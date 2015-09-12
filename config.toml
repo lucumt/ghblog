@@ -1,0 +1,53 @@
+baseurl = "127.0.0.1:1313"
+languageCode = "zh-CN"
+title = "飞狐的部落格"
+
+[author]
+    name = "Tom Maiaroto"
+    homepage = "http://localhost:1313"
+
+[params] 
+    sidebartitle = "飞狐的部落格" 
+    sidebartagline = "Rosen Lu"
+    photo = "/img/photo.jpg"
+
+[[menu.main]] 
+    pre = "<i class='fa fa-road'></i>"
+    name = "About" 
+    url = "/about"
+
+[[menu.main]] 
+    pre = "<i class='fa fa-road'></i>"
+    name = "Blog" 
+    url = "/post"
+
+[[menu.footer]] 
+    name = "Designed by Red Lounge" 
+    url = "https://github.com/tmaiaroto/hugo-redlounge"
+
+[[menu.social]] 
+    pre = "<i class='fa fa-mail-forward'></i>" 
+    url = "mailto:lucumt@gmail.com" 
+    identifier = "mail-forward"
+    weight = 100
+
+[[menu.social]] 
+    pre = "<i class='fa fa-twitter'></i>" 
+    url = "http://www.twitter.com/rosenlucumt" 
+    identifier = "twitter"
+
+[[menu.social]] 
+    pre = "<i class='fa fa-facebook'></i>" 
+    url = "https://www.facebook.com/rosen.lu.1" 
+    identifier = "facebook"
+
+[[menu.social]] 
+    pre = "<i class='fa fa-google-plus'></i>" 
+    url = "https://plus.google.com/u/0/115794588502118898127/posts" 
+    identifier = "google-plus"
+
+[[menu.social]] 
+    pre = "<i class='fa fa-github'></i>" 
+    url = "https://github.com/lucumt" 
+    identifier = "github"
+    weight = -10
