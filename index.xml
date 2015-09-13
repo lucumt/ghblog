@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>飞狐的部落格</title>
-    <link>http://localhost:1313/</link>
+    <link>http://lucumt.info/</link>
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 07 Sep 2015 00:22:23 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>关于我</title>
-      <link>http://localhost:1313/about/</link>
+      <link>http://lucumt.info/about/</link>
       <pubDate>Mon, 07 Sep 2015 00:22:23 +0800</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>http://lucumt.info/about/</guid>
       <description>
 
 &lt;p&gt;一个混迹于帝都的程序猿，单身狗。&lt;/p&gt;
