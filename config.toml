@@ -36,19 +36,42 @@ canonifyurls = true
     pre = "<i class='fa fa-twitter'></i>" 
     url = "http://www.twitter.com/rosenlucumt" 
     identifier = "twitter"
+    weight = -7
 
 [[menu.social]] 
     pre = "<i class='fa fa-facebook'></i>" 
     url = "https://www.facebook.com/rosen.lu.1" 
     identifier = "facebook"
+    weight = -8
 
 [[menu.social]] 
     pre = "<i class='fa fa-google-plus'></i>" 
     url = "https://plus.google.com/u/0/115794588502118898127/posts" 
     identifier = "google-plus"
+    weight = -9
 
 [[menu.social]] 
     pre = "<i class='fa fa-github'></i>" 
     url = "https://github.com/lucumt" 
     identifier = "github"
     weight = -10
+
+ [[menu.site]]
+    url ="http://lilydjwg.is-programmer.com/"
+    name = "依云的博客"
+    weight = -20
+
+ [[menu.site]]
+    url = "http://evilbinary.org/"
+    name = "邪恶二进制"
+    weight = -19
+ 
+ [[menu.site]]
+    url ="http://www.linuxzen.com/"
+    name = "cold's world"
+    weight = -18
+
+  [[menu.site]]
+    url = "http://frantic1048.logdown.com/"
+    name = "Frantic log#1048"
+    weight = -17

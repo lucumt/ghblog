@@ -25,9 +25,20 @@
         <a href="{{ .URL }}" target="_blank">{{ .Pre }}</a>
         {{ end }}
       {{ end }}
-      
     </div>
     {{ end }}
+    
+	{{ if .Site.Menus.site }}
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    {{ range .Site.Menus.site }}
+		   <li class="nav-site"><a href="{{.URL}}" target="_blank">{{.Name}}</a></li>
+		{{ end }}
+	  </ul>
+	  </nav>
+	{{ end }}
+	
 
   </div>
 </div>
