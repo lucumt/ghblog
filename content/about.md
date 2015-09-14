@@ -4,6 +4,7 @@ date = "2015-09-07T00:22:23+08:00"
 draft = true
 title = "关于我"
 pinned = true
+nodate = true
 
 +++
 
