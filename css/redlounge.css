@@ -136,12 +136,12 @@ h2.brand-tagline {
     list-style: none;
     padding-bottom: 1rem;
 }
-.nav-item {
+.nav-item ,nav-site{
     display: inline-block;
     *display: inline;
     zoom: 1;
 }
-.nav-item a {
+.nav-item a{
     background: transparent;
     color: #fff;
     margin-top: 1rem;
@@ -152,10 +152,29 @@ h2.brand-tagline {
     margin-right: 0.1rem;
     line-height: 1.5rem;
 }
+
+.nav-site a{
+    background: transparent;
+    color: #fff;
+    margin-top: 1rem;
+    letter-spacing: 0.05rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-right: 0.1rem;
+    line-height: 1.5rem;
+}
 .nav-item a:hover,
-.nav-item a:focus {
+.nav-item a:focus ,
+.nav-site a:hover,
+.nav-site a:focus{
     text-decoration: none;
 }
+
+.nav-site-separator {
+  margin-top:25px;
+  margin-bottom:20px;
+}
+
 .nav-item-separator {
 	font-weight: 100;
 	font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
