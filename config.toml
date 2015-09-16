@@ -65,13 +65,18 @@ canonifyurls = true
     url = "http://evilbinary.org/"
     name = "邪恶二进制"
     weight = -19
+
+ [[menu.site]]
+    url = "http://www.wlman.cc/"
+    name = "Consec 's Blog"
+    weight = 7
  
  [[menu.site]]
     url ="http://www.linuxzen.com/"
     name = "cold's world"
-    weight = -18
+    weight = 8
 
   [[menu.site]]
     url = "http://frantic1048.logdown.com/"
     name = "Frantic log#1048"
-    weight = -17
+    weight = 9
