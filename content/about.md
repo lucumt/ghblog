@@ -5,6 +5,7 @@ draft = true
 title = "关于我"
 pinned = true
 nodate = true
+nocomment = true
 
 +++
 
