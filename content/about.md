@@ -24,12 +24,12 @@ nocomment = true
 
 # 教育信息
 * China University of Mining and Technology(中国矿业大学)
-* Computer Science and Technology(计算机科学与技术) (2006.9-2010.6)
+* Computer Science and Technology(计算机科学与技术)
 
 # 自我评价
-&emsp;&nbsp;宅男，***闷骚***
+&emsp;&nbsp;宅男，***闷骚***，热爱编程
 
 # 近期任务
-* 完成自己在公司中的本职工作；
+* Golang和Java并发的学习；
 * 利用Golang并发完成一个网络爬虫[美空网爬虫](https://github.com/lucumt/goMeikongSpider "主要用于抓取美空网上的模特图片并存储到本地");
 * 利用Golang重新搭建一个自己的博客，而不是利用[Hugo](https://gohugo.io/);
