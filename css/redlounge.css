@@ -509,8 +509,8 @@ hr.thin {
     }
 
 	.header .profilepic{
-	   width:160px;
-	   height:160px;
+	   width:40%;
+	   height:40%;
 	   border-radius: 50%;
 	   -moz-border-radius: 50%;
 	   -webkit-border-radius: 50%;
