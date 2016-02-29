@@ -219,6 +219,7 @@ h2.brand-tagline {
 h1.post-title a {
 	text-decoration: none;
 	color: #111111;
+	font-size:1.7rem;
 }
 .post-date {
 	color: #E54028;
