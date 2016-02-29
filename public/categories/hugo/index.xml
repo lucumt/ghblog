@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>飞狐的部落格</title>
-    <link>http://lucumt.info/</link>
-    <description>Recent content on 飞狐的部落格</description>
+    <title>Hugo on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/hugo/</link>
+    <description>Recent content in Hugo on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 27 Feb 2016 22:23:37 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucumt.info/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>利用Github Pages和基于Go的Hugo搭建个人博客</title>
@@ -155,118 +155,6 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&amp;lt;&amp;ndash;待续&amp;ndash;&amp;gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>关于我</title>
-      <link>http://lucumt.info/about/</link>
-      <pubDate>Thu, 25 Feb 2016 00:22:23 +0800</pubDate>
-      
-      <guid>http://lucumt.info/about/</guid>
-      <description>
-
-&lt;p&gt;一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作。&lt;/p&gt;
-
-&lt;h1 id=&#34;编程领域:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;编程领域&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java，主要用它进行web开发&lt;/li&gt;
-&lt;li&gt;Python，主要用它进行网络爬虫开发和web开发&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://golang.org/&#34; title=&#34;要打开此网站请确保自己能翻墙&#34;&gt;Golang&lt;/a&gt;,个人业余爱好&lt;/li&gt;
-&lt;li&gt;Oracle,MySQL,MongoDB&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;it技能列表:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;IT技能列表:&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java相关：
-
-&lt;ul&gt;
-&lt;li&gt;超过7年使用经验，掌握JVM调优；&lt;/li&gt;
-&lt;li&gt;能熟练运用struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；&lt;/li&gt;
-&lt;li&gt;熟练掌握Java多线程编程和Socket编程；&lt;/li&gt;
-&lt;li&gt;对工作流有一定的了解，可以熟练使用Activiti进行工作流相关的开发；&lt;/li&gt;
-&lt;li&gt;能熟练运用基于Java的Webservice与其它应用程序进行信息交互；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;前端相关：
-
-&lt;ul&gt;
-&lt;li&gt;JavaScript，超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;jQuery,jQueryUI、EasyUI、zTree、Bootstrap 超过4年使用经验；&lt;/li&gt;
-&lt;li&gt;HTML、CSS3 超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;HTML5 超过2年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Python相关：
-
-&lt;ul&gt;
-&lt;li&gt;Python2 超过4年使用经验；&lt;/li&gt;
-&lt;li&gt;Scrapy、Sqlalchemy、Flask、BeautifulSoup、Requests 超过3年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;数据库相关：
-
-&lt;ul&gt;
-&lt;li&gt;MySQL 超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;Oracle 超过3年使用经验；&lt;/li&gt;
-&lt;li&gt;MongoDB 超过1年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;开发工具：
-
-&lt;ul&gt;
-&lt;li&gt;可以熟练使用Git、SVN进行代码版本管理；&lt;/li&gt;
-&lt;li&gt;可以熟练使用Maven进行开发，对Ant有一定程度的掌握；&lt;/li&gt;
-&lt;li&gt;熟练运用Tomcat进行Java程序部署；&lt;/li&gt;
-&lt;li&gt;可以基于Nginx进行Python和PHP程序的部署；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;其他：
-
-&lt;ul&gt;
-&lt;li&gt;可以在Java、Python、Golang和JavaScript中熟练的运用正则表达式；&lt;/li&gt;
-&lt;li&gt;英文读写能力强，通过CET-6,能够通过Skype或Gmail用英文与老外熟练的沟通；&lt;/li&gt;
-&lt;li&gt;业余爱好Golang，本博客即是利用Golang和Github Pages搭建的；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;应用领域:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;应用领域&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java:主要是自己公司的各种Java项目；&lt;/li&gt;
-&lt;li&gt;Python：主要是在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给老外开发爬虫脚本和简易的web系统,可以查看&lt;a href=&#34;http://imgur.com/q8brokn&#34;&gt;工作记录截图&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;Golang：用于网络爬虫和个人博客搭建；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;自我评价:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自我评价&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;热爱学习和使用新技术；&lt;/li&gt;
-&lt;li&gt;有着十分强烈的代码洁癖；&lt;/li&gt;
-&lt;li&gt;喜欢重构代码，善于分析和解决问题；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;教育信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;教育信息&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;China University of Mining and Technology(中国矿业大学 2006.9-2010.6)&lt;/li&gt;
-&lt;li&gt;Computer Science and Technology(计算机科学与技术)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;个人爱好:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人爱好&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上网&lt;/li&gt;
-&lt;li&gt;看纪录片&lt;/li&gt;
-&lt;li&gt;编程&lt;/li&gt;
-&lt;li&gt;阅读&lt;/li&gt;
-&lt;li&gt;睡觉&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;近期任务:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;近期任务&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Golang、JVM虚拟机相关、Java并发编程的学习；&lt;/li&gt;
-&lt;li&gt;利用Golang并发完成一个网络爬虫&lt;a href=&#34;https://github.com/lucumt/goMeikongSpider&#34; title=&#34;主要用于抓取美空网上的模特图片并存储到本地&#34;&gt;美空网爬虫&lt;/a&gt;;&lt;/li&gt;
-&lt;li&gt;利用Golang重新搭建一个自己的博客，而不是利用&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

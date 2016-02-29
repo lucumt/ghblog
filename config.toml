@@ -21,7 +21,7 @@ disqusShortname = "rosenlu"
 [[menu.main]] 
     pre = "<i class='fa fa-road'></i>"
     name = "Blog" 
-    url = "/post"
+    url = "/posts"
 
 [[menu.footer]] 
     name = "Designed by Red Lounge" 
