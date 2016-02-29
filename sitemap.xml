@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://lucumt.info/</loc>
-    <lastmod>2016-02-25T00:22:23+08:00</lastmod>
+    <lastmod>2016-02-27T22:23:37+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/create-website-with-hugo/</loc>
+    <lastmod>2016-02-27T22:23:37+08:00</lastmod>
   </url>
   
   <url>

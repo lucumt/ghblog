@@ -32,6 +32,21 @@ section.post{
 pre {
     padding: 5px;
 }
+
+code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c72f4e;
+    background-color: #d0d0d0;
+    border-radius: 4px;
+}
+
+blockquote p{
+   padding:10px;
+   background-color:#d0d0d0;
+   border-radius:4px;
+}
+
 p {
 	color: #2d303b;
 }
@@ -43,6 +58,12 @@ a {
   transition:.5s;
   color: #616161;
 }
+
+p img{
+  border:1px dashed #aaa;
+  border-radius:4px;
+}
+
 a:hover {
 	color:#E54028;
 }
@@ -57,9 +78,9 @@ a.pure-button:hover, a.pure-button:focus {
 a.pure-button-primary:hover, a.pure-button-primary:focus {
 	color: #fff;
 }
-p a {
+/*p a {
 	color:#7F1000;
-}
+}*/
 h1 {
 	font-family: 'Libre Baskerville', serif;
 	font-weight: 700; 
@@ -245,13 +266,13 @@ a.post-author {
     line-height: 1.75rem;
 }
 .post p {
-	margin-bottom: 1.75rem;
-	margin-top: 0;
+	margin-bottom: 15px;
+	margin-top: 8px;
 }
 .post h3 {
 	margin-bottom: .25rem;
 	font-size: 1.4rem;
-	color: #7F1000;
+	/*color: #7F1000;*/
 	font-weight: 500;
 }
 .post h3.post-subtitle {
@@ -434,9 +455,16 @@ a.post-category:hover {
 	border-left: 1px solid #eee;
 	font-size: 0.9rem;
 }
-nav#TableOfContents li {
-	padding-bottom: 0.25rem;
+
+nav#TableOfContents ul {
+	padding-left: 15px;
 }
+
+nav#TableOfContents li {
+	padding-bottom: 1px;
+}
+
+
 .toc-label {
 	font-size: 0.8rem;
 	color: #aeaeae;
@@ -498,6 +526,10 @@ hr.thin {
 	   border-radius: 50%;
 	   -moz-border-radius: 50%;
 	   -webkit-border-radius: 50%;
+	}
+
+	p img{
+	 max-width:100%;
 	}
 }
 

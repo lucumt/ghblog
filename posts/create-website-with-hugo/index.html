@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    利用Github Pages和基于Go的Hugo搭建个人博客 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="Github Pages,Go,Hugo,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="利用Github Pages和基于Go的Hugo搭建个人博客" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/create-website-with-hugo/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  
+ 
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li><a href="#环境准备:ef8b9e40461ea61e62e36d1aa4c54d14">环境准备</a></li>
+<li><a href="#过程概要:ef8b9e40461ea61e62e36d1aa4c54d14">过程概要</a>
+<ul>
+<li><a href="#在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14">在Github上创建一个自己的项目</a></li>
+<li><a href="#利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14">利用Hugo作为博客生成器</a>
+<ul>
+<li><a href="#安装go:ef8b9e40461ea61e62e36d1aa4c54d14">安装Go</a></li>
+<li><a href="#安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14">安装Hugo</a></li>
+</ul></li>
+<li><a href="#在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14">在Github Pages上托管Hugo</a>
+<ul>
+<li><a href="#安装命令:ef8b9e40461ea61e62e36d1aa4c54d14">安装命令</a></li>
+<li><a href="#说明信息:ef8b9e40461ea61e62e36d1aa4c54d14">说明信息</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/create-website-with-hugo">利用Github Pages和基于Go的Hugo搭建个人博客</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>27</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Feb</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-go" href="http://lucumt.info//categories/go">Go</a>
+				
+					<a class="post-category post-category-hugo" href="http://lucumt.info//categories/hugo">Hugo</a>
+				
+					<a class="post-category post-category-github-pages" href="http://lucumt.info//categories/github-pages">Github Pages</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            
+
+<p>一直以来都想拥有一个属于自己的博客，前段时间在学习<code>Go</code> ，于是利用<code>Hugo</code> 和<code>Github Pages</code> 搭建了一个简易的个人博客，先简单记录下。</p>
+
+<h1 id="环境准备:ef8b9e40461ea61e62e36d1aa4c54d14">环境准备</h1>
+
+<ul>
+<li><a href="https://golang.org/">Go</a>1.4+</li>
+<li><a href="https://gohugo.io">Hugo</a>v0.14+</li>
+<li><a href="https://pages.github.com/">Github Pages</a>账号</li>
+<li><a href="https://www.godaddy.com">GoDaddy</a>域名</li>
+</ul>
+
+<h1 id="过程概要:ef8b9e40461ea61e62e36d1aa4c54d14">过程概要</h1>
+
+<h2 id="在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14">在Github上创建一个自己的项目</h2>
+
+<p>参考<code>[Github Pages]</code> 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：<br />
+1. 创建<strong>User or origanization site</strong>或<strong>Project site</strong>,我个人选择的是<strong>Project site</strong>。
+<img src="https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png" alt="png_1" />
+
+2. 若选择的是<strong>Project site</strong>,则会让选择<strong>Generate a site</strong>或<strong>Start from scratch</strong>，个人选择<strong>Start from scratch</strong>从头开始搭建。
+<img src="https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png" alt="png_2.png" />
+
+当然个人的爱好不同，不一定非得选择<strong>Project site</strong>和<strong>Start from scratch</strong>，这不是本文的重点，只要能按照<code>Github Pages</code>的提示成功搭建自己的静态博客即可。</p>
+
+<h2 id="利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14">利用Hugo作为博客生成器</h2>
+
+<p>由于<code>Github Pages</code> 只支持静态的html页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。</p>
+
+<p>由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择<code>Hugo</code> 作为自己的博客生成器。<code>Hugo</code> 是一个基于<code>Go]</code>开发的静态生成器，它采用<em><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></em> 语法来编写博客生成，然后生成相应的HTML页面。</p>
+
+<h3 id="安装go:ef8b9e40461ea61e62e36d1aa4c54d14">安装Go</h3>
+
+<p>访问<a href="https://golang.org/dl/">Golang下载页</a>根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。
+以我自己的64位win7系统为例，安装过程如下：</p>
+
+<ul>
+<li>下载<strong>go1.4.2.windows-amd64.msi</strong></li>
+<li>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把<code>Go</code>安装在*D:\code\go*下，这三个变量相应的设置为:</li>
+</ul>
+
+<blockquote>
+<p>PATH=&rsquo;D:\code\go\bin&rsquo;;%PATH%<br />
+GOPATH=&rsquo;D:\code\gopath&rsquo;<br />
+GOROOT=&rsquo;D:\code\go&rsquo;</p>
+</blockquote>
+
+<p>其中<strong>PATH</strong>变量的作用主要是为了将<code>Go</code>的各种命令加到cmd中。<strong>GOROOT</strong>则是当我们将<code>Go</code>安装在我们的自定义目录时，需要制定该安装目录，若安装在默认目录<strong>C:\go</strong>下则不用设置<strong>GOROOT</strong>目录，官方文档原文为<em>GOROOT must be set only when installing to a custom location.</em> 比较难懂的是<strong>GOPATH</strong>,官方文档上的说明为 <em>Create a directory to contain your workspace, $HOME/work for example, and set the GOPATH environment variable to point to that location.</em> 据此我们可以将<strong>GOPATH</strong>理解为工作目录，它主要用来存放<code>Go</code>代码编译之后的可执行文件，其位置可以随意设置，只要不与<strong>GOROOT</strong>相同即可。</p>
+
+<ul>
+<li>安装完成之后，重新打开cmd窗口，输入<strong>go version</strong>之后按Enter键，若出现如下信息，则表示<code>Go</code>安装成功:</li>
+</ul>
+
+<blockquote>
+<p>C:\Users\Administrator&gt;go version<br />
+go version go1.4.2 windows/amd64</p>
+</blockquote>
+
+<h3 id="安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14">安装Hugo</h3>
+
+<p><code>Hugo</code>的安装过程与<code>Go</code>的类似.</p>
+
+<ul>
+<li>首先在<a href="https://github.com/spf13/hugo/releases">Hugo下载页</a>根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的<strong>PATH</strong>环境变量即可。我的安装在 <em>D:\program\hugo</em> 所以相应的环境变量设置为</li>
+</ul>
+
+<blockquote>
+<p>PATH=&rsquo;D:\program\hugo&rsquo;;%PATH%</p>
+</blockquote>
+
+<ul>
+<li>重新打开cmd窗口，输入<strong>hugo version</strong>，若出现如下信息，则表示<code>Hugo</code>安装成功：</li>
+</ul>
+
+<blockquote>
+<p>C:\Users\Administrator&gt;hugo version
+Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
+</blockquote>
+
+<p>关于<code>Hugo</code>的基本操作命令，可以参见<a href="https://gohugo.io/overview/quickstart/">Hugo快速入门</a>，此处不再详述。</p>
+
+<h2 id="在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14">在Github Pages上托管Hugo</h2>
+
+<h3 id="安装命令:ef8b9e40461ea61e62e36d1aa4c54d14">安装命令</h3>
+
+<p>最权威的信息还是来源于官方文档，可以参见<a href="https://gohugo.io/tutorials/github-pages-blog/">在Github Pages上托管Hugo</a>,主要的<code>Git</code>操作命令如下：</p>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e"># Create a new orphand branch (no commit history) named gh-pages</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">checkout</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">orphan</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span>
+
+<span style="color: #75715e"># Unstage all files</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">rm</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">cached</span> <span style="color: #960050; background-color: #1e0010">$</span><span style="color: #f8f8f2">(git</span> <span style="color: #f8f8f2">ls</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">files)</span>
+
+<span style="color: #75715e"># Grab one file from the master branch so we can make a commit</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">checkout</span> <span style="color: #f8f8f2">master</span> <span style="color: #66d9ef">README</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">md</span>
+
+<span style="color: #75715e"># Add and commit that file</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">add</span> <span style="color: #f92672">.</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">commit</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">m</span> <span style="color: #e6db74">&quot;INIT: initial commit on gh-pages branch&quot;</span>
+
+<span style="color: #75715e"># Push to remote gh-pages branch</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">push</span> <span style="color: #f8f8f2">origin</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span>
+
+<span style="color: #75715e"># Return to master branch</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">checkout</span> <span style="color: #f8f8f2">master</span>
+
+<span style="color: #75715e"># Remove the public folder to make room for the gh-pages subtree</span>
+<span style="color: #f8f8f2">rm</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">rf</span> <span style="color: #66d9ef">public</span>
+
+<span style="color: #75715e"># Add the gh-pages branch of the repository. It will look like a folder named public</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">subtree</span> <span style="color: #f8f8f2">add</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">prefix</span><span style="color: #f92672">=</span><span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">git@github</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">com</span><span style="color: #e6db74">:spencerlyon2</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">hugo_gh_blog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">squash</span>
+
+<span style="color: #75715e"># Pull down the file we just committed. This helps avoid merge conflicts</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">subtree</span> <span style="color: #f8f8f2">pull</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">prefix</span><span style="color: #f92672">=</span><span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">git@github</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">com</span><span style="color: #e6db74">:spencerlyon2</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">hugo_gh_blog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span>
+
+<span style="color: #75715e"># Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you&#39;re not using a theme)</span>
+<span style="color: #f8f8f2">hugo</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">t</span> <span style="color: #66d9ef">ThemeName</span>
+
+
+<span style="color: #75715e"># Add everything</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">add</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">A</span>
+
+<span style="color: #75715e"># Commit and push to master</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">commit</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">m</span> <span style="color: #e6db74">&quot;Updating site&quot;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">push</span> <span style="color: #f8f8f2">origin</span> <span style="color: #f8f8f2">master</span>
+
+<span style="color: #75715e"># Push the public subtree to the gh-pages branch</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">subtree</span> <span style="color: #f8f8f2">push</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">prefix</span><span style="color: #f92672">=</span><span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">git@github</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">com</span><span style="color: #e6db74">:spencerlyon2</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">hugo_gh_blog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span>
+</pre></div>
+</p>
+
+<h3 id="说明信息:ef8b9e40461ea61e62e36d1aa4c54d14">说明信息</h3>
+
+<ul>
+<li>上述命令的核心思想把源代码放在<strong>master</strong>上，把生成的静态html代码通过<strong>substree</strong>命令放到<strong>branch</strong>上；</li>
+<li><code>Git</code>主干的名字可以随便取，但是分支的名字必须为<code>gh-pages</code>；</li>
+<li>上述命令针对的是从头到尾开始创建一个<code>Git</code>项目然后提交，如果之前已经有<code>gh-pages</code>项目了，则可以从 <em>git subtree add &ndash;prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages &ndash;squash</em> 这句代码开始执行；</li>
+</ul>
+
+<p>&lt;&ndash;待续&ndash;&gt;</p>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
