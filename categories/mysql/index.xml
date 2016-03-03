@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/mysql/</link>
+    <description>Recent content in Mysql on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 03 Mar 2016 14:33:43 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
+      <link>http://lucumt.info/posts/can-not-run-program-mysqldump/</link>
+      <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/can-not-run-program-mysqldump/</guid>
+      <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;strong&gt;&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;Runtime&lt;/a&gt;&lt;/strong&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;runtime&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getRuntime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;();&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;mysqlCmd&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;mysqldump&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; -u&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; -p&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;password&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; 
+           &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;  -h &amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;databaseAddress&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;databaseName&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;Process&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;process&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;exec&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;mysqlCmd&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;但是在客户那里实际使用时，有时候会出现在cmd中&lt;code&gt;MySQL&lt;/code&gt;命令可以正常识别但是程序不能正常执行的情况，报错信息如下:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;io&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;IOException&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Cannot&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;run&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;program&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;mysqldump&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CreateProcess&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;The&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;system&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cannot&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;find&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;the&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;file&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;specified&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;at&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;ProcessBuilder&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;start&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ProcessBuilder&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;460&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;at&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;exec&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;593&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;at&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;exec&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;431&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;at&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;exec&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;java&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;328&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Google之后，在&lt;strong&gt;&lt;a href=&#34;http://stackoverflow.com/&#34;&gt;Stackoverflow&lt;/a&gt;&lt;/strong&gt;发现两个相关的问题：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/15850548/error-when-backing-up-mysql-database&#34;&gt;Error when backing up MYSQL database&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/13376132/backup-mysql-database-java-code&#34;&gt;backup mysql database java code&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;阅读之后，发现上面说问题产生的原因是&lt;code&gt;mysqldump&lt;/code&gt;命令无法识别，把&lt;code&gt;mysqldump&lt;/code&gt;可执行文件的路径加入PATH环境变量中即可解决问题。&lt;/p&gt;
+
+&lt;p&gt;但当我在cmd中无论执行&lt;code&gt;mysql&lt;/code&gt;或&lt;code&gt;mysqldump&lt;/code&gt;命令时，都显示这两个命令可以正常执行：
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png&#34; alt=&#34;mysql1.png&#34; /&gt;
+
+在cmd中输出PATH环境变量时，也显示&lt;code&gt;MySQL&lt;/code&gt;的bin目录已经添加:
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/03/56d7e39ff3ab8.png&#34; alt=&#34;mysql2.png&#34; /&gt;
+
+即使重启电脑，上述通过&lt;code&gt;Java&lt;/code&gt;备份&lt;code&gt;MySQL&lt;/code&gt;的代码还是不能正常执行，但当在cmd中执行&lt;code&gt;mysql&lt;/code&gt;、&lt;code&gt;mysqldump&lt;/code&gt;命令或输出PATH环境变量时，结果任何上面图片中显示的一致。&lt;/p&gt;
+
+&lt;p&gt;这下让我感到很困惑:&amp;nbsp;&lt;strong&gt;通过&lt;/strong&gt;&lt;code&gt;Java&lt;/code&gt;&lt;strong&gt;代码来执行&lt;/strong&gt;&lt;code&gt;mysqldump&lt;/code&gt;&lt;strong&gt;导出操作时去不能正常执行原因是&lt;/strong&gt;&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的执行路径没有加到PATH环境变量中,但实际检查发现&lt;/strong&gt;&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的环境变量设置正常，在命令行通过&lt;/strong&gt;&lt;code&gt;mysqldump&lt;/code&gt;&lt;strong&gt;导出sql文件可以成功操作!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;继续在网上搜索该问题的解决方案，得到的答案也都是&lt;code&gt;MySQL&lt;/code&gt;的执行路径没有加到PATH环境变量中去，问题依旧。。。&lt;/p&gt;
+
+&lt;p&gt;正当我在为这个问题发愁时，测试部门有个同事的新&lt;code&gt;Win7&lt;/code&gt;电脑上利用我们的软件执行&lt;code&gt;MySQL&lt;/code&gt;备份时也出现了类似的问题，之前我还猜有可能是由于客户服务器的操作系统版本太低或某些DLL文件不存在导致的。但现在居然在刚装好的&lt;code&gt;Win7&lt;/code&gt;电脑上也出现此问题，基本可以排除操作系统的问题。&lt;/p&gt;
+
+&lt;p&gt;由于在我自己的笔记本和台式研发机上都没出现这个问题，无奈之下我只好把同事的电脑拿过来和我自己的电脑进行对比，看看哪里设置不一样。通过&lt;code&gt;Win7&lt;/code&gt;中&lt;code&gt;高级系统设置&lt;/code&gt;查看PATH环境变量，很快就发现了问题的根源：&lt;br /&gt;
+&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的执行路径被设置到了&lt;/strong&gt;&lt;code&gt;用户变量&lt;/code&gt;&lt;strong&gt;中的PATH变量里，&lt;/strong&gt;&lt;code&gt;系统变量&lt;/code&gt;&lt;strong&gt;中的PATH变量里却没有&lt;/strong&gt;&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的执行路径，而&lt;/strong&gt;&lt;code&gt;Java&lt;/code&gt;&lt;strong&gt;代码是匿名执行的，无法获取到&lt;/strong&gt;&lt;code&gt;用户变量&lt;/code&gt;，&lt;strong&gt;只能去&lt;/strong&gt;&lt;code&gt;系统变量&lt;/code&gt;&lt;strong&gt;中寻找相关的可执行命令,因而程序会出错！&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/03/56d7ebcbce7fc.png&#34; alt=&#34;mysql3.png&#34; /&gt;
+&lt;br /&gt;
+这下问题原因变得很清楚了，我们在&lt;code&gt;cmd&lt;/code&gt;中执行&lt;code&gt;mysql&lt;/code&gt;和&lt;code&gt;mysqldump&lt;/code&gt;命令以及输出PATH环境变量时，系统会把当前用户的&lt;code&gt;用户变量&lt;/code&gt;中的PATH和操作系统的&lt;code&gt;系统变量&lt;/code&gt;中的PATH变量整合到一块，所以我们在cmd中操作时一切正常。但是当我们在&lt;code&gt;Java&lt;/code&gt;程序中执行&lt;code&gt;mysqldump&lt;/code&gt;命令时，由于&lt;code&gt;Java&lt;/code&gt;程序的运行和用户无关，无法获取到&lt;code&gt;用户变量&lt;/code&gt;中的PATH值，所以当我们在&lt;code&gt;Java&lt;/code&gt;程序中执行&lt;code&gt;mysqldump&lt;/code&gt;命令时会出错。这也正好和&lt;strong&gt;&lt;a href=&#34;http://stackoverflow.com/&#34;&gt;Stackoverflow&lt;/a&gt;&lt;/strong&gt;中说明的原因一致。&lt;/p&gt;
+
+&lt;p&gt;由于有的电脑上会出现此问题，有的电脑上没有此问题，进一步的深究问题的根源，发现发生问题的电脑和服务器在安装&lt;code&gt;MySQL&lt;/code&gt;数据库时都是通过我们自己写的&lt;code&gt;bat&lt;/code&gt;脚本来安装的。而&lt;code&gt;bat&lt;/code&gt;脚本中设置环境变量的代码如下:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;@echo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;setx&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;PATH&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%Path%;C:\INTA\Database&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\b&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;in;&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;@echo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+问题的关键就在于&lt;strong&gt;&lt;em&gt;setx PATH &amp;ldquo;%Path%;C:\INTA\Database\bin;&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;这行代码，这样写的话只会把&lt;code&gt;MySQL&lt;/code&gt;的执行路径加入到当前执行该脚本的&lt;code&gt;用户变量&lt;/code&gt;中，不会加入到&lt;code&gt;环境变量&lt;/code&gt;中。而那些没有出问题的电脑都是我自己手动在&lt;code&gt;系统变量&lt;/code&gt;中设置&lt;code&gt;MySQL&lt;/code&gt;执行路径的！&lt;/p&gt;
+
+&lt;p&gt;该问题的解决方法也很简单，在&lt;strong&gt;&lt;em&gt;setx&lt;/em&gt;&lt;/strong&gt;后面加上&lt;strong&gt;&lt;em&gt;-m&lt;/em&gt;&lt;/strong&gt;即可，这样&lt;code&gt;bat&lt;/code&gt;脚本执行时会把&lt;code&gt;MySQL&lt;/code&gt;的执行路径写入&lt;code&gt;系统变量&lt;/code&gt;的PATH变量中，不会写入&lt;code&gt;用户变量&lt;/code&gt;的PATH变量中：
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;@echo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;setx&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;PATH&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%Path%;C:\INTA\Database&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\b&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;in;&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;@echo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Orz~&lt;br /&gt;
+想不到由于一个&lt;strong&gt;&lt;em&gt;-m&lt;/em&gt;&lt;/strong&gt;而让自己郁闷了这么久!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
