@@ -24,9 +24,9 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 ## 在Github上创建一个自己的项目
 参考`[Github Pages]` 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：  
 1. 创建**User or origanization site**或**Project site**,我个人选择的是**Project site**。
-![png_1](https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png)
+![png_1](https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png)  
 2. 若选择的是**Project site**,则会让选择**Generate a site**或**Start from scratch**，个人选择**Start from scratch**从头开始搭建。
-![png_2.png](https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png)
+![png_2.png](https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png)  
 当然个人的爱好不同，不一定非得选择**Project site**和**Start from scratch**，这不是本文的重点，只要能按照`Github Pages`的提示成功搭建自己的静态博客即可。
 
 ## 利用Hugo作为博客生成器
@@ -118,5 +118,9 @@ git subtree push --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh
 * 上述命令的核心思想把源代码放在**master**上，把生成的静态html代码通过**substree**命令放到**branch**上；
 * `Git`主干的名字可以随便取，但是分支的名字必须为`gh-pages`；
 * 上述命令针对的是从头到尾开始创建一个`Git`项目然后提交，如果之前已经有`gh-pages`项目了，则可以从 *git subtree add --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages --squash* 这句代码开始执行；
+
+### 相关命令
+* 生成绑定到指定域名的页面
+`hugo server -D --baseUrl="http://lucumt.info" --appendPort=false`
 
 <--待续-->

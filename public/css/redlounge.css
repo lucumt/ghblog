@@ -62,6 +62,7 @@ a {
 p img{
   border:1px dashed #aaa;
   border-radius:4px;
+  width:100%;
 }
 
 a:hover {
