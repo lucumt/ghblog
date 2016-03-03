@@ -150,6 +150,53 @@
                 <header class="post-header">
                     
                     <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/can-not-run-program-mysqldump">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>3</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" >卢运强</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-go" href="http://lucumt.info//categories/go">Go</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<strong><a href="http://docs.oracle.com/javase/6/docs/api/">Runtime</a></strong>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
+
+<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Runtime</span> <span style="color: #f8f8f2">runtime</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getRuntime</span><span style="color: #f92672">();</span>
+<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">mysqlCmd</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;mysqldump&quot;</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -u&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">username</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -p&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">password</span> <span style="color: #f92672">+</span> 
+           <span style="color: #e6db74">&quot;  -h &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">databaseAddress</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; &quot;</span> <span style="color: #f92672">+</span><span style="color: #f8f8f2">databaseName</span><span style="color: #f92672">;</span>
+<span style="color: #f8f8f2">Process</span> <span style="color: #f8f8f2">process</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">mysqlCmd</span><span style="color: #f92672">);</span>
+</pre></div>
+</p>
+
+<p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/can-not-run-program-mysqldump"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
                       <a href="http://lucumt.info/posts/create-website-with-hugo">利用Github Pages和基于Go的Hugo搭建个人博客</a>
                   </h1>
               </header>
