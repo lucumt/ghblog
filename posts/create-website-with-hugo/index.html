@@ -159,6 +159,7 @@
 <ul>
 <li><a href="#安装命令:ef8b9e40461ea61e62e36d1aa4c54d14">安装命令</a></li>
 <li><a href="#说明信息:ef8b9e40461ea61e62e36d1aa4c54d14">说明信息</a></li>
+<li><a href="#相关命令:ef8b9e40461ea61e62e36d1aa4c54d14">相关命令</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -226,10 +227,10 @@
 <p>参考<code>[Github Pages]</code> 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：<br />
 1. 创建<strong>User or origanization site</strong>或<strong>Project site</strong>,我个人选择的是<strong>Project site</strong>。
 <img src="https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png" alt="png_1" />
-
+<br />
 2. 若选择的是<strong>Project site</strong>,则会让选择<strong>Generate a site</strong>或<strong>Start from scratch</strong>，个人选择<strong>Start from scratch</strong>从头开始搭建。
 <img src="https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png" alt="png_2.png" />
-
+<br />
 当然个人的爱好不同，不一定非得选择<strong>Project site</strong>和<strong>Start from scratch</strong>，这不是本文的重点，只要能按照<code>Github Pages</code>的提示成功搭建自己的静态博客即可。</p>
 
 <h2 id="利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14">利用Hugo作为博客生成器</h2>
@@ -343,6 +344,13 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 <li>上述命令的核心思想把源代码放在<strong>master</strong>上，把生成的静态html代码通过<strong>substree</strong>命令放到<strong>branch</strong>上；</li>
 <li><code>Git</code>主干的名字可以随便取，但是分支的名字必须为<code>gh-pages</code>；</li>
 <li>上述命令针对的是从头到尾开始创建一个<code>Git</code>项目然后提交，如果之前已经有<code>gh-pages</code>项目了，则可以从 <em>git subtree add &ndash;prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages &ndash;squash</em> 这句代码开始执行；</li>
+</ul>
+
+<h3 id="相关命令:ef8b9e40461ea61e62e36d1aa4c54d14">相关命令</h3>
+
+<ul>
+<li>生成绑定到指定域名的页面
+<code>hugo server -D --baseUrl=&quot;http://lucumt.info&quot; --appendPort=false</code></li>
 </ul>
 
 <p>&lt;&ndash;待续&ndash;&gt;</p>
