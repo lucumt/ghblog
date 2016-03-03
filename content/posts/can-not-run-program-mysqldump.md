@@ -1,7 +1,7 @@
 +++
 
 author = "卢运强"
-categories = ["Go"]
+categories = ["MySQL"]
 date = "2016-03-03T14:33:43+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["MySQL"]
@@ -71,4 +71,6 @@ setx -m PATH "%Path%;C:\INTA\Database\bin;"
 @echo %Path%
 {{< /highlight>}}
 
-想不到由于一个***-m***而让自己郁闷了这么久，哎!
+
+Orz~  
+想不到由于一个***-m***而让自己郁闷了这么久!
