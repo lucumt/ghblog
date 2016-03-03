@@ -103,14 +103,17 @@ git subtree pull --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh
 # Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you're not using a theme)
 hugo -t ThemeName
 
-
+# 如果不是第一次创建，那么后续更新时可以从此步骤开始
 # Add everything
 git add -A
 
 # Commit and push to master
-git commit -m "Updating site" && git push origin master
+git commit -m "Updating site"
 
-# Push the public subtree to the gh-pages branch
+# Push to master
+git push origin master
+
+# 将主干中public目录同步到gh-pages分支上
 git subtree push --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages{{< /highlight >}}
 
 ### 说明信息
