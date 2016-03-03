@@ -62,6 +62,12 @@
 	
 
 	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
     <div class="sidebar pure-u-1 pure-u-md-1-4">
   <div class="header">
     
@@ -326,14 +332,17 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 <span style="color: #75715e"># Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you&#39;re not using a theme)</span>
 <span style="color: #f8f8f2">hugo</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">t</span> <span style="color: #66d9ef">ThemeName</span>
 
-
+<span style="color: #75715e"># 如果不是第一次创建，那么后续更新时可以从此步骤开始</span>
 <span style="color: #75715e"># Add everything</span>
 <span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">add</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">A</span>
 
 <span style="color: #75715e"># Commit and push to master</span>
-<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">commit</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">m</span> <span style="color: #e6db74">&quot;Updating site&quot;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">push</span> <span style="color: #f8f8f2">origin</span> <span style="color: #f8f8f2">master</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">commit</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">m</span> <span style="color: #e6db74">&quot;Updating site&quot;</span>
 
-<span style="color: #75715e"># Push the public subtree to the gh-pages branch</span>
+<span style="color: #75715e"># Push to master</span>
+<span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">push</span> <span style="color: #f8f8f2">origin</span> <span style="color: #f8f8f2">master</span>
+
+<span style="color: #75715e"># 将主干中public目录同步到gh-pages分支上</span>
 <span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">subtree</span> <span style="color: #f8f8f2">push</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">prefix</span><span style="color: #f92672">=</span><span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">git@github</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">com</span><span style="color: #e6db74">:spencerlyon2</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">hugo_gh_blog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">git</span> <span style="color: #f8f8f2">gh</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">pages</span>
 </pre></div>
 </p>

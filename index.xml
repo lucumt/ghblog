@@ -134,14 +134,17 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;span style=&#34;color: #75715e&#34;&gt;# Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you&amp;#39;re not using a theme)&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;t&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;ThemeName&lt;/span&gt;
 
-
+&lt;span style=&#34;color: #75715e&#34;&gt;# 如果不是第一次创建，那么后续更新时可以从此步骤开始&lt;/span&gt;
 &lt;span style=&#34;color: #75715e&#34;&gt;# Add everything&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;A&lt;/span&gt;
 
 &lt;span style=&#34;color: #75715e&#34;&gt;# Commit and push to master&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Updating site&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Updating site&amp;quot;&lt;/span&gt;
 
-&lt;span style=&#34;color: #75715e&#34;&gt;# Push the public subtree to the gh-pages branch&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# Push to master&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# 将主干中public目录同步到gh-pages分支上&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
