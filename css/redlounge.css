@@ -533,6 +533,10 @@ hr.thin {
 	p img{
 	 max-width:100%;
 	}
+
+	section.post{
+	  width:95%;
+	}
 }
 
 @media (min-width: 48rem) {
