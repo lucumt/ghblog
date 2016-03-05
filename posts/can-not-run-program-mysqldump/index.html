@@ -213,12 +213,12 @@
 
 <p>阅读之后，发现上面说问题产生的原因是<code>mysqldump</code>命令无法识别，把<code>mysqldump</code>可执行文件的路径加入PATH环境变量中即可解决问题。</p>
 
-<p>但当我在cmd中无论执行<code>mysql</code>或<code>mysqldump</code>命令时，都显示这两个命令可以正常执行：
+<p>但当我在cmd中无论执行<code>mysql</code>或<code>mysqldump</code>命令时，都显示这两个命令可以正常执行：<br />
 <img src="https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png" alt="mysql1.png" />
-
-在cmd中输出PATH环境变量时，也显示<code>MySQL</code>的bin目录已经添加:
+<br />
+在cmd中输出PATH环境变量时，也显示<code>MySQL</code>的bin目录已经添加:<br />
 <img src="https://ooo.0o0.ooo/2016/03/03/56d7e39ff3ab8.png" alt="mysql2.png" />
-
+<br />
 即使重启电脑，上述通过<code>Java</code>备份<code>MySQL</code>的代码还是不能正常执行，但当在cmd中执行<code>mysql</code>、<code>mysqldump</code>命令或输出PATH环境变量时，结果任何上面图片中显示的一致。</p>
 
 <p>这下让我感到很困惑:&nbsp;<strong>通过</strong><code>Java</code><strong>代码来执行</strong><code>mysqldump</code><strong>导出操作时去不能正常执行原因是</strong><code>MySQL</code><strong>的执行路径没有加到PATH环境变量中,但实际检查发现</strong><code>MySQL</code><strong>的环境变量设置正常，在命令行通过</strong><code>mysqldump</code><strong>导出sql文件可以成功操作!</strong></p>
