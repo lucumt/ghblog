@@ -39,10 +39,10 @@ Google之后，在**[Stackoverflow](http://stackoverflow.com/)**发现两个相�
 
 阅读之后，发现上面说问题产生的原因是`mysqldump`命令无法识别，把`mysqldump`可执行文件的路径加入PATH环境变量中即可解决问题。  
 
-但当我在cmd中无论执行`mysql`或`mysqldump`命令时，都显示这两个命令可以正常执行：
-![mysql1.png](https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png)
-在cmd中输出PATH环境变量时，也显示`MySQL`的bin目录已经添加:
-![mysql2.png](https://ooo.0o0.ooo/2016/03/03/56d7e39ff3ab8.png)
+但当我在cmd中无论执行`mysql`或`mysqldump`命令时，都显示这两个命令可以正常执行：  
+![mysql1.png](https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png)    
+在cmd中输出PATH环境变量时，也显示`MySQL`的bin目录已经添加:  
+![mysql2.png](https://ooo.0o0.ooo/2016/03/03/56d7e39ff3ab8.png)    
 即使重启电脑，上述通过`Java`备份`MySQL`的代码还是不能正常执行，但当在cmd中执行`mysql`、`mysqldump`命令或输出PATH环境变量时，结果任何上面图片中显示的一致。
 
 这下让我感到很困惑:&nbsp;**通过**`Java`**代码来执行**`mysqldump`**导出操作时去不能正常执行原因是**`MySQL`**的执行路径没有加到PATH环境变量中,但实际检查发现**`MySQL`**的环境变量设置正常，在命令行通过**`mysqldump`**导出sql文件可以成功操作!**
