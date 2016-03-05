@@ -10,7 +10,7 @@ html, p, nav, section, article {
 	font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
 }
 section{
-	margin:1em 21.42857% 0 2.42857%;
+	margin:1em 5% 0 2.42857%;
 	font-size:1.25em;
 	line-height:1.8em;*zoom:1
 }
@@ -25,8 +25,7 @@ section.post{
 }
 
 #list>li>.meta {
-	float: right;
-	width: 35%;
+	float: right !important;
 }
 
 pre {
