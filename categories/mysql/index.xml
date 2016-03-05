@@ -43,12 +43,12 @@
 
 &lt;p&gt;阅读之后，发现上面说问题产生的原因是&lt;code&gt;mysqldump&lt;/code&gt;命令无法识别，把&lt;code&gt;mysqldump&lt;/code&gt;可执行文件的路径加入PATH环境变量中即可解决问题。&lt;/p&gt;
 
-&lt;p&gt;但当我在cmd中无论执行&lt;code&gt;mysql&lt;/code&gt;或&lt;code&gt;mysqldump&lt;/code&gt;命令时，都显示这两个命令可以正常执行：
+&lt;p&gt;但当我在cmd中无论执行&lt;code&gt;mysql&lt;/code&gt;或&lt;code&gt;mysqldump&lt;/code&gt;命令时，都显示这两个命令可以正常执行：&lt;br /&gt;
 &lt;img src=&#34;https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png&#34; alt=&#34;mysql1.png&#34; /&gt;
-
-在cmd中输出PATH环境变量时，也显示&lt;code&gt;MySQL&lt;/code&gt;的bin目录已经添加:
+&lt;br /&gt;
+在cmd中输出PATH环境变量时，也显示&lt;code&gt;MySQL&lt;/code&gt;的bin目录已经添加:&lt;br /&gt;
 &lt;img src=&#34;https://ooo.0o0.ooo/2016/03/03/56d7e39ff3ab8.png&#34; alt=&#34;mysql2.png&#34; /&gt;
-
+&lt;br /&gt;
 即使重启电脑，上述通过&lt;code&gt;Java&lt;/code&gt;备份&lt;code&gt;MySQL&lt;/code&gt;的代码还是不能正常执行，但当在cmd中执行&lt;code&gt;mysql&lt;/code&gt;、&lt;code&gt;mysqldump&lt;/code&gt;命令或输出PATH环境变量时，结果任何上面图片中显示的一致。&lt;/p&gt;
 
 &lt;p&gt;这下让我感到很困惑:&amp;nbsp;&lt;strong&gt;通过&lt;/strong&gt;&lt;code&gt;Java&lt;/code&gt;&lt;strong&gt;代码来执行&lt;/strong&gt;&lt;code&gt;mysqldump&lt;/code&gt;&lt;strong&gt;导出操作时去不能正常执行原因是&lt;/strong&gt;&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的执行路径没有加到PATH环境变量中,但实际检查发现&lt;/strong&gt;&lt;code&gt;MySQL&lt;/code&gt;&lt;strong&gt;的环境变量设置正常，在命令行通过&lt;/strong&gt;&lt;code&gt;mysqldump&lt;/code&gt;&lt;strong&gt;导出sql文件可以成功操作!&lt;/strong&gt;&lt;/p&gt;
