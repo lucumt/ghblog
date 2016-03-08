@@ -23,7 +23,7 @@ Java `volatile`关键字确保了`volatile`变量的修改在多线程中是可�
 ![p1.png](https://ooo.0o0.ooo/2016/03/07/56dd58a160db3.png)  
 对于`volatile`变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。
 
-设想两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：
+假设两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：
 {{< highlight java>}}
 public class SharedObject {
 
@@ -31,7 +31,7 @@ public class SharedObject {
 
 }
 {{</highlight>}}
-再次设想，只有Thread1会增加 *counter* 变量的值，但是Thread1和Thread2都能在任意时刻读取 *counter* 变量的值。
+再次假设，只有Thread1会增加 *counter* 变量的值，但是Thread1和Thread2都能在任意时刻读取 *counter* 变量的值。
 
 如果*couner*变量没有声明为`volatile`将无法保证在何时把CPU缓存中的值写入主内存中。这意味着 *counter* 变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：  
 ![p2.png](https://ooo.0o0.ooo/2016/03/07/56dd58a7387d7.png)  
@@ -47,7 +47,7 @@ public class SharedObject {
 {{</highlight>}}
 因此定义一个`volatile`变量可以保证写变量的操作对于其它线程可见。
 
-# Java volatile先行发生保障
+# Volatile先行发生原则
 从Java5之后`volatile`关键字不仅能用于确保变量从主内存中读取和写入，事实上，`volatile`关键字还有如下作用：
 
 * 如果线程A写入了一个`volatile`变量然后线程B读取了这个相同的`volatile`变量，那么所有在线程A写之前对其可见的变量，在线程B读取这个`volatile`之后也会对其可见。  
@@ -111,7 +111,7 @@ object = newObject;
 
 但是，对于执行指令重排序可能会损害 *object* 变量的可见性。首先，线程B可能会在线程A对 *object* 真实的写入一个值到object之前读取到 *hasNewObject* 的值为true。其次,现在甚至不能保证什么时候写入 *object* 的新值会刷写入主内存（好吧，下次线程A在其它地方写入`volatile`变量。。。）  
 
-为了阻止上面所述的这种情况发生，`volatile`关键字提供了一个 **先行发生保证**。先行发生保证确保对于`volatile`变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是`volatile`读写指令不能和它前后的任何指令重新排序。
+为了阻止上面所述的这种情况发生，`volatile`关键字提供了一个 **先行发生原则**。先行发生保证确保对于`volatile`变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是`volatile`读写指令不能和它前后的任何指令重新排序。
 
 看看下面这个例子：
 {{< highlight java>}}
@@ -129,7 +129,7 @@ JVM可能会重新排序前3条指令，只要它们都先发生于`volatile`写
 
 同样的，JVM可能会重新排序最后3条指令，只要`volatile`写指令先行发生于它们，这3条指令都不能被重新排序到`volatile`指令的前面。
 
-这就是`volatile`先行发生保证的基本含义。
+这就是`volatile`先行发生原则的基本含义。
 
 # Volatile并不是万能的
 尽管`volatile`关键字确保了所有对于`volatile`变量的读操作都是直接从主内存中读取的，所有对于`volatile`变量的写操作都是直接写入主内存的，但仍有一些情况只定义一个`volatile`变量是不够的。
@@ -147,7 +147,7 @@ JVM可能会重新排序前3条指令，只要它们都先发生于`volatile`写
 
 线程1和线程2现在都没有同步，共享变量 *counter* 的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量 *counter* 的计算值写入到主内存中，*counter* 的值仍然是错的。
 
-# Volatile变量什么时候适用
+# Volatile的适用场景
 就像我在前面提到的那样，如果两个线程同时对一个恭喜变量进行读和写，那么仅用`volatile`变量是不够的。在这种情况下，你需要使用`synchronized`来确保关于该变量的读和写都是原子操作。读或写一个`volatile`变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用`synchronzied`关键字来修饰你的关键代码。  
 
 除了使用`synchronzied`之外，你也可以使用 **java.util.concurrent** 包中的一些原子数据类型，如 **AtomicLong** ， **AtomicReference** 等。
@@ -156,6 +156,8 @@ JVM可能会重新排序前3条指令，只要它们都先发生于`volatile`写
 
 `Volatile`关键字适用于32位变量和64位变量。
 
-# Volatile性能考虑
+# Volatile性能思考
 对于`volatile`变量的读和写都是直接从主内存中进行的。相对于CPU缓存，直接对主内存进行读写代价更高。
 访问一个`volatile`变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用`volatile`变量。
+
+<--终于翻译完了!-->
