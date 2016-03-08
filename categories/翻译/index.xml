@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>翻译 on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</link>
+    <description>Recent content in 翻译 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 07 Mar 2016 18:03:18 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>[译] Java Volatile 关键字详解</title>
+      <link>http://lucumt.info/posts/java-volatile-keyword/</link>
+      <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/java-volatile-keyword/</guid>
+      <description>
+
+&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为*在主内中存储*，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
+
+&lt;p&gt;事实上，从Java5之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;
+
+&lt;h1 id=&#34;volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile变量可见性保证&lt;/h1&gt;
+
+&lt;p&gt;Java &lt;code&gt;volatile&lt;/code&gt;关键字确保了&lt;code&gt;volatile&lt;/code&gt;变量的修改在多线程中是可见的。这听起来有些抽象，接下来我将详细说明。&lt;/p&gt;
+
+&lt;p&gt;在一个对非&lt;code&gt;volatile&lt;/code&gt;变量进行操作的多线程应用，由于性能的关系，当对这些变量进行读写时，每个线程都可能从主线程中拷贝变量到CPU缓存中。如果你的电脑不止一个CPU，每个线程可能会在不同的CPU上运行。这意味着，每个线程都可能将变量拷贝到不同的CPU的CPU缓存中，如下图所示：
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58a160db3.png&#34; alt=&#34;p1.png&#34; /&gt;
+&lt;br /&gt;
+对于&lt;code&gt;volatile&lt;/code&gt;变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。&lt;/p&gt;
+
+&lt;p&gt;设想两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SharedObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;counter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+再次设想，只有Thread1会增加 &lt;em&gt;counter&lt;/em&gt; 变量的值，但是Thread1和Thread2都能在任意时刻读取 &lt;em&gt;counter&lt;/em&gt; 变量的值。&lt;/p&gt;
+
+&lt;p&gt;如果&lt;em&gt;couner*变量没有声明为&lt;code&gt;volatile&lt;/code&gt;将无法保证在何时把CPU缓存中的值写入主内存中。这意味着 *counter&lt;/em&gt; 变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：&lt;br /&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58a7387d7.png&#34; alt=&#34;p2.png&#34; /&gt;
+&lt;br /&gt;
+造成线程不能获取变量最新值得原因为变量值没有被其它线程及时写回主内存中，这就是所谓的可见性问题。某个线程的更新对其它线程不可见。&lt;/p&gt;
+
+&lt;p&gt;将 &lt;em&gt;counter&lt;/em&gt; 变量声明为&lt;code&gt;volatile&lt;/code&gt;之后，所有对 &lt;em&gt;counter&lt;/em&gt; 变量的写操作会立即写入主内存中，同样，所有对 &lt;em&gt;counter&lt;/em&gt; 变量的读操作都会从主内存中读取数据。下面的代码块展示了如何将 &lt;em&gt;counter&lt;/em&gt; 变量声明为&lt;code&gt;volatile&lt;/code&gt;：&lt;br /&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SharedObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;volatile&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;counter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+因此定义一个&lt;code&gt;volatile&lt;/code&gt;变量可以保证写变量的操作对于其它线程可见。&lt;/p&gt;
+
+&lt;h1 id=&#34;java-volatile先行发生保障:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Java volatile先行发生保障&lt;/h1&gt;
+
+&lt;p&gt;从Java5之后&lt;code&gt;volatile&lt;/code&gt;关键字不仅能用于确保变量从主内存中读取和写入，事实上，&lt;code&gt;volatile&lt;/code&gt;关键字还有如下作用：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果线程A写入了一个&lt;code&gt;volatile&lt;/code&gt;变量然后线程B读取了这个相同的&lt;code&gt;volatile&lt;/code&gt;变量，那么所有在线程A写之前对其可见的变量，在线程B读取这个&lt;code&gt;volatile&lt;/code&gt;之后也会对其可见。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;volatile&lt;/code&gt;变量的读写指令不能被JVM重排序（出于性能的考虑，JVM可能会对指令重排序如果JVM检测到指令排序不会对程序运行产生变化）。
+前后的指令可以重排序，但是&lt;code&gt;volatile&lt;/code&gt;变量的读和写不能与这些重排序指令混在一起。任何跟随在&lt;code&gt;volatile&lt;/code&gt;变量读写之后的指令都会确保只有在变量的读写操作之后才能执行。&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上述说明需要更进一步的解释。&lt;/p&gt;
+
+&lt;p&gt;当一个线程向一个&lt;code&gt;volatile&lt;/code&gt;变量写操作，此时不仅这个&lt;code&gt;volatile&lt;/code&gt;变量自身会写入主内存，所有这个&lt;code&gt;volatile&lt;/code&gt;变量写入之前受影响发生改变的变量也会刷写入主内存。当一个线程向一个&lt;code&gt;volatile&lt;/code&gt;变量读操作时它同样也会从主内存中读取所有和这个&lt;code&gt;volatile&lt;/code&gt;变量一起刷写入主内存的变量。&lt;/p&gt;
+
+&lt;p&gt;看看下面这个示例：
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Thread&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;A&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;counter&lt;/span&gt;     &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;counter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;Thread&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;B&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;counter&lt;/span&gt;     &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;counter&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;nonVolatile&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;br /&gt;
+由于线程A在写操作&lt;code&gt;volatile&lt;/code&gt;变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 之前写操作非&lt;code&gt;volatile&lt;/code&gt;变量 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; ，因而当线程A写操作变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 后,变量 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 和 &lt;em&gt;sharedObject.counter&lt;/em&gt; 都被写入主内存。&lt;/p&gt;
+
+&lt;p&gt;由于线程B以读取&lt;code&gt;volatile&lt;/code&gt;变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 开始，因而变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 和变量&lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 都会被写入线程B所使用的CPU缓存中。当线程B读取 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 变量时，它将能看见被线程A写入的变量。&lt;/p&gt;
+
+&lt;p&gt;开发人员可以利用这个扩展的可见性来优化线程之间变量的可见性。不同于把每个变量都设置为&lt;code&gt;volatile&lt;/code&gt;，此时只有少部分变量需要声明为&lt;code&gt;volatile&lt;/code&gt;。下面是一个利用此规则编写的简单示例程序 &lt;em&gt;Exchanger&lt;/em&gt; ：&lt;br /&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Exchanger&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Object&lt;/span&gt;   &lt;span style=&#34;color: #f8f8f2&#34;&gt;object&lt;/span&gt;       &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;volatile&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;put&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Object&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;newObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #75715e&#34;&gt;//等待，不覆盖已经存在的新对象&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;object&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;newObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//volatile写入&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Object&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;take&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(){&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;){&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//volatile读取&lt;/span&gt;
+            &lt;span style=&#34;color: #75715e&#34;&gt;//等待，不获取旧的对象（或null对象）&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Object&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;obj&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;object&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//volatile写入&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;obj&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+线程A随时可能会通过调用 &lt;em&gt;put()&lt;/em&gt; 方法增加对象，线程B随时可能会通过调用 &lt;em&gt;take()&lt;/em&gt; 方法获取对象。只要线程A只调用 &lt;em&gt;put()&lt;/em&gt; ，线程B只调用 &lt;em&gt;take()&lt;/em&gt; ,这个 &lt;em&gt;Exchanger&lt;/em&gt; 就可以通过一个&lt;code&gt;volatile&lt;/code&gt;变量正常工作（排除&lt;code&gt;synchronized&lt;/code&gt;代码块的使用）。&lt;/p&gt;
+
+&lt;p&gt;然而，JVM可能会重排序Java指令来优化性能，如果JVM可以通过不改变这些重排序指令的语义来实现此功能。如果JVM调换了 &lt;em&gt;put()&lt;/em&gt; 和 &lt;em&gt;take()&lt;/em&gt; 中的读和写的指令，会发生什么呢？如果 &lt;em&gt;put()&lt;/em&gt; 真的像下面这样执行会出现什么情况呢？
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;//等待，不覆盖已经存在的新对象&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;hasNewObject&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//volatile写入&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;object&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;newObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+请注意此时对于&lt;code&gt;volatile&lt;/code&gt;变量 &lt;em&gt;hasNewObject&lt;/em&gt; 的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。&lt;/p&gt;
+
+&lt;p&gt;但是，对于执行指令重排序可能会损害 &lt;em&gt;object&lt;/em&gt; 变量的可见性。首先，线程B可能会在线程A对 &lt;em&gt;object&lt;/em&gt; 真实的写入一个值到object之前读取到 &lt;em&gt;hasNewObject&lt;/em&gt; 的值为true。其次,现在甚至不能保证什么时候写入 &lt;em&gt;object&lt;/em&gt; 的新值会刷写入主内存（好吧，下次线程A在其它地方写入&lt;code&gt;volatile&lt;/code&gt;变量。。。）&lt;/p&gt;
+
+&lt;p&gt;为了阻止上面所述的这种情况发生，&lt;code&gt;volatile&lt;/code&gt;关键字提供了一个 &lt;strong&gt;先行发生保证&lt;/strong&gt;。先行发生保证确保对于&lt;code&gt;volatile&lt;/code&gt;变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是&lt;code&gt;volatile&lt;/code&gt;读写指令不能和它前后的任何指令重新排序。&lt;/p&gt;
+
+&lt;p&gt;看看下面这个例子：
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;456&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile3&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;789&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;volatile&lt;/span&gt;     &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;//a volatile variable&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;someValue1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile4&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;someValue2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile5&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;someValue3&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sharedObject&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;nonVolatile6&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+JVM可能会重新排序前3条指令，只要它们都先发生于&lt;code&gt;volatile&lt;/code&gt;写指令（它们都必须在&lt;code&gt;volatile&lt;/code&gt;写指令之前执行）。&lt;/p&gt;
+
+&lt;p&gt;同样的，JVM可能会重新排序最后3条指令，只要&lt;code&gt;volatile&lt;/code&gt;写指令先行发生于它们，这3条指令都不能被重新排序到&lt;code&gt;volatile&lt;/code&gt;指令的前面。&lt;/p&gt;
+
+&lt;p&gt;这就是&lt;code&gt;volatile&lt;/code&gt;先行发生保证的基本含义。&lt;/p&gt;
+
+&lt;h1 id=&#34;volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile并不是万能的&lt;/h1&gt;
+
+&lt;p&gt;尽管&lt;code&gt;volatile&lt;/code&gt;关键字确保了所有对于&lt;code&gt;volatile&lt;/code&gt;变量的读操作都是直接从主内存中读取的，所有对于&lt;code&gt;volatile&lt;/code&gt;变量的写操作都是直接写入主内存的，但仍有一些情况只定义一个&lt;code&gt;volatile&lt;/code&gt;变量是不够的。&lt;/p&gt;
+
+&lt;p&gt;在前面的场景中，线程1对共享变量&lt;code&gt;counter&lt;/code&gt;写入操作，声明 &lt;em&gt;counter&lt;/em&gt; 变量为&lt;code&gt;volatile&lt;/code&gt;之后就能够确保线程2总是可以看见最新的写入值。&lt;/p&gt;
+
+&lt;p&gt;事实上，如果写入该变量的值不依赖于它前面的值，多个线程甚至可以在写入一个共享的&lt;code&gt;volatile&lt;/code&gt;变量时仍然能够持有在主内存中存储的正确值。换句话解释为，如果一个线程在写入volatile共享变量时，不需要先读取该变量的值以计算下一个值。&lt;/p&gt;
+
+&lt;p&gt;一旦一个线程需要首先读取一个&lt;code&gt;volatile&lt;/code&gt;变量的值，然后基于该值产生&lt;code&gt;volatile&lt;/code&gt;共享变量的下一个值，那么该&lt;code&gt;volatile&lt;/code&gt;变量将不再能够完全确保正确的可见性。在读取&lt;code&gt;volatile&lt;/code&gt;变量和写入它的新值这个很短的时间间隔内，产生了一个 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html&#34;&gt;竞争条件&lt;/a&gt;&lt;/strong&gt; :多个线程可能会读取&lt;code&gt;volatile&lt;/code&gt;变量的相同值，然后产生新值并写入主内存，这样将会覆盖互相的值。&lt;/p&gt;
+
+&lt;p&gt;这种多个线程同时增加相同计数器的场景正是&lt;code&gt;volatile&lt;/code&gt;变量不适用的地方，接下来的部分进行了更详细的解释。&lt;/p&gt;
+
+&lt;p&gt;假设线程1读取一个值为0的共享变量 &lt;em&gt;counter&lt;/em&gt; 到它的CPU缓存中，将它加1但是并没有将增加后的值写入主内存中。线程2可能会从主内存中读取同一个 &lt;em&gt;counter&lt;/em&gt; 变量，其值仍然为0，同样不将其写入主内存中，就如下面的图片所展示的那样：&lt;br /&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58ae1cdfb.png&#34; alt=&#34;p3.png&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;线程1和线程2现在都没有同步，共享变量 &lt;em&gt;counter&lt;/em&gt; 的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量 &lt;em&gt;counter&lt;/em&gt; 的计算值写入到主内存中，&lt;em&gt;counter&lt;/em&gt; 的值仍然是错的。&lt;/p&gt;
+
+&lt;h1 id=&#34;volatile变量什么时候适用:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile变量什么时候适用&lt;/h1&gt;
+
+&lt;p&gt;就像我在前面提到的那样，如果两个线程同时对一个恭喜变量进行读和写，那么仅用&lt;code&gt;volatile&lt;/code&gt;变量是不够的。在这种情况下，你需要使用&lt;code&gt;synchronized&lt;/code&gt;来确保关于该变量的读和写都是原子操作。读或写一个&lt;code&gt;volatile&lt;/code&gt;变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用&lt;code&gt;synchronzied&lt;/code&gt;关键字来修饰你的关键代码。&lt;/p&gt;
+
+&lt;p&gt;除了使用&lt;code&gt;synchronzied&lt;/code&gt;之外，你也可以使用 &lt;strong&gt;java.util.concurrent&lt;/strong&gt; 包中的一些原子数据类型，如 &lt;strong&gt;AtomicLong&lt;/strong&gt; ， &lt;strong&gt;AtomicReference&lt;/strong&gt; 等。&lt;/p&gt;
+
+&lt;p&gt;当只有一个线程对一个&lt;code&gt;volatile&lt;/code&gt;变量进行读写而其它线程只读取该变量时，&lt;code&gt;volatile&lt;/code&gt;可以确保这些读线程读取到的是该变量的最新写入值。如果不声明该变量为&lt;code&gt;volatile&lt;/code&gt;，则不能这些读线程保证读取的是最新写入值。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Volatile&lt;/code&gt;关键字适用于32位变量和64位变量。&lt;/p&gt;
+
+&lt;h1 id=&#34;volatile性能考虑:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile性能考虑&lt;/h1&gt;
+
+&lt;p&gt;对于&lt;code&gt;volatile&lt;/code&gt;变量的读和写都是直接从主内存中进行的。相对于CPU缓存，直接对主内存进行读写代价更高。
+访问一个&lt;code&gt;volatile&lt;/code&gt;变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用&lt;code&gt;volatile&lt;/code&gt;变量。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

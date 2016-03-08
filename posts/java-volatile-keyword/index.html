@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    [译] Java Volatile 关键字详解 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="Java,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="[译] Java Volatile 关键字详解" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/java-volatile-keyword/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  
+ 
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li><a href="#volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8">Volatile变量可见性保证</a></li>
+<li><a href="#java-volatile先行发生保障:a750225f0d61f6f6aa9de85e7ec295c8">Java volatile先行发生保障</a></li>
+<li><a href="#volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8">Volatile并不是万能的</a></li>
+<li><a href="#volatile变量什么时候适用:a750225f0d61f6f6aa9de85e7ec295c8">Volatile变量什么时候适用</a></li>
+<li><a href="#volatile性能考虑:a750225f0d61f6f6aa9de85e7ec295c8">Volatile性能考虑</a></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/java-volatile-keyword">[译] Java Volatile 关键字详解</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>7</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+				
+					<a class="post-category post-category-java-concurrency" href="http://lucumt.info//categories/java-concurrency">Java Concurrency</a>
+				
+					<a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="http://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            
+
+<p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword</a></strong></p>
+
+<p>Java关键字<code>volatile</code>用于将一个Java变量标记为*在主内中存储*，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
+
+<p>事实上，从Java5之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
+
+<h1 id="volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8">Volatile变量可见性保证</h1>
+
+<p>Java <code>volatile</code>关键字确保了<code>volatile</code>变量的修改在多线程中是可见的。这听起来有些抽象，接下来我将详细说明。</p>
+
+<p>在一个对非<code>volatile</code>变量进行操作的多线程应用，由于性能的关系，当对这些变量进行读写时，每个线程都可能从主线程中拷贝变量到CPU缓存中。如果你的电脑不止一个CPU，每个线程可能会在不同的CPU上运行。这意味着，每个线程都可能将变量拷贝到不同的CPU的CPU缓存中，如下图所示：
+<img src="https://ooo.0o0.ooo/2016/03/07/56dd58a160db3.png" alt="p1.png" />
+<br />
+对于<code>volatile</code>变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。</p>
+
+<p>设想两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SharedObject</span> <span style="color: #f92672">{</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">counter</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>
+
+<span style="color: #f92672">}</span>
+</pre></div>
+
+再次设想，只有Thread1会增加 <em>counter</em> 变量的值，但是Thread1和Thread2都能在任意时刻读取 <em>counter</em> 变量的值。</p>
+
+<p>如果<em>couner*变量没有声明为<code>volatile</code>将无法保证在何时把CPU缓存中的值写入主内存中。这意味着 *counter</em> 变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：<br />
+<img src="https://ooo.0o0.ooo/2016/03/07/56dd58a7387d7.png" alt="p2.png" />
+<br />
+造成线程不能获取变量最新值得原因为变量值没有被其它线程及时写回主内存中，这就是所谓的可见性问题。某个线程的更新对其它线程不可见。</p>
+
+<p>将 <em>counter</em> 变量声明为<code>volatile</code>之后，所有对 <em>counter</em> 变量的写操作会立即写入主内存中，同样，所有对 <em>counter</em> 变量的读操作都会从主内存中读取数据。下面的代码块展示了如何将 <em>counter</em> 变量声明为<code>volatile</code>：<br />
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SharedObject</span> <span style="color: #f92672">{</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">volatile</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">counter</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>
+
+<span style="color: #f92672">}</span>
+</pre></div>
+
+因此定义一个<code>volatile</code>变量可以保证写变量的操作对于其它线程可见。</p>
+
+<h1 id="java-volatile先行发生保障:a750225f0d61f6f6aa9de85e7ec295c8">Java volatile先行发生保障</h1>
+
+<p>从Java5之后<code>volatile</code>关键字不仅能用于确保变量从主内存中读取和写入，事实上，<code>volatile</code>关键字还有如下作用：</p>
+
+<ul>
+<li>如果线程A写入了一个<code>volatile</code>变量然后线程B读取了这个相同的<code>volatile</code>变量，那么所有在线程A写之前对其可见的变量，在线程B读取这个<code>volatile</code>之后也会对其可见。<br /></li>
+<li><code>volatile</code>变量的读写指令不能被JVM重排序（出于性能的考虑，JVM可能会对指令重排序如果JVM检测到指令排序不会对程序运行产生变化）。
+前后的指令可以重排序，但是<code>volatile</code>变量的读和写不能与这些重排序指令混在一起。任何跟随在<code>volatile</code>变量读写之后的指令都会确保只有在变量的读写操作之后才能执行。<br /></li>
+</ul>
+
+<p>上述说明需要更进一步的解释。</p>
+
+<p>当一个线程向一个<code>volatile</code>变量写操作，此时不仅这个<code>volatile</code>变量自身会写入主内存，所有这个<code>volatile</code>变量写入之前受影响发生改变的变量也会刷写入主内存。当一个线程向一个<code>volatile</code>变量读操作时它同样也会从主内存中读取所有和这个<code>volatile</code>变量一起刷写入主内存的变量。</p>
+
+<p>看看下面这个示例：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">A</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">123</span><span style="color: #f92672">;</span>
+    <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">counter</span>     <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">counter</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">;</span>
+
+<span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">B</span><span style="color: #f92672">:</span>
+    <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">counter</span>     <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">counter</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">nonVolatile</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile</span><span style="color: #f92672">;</span>
+</pre></div>
+<br />
+由于线程A在写操作<code>volatile</code>变量 <em>sharedObject.counter</em> 之前写操作非<code>volatile</code>变量 <em>sharedObject.nonVolatile</em> ，因而当线程A写操作变量 <em>sharedObject.counter</em> 后,变量 <em>sharedObject.nonVolatile</em> 和 <em>sharedObject.counter</em> 都被写入主内存。</p>
+
+<p>由于线程B以读取<code>volatile</code>变量 <em>sharedObject.counter</em> 开始，因而变量 <em>sharedObject.counter</em> 和变量<em>sharedObject.nonVolatile</em> 都会被写入线程B所使用的CPU缓存中。当线程B读取 <em>sharedObject.nonVolatile</em> 变量时，它将能看见被线程A写入的变量。</p>
+
+<p>开发人员可以利用这个扩展的可见性来优化线程之间变量的可见性。不同于把每个变量都设置为<code>volatile</code>，此时只有少部分变量需要声明为<code>volatile</code>。下面是一个利用此规则编写的简单示例程序 <em>Exchanger</em> ：<br />
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Exchanger</span> <span style="color: #f92672">{</span>
+
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">Object</span>   <span style="color: #f8f8f2">object</span>       <span style="color: #f92672">=</span> <span style="color: #66d9ef">null</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">volatile</span> <span style="color: #f8f8f2">hasNewObject</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">put</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Object</span> <span style="color: #f8f8f2">newObject</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">while</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hasNewObject</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+            <span style="color: #75715e">//等待，不覆盖已经存在的新对象</span>
+        <span style="color: #f92672">}</span>
+        <span style="color: #f8f8f2">object</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">newObject</span><span style="color: #f92672">;</span>
+        <span style="color: #f8f8f2">hasNewObject</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f92672">;</span> <span style="color: #75715e">//volatile写入</span>
+    <span style="color: #f92672">}</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">Object</span> <span style="color: #a6e22e">take</span><span style="color: #f92672">(){</span>
+        <span style="color: #66d9ef">while</span><span style="color: #f92672">(!</span><span style="color: #f8f8f2">hasNewObject</span><span style="color: #f92672">){</span> <span style="color: #75715e">//volatile读取</span>
+            <span style="color: #75715e">//等待，不获取旧的对象（或null对象）</span>
+        <span style="color: #f92672">}</span>
+        <span style="color: #f8f8f2">Object</span> <span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">object</span><span style="color: #f92672">;</span>
+        <span style="color: #f8f8f2">hasNewObject</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span> <span style="color: #75715e">//volatile写入</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">obj</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+线程A随时可能会通过调用 <em>put()</em> 方法增加对象，线程B随时可能会通过调用 <em>take()</em> 方法获取对象。只要线程A只调用 <em>put()</em> ，线程B只调用 <em>take()</em> ,这个 <em>Exchanger</em> 就可以通过一个<code>volatile</code>变量正常工作（排除<code>synchronized</code>代码块的使用）。</p>
+
+<p>然而，JVM可能会重排序Java指令来优化性能，如果JVM可以通过不改变这些重排序指令的语义来实现此功能。如果JVM调换了 <em>put()</em> 和 <em>take()</em> 中的读和写的指令，会发生什么呢？如果 <em>put()</em> 真的像下面这样执行会出现什么情况呢？
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">while</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hasNewObject</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+    <span style="color: #75715e">//等待，不覆盖已经存在的新对象</span>
+<span style="color: #f92672">}</span>
+<span style="color: #f8f8f2">hasNewObject</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f92672">;</span> <span style="color: #75715e">//volatile写入</span>
+<span style="color: #f8f8f2">object</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">newObject</span><span style="color: #f92672">;</span>
+</pre></div>
+
+请注意此时对于<code>volatile</code>变量 <em>hasNewObject</em> 的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。</p>
+
+<p>但是，对于执行指令重排序可能会损害 <em>object</em> 变量的可见性。首先，线程B可能会在线程A对 <em>object</em> 真实的写入一个值到object之前读取到 <em>hasNewObject</em> 的值为true。其次,现在甚至不能保证什么时候写入 <em>object</em> 的新值会刷写入主内存（好吧，下次线程A在其它地方写入<code>volatile</code>变量。。。）</p>
+
+<p>为了阻止上面所述的这种情况发生，<code>volatile</code>关键字提供了一个 <strong>先行发生保证</strong>。先行发生保证确保对于<code>volatile</code>变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是<code>volatile</code>读写指令不能和它前后的任何指令重新排序。</p>
+
+<p>看看下面这个例子：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile1</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">123</span><span style="color: #f92672">;</span>
+<span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile2</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">456</span><span style="color: #f92672">;</span>
+<span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile3</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">789</span><span style="color: #f92672">;</span>
+
+<span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">volatile</span>     <span style="color: #f92672">=</span> <span style="color: #66d9ef">true</span><span style="color: #f92672">;</span> <span style="color: #75715e">//a volatile variable</span>
+
+<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">someValue1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile4</span><span style="color: #f92672">;</span>
+<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">someValue2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile5</span><span style="color: #f92672">;</span>
+<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">someValue3</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sharedObject</span><span style="color: #f92672">.</span><span style="color: #a6e22e">nonVolatile6</span><span style="color: #f92672">;</span>
+</pre></div>
+
+JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatile</code>写指令（它们都必须在<code>volatile</code>写指令之前执行）。</p>
+
+<p>同样的，JVM可能会重新排序最后3条指令，只要<code>volatile</code>写指令先行发生于它们，这3条指令都不能被重新排序到<code>volatile</code>指令的前面。</p>
+
+<p>这就是<code>volatile</code>先行发生保证的基本含义。</p>
+
+<h1 id="volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8">Volatile并不是万能的</h1>
+
+<p>尽管<code>volatile</code>关键字确保了所有对于<code>volatile</code>变量的读操作都是直接从主内存中读取的，所有对于<code>volatile</code>变量的写操作都是直接写入主内存的，但仍有一些情况只定义一个<code>volatile</code>变量是不够的。</p>
+
+<p>在前面的场景中，线程1对共享变量<code>counter</code>写入操作，声明 <em>counter</em> 变量为<code>volatile</code>之后就能够确保线程2总是可以看见最新的写入值。</p>
+
+<p>事实上，如果写入该变量的值不依赖于它前面的值，多个线程甚至可以在写入一个共享的<code>volatile</code>变量时仍然能够持有在主内存中存储的正确值。换句话解释为，如果一个线程在写入volatile共享变量时，不需要先读取该变量的值以计算下一个值。</p>
+
+<p>一旦一个线程需要首先读取一个<code>volatile</code>变量的值，然后基于该值产生<code>volatile</code>共享变量的下一个值，那么该<code>volatile</code>变量将不再能够完全确保正确的可见性。在读取<code>volatile</code>变量和写入它的新值这个很短的时间间隔内，产生了一个 <strong><a href="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html">竞争条件</a></strong> :多个线程可能会读取<code>volatile</code>变量的相同值，然后产生新值并写入主内存，这样将会覆盖互相的值。</p>
+
+<p>这种多个线程同时增加相同计数器的场景正是<code>volatile</code>变量不适用的地方，接下来的部分进行了更详细的解释。</p>
+
+<p>假设线程1读取一个值为0的共享变量 <em>counter</em> 到它的CPU缓存中，将它加1但是并没有将增加后的值写入主内存中。线程2可能会从主内存中读取同一个 <em>counter</em> 变量，其值仍然为0，同样不将其写入主内存中，就如下面的图片所展示的那样：<br />
+<img src="https://ooo.0o0.ooo/2016/03/07/56dd58ae1cdfb.png" alt="p3.png" />
+</p>
+
+<p>线程1和线程2现在都没有同步，共享变量 <em>counter</em> 的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量 <em>counter</em> 的计算值写入到主内存中，<em>counter</em> 的值仍然是错的。</p>
+
+<h1 id="volatile变量什么时候适用:a750225f0d61f6f6aa9de85e7ec295c8">Volatile变量什么时候适用</h1>
+
+<p>就像我在前面提到的那样，如果两个线程同时对一个恭喜变量进行读和写，那么仅用<code>volatile</code>变量是不够的。在这种情况下，你需要使用<code>synchronized</code>来确保关于该变量的读和写都是原子操作。读或写一个<code>volatile</code>变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用<code>synchronzied</code>关键字来修饰你的关键代码。</p>
+
+<p>除了使用<code>synchronzied</code>之外，你也可以使用 <strong>java.util.concurrent</strong> 包中的一些原子数据类型，如 <strong>AtomicLong</strong> ， <strong>AtomicReference</strong> 等。</p>
+
+<p>当只有一个线程对一个<code>volatile</code>变量进行读写而其它线程只读取该变量时，<code>volatile</code>可以确保这些读线程读取到的是该变量的最新写入值。如果不声明该变量为<code>volatile</code>，则不能这些读线程保证读取的是最新写入值。</p>
+
+<p><code>Volatile</code>关键字适用于32位变量和64位变量。</p>
+
+<h1 id="volatile性能考虑:a750225f0d61f6f6aa9de85e7ec295c8">Volatile性能考虑</h1>
+
+<p>对于<code>volatile</code>变量的读和写都是直接从主内存中进行的。相对于CPU缓存，直接对主内存进行读写代价更高。
+访问一个<code>volatile</code>变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用<code>volatile</code>变量。</p>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/java-volatile-keyword\/';
+    var disqus_title = '[译] Java Volatile 关键字详解';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/java-volatile-keyword\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
