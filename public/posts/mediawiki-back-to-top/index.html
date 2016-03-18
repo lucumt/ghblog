@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    Mediawiki添加回到顶部的方法 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="Mediawiki,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="Mediawiki添加回到顶部的方法" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/mediawiki-back-to-top/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  
+ 
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/mediawiki-back-to-top">Mediawiki添加回到顶部的方法</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>18</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-mediawiki" href="http://lucumt.info//categories/mediawiki">Mediawiki</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            <p><strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>是<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>系统所采用的框架，适合于需要快速搭建知识分享的场合。采用<strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>生成的知识共享平台和<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>的操作与使用类似，都支持采用<strong><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></strong>语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个<strong><em>回到顶部</em></strong>的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：</p>
+
+<ul>
+<li>以<strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>管理员身份登录mediawiki,在搜索栏输入MediaWiki:Common.js,然后输入如下代码并保存：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #75715e">/* 此处的JavaScript将加载于所有用户每一个页面。 */</span>
+<span style="color: #a6e22e">$</span><span style="color: #f8f8f2">(window).</span><span style="color: #a6e22e">scroll</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){</span>
+   <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">$</span><span style="color: #f8f8f2">(window).</span><span style="color: #a6e22e">scrollTop</span><span style="color: #f8f8f2">()</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">){</span>
+    <span style="color: #a6e22e">$</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;.back-to-top&quot;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">fadeIn</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1000</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #f8f8f2">}</span><span style="color: #66d9ef">else</span><span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">$</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;.back-to-top&quot;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">fadeOut</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1000</span><span style="color: #f8f8f2">);</span>
+  <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+</li>
+<li>在mediawiki\skins\Vector.php中的第252行添加如下代码：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;back-to-top&quot;</span> <span style="color: #a6e22e">x_onClick=</span><span style="color: #e6db74">&quot;$(&#39;html,body&#39;).animate({scrollTop:0},500);&quot;</span><span style="color: #f92672">&gt;</span>
+     <span style="color: #f92672">&lt;span&gt;</span>返回顶部<span style="color: #f92672">&lt;/span&gt;</span>
+  <span style="color: #f92672">&lt;/div&gt;</span>
+</pre></div>
+</li>
+
+<li><p>在mediawiki\skins\vector\screen.css的最后添加如下代码：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #a6e22e">.back-to-top</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">position</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">fixed</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">bottom</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">6em</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">right</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">3em</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">background-color</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">rgba(</span><span style="color: #ae81ff">46</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">46</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">46</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">.</span><span style="color: #ae81ff">8</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #66d9ef">text-align</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">center</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">padding</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">5px</span> <span style="color: #ae81ff">6px</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">color</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">#eee</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f92672">-</span><span style="color: #f8f8f2">webkit</span><span style="color: #f92672">-</span><span style="color: #66d9ef">border</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">radius</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">3px</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f92672">-</span><span style="color: #f8f8f2">moz</span><span style="color: #f92672">-</span><span style="color: #66d9ef">border</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">radius</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">3px</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">border</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">radius</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">3px</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">cursor</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">pointer</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">display</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">none</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">}</span>
+ 
+<span style="color: #a6e22e">.back-to-top:hover</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">background</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">rgba(</span><span style="color: #ae81ff">0</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">221</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">255</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">.</span><span style="color: #ae81ff">8</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+</p></li>
+
+<li><p>当页面的高度超出限制时，就会出现“返回顶部”的悬浮框，效果图如下：<br />
+<img src="https://ooo.0o0.ooo/2016/03/18/56ec1de1a77ac.png" alt="Back to top.PNG" title="返回顶部示例图片" />
+</p></li>
+</ul>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/mediawiki-back-to-top\/';
+    var disqus_title = 'Mediawiki添加回到顶部的方法';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/mediawiki-back-to-top\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
