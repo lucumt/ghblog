@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    在Spring中利用Mock对HttpServletRequest进行单元测试 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="Java,Spring,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/using-mock-test-http-servlet-request/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  
+ 
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li><a href="#编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</a></li>
+<li><a href="#spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</a></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/using-mock-test-http-servlet-request">在Spring中利用Mock对HttpServletRequest进行单元测试</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>19</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+				
+					<a class="post-category post-category-spring" href="http://lucumt.info//categories/spring">Spring</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            
+
+<h1 id="编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</h1>
+
+<p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
+
+<p>假设在 <strong><em>HttpServletRequest</em></strong> 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #75715e">//先获取userId对象</span>
+  <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAttribute</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;userId&quot;</span><span style="color: #f92672">).</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">();</span>
+ 
+  <span style="color: #75715e">//然后将获取的userId传入对应方法</span>
+  <span style="color: #f8f8f2">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
+  <span style="color: #75715e">//相关该方法</span>
+   <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">User</span> <span style="color: #a6e22e">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span><span style="color: #f92672">){</span>
+       <span style="color: #f8f8f2">User</span> <span style="color: #f8f8f2">userModel</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">userDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">findById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
+       <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">userModel</span><span style="color: #f92672">;</span>
+  <span style="color: #f92672">}</span>  
+</pre></div>
+
+请尽量避免使用第二种方式
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"> 
+  <span style="color: #75715e">//直接传入request对象</span>
+  <span style="color: #f8f8f2">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">request</span><span style="color: #f92672">);</span>
+  <span style="color: #75715e">//相关该方法</span>
+   <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">User</span> <span style="color: #a6e22e">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">HttpServletRequest</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">){</span>
+     
+       <span style="color: #75715e">//在该方法内部获取userId</span>
+       <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAttribute</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;userId&quot;</span><span style="color: #f92672">).</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">();</span>
+ 
+       <span style="color: #f8f8f2">User</span> <span style="color: #f8f8f2">userModel</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">userDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">findById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
+       <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">userModel</span><span style="color: #f92672">;</span>
+  <span style="color: #f92672">}</span>  
+</pre></div>
+
+<em>若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 <strong>HttpServletRequest</strong> 对象，从而影响我们的测试。</em></p>
+
+<h1 id="spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</h1>
+
+<p>在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 <strong><em>HttpServletRequest</em></strong> 或 <strong><em>ServletContext</em></strong> 对象，如果我们想对这种方法进行测试，可以利用<strong><a href="http://mockito.org/">Mock</a></strong>来模拟相关的对象。</p>
+
+<p>由于<strong><a href="https://spring.io/">Spring</a></strong>自身已经整合了<strong><a href="http://mockito.org/">Mock</a></strong>相关的类，故在此处展示一个示例代码，以供参考:
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.File</span><span style="color: #f92672">;</span>
+ 
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.Test</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.mock.web.MockHttpServletRequest</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.mock.web.MockServletContext</span><span style="color: #f92672">;</span>
+ 
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SpringMockTest</span> <span style="color: #f92672">{</span>
+ 
+<span style="color: #a6e22e">@Test</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">testHttpServletRequest</span><span style="color: #f92672">(){</span>
+	<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">realPath</span> <span style="color: #f92672">=</span><span style="color: #e6db74">&quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&quot;</span><span style="color: #f92672">;</span>
+	<span style="color: #75715e">//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错</span>
+	<span style="color: #f8f8f2">MockServletContext</span> <span style="color: #f8f8f2">context</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MockServletContext</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">realPath</span><span style="color: #f92672">);</span>
+	<span style="color: #75715e">//获取realPath</span>
+	<span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">context</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getRealPath</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">File</span><span style="color: #f92672">.</span><span style="color: #a6e22e">separator</span><span style="color: #f92672">));</span>
+	<span style="color: #75715e">//模拟HttpServletRequest</span>
+	<span style="color: #f8f8f2">MockHttpServletRequest</span> <span style="color: #f8f8f2">request</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MockHttpServletRequest</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">context</span><span style="color: #f92672">);</span>
+	<span style="color: #75715e">//通过HttpServletRequest来获取realPath</span>
+	<span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getSession</span><span style="color: #f92672">().</span><span style="color: #a6e22e">getServletContext</span><span style="color: #f92672">().</span><span style="color: #a6e22e">getRealPath</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">File</span><span style="color: #f92672">.</span><span style="color: #a6e22e">separator</span><span style="color: #f92672">));</span>
+	<span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+注意:请在上下文路径的字符串前面加上 <strong>file:</strong> 前缀，否则程序会报错。如上面的程序，realPath的值应为 <em>file:D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，若去掉 <em>file:</em> 前缀，改为 <em>D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，则程序会报错。</p>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/using-mock-test-http-servlet-request\/';
+    var disqus_title = '在Spring中利用Mock对HttpServletRequest进行单元测试';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/using-mock-test-http-servlet-request\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>

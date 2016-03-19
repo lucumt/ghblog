@@ -6,8 +6,82 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Mar 2016 23:14:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 19 Mar 2016 22:43:47 +0800</lastBuildDate>
     <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
+      <link>http://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
+      <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
+      <description>
+
+&lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;
+
+&lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
+
+&lt;p&gt;假设在 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;//先获取userId对象&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getAttribute&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;userId&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toString&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;();&lt;/span&gt;
+ 
+  &lt;span style=&#34;color: #75715e&#34;&gt;//然后将获取的userId传入对应方法&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;queryUserById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+  &lt;span style=&#34;color: #75715e&#34;&gt;//相关该方法&lt;/span&gt;
+   &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;queryUserById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;){&lt;/span&gt;
+       &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userModel&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userDao&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;findById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+       &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userModel&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+请尽量避免使用第二种方式
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt; 
+  &lt;span style=&#34;color: #75715e&#34;&gt;//直接传入request对象&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;queryUserById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+  &lt;span style=&#34;color: #75715e&#34;&gt;//相关该方法&lt;/span&gt;
+   &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;queryUserById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;HttpServletRequest&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;){&lt;/span&gt;
+     
+       &lt;span style=&#34;color: #75715e&#34;&gt;//在该方法内部获取userId&lt;/span&gt;
+       &lt;span style=&#34;color: #f8f8f2&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getAttribute&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;userId&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toString&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;();&lt;/span&gt;
+ 
+       &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userModel&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userDao&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;findById&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;userId&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+       &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;userModel&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+  &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;em&gt;若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 &lt;strong&gt;HttpServletRequest&lt;/strong&gt; 对象，从而影响我们的测试。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h1&gt;
+
+&lt;p&gt;在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 对象，如果我们想对这种方法进行测试，可以利用&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟相关的对象。&lt;/p&gt;
+
+&lt;p&gt;由于&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;自身已经整合了&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;相关的类，故在此处展示一个示例代码，以供参考:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;java.io.File&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+ 
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;org.junit.Test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;org.springframework.mock.web.MockHttpServletRequest&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;org.springframework.mock.web.MockServletContext&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+ 
+&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SpringMockTest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+ 
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@Test&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;testHttpServletRequest&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(){&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;realPath&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color: #75715e&#34;&gt;//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;MockServletContext&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;context&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MockServletContext&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;realPath&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+	&lt;span style=&#34;color: #75715e&#34;&gt;//获取realPath&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getRealPath&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;File&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;separator&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;));&lt;/span&gt;
+	&lt;span style=&#34;color: #75715e&#34;&gt;//模拟HttpServletRequest&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;MockHttpServletRequest&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;MockHttpServletRequest&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;);&lt;/span&gt;
+	&lt;span style=&#34;color: #75715e&#34;&gt;//通过HttpServletRequest来获取realPath&lt;/span&gt;
+	&lt;span style=&#34;color: #f8f8f2&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getSession&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getServletContext&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getRealPath&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;File&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;separator&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;));&lt;/span&gt;
+	&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+注意:请在上下文路径的字符串前面加上 &lt;strong&gt;file:&lt;/strong&gt; 前缀，否则程序会报错。如上面的程序，realPath的值应为 &lt;em&gt;file:D:\Java\apache-tomcat-7.0.23\webapps\tmn&lt;/em&gt; ，若去掉 &lt;em&gt;file:&lt;/em&gt; 前缀，改为 &lt;em&gt;D:\Java\apache-tomcat-7.0.23\webapps\tmn&lt;/em&gt; ，则程序会报错。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mediawiki添加回到顶部的方法</title>
