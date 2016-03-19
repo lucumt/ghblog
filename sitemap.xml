@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://lucumt.info/</loc>
-    <lastmod>2016-03-18T23:14:59+08:00</lastmod>
+    <lastmod>2016-03-19T22:43:47+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/using-mock-test-http-servlet-request/</loc>
+    <lastmod>2016-03-19T22:43:47+08:00</lastmod>
   </url>
   
   <url>
