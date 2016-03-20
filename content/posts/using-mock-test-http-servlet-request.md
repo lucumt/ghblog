@@ -1,10 +1,10 @@
 +++
 
 author = "卢运强"
-categories = ["Java","Spring"]
+categories = ["Java","Spring","SpringMVC","JUnit"]
 date = "2016-03-19T22:43:47+08:00"
-description = "Blog of Rosen Lu"
-keywords = ["Java","Spring"]
+description = "在Spring中利用Mock对HttpServletRequest进行单元测试"
+keywords = ["Java","Spring","SpringMVC","JUnit"]
 title = "在Spring中利用Mock对HttpServletRequest进行单元测试"
 
 +++

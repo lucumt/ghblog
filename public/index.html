@@ -150,6 +150,130 @@
                 <header class="post-header">
                     
                     <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/download-big-file-using-springmvc">利用SpringMVC下载大文件</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>20</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" >卢运强</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+                    
+                    <a class="post-category post-category-spring" href="http://lucumt.info//categories/spring">Spring</a>
+                    
+                    <a class="post-category post-category-springmvc" href="http://lucumt.info//categories/springmvc">SpringMVC</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html">java.io</a></strong> 下面的各种IO类自己实现，或者利用 <strong><a href="https://commons.apache.org/proper/commons-io/">Commons IO</a></strong> 包中的 <strong><em>FileUtils</em></strong> 、 <strong><em>IOUtils</em></strong> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong> 来作为项目的MVC实现，所以很自然的采用 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/download-big-file-using-springmvc"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/using-junit-in-spring">利用Spring和JUnit进行单元测试</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>20</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" >卢运强</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+                    
+                    <a class="post-category post-category-junit" href="http://lucumt.info//categories/junit">JUnit</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <strong><em>commit()</em></strong> 或 <strong><em>rollback()</em></strong> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/using-junit-in-spring"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/update-authority-dynamic-using-spring-security">利用Spring Security动态的改变权限</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>20</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" >卢运强</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+                    
+                    <a class="post-category post-category-spring" href="http://lucumt.info//categories/spring">Spring</a>
+                    
+                    <a class="post-category post-category-spring-security" href="http://lucumt.info//categories/spring-security">Spring Security</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 来管理我们的web程序时，通常需要在<strong><em>UserDetailsService</em></strong> 接口中的 <strong><em>loadUserByUsername</em></strong> 方法中来初始化权限信息,但 <strong><em>UserDetailsService</em></strong> 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 提供的API来实现。</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/update-authority-dynamic-using-spring-security"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
                       <a href="http://lucumt.info/posts/using-mock-test-http-servlet-request">在Spring中利用Mock对HttpServletRequest进行单元测试</a>
                   </h1>
               </header>
@@ -171,6 +295,10 @@
                     <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
                     
                     <a class="post-category post-category-spring" href="http://lucumt.info//categories/spring">Spring</a>
+                    
+                    <a class="post-category post-category-springmvc" href="http://lucumt.info//categories/springmvc">SpringMVC</a>
+                    
+                    <a class="post-category post-category-junit" href="http://lucumt.info//categories/junit">JUnit</a>
                     
                 </div>
                 
@@ -258,9 +386,9 @@
                 
             </p>
             <article class="post-summary">
-                  <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword</a></strong></p>
+                  <p>本文翻译自 <strong><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword</a></strong></p>
 
-<p>Java关键字<code>volatile</code>用于将一个Java变量标记为*在主内中存储*，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
+<p>Java关键字<code>volatile</code>用于将一个Java变量标记为 <em>在主内中存储</em> ，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
 
 <p>事实上，从Java5之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
 
@@ -295,6 +423,8 @@
                 <div class="post-categories">
                     
                     <a class="post-category post-category-mysql" href="http://lucumt.info//categories/mysql">MySQL</a>
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
                     
                 </div>
                 

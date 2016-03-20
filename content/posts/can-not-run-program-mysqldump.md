@@ -1,10 +1,10 @@
 +++
 
 author = "卢运强"
-categories = ["MySQL"]
+categories = ["MySQL","Java"]
 date = "2016-03-03T14:33:43+08:00"
 description = "Blog of Rosen Lu"
-keywords = ["MySQL"]
+keywords = ["MySQL","Java"]
 title = "Cannot run program \"mysqldump\": CreateProcess error=2, The system cannot find the file specified"
 
 +++

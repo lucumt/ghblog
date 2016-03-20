@@ -9,9 +9,9 @@ title = "[译] Java Volatile 关键字详解"
 
 +++
 
-本文翻译自**[Java Volatile Keyword](http://tutorials.jenkov.com/java-concurrency/volatile.html)**
+本文翻译自 **[Java Volatile Keyword](http://tutorials.jenkov.com/java-concurrency/volatile.html)**
 
-Java关键字`volatile`用于将一个Java变量标记为*在主内中存储*，更准确的解释为：每次读取一个`volatile`变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个`volatile`变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。
+Java关键字`volatile`用于将一个Java变量标记为 *在主内中存储* ，更准确的解释为：每次读取一个`volatile`变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个`volatile`变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。
 
 事实上，从Java5之后，`volatile`关键字不仅仅可以用来确保`volatile`变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：
 <!--more-->
