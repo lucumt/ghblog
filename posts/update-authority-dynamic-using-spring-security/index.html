@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    利用Spring Security动态的改变权限 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="本文描述了如何利用Spring Security来在我们的程序中动态的改变用户的权限">
+<meta name="keywords" content="Java,Spring,Spring Security,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="利用Spring Security动态的改变权限" />
+<meta property="og:description" content="本文描述了如何利用Spring Security来在我们的程序中动态的改变用户的权限" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/update-authority-dynamic-using-spring-security/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  
+ 
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/update-authority-dynamic-using-spring-security">利用Spring Security动态的改变权限</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>20</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+				
+					<a class="post-category post-category-spring" href="http://lucumt.info//categories/spring">Spring</a>
+				
+					<a class="post-category post-category-spring-security" href="http://lucumt.info//categories/spring-security">Spring Security</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            <p>利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 来管理我们的web程序时，通常需要在<strong><em>UserDetailsService</em></strong> 接口中的 <strong><em>loadUserByUsername</em></strong> 方法中来初始化权限信息,但 <strong><em>UserDetailsService</em></strong> 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 提供的API来实现。</p>
+
+<p>以我自己的项目为例，<strong><em>UserDetailsService</em></strong> 接口中的 <strong><em>loadUserByUsername</em></strong> 具体实现如下：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #a6e22e">@Override</span>
+<span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">UserDetails</span> <span style="color: #a6e22e">loadUserByUsername</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">username</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">UsernameNotFoundException</span> <span style="color: #f92672">{</span>
+       <span style="color: #f8f8f2">UserModel</span> <span style="color: #f8f8f2">userModel</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">userDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getUserByUsername</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">username</span><span style="color: #f92672">);</span>
+       <span style="color: #66d9ef">if</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userModel</span><span style="color: #f92672">==</span><span style="color: #66d9ef">null</span><span style="color: #f92672">)</span>
+  <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">UsernameNotFoundException</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">username</span><span style="color: #f92672">+</span><span style="color: #e6db74">&quot; not exist!&quot;</span><span style="color: #f92672">);</span>
+       <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">GrantedAuthority</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">userAuthList</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">GrantedAuthority</span><span style="color: #f92672">&gt;();</span>
+       <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">AuthorityVO</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">authList</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">authorityDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">queryAuthorityByUserId</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getId</span><span style="color: #f92672">());</span>
+       <span style="color: #66d9ef">for</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">AuthorityVO</span> <span style="color: #f8f8f2">authVO</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">authList</span><span style="color: #f92672">){</span>
+   <span style="color: #f8f8f2">userAuthList</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">SimpleGrantedAuthority</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">authVO</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAuthName</span><span style="color: #f92672">()));</span>
+       <span style="color: #f92672">}</span>
+       <span style="color: #f8f8f2">UserDetails</span> <span style="color: #f8f8f2">userDetails</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">User</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getUsername</span><span style="color: #f92672">(),</span><span style="color: #f8f8f2">userModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getPassword</span><span style="color: #f92672">(),</span><span style="color: #66d9ef">true</span><span style="color: #f92672">,</span><span style="color: #66d9ef">true</span><span style="color: #f92672">,</span><span style="color: #66d9ef">true</span><span style="color: #f92672">,</span><span style="color: #66d9ef">true</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">userAuthList</span><span style="color: #f92672">);</span>
+       <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">userDetails</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">}</span>
+</pre></div>
+
+上述代码会一次性的把用户权限查询出来然后放入特定的 <strong>session</strong> 中，但是 <strong><em>UserDetailService</em></strong> 方法一般只在用户登录web系统成功时才会被调用一次，使用范围较为局限，有时候我们需要在用户使用的过程中动态的改变用户的权限（譬如在我自己的项目中，当用户选中不同的项目之后，不同的项目对应不同的权限）。利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 来管理权限信息时，用户的权限本质上是存储在一个 <strong>session</strong> 中，只不过被<strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong>进行了进一步的封装而已。所以若想动态的改变用户的权限，我们只需要将用户的信息重新存储到 <strong>session</strong> 中即可，具体代码如下所示：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">GrantedAuthority</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">authList</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">GrantedAuthority</span><span style="color: #f92672">&gt;();</span><span style="color: #75715e">//用于存储修改之后的权限列表</span>
+  <span style="color: #f8f8f2">authList</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">SimpleGrantedAuthority</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;addUser&quot;</span><span style="color: #f92672">));</span>
+  <span style="color: #f8f8f2">authList</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">SimpleGrantedAuthority</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;editUser&quot;</span><span style="color: #f92672">));</span>
+  <span style="color: #f8f8f2">SecurityContext</span> <span style="color: #f8f8f2">context</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">SecurityContextHolder</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getContext</span><span style="color: #f92672">();</span>
+  <span style="color: #f8f8f2">UserDetails</span> <span style="color: #f8f8f2">userDetails</span><span style="color: #f92672">=(</span><span style="color: #f8f8f2">UserDetails</span><span style="color: #f92672">)</span> <span style="color: #f8f8f2">context</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAuthentication</span><span style="color: #f92672">().</span><span style="color: #a6e22e">getPrincipal</span><span style="color: #f92672">();</span>
+  <span style="color: #f8f8f2">Authentication</span> <span style="color: #f8f8f2">auth</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">UsernamePasswordAuthenticationToken</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userDetails</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">userDetails</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getPassword</span><span style="color: #f92672">(),</span><span style="color: #f8f8f2">authList</span><span style="color: #f92672">);</span>
+  <span style="color: #f8f8f2">context</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setAuthentication</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">auth</span><span style="color: #f92672">);</span> <span style="color: #75715e">//重新设置上下文中存储的用户权限</span>
+</pre></div>
+</p>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/update-authority-dynamic-using-spring-security\/';
+    var disqus_title = '利用Spring Security动态的改变权限';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/update-authority-dynamic-using-spring-security\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>

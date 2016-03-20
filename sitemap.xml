@@ -3,8 +3,23 @@
   
   <url>
     <loc>http://lucumt.info/</loc>
-    <lastmod>2016-03-19T22:43:47+08:00</lastmod>
+    <lastmod>2016-03-20T16:41:29+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/download-big-file-using-springmvc/</loc>
+    <lastmod>2016-03-20T16:41:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/using-junit-in-spring/</loc>
+    <lastmod>2016-03-20T16:27:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</loc>
+    <lastmod>2016-03-20T16:05:52+08:00</lastmod>
   </url>
   
   <url>
