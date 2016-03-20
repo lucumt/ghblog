@@ -17,9 +17,9 @@
       <guid>http://lucumt.info/posts/java-volatile-keyword/</guid>
       <description>
 
-&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为*在主内中存储*，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
+&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为 &lt;em&gt;在主内中存储&lt;/em&gt; ，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
 
 &lt;p&gt;事实上，从Java5之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;
 
