@@ -299,17 +299,20 @@
       <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;是&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;系统所采用的框架，适合于需要快速搭建知识分享的场合。采用&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;生成的知识共享平台和&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;的操作与使用类似，都支持采用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/Markdown&#34;&gt;Markdown&lt;/a&gt;&lt;/strong&gt;语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个&lt;strong&gt;&lt;em&gt;回到顶部&lt;/em&gt;&lt;/strong&gt;的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;以&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;管理员身份登录mediawiki,在搜索栏输入MediaWiki:Common.js,然后输入如下代码并保存：
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;/* 此处的JavaScript将加载于所有用户每一个页面。 */&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(window).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;scroll&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(){&lt;/span&gt;
-   &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(window).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;scrollTop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;){&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.back-to-top&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;fadeIn&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.back-to-top&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;fadeOut&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
+&lt;li&gt;以&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;管理员身份登录mediawiki,在搜索栏输入MediaWiki:Common.js,然后输入如下代码并保存：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;/* 此处的JavaScript将加载于所有用户每一个页面。 */
+$(window).scroll(function(){
+   if($(window).scrollTop()&amp;gt;100){
+    $(&amp;quot;.back-to-top&amp;quot;).fadeIn(1000);
+  }else{
+    $(&amp;quot;.back-to-top&amp;quot;).fadeOut(1000);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
 &lt;li&gt;在mediawiki\skins\Vector.php中的第252行添加如下代码：
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;  &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;div&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;class=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;back-to-top&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;x_onClick=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;$(&amp;#39;html,body&amp;#39;).animate({scrollTop:0},500);&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
      &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;返回顶部&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
