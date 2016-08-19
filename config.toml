@@ -2,6 +2,7 @@ baseurl = "http://lucumt.info"
 languageCode = "zh-CN"
 title = "飞狐的部落格"
 canonifyurls = true
+PygmentsCodeFences=true
 disqusShortname = "rosenlu"
 
 [author]
