@@ -204,104 +204,104 @@
 
 <h1 id="所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">所有方法都回滚</h1>
 
-<p>在该单元测试类的开头加上 <em>@TransactionConfiguration(defaultRollback=true)</em> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">package</span> <span style="color: #f8f8f2">com.hirain.testmanagement.service.test</span><span style="color: #f92672">;</span>
+<p>在该单元测试类的开头加上 <em>@TransactionConfiguration(defaultRollback=true)</em> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
+
+<pre><code class="language-java">package com.hirain.testmanagement.service.test;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">static</span> <span style="color: #f8f8f2">org</span><span style="color: #f92672">.</span><span style="color: #a6e22e">junit</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Assert</span><span style="color: #f92672">.</span><span style="color: #a6e22e">assertEquals</span><span style="color: #f92672">;</span>
+import static org.junit.Assert.assertEquals;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.Date</span><span style="color: #f92672">;</span>
+import java.util.Date;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">javax.inject.Inject</span><span style="color: #f92672">;</span>
+import javax.inject.Inject;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.Test</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.runner.RunWith</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.context.ContextConfiguration</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.context.junit4.SpringJUnit4ClassRunner</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.context.transaction.TransactionConfiguration</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.transaction.annotation.Transactional</span><span style="color: #f92672">;</span>
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.common.util.StringUtil</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.model.ProjectModel</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.service.IProjectService</span><span style="color: #f92672">;</span>
+import com.hirain.testmanagement.common.util.StringUtil;
+import com.hirain.testmanagement.model.ProjectModel;
+import com.hirain.testmanagement.service.IProjectService;
  
-<span style="color: #a6e22e">@RunWith</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">SpringJUnit4ClassRunner</span><span style="color: #f92672">.</span><span style="color: #a6e22e">class</span><span style="color: #f92672">)</span>
-<span style="color: #a6e22e">@Transactional</span>
-<span style="color: #a6e22e">@TransactionConfiguration</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">defaultRollback</span><span style="color: #f92672">=</span><span style="color: #66d9ef">true</span><span style="color: #f92672">)</span>
-<span style="color: #a6e22e">@ContextConfiguration</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;classpath:spring/spring-context-*.xml&quot;</span><span style="color: #f92672">)</span>
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ProjectServiceTest</span><span style="color: #f92672">{</span>
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
+@TransactionConfiguration(defaultRollback=true)
+@ContextConfiguration(&quot;classpath:spring/spring-context-*.xml&quot;)
+public class ProjectServiceTest{
  
-	<span style="color: #a6e22e">@Inject</span>
-	<span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">IProjectService</span> <span style="color: #f8f8f2">projectService</span><span style="color: #f92672">;</span>
+	@Inject
+	private IProjectService projectService;
 	   
-	<span style="color: #a6e22e">@Test</span>
-	<span style="color: #a6e22e">@Transactional</span>
-	<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">testAddProject</span><span style="color: #f92672">(){</span>
-	  <span style="color: #f8f8f2">ProjectModel</span> <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ProjectModel</span><span style="color: #f92672">();</span>
-	  <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">projectId</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">StringUtil</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getUUID</span><span style="color: #f92672">();</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setId</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">projectId</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;汽车电子测试管理系统&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setAlias</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;INTA&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setLastModifyTime</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Date</span><span style="color: #f92672">());</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setLastModifyUser</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;6e518d0819d14148ae489f76dad80967&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setCreateTime</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Date</span><span style="color: #f92672">());</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setCreateUser</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;cface18d5fac11e28c68c89cdca4c015&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">projectService</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addProject</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">pModel</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">assertEquals</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Add project failed!&quot;</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">projectService</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getProject</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">projectId</span><span style="color: #f92672">).</span><span style="color: #a6e22e">getName</span><span style="color: #f92672">(),</span><span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getName</span><span style="color: #f92672">());</span>
-	<span style="color: #f92672">}</span>
+	@Test
+	@Transactional
+	public void testAddProject(){
+	  ProjectModel pModel=new ProjectModel();
+	  String projectId=StringUtil.getUUID();
+	  pModel.setId(projectId);
+	  pModel.setName(&quot;汽车电子测试管理系统&quot;);
+	  pModel.setAlias(&quot;INTA&quot;);
+	  pModel.setLastModifyTime(new Date());
+	  pModel.setLastModifyUser(&quot;6e518d0819d14148ae489f76dad80967&quot;);
+	  pModel.setCreateTime(new Date());
+	  pModel.setCreateUser(&quot;cface18d5fac11e28c68c89cdca4c015&quot;);
+	  projectService.addProject(pModel);
+	  assertEquals(&quot;Add project failed!&quot;,projectService.getProject(projectId).getName(),pModel.getName());
+	}
  
-<span style="color: #f92672">}</span>
-</pre></div>
-</p>
+}
+</code></pre>
 
 <h1 id="指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">指定方法回滚</h1>
 
-<p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <em>@TransactionConfiguration(defaultRollback=true)</em> ，同时在对应的方法上加上注解声明 <em>@Rollback(true)</em> 即可达到目的。
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">package</span> <span style="color: #f8f8f2">com.hirain.testmanagement.service.test</span><span style="color: #f92672">;</span>
+<p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <em>@TransactionConfiguration(defaultRollback=true)</em> ，同时在对应的方法上加上注解声明 <em>@Rollback(true)</em> 即可达到目的。</p>
+
+<pre><code class="language-java">package com.hirain.testmanagement.service.test;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">static</span> <span style="color: #f8f8f2">org</span><span style="color: #f92672">.</span><span style="color: #a6e22e">junit</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Assert</span><span style="color: #f92672">.</span><span style="color: #a6e22e">assertEquals</span><span style="color: #f92672">;</span>
+import static org.junit.Assert.assertEquals;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.Date</span><span style="color: #f92672">;</span>
+import java.util.Date;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">javax.inject.Inject</span><span style="color: #f92672">;</span>
+import javax.inject.Inject;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.Test</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.runner.RunWith</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.annotation.Rollback</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.context.ContextConfiguration</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.test.context.junit4.SpringJUnit4ClassRunner</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.transaction.annotation.Transactional</span><span style="color: #f92672">;</span>
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
  
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.common.util.StringUtil</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.model.ProjectModel</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">com.hirain.testmanagement.service.IProjectService</span><span style="color: #f92672">;</span>
+import com.hirain.testmanagement.common.util.StringUtil;
+import com.hirain.testmanagement.model.ProjectModel;
+import com.hirain.testmanagement.service.IProjectService;
  
-<span style="color: #a6e22e">@RunWith</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">SpringJUnit4ClassRunner</span><span style="color: #f92672">.</span><span style="color: #a6e22e">class</span><span style="color: #f92672">)</span>
-<span style="color: #a6e22e">@Transactional</span>
-<span style="color: #a6e22e">@ContextConfiguration</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;classpath:spring/spring-context-*.xml&quot;</span><span style="color: #f92672">)</span>
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ProjectServiceTest</span><span style="color: #f92672">{</span>
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
+@ContextConfiguration(&quot;classpath:spring/spring-context-*.xml&quot;)
+public class ProjectServiceTest{
  
-	<span style="color: #a6e22e">@Inject</span>
-	<span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">IProjectService</span> <span style="color: #f8f8f2">projectService</span><span style="color: #f92672">;</span>
+	@Inject
+	private IProjectService projectService;
 	   
-	<span style="color: #a6e22e">@Test</span>
-	<span style="color: #a6e22e">@Rollback</span><span style="color: #f92672">(</span><span style="color: #66d9ef">true</span><span style="color: #f92672">)</span>
-	<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">testAddProject</span><span style="color: #f92672">(){</span>
-	  <span style="color: #f8f8f2">ProjectModel</span> <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ProjectModel</span><span style="color: #f92672">();</span>
-	  <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">projectId</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">StringUtil</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getUUID</span><span style="color: #f92672">();</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setId</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">projectId</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;汽车电子测试管理系统&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setAlias</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;INTA&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setLastModifyTime</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Date</span><span style="color: #f92672">());</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setLastModifyUser</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;6e518d0819d14148ae489f76dad80967&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setCreateTime</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Date</span><span style="color: #f92672">());</span>
-	  <span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setCreateUser</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;cface18d5fac11e28c68c89cdca4c015&quot;</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">projectService</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addProject</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">pModel</span><span style="color: #f92672">);</span>
-	  <span style="color: #f8f8f2">assertEquals</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Add project failed!&quot;</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">projectService</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getProject</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">projectId</span><span style="color: #f92672">).</span><span style="color: #a6e22e">getName</span><span style="color: #f92672">(),</span><span style="color: #f8f8f2">pModel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getName</span><span style="color: #f92672">());</span>
-	<span style="color: #f92672">}</span>
+	@Test
+	@Rollback(true)
+	public void testAddProject(){
+	  ProjectModel pModel=new ProjectModel();
+	  String projectId=StringUtil.getUUID();
+	  pModel.setId(projectId);
+	  pModel.setName(&quot;汽车电子测试管理系统&quot;);
+	  pModel.setAlias(&quot;INTA&quot;);
+	  pModel.setLastModifyTime(new Date());
+	  pModel.setLastModifyUser(&quot;6e518d0819d14148ae489f76dad80967&quot;);
+	  pModel.setCreateTime(new Date());
+	  pModel.setCreateUser(&quot;cface18d5fac11e28c68c89cdca4c015&quot;);
+	  projectService.addProject(pModel);
+	  assertEquals(&quot;Add project failed!&quot;,projectService.getProject(projectId).getName(),pModel.getName());
+	}
  
-<span style="color: #f92672">}</span>
-</pre></div>
-</p>
+}
+</code></pre>
 
 	
 			

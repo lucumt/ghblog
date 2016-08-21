@@ -208,65 +208,61 @@
 
 <p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
 
-<p>假设在 <strong><em>HttpServletRequest</em></strong> 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #75715e">//先获取userId对象</span>
-  <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAttribute</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;userId&quot;</span><span style="color: #f92672">).</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">();</span>
- 
-  <span style="color: #75715e">//然后将获取的userId传入对应方法</span>
-  <span style="color: #f8f8f2">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
-  <span style="color: #75715e">//相关该方法</span>
-   <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">User</span> <span style="color: #a6e22e">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span><span style="color: #f92672">){</span>
-       <span style="color: #f8f8f2">User</span> <span style="color: #f8f8f2">userModel</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">userDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">findById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
-       <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">userModel</span><span style="color: #f92672">;</span>
-  <span style="color: #f92672">}</span>  
-</pre></div>
+<p>假设在 <strong><em>HttpServletRequest</em></strong> 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:</p>
 
-请尽量避免使用第二种方式
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"> 
-  <span style="color: #75715e">//直接传入request对象</span>
-  <span style="color: #f8f8f2">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">request</span><span style="color: #f92672">);</span>
-  <span style="color: #75715e">//相关该方法</span>
-   <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">User</span> <span style="color: #a6e22e">queryUserById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">HttpServletRequest</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">){</span>
-     
-       <span style="color: #75715e">//在该方法内部获取userId</span>
-       <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">userId</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getAttribute</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;userId&quot;</span><span style="color: #f92672">).</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">();</span>
- 
-       <span style="color: #f8f8f2">User</span> <span style="color: #f8f8f2">userModel</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">userDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">findById</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">userId</span><span style="color: #f92672">);</span>
-       <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">userModel</span><span style="color: #f92672">;</span>
-  <span style="color: #f92672">}</span>  
-</pre></div>
+<pre><code class="language-java">  String userId = request.getAttribute(&quot;userId&quot;).toString();//先获取userId对象
+  queryUserById(userId);//然后将获取的userId传入对应方法
 
-<em>若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 <strong>HttpServletRequest</strong> 对象，从而影响我们的测试。</em></p>
+  public User queryUserById(String userId){//相关该方法
+       User userModel = userDao.findById(userId);
+       return userModel;
+  }  
+</code></pre>
+
+<p>请尽量避免使用第二种方式</p>
+
+<pre><code class="language-java">  queryUserById(request);//直接传入request对象
+  
+  public User queryUserById(HttpServletRequest request){//相关方法
+       String userId = request.getAttribute(&quot;userId&quot;).toString();//在该方法内部获取userId
+ 
+       User userModel = userDao.findById(userId);
+       return userModel;
+  }  
+</code></pre>
+
+<p><em>若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 <strong>HttpServletRequest</strong> 对象，从而影响我们的测试。</em></p>
 
 <h1 id="spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</h1>
 
 <p>在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 <strong><em>HttpServletRequest</em></strong> 或 <strong><em>ServletContext</em></strong> 对象，如果我们想对这种方法进行测试，可以利用<strong><a href="http://mockito.org/">Mock</a></strong>来模拟相关的对象。</p>
 
-<p>由于<strong><a href="https://spring.io/">Spring</a></strong>自身已经整合了<strong><a href="http://mockito.org/">Mock</a></strong>相关的类，故在此处展示一个示例代码，以供参考:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.File</span><span style="color: #f92672">;</span>
- 
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.junit.Test</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.mock.web.MockHttpServletRequest</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.springframework.mock.web.MockServletContext</span><span style="color: #f92672">;</span>
- 
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SpringMockTest</span> <span style="color: #f92672">{</span>
- 
-<span style="color: #a6e22e">@Test</span>
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">testHttpServletRequest</span><span style="color: #f92672">(){</span>
-	<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">realPath</span> <span style="color: #f92672">=</span><span style="color: #e6db74">&quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&quot;</span><span style="color: #f92672">;</span>
-	<span style="color: #75715e">//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错</span>
-	<span style="color: #f8f8f2">MockServletContext</span> <span style="color: #f8f8f2">context</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MockServletContext</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">realPath</span><span style="color: #f92672">);</span>
-	<span style="color: #75715e">//获取realPath</span>
-	<span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">context</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getRealPath</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">File</span><span style="color: #f92672">.</span><span style="color: #a6e22e">separator</span><span style="color: #f92672">));</span>
-	<span style="color: #75715e">//模拟HttpServletRequest</span>
-	<span style="color: #f8f8f2">MockHttpServletRequest</span> <span style="color: #f8f8f2">request</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">MockHttpServletRequest</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">context</span><span style="color: #f92672">);</span>
-	<span style="color: #75715e">//通过HttpServletRequest来获取realPath</span>
-	<span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getSession</span><span style="color: #f92672">().</span><span style="color: #a6e22e">getServletContext</span><span style="color: #f92672">().</span><span style="color: #a6e22e">getRealPath</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">File</span><span style="color: #f92672">.</span><span style="color: #a6e22e">separator</span><span style="color: #f92672">));</span>
-	<span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
-</pre></div>
+<p>由于<strong><a href="https://spring.io/">Spring</a></strong>自身已经整合了<strong><a href="http://mockito.org/">Mock</a></strong>相关的类，故在此处展示一个示例代码，以供参考:</p>
 
-注意:请在上下文路径的字符串前面加上 <strong>file:</strong> 前缀，否则程序会报错。如上面的程序，realPath的值应为 <em>file:D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，若去掉 <em>file:</em> 前缀，改为 <em>D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，则程序会报错。</p>
+<pre><code class="language-java">import java.io.File;
+ 
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockServletContext;
+ 
+public class SpringMockTest {
+ 
+@Test
+public void testHttpServletRequest(){
+	String realPath =&quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&quot;;
+	//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错
+	MockServletContext context = new MockServletContext(realPath);
+	//获取realPath
+	System.out.println(context.getRealPath(File.separator));
+	//模拟HttpServletRequest
+	MockHttpServletRequest request = new MockHttpServletRequest(context);
+	//通过HttpServletRequest来获取realPath
+	System.out.println(request.getSession().getServletContext().getRealPath(File.separator));
+	}
+}
+</code></pre>
+
+<p>注意:请在上下文路径的字符串前面加上 <strong>file:</strong> 前缀，否则程序会报错。如上面的程序，realPath的值应为 <em>file:D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，若去掉 <em>file:</em> 前缀，改为 <em>D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，则程序会报错。</p>
 
 	
 			
