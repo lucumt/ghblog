@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 飞狐的部落格</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>http://lucumt.info/posts/</link>
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 20 Mar 2016 16:41:29 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucumt.info/posts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>利用SpringMVC下载大文件</title>
-      <link>http://localhost:1313/posts/download-big-file-using-springmvc/</link>
+      <link>http://lucumt.info/posts/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/download-big-file-using-springmvc/</guid>
+      <guid>http://lucumt.info/posts/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;java.io&lt;/a&gt;&lt;/strong&gt; 下面的各种IO类自己实现，或者利用 &lt;strong&gt;&lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;Commons IO&lt;/a&gt;&lt;/strong&gt; 包中的 &lt;strong&gt;&lt;em&gt;FileUtils&lt;/em&gt;&lt;/strong&gt; 、 &lt;strong&gt;&lt;em&gt;IOUtils&lt;/em&gt;&lt;/strong&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt; 来作为项目的MVC实现，所以很自然的采用 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    &lt;span style=&#34;color: #a6e22e&#34;&gt;@RequestMapping&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;downloadRequireDocument&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
@@ -68,10 +68,10 @@
     
     <item>
       <title>利用Spring和JUnit进行单元测试</title>
-      <link>http://localhost:1313/posts/using-junit-in-spring/</link>
+      <link>http://lucumt.info/posts/using-junit-in-spring/</link>
       <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/using-junit-in-spring/</guid>
+      <guid>http://lucumt.info/posts/using-junit-in-spring/</guid>
       <description>
 
 &lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;strong&gt;&lt;em&gt;commit()&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;rollback()&lt;/em&gt;&lt;/strong&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;
@@ -181,10 +181,10 @@
     
     <item>
       <title>利用Spring Security动态的改变权限</title>
-      <link>http://localhost:1313/posts/update-authority-dynamic-using-spring-security/</link>
+      <link>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/update-authority-dynamic-using-spring-security/</guid>
+      <guid>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理我们的web程序时，通常需要在&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 方法中来初始化权限信息,但 &lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 提供的API来实现。&lt;/p&gt;
 
 &lt;p&gt;以我自己的项目为例，&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 具体实现如下：
@@ -218,10 +218,10 @@
     
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>http://localhost:1313/posts/using-mock-test-http-servlet-request/</link>
+      <link>http://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/using-mock-test-http-servlet-request/</guid>
+      <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
       <description>
 
 &lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;
@@ -292,10 +292,10 @@
     
     <item>
       <title>Mediawiki添加回到顶部的方法</title>
-      <link>http://localhost:1313/posts/mediawiki-back-to-top/</link>
+      <link>http://lucumt.info/posts/mediawiki-back-to-top/</link>
       <pubDate>Fri, 18 Mar 2016 23:14:59 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/mediawiki-back-to-top/</guid>
+      <guid>http://lucumt.info/posts/mediawiki-back-to-top/</guid>
       <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;是&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;系统所采用的框架，适合于需要快速搭建知识分享的场合。采用&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;生成的知识共享平台和&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;的操作与使用类似，都支持采用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/Markdown&#34;&gt;Markdown&lt;/a&gt;&lt;/strong&gt;语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个&lt;strong&gt;&lt;em&gt;回到顶部&lt;/em&gt;&lt;/strong&gt;的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：&lt;/p&gt;
 
 &lt;ul&gt;
@@ -354,10 +354,10 @@ $(window).scroll(function(){
     
     <item>
       <title>[译] Java Volatile 关键字详解</title>
-      <link>http://localhost:1313/posts/java-volatile-keyword/</link>
+      <link>http://lucumt.info/posts/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/java-volatile-keyword/</guid>
+      <guid>http://lucumt.info/posts/java-volatile-keyword/</guid>
       <description>
 
 &lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -526,10 +526,10 @@ JVM可能会重新排序前3条指令，只要它们都先发生于&lt;code&gt;v
     
     <item>
       <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
-      <link>http://localhost:1313/posts/can-not-run-program-mysqldump/</link>
+      <link>http://lucumt.info/posts/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/can-not-run-program-mysqldump/</guid>
+      <guid>http://lucumt.info/posts/can-not-run-program-mysqldump/</guid>
       <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;strong&gt;&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;Runtime&lt;/a&gt;&lt;/strong&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
 
 &lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;runtime&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Runtime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getRuntime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;();&lt;/span&gt;
@@ -600,10 +600,10 @@ JVM可能会重新排序前3条指令，只要它们都先发生于&lt;code&gt;v
     
     <item>
       <title>利用Github Pages和基于Go的Hugo搭建个人博客</title>
-      <link>http://localhost:1313/posts/create-website-with-hugo/</link>
+      <link>http://lucumt.info/posts/create-website-with-hugo/</link>
       <pubDate>Sat, 27 Feb 2016 22:23:37 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/create-website-with-hugo/</guid>
+      <guid>http://lucumt.info/posts/create-website-with-hugo/</guid>
       <description>
 
 &lt;p&gt;一直以来都想拥有一个属于自己的博客，前段时间在学习&lt;code&gt;Go&lt;/code&gt; ，于是利用&lt;code&gt;Hugo&lt;/code&gt; 和&lt;code&gt;Github Pages&lt;/code&gt; 搭建了一个简易的个人博客，先简单记录下。&lt;/p&gt;
