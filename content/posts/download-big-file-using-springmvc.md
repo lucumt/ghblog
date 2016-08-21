@@ -12,7 +12,7 @@ title = "利用SpringMVC下载大文件"
 
 <!--more-->
 
-{{< highlight java >}}
+```java
     @RequestMapping("downloadRequireDocument")
     public ResponseEntity<byte[]> downloadRequireDocument(String fileId,String fileName,String fileType,
          HttpServletRequest request) throws IOException{
@@ -24,21 +24,19 @@ title = "利用SpringMVC下载大文件"
              +FileConstants.REQUIREMENT_ASSOCIATE_DOCUNENT+filePath);
 	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(downloadFile),headers,HttpStatus.CREATED);
     }
-{{< /highlight>}}
+```
 该段代码在下载小文件时可以正常工作，但是当要下载的文件很大时（如几百M或上G），就会发生如下错误：
-{{< highlight java >}}
+```java
 java.lang.OutOfMemoryError: Java heap space
 at org.apache.commons.io.output.ByteArrayOutputStream.toByteArray(ByteArrayOutputStream.java:271)
 at org.apache.commons.io.IOUtils.toByteArray(IOUtils.java:219)
 at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)
-{{< /highlight>}}
+```
 去网上搜索 ***java.lang.OutOfMemoryError: Java heap space*** 这个错误时，一般都建议我们在tomcat中添加如下类似设置来提高JVM的配置:  
-{{< highlight ruby >}}
-set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m -XX:MaxPermSize=256m
-{{< /highlight>}}
+```set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m -XX:MaxPermSize=256m```  
 
 但即使按照把上面的参数配置都扩大一倍，在下载更大的文件时还是会遇到 ***java.lang.OutOfMemoryError: Java heap space*** 这个错误，上面的解决方法治标不治本。分析下异常堆栈可以发现问题产生的根源在于 *at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)* 这行代码，***FileUtils.readFileToByteArray***  会把文件一次性读入内存中，要下载的文件越大，需要占用的内存也越大，当文件的大小超过JVM和Tomcat的内存配置时，***OutOfMemoryError*** 这个问题就会不可避免的发生。弄清产生该问题的原因之后，解决的方法也很简单：**不利用[Commons IO](https://commons.apache.org/proper/commons-io/)把文件一次性读入内存，而是利用普通的文件输出流按字节分段写入文件，把占用的内存固定在一个指定的范围内，从根本上避免内存占用过高的问题**,替代的代码如下:
-{{< highlight java >}}
+```java
 @RequestMapping("downloadRequireDocument")
 public void downloadRequireDocument(String fileId,String fileName,String fileType,
 	HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -56,5 +54,4 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
 	os.flush();
 	os.close();
 	is.close();
-}
-{{< /highlight>}}
+```
