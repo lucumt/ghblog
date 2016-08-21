@@ -20,36 +20,37 @@
 <meta property="og:description" content="Blog of Rosen Lu" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="http://lucumt.info/posts/java-volatile-keyword/" />
+<meta property="og:url" content="http://localhost:1313/posts/java-volatile-keyword/" />
 
 
   
-  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
-  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/base-min.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/pure-min.css">
   
   
-    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="http://localhost:1313/css/grids-responsive-min.css">
   
   
 
-  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/redlounge.css">
   
-  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/googleapis.font.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="http://lucumt.info/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:1313/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://localhost:1313/favicon.png">
 
   
   <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
 
     
   
-  <link rel="stylesheet" href="http://lucumt.info/css/tomorrow-night-bright.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/foundation.min.css">
   
- 
+  <script src="http://localhost:1313/js/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 
   
@@ -73,7 +74,7 @@
     
 
 	
-	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	  <img src="http://localhost:1313/img/photo.jpg" class="profilepic">
 	
 
     <h1 class="brand-title">飞狐的部落格</h1>
@@ -81,11 +82,11 @@
 
     <nav class="nav">
       <ul class="nav-list">
-        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://localhost:1313/">Home</a></li>
         
-          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://localhost:1313/about/">About</a></li>
         
-          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://localhost:1313/posts/">Blog</a></li>
         
       </ul>
     </nav>
@@ -164,7 +165,7 @@
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="http://lucumt.info/posts/java-volatile-keyword">[译] Java Volatile 关键字详解</a>
+              <a href="http://localhost:1313/posts/java-volatile-keyword">[译] Java Volatile 关键字详解</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -189,11 +190,11 @@
 			
 				<div class="post-categories">
 				
-					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+					<a class="post-category post-category-java" href="http://localhost:1313//categories/java">Java</a>
 				
-					<a class="post-category post-category-java-concurrency" href="http://lucumt.info//categories/java-concurrency">Java Concurrency</a>
+					<a class="post-category post-category-java-concurrency" href="http://localhost:1313//categories/java-concurrency">Java Concurrency</a>
 				
-					<a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="http://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
+					<a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="http://localhost:1313//categories/%E7%BF%BB%E8%AF%91">翻译</a>
 				
 				</div>
 			
@@ -377,9 +378,9 @@ JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatil
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
-    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/java-volatile-keyword\/';
+    var disqus_identifier = 'http:\/\/localhost:1313\/posts\/java-volatile-keyword\/';
     var disqus_title = '[译] Java Volatile 关键字详解';
-    var disqus_url = 'http:\/\/lucumt.info\/posts\/java-volatile-keyword\/';
+    var disqus_url = 'http:\/\/localhost:1313\/posts\/java-volatile-keyword\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -410,5 +411,8 @@ JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatil
 	
 
   
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>

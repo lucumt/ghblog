@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Junit on 飞狐的部落格</title>
-    <link>http://lucumt.info/categories/junit/</link>
+    <link>http://localhost:1313/categories/junit/</link>
     <description>Recent content in Junit on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 20 Mar 2016 16:27:21 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/categories/junit/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/junit/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>利用Spring和JUnit进行单元测试</title>
-      <link>http://lucumt.info/posts/using-junit-in-spring/</link>
+      <link>http://localhost:1313/posts/using-junit-in-spring/</link>
       <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/using-junit-in-spring/</guid>
+      <guid>http://localhost:1313/posts/using-junit-in-spring/</guid>
       <description>
 
 &lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;strong&gt;&lt;em&gt;commit()&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;rollback()&lt;/em&gt;&lt;/strong&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;
@@ -124,10 +124,10 @@
     
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>http://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
+      <link>http://localhost:1313/posts/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
+      <guid>http://localhost:1313/posts/using-mock-test-http-servlet-request/</guid>
       <description>
 
 &lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;
