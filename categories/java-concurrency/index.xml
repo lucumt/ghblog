@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java Concurrency on 飞狐的部落格</title>
-    <link>http://localhost:1313/categories/java-concurrency/</link>
+    <link>http://lucumt.info/categories/java-concurrency/</link>
     <description>Recent content in Java Concurrency on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 07 Mar 2016 18:03:18 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/java-concurrency/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucumt.info/categories/java-concurrency/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>[译] Java Volatile 关键字详解</title>
-      <link>http://localhost:1313/posts/java-volatile-keyword/</link>
+      <link>http://lucumt.info/posts/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/java-volatile-keyword/</guid>
+      <guid>http://lucumt.info/posts/java-volatile-keyword/</guid>
       <description>
 
 &lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
