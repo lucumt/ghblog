@@ -51,4 +51,5 @@ $(window).scroll(function(){
 ```
 
 * 当页面的高度超出限制时，就会出现“返回顶部”的悬浮框，效果图如下：  
+
 ![Back to top.PNG](https://ooo.0o0.ooo/2016/03/18/56ec1de1a77ac.png "返回顶部示例图片")
