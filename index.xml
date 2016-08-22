@@ -341,9 +341,11 @@ $(window).scroll(function(){
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;当页面的高度超出限制时，就会出现“返回顶部”的悬浮框，效果图如下：&lt;br /&gt;
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/18/56ec1de1a77ac.png&#34; alt=&#34;Back to top.PNG&#34; title=&#34;返回顶部示例图片&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;当页面的高度超出限制时，就会出现“返回顶部”的悬浮框，效果图如下：&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/18/56ec1de1a77ac.png&#34; alt=&#34;Back to top.PNG&#34; title=&#34;返回顶部示例图片&#34; /&gt;
+&lt;/p&gt;
 </description>
     </item>
     
