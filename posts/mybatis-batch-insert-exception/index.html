@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    mybatis batch insert exception // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="Java,MyBatis,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="mybatis batch insert exception" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/mybatis-batch-insert-exception/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/lucumt.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/foundation.min.css">
+  
+  <script src="http://lucumt.info/js/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog" target="_new">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/mybatis-batch-insert-exception">mybatis batch insert exception</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>30</sup></span><span class="post-date-separator">/</span><span class="post-date-month">May</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
+
+<ul>
+<li>SQL配置文件:
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">insert</span> <span style="color: #f8f8f2">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;addAuthorityRoleBatch&quot;</span> <span style="color: #f8f8f2">parameterType</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;List&quot;</span><span style="color: #f92672">&gt;</span>
+    <span style="color: #66d9ef">INSERT</span> <span style="color: #66d9ef">INTO</span> <span style="color: #f8f8f2">system_authority_role(role_id,authority_id)</span>
+      <span style="color: #66d9ef">VALUES</span>
+      <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">foreach</span> <span style="color: #f8f8f2">collection</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;list&quot;</span> <span style="color: #f8f8f2">item</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;authRole&quot;</span> <span style="color: #f8f8f2">separator</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;,&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f8f8f2">(</span><span style="color: #75715e">#{authRole.roleId},#{authRole.authorityId})</span>
+      <span style="color: #f92672">&lt;</span><span style="color: #e6db74">/foreach&gt;</span>
+<span style="color: #e6db74">  &lt;/inse</span><span style="color: #f8f8f2">rt</span><span style="color: #f92672">&gt;</span>
+</pre></div>
+</li>
+<li>Java代码:
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">   <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">adjustRoleAuth</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">roleId</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">authIdsStr</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+	<span style="color: #f8f8f2">authRoleDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">deleteAuthorityRoleByRole</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">roleId</span><span style="color: #f92672">);</span>
+	<span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">authIds</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">authIdsStr</span><span style="color: #f92672">.</span><span style="color: #a6e22e">split</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;;&quot;</span><span style="color: #f92672">);</span>
+	<span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">&gt;();</span>
+	<span style="color: #66d9ef">for</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">authId</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">authIds</span><span style="color: #f92672">){</span>
+		<span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">roleId</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">authId</span><span style="color: #f92672">));</span>
+	<span style="color: #f92672">}</span>
+	<span style="color: #f8f8f2">authRoleDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addAuthorityRoleBatch</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">);</span>
+  <span style="color: #f92672">}</span>
+</pre></div>
+
+上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #960050; background-color: #1e0010">###</span> <span style="color: #f8f8f2">SQL</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">INSERT</span> <span style="color: #f8f8f2">INTO</span> <span style="color: #a6e22e">system_authority_role</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">role_id</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">authority_id</span><span style="color: #f92672">)</span>       <span style="color: #f8f8f2">VALUES</span>
+<span style="color: #960050; background-color: #1e0010">###</span> <span style="color: #f8f8f2">Cause</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">com</span><span style="color: #f92672">.</span><span style="color: #a6e22e">mysql</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exceptions</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc4</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MySQLSyntaxErrorException</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">You</span> <span style="color: #f8f8f2">have</span> <span style="color: #f8f8f2">an</span> <span style="color: #f8f8f2">error</span> <span style="color: #f8f8f2">in</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">syntax</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">check</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">manual</span> <span style="color: #f8f8f2">that</span> <span style="color: #f8f8f2">corresponds</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">MySQL</span> <span style="color: #f8f8f2">server</span> <span style="color: #f8f8f2">version</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">right</span> <span style="color: #f8f8f2">syntax</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">use</span> <span style="color: #f8f8f2">near</span> <span style="color: #960050; background-color: #1e0010">&#39;&#39;</span> <span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">line</span> <span style="color: #ae81ff">2</span>
+<span style="color: #f92672">;</span> <span style="color: #f8f8f2">bad</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">grammar</span> <span style="color: #f92672">[];</span> <span style="color: #f8f8f2">nested</span> <span style="color: #f8f8f2">exception</span> <span style="color: #f8f8f2">is</span> <span style="color: #f8f8f2">com</span><span style="color: #f92672">.</span><span style="color: #a6e22e">mysql</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exceptions</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc4</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MySQLSyntaxErrorException</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">You</span> <span style="color: #f8f8f2">have</span> <span style="color: #f8f8f2">an</span> <span style="color: #f8f8f2">error</span> <span style="color: #f8f8f2">in</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">syntax</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">check</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">manual</span> <span style="color: #f8f8f2">that</span> <span style="color: #f8f8f2">corresponds</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">MySQL</span> <span style="color: #f8f8f2">server</span> <span style="color: #f8f8f2">version</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">right</span> <span style="color: #f8f8f2">syntax</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">use</span> <span style="color: #f8f8f2">near</span> <span style="color: #960050; background-color: #1e0010">&#39;&#39;</span> <span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">line</span> <span style="color: #ae81ff">2</span>
+<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">org</span><span style="color: #f92672">.</span><span style="color: #a6e22e">springframework</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">support</span><span style="color: #f92672">.</span><span style="color: #a6e22e">SQLErrorCodeSQLExceptionTranslator</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doTranslate</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">SQLErrorCodeSQLExceptionTranslator</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">233</span>
+</pre></div>
+<br />
+上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<br/>
+该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</li>
+</ul>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/mybatis-batch-insert-exception\/';
+    var disqus_title = 'mybatis batch insert exception';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/mybatis-batch-insert-exception\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
