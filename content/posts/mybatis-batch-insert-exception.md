@@ -21,6 +21,10 @@ title = "mybatis batch insert exception"
       </foreach>
   </insert>
 {{</highlight>}}
+
+[//]:(设置前面的内容为summary)
+<!--more-->
+
 * Java代码:
 {{< highlight java>}}
    public void adjustRoleAuth(String roleId, String authIdsStr) {
