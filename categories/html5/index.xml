@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Html5 on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/html5/</link>
+    <description>Recent content in Html5 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 30 Oct 2016 19:48:17 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/html5/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</title>
+      <link>http://lucumt.info/posts/show-video-in-html5-page/</link>
+      <pubDate>Sun, 30 Oct 2016 19:48:17 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/show-video-in-html5-page/</guid>
+      <description>
+
+&lt;p&gt;由于项目需要，最近使用了在&lt;code&gt;html5&lt;/code&gt;中播放视频的功能，期间遇到了几个坑，先简单记录下。&lt;/p&gt;
+
+&lt;h1 id=&#34;在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989&#34;&gt;在html5页面中播放视频&lt;/h1&gt;
+
+&lt;p&gt;如何在&lt;code&gt;html5&lt;/code&gt;页面中嵌入视频的代码在网上很容易直接搜索到，典型的代码如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;video width=&amp;quot;320&amp;quot; height=&amp;quot;240&amp;quot; controls=&amp;quot;controls&amp;quot;&amp;gt;
+  &amp;lt;source src=&amp;quot;movie.mp4&amp;quot; type=&amp;quot;video/mp4&amp;quot;/&amp;gt;
+  Your browser does not support the video tag.
+&amp;lt;/video&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后的效果显示如下，从图中我们可以看出该视频播放界面包含 &lt;em&gt;快进&lt;/em&gt; 、 &lt;em&gt;音量调整&lt;/em&gt; 和 &lt;em&gt;全屏播放&lt;/em&gt; 这几个按钮&lt;br /&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/10/30/5815e96382a3c.png&#34; alt=&#34;浏览器中正常播放视频&#34; title=&#34;浏览器中正常播放视频&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h1 id=&#34;在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989&#34;&gt;在iframe中不能全屏播放视频&lt;/h1&gt;
+
+&lt;p&gt;项目中好多地方都用&lt;code&gt;iframe&lt;/code&gt;来嵌套html页面，最开始我是用类似如下代码在被&lt;code&gt;iframe&lt;/code&gt;包含的页面中嵌入前面的视频播放代码，
+发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索&lt;strong&gt;&lt;a href=&#34;http://stackoverflow.com/&#34;&gt;stackoverflow&lt;/a&gt;&lt;/strong&gt;找到一个类似的问题&lt;a href=&#34;http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe&#34;&gt;How to make a video fullscreen when it is placed inside an iframe?&lt;/a&gt;，阅读后发现只需要将&lt;code&gt;iframe&lt;/code&gt;修改成&lt;code&gt;&amp;lt;iframe … allowfullscreen=&amp;quot;true&amp;quot; webkitallowfullscreen=&amp;quot;true&amp;quot; mozallowfullscreen=&amp;quot;true&amp;quot;&amp;gt;&lt;/code&gt;即可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;iframe&amp;gt;
+  &amp;lt;!DOCTYPE html&amp;gt;
+  &amp;lt;html&amp;gt;
+    &amp;lt;head /&amp;gt;
+    &amp;lt;body&amp;gt;
+      &amp;lt;video width=&amp;quot;320&amp;quot; height=&amp;quot;240&amp;quot; controls=&amp;quot;controls&amp;quot;&amp;gt;
+		&amp;lt;source src=&amp;quot;movie.mp4&amp;quot; type=&amp;quot;video/mp4&amp;quot;/&amp;gt;
+		Your browser does not support the video tag.
+	  &amp;lt;/video&amp;gt;
+    &amp;lt;body&amp;gt;
+  &amp;lt;/html&amp;gt;
+&amp;lt;/iframe&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ooo.0o0.ooo/2016/10/30/581600e124b51.png&#34; alt=&#34;视频无法进行全屏播放&#34; title=&#34;视频无法进行全屏播放&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h1 id=&#34;隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989&#34;&gt;隐藏声音调整按钮&lt;/h1&gt;
+
+&lt;p&gt;有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于&lt;code&gt;webkit&lt;/code&gt;内核的&lt;code&gt;Chrome&lt;/code&gt;浏览器访问，通过Google之后在 &lt;strong&gt;&lt;a href=&#34;http://stackoverflow.com/&#34;&gt;stackoverflow&lt;/a&gt;&lt;/strong&gt;找到
+&lt;a href=&#34;http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555&#34;&gt;Why do no user-agents implement the CSS cursor style for video elements&lt;/a&gt;这篇文章，其中列出了播放视频时相关控制按钮的css类：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;video::-webkit-media-controls-panel&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-play-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-volume-slider-container&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-volume-slider&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-mute-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-timeline&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-current-time-display&lt;/li&gt;
+&lt;li&gt;video::-webkit-full-page-media::-webkit-media-controls-panel&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-timeline-container&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-time-remaining-display&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-seek-back-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-seek-forward-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-fullscreen-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-rewind-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-return-to-realtime-button&lt;/li&gt;
+&lt;li&gt;video::-webkit-media-controls-toggle-closed-captions-button&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为了屏蔽掉声音播放按钮，我们只需使用 &lt;em&gt;video::-webkit-media-controls-volume-slider&lt;/em&gt; 和  &lt;em&gt;video::-webkit-media-controls-mute-button&lt;/em&gt; 这两个属性即可，相应的css代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;	/**隐藏视频音量大小调整控件**/
+	.no_sound_style&amp;gt;video::-webkit-media-controls-volume-slider{
+		display:none;
+	}
+	
+	/**影藏视频音量喇叭**/
+	.no_sound_style&amp;gt;video::-webkit-media-controls-mute-button{
+		display:none;
+	}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见&lt;br /&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2016/10/30/5815f41099feb.png&#34; alt=&#34;屏蔽了声音播放按钮&#34; title=&#34;屏蔽了播放器中的声音播放按钮&#34; /&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
