@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    在iframe嵌套的html5中播放视频时全屏显示和取消音量调整 // 飞狐的部落格
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="Blog of Rosen Lu">
+<meta name="keywords" content="html5,">
+<meta name="author" content="卢运强">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="在iframe嵌套的html5中播放视频时全屏显示和取消音量调整" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://lucumt.info/posts/show-video-in-html5-page/" />
+
+
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
+  
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/lucumt.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/foundation.min.css">
+  
+  <script src="http://lucumt.info/js/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+  
+
+  
+</head>
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    
+		 <a href="https://github.com/lucumt/ghblog" target="_new">
+			<img style="position: absolute; top: 0; right: 0; border: 0;" 
+			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
+		</a>
+
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+	
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
+	
+
+    <h1 class="brand-title">飞狐的部落格</h1>
+    <h2 class="brand-tagline">Rosen Lu</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="https://github.com/lucumt" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/u/0/115794588502118898127/posts" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/rosen.lu.1" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.twitter.com/rosenlucumt" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="mailto:lucumt@gmail.com" target="_blank"><i class='fa fa-mail-forward'></i></a>
+        
+      
+    </div>
+    
+    
+	
+	  <hr class="nav-site-separator"/>
+	  <nav class="nav">
+      <ul class="nav-list">
+	    
+		   <li class="nav-site"><a href="http://lilydjwg.is-programmer.com/" target="_blank">依云的博客</a></li>
+		
+		   <li class="nav-site"><a href="http://evilbinary.org/" target="_blank">邪恶二进制</a></li>
+		
+		   <li class="nav-site"><a href="http://www.wlman.cc/" target="_blank">Consec &#39;s Blog</a></li>
+		
+		   <li class="nav-site"><a href="http://www.linuxzen.com/" target="_blank">cold&#39;s world</a></li>
+		
+		   <li class="nav-site"><a href="http://frantic1048.logdown.com/" target="_blank">Frantic log#1048</a></li>
+		
+	  </ul>
+	  </nav>
+	
+	
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li><a href="#在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989">在html5页面中播放视频</a></li>
+<li><a href="#在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989">在iframe中不能全屏播放视频</a></li>
+<li><a href="#隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989">隐藏声音调整按钮</a></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="http://lucumt.info/posts/show-video-in-html5-page">在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>30</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Oct</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            		<span class="post-author-single">By <a class="post-author"  target="">卢运强</a></span>
+            		
+
+
+
+
+            	
+            
+
+			
+			
+				<div class="post-categories">
+				
+					<a class="post-category post-category-html5" href="http://lucumt.info//categories/html5">html5</a>
+				
+				</div>
+			
+
+			
+
+			
+
+            
+
+<p>由于项目需要，最近使用了在<code>html5</code>中播放视频的功能，期间遇到了几个坑，先简单记录下。</p>
+
+<h1 id="在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989">在html5页面中播放视频</h1>
+
+<p>如何在<code>html5</code>页面中嵌入视频的代码在网上很容易直接搜索到，典型的代码如下所示：</p>
+
+<pre><code class="language-html">&lt;video width=&quot;320&quot; height=&quot;240&quot; controls=&quot;controls&quot;&gt;
+  &lt;source src=&quot;movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+</code></pre>
+
+<p>之后的效果显示如下，从图中我们可以看出该视频播放界面包含 <em>快进</em> 、 <em>音量调整</em> 和 <em>全屏播放</em> 这几个按钮<br />
+<img src="https://ooo.0o0.ooo/2016/10/30/5815e96382a3c.png" alt="浏览器中正常播放视频" title="浏览器中正常播放视频" />
+</p>
+
+<h1 id="在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989">在iframe中不能全屏播放视频</h1>
+
+<p>项目中好多地方都用<code>iframe</code>来嵌套html页面，最开始我是用类似如下代码在被<code>iframe</code>包含的页面中嵌入前面的视频播放代码，
+发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索<strong><a href="http://stackoverflow.com/">stackoverflow</a></strong>找到一个类似的问题<a href="http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe">How to make a video fullscreen when it is placed inside an iframe?</a>，阅读后发现只需要将<code>iframe</code>修改成<code>&lt;iframe … allowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot;&gt;</code>即可</p>
+
+<pre><code class="language-html">&lt;iframe&gt;
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+    &lt;head /&gt;
+    &lt;body&gt;
+      &lt;video width=&quot;320&quot; height=&quot;240&quot; controls=&quot;controls&quot;&gt;
+		&lt;source src=&quot;movie.mp4&quot; type=&quot;video/mp4&quot;/&gt;
+		Your browser does not support the video tag.
+	  &lt;/video&gt;
+    &lt;body&gt;
+  &lt;/html&gt;
+&lt;/iframe&gt;
+</code></pre>
+
+<p><img src="https://ooo.0o0.ooo/2016/10/30/581600e124b51.png" alt="视频无法进行全屏播放" title="视频无法进行全屏播放" />
+</p>
+
+<h1 id="隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989">隐藏声音调整按钮</h1>
+
+<p>有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于<code>webkit</code>内核的<code>Chrome</code>浏览器访问，通过Google之后在 <strong><a href="http://stackoverflow.com/">stackoverflow</a></strong>找到
+<a href="http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555">Why do no user-agents implement the CSS cursor style for video elements</a>这篇文章，其中列出了播放视频时相关控制按钮的css类：</p>
+
+<ul>
+<li>video::-webkit-media-controls-panel</li>
+<li>video::-webkit-media-controls-play-button</li>
+<li>video::-webkit-media-controls-volume-slider-container</li>
+<li>video::-webkit-media-controls-volume-slider</li>
+<li>video::-webkit-media-controls-mute-button</li>
+<li>video::-webkit-media-controls-timeline</li>
+<li>video::-webkit-media-controls-current-time-display</li>
+<li>video::-webkit-full-page-media::-webkit-media-controls-panel</li>
+<li>video::-webkit-media-controls-timeline-container</li>
+<li>video::-webkit-media-controls-time-remaining-display</li>
+<li>video::-webkit-media-controls-seek-back-button</li>
+<li>video::-webkit-media-controls-seek-forward-button</li>
+<li>video::-webkit-media-controls-fullscreen-button</li>
+<li>video::-webkit-media-controls-rewind-button</li>
+<li>video::-webkit-media-controls-return-to-realtime-button</li>
+<li>video::-webkit-media-controls-toggle-closed-captions-button</li>
+</ul>
+
+<p>为了屏蔽掉声音播放按钮，我们只需使用 <em>video::-webkit-media-controls-volume-slider</em> 和  <em>video::-webkit-media-controls-mute-button</em> 这两个属性即可，相应的css代码如下：</p>
+
+<pre><code class="language-css">	/**隐藏视频音量大小调整控件**/
+	.no_sound_style&gt;video::-webkit-media-controls-volume-slider{
+		display:none;
+	}
+	
+	/**影藏视频音量喇叭**/
+	.no_sound_style&gt;video::-webkit-media-controls-mute-button{
+		display:none;
+	}
+</code></pre>
+
+<p>对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见<br />
+<img src="https://ooo.0o0.ooo/2016/10/30/5815f41099feb.png" alt="屏蔽了声音播放按钮" title="屏蔽了播放器中的声音播放按钮" />
+</p>
+
+	
+			
+
+			
+
+			
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rosenlu';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/show-video-in-html5-page\/';
+    var disqus_title = '在iframe嵌套的html5中播放视频时全屏显示和取消音量调整';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/show-video-in-html5-page\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="https://github.com/tmaiaroto/hugo-redlounge">Designed by Red Lounge</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
