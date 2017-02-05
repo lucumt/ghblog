@@ -36,7 +36,7 @@ code {
     padding: 2px 4px;
     font-size: 90%;
     color: #c72f4e;
-    background-color: #d0d0d0;
+    background-color: #d0d0d0 !important;
     border-radius: 4px;
 }
 
