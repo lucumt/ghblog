@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
   
   <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/jqcloud.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   
 
@@ -44,6 +45,9 @@
 
   
   <link href="http://lucumt.info/categories/java-concurrency/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+
+  <script src="http://lucumt.info//js/jquery.min.js"></script>
+  <script src="http://lucumt.info//js/jqcloud-1.0.4.min.js"></script>
 
     
   
@@ -59,7 +63,49 @@
 
   
 </head>
-<body>
+<script type="text/javascript">
+  var words = new Array();
+  
+	 words.push({text:"github-pages",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/github-pages"});
+  
+	 words.push({text:"go",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/go"});
+  
+	 words.push({text:"html5",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/html5"});
+  
+	 words.push({text:"hugo",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/hugo"});
+  
+	 words.push({text:"java",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/java"});
+  
+	 words.push({text:"java-concurrency",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/java-concurrency"});
+  
+	 words.push({text:"junit",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/junit"});
+  
+	 words.push({text:"mediawiki",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/mediawiki"});
+  
+	 words.push({text:"mysql",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/mysql"});
+  
+	 words.push({text:"spring",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/spring"});
+  
+	 words.push({text:"spring-security",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/spring-security"});
+  
+	 words.push({text:"springmvc",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/springmvc"});
+  
+	 words.push({text:"算法",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/算法"});
+  
+	 words.push({text:"翻译",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/翻译"});
+    
+
+  function initTags(){
+	$("#category_area").jQCloud(words,{
+		autoResize: true,
+		fontSize: {
+			from: 0.1,
+			to: 0.02
+		}
+	});
+  }
+</script>
+<body onload="initTags()">
 	<div id="layout" class="pure-g">
 
         <a href="https://github.com/lucumt/ghblog" target="_new">
@@ -160,6 +206,8 @@
 		
 	  </div>
 	</section>
+
+    <div id="category_area" class="cloud_area"></div>
 
       <div class="footer">
 	<hr class="thin" />
