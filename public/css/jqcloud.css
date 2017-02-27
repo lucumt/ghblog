@@ -49,7 +49,7 @@ div.jqcloud {
 div.jqcloud span { padding: 0; }
 
 div.cloud_area{
-	width:50%; 
+	/*width:50%;*/ 
 	height: 300px;
 	/*border:1px dashed #d0d0d0;*/
 	margin-left:2.42857%
