@@ -1,5 +1,21 @@
 {{ partial "header.html" . }}
-<body>
+<script type="text/javascript">
+  var words = new Array();
+  {{ range $key,$taxonomy := .Site.Taxonomies.categories }}
+	 words.push({text:"{{$key}}",weight:(Math.random() * 10 + 0.02).toFixed(2),link:"/categories/{{$key}}"});
+  {{ end }}  
+
+  function initTags(){
+	$("#category_area").jQCloud(words,{
+		autoResize: true,
+		fontSize: {
+			from: 0.1,
+			to: 0.02
+		}
+	});
+  }
+</script>
+<body onload="initTags()">
 	<div id="layout" class="pure-g">
 
         <a href="https://github.com/lucumt/ghblog" target="_new">
@@ -30,6 +46,8 @@
 		{{ end }}
 	  </div>
 	</section>
+
+    <div id="category_area" class="cloud_area"></div>
 
       {{ partial "footer.html" . }}
     </div>

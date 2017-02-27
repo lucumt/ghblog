@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/redlounge.css">
   <!--<link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.min.css">-->
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/googleapis.font.css">
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/jqcloud.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <!--<link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
   <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>-->
@@ -35,10 +36,12 @@
   <!-- RSS -->
   <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 
+  <script src="{{ .Site.BaseURL }}/js/jquery.min.js"></script>
+  <script src="{{ .Site.BaseURL }}/js/jqcloud-1.0.4.min.js"></script>
+
   {{ partial "syntaxhighlight.html" . }}
 
   {{ if .Params.lightbox }}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}/css/lightbox.css">
   <script src="{{ .Site.BaseURL }}/js/lightbox.min.js"></script>
   {{ end }}
