@@ -24,8 +24,8 @@
 
 
   
-  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
-  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
   
   
     <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
@@ -51,7 +51,7 @@
 
     
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/foundation.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/rainbow.min.css">
   
   <script src="http://lucumt.info/js/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
@@ -193,39 +193,43 @@
             <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
 
 <ul>
-<li><p>SQL配置文件:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">insert</span> <span style="color: #f8f8f2">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;addAuthorityRoleBatch&quot;</span> <span style="color: #f8f8f2">parameterType</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;List&quot;</span><span style="color: #f92672">&gt;</span>
-    <span style="color: #66d9ef">INSERT</span> <span style="color: #66d9ef">INTO</span> <span style="color: #f8f8f2">system_authority_role(role_id,authority_id)</span>
-      <span style="color: #66d9ef">VALUES</span>
-      <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">foreach</span> <span style="color: #f8f8f2">collection</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;list&quot;</span> <span style="color: #f8f8f2">item</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;authRole&quot;</span> <span style="color: #f8f8f2">separator</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;,&quot;</span><span style="color: #f92672">&gt;</span>
-        <span style="color: #f8f8f2">(</span><span style="color: #75715e">#{authRole.roleId},#{authRole.authorityId})</span>
-      <span style="color: #f92672">&lt;</span><span style="color: #e6db74">/foreach&gt;</span>
-<span style="color: #e6db74">  &lt;/inse</span><span style="color: #f8f8f2">rt</span><span style="color: #f92672">&gt;</span>
-</pre></div>
-</p></li>
-
-<li><p>Java代码:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%">   <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">adjustRoleAuth</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">roleId</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">authIdsStr</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-	<span style="color: #f8f8f2">authRoleDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">deleteAuthorityRoleByRole</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">roleId</span><span style="color: #f92672">);</span>
-	<span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">authIds</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">authIdsStr</span><span style="color: #f92672">.</span><span style="color: #a6e22e">split</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;;&quot;</span><span style="color: #f92672">);</span>
-	<span style="color: #f8f8f2">List</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">=</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">&gt;();</span>
-	<span style="color: #66d9ef">for</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">authId</span><span style="color: #f92672">:</span><span style="color: #f8f8f2">authIds</span><span style="color: #f92672">){</span>
-		<span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">AuthorityRoleModel</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">roleId</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">authId</span><span style="color: #f92672">));</span>
-	<span style="color: #f92672">}</span>
-	<span style="color: #f8f8f2">authRoleDao</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addAuthorityRoleBatch</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">authRoleList</span><span style="color: #f92672">);</span>
-  <span style="color: #f92672">}</span>
-</pre></div>
-
-上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #960050; background-color: #1e0010">###</span> <span style="color: #f8f8f2">SQL</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">INSERT</span> <span style="color: #f8f8f2">INTO</span> <span style="color: #a6e22e">system_authority_role</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">role_id</span><span style="color: #f92672">,</span><span style="color: #f8f8f2">authority_id</span><span style="color: #f92672">)</span>       <span style="color: #f8f8f2">VALUES</span>
-<span style="color: #960050; background-color: #1e0010">###</span> <span style="color: #f8f8f2">Cause</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">com</span><span style="color: #f92672">.</span><span style="color: #a6e22e">mysql</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exceptions</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc4</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MySQLSyntaxErrorException</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">You</span> <span style="color: #f8f8f2">have</span> <span style="color: #f8f8f2">an</span> <span style="color: #f8f8f2">error</span> <span style="color: #f8f8f2">in</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">syntax</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">check</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">manual</span> <span style="color: #f8f8f2">that</span> <span style="color: #f8f8f2">corresponds</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">MySQL</span> <span style="color: #f8f8f2">server</span> <span style="color: #f8f8f2">version</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">right</span> <span style="color: #f8f8f2">syntax</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">use</span> <span style="color: #f8f8f2">near</span> <span style="color: #960050; background-color: #1e0010">&#39;&#39;</span> <span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">line</span> <span style="color: #ae81ff">2</span>
-<span style="color: #f92672">;</span> <span style="color: #f8f8f2">bad</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">grammar</span> <span style="color: #f92672">[];</span> <span style="color: #f8f8f2">nested</span> <span style="color: #f8f8f2">exception</span> <span style="color: #f8f8f2">is</span> <span style="color: #f8f8f2">com</span><span style="color: #f92672">.</span><span style="color: #a6e22e">mysql</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exceptions</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc4</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MySQLSyntaxErrorException</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">You</span> <span style="color: #f8f8f2">have</span> <span style="color: #f8f8f2">an</span> <span style="color: #f8f8f2">error</span> <span style="color: #f8f8f2">in</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">SQL</span> <span style="color: #f8f8f2">syntax</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">check</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">manual</span> <span style="color: #f8f8f2">that</span> <span style="color: #f8f8f2">corresponds</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">your</span> <span style="color: #f8f8f2">MySQL</span> <span style="color: #f8f8f2">server</span> <span style="color: #f8f8f2">version</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">right</span> <span style="color: #f8f8f2">syntax</span> <span style="color: #f8f8f2">to</span> <span style="color: #f8f8f2">use</span> <span style="color: #f8f8f2">near</span> <span style="color: #960050; background-color: #1e0010">&#39;&#39;</span> <span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">line</span> <span style="color: #ae81ff">2</span>
-<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">org</span><span style="color: #f92672">.</span><span style="color: #a6e22e">springframework</span><span style="color: #f92672">.</span><span style="color: #a6e22e">jdbc</span><span style="color: #f92672">.</span><span style="color: #a6e22e">support</span><span style="color: #f92672">.</span><span style="color: #a6e22e">SQLErrorCodeSQLExceptionTranslator</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doTranslate</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">SQLErrorCodeSQLExceptionTranslator</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">233</span>
-</pre></div>
-<br />
-上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<br/>
-该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</p></li>
+<li>SQL配置文件:</li>
 </ul>
+
+<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
+    INSERT INTO system_authority_role(role_id,authority_id)
+      VALUES
+      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
+        (#{authRole.roleId},#{authRole.authorityId})
+      &lt;/foreach&gt;
+  &lt;/insert&gt;
+</code></pre>
+
+<ul>
+<li>Java代码:</li>
+</ul>
+
+<pre><code class="language-java">   public void adjustRoleAuth(String roleId, String authIdsStr) {
+    authRoleDao.deleteAuthorityRoleByRole(roleId);
+    String[] authIds=authIdsStr.split(&quot;;&quot;);
+    List&lt;AuthorityRoleModel&gt; authRoleList=new ArrayList&lt;AuthorityRoleModel&gt;();
+    for(String authId:authIds){
+        authRoleList.add(new AuthorityRoleModel(roleId,authId));
+    }
+    authRoleDao.addAuthorityRoleBatch(authRoleList);
+  }
+</code></pre>
+
+<p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
+
+<pre><code class="language-java">### SQL: INSERT INTO system_authority_role(role_id,authority_id)       VALUES
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:233
+</code></pre>
+
+<p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<br/>
+该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</p>
 
 	
 			

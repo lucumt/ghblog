@@ -24,8 +24,8 @@
 
 
   
-  <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
-  <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
   
   
     <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
@@ -51,7 +51,7 @@
 
     
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/foundation.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/rainbow.min.css">
   
   <script src="http://lucumt.info/js/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
@@ -298,17 +298,17 @@
                   <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
 
 <ul>
-<li>SQL配置文件:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">insert</span> <span style="color: #f8f8f2">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;addAuthorityRoleBatch&quot;</span> <span style="color: #f8f8f2">parameterType</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;List&quot;</span><span style="color: #f92672">&gt;</span>
-    <span style="color: #66d9ef">INSERT</span> <span style="color: #66d9ef">INTO</span> <span style="color: #f8f8f2">system_authority_role(role_id,authority_id)</span>
-      <span style="color: #66d9ef">VALUES</span>
-      <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">foreach</span> <span style="color: #f8f8f2">collection</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;list&quot;</span> <span style="color: #f8f8f2">item</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;authRole&quot;</span> <span style="color: #f8f8f2">separator</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;,&quot;</span><span style="color: #f92672">&gt;</span>
-        <span style="color: #f8f8f2">(</span><span style="color: #75715e">#{authRole.roleId},#{authRole.authorityId})</span>
-      <span style="color: #f92672">&lt;</span><span style="color: #e6db74">/foreach&gt;</span>
-<span style="color: #e6db74">  &lt;/inse</span><span style="color: #f8f8f2">rt</span><span style="color: #f92672">&gt;</span>
-</pre></div>
-</li>
+<li>SQL配置文件:</li>
 </ul>
+
+<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
+    INSERT INTO system_authority_role(role_id,authority_id)
+      VALUES
+      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
+        (#{authRole.roleId},#{authRole.authorityId})
+      &lt;/foreach&gt;
+  &lt;/insert&gt;
+</code></pre>
 
               </article>
               <div class="read-more-link">

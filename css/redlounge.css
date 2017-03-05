@@ -24,20 +24,25 @@ section.post{
 	font-size:16px;
 }
 
+section.post ul{
+  margin:0px;
+}
+
 #list>li>.meta {
 	float: right !important;
 }
 
 pre {
     padding: 5px;
+	margin: 0px;
 }
 
 code {
     padding: 2px 4px;
     font-size: 90%;
     color: #c72f4e;
-    background-color: #d0d0d0 !important;
     border-radius: 4px;
+	line-height:normal;
 }
 
 blockquote p{
@@ -48,6 +53,7 @@ blockquote p{
 
 p {
 	color: #2d303b;
+	margin: 0px;
 }
 a {
   -o-transition:.5s;
@@ -216,11 +222,16 @@ h2.brand-tagline {
 }
 
 /* Posts */
-h1.post-title a {
+h1.post-title>a {
 	text-decoration: none;
 	color: #111111;
 	font-size:1.7rem;
 }
+
+.posts .post-header>.post-title>a{
+  color:#3498db;
+}
+
 .post-date {
 	color: #E54028;
 	font-family: 'Libre Baskerville', serif;
@@ -265,10 +276,6 @@ a.post-author {
 .post {
     padding-bottom: 1.8rem;
     line-height: 1.75rem;
-}
-.post p {
-	margin-bottom: 15px;
-	margin-top: 8px;
 }
 .post h3 {
 	margin-bottom: .25rem;

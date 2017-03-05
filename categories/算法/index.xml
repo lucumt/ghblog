@@ -49,8 +49,9 @@
 相应的代码实现如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public static boolean isIntersect(int k, int l, int m, int n, int p, int q, int r, int s) {
+	
 	boolean nointersect = false;
-    // B在A的上面
+	// B在A的上面
 	nointersect = q &amp;gt; n;
 	// B在A的下面
 	nointersect = l &amp;gt; s;
@@ -58,6 +59,7 @@
 	nointersect = r &amp;lt; k;
 	// B在A的右侧
 	nointersect = m &amp;lt; p;
+
 	return !nointersect;
 }
 &lt;/code&gt;&lt;/pre&gt;
