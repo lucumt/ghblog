@@ -13,7 +13,7 @@ disqusShortname = "rosenlu"
     sidebartitle = "飞狐的部落格" 
     sidebartagline = "Rosen Lu"
     photo = "/img/photo.jpg"
-    highlightstyle="foundation"
+    highlightstyle="rainbow"
 
 [[menu.main]] 
     pre = "<i class='fa fa-road'></i>"

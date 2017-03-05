@@ -39,8 +39,9 @@ public static int calculateIntersectArea(int k, int l, int m, int n, int p,int q
 
 ```java
 public static boolean isIntersect(int k, int l, int m, int n, int p, int q, int r, int s) {
+	
 	boolean nointersect = false;
-    // B在A的上面
+	// B在A的上面
 	nointersect = q > n;
 	// B在A的下面
 	nointersect = l > s;
@@ -48,6 +49,7 @@ public static boolean isIntersect(int k, int l, int m, int n, int p, int q, int 
 	nointersect = r < k;
 	// B在A的右侧
 	nointersect = m < p;
+
 	return !nointersect;
 }
 ```
