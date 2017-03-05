@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Intellij Idea on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/intellij-idea/</link>
+    <description>Recent content in Intellij Idea on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 05 Mar 2017 14:04:43 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/intellij-idea/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在Intellij IDEA中引用Golang本地包</title>
+      <link>http://lucumt.info/posts/import-local-page-in-intellij-idea/</link>
+      <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/import-local-page-in-intellij-idea/</guid>
+      <description>
+
+&lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是eclpse中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;插件来进行&lt;code&gt;Golang&lt;/code&gt;编程，但其对&lt;code&gt;Golang&lt;/code&gt;的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像&lt;code&gt;Java&lt;/code&gt;那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;Golang插件&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;对&lt;code&gt;Golang&lt;/code&gt;的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;
+
+&lt;h1 id=&#34;在eclipse中引用golang本地包:d0311b7d249635030def3a3303ae4d70&#34;&gt;在Eclipse中引用Golang本地包&lt;/h1&gt;
+
+&lt;p&gt;若我们采用的是&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;来开发&lt;code&gt;Golang&lt;/code&gt;,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 &lt;em&gt;src&lt;/em&gt; 是源代码所在的目录，在 &lt;em&gt;src&lt;/em&gt; 的 &lt;em&gt;sec&lt;/em&gt; 文件夹下有一个名为 &lt;em&gt;calculate.go&lt;/em&gt; 的文件，其中有一个名为 &lt;em&gt;Add&lt;/em&gt; 的函数用于计算两个整数的相加之和。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png&#34; alt=&#34;goclipse中的本地包&#34; /&gt;
+&lt;br /&gt;
+若要在主程序main方法中调用 &lt;em&gt;Add&lt;/em&gt; 方法，先通过import引入该文件的包名&lt;code&gt;import service&lt;/code&gt;，然后通过包名调用该方法&lt;code&gt;service.Add(1,2)&lt;/code&gt;，如下图所示，可以看出在Eclipse中引用&lt;code&gt;Golang&lt;/code&gt;本地包与引用Java包没有太大的区别，都是将包文件放到 &lt;em&gt;src&lt;/em&gt; 源文件夹下，然后通过包名来引用。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference.png&#34; alt=&#34;goclipse中的本地包引用&#34; /&gt;
+&lt;br /&gt;
+也可以通过直接导入该包所在的文件夹的名称来调用该方法，此时需要将&lt;code&gt;import service&lt;/code&gt;改为&lt;code&gt;import sec&lt;/code&gt;，如下图所示&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference_folder.png&#34; alt=&#34;goclipse中的本地包通过文件夹引用&#34; /&gt;
+&lt;br /&gt;
+可以看出在eclipse中导入&lt;code&gt;Golang&lt;/code&gt;本地包时有两种方法： &lt;strong&gt;通过import导入包名&lt;/strong&gt; 或 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; ，这两种方法均可使程序正常运行。&lt;/p&gt;
+
+&lt;h1 id=&#34;在intellij-idea中引用golang本地包:d0311b7d249635030def3a3303ae4d70&#34;&gt;在Intellij IDEA中引用Golang本地包&lt;/h1&gt;
+
+&lt;p&gt;下面2张图为在IDEA中建立的对应项目，图中 &lt;em&gt;gproject&lt;/em&gt; 是一个项目，&lt;em&gt;gotest&lt;/em&gt; 是一个模块，我们在 &lt;em&gt;gotest&lt;/em&gt; 下建立相关的测试文件。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package.png&#34; alt=&#34;IDEA中的本地包&#34; /&gt;
+&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference.png&#34; alt=&#34;IDEA中的本地包引用&#34; /&gt;
+&lt;br /&gt;
+在上述代码中我们是通过&lt;code&gt;import service&lt;/code&gt;的方式来导入相应包的，由于IDEA对Golang很强，从图中可以看出 &lt;em&gt;service&lt;/em&gt; 的颜色与其它导入包的颜色不一致，当把鼠标移动到 &lt;em&gt;service&lt;/em&gt; 上时会提示 &lt;em&gt;Cannot resolve file &amp;lsquo;service&amp;rsquo;&lt;/em&gt; ，直接运行时，会出现如下图所示 &lt;em&gt;cannot find package&lt;/em&gt; 错误，将&lt;code&gt;import service&lt;/code&gt;修改为&lt;code&gt;import sec&lt;/code&gt;时，会出现同样的错误，可以看出在idea中默认不支持直接导入本地&lt;code&gt;Golang&lt;/code&gt;包。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference_run_error.png&#34; alt=&#34;IDEA中引用本地包运行出错&#34; /&gt;
+&lt;br /&gt;
+从报错信息可以看出，程序在运行时先去 &lt;strong&gt;GOROOT&lt;/strong&gt; 去搜索导入包，然后去 &lt;strong&gt;GOPATH&lt;/strong&gt; 寻找导入包，最后在当前项目模块下寻找导入包，但实际上不存在 &lt;em&gt;D:\program\IntelliJ IDEA 2016.2.1\workspace\gproject\gotest\src\service&lt;/em&gt; 这个目录，故而程序报错，不能正常运行。&lt;/p&gt;
+
+&lt;p&gt;解决该问题的关键是明白 &lt;strong&gt;&lt;a href=&#34;http://golang.org/doc/install#tarball_non_standard&#34;&gt;GOROOT&lt;/a&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;a href=&#34;http://golang.org/cmd/go/#hdr-GOPATH_environment_variable&#34;&gt;GOPATH&lt;/a&gt;&lt;/strong&gt; 的作用，根据官方文档的解释 &lt;strong&gt;GOPATH&lt;/strong&gt; 的主要作用是存放文件以便&lt;code&gt;Golang&lt;/code&gt;程序编译时可以进行搜索引用，&lt;strong&gt;GOPATH&lt;/strong&gt; 可以设置一个值或多个值，多个值之间以分号隔开。很明显只要我们将本地&lt;code&gt;Golang&lt;/code&gt;加入到 &lt;strong&gt;GOPATH&lt;/strong&gt;中即可在IDEA中正常运行该程序。&lt;/p&gt;
+
+&lt;p&gt;如下图所示，在IDEA中依次选择 &lt;strong&gt;File-&amp;gt;Settings-&amp;gt;Language&amp;amp;Frameworks-&amp;gt;Go-&amp;gt;Go Libraries&lt;/strong&gt; ，会出现如下图所示的配置&lt;code&gt;Golang&lt;/code&gt;库的界面，在该界面可以添加&lt;code&gt;Golang&lt;/code&gt;本地包所在的路径，该界面包含3个不同作用范围的配置方式： &lt;em&gt;Global libraries&lt;/em&gt; 、 &lt;em&gt;Project libraries&lt;/em&gt; 和 &lt;em&gt;Module libraries&lt;/em&gt; ，其中 &lt;em&gt;Global libraries&lt;/em&gt; 的配置对所有项目生效为全局配置，&lt;em&gt;Project libraries&lt;/em&gt; 的配置对整个项目生效，&lt;em&gt;Module libraries&lt;/em&gt; 的配置只对模块生效，可以看出在 &lt;em&gt;Global libraries&lt;/em&gt; 默认包含了 &lt;strong&gt;GOPATH&lt;/strong&gt; 。根据实际使用的需求我们可以选择把本地包设置在 &lt;em&gt;Project libraries&lt;/em&gt; 还是 &lt;em&gt;Module libraries&lt;/em&gt; 中。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_select_gopath.png&#34; alt=&#34;IDEA中配置程序库&#34; /&gt;
+&lt;br /&gt;
+本文的程序都是在 &lt;em&gt;gotest&lt;/em&gt; 模块下，故将其添加到 &lt;em&gt;Module libraries&lt;/em&gt; 下，添加完的结果如下所示：&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_gopath_config.png&#34; alt=&#34;IDEA中配置程序库的结果&#34; /&gt;
+&lt;br /&gt;
+将本地包添加到模块库之后，还需要在go文件中将导入包的语句设置为&lt;code&gt;import sec&lt;/code&gt;，不能设置为&lt;code&gt;import service&lt;/code&gt;，然后该&lt;code&gt;Golang&lt;/code&gt;程序即可正常运行。&lt;/p&gt;
+
+&lt;p&gt;可以看出，不同于&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;，在IDEA中只能使用 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; 来导入本地&lt;code&gt;Golang&lt;/code&gt;包，至于原因还需要进一步研究。&lt;/p&gt;
+
+&lt;h1 id=&#34;利用goclipse时无法运行程序的解决方法:d0311b7d249635030def3a3303ae4d70&#34;&gt;利用Goclipse时无法运行程序的解决方法&lt;/h1&gt;
+
+&lt;p&gt;在使用&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;运行&lt;code&gt;Golang&lt;/code&gt;程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 &lt;em&gt;src&lt;/em&gt; 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 &lt;em&gt;src&lt;/em&gt; 目录添加源代码目录。在Eclipse中选中该项目然后点击 &lt;strong&gt;Properties&lt;/strong&gt; ，会出现项目属性配置界面，点击 &lt;strong&gt;Go Project Configuration&lt;/strong&gt; ，通过 &lt;strong&gt;Add Folder&lt;/strong&gt; 可以将 &lt;em&gt;src&lt;/em&gt; 添加到源代码中，之后程序即可正常运行。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png&#34; alt=&#34;goclipse中添加源程序目录&#34; /&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
