@@ -45,6 +45,10 @@ code {
 	line-height:normal;
 }
 
+blockquote{
+	margin:0 40px;
+}
+
 blockquote p{
    padding:10px;
    background-color:#d0d0d0;
@@ -88,9 +92,22 @@ a.pure-button-primary:hover, a.pure-button-primary:focus {
 	color:#7F1000;
 }*/
 h1 {
-	font-family: 'Libre Baskerville', serif;
-	font-weight: 700; 
-	font-size:1em;
+	font-weight:bold;
+	font-size:1.5em;
+	margin:0.3em 0;
+}
+h2 {
+	font-weight:bold;
+	font-size:0.9em;
+	margin:0.2em 0;
+}
+h3{
+	font-weight:bold;
+	font-size:0.7em;
+	margin:0.2em 0;
+}
+ul{
+  margin: 0.3em 0;
 }
 .center {
 	text-align: center;
