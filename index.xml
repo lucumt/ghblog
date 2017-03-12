@@ -893,7 +893,7 @@ int someValue3 = sharedObject.nonVolatile6;
 
 &lt;h2 id=&#34;在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github上创建一个自己的项目&lt;/h2&gt;
 
-&lt;p&gt;参考&lt;code&gt;[Github Pages]&lt;/code&gt; 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：&lt;br /&gt;
+&lt;p&gt;参考&lt;code&gt;Github Pages&lt;/code&gt; 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：&lt;br /&gt;
 1. 创建&lt;strong&gt;User or origanization site&lt;/strong&gt;或&lt;strong&gt;Project site&lt;/strong&gt;,我个人选择的是&lt;strong&gt;Project site&lt;/strong&gt;。
 &lt;img src=&#34;https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png&#34; alt=&#34;png_1&#34; /&gt;
 &lt;br /&gt;
@@ -1048,14 +1048,14 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;li&gt;Oracle,MySQL,MongoDB&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;it技能列表:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;IT技能列表:&lt;/h2&gt;
+&lt;h2 id=&#34;it技能列表:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;IT技能列表&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Java相关：
 
 &lt;ul&gt;
 &lt;li&gt;超过7年使用经验，掌握JVM调优；&lt;/li&gt;
-&lt;li&gt;能熟练运用struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；&lt;/li&gt;
+&lt;li&gt;能熟练运用Struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；&lt;/li&gt;
 &lt;li&gt;熟练掌握Java多线程编程和Socket编程；&lt;/li&gt;
 &lt;li&gt;对工作流有一定的了解，可以熟练使用Activiti进行工作流相关的开发；&lt;/li&gt;
 &lt;li&gt;能熟练运用基于Java的Webservice与其它应用程序进行信息交互；&lt;/li&gt;
@@ -1102,11 +1102,40 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Java:主要是自己公司的各种Java项目；&lt;/li&gt;
-&lt;li&gt;Python：主要是在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给老外开发爬虫脚本和简易的web系统,可以查看&lt;a href=&#34;http://imgur.com/q8brokn&#34;&gt;工作记录截图&lt;/a&gt;；&lt;/li&gt;
+&lt;li&gt;Python：主要是在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给老外开发爬虫脚本和简易的web系统；&lt;/li&gt;
 &lt;li&gt;Golang：用于网络爬虫和个人博客搭建；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;自我评价:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自我评价&lt;/h1&gt;
+&lt;h2 id=&#34;个人项目:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人项目&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/lucumt/myscripts/tree/master/python/alenspider&#34;&gt;Python Web Data Scraper&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给美国人写的一系列Python爬虫脚本，主要功能是爬虫将采集到的数据存入MySQL数据库，
+将脚本部署到AWS上，并利用Crontab每天定时运行相应脚本，相应技术细节如下:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;数据采集: Python&amp;nbsp;&lt;a href=&#34;http://docs.python-requests.org/en/master/&#34;&gt;requests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;数据解析: Python&amp;nbsp;&lt;a href=&#34;https://pypi.python.org/pypi/beautifulsoup4&#34;&gt;Beautiful Soup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;持久化: Python&amp;nbsp;&lt;a href=&#34;https://www.sqlalchemy.org/&#34;&gt;SQLAlchemy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;运行平台: &lt;a href=&#34;https://aws.amazon.com&#34;&gt;AWS&lt;/a&gt;&amp;nbsp;Ubuntu12.04，并利用&lt;a href=&#34;https://en.wikipedia.org/wiki/Cron&#34;&gt;Crontab&lt;/a&gt;每天定时运行一次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://lucumt.info/blog_img/about/elance_work_record.png&#34; alt=&#34;Python网络爬虫&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h1 id=&#34;个人信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人信息&lt;/h1&gt;
+
+&lt;h2 id=&#34;教育信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;教育信息&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cumt.edu.cn/&#34;&gt;中国矿业大学&lt;/a&gt;&amp;nbsp;(2006.9-2010.6)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://cs.cumt.edu.cn/&#34;&gt;计算机科学与技术&lt;/a&gt;&amp;nbsp;(本科)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;个人爱好:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人爱好&lt;/h2&gt;
+
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上网&amp;nbsp;看纪录片&amp;nbsp;编程&amp;nbsp;阅读&amp;nbsp;睡觉&lt;/p&gt;
+
+&lt;h2 id=&#34;自我评价:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自我评价&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;热爱学习和使用新技术；&lt;/li&gt;
@@ -1114,29 +1143,12 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;li&gt;喜欢重构代码，善于分析和解决问题；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;教育信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;教育信息&lt;/h1&gt;
+&lt;h2 id=&#34;联系方式:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;联系方式&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;China University of Mining and Technology(中国矿业大学 2006.9-2010.6)&lt;/li&gt;
-&lt;li&gt;Computer Science and Technology(计算机科学与技术)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;个人爱好:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人爱好&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上网&lt;/li&gt;
-&lt;li&gt;看纪录片&lt;/li&gt;
-&lt;li&gt;编程&lt;/li&gt;
-&lt;li&gt;阅读&lt;/li&gt;
-&lt;li&gt;睡觉&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;近期任务:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;近期任务&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Golang、JVM虚拟机相关、Java并发编程的学习；&lt;/li&gt;
-&lt;li&gt;利用Golang并发完成一个网络爬虫&lt;a href=&#34;https://github.com/lucumt/goMeikongSpider&#34; title=&#34;主要用于抓取美空网上的模特图片并存储到本地&#34;&gt;美空网爬虫&lt;/a&gt;;&lt;/li&gt;
-&lt;li&gt;利用Golang重新搭建一个自己的博客，而不是利用&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: lucumt@gmail.com或cumtlu@126.com&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skype&lt;/strong&gt;: lu.rosen&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QQ&lt;/strong&gt;: 317801876&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
