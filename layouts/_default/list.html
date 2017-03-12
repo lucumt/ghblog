@@ -39,7 +39,7 @@
 				{{ range .Pages }}
 					<li>
 						<a href="{{ .Permalink }}">{{ .Title }} {{ if .GetParam "draft"}}DRAFT{{end}}</a>
-						<span class="meta">{{ .Date.Format "Mon, Jan, 2" }}</span>
+						<span class="meta">{{ .Date.Format "2006-01-02" }}</span>
 					</li>
 				{{ end }}
 			</ul>
