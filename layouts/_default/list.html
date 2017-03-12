@@ -34,7 +34,7 @@
 	<section id="main">
 	  <div>
 		{{ range .Data.Pages.GroupByDate "2006" }}
-		<h2>{{ .Key }}</h2>
+		<h1>{{ .Key }}</h1>
 			<ul id="list">
 				{{ range .Pages }}
 					<li>

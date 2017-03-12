@@ -22,7 +22,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 # 过程概要
 ## 在Github上创建一个自己的项目
-参考`[Github Pages]` 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：  
+参考`Github Pages` 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：  
 1. 创建**User or origanization site**或**Project site**,我个人选择的是**Project site**。
 ![png_1](https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png)  
 2. 若选择的是**Project site**,则会让选择**Generate a site**或**Start from scratch**，个人选择**Start from scratch**从头开始搭建。

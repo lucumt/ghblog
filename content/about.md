@@ -17,10 +17,10 @@ nocomment = true
 * [Golang](https://golang.org/ "要打开此网站请确保自己能翻墙"),个人业余爱好
 * Oracle,MySQL,MongoDB
 
-## IT技能列表:
+## IT技能列表
 * Java相关：
   * 超过7年使用经验，掌握JVM调优；
-  * 能熟练运用struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；
+  * 能熟练运用Struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；
   * 熟练掌握Java多线程编程和Socket编程；
   * 对工作流有一定的了解，可以熟练使用Activiti进行工作流相关的开发； 
   * 能熟练运用基于Java的Webservice与其它应用程序进行信息交互；
@@ -48,26 +48,36 @@ nocomment = true
 
 ## 应用领域
 * Java:主要是自己公司的各种Java项目；
-* Python：主要是在[Elance](https://www.elance.com)上给老外开发爬虫脚本和简易的web系统,可以查看[工作记录截图](http://imgur.com/q8brokn)；
+* Python：主要是在[Elance](https://www.elance.com)上给老外开发爬虫脚本和简易的web系统；
 * Golang：用于网络爬虫和个人博客搭建；
 
-# 自我评价
+## 个人项目
+**[Python Web Data Scraper](https://github.com/lucumt/myscripts/tree/master/python/alenspider)**  
+在[Elance](https://www.elance.com)上给美国人写的一系列Python爬虫脚本，主要功能是爬虫将采集到的数据存入MySQL数据库，
+将脚本部署到AWS上，并利用Crontab每天定时运行相应脚本，相应技术细节如下:
+
+- 数据采集: Python&nbsp;[requests](http://docs.python-requests.org/en/master/)
+- 数据解析: Python&nbsp;[Beautiful Soup](https://pypi.python.org/pypi/beautifulsoup4)
+- 持久化: Python&nbsp;[SQLAlchemy](https://www.sqlalchemy.org/)
+- 运行平台: [AWS](https://aws.amazon.com)&nbsp;Ubuntu12.04，并利用[Crontab](https://en.wikipedia.org/wiki/Cron)每天定时运行一次
+
+![Python网络爬虫](/blog_img/about/elance_work_record.png)
+
+# 个人信息
+
+## 教育信息
+* [中国矿业大学](http://www.cumt.edu.cn/)&nbsp;(2006.9-2010.6)
+* [计算机科学与技术](http://cs.cumt.edu.cn/)&nbsp;(本科)
+
+## 个人爱好
+&nbsp;&nbsp;&nbsp;&nbsp;上网&nbsp;看纪录片&nbsp;编程&nbsp;阅读&nbsp;睡觉
+
+## 自我评价
 * 热爱学习和使用新技术；
 * 有着十分强烈的代码洁癖；
 * 喜欢重构代码，善于分析和解决问题；
 
-# 教育信息
-* China University of Mining and Technology(中国矿业大学 2006.9-2010.6)
-* Computer Science and Technology(计算机科学与技术)
-
-# 个人爱好
-* 上网
-* 看纪录片
-* 编程
-* 阅读
-* 睡觉
-
-# 近期任务
-* Golang、JVM虚拟机相关、Java并发编程的学习；
-* 利用Golang并发完成一个网络爬虫[美空网爬虫](https://github.com/lucumt/goMeikongSpider "主要用于抓取美空网上的模特图片并存储到本地");
-* 利用Golang重新搭建一个自己的博客，而不是利用[Hugo](https://gohugo.io/);
+## 联系方式
+* **Email**: lucumt@gmail.com或cumtlu@126.com
+* **Skype**: lu.rosen
+* **QQ**: 317801876
