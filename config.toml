@@ -14,7 +14,8 @@ disqusShortname = "rosenlu"
     sidebartagline = "Rosen Lu"
     photo = "/img/photo.jpg"
     highlightstyle="rainbow"
-    gaid = "UA-75123653-1"
+    gaid = ""
+    baiduanalysis="true"
 
 [[menu.main]] 
     pre = "<i class='fa fa-road'></i>"
