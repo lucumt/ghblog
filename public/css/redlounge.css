@@ -7,7 +7,7 @@ html {
 	color: #2d303b;
 }
 html, p, nav, section, article {
-	font-family: 'Raleway', 'Helvetica', 'Arial', sans-serif;
+	font-family: "Microsoft Yahei","Î¢ÈíÑÅºÚ","ËÎÌå",Tahoma,'Simsun',Arial,Helvetica,sans-serif;
 }
 section{
 	margin:1em 5% 0 2.42857%;
@@ -34,7 +34,7 @@ section.post ul{
 
 pre {
     padding: 5px;
-	margin: 0px;
+	margin: -16px 0px;
 }
 
 code {
@@ -57,7 +57,6 @@ blockquote p{
 
 p {
 	color: #2d303b;
-	margin: 0px;
 }
 a {
   -o-transition:.5s;
