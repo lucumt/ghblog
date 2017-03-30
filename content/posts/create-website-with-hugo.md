@@ -30,20 +30,17 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 当然个人的爱好不同，不一定非得选择**Project site**和**Start from scratch**，这不是本文的重点，只要能按照`Github Pages`的提示成功搭建自己的静态博客即可。
 
 ## 利用Hugo作为博客生成器
-由于`Github Pages` 只支持静态的html页面托管，所以需要采用`Jekyll` 、`Logdown` 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。
-
-由于自己近期一直在学习`Go`，为了加深自己对于`Go`的运用，于是便选择`Hugo` 作为自己的博客生成器。`Hugo` 是一个基于`Go]`开发的静态生成器，它采用*[Markdown](https://zh.wikipedia.org/zh-cn/Markdown)* 语法来编写博客生成，然后生成相应的HTML页面。
+由于`Github Pages` 只支持静态的html页面托管，所以需要采用`Jekyll` 、`Logdown` 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习`Go`，为了加深自己对于`Go`的运用，于是便选择`Hugo` 作为自己的博客生成器。`Hugo` 是一个基于`Go]`开发的静态生成器，它采用*[Markdown](https://zh.wikipedia.org/zh-cn/Markdown)* 语法来编写博客生成，然后生成相应的HTML页面。
 
 ### 安装Go
-访问[Golang下载页](https://golang.org/dl/)根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。
-以我自己的64位win7系统为例，安装过程如下：
+访问[Golang下载页](https://golang.org/dl/)根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：
 
 * 下载**go1.4.2.windows-amd64.msi**
-* 双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置`PATH`、`GOPATH`和`GOROOT`这三个环境变量，我自己把`Go`安装在*D:\code\go*下，这三个变量相应的设置为:
+* 双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置`PATH`、`GOPATH`和`GOROOT`这三个环境变量，我自己把`Go`安装在 *D:\code\go* 下，这三个变量相应的设置为:
 
 >PATH='D:\code\go\bin';%PATH%  
->GOPATH='D:\code\gopath'  
->GOROOT='D:\code\go'
+GOPATH='D:\code\gopath'  
+GOROOT='D:\code\go'
 
 其中**PATH**变量的作用主要是为了将`Go`的各种命令加到cmd中。**GOROOT**则是当我们将`Go`安装在我们的自定义目录时，需要制定该安装目录，若安装在默认目录**C:\go**下则不用设置**GOROOT**目录，官方文档原文为*GOROOT must be set only when installing to a custom location.* 比较难懂的是**GOPATH**,官方文档上的说明为 *Create a directory to contain your workspace, $HOME/work for example, and set the GOPATH environment variable to point to that location.* 据此我们可以将**GOPATH**理解为工作目录，它主要用来存放`Go`代码编译之后的可执行文件，其位置可以随意设置，只要不与**GOROOT**相同即可。
 
@@ -62,7 +59,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 * 重新打开cmd窗口，输入**hugo version**，若出现如下信息，则表示`Hugo`安装成功：
 
 >C:\Users\Administrator>hugo version
->Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
+Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 
 关于`Hugo`的基本操作命令，可以参见[Hugo快速入门](https://gohugo.io/overview/quickstart/)，此处不再详述。
 

@@ -11,15 +11,15 @@
     
     <item>
       <title>在Intellij IDEA中引用Golang本地包</title>
-      <link>http://lucumt.info/posts/import-local-page-in-intellij-idea/</link>
+      <link>http://lucumt.info/posts/import-local-package-in-intellij-idea/</link>
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/import-local-page-in-intellij-idea/</guid>
+      <guid>http://lucumt.info/posts/import-local-package-in-intellij-idea/</guid>
       <description>
 
 &lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是eclpse中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;插件来进行&lt;code&gt;Golang&lt;/code&gt;编程，但其对&lt;code&gt;Golang&lt;/code&gt;的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像&lt;code&gt;Java&lt;/code&gt;那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;Golang插件&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;对&lt;code&gt;Golang&lt;/code&gt;的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;
 
-&lt;h1 id=&#34;在eclipse中引用golang本地包:d0311b7d249635030def3a3303ae4d70&#34;&gt;在Eclipse中引用Golang本地包&lt;/h1&gt;
+&lt;h1 id=&#34;在eclipse中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Eclipse中引用Golang本地包&lt;/h1&gt;
 
 &lt;p&gt;若我们采用的是&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;来开发&lt;code&gt;Golang&lt;/code&gt;,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 &lt;em&gt;src&lt;/em&gt; 是源代码所在的目录，在 &lt;em&gt;src&lt;/em&gt; 的 &lt;em&gt;sec&lt;/em&gt; 文件夹下有一个名为 &lt;em&gt;calculate.go&lt;/em&gt; 的文件，其中有一个名为 &lt;em&gt;Add&lt;/em&gt; 的函数用于计算两个整数的相加之和。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png&#34; alt=&#34;goclipse中的本地包&#34; /&gt;
@@ -32,7 +32,7 @@
 &lt;br /&gt;
 可以看出在eclipse中导入&lt;code&gt;Golang&lt;/code&gt;本地包时有两种方法： &lt;strong&gt;通过import导入包名&lt;/strong&gt; 或 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; ，这两种方法均可使程序正常运行。&lt;/p&gt;
 
-&lt;h1 id=&#34;在intellij-idea中引用golang本地包:d0311b7d249635030def3a3303ae4d70&#34;&gt;在Intellij IDEA中引用Golang本地包&lt;/h1&gt;
+&lt;h1 id=&#34;在intellij-idea中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Intellij IDEA中引用Golang本地包&lt;/h1&gt;
 
 &lt;p&gt;下面2张图为在IDEA中建立的对应项目，图中 &lt;em&gt;gproject&lt;/em&gt; 是一个项目，&lt;em&gt;gotest&lt;/em&gt; 是一个模块，我们在 &lt;em&gt;gotest&lt;/em&gt; 下建立相关的测试文件。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package.png&#34; alt=&#34;IDEA中的本地包&#34; /&gt;
@@ -56,7 +56,7 @@
 
 &lt;p&gt;可以看出，不同于&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;，在IDEA中只能使用 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; 来导入本地&lt;code&gt;Golang&lt;/code&gt;包，至于原因还需要进一步研究。&lt;/p&gt;
 
-&lt;h1 id=&#34;利用goclipse时无法运行程序的解决方法:d0311b7d249635030def3a3303ae4d70&#34;&gt;利用Goclipse时无法运行程序的解决方法&lt;/h1&gt;
+&lt;h1 id=&#34;利用goclipse时无法运行程序的解决方法:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;利用Goclipse时无法运行程序的解决方法&lt;/h1&gt;
 
 &lt;p&gt;在使用&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;运行&lt;code&gt;Golang&lt;/code&gt;程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 &lt;em&gt;src&lt;/em&gt; 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 &lt;em&gt;src&lt;/em&gt; 目录添加源代码目录。在Eclipse中选中该项目然后点击 &lt;strong&gt;Properties&lt;/strong&gt; ，会出现项目属性配置界面，点击 &lt;strong&gt;Go Project Configuration&lt;/strong&gt; ，通过 &lt;strong&gt;Add Folder&lt;/strong&gt; 可以将 &lt;em&gt;src&lt;/em&gt; 添加到源代码中，之后程序即可正常运行。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png&#34; alt=&#34;goclipse中添加源程序目录&#34; /&gt;
