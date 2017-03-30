@@ -208,22 +208,20 @@ var _hmt = _hmt || [];
 
             <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<strong><a href="http://docs.oracle.com/javase/6/docs/api/">Runtime</a></strong>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Runtime</span> <span style="color: #f8f8f2">runtime</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getRuntime</span><span style="color: #f92672">();</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">mysqlCmd</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;mysqldump&quot;</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -u&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">username</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -p&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">password</span> <span style="color: #f92672">+</span> 
-           <span style="color: #e6db74">&quot;  -h &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">databaseAddress</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; &quot;</span> <span style="color: #f92672">+</span><span style="color: #f8f8f2">databaseName</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">Process</span> <span style="color: #f8f8f2">process</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">mysqlCmd</span><span style="color: #f92672">);</span>
-</pre></div>
-</p>
+<pre><code class="language-java">Runtime runtime = Runtime.getRuntime();
+String mysqlCmd = &quot;mysqldump&quot; + &quot; -u&quot; + username + &quot; -p&quot; + password + 
+           &quot;  -h &quot; + databaseAddress + &quot; &quot; +databaseName;
+Process process = runtime.exec(mysqlCmd);
+</code></pre>
 
 <p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">java</span><span style="color: #f92672">.</span><span style="color: #a6e22e">io</span><span style="color: #f92672">.</span><span style="color: #a6e22e">IOException</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">Cannot</span> <span style="color: #f8f8f2">run</span> <span style="color: #f8f8f2">program</span> <span style="color: #e6db74">&quot;mysqldump&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">CreateProcess</span> <span style="color: #f8f8f2">error</span><span style="color: #f92672">=</span><span style="color: #ae81ff">2</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">The</span> <span style="color: #f8f8f2">system</span> <span style="color: #f8f8f2">cannot</span> <span style="color: #f8f8f2">find</span> <span style="color: #f8f8f2">the</span> <span style="color: #f8f8f2">file</span> <span style="color: #f8f8f2">specified</span>
-	<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">java</span><span style="color: #f92672">.</span><span style="color: #a6e22e">lang</span><span style="color: #f92672">.</span><span style="color: #a6e22e">ProcessBuilder</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">ProcessBuilder</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">460</span><span style="color: #f92672">)</span>
-	<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">java</span><span style="color: #f92672">.</span><span style="color: #a6e22e">lang</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">593</span><span style="color: #f92672">)</span>
-	<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">java</span><span style="color: #f92672">.</span><span style="color: #a6e22e">lang</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">431</span><span style="color: #f92672">)</span>
-	<span style="color: #f8f8f2">at</span> <span style="color: #f8f8f2">java</span><span style="color: #f92672">.</span><span style="color: #a6e22e">lang</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">java</span><span style="color: #f92672">:</span><span style="color: #ae81ff">328</span><span style="color: #f92672">)</span>
-</pre></div>
-</p>
+<pre><code class="language-java">java.io.IOException: Cannot run program &quot;mysqldump&quot;: CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:460)
+	at java.lang.Runtime.exec(Runtime.java:593)
+	at java.lang.Runtime.exec(Runtime.java:431)
+	at java.lang.Runtime.exec(Runtime.java:328)
+</code></pre>
 
 <p>Google之后，在<strong><a href="http://stackoverflow.com/">Stackoverflow</a></strong>发现两个相关的问题：</p>
 
@@ -232,9 +230,7 @@ var _hmt = _hmt || [];
 <li><a href="http://stackoverflow.com/questions/13376132/backup-mysql-database-java-code">backup mysql database java code</a><br /></li>
 </ul>
 
-<p>阅读之后，发现上面说问题产生的原因是<code>mysqldump</code>命令无法识别，把<code>mysqldump</code>可执行文件的路径加入PATH环境变量中即可解决问题。</p>
-
-<p>但当我在cmd中无论执行<code>mysql</code>或<code>mysqldump</code>命令时，都显示这两个命令可以正常执行：<br />
+<p>阅读之后，发现上面说问题产生的原因是<code>mysqldump</code>命令无法识别，把<code>mysqldump</code>可执行文件的路径加入PATH环境变量中即可解决问题。但当我在cmd中无论执行<code>mysql</code>或<code>mysqldump</code>命令时，都显示这两个命令可以正常执行：<br />
 <img src="https://ooo.0o0.ooo/2016/03/03/56d7e3254c0a0.png" alt="mysql1.png" />
 <br />
 在cmd中输出PATH环境变量时，也显示<code>MySQL</code>的bin目录已经添加:<br />
@@ -242,32 +238,26 @@ var _hmt = _hmt || [];
 <br />
 即使重启电脑，上述通过<code>Java</code>备份<code>MySQL</code>的代码还是不能正常执行，但当在cmd中执行<code>mysql</code>、<code>mysqldump</code>命令或输出PATH环境变量时，结果任何上面图片中显示的一致。</p>
 
-<p>这下让我感到很困惑:&nbsp;<strong>通过</strong><code>Java</code><strong>代码来执行</strong><code>mysqldump</code><strong>导出操作时去不能正常执行原因是</strong><code>MySQL</code><strong>的执行路径没有加到PATH环境变量中,但实际检查发现</strong><code>MySQL</code><strong>的环境变量设置正常，在命令行通过</strong><code>mysqldump</code><strong>导出sql文件可以成功操作!</strong></p>
+<p>这下让我感到很困惑:&nbsp;<strong>通过</strong><code>Java</code><strong>代码来执行</strong><code>mysqldump</code><strong>导出操作时去不能正常执行原因是</strong><code>MySQL</code><strong>的执行路径没有加到PATH环境变量中,但实际检查发现</strong><code>MySQL</code><strong>的环境变量设置正常，在命令行通过</strong><code>mysqldump</code><strong>导出sql文件可以成功操作!</strong>继续在网上搜索该问题的解决方案，得到的答案也都是<code>MySQL</code>的执行路径没有加到PATH环境变量中去，问题依旧。。。</p>
 
-<p>继续在网上搜索该问题的解决方案，得到的答案也都是<code>MySQL</code>的执行路径没有加到PATH环境变量中去，问题依旧。。。</p>
-
-<p>正当我在为这个问题发愁时，测试部门有个同事的新<code>Win7</code>电脑上利用我们的软件执行<code>MySQL</code>备份时也出现了类似的问题，之前我还猜有可能是由于客户服务器的操作系统版本太低或某些DLL文件不存在导致的。但现在居然在刚装好的<code>Win7</code>电脑上也出现此问题，基本可以排除操作系统的问题。</p>
-
-<p>由于在我自己的笔记本和台式研发机上都没出现这个问题，无奈之下我只好把同事的电脑拿过来和我自己的电脑进行对比，看看哪里设置不一样。通过<code>Win7</code>中<code>高级系统设置</code>查看PATH环境变量，很快就发现了问题的根源：<br />
-<code>MySQL</code><strong>的执行路径被设置到了</strong><code>用户变量</code><strong>中的PATH变量里，</strong><code>系统变量</code><strong>中的PATH变量里却没有</strong><code>MySQL</code><strong>的执行路径，而</strong><code>Java</code><strong>代码是匿名执行的，无法获取到</strong><code>用户变量</code>，<strong>只能去</strong><code>系统变量</code><strong>中寻找相关的可执行命令,因而程序会出错！</strong><br />
+<p>正当我在为这个问题发愁时，测试部门有个同事的新<code>Win7</code>电脑上利用我们的软件执行<code>MySQL</code>备份时也出现了类似的问题，之前我还猜有可能是由于客户服务器的操作系统版本太低或某些DLL文件不存在导致的。但现在居然在刚装好的<code>Win7</code>电脑上也出现此问题，基本可以排除操作系统的问题。由于在我自己的笔记本和台式研发机上都没出现这个问题，无奈之下我只好把同事的电脑拿过来和我自己的电脑进行对比，看看哪里设置不一样。通过<code>Win7</code>中<code>高级系统设置</code>查看PATH环境变量，很快就发现了问题的根源：<code>MySQL</code><strong>的执行路径被设置到了</strong><code>用户变量</code><strong>中的PATH变量里，</strong><code>系统变量</code><strong>中的PATH变量里却没有</strong><code>MySQL</code><strong>的执行路径，而</strong><code>Java</code><strong>代码是匿名执行的，无法获取到</strong><code>用户变量</code>，<strong>只能去</strong><code>系统变量</code><strong>中寻找相关的可执行命令,因而程序会出错！</strong><br />
 <img src="https://ooo.0o0.ooo/2016/03/03/56d7ebcbce7fc.png" alt="mysql3.png" />
 <br />
 这下问题原因变得很清楚了，我们在<code>cmd</code>中执行<code>mysql</code>和<code>mysqldump</code>命令以及输出PATH环境变量时，系统会把当前用户的<code>用户变量</code>中的PATH和操作系统的<code>系统变量</code>中的PATH变量整合到一块，所以我们在cmd中操作时一切正常。但是当我们在<code>Java</code>程序中执行<code>mysqldump</code>命令时，由于<code>Java</code>程序的运行和用户无关，无法获取到<code>用户变量</code>中的PATH值，所以当我们在<code>Java</code>程序中执行<code>mysqldump</code>命令时会出错。这也正好和<strong><a href="http://stackoverflow.com/">Stackoverflow</a></strong>中说明的原因一致。</p>
 
-<p>由于有的电脑上会出现此问题，有的电脑上没有此问题，进一步的深究问题的根源，发现发生问题的电脑和服务器在安装<code>MySQL</code>数据库时都是通过我们自己写的<code>bat</code>脚本来安装的。而<code>bat</code>脚本中设置环境变量的代码如下:
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">@echo</span> <span style="color: #f92672">%</span><span style="color: #66d9ef">Path</span><span style="color: #f92672">%</span>
-<span style="color: #f8f8f2">setx</span> <span style="color: #66d9ef">PATH</span> <span style="color: #e6db74">&quot;%Path%;C:\INTA\Database</span><span style="color: #ae81ff">\b</span><span style="color: #e6db74">in;&quot;</span>
-<span style="color: #f8f8f2">@echo</span> <span style="color: #f92672">%</span><span style="color: #66d9ef">Path</span><span style="color: #f92672">%</span>
-</pre></div>
+<p>由于有的电脑上会出现此问题，有的电脑上没有此问题，进一步的深究问题的根源，发现发生问题的电脑和服务器在安装<code>MySQL</code>数据库时都是通过我们自己写的<code>bat</code>脚本来安装的。而<code>bat</code>脚本中设置环境变量的代码如下:</p>
 
-问题的关键就在于<strong><em>setx PATH &ldquo;%Path%;C:\INTA\Database\bin;&rdquo;</em></strong>这行代码，这样写的话只会把<code>MySQL</code>的执行路径加入到当前执行该脚本的<code>用户变量</code>中，不会加入到<code>环境变量</code>中。而那些没有出问题的电脑都是我自己手动在<code>系统变量</code>中设置<code>MySQL</code>执行路径的！</p>
+<pre><code class="language-ruby">@echo %Path%
+setx PATH &quot;%Path%;C:\INTA\Database\bin;&quot;
+@echo %Path%
+</code></pre>
 
-<p>该问题的解决方法也很简单，在<strong><em>setx</em></strong>后面加上<strong><em>-m</em></strong>即可，这样<code>bat</code>脚本执行时会把<code>MySQL</code>的执行路径写入<code>系统变量</code>的PATH变量中，不会写入<code>用户变量</code>的PATH变量中：
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">@echo</span> <span style="color: #f92672">%</span><span style="color: #66d9ef">Path</span><span style="color: #f92672">%</span>
-<span style="color: #f8f8f2">setx</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">m</span> <span style="color: #66d9ef">PATH</span> <span style="color: #e6db74">&quot;%Path%;C:\INTA\Database</span><span style="color: #ae81ff">\b</span><span style="color: #e6db74">in;&quot;</span>
-<span style="color: #f8f8f2">@echo</span> <span style="color: #f92672">%</span><span style="color: #66d9ef">Path</span><span style="color: #f92672">%</span>
-</pre></div>
-</p>
+<p>问题的关键就在于<strong><em>setx PATH &ldquo;%Path%;C:\INTA\Database\bin;&rdquo;</em></strong>这行代码，这样写的话只会把<code>MySQL</code>的执行路径加入到当前执行该脚本的<code>用户变量</code>中，不会加入到<code>环境变量</code>中。而那些没有出问题的电脑都是我自己手动在<code>系统变量</code>中设置<code>MySQL</code>执行路径的！该问题的解决方法也很简单，在<strong><em>setx</em></strong>后面加上<strong><em>-m</em></strong>即可，这样<code>bat</code>脚本执行时会把<code>MySQL</code>的执行路径写入<code>系统变量</code>的PATH变量中，不会写入<code>用户变量</code>的PATH变量中：</p>
+
+<pre><code class="language-ruby">@echo %Path%
+setx -m PATH &quot;%Path%;C:\INTA\Database\bin;&quot;
+@echo %Path%
+</code></pre>
 
 <p>Orz~<br />
 想不到由于一个<strong><em>-m</em></strong>而让自己郁闷了这么久!</p>

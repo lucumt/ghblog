@@ -20,7 +20,7 @@
 <meta property="og:description" content="Blog of Rosen Lu" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="http://lucumt.info/posts/import-local-page-in-intellij-idea/" />
+<meta property="og:url" content="http://lucumt.info/posts/import-local-package-in-intellij-idea/" />
 
 
   
@@ -171,9 +171,9 @@ var _hmt = _hmt || [];
 				<small class="toc-label">Contents</small>
 		   	 	<nav id="TableOfContents">
 <ul>
-<li><a href="#在eclipse中引用golang本地包:d0311b7d249635030def3a3303ae4d70">在Eclipse中引用Golang本地包</a></li>
-<li><a href="#在intellij-idea中引用golang本地包:d0311b7d249635030def3a3303ae4d70">在Intellij IDEA中引用Golang本地包</a></li>
-<li><a href="#利用goclipse时无法运行程序的解决方法:d0311b7d249635030def3a3303ae4d70">利用Goclipse时无法运行程序的解决方法</a></li>
+<li><a href="#在eclipse中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5">在Eclipse中引用Golang本地包</a></li>
+<li><a href="#在intellij-idea中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5">在Intellij IDEA中引用Golang本地包</a></li>
+<li><a href="#利用goclipse时无法运行程序的解决方法:bb4f21717a930ee21245b90e8acfc2d5">利用Goclipse时无法运行程序的解决方法</a></li>
 </ul>
 </nav>
 		    </div>
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="http://lucumt.info/posts/import-local-page-in-intellij-idea">在Intellij IDEA中引用Golang本地包</a>
+              <a href="http://lucumt.info/posts/import-local-package-in-intellij-idea">在Intellij IDEA中引用Golang本地包</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
 
 <p>在学习<code>Golang</code>时，自己最开始用的是eclpse中的<a href="https://goclipse.github.io/">goclipse</a>插件来进行<code>Golang</code>编程，但其对<code>Golang</code>的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像<code>Java</code>那么强，于是转用<a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>安装<a href="https://plugins.jetbrains.com/plugin/5047-go">Golang插件</a>来替代使用，安装完插件后的<a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>对<code>Golang</code>的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。</p>
 
-<h1 id="在eclipse中引用golang本地包:d0311b7d249635030def3a3303ae4d70">在Eclipse中引用Golang本地包</h1>
+<h1 id="在eclipse中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5">在Eclipse中引用Golang本地包</h1>
 
 <p>若我们采用的是<a href="https://goclipse.github.io/">goclipse</a>来开发<code>Golang</code>,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 <em>src</em> 是源代码所在的目录，在 <em>src</em> 的 <em>sec</em> 文件夹下有一个名为 <em>calculate.go</em> 的文件，其中有一个名为 <em>Add</em> 的函数用于计算两个整数的相加之和。<br />
 <img src="http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png" alt="goclipse中的本地包" />
@@ -234,7 +234,7 @@ var _hmt = _hmt || [];
 <br />
 可以看出在eclipse中导入<code>Golang</code>本地包时有两种方法： <strong>通过import导入包名</strong> 或 <strong>通过import导入该包对应的文件夹</strong> ，这两种方法均可使程序正常运行。</p>
 
-<h1 id="在intellij-idea中引用golang本地包:d0311b7d249635030def3a3303ae4d70">在Intellij IDEA中引用Golang本地包</h1>
+<h1 id="在intellij-idea中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5">在Intellij IDEA中引用Golang本地包</h1>
 
 <p>下面2张图为在IDEA中建立的对应项目，图中 <em>gproject</em> 是一个项目，<em>gotest</em> 是一个模块，我们在 <em>gotest</em> 下建立相关的测试文件。<br />
 <img src="http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package.png" alt="IDEA中的本地包" />
@@ -258,7 +258,7 @@ var _hmt = _hmt || [];
 
 <p>可以看出，不同于<a href="https://goclipse.github.io/">goclipse</a>，在IDEA中只能使用 <strong>通过import导入该包对应的文件夹</strong> 来导入本地<code>Golang</code>包，至于原因还需要进一步研究。</p>
 
-<h1 id="利用goclipse时无法运行程序的解决方法:d0311b7d249635030def3a3303ae4d70">利用Goclipse时无法运行程序的解决方法</h1>
+<h1 id="利用goclipse时无法运行程序的解决方法:bb4f21717a930ee21245b90e8acfc2d5">利用Goclipse时无法运行程序的解决方法</h1>
 
 <p>在使用<a href="https://goclipse.github.io/">goclipse</a>运行<code>Golang</code>程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 <em>src</em> 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 <em>src</em> 目录添加源代码目录。在Eclipse中选中该项目然后点击 <strong>Properties</strong> ，会出现项目属性配置界面，点击 <strong>Go Project Configuration</strong> ，通过 <strong>Add Folder</strong> 可以将 <em>src</em> 添加到源代码中，之后程序即可正常运行。<br />
 <img src="http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png" alt="goclipse中添加源程序目录" />
@@ -275,9 +275,9 @@ var _hmt = _hmt || [];
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
-    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/import-local-page-in-intellij-idea\/';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/import-local-package-in-intellij-idea\/';
     var disqus_title = '在Intellij IDEA中引用Golang本地包';
-    var disqus_url = 'http:\/\/lucumt.info\/posts\/import-local-page-in-intellij-idea\/';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/import-local-package-in-intellij-idea\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
