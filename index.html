@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
-                      <a href="http://lucumt.info/posts/import-local-page-in-intellij-idea">在Intellij IDEA中引用Golang本地包</a>
+                      <a href="http://lucumt.info/posts/import-local-package-in-intellij-idea">在Intellij IDEA中引用Golang本地包</a>
                   </h1>
               </header>
               <p class="post-meta">
@@ -246,7 +246,7 @@ var _hmt = _hmt || [];
 
               </article>
               <div class="read-more-link">
-                  <a href="http://lucumt.info/posts/import-local-page-in-intellij-idea"><span class="read-more-slashes">//</span>Read More...</a>
+                  <a href="http://lucumt.info/posts/import-local-package-in-intellij-idea"><span class="read-more-slashes">//</span>Read More...</a>
               </div>
           </section>
           
@@ -280,7 +280,7 @@ var _hmt = _hmt || [];
                 
             </p>
             <article class="post-summary">
-                  <p>之前面试时遇到一个算法题: <em>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</em> 此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
+                  <p>之前面试时遇到一个算法题: <strong>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</strong> 此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
 
               </article>
               <div class="read-more-link">
@@ -332,7 +332,7 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
-                      <a href="http://lucumt.info/posts/mybatis-batch-insert-exception">mybatis batch insert exception</a>
+                      <a href="http://lucumt.info/posts/mybatis-batch-insert-exception">mybatis batch insert exception的解决方法</a>
                   </h1>
               </header>
               <p class="post-meta">
@@ -359,8 +359,7 @@ var _hmt = _hmt || [];
                   <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
 
 <ul>
-<li>SQL配置文件:</li>
-</ul>
+<li><p>SQL配置文件:</p>
 
 <pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
     INSERT INTO system_authority_role(role_id,authority_id)
@@ -369,7 +368,8 @@ var _hmt = _hmt || [];
         (#{authRole.roleId},#{authRole.authorityId})
       &lt;/foreach&gt;
   &lt;/insert&gt;
-</code></pre>
+</code></pre></li>
+</ul>
 
               </article>
               <div class="read-more-link">
@@ -425,7 +425,7 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
-                      <a href="http://lucumt.info/posts/using-junit-in-spring">利用Spring和JUnit进行单元测试</a>
+                      <a href="http://lucumt.info/posts/using-junit-in-spring">利用Spring和JUnit对数据库操作进行单元测试</a>
                   </h1>
               </header>
               <p class="post-meta">
@@ -451,7 +451,7 @@ var _hmt = _hmt || [];
                 
             </p>
             <article class="post-summary">
-                  <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <strong><em>commit()</em></strong> 或 <strong><em>rollback()</em></strong> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
+                  <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
 
               </article>
               <div class="read-more-link">
@@ -665,12 +665,11 @@ var _hmt = _hmt || [];
             <article class="post-summary">
                   <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<strong><a href="http://docs.oracle.com/javase/6/docs/api/">Runtime</a></strong>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
 
-<p><div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">Runtime</span> <span style="color: #f8f8f2">runtime</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getRuntime</span><span style="color: #f92672">();</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">mysqlCmd</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;mysqldump&quot;</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -u&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">username</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; -p&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">password</span> <span style="color: #f92672">+</span> 
-           <span style="color: #e6db74">&quot;  -h &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">databaseAddress</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; &quot;</span> <span style="color: #f92672">+</span><span style="color: #f8f8f2">databaseName</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">Process</span> <span style="color: #f8f8f2">process</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">runtime</span><span style="color: #f92672">.</span><span style="color: #a6e22e">exec</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">mysqlCmd</span><span style="color: #f92672">);</span>
-</pre></div>
-</p>
+<pre><code class="language-java">Runtime runtime = Runtime.getRuntime();
+String mysqlCmd = &quot;mysqldump&quot; + &quot; -u&quot; + username + &quot; -p&quot; + password + 
+           &quot;  -h &quot; + databaseAddress + &quot; &quot; +databaseName;
+Process process = runtime.exec(mysqlCmd);
+</code></pre>
 
 <p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
 

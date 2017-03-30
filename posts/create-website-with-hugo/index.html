@@ -260,18 +260,15 @@ var _hmt = _hmt || [];
 
 <h2 id="利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14">利用Hugo作为博客生成器</h2>
 
-<p>由于<code>Github Pages</code> 只支持静态的html页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。</p>
-
-<p>由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择<code>Hugo</code> 作为自己的博客生成器。<code>Hugo</code> 是一个基于<code>Go]</code>开发的静态生成器，它采用<em><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></em> 语法来编写博客生成，然后生成相应的HTML页面。</p>
+<p>由于<code>Github Pages</code> 只支持静态的html页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择<code>Hugo</code> 作为自己的博客生成器。<code>Hugo</code> 是一个基于<code>Go]</code>开发的静态生成器，它采用<em><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></em> 语法来编写博客生成，然后生成相应的HTML页面。</p>
 
 <h3 id="安装go:ef8b9e40461ea61e62e36d1aa4c54d14">安装Go</h3>
 
-<p>访问<a href="https://golang.org/dl/">Golang下载页</a>根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。
-以我自己的64位win7系统为例，安装过程如下：</p>
+<p>访问<a href="https://golang.org/dl/">Golang下载页</a>根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：</p>
 
 <ul>
 <li>下载<strong>go1.4.2.windows-amd64.msi</strong></li>
-<li>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把<code>Go</code>安装在*D:\code\go*下，这三个变量相应的设置为:</li>
+<li>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把<code>Go</code>安装在 <em>D:\code\go</em> 下，这三个变量相应的设置为:</li>
 </ul>
 
 <blockquote>

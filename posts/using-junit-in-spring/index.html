@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    利用Spring和JUnit进行单元测试 // 飞狐的部落格
+    利用Spring和JUnit对数据库操作进行单元测试 // 飞狐的部落格
   </title>
 
   <link href="http://gmpg.org/xfn/11" rel="profile">
@@ -16,7 +16,7 @@
 <meta name="author" content="卢运强">
 <meta name="generator" content="Hugo 0.14" />
 
-  <meta property="og:title" content="利用Spring和JUnit进行单元测试" />
+  <meta property="og:title" content="利用Spring和JUnit对数据库操作进行单元测试" />
 <meta property="og:description" content="本文主要介绍了基于Spring来进行JUnit单元测试时如何对数据库事务进行控制" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
@@ -180,7 +180,7 @@ var _hmt = _hmt || [];
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="http://lucumt.info/posts/using-junit-in-spring">利用Spring和JUnit进行单元测试</a>
+              <a href="http://lucumt.info/posts/using-junit-in-spring">利用Spring和JUnit对数据库操作进行单元测试</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -218,11 +218,11 @@ var _hmt = _hmt || [];
 
             
 
-<p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <strong><em>commit()</em></strong> 或 <strong><em>rollback()</em></strong> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
+<p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
 
 <h1 id="所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">所有方法都回滚</h1>
 
-<p>在该单元测试类的开头加上 <em>@TransactionConfiguration(defaultRollback=true)</em> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
+<p>在该单元测试类的开头加上 <code>@TransactionConfiguration(defaultRollback=true)</code> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
 
 <pre><code class="language-java">package com.hirain.testmanagement.service.test;
  
@@ -273,7 +273,7 @@ public class ProjectServiceTest{
 
 <h1 id="指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">指定方法回滚</h1>
 
-<p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <em>@TransactionConfiguration(defaultRollback=true)</em> ，同时在对应的方法上加上注解声明 <em>@Rollback(true)</em> 即可达到目的。</p>
+<p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <code>@TransactionConfiguration(defaultRollback=true)</code> ，同时在对应的方法上加上注解声明 <code>@Rollback(true)</code> 即可达到目的。</p>
 
 <pre><code class="language-java">package com.hirain.testmanagement.service.test;
  
@@ -333,7 +333,7 @@ public class ProjectServiceTest{
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
     var disqus_identifier = 'http:\/\/lucumt.info\/posts\/using-junit-in-spring\/';
-    var disqus_title = '利用Spring和JUnit进行单元测试';
+    var disqus_title = '利用Spring和JUnit对数据库操作进行单元测试';
     var disqus_url = 'http:\/\/lucumt.info\/posts\/using-junit-in-spring\/';
 
     (function() {

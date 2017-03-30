@@ -21,16 +21,25 @@
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       UserModel userModel=userDao.getUserByUsername(username);
-       if(userModel==null)
-  throw new UsernameNotFoundException(username+&amp;quot; not exist!&amp;quot;);
-       List&amp;lt;GrantedAuthority&amp;gt; userAuthList=new ArrayList&amp;lt;GrantedAuthority&amp;gt;();
-       List&amp;lt;AuthorityVO&amp;gt; authList=authorityDao.queryAuthorityByUserId(userModel.getId());
-       for(AuthorityVO authVO:authList){
-   userAuthList.add(new SimpleGrantedAuthority(authVO.getAuthName()));
-       }
-       UserDetails userDetails=new User(userModel.getUsername(),userModel.getPassword(),true,true,true,true,userAuthList);
-       return userDetails;
+       
+	UserModel userModel=userDao.getUserByUsername(username);
+       
+	if(userModel==null){
+		throw new UsernameNotFoundException(username+&amp;quot; not exist!&amp;quot;);
+	}
+	
+	List&amp;lt;GrantedAuthority&amp;gt; userAuthList=new ArrayList&amp;lt;GrantedAuthority&amp;gt;();
+    
+	//查询出用户相关的所有权限并放入List中
+	List&amp;lt;AuthorityVO&amp;gt; authList=authorityDao.queryAuthorityByUserId(userModel.getId());
+	for(AuthorityVO authVO:authList){
+		userAuthList.add(new SimpleGrantedAuthority(authVO.getAuthName()));
+	}
+
+	//将查询出来的权限赋予用户
+	UserDetails userDetails=new User(userModel.getUsername(),userModel.getPassword(),true,true,true,true,userAuthList);
+	
+	return userDetails;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -39,9 +48,12 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  List&amp;lt;GrantedAuthority&amp;gt; authList=new ArrayList&amp;lt;GrantedAuthority&amp;gt;();//用于存储修改之后的权限列表
   authList.add(new SimpleGrantedAuthority(&amp;quot;addUser&amp;quot;));
   authList.add(new SimpleGrantedAuthority(&amp;quot;editUser&amp;quot;));
+
   SecurityContext context=SecurityContextHolder.getContext();
+
   UserDetails userDetails=(UserDetails) context.getAuthentication().getPrincipal();
   Authentication auth=new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),authList);
+
   context.setAuthentication(auth); //重新设置上下文中存储的用户权限
 &lt;/code&gt;&lt;/pre&gt;
 </description>
