@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    2. [译]多线程的优点 // 飞狐的部落格
+    3. [译]多线程的成本 // 飞狐的部落格
   </title>
 
   <link href="http://gmpg.org/xfn/11" rel="profile">
@@ -11,16 +11,16 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-<meta name="description" content="本文介绍了多线程的优点">
+<meta name="description" content="Blog of Rosen Lu">
 <meta name="keywords" content="java concurrency,">
 <meta name="author" content="飞狐">
 <meta name="generator" content="Hugo 0.14" />
 
-  <meta property="og:title" content="2. [译]多线程的优点" />
-<meta property="og:description" content="本文介绍了多线程的优点" />
+  <meta property="og:title" content="3. [译]多线程的成本" />
+<meta property="og:description" content="Blog of Rosen Lu" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="http://lucumt.info/posts/java-concurrency/multithreading-benefits/" />
+<meta property="og:url" content="http://lucumt.info/posts/java-concurrency/multithreading-costs/" />
 
 
   
@@ -173,9 +173,9 @@ var _hmt = _hmt || [];
 <ul>
 <li>
 <ul>
-<li><a href="#更好的资源利用:03f2a6ff6ff43564d8cd77dcf4ddb389">更好的资源利用</a></li>
-<li><a href="#简化程序设计:03f2a6ff6ff43564d8cd77dcf4ddb389">简化程序设计</a></li>
-<li><a href="#提高程序响应:03f2a6ff6ff43564d8cd77dcf4ddb389">提高程序响应</a></li>
+<li><a href="#更复杂的设计:40e6cc49e0f5e4f0e9401d25e902878f">更复杂的设计</a></li>
+<li><a href="#上下文切换开销:40e6cc49e0f5e4f0e9401d25e902878f">上下文切换开销</a></li>
+<li><a href="#加重资源消耗:40e6cc49e0f5e4f0e9401d25e902878f">加重资源消耗</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -184,7 +184,7 @@ var _hmt = _hmt || [];
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="http://lucumt.info/posts/java-concurrency/multithreading-benefits">2. [译]多线程的优点</a>
+              <a href="http://lucumt.info/posts/java-concurrency/multithreading-costs">3. [译]多线程的成本</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -224,68 +224,23 @@ var _hmt = _hmt || [];
 
             
 
-<p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/benefits.html">Java Concurrency / Multithreading Benefits</a></strong></p>
+<p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/costs.html">Java Concurrency / Multithreading Costs</a></strong></p>
 
-<p>尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：</p>
+<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
 
-<ul>
-<li>更好的资源利用</li>
-<li>在某些场景可以简化程序设计</li>
-<li>提高程序响应</li>
-</ul>
+<h2 id="更复杂的设计:40e6cc49e0f5e4f0e9401d25e902878f">更复杂的设计</h2>
 
-<h2 id="更好的资源利用:03f2a6ff6ff43564d8cd77dcf4ddb389">更好的资源利用</h2>
+<p>尽管多线程应用程序的某些部分比单线程应用程序更简单，但其它部分却更为复杂。在执行通过多线程访问共享数据时需要特别注意，同时多线程间的交互也不是那么简单,由不正确的线程同步引起的错误可能会非常难以检测、复现和修复。</p>
 
-<p>假设我们有一个程序从本地磁盘中读取和处理文件，若读取和处理一个文件的耗时分别为5秒钟和2秒钟，则读取处理2个文件的耗时如下：</p>
+<h2 id="上下文切换开销:40e6cc49e0f5e4f0e9401d25e902878f">上下文切换开销</h2>
 
-<pre><code>5 seconds reading file A
-2 seconds processing file A
-5 seconds reading file B
-2 seconds processing file B
------------------------
-14 seconds total//串行读取时总共耗时14秒
-</code></pre>
+<p>当CPU从执行一个线程切换到执行另外一个线程时，CPU需要保存当前线程的本地数据，程序指针等，并加载下一个线程的本地数据，程序指针等来执行线程，这种切换被称作上下文切换，CPU从一个线程的上下文中执行切换到在另一个线程的上下文中执行。</p>
 
-<p>当从磁盘读取文件时CPU的大部分时间都花费在等待从磁盘读取数据，在此期间CPU大部分时间都处于空闲状态。这些空闲时间可以做一些其它的事情，通过改变操作顺序，CPU可以被更好的利用，如下面的列子：</p>
+<p>上下文切换的代价并不便宜，在线程间要避免不必要的切换。可以在维基百科上阅读 <strong><a href="https://en.wikipedia.org/wiki/Context_switch">Context switch</a></strong>来了解更多关于上下文切换的知识。</p>
 
-<pre><code>5 seconds reading file A
-5 seconds reading file B + 2 seconds processing file A
-2 seconds processing file B
------------------------
-12 seconds total//并行读取时总共耗时12秒
-</code></pre>
+<h2 id="加重资源消耗:40e6cc49e0f5e4f0e9401d25e902878f">加重资源消耗</h2>
 
-<p>在上面的例子中，CPU先等待读取第一个文件，然后开始读取第二个文件，在读取第二个文件的同时，CPU可以同时处理第一个文件。请记住，当等待从磁盘读取数据时，CPU大部分时间处于空闲状态！</p>
-
-<p>通常情况下，CPU在等待IO响应时可以做一些其它事情，这不仅适用于磁盘IO操作，也适用于网络IO操作，或者读取用户输入,网络和磁盘IO操作通常比CPU和内存IO操作慢很多。</p>
-
-<h2 id="简化程序设计:03f2a6ff6ff43564d8cd77dcf4ddb389">简化程序设计</h2>
-
-<p>如果在单线程应用程序中编程实现上述读取和处理文件的功能，就必须跟踪每个文件的读取和处理状态。相反的，在多线程程序中我们可以开启两个线程，每个线程读取和处理同一个文件。每个线程在等待从磁盘读取文件时都会被阻塞，但在等待的同时，其它线程可以利用CPU来处理已经读取的文件。这样能够是的CPU和磁盘都被更好的使用，而且由于每个线程只需要跟踪一个文件，编程实现也会变得更简单。</p>
-
-<h2 id="提高程序响应:03f2a6ff6ff43564d8cd77dcf4ddb389">提高程序响应</h2>
-
-<p>将单线程应用变为多线程应用的另一个常见目的是获得更快的响应。假设有一个服务器程序在某个端口监听请求，当接收到一个请求后，服务器处理该请求，处理完后再继续监听，该循环监听服务器的设计草图如下：</p>
-
-<pre><code>while(server is active){
-    listen for request //监听请求
-    process request//处理请求
-}
-</code></pre>
-
-<p>如果某个请求需要花费很长的时间来处理，那么在此期间其它的客户端就不能向此服务器发送请求，只有当服务器处于监听状态时才能够接收请求。</p>
-
-<p>一种替代方案是让监听线程将接收到的请求发送给worker线程处理，然后立即恢复监听，worker线程对请求进行处理并给客户端发送回复，此种服务器的设计草图如下：</p>
-
-<pre><code>while(server is active){
-    listen for request //监听请求
-    hand request to worker thread//将接收到的请求发送给worker线程处理
-}
-</code></pre>
-
-<p>在这种方式下，服务器线程会迅速返回监听，因而更多的客户端可以给服务器发送请求，服务器的响应也得以提高。</p>
-
-<p>该方法同样适用于桌面应用程序，如果你点击一个按钮来开启一个长任务，而执行该任务的线程是更新窗口、按钮等部件的线程，那么在该任务运行期间，该桌面程序将无法响应其它操作。相反的，可以将该任务移交给一个worker线程，当worker线程处理该任务时，更新窗口的线程处于空闲状态，可以响应其它用户请求，当worker线程执行完任务时通知更新窗口线程，该窗口线程根据执行结果来更新程序。因而利用worker线程设计实现的程序对用户更具有响应性。</p>
+<p>线程需要计算机的一些资源才能运行，除了CPU时间之外，线程需要一些内存来维护其本地堆栈，它也可能会占用操作系统的一些资源来管理该线程。我们可以尝试创建100个什么操作也没有的等待线程来看看在运行这些线程时应用程序需要多少内存。</p>
 
 <p>&lt;–翻译结束!–&gt;</p>
 
@@ -300,9 +255,9 @@ var _hmt = _hmt || [];
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
-    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/java-concurrency\/multithreading-benefits\/';
-    var disqus_title = '2. [译]多线程的优点';
-    var disqus_url = 'http:\/\/lucumt.info\/posts\/java-concurrency\/multithreading-benefits\/';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/java-concurrency\/multithreading-costs\/';
+    var disqus_title = '3. [译]多线程的成本';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/java-concurrency\/multithreading-costs\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

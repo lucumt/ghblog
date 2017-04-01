@@ -35,7 +35,7 @@
                 </span>
                 {{ end }}
                 {{ if not .Params.noauthor }}
-                    {{ if .Params.author }}By <a class="post-author" {{ if .Params.authorlink }}href="{{ .Params.authorlink }}"{{ end }}>{{ .Params.author }}</a>{{ end }}
+                    {{ if .Params.author }}By <a class="post-author" {{ if .Site.Author.link }}href="{{ .Site.Author.link }}"{{ end }} target="{{ .Site.Author.linktarget }}">{{ .Params.author }}</a>{{ end }}
                 {{ end }}
                 {{ if not .Params.noread }}
                     <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>{{.ReadingTime}} min. read</em></span>

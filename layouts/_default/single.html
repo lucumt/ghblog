@@ -47,7 +47,7 @@
             	{{ end }}
             {{ if not .Params.noauthor }}
             	{{ if .Params.author }}
-            		<span class="post-author-single">By <a class="post-author" {{ if .Params.authorlink }}href="{{ .Params.authorlink }}"{{ end }} target="{{ .Params.authorlinktarget }}">{{ .Params.author }}</a></span>
+            		<span class="post-author-single">By <a class="post-author" {{ if .Site.Author.link }}href="{{ .Site.Author.link }}"{{ end }} target="{{ .Site.Author.linktarget }}">{{ .Params.author }}</a></span>
             		{{ partial "authorsocial.html" . }}
             	{{ end }}
             {{ end }}

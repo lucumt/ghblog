@@ -1,10 +1,10 @@
 +++
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","Java Concurrency","翻译"]
 date = "2017-04-01T13:18:43+08:00"
 description = "本文介绍了多线程的优点"
 keywords = ["java concurrency"]
-title = "[译]多线程的优点"
+title = "2. [译]多线程的优点"
 
 +++
 本文翻译自**[Java Concurrency / Multithreading Benefits](http://tutorials.jenkov.com/java-concurrency/benefits.html)**

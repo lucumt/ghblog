@@ -6,11 +6,41 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 01 Apr 2017 13:18:43 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 01 Apr 2017 21:57:30 +0800</lastBuildDate>
     <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>[译]多线程的优点</title>
+      <title>3. [译]多线程的成本</title>
+      <link>http://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
+      <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
+      <description>
+
+&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;
+
+&lt;h2 id=&#34;更复杂的设计:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;更复杂的设计&lt;/h2&gt;
+
+&lt;p&gt;尽管多线程应用程序的某些部分比单线程应用程序更简单，但其它部分却更为复杂。在执行通过多线程访问共享数据时需要特别注意，同时多线程间的交互也不是那么简单,由不正确的线程同步引起的错误可能会非常难以检测、复现和修复。&lt;/p&gt;
+
+&lt;h2 id=&#34;上下文切换开销:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;上下文切换开销&lt;/h2&gt;
+
+&lt;p&gt;当CPU从执行一个线程切换到执行另外一个线程时，CPU需要保存当前线程的本地数据，程序指针等，并加载下一个线程的本地数据，程序指针等来执行线程，这种切换被称作上下文切换，CPU从一个线程的上下文中执行切换到在另一个线程的上下文中执行。&lt;/p&gt;
+
+&lt;p&gt;上下文切换的代价并不便宜，在线程间要避免不必要的切换。可以在维基百科上阅读 &lt;strong&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Context_switch&#34;&gt;Context switch&lt;/a&gt;&lt;/strong&gt;来了解更多关于上下文切换的知识。&lt;/p&gt;
+
+&lt;h2 id=&#34;加重资源消耗:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;加重资源消耗&lt;/h2&gt;
+
+&lt;p&gt;线程需要计算机的一些资源才能运行，除了CPU时间之外，线程需要一些内存来维护其本地堆栈，它也可能会占用操作系统的一些资源来管理该线程。我们可以尝试创建100个什么操作也没有的等待线程来看看在运行这些线程时应用程序需要多少内存。&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2. [译]多线程的优点</title>
       <link>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
       
@@ -85,7 +115,7 @@
     </item>
     
     <item>
-      <title>[译]Java多线程与并发教程</title>
+      <title>1. [译]Java多线程与并发教程</title>
       <link>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
       
@@ -1155,130 +1185,6 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&amp;lt;&amp;ndash;待续&amp;ndash;&amp;gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>关于我</title>
-      <link>http://lucumt.info/about/</link>
-      <pubDate>Thu, 25 Feb 2016 00:22:23 +0800</pubDate>
-      
-      <guid>http://lucumt.info/about/</guid>
-      <description>
-
-&lt;p&gt;一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作。&lt;/p&gt;
-
-&lt;h1 id=&#34;编程领域:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;编程领域&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java，主要用它进行web开发&lt;/li&gt;
-&lt;li&gt;Python，主要用它进行网络爬虫开发和web开发&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://golang.org/&#34; title=&#34;要打开此网站请确保自己能翻墙&#34;&gt;Golang&lt;/a&gt;,个人业余爱好&lt;/li&gt;
-&lt;li&gt;Oracle,MySQL,MongoDB&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;it技能列表:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;IT技能列表&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java相关：
-
-&lt;ul&gt;
-&lt;li&gt;超过7年使用经验，掌握JVM调优；&lt;/li&gt;
-&lt;li&gt;能熟练运用Struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；&lt;/li&gt;
-&lt;li&gt;熟练掌握Java多线程编程和Socket编程；&lt;/li&gt;
-&lt;li&gt;对工作流有一定的了解，可以熟练使用Activiti进行工作流相关的开发；&lt;/li&gt;
-&lt;li&gt;能熟练运用基于Java的Webservice与其它应用程序进行信息交互；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;前端相关：
-
-&lt;ul&gt;
-&lt;li&gt;JavaScript，超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;jQuery,jQueryUI、EasyUI、zTree、Bootstrap 超过4年使用经验；&lt;/li&gt;
-&lt;li&gt;HTML、CSS3 超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;HTML5 超过2年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Python相关：
-
-&lt;ul&gt;
-&lt;li&gt;Python2 超过4年使用经验；&lt;/li&gt;
-&lt;li&gt;Scrapy、Sqlalchemy、Flask、BeautifulSoup、Requests 超过3年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;数据库相关：
-
-&lt;ul&gt;
-&lt;li&gt;MySQL 超过6年使用经验；&lt;/li&gt;
-&lt;li&gt;Oracle 超过3年使用经验；&lt;/li&gt;
-&lt;li&gt;MongoDB 超过1年使用经验；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;开发工具：
-
-&lt;ul&gt;
-&lt;li&gt;可以熟练使用Git、SVN进行代码版本管理；&lt;/li&gt;
-&lt;li&gt;可以熟练使用Maven进行开发，对Ant有一定程度的掌握；&lt;/li&gt;
-&lt;li&gt;熟练运用Tomcat进行Java程序部署；&lt;/li&gt;
-&lt;li&gt;可以基于Nginx进行Python和PHP程序的部署；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;其他：
-
-&lt;ul&gt;
-&lt;li&gt;可以在Java、Python、Golang和JavaScript中熟练的运用正则表达式；&lt;/li&gt;
-&lt;li&gt;英文读写能力强，通过CET-6,能够通过Skype或Gmail用英文与老外熟练的沟通；&lt;/li&gt;
-&lt;li&gt;业余爱好Golang，本博客即是利用Golang和Github Pages搭建的；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;应用领域:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;应用领域&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Java:主要是自己公司的各种Java项目；&lt;/li&gt;
-&lt;li&gt;Python：主要是在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给老外开发爬虫脚本和简易的web系统；&lt;/li&gt;
-&lt;li&gt;Golang：用于网络爬虫和个人博客搭建；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;个人项目:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人项目&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/lucumt/myscripts/tree/master/python/alenspider&#34;&gt;Python Web Data Scraper&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
-在&lt;a href=&#34;https://www.elance.com&#34;&gt;Elance&lt;/a&gt;上给美国人写的一系列Python爬虫脚本，主要功能是爬虫将采集到的数据存入MySQL数据库，
-将脚本部署到AWS上，并利用Crontab每天定时运行相应脚本，相应技术细节如下:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;数据采集: Python&amp;nbsp;&lt;a href=&#34;http://docs.python-requests.org/en/master/&#34;&gt;requests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;数据解析: Python&amp;nbsp;&lt;a href=&#34;https://pypi.python.org/pypi/beautifulsoup4&#34;&gt;Beautiful Soup&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;持久化: Python&amp;nbsp;&lt;a href=&#34;https://www.sqlalchemy.org/&#34;&gt;SQLAlchemy&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;运行平台: &lt;a href=&#34;https://aws.amazon.com&#34;&gt;AWS&lt;/a&gt;&amp;nbsp;Ubuntu12.04，并利用&lt;a href=&#34;https://en.wikipedia.org/wiki/Cron&#34;&gt;Crontab&lt;/a&gt;每天定时运行一次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://lucumt.info/blog_img/about/elance_work_record.png&#34; alt=&#34;Python网络爬虫&#34; /&gt;
-&lt;/p&gt;
-
-&lt;h1 id=&#34;个人信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人信息&lt;/h1&gt;
-
-&lt;h2 id=&#34;教育信息:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;教育信息&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.cumt.edu.cn/&#34;&gt;中国矿业大学&lt;/a&gt;&amp;nbsp;(2006.9-2010.6)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://cs.cumt.edu.cn/&#34;&gt;计算机科学与技术&lt;/a&gt;&amp;nbsp;(本科)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;个人爱好:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;个人爱好&lt;/h2&gt;
-
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上网&amp;nbsp;看纪录片&amp;nbsp;编程&amp;nbsp;阅读&amp;nbsp;睡觉&lt;/p&gt;
-
-&lt;h2 id=&#34;自我评价:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;自我评价&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;热爱学习和使用新技术；&lt;/li&gt;
-&lt;li&gt;有着十分强烈的代码洁癖；&lt;/li&gt;
-&lt;li&gt;喜欢重构代码，善于分析和解决问题；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;联系方式:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;联系方式&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: lucumt@gmail.com或cumtlu@126.com&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Skype&lt;/strong&gt;: lu.rosen&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;QQ&lt;/strong&gt;: 317801876&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

@@ -6,8 +6,10 @@ PygmentsCodeFences=true
 disqusShortname = "rosenlu"
 
 [author]
-    name = "Tom Maiaroto"
+    name = "飞狐"
     homepage = "http://lucumt.info"
+    link = "https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/"
+    linktarget = "_new"
 
 [params] 
     sidebartitle = "飞狐的部落格" 

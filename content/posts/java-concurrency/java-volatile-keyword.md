@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","Java Concurrency","翻译"]
 date = "2016-03-07T18:03:18+08:00"
 description = "Blog of Rosen Lu"

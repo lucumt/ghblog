@@ -1,10 +1,10 @@
 +++
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","Java Concurrency","翻译"]
 date = "2017-03-30T14:49:08+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["java concurrency"]
-title = "[译]Java多线程与并发教程"
+title = "1. [译]Java多线程与并发教程"
 
 +++
 本文翻译自**[Java Concurrency / Multithreading Tutorial](http://tutorials.jenkov.com/java-concurrency/index.html)**
