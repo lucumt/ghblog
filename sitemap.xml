@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://lucumt.info/</loc>
-    <lastmod>2017-03-30T14:49:08+08:00</lastmod>
+    <lastmod>2017-04-01T13:18:43+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</loc>
+    <lastmod>2017-04-01T13:18:43+08:00</lastmod>
   </url>
   
   <url>
@@ -58,7 +63,7 @@
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/java-volatile-keyword/</loc>
+    <loc>http://lucumt.info/posts/java-concurrency/java-volatile-keyword/</loc>
     <lastmod>2016-03-07T18:03:18+08:00</lastmod>
   </url>
   
