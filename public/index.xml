@@ -6,8 +6,48 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 01 Apr 2017 21:57:30 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 07 Apr 2017 10:47:28 +0800</lastBuildDate>
     <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
+      <link>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</link>
+      <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <description>&lt;p&gt;由于业务要求，需要在利用MyEclipse中开发的Web项目中添加&lt;code&gt;Birt&lt;/code&gt;报表统计功能，新建完一个 &lt;em&gt;report.rptdesign&lt;/em&gt; 文件后双击该文件出现如下错误:&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png&#34; alt=&#34;无法打开报表文件&#34; title=&#34;无法打开birt报表文件&#34; /&gt;
+&lt;br /&gt;
+错误信息提示MyEclipse无法打开&lt;code&gt;Birt&lt;/code&gt;报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 &lt;em&gt;MyEclipse&lt;/em&gt; -&amp;gt; &lt;em&gt;Add Report  Capabilities&lt;/em&gt; 来对该项目添加&lt;code&gt;Birt&lt;/code&gt;报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的&lt;code&gt;Birt&lt;/code&gt;jar包和相应的report文件夹，给我们的项目造成了一定的干扰。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png&#34; alt=&#34;birt项目&#34; title=&#34;MyEclipse中的birt项目&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;分析上述添加完&lt;code&gt;Birt&lt;/code&gt;报表支持的项目文件后，可发现与普通的Java Web项目相比  &lt;em&gt;.project&lt;/em&gt; 文件在 &lt;em&gt;natures&lt;/em&gt; 下面多了一个  &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 的配置项，而该配置项正是用于在项目中支持&lt;code&gt;Birt&lt;/code&gt;报表操作。&lt;/p&gt;
+
+&lt;p&gt;据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开&lt;code&gt;Birt&lt;/code&gt;报表的问题：&lt;strong&gt;将 &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 配置项添加到当前项目 &lt;em&gt;.project&lt;/em&gt; 文件的 &lt;em&gt;natures&lt;/em&gt; 配置项下面&lt;/strong&gt;，如下所示:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;projectDescription&amp;gt;
+    &amp;lt;name&amp;gt;teq&amp;lt;/name&amp;gt;
+    &amp;lt;comment&amp;gt;&amp;lt;/comment&amp;gt;
+    &amp;lt;projects&amp;gt;
+    &amp;lt;/projects&amp;gt;
+    &amp;lt;buildSpec&amp;gt;
+       ...
+    &amp;lt;/buildSpec&amp;gt;
+    &amp;lt;natures&amp;gt;
+        &amp;lt;!--添加报表支持 --&amp;gt;
+        &amp;lt;nature&amp;gt;com.genuitec.eclipse.reporting.reportnature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;com.genuitec.eclipse.j2eedt.core.webnature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;org.eclipse.jdt.core.javanature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;org.eclipse.wst.jsdt.core.jsNature&amp;lt;/nature&amp;gt;
+    &amp;lt;/natures&amp;gt;
+&amp;lt;/projectDescription&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;利用此种方式既可解决无法打开&lt;code&gt;Birt&lt;/code&gt;报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>3. [译]多线程的成本</title>
@@ -241,7 +281,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;寻找出如何计算相交矩形的面积之后，还需要解决一个问题:&lt;strong&gt;上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误&lt;/strong&gt;，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：&lt;strong&gt;如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！&lt;/strong&gt;，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4中情况：&lt;br /&gt;
+&lt;p&gt;寻找出如何计算相交矩形的面积之后，还需要解决一个问题:&lt;strong&gt;上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误&lt;/strong&gt;，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：&lt;strong&gt;如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！&lt;/strong&gt;，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4种情况：&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/no_interact_position_compare.png&#34; alt=&#34;矩形不相交坐标计算&#34; title=&#34;矩形不相交的4种情况&#34; /&gt;
 &lt;br /&gt;
 相应的代码实现如下：&lt;/p&gt;
@@ -1029,162 +1069,6 @@ setx -m PATH &amp;quot;%Path%;C:\INTA\Database\bin;&amp;quot;
 
 &lt;p&gt;Orz~&lt;br /&gt;
 想不到由于一个&lt;strong&gt;&lt;em&gt;-m&lt;/em&gt;&lt;/strong&gt;而让自己郁闷了这么久!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>利用Github Pages和基于Go的Hugo搭建个人博客</title>
-      <link>http://lucumt.info/posts/create-website-with-hugo/</link>
-      <pubDate>Sat, 27 Feb 2016 22:23:37 +0800</pubDate>
-      
-      <guid>http://lucumt.info/posts/create-website-with-hugo/</guid>
-      <description>
-
-&lt;p&gt;一直以来都想拥有一个属于自己的博客，前段时间在学习&lt;code&gt;Go&lt;/code&gt; ，于是利用&lt;code&gt;Hugo&lt;/code&gt; 和&lt;code&gt;Github Pages&lt;/code&gt; 搭建了一个简易的个人博客，先简单记录下。&lt;/p&gt;
-
-&lt;h1 id=&#34;环境准备:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;环境准备&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt;1.4+&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;v0.14+&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;账号&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.godaddy.com&#34;&gt;GoDaddy&lt;/a&gt;域名&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;过程概要:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;过程概要&lt;/h1&gt;
-
-&lt;h2 id=&#34;在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github上创建一个自己的项目&lt;/h2&gt;
-
-&lt;p&gt;参考&lt;code&gt;Github Pages&lt;/code&gt; 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：&lt;br /&gt;
-1. 创建&lt;strong&gt;User or origanization site&lt;/strong&gt;或&lt;strong&gt;Project site&lt;/strong&gt;,我个人选择的是&lt;strong&gt;Project site&lt;/strong&gt;。
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png&#34; alt=&#34;png_1&#34; /&gt;
-&lt;br /&gt;
-2. 若选择的是&lt;strong&gt;Project site&lt;/strong&gt;,则会让选择&lt;strong&gt;Generate a site&lt;/strong&gt;或&lt;strong&gt;Start from scratch&lt;/strong&gt;，个人选择&lt;strong&gt;Start from scratch&lt;/strong&gt;从头开始搭建。
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png&#34; alt=&#34;png_2.png&#34; /&gt;
-&lt;br /&gt;
-当然个人的爱好不同，不一定非得选择&lt;strong&gt;Project site&lt;/strong&gt;和&lt;strong&gt;Start from scratch&lt;/strong&gt;，这不是本文的重点，只要能按照&lt;code&gt;Github Pages&lt;/code&gt;的提示成功搭建自己的静态博客即可。&lt;/p&gt;
-
-&lt;h2 id=&#34;利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用Hugo作为博客生成器&lt;/h2&gt;
-
-&lt;p&gt;由于&lt;code&gt;Github Pages&lt;/code&gt; 只支持静态的html页面托管，所以需要采用&lt;code&gt;Jekyll&lt;/code&gt; 、&lt;code&gt;Logdown&lt;/code&gt; 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习&lt;code&gt;Go&lt;/code&gt;，为了加深自己对于&lt;code&gt;Go&lt;/code&gt;的运用，于是便选择&lt;code&gt;Hugo&lt;/code&gt; 作为自己的博客生成器。&lt;code&gt;Hugo&lt;/code&gt; 是一个基于&lt;code&gt;Go]&lt;/code&gt;开发的静态生成器，它采用&lt;em&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/Markdown&#34;&gt;Markdown&lt;/a&gt;&lt;/em&gt; 语法来编写博客生成，然后生成相应的HTML页面。&lt;/p&gt;
-
-&lt;h3 id=&#34;安装go:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Go&lt;/h3&gt;
-
-&lt;p&gt;访问&lt;a href=&#34;https://golang.org/dl/&#34;&gt;Golang下载页&lt;/a&gt;根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;下载&lt;strong&gt;go1.4.2.windows-amd64.msi&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置&lt;code&gt;PATH&lt;/code&gt;、&lt;code&gt;GOPATH&lt;/code&gt;和&lt;code&gt;GOROOT&lt;/code&gt;这三个环境变量，我自己把&lt;code&gt;Go&lt;/code&gt;安装在 &lt;em&gt;D:\code\go&lt;/em&gt; 下，这三个变量相应的设置为:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;PATH=&amp;rsquo;D:\code\go\bin&amp;rsquo;;%PATH%&lt;br /&gt;
-GOPATH=&amp;rsquo;D:\code\gopath&amp;rsquo;&lt;br /&gt;
-GOROOT=&amp;rsquo;D:\code\go&amp;rsquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;其中&lt;strong&gt;PATH&lt;/strong&gt;变量的作用主要是为了将&lt;code&gt;Go&lt;/code&gt;的各种命令加到cmd中。&lt;strong&gt;GOROOT&lt;/strong&gt;则是当我们将&lt;code&gt;Go&lt;/code&gt;安装在我们的自定义目录时，需要制定该安装目录，若安装在默认目录&lt;strong&gt;C:\go&lt;/strong&gt;下则不用设置&lt;strong&gt;GOROOT&lt;/strong&gt;目录，官方文档原文为&lt;em&gt;GOROOT must be set only when installing to a custom location.&lt;/em&gt; 比较难懂的是&lt;strong&gt;GOPATH&lt;/strong&gt;,官方文档上的说明为 &lt;em&gt;Create a directory to contain your workspace, $HOME/work for example, and set the GOPATH environment variable to point to that location.&lt;/em&gt; 据此我们可以将&lt;strong&gt;GOPATH&lt;/strong&gt;理解为工作目录，它主要用来存放&lt;code&gt;Go&lt;/code&gt;代码编译之后的可执行文件，其位置可以随意设置，只要不与&lt;strong&gt;GOROOT&lt;/strong&gt;相同即可。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装完成之后，重新打开cmd窗口，输入&lt;strong&gt;go version&lt;/strong&gt;之后按Enter键，若出现如下信息，则表示&lt;code&gt;Go&lt;/code&gt;安装成功:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;C:\Users\Administrator&amp;gt;go version&lt;br /&gt;
-go version go1.4.2 windows/amd64&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Hugo&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;Hugo&lt;/code&gt;的安装过程与&lt;code&gt;Go&lt;/code&gt;的类似.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;首先在&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;Hugo下载页&lt;/a&gt;根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的&lt;strong&gt;PATH&lt;/strong&gt;环境变量即可。我的安装在 &lt;em&gt;D:\program\hugo&lt;/em&gt; 所以相应的环境变量设置为&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;PATH=&amp;rsquo;D:\program\hugo&amp;rsquo;;%PATH%&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;重新打开cmd窗口，输入&lt;strong&gt;hugo version&lt;/strong&gt;，若出现如下信息，则表示&lt;code&gt;Hugo&lt;/code&gt;安装成功：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;C:\Users\Administrator&amp;gt;hugo version
-Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;关于&lt;code&gt;Hugo&lt;/code&gt;的基本操作命令，可以参见&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo快速入门&lt;/a&gt;，此处不再详述。&lt;/p&gt;
-
-&lt;h2 id=&#34;在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github Pages上托管Hugo&lt;/h2&gt;
-
-&lt;h3 id=&#34;安装命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装命令&lt;/h3&gt;
-
-&lt;p&gt;最权威的信息还是来源于官方文档，可以参见&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;在Github Pages上托管Hugo&lt;/a&gt;,主要的&lt;code&gt;Git&lt;/code&gt;操作命令如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Create a new orphand branch (no commit history) named gh-pages&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;orphan&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Unstage all files&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;rm&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;cached&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ls&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;files)&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Grab one file from the master branch so we can make a commit&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;README&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;md&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add and commit that file&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;INIT: initial commit on gh-pages branch&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Push to remote gh-pages branch&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Return to master branch&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Remove the public folder to make room for the gh-pages subtree&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;rm&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rf&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add the gh-pages branch of the repository. It will look like a folder named public&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;squash&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Pull down the file we just committed. This helps avoid merge conflicts&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;pull&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you&amp;#39;re not using a theme)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;t&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;ThemeName&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# 如果不是第一次创建，那么后续更新时可以从此步骤开始&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add everything&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;A&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Commit and push to master&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Updating site&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Push to master&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# 将主干中public目录同步到gh-pages分支上&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;说明信息:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;说明信息&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上述命令的核心思想把源代码放在&lt;strong&gt;master&lt;/strong&gt;上，把生成的静态html代码通过&lt;strong&gt;substree&lt;/strong&gt;命令放到&lt;strong&gt;branch&lt;/strong&gt;上；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Git&lt;/code&gt;主干的名字可以随便取，但是分支的名字必须为&lt;code&gt;gh-pages&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;上述命令针对的是从头到尾开始创建一个&lt;code&gt;Git&lt;/code&gt;项目然后提交，如果之前已经有&lt;code&gt;gh-pages&lt;/code&gt;项目了，则可以从 &lt;em&gt;git subtree add &amp;ndash;prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages &amp;ndash;squash&lt;/em&gt; 这句代码开始执行；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;相关命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;相关命令&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;生成绑定到指定域名的页面
-&lt;code&gt;hugo server -D --baseUrl=&amp;quot;http://lucumt.info&amp;quot; --appendPort=false&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&amp;lt;&amp;ndash;待续&amp;ndash;&amp;gt;&lt;/p&gt;
 </description>
     </item>
     
