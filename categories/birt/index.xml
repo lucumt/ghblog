@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Birt on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/birt/</link>
+    <description>Recent content in Birt on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 07 Apr 2017 10:47:28 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/birt/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
+      <link>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</link>
+      <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <description>&lt;p&gt;由于业务要求，需要在利用MyEclipse中开发的Web项目中添加&lt;code&gt;Birt&lt;/code&gt;报表统计功能，新建完一个 &lt;em&gt;report.rptdesign&lt;/em&gt; 文件后双击该文件出现如下错误:&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png&#34; alt=&#34;无法打开报表文件&#34; title=&#34;无法打开birt报表文件&#34; /&gt;
+&lt;br /&gt;
+错误信息提示MyEclipse无法打开&lt;code&gt;Birt&lt;/code&gt;报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 &lt;em&gt;MyEclipse&lt;/em&gt; -&amp;gt; &lt;em&gt;Add Report  Capabilities&lt;/em&gt; 来对该项目添加&lt;code&gt;Birt&lt;/code&gt;报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的&lt;code&gt;Birt&lt;/code&gt;jar包和相应的report文件夹，给我们的项目造成了一定的干扰。&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png&#34; alt=&#34;birt项目&#34; title=&#34;MyEclipse中的birt项目&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;分析上述添加完&lt;code&gt;Birt&lt;/code&gt;报表支持的项目文件后，可发现与普通的Java Web项目相比  &lt;em&gt;.project&lt;/em&gt; 文件在 &lt;em&gt;natures&lt;/em&gt; 下面多了一个  &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 的配置项，而该配置项正是用于在项目中支持&lt;code&gt;Birt&lt;/code&gt;报表操作。&lt;/p&gt;
+
+&lt;p&gt;据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开&lt;code&gt;Birt&lt;/code&gt;报表的问题：&lt;strong&gt;将 &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 配置项添加到当前项目 &lt;em&gt;.project&lt;/em&gt; 文件的 &lt;em&gt;natures&lt;/em&gt; 配置项下面&lt;/strong&gt;，如下所示:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;projectDescription&amp;gt;
+    &amp;lt;name&amp;gt;teq&amp;lt;/name&amp;gt;
+    &amp;lt;comment&amp;gt;&amp;lt;/comment&amp;gt;
+    &amp;lt;projects&amp;gt;
+    &amp;lt;/projects&amp;gt;
+    &amp;lt;buildSpec&amp;gt;
+       ...
+    &amp;lt;/buildSpec&amp;gt;
+    &amp;lt;natures&amp;gt;
+        &amp;lt;!--添加报表支持 --&amp;gt;
+        &amp;lt;nature&amp;gt;com.genuitec.eclipse.reporting.reportnature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;com.genuitec.eclipse.j2eedt.core.webnature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;org.eclipse.jdt.core.javanature&amp;lt;/nature&amp;gt;
+        &amp;lt;nature&amp;gt;org.eclipse.wst.jsdt.core.jsNature&amp;lt;/nature&amp;gt;
+    &amp;lt;/natures&amp;gt;
+&amp;lt;/projectDescription&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;利用此种方式既可解决无法打开&lt;code&gt;Birt&lt;/code&gt;报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
