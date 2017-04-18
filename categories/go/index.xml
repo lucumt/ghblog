@@ -79,7 +79,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt;1.4+&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;v0.14+&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt;账号&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt;账号&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.godaddy.com&#34;&gt;GoDaddy&lt;/a&gt;域名&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -87,14 +87,16 @@
 
 &lt;h2 id=&#34;在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github上创建一个自己的项目&lt;/h2&gt;
 
-&lt;p&gt;参考&lt;code&gt;Github Pages&lt;/code&gt; 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：&lt;br /&gt;
-1. 创建&lt;strong&gt;User or origanization site&lt;/strong&gt;或&lt;strong&gt;Project site&lt;/strong&gt;,我个人选择的是&lt;strong&gt;Project site&lt;/strong&gt;。
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png&#34; alt=&#34;png_1&#34; /&gt;
+&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;Github&lt;/code&gt;上创建一个项目，本文中该项目名为 &lt;em&gt;blog&lt;/em&gt;&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/create-github-repository.png&#34; alt=&#34;创建Github项目&#34; title=&#34;创建Github项目&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;由于&lt;code&gt;Github Pages&lt;/code&gt;强制要求在托管博客时该项目必须有一个名为 &lt;em&gt;gh-pages&lt;/em&gt; 的分支，所以要预先给该项目创建一个名为 &lt;em&gt;gh-pages&lt;/em&gt; 的分支&lt;/li&gt;
+&lt;li&gt;在Github中打开 &lt;em&gt;blog&lt;/em&gt; 项目主页面，点击 &lt;em&gt;Settings&lt;/em&gt; 按钮&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/open-github-project-settings.png&#34; alt=&#34;打开项目配置界面&#34; title=&#34;打开Github项目设置界面&#34; /&gt;
 &lt;br /&gt;
-2. 若选择的是&lt;strong&gt;Project site&lt;/strong&gt;,则会让选择&lt;strong&gt;Generate a site&lt;/strong&gt;或&lt;strong&gt;Start from scratch&lt;/strong&gt;，个人选择&lt;strong&gt;Start from scratch&lt;/strong&gt;从头开始搭建。
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png&#34; alt=&#34;png_2.png&#34; /&gt;
-&lt;br /&gt;
-当然个人的爱好不同，不一定非得选择&lt;strong&gt;Project site&lt;/strong&gt;和&lt;strong&gt;Start from scratch&lt;/strong&gt;，这不是本文的重点，只要能按照&lt;code&gt;Github Pages&lt;/code&gt;的提示成功搭建自己的静态博客即可。&lt;/p&gt;
+在 &lt;em&gt;Github Pages&lt;/em&gt; 这个区域可以看见本项目的发布链接为 &lt;em&gt;https://fox321.github.io/blog/&lt;/em&gt; ，点击该链接可以访问该项目对应的静态页面
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/check-github-project-address.png&#34; alt=&#34;查看项目发布链接&#34; title=&#34;查看项目发布链接&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&#34;利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用Hugo作为博客生成器&lt;/h2&gt;
 
@@ -153,68 +155,47 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 
 &lt;h3 id=&#34;安装命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装命令&lt;/h3&gt;
 
-&lt;p&gt;最权威的信息还是来源于官方文档，可以参见&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;在Github Pages上托管Hugo&lt;/a&gt;,主要的&lt;code&gt;Git&lt;/code&gt;操作命令如下：&lt;/p&gt;
+&lt;p&gt;虽然官方文档&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;在Github Pages上托管Hugo&lt;/a&gt;上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Create a new orphand branch (no commit history) named gh-pages&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;orphan&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Unstage all files&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;rm&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;cached&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ls&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;files)&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Grab one file from the master branch so we can make a commit&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;README&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;md&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add and commit that file&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;INIT: initial commit on gh-pages branch&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Push to remote gh-pages branch&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Return to master branch&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;checkout&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Remove the public folder to make room for the gh-pages subtree&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;rm&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;rf&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add the gh-pages branch of the repository. It will look like a folder named public&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;squash&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Pull down the file we just committed. This helps avoid merge conflicts&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;pull&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you&amp;#39;re not using a theme)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;t&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;ThemeName&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# 如果不是第一次创建，那么后续更新时可以从此步骤开始&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Add everything&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;add&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;A&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Commit and push to master&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Updating site&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Push to master&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;master&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# 将主干中public目录同步到gh-pages分支上&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;subtree&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;push&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;prefix&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;git@github&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;com&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:spencerlyon2&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;hugo_gh_blog&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;git&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;gh&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pages&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;h3 id=&#34;说明信息:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;说明信息&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上述命令的核心思想把源代码放在&lt;strong&gt;master&lt;/strong&gt;上，把生成的静态html代码通过&lt;strong&gt;substree&lt;/strong&gt;命令放到&lt;strong&gt;branch&lt;/strong&gt;上；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Git&lt;/code&gt;主干的名字可以随便取，但是分支的名字必须为&lt;code&gt;gh-pages&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;上述命令针对的是从头到尾开始创建一个&lt;code&gt;Git&lt;/code&gt;项目然后提交，如果之前已经有&lt;code&gt;gh-pages&lt;/code&gt;项目了，则可以从 &lt;em&gt;git subtree add &amp;ndash;prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages &amp;ndash;squash&lt;/em&gt; 这句代码开始执行；&lt;/li&gt;
-&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;将之前在Github上创建的 &lt;em&gt;blog&lt;/em&gt; 项目clone到本地目录&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/clone-github-repository.png&#34; alt=&#34;将项目下载到本地&#34; title=&#34;将项目下载到本地&#34; /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;切换到 &lt;em&gt;blog&lt;/em&gt; 目录并利用&lt;code&gt;hugo new site&lt;/code&gt;命令创建一个名为 &lt;em&gt;person_blog&lt;/em&gt; 的&lt;code&gt;Hugo&lt;/code&gt;站点，然后将其内容移入到 &lt;em&gt;blog&lt;/em&gt; 目录下并删除 &lt;em&gt;person_blog&lt;/em&gt; 目录&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/create-hugo-site-in-repository.png&#34; alt=&#34;创建一个Hugo站点&#34; title=&#34;创建一个Hugo站点&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;利用&lt;code&gt;hugo new&lt;/code&gt;命令创建一个md文件用于存储我们的第一篇博客&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/create-hugo-page.png&#34; alt=&#34;创建一个Hugo页面&#34; title=&#34;创建一个Hugo页面&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;在 &lt;em&gt;blog&lt;/em&gt; 目录下创建一个名为 &lt;em&gt;themes&lt;/em&gt; 的文件夹用于存储&lt;code&gt;Hugo&lt;/code&gt;样式，并将自己选中的样式下载到本地&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/clone-hugo-theme.png&#34; alt=&#34;下载Hugo样式&#34; title=&#34;下载Hugo样式&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;输入&lt;code&gt;hugo server --theme=hugo-redlounge --buildDrafts&lt;/code&gt;在本地启动Hugo，启动正常后命令行输出如下&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/start-hugo-in-local.png&#34; alt=&#34;在本地启动Hugo&#34; title=&#34;在本地启动Hugo&#34; /&gt;
+&lt;br /&gt;
+此时在浏览器中输入&lt;code&gt;http://127.0.0.1:1313&lt;/code&gt;会看到如下输出，该页面意味着本地博客创建成功，接下来要将其上传到&lt;code&gt;Github Pages&lt;/code&gt;中托管&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/visit-local-hugo-site.png&#34; alt=&#34;在本地访问Hugo站点&#34; title=&#34;在本地访问Hugo站点&#34; /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;我们需要将相关的链接地址修改为 &lt;em&gt;https://fox321.github.io/blog&lt;/em&gt; ，同时将端口号去掉，相关的命令为 &lt;code&gt;hugo server -D --theme=hugo-redlounge --baseUrl=&amp;quot;https://fox321.github.io/blog&amp;quot; --appendPort=false&lt;/code&gt;，运行截图如下
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/update-hugo-site-url.png&#34; alt=&#34;修改博客链接地址&#34; title=&#34;修改博客链接地址&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;修改完链接地址之后，需要将生成的页面提交到&lt;code&gt;Github&lt;/code&gt;中才能被访问，首先需要将页面提交到 *master*，由于我是在Windows操作系统上进行的，而CMD对&lt;code&gt;Git&lt;/code&gt;的支持不是很好，故从此步开始切换为在&lt;code&gt;Git Bash&lt;/code&gt;进行相关操作&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-github.png&#34; alt=&#34;提交到master&#34; title=&#34;提交到master&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;利用&lt;code&gt;subtree&lt;/code&gt;命令将 &lt;em&gt;master&lt;/em&gt; 中 &lt;em&gt;public&lt;/em&gt; 目录下的内容同步到 &lt;em&gt;gh-pages&lt;/em&gt; 目录下&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-branch.png&#34; alt=&#34;同步到gh-pages&#34; title=&#34;同步到gh-pages&#34; /&gt;
+&lt;br /&gt;
+此时访问该项目的设置页面，在 &lt;em&gt;Github Pages&lt;/em&gt; 部分会看见如下信息&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-branch-success.png&#34; alt=&#34;同步到gh-pages成功&#34; title=&#34;同步到gh-pages成功&#34; /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;访问 &lt;em&gt;https://fox321.github.io/blog&lt;/em&gt; ，出现如下页面，至此&lt;code&gt;Hugo&lt;/code&gt;博客托管到&lt;code&gt;Github Pages&lt;/code&gt;成功！&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png&#34; alt=&#34;访问Github Pages页面&amp;quot;&#34; title=&#34;访问Github Pages页面&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h3 id=&#34;相关命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;相关命令&lt;/h3&gt;
 
-&lt;ul&gt;
-&lt;li&gt;生成绑定到指定域名的页面
-&lt;code&gt;hugo server -D --baseUrl=&amp;quot;http://lucumt.info&amp;quot; --appendPort=false&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;生成绑定到指定域名的页面 &lt;code&gt;hugo server -D --baseUrl=&amp;quot;http://lucumt.info&amp;quot; --appendPort=false&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;将 &lt;em&gt;master&lt;/em&gt; 的 &lt;em&gt;public&lt;/em&gt; 目录同步到分支 &lt;code&gt;git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用GoDaddy配置自定义域名&lt;/h2&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;&amp;lt;&amp;ndash;待续&amp;ndash;&amp;gt;&lt;/p&gt;
 </description>
