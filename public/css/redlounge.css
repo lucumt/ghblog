@@ -67,7 +67,8 @@ a {
   color: #616161;
 }
 
-p img{
+p img,
+li img{
   border:1px dashed #aaa;
   border-radius:4px;
   max-width:100%;

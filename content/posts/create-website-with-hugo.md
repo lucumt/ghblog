@@ -13,21 +13,22 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 [//]:(设置前面的内容为summary)
 <!--more-->
- 
+
 # 环境准备
 * [Go](https://golang.org/)1.4+
 * [Hugo](https://gohugo.io)v0.14+
-* [Github Pages](https://pages.github.com/)账号
+* [Github](https://github.com/)账号
 * [GoDaddy](https://www.godaddy.com)域名 
 
 # 过程概要
 ## 在Github上创建一个自己的项目
-参考`Github Pages` 官网首页的说明，按照提示步骤依次操作即可。在此过程中，有两个步骤需要我们进行选择：  
-1. 创建**User or origanization site**或**Project site**,我个人选择的是**Project site**。
-![png_1](https://ooo.0o0.ooo/2016/02/29/56d46b8727135.png)  
-2. 若选择的是**Project site**,则会让选择**Generate a site**或**Start from scratch**，个人选择**Start from scratch**从头开始搭建。
-![png_2.png](https://ooo.0o0.ooo/2016/02/27/56d1c72e8b3ba.png)  
-当然个人的爱好不同，不一定非得选择**Project site**和**Start from scratch**，这不是本文的重点，只要能按照`Github Pages`的提示成功搭建自己的静态博客即可。
+1. 在`Github`上创建一个项目，本文中该项目名为 *blog*  
+	![创建Github项目](/blog_img/create-website-with-hugo/create-github-repository.png "创建Github项目")
+2. 由于`Github Pages`强制要求在托管博客时该项目必须有一个名为 *gh-pages* 的分支，所以要预先给该项目创建一个名为 *gh-pages* 的分支
+3. 在Github中打开 *blog* 项目主页面，点击 *Settings* 按钮  
+	![打开项目配置界面](/blog_img/create-website-with-hugo/open-github-project-settings.png "打开Github项目设置界面")  
+	在 *Github Pages* 这个区域可以看见本项目的发布链接为 *https\://fox321.github.io/blog/* ，点击该链接可以访问该项目对应的静态页面 
+	![查看项目发布链接](/blog_img/create-website-with-hugo/check-github-project-address.png "查看项目发布链接")
 
 ## 利用Hugo作为博客生成器
 由于`Github Pages` 只支持静态的html页面托管，所以需要采用`Jekyll` 、`Logdown` 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习`Go`，为了加深自己对于`Go`的运用，于是便选择`Hugo` 作为自己的博客生成器。`Hugo` 是一个基于`Go]`开发的静态生成器，它采用*[Markdown](https://zh.wikipedia.org/zh-cn/Markdown)* 语法来编写博客生成，然后生成相应的HTML页面。
@@ -63,64 +64,38 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 
 关于`Hugo`的基本操作命令，可以参见[Hugo快速入门](https://gohugo.io/overview/quickstart/)，此处不再详述。
 
+
 ## 在Github Pages上托管Hugo
 
 ### 安装命令
-最权威的信息还是来源于官方文档，可以参见[在Github Pages上托管Hugo](https://gohugo.io/tutorials/github-pages-blog/),主要的`Git`操作命令如下：
+虽然官方文档[在Github Pages上托管Hugo](https://gohugo.io/tutorials/github-pages-blog/)上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：
 
-
-{{< highlight ruby >}}# Create a new orphand branch (no commit history) named gh-pages
-git checkout --orphan gh-pages
-
-# Unstage all files
-git rm --cached $(git ls-files)
-
-# Grab one file from the master branch so we can make a commit
-git checkout master README.md
-
-# Add and commit that file
-git add .
-git commit -m "INIT: initial commit on gh-pages branch"
-
-# Push to remote gh-pages branch
-git push origin gh-pages
-
-# Return to master branch
-git checkout master
-
-# Remove the public folder to make room for the gh-pages subtree
-rm -rf public
-
-# Add the gh-pages branch of the repository. It will look like a folder named public
-git subtree add --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages --squash
-
-# Pull down the file we just committed. This helps avoid merge conflicts
-git subtree pull --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages
-
-# Run hugo. Generated site will be placed in public directory (or omit -t ThemeName if you're not using a theme)
-hugo -t ThemeName
-
-# 如果不是第一次创建，那么后续更新时可以从此步骤开始
-# Add everything
-git add -A
-
-# Commit and push to master
-git commit -m "Updating site"
-
-# Push to master
-git push origin master
-
-# 将主干中public目录同步到gh-pages分支上
-git subtree push --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages{{< /highlight >}}
-
-### 说明信息
-
-* 上述命令的核心思想把源代码放在**master**上，把生成的静态html代码通过**substree**命令放到**branch**上；
-* `Git`主干的名字可以随便取，但是分支的名字必须为`gh-pages`；
-* 上述命令针对的是从头到尾开始创建一个`Git`项目然后提交，如果之前已经有`gh-pages`项目了，则可以从 *git subtree add --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages --squash* 这句代码开始执行；
+1. 将之前在Github上创建的 *blog* 项目clone到本地目录   
+    ![将项目下载到本地](/blog_img/create-website-with-hugo/clone-github-repository.png "将项目下载到本地")  
+2. 切换到 *blog* 目录并利用`hugo new site`命令创建一个名为 *person_blog* 的`Hugo`站点，然后将其内容移入到 *blog* 目录下并删除 *person_blog* 目录   
+	![创建一个Hugo站点](/blog_img/create-website-with-hugo/create-hugo-site-in-repository.png "创建一个Hugo站点")
+3. 利用`hugo new`命令创建一个md文件用于存储我们的第一篇博客  
+	![创建一个Hugo页面](/blog_img/create-website-with-hugo/create-hugo-page.png "创建一个Hugo页面")
+4. 在 *blog* 目录下创建一个名为 *themes* 的文件夹用于存储`Hugo`样式，并将自己选中的样式下载到本地  
+	![下载Hugo样式](/blog_img/create-website-with-hugo/clone-hugo-theme.png "下载Hugo样式")
+5. 输入`hugo server --theme=hugo-redlounge --buildDrafts`在本地启动Hugo，启动正常后命令行输出如下  
+	![在本地启动Hugo](/blog_img/create-website-with-hugo/start-hugo-in-local.png "在本地启动Hugo")  
+	此时在浏览器中输入`http://127.0.0.1:1313`会看到如下输出，该页面意味着本地博客创建成功，接下来要将其上传到`Github Pages`中托管    
+	![在本地访问Hugo站点](/blog_img/create-website-with-hugo/visit-local-hugo-site.png "在本地访问Hugo站点")  
+7. 我们需要将相关的链接地址修改为 *https\://fox321.github.io/blog* ，同时将端口号去掉，相关的命令为 `hugo server -D --theme=hugo-redlounge --baseUrl="https://fox321.github.io/blog" --appendPort=false`，运行截图如下
+	![修改博客链接地址](/blog_img/create-website-with-hugo/update-hugo-site-url.png "修改博客链接地址")
+8. 修改完链接地址之后，需要将生成的页面提交到`Github`中才能被访问，首先需要将页面提交到 *master*，由于我是在Windows操作系统上进行的，而CMD对`Git`的支持不是很好，故从此步开始切换为在`Git Bash`进行相关操作    
+	![提交到master](/blog_img/create-website-with-hugo/push-blog-to-github.png "提交到master")
+9. 利用`subtree`命令将 *master* 中 *public* 目录下的内容同步到 *gh-pages* 目录下  
+	![同步到gh-pages](/blog_img/create-website-with-hugo/push-blog-to-branch.png "同步到gh-pages")  
+	此时访问该项目的设置页面，在 *Github Pages* 部分会看见如下信息  
+    ![同步到gh-pages成功](/blog_img/create-website-with-hugo/push-blog-to-branch-success.png "同步到gh-pages成功")  
+10. 访问 *https\://fox321.github.io/blog* ，出现如下页面，至此`Hugo`博客托管到`Github Pages`成功！  
+	![访问Github Pages页面"](/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png "访问Github Pages页面")
 
 ### 相关命令
-* 生成绑定到指定域名的页面
-`hugo server -D --baseUrl="http://lucumt.info" --appendPort=false`
+1. 生成绑定到指定域名的页面 `hugo server -D --baseUrl="http://lucumt.info" --appendPort=false`
+2. 将 *master* 的 *public* 目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
+## 利用GoDaddy配置自定义域名
 
 <--待续-->
