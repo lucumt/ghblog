@@ -337,7 +337,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 <br /></li>
 <li>我们需要将相关的链接地址修改为 <em>https://fox321.github.io/blog</em> ，同时将端口号去掉，相关的命令为 <code>hugo server -D --theme=hugo-redlounge --baseUrl=&quot;https://fox321.github.io/blog&quot; --appendPort=false</code>，运行截图如下
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/update-hugo-site-url.png" alt="修改博客链接地址" title="修改博客链接地址" /></li>
-<li>修改完链接地址之后，需要将生成的页面提交到<code>Github</code>中才能被访问，首先需要将页面提交到 *master*，由于我是在Windows操作系统上进行的，而CMD对<code>Git</code>的支持不是很好，故从此步开始切换为在<code>Git Bash</code>进行相关操作<br />
+<li>修改完链接地址之后，需要将生成的页面提交到<code>Github</code>中才能被访问，首先需要将页面提交到 <em>master</em> ，由于我是在Windows操作系统上进行的，而CMD对<code>Git</code>的支持不是很好，故从此步开始切换为在<code>Git Bash</code>进行相关操作<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-github.png" alt="提交到master" title="提交到master" /></li>
 <li>利用<code>subtree</code>命令将 <em>master</em> 中 <em>public</em> 目录下的内容同步到 <em>gh-pages</em> 目录下<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-branch.png" alt="同步到gh-pages" title="同步到gh-pages" />
@@ -353,11 +353,34 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 
 <ol>
 <li>生成绑定到指定域名的页面 <code>hugo server -D --baseUrl=&quot;http://lucumt.info&quot; --appendPort=false</code></li>
-
-<li><p>将 <em>master</em> 的 <em>public</em> 目录同步到分支 <code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code></p>
-
-<h2 id="利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14">利用GoDaddy配置自定义域名</h2></li>
+<li>将 <em>master</em> 的 <em>public</em> 目录同步到分支 <code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code></li>
 </ol>
+
+<h2 id="利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14">利用GoDaddy配置自定义域名</h2>
+
+<p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">Using a custom domain with GitHub Pages</a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在<a href="https://www.godaddy.com/">Godaddy</a>上的说明来设置的。</p>
+
+<ol>
+<li>在public目录下创建一个名为 <strong>CNAME</strong> 的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 <em><a href="http://lucumt.info">http://lucumt.info</a></em> ，故填入 <em>lucumt.info</em><br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/create-cname-file.png" alt="&quot;创建CNAME文件&quot;" title="创建CNAME文件并添加域名" />
+<br /></li>
+<li>登陆Godaddy，然后在页面右上角点击自己的用户名，出现如下图所示的页面，选择 <em>Manage My Domains</em><br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/godaddy-choose-manage-page.png" alt="&quot;选择域名管理界面&quot;" title="选择域名管理界面" />
+<br /></li>
+<li>选择完 <em>Manage My Domains</em> 之后会出现如下图所示的界面，选择 <em>Manage DNS</em><br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/godaddy-choose-manage-dns.png" alt="&quot;选择DNS管理界面&quot;" title="选择DNS管理界面" /></li>
+<li>选择完 <em>Manage DNS</em> 之后会出现如下图所示的界面，点击 <em>Add</em> 按钮会出现下拉框让我们增加A记录<br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/godaddy-dns-records-page.png" alt="&quot;DNS管理界面&quot;" title="DNS管理界面" />
+<br /></li>
+<li>在 <em>Type</em> 部分选择 <strong>A</strong> ，<em>Host</em> 部分选择 <strong>@</strong>， <em>Poinst to</em> 根据<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在<a href="https://www.godaddy.com/">Godaddy</a>中 <em>Configuring A records with your DNS provider</em> 部分的说明添加 <strong>192.30.252.153</strong> ,点击 <em>Save</em> 即完成一条A记录的添加<br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&quot;增加A记录&quot;" title="增加A记录" />
+<br /></li>
+<li>再次点击 <em>Add</em> 添加，按照步骤5添加第二条A记录，除了 <em>Points to</em> 设置为 <strong>192.30.252.154</strong> 之外，其它的配置都相同</li>
+<li>在<code>Github</code>项目中点击 <em>Settings</em> 按钮查看 <em>Github Pages</em> 区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功<br />
+<img src="http://lucumt.info/blog_img/create-website-with-hugo/github-pages-configuration-check.png" alt="&quot;增加A记录&quot;" title="增加A记录" /></li>
+</ol>
+
+<p>至此利用<a href="https://www.godaddy.com/">Godaddy</a>来配置自自定义域名的过程完成，输入 <em><a href="https://lucumt.info">https://lucumt.info</a></em> 即可访问自己的博客！</p>
 
 <p>&lt;&ndash;待续&ndash;&gt;</p>
 

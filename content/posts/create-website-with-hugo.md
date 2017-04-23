@@ -84,7 +84,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 	![在本地访问Hugo站点](/blog_img/create-website-with-hugo/visit-local-hugo-site.png "在本地访问Hugo站点")  
 7. 我们需要将相关的链接地址修改为 *https\://fox321.github.io/blog* ，同时将端口号去掉，相关的命令为 `hugo server -D --theme=hugo-redlounge --baseUrl="https://fox321.github.io/blog" --appendPort=false`，运行截图如下
 	![修改博客链接地址](/blog_img/create-website-with-hugo/update-hugo-site-url.png "修改博客链接地址")
-8. 修改完链接地址之后，需要将生成的页面提交到`Github`中才能被访问，首先需要将页面提交到 *master*，由于我是在Windows操作系统上进行的，而CMD对`Git`的支持不是很好，故从此步开始切换为在`Git Bash`进行相关操作    
+8. 修改完链接地址之后，需要将生成的页面提交到`Github`中才能被访问，首先需要将页面提交到 *master* ，由于我是在Windows操作系统上进行的，而CMD对`Git`的支持不是很好，故从此步开始切换为在`Git Bash`进行相关操作    
 	![提交到master](/blog_img/create-website-with-hugo/push-blog-to-github.png "提交到master")
 9. 利用`subtree`命令将 *master* 中 *public* 目录下的内容同步到 *gh-pages* 目录下  
 	![同步到gh-pages](/blog_img/create-website-with-hugo/push-blog-to-branch.png "同步到gh-pages")  
@@ -96,6 +96,24 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 ### 相关命令
 1. 生成绑定到指定域名的页面 `hugo server -D --baseUrl="http://lucumt.info" --appendPort=false`
 2. 将 *master* 的 *public* 目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
+
 ## 利用GoDaddy配置自定义域名
+在[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)中有详细的说明，我自己配置的时候主要是按照[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[Godaddy](https://www.godaddy.com/)上的说明来设置的。
+
+1. 在public目录下创建一个名为 **CNAME** 的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 *http://lucumt.info* ，故填入 *lucumt.info*  
+!["创建CNAME文件"](/blog_img/create-website-with-hugo/create-cname-file.png "创建CNAME文件并添加域名")  
+2. 登陆Godaddy，然后在页面右上角点击自己的用户名，出现如下图所示的页面，选择 *Manage My Domains*  
+!["选择域名管理界面"](/blog_img/create-website-with-hugo/godaddy-choose-manage-page.png "选择域名管理界面")  
+3. 选择完 *Manage My Domains* 之后会出现如下图所示的界面，选择 *Manage DNS*   
+!["选择DNS管理界面"](/blog_img/create-website-with-hugo/godaddy-choose-manage-dns.png "选择DNS管理界面") 
+4. 选择完 *Manage DNS* 之后会出现如下图所示的界面，点击 *Add* 按钮会出现下拉框让我们增加A记录  
+!["DNS管理界面"](/blog_img/create-website-with-hugo/godaddy-dns-records-page.png "DNS管理界面")  
+5. 在 *Type* 部分选择 **A** ，*Host* 部分选择 **@**， *Poinst to* 根据[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[Godaddy](https://www.godaddy.com/)中 *Configuring A records with your DNS provider* 部分的说明添加 **192.30.252.153** ,点击 *Save* 即完成一条A记录的添加  
+!["增加A记录"](/blog_img/create-website-with-hugo/godaddy-dns-add-a-records.png "增加A记录")  
+6. 再次点击 *Add* 添加，按照步骤5添加第二条A记录，除了 *Points to* 设置为 **192.30.252.154** 之外，其它的配置都相同
+7. 在`Github`项目中点击 *Settings* 按钮查看 *Github Pages* 区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功  
+!["增加A记录"](/blog_img/create-website-with-hugo/github-pages-configuration-check.png "增加A记录")
+
+至此利用[Godaddy](https://www.godaddy.com/)来配置自自定义域名的过程完成，输入 *https://lucumt.info* 即可访问自己的博客！
 
 <--待续-->
