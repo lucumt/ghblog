@@ -2,19 +2,119 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java Concurrency on 飞狐的部落格</title>
-    <link>http://lucumt.info/categories/java-concurrency/</link>
+    <link>https://lucumt.info/categories/java-concurrency/</link>
     <description>Recent content in Java Concurrency on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 01 Apr 2017 21:57:30 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/categories/java-concurrency/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Apr 2017 00:10:11 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/java-concurrency/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>4. [译]并发的模型</title>
+      <link>https://lucumt.info/posts/java-concurrency/concurrency-models/</link>
+      <pubDate>Mon, 24 Apr 2017 00:10:11 +0800</pubDate>
+      
+      <guid>https://lucumt.info/posts/java-concurrency/concurrency-models/</guid>
+      <description>
+
+&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;
+
+&lt;h2 id=&#34;并发模型和分布式系统相似之处:9ebec4031501f63cd264123a50a14d31&#34;&gt;并发模型和分布式系统相似之处&lt;/h2&gt;
+
+&lt;p&gt;本文中描述的并发模型与分布式系统中使用的架构类似，在一个并发系统中，不同的线程之间互相通信，在一个分布式系统中，不同的进程间彼此通信（这些进程可能在不同的电脑上）。线程和进程在本质上时非常相似的，这就是为什么不同的并发模型与不同的分布式系统架构通常看起来相似。&lt;/p&gt;
+
+&lt;p&gt;虽然分布式系统还有额外的挑战，如网络故障、远程计算机或进程关闭等，但一个运行在大型服务器上的并发系统也可能会遇到类似的问题，如CPU故障、网卡故障、硬盘故障等，虽然其发生的概率较低，但理论上仍然可以发生。&lt;/p&gt;
+
+&lt;p&gt;由于并发模型和分布式系统架构类似，它们通常可以相互借鉴，比如在线程中分配工作的模型通常与分布式系统中的负载均衡类似，它们的错误处理手段也类似，例如日志（logging）、故障切换（fail-over）和等幂性任务（idempotency of jobs）等。&lt;/p&gt;
+
+&lt;h2 id=&#34;并行工作者模型-parallel-workers-model:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型(Parallel Workers model)&lt;/h2&gt;
+
+&lt;p&gt;并行工作者模型是本文要说明的第一个并发模型，该模型会将系统中到来的任务分配给不同的工作者，如下图所示：&lt;br /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png&#34; alt=&#34;&amp;quot;并行工作者模型&amp;quot;&#34; title=&#34;并行工作者模型&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;并发模型中有一个“委托者”将到来的任务分配给不同的工作者，每个工作者完成整个任务，每个工作者在不同的线程中（也有可能在不同的CPU）并行工作。&lt;/p&gt;
+
+&lt;p&gt;如果一个汽车厂采用了并行工作者模型，那么每辆汽车将由一个工人根据说明书从头到尾来制造。&lt;/p&gt;
+
+&lt;p&gt;并行工作者模型是Java应用程序中使用最广泛的并发模型（尽管这种情形正在发生变化），&lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html&#34;&gt;java.util.concurrent &lt;/a&gt;&lt;/strong&gt; 中的许多包都被设计用于此模型，你也可以在Java企业级服务器的设计中找到此模型的应用踪迹。&lt;/p&gt;
+
+&lt;h2 id=&#34;并行工作者模型的优点:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型的优点&lt;/h2&gt;
+
+&lt;p&gt;并行工作者模型的优点是理解容易，当要增加应用程序的并行能力时我们只需添加更多的工作者即可。&lt;/p&gt;
+
+&lt;p&gt;例如，假设你想实现一个网络爬虫，你可以使用不同数量的工作者线程来爬取制定数量的页面，根据结果来决定使用多少个工作者线程具有最短的抓取时间（同时意味着最优性能）。由于网络爬虫是IO密集型工作，在等待下载数据时会浪费大量时间，若每个CPU只运行一个线程时效率不高，所以最终的结果可能会是在电脑中一个CPU/内核运行多个线程。&lt;/p&gt;
+
+&lt;h2 id=&#34;并行工作者模型的缺点:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型的缺点&lt;/h2&gt;
+
+&lt;p&gt;并行工作者模式在其简单外表之下还有若干缺点，我将在以下部分说明其中最为明显的几个。&lt;/p&gt;
+
+&lt;h3 id=&#34;状态共享将使复杂性增加:9ebec4031501f63cd264123a50a14d31&#34;&gt;状态共享将使复杂性增加&lt;/h3&gt;
+
+&lt;p&gt;实际上并行工作者模型比上面说明的还要复杂一些，并行工作者通常需要访问一些共享数据，它们可能存储在内存中也可能存在数据库中，下面的图标展示了这种情形是如何是的并行工作者模型变得复杂的。&lt;br /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png&#34; alt=&#34;&amp;quot;并行工作者访问共享数据&amp;quot;&#34; title=&#34;并行工作者访问共享数据&#34; /&gt;
+&lt;br /&gt;
+其中的一些共享状态可能在类似于任务队列的通信过程中，但是另外一些共享状态可能是商业数据、缓存数据、数据库的连接池等。一旦共享状态引入到了并行工作者模型，问题就开始变得复杂。线程需要一种方式来访问共享数据以确保一个线程对共享数据的更改对其它线程是可见的（将其推送到主内存中，而不是仅停留在执行线程的CPU缓存中）。线程间需要避免竞争条件、死锁和其它共享状态相关的问题。&lt;/p&gt;
+
+&lt;p&gt;另外，当线程间在等待彼此访问共享数据结构时，会降低应用程序的并行性。许多并发数据结构都是阻塞式的，这意味着在给定时间只有一个或一组有限的线程可以访问它们，这可能导致线程对这些共享数据的竞争，高度竞争将会导致访问共享数据的代码从本质上变为串行执行。&lt;/p&gt;
+
+&lt;p&gt;现代的 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/non-blocking-algorithms.html&#34;&gt;非阻塞并行算法(non-blocking concurrency algorithms )&lt;/a&gt;&lt;/strong&gt; 可能会减少竞争和提高性能，但是非阻塞算法很难实现。&lt;/p&gt;
+
+&lt;p&gt;持久化数据结构是另外一种选择，一个持久化数据在自身被修改时会始终保留之前的值。因此，如果多个线程同时操作一个持久化数据并且其中一个修改了该数据，该线程会得到新数据的引用，而其它线程在则保持着对未修改的旧数据的引用，从而依旧保持一致。在Scala编程中包含若干个持久化的数据结构。&lt;/p&gt;
+
+&lt;p&gt;虽然持久化数据结构是并发修改共享数据的一种看似优雅的解决方案，但其执行性能并不理想。例如，一个持久化的列表会把新元素加入其首部并且返回对该新增元素的引用（它将会指向列表的其余元素）。所有其它的线程仍然保持着对先前列表中第一个元素的引用，对这些线程而言该列表并没有发生修改，它们看不见新增加的元素。&lt;/p&gt;
+
+&lt;p&gt;这种持久化的列表可以用链表来实现，不幸的是，现在的硬件并不能很好的支持链表，链表中的每一个元素都是一个单独的对象，这些对象可以遍布计算机的内存。现在的CPU在访问连续的内存地址时速度更快，因此实现为数组(Array)结构会获得更高的性能。对于一个以数组方式存储的数据而言，CPU缓存可以一次将更大的数组块加载到缓存中，一旦数据加载完毕，CPU可以直接在缓存中访问这些数据，而这对于元素分散在RAM中的链表而言是不太可能实现的。&lt;/p&gt;
+
+&lt;h3 id=&#34;无状态的工作者:9ebec4031501f63cd264123a50a14d31&#34;&gt;无状态的工作者&lt;/h3&gt;
+
+&lt;p&gt;共享状态可以被系统中的其它线程修改，因此工作者(workers)在每次需要它们时都必须重新读取该状态，以确保它在最新的副本上工作，无论共享状态是保存在内存还是外部数据库中，都是如此。一个工作者不在其内部保存状态（而是在每次需要时都重新读取），我们称之为无状态。&lt;/p&gt;
+
+&lt;h3 id=&#34;任务顺序的不确定:9ebec4031501f63cd264123a50a14d31&#34;&gt;任务顺序的不确定&lt;/h3&gt;
+
+&lt;p&gt;并行工作者模型的另一个缺点是任务执行的顺序无法确定。没有办法来确保某个任务最先执行或最后执行，任务A在任务B之前分配给一个工作者，但是任务B可能先于任务A执行。&lt;/p&gt;
+
+&lt;p&gt;并能工作者模型的不确定性使得很难在任何给定的时间点推理系统的状态，它同样使得确保一个任务在另外一个任务之前执行变得更难（如果可能）。&lt;/p&gt;
+
+&lt;h2 id=&#34;流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31&#34;&gt;流水线模型（Assembly Line）&lt;/h2&gt;
+
+&lt;p&gt;第二种并发模型我称之为流水线模型，我选择名称以符合早期“并行工作者”的含义。在不同的平台/社区中，其他的开发人员或许使用其它的名称，如反应式系统(reactive systems)，或事件驱动系统(event driven systems)，下图是流水线并发模型的一个展示&lt;br /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png&#34; alt=&#34;&amp;quot;流水线并发模型&amp;quot;&#34; title=&#34;流水线并发模型&#34; /&gt;
+&lt;br /&gt;
+这些工作者就像工厂里的工人一样组织起来，每个工作者只完成整个任务的一部分，当该部分任务完成时，该工作者将任务转移到下一个工作者。每个工作者都在自己的线程中运行，并且没有与其它的工作者共享状态，因此流水线模型有时也被称之为无共享的并发模型。&lt;/p&gt;
+
+&lt;p&gt;流水线模型通常用于系统中的非阻塞IO操作，非阻塞IO意味着当一个工作者(worker)开始一个IO操作时(如从网络读取文件或数据)，该工作者(worker)不必等待IO操作结束。IO操作通常较慢，因此等待IO操作完成是对CPU时间的浪费，CPU可以在此时做一些其它事情。当IO操作完成时，IO操作的结果（如数据状态读取或输入写入）会传给下一个工作者(worker)。&lt;/p&gt;
+
+&lt;p&gt;使用非阻塞IO时，IO操作的结果决定了工作者(worker)之间的边界，一个工作者(worker)在不得不开始IO操作之前可以尽可能的完成任务，然后放弃对该任务的控制，当IO操作结束时，在流水线上的另一个工作者(worker)以类似的方式继续完成该任务，直到它不得不开始IO操作。&lt;br /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png&#34; alt=&#34;&amp;quot;非阻塞IO操作&amp;quot;&#34; title=&#34;非阻塞IO操作&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;实际中，上述这些任务可能不会沿着一条流水线流动，因为大多数操作系统可以同时运行多个任务，这些任务根据实际需求沿着流水线逐个的被工作者处理。在实际使用中可能会有多个虚拟流水线同时运行，下图展示了在实际使用中任务如何在这种流水线上流转。&lt;br /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png&#34; alt=&#34;&amp;quot;多条流水线的模型&amp;quot;&#34; title=&#34;多条流水线的模型&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图&lt;/p&gt;
+
+&lt;h2 id=&#34;assembly-line模型的优点:9ebec4031501f63cd264123a50a14d31&#34;&gt;Assembly Line模型的优点&lt;/h2&gt;
+
+&lt;h2 id=&#34;assembly-line模型的缺点:9ebec4031501f63cd264123a50a14d31&#34;&gt;Assembly Line模型的缺点&lt;/h2&gt;
+
+&lt;h2 id=&#34;functional-parallelism模型:9ebec4031501f63cd264123a50a14d31&#34;&gt;Functional Parallelism模型&lt;/h2&gt;
+
+&lt;h2 id=&#34;哪种并发模型最适合:9ebec4031501f63cd264123a50a14d31&#34;&gt;哪种并发模型最适合&lt;/h2&gt;
+
+&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>3. [译]多线程的成本</title>
-      <link>http://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
+      <link>https://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -41,10 +141,10 @@
     
     <item>
       <title>2. [译]多线程的优点</title>
-      <link>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
+      <link>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -116,10 +216,10 @@
     
     <item>
       <title>1. [译]Java多线程与并发教程</title>
-      <link>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <link>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -130,7 +230,7 @@
 之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;
 
 &lt;p&gt;多线程虽然是提高某些类型程序性能的良方，但是多线程比多任务更具有挑战性。由于这些线程执行的是相同的程序，因此它们同时读写相同的内存，这可能会导致在单线程中不会出现的错误结果。某些错误结果不会出现在单CPU中机器中是由于两个线程不可能同时执行。现在的电脑大都拥有多核甚至多CPU，这意味着多个不同的线程可以被不同的内核或CPU同时执行。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/java-concurrency/java-concurrency-multithreading-tutorial/java-concurrency-tutorial-introduction_1.png&#34; alt=&#34;多线程介绍1&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/java-concurrency/java-concurrency-multithreading-tutorial/java-concurrency-tutorial-introduction_1.png&#34; alt=&#34;多线程介绍1&#34; /&gt;
 &lt;br /&gt;
 如果一个线程读取一个内存地址同时另一个线程向其写入信息，第一个线程在读取完成时会得到什么值呢？旧的值还是被第二个线程写入的新值？亦或是这两个值得混合？若两个线程同时向一个内存地址写入信息，当这两个线程运行完毕时，最终的值会是什么呢？是第一个线程写入的值还是第二个线程写入的值？亦或是这两个线程写入值的混合？&lt;/p&gt;
 
@@ -154,10 +254,10 @@
     
     <item>
       <title>[译] Java Volatile 关键字详解</title>
-      <link>http://lucumt.info/posts/java-concurrency/java-volatile-keyword/</link>
+      <link>https://lucumt.info/posts/java-concurrency/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/java-volatile-keyword/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/java-volatile-keyword/</guid>
       <description>
 
 &lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
