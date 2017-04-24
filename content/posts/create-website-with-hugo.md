@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Go","Hugo","Github Pages"]
 date = "2016-02-27T22:23:37+08:00"
 description = "Blog of Rosen Lu"

@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","Spring","SpringMVC","JUnit"]
 date = "2016-03-19T22:43:47+08:00"
 description = "在Spring中利用Mock对HttpServletRequest进行单元测试"

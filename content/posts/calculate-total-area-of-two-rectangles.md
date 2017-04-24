@@ -1,5 +1,5 @@
 +++
-author = "卢运强"
+author = "飞狐"
 categories = ["算法"]
 date = "2017-02-26T19:26:33+08:00"
 description = "检测矩形是否相交，检测矩形面积"

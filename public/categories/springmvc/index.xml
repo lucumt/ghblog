@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Springmvc on 飞狐的部落格</title>
-    <link>http://lucumt.info/categories/springmvc/</link>
+    <link>https://lucumt.info/categories/springmvc/</link>
     <description>Recent content in Springmvc on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 20 Mar 2016 16:41:29 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/categories/springmvc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lucumt.info/categories/springmvc/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>利用SpringMVC下载大文件</title>
-      <link>http://lucumt.info/posts/download-big-file-using-springmvc/</link>
+      <link>https://lucumt.info/posts/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/download-big-file-using-springmvc/</guid>
+      <guid>https://lucumt.info/posts/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;java.io&lt;/a&gt;&lt;/strong&gt; 下面的各种IO类自己实现，或者利用 &lt;strong&gt;&lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;Commons IO&lt;/a&gt;&lt;/strong&gt; 包中的 &lt;strong&gt;&lt;em&gt;FileUtils&lt;/em&gt;&lt;/strong&gt; 、 &lt;strong&gt;&lt;em&gt;IOUtils&lt;/em&gt;&lt;/strong&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt; 来作为项目的MVC实现，所以很自然的采用 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@RequestMapping(&amp;quot;downloadRequireDocument&amp;quot;)
@@ -73,10 +73,10 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
     
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>http://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
+      <link>https://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
+      <guid>https://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
       <description>
 
 &lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;

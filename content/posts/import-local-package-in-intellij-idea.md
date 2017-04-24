@@ -1,5 +1,5 @@
 +++
-author = "卢运强"
+author = "飞狐"
 categories = ["Go","Intellij IDEA"]
 date = "2017-03-05T14:04:43+08:00"
 description = "Blog of Rosen Lu"

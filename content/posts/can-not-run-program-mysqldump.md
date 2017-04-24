@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["MySQL","Java"]
 date = "2016-03-03T14:33:43+08:00"
 description = "Blog of Rosen Lu"

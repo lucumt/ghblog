@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Mediawiki"]
 date = "2016-03-18T23:14:59+08:00"
 description = "Blog of Rosen Lu"

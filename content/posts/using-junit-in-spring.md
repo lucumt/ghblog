@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","JUnit"]
 date = "2016-03-20T16:27:21+08:00"
 description = "本文主要介绍了基于Spring来进行JUnit单元测试时如何对数据库事务进行控制"

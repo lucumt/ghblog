@@ -1,6 +1,6 @@
 +++
 
-author = "卢运强"
+author = "飞狐"
 categories = ["Java","Spring","Spring Security"]
 date = "2016-03-20T16:05:52+08:00"
 description = "本文描述了如何利用Spring Security来在我们的程序中动态的改变用户的权限"
