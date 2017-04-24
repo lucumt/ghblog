@@ -2,93 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://lucumt.info/</loc>
-    <lastmod>2017-04-07T10:47:28+08:00</lastmod>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2017-04-24T00:10:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</loc>
+    <loc>https://lucumt.info/posts/java-concurrency/concurrency-models/</loc>
+    <lastmod>2017-04-24T00:10:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</loc>
     <lastmod>2017-04-07T10:47:28+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/java-concurrency/multithreading-costs/</loc>
+    <loc>https://lucumt.info/posts/java-concurrency/multithreading-costs/</loc>
     <lastmod>2017-04-01T21:57:30+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</loc>
+    <loc>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</loc>
     <lastmod>2017-04-01T13:18:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</loc>
+    <loc>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</loc>
     <lastmod>2017-03-30T14:49:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/import-local-package-in-intellij-idea/</loc>
+    <loc>https://lucumt.info/posts/import-local-package-in-intellij-idea/</loc>
     <lastmod>2017-03-05T14:04:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/calculate-total-area-of-two-rectangles/</loc>
+    <loc>https://lucumt.info/posts/calculate-total-area-of-two-rectangles/</loc>
     <lastmod>2017-02-26T19:26:33+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/show-video-in-html5-page/</loc>
+    <loc>https://lucumt.info/posts/show-video-in-html5-page/</loc>
     <lastmod>2016-10-30T19:48:17+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/mybatis-batch-insert-exception/</loc>
+    <loc>https://lucumt.info/posts/mybatis-batch-insert-exception/</loc>
     <lastmod>2016-05-30T18:20:37+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/download-big-file-using-springmvc/</loc>
+    <loc>https://lucumt.info/posts/download-big-file-using-springmvc/</loc>
     <lastmod>2016-03-20T16:41:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/using-junit-in-spring/</loc>
+    <loc>https://lucumt.info/posts/using-junit-in-spring/</loc>
     <lastmod>2016-03-20T16:27:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</loc>
+    <loc>https://lucumt.info/posts/update-authority-dynamic-using-spring-security/</loc>
     <lastmod>2016-03-20T16:05:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/using-mock-test-http-servlet-request/</loc>
+    <loc>https://lucumt.info/posts/using-mock-test-http-servlet-request/</loc>
     <lastmod>2016-03-19T22:43:47+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/mediawiki-back-to-top/</loc>
+    <loc>https://lucumt.info/posts/mediawiki-back-to-top/</loc>
     <lastmod>2016-03-18T23:14:59+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/java-concurrency/java-volatile-keyword/</loc>
+    <loc>https://lucumt.info/posts/java-concurrency/java-volatile-keyword/</loc>
     <lastmod>2016-03-07T18:03:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/can-not-run-program-mysqldump/</loc>
+    <loc>https://lucumt.info/posts/can-not-run-program-mysqldump/</loc>
     <lastmod>2016-03-03T14:33:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/posts/create-website-with-hugo/</loc>
+    <loc>https://lucumt.info/posts/create-website-with-hugo/</loc>
     <lastmod>2016-02-27T22:23:37+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://lucumt.info/about/</loc>
+    <loc>https://lucumt.info/about/</loc>
     <lastmod>2016-02-25T00:22:23+08:00</lastmod>
   </url>
   
