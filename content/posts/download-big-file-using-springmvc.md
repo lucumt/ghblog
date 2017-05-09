@@ -5,7 +5,7 @@ categories = ["Java","Spring","SpringMVC"]
 date = "2016-03-20T16:41:29+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["Java","SpringMVC"]
-title = "利用SpringMVC下载大文件"
+title = "利用SpringMVC下载大文件时内存溢出的处理"
 
 +++
 文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 **[java.io](https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html)** 下面的各种IO类自己实现，或者利用 **[Commons IO](https://commons.apache.org/proper/commons-io/)** 包中的 ***FileUtils*** 、 ***IOUtils*** 类中封装好的方法直接调用。由于目前我所开发的系统采用了 **[SpringMVC](http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html)** 来作为项目的MVC实现，所以很自然的采用 **[SpringMVC](http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html)**内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：
