@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mysql on 飞狐的部落格</title>
-    <link>https://lucumt.info/categories/mysql/</link>
+    <link>http://lucumt.info/categories/mysql/</link>
     <description>Recent content in Mysql on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 03 Mar 2016 14:33:43 +0800</lastBuildDate>
-    <atom:link href="https://lucumt.info/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucumt.info/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
-      <link>https://lucumt.info/posts/can-not-run-program-mysqldump/</link>
+      <link>http://lucumt.info/posts/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/can-not-run-program-mysqldump/</guid>
+      <guid>http://lucumt.info/posts/can-not-run-program-mysqldump/</guid>
       <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;strong&gt;&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;Runtime&lt;/a&gt;&lt;/strong&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Runtime runtime = Runtime.getRuntime();

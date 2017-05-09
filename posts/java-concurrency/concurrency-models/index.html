@@ -20,40 +20,40 @@
 <meta property="og:description" content="Blog of Rosen Lu" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="https://lucumt.info/posts/java-concurrency/concurrency-models/" />
+<meta property="og:url" content="http://lucumt.info/posts/java-concurrency/concurrency-models/" />
 
 
   
-   <link rel="stylesheet" href="https://lucumt.info/css/base-min.css">
-   <link rel="stylesheet" href="https://lucumt.info/css/pure-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/base-min.css">
+   <link rel="stylesheet" href="http://lucumt.info/css/pure-min.css">
   
   
-    <link rel="stylesheet" href="https://lucumt.info/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="http://lucumt.info/css/grids-responsive-min.css">
   
   
 
-  <link rel="stylesheet" href="https://lucumt.info/css/redlounge.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/redlounge.css">
   
-  <link rel="stylesheet" href="https://lucumt.info/css/googleapis.font.css">
-  <link rel="stylesheet" href="https://lucumt.info/css/jqcloud.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/googleapis.font.css">
+  <link rel="stylesheet" href="http://lucumt.info/css/jqcloud.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://lucumt.info/touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="https://lucumt.info/lucumt.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://lucumt.info/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://lucumt.info/lucumt.ico">
 
   
   <link href="" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
 
-  <script src="https://lucumt.info//js/jquery.min.js"></script>
-  <script src="https://lucumt.info//js/jqcloud-1.0.4.min.js"></script>
+  <script src="http://lucumt.info//js/jquery.min.js"></script>
+  <script src="http://lucumt.info//js/jqcloud-1.0.4.min.js"></script>
 
     
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/rainbow.min.css">
   
-  <script src="https://lucumt.info/js/highlight.min.js"></script>
+  <script src="http://lucumt.info/js/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
@@ -92,7 +92,7 @@ var _hmt = _hmt || [];
     
 
 	
-	  <img src="https://lucumt.info/img/photo.jpg" class="profilepic">
+	  <img src="http://lucumt.info/img/photo.jpg" class="profilepic">
 	
 
     <h1 class="brand-title">飞狐的部落格</h1>
@@ -100,11 +100,11 @@ var _hmt = _hmt || [];
 
     <nav class="nav">
       <ul class="nav-list">
-        <li class="nav-item"><span class="nav-item-separator">//</span><a href="https://lucumt.info/">Home</a></li>
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/">Home</a></li>
         
-          <li class="nav-item"><span class="nav-item-separator">//</span><a href="https://lucumt.info/about/">About</a></li>
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/about/">About</a></li>
         
-          <li class="nav-item"><span class="nav-item-separator">//</span><a href="https://lucumt.info/posts/">Blog</a></li>
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://lucumt.info/posts/">Blog</a></li>
         
       </ul>
     </nav>
@@ -182,11 +182,21 @@ var _hmt = _hmt || [];
 <li><a href="#无状态的工作者:9ebec4031501f63cd264123a50a14d31">无状态的工作者</a></li>
 <li><a href="#任务顺序的不确定:9ebec4031501f63cd264123a50a14d31">任务顺序的不确定</a></li>
 </ul></li>
-<li><a href="#流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）</a></li>
-<li><a href="#assembly-line模型的优点:9ebec4031501f63cd264123a50a14d31">Assembly Line模型的优点</a></li>
-<li><a href="#assembly-line模型的缺点:9ebec4031501f63cd264123a50a14d31">Assembly Line模型的缺点</a></li>
-<li><a href="#functional-parallelism模型:9ebec4031501f63cd264123a50a14d31">Functional Parallelism模型</a></li>
-<li><a href="#哪种并发模型最适合:9ebec4031501f63cd264123a50a14d31">哪种并发模型最适合</a></li>
+<li><a href="#流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）</a>
+<ul>
+<li><a href="#响应式-事件驱动系统:9ebec4031501f63cd264123a50a14d31">响应式、事件驱动系统</a></li>
+<li><a href="#参与者-actors-与管道-channels-对比:9ebec4031501f63cd264123a50a14d31">参与者(Actors)与管道(Channels)对比</a></li>
+</ul></li>
+<li><a href="#流水线模型-assembly-line-的优点:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）的优点</a>
+<ul>
+<li><a href="#无共享状态:9ebec4031501f63cd264123a50a14d31">无共享状态</a></li>
+<li><a href="#有状态的工作者:9ebec4031501f63cd264123a50a14d31">有状态的工作者</a></li>
+<li><a href="#更好的硬件协同:9ebec4031501f63cd264123a50a14d31">更好的硬件协同</a></li>
+<li><a href="#任务可排序:9ebec4031501f63cd264123a50a14d31">任务可排序</a></li>
+</ul></li>
+<li><a href="#流水线模型-assembly-line-的缺点:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）的缺点</a></li>
+<li><a href="#功能并行-functional-parallelism-模型:9ebec4031501f63cd264123a50a14d31">功能并行(Functional Parallelism)模型</a></li>
+<li><a href="#孰优孰劣:9ebec4031501f63cd264123a50a14d31">孰优孰劣</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -195,7 +205,7 @@ var _hmt = _hmt || [];
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="https://lucumt.info/posts/java-concurrency/concurrency-models">4. [译]并发的模型</a>
+              <a href="http://lucumt.info/posts/java-concurrency/concurrency-models">4. [译]并发的模型</a>
             </h1>
             <h3 class="post-subtitle">
             	
@@ -220,11 +230,11 @@ var _hmt = _hmt || [];
 			
 				<div class="post-categories">
 				
-					<a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
+					<a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
 				
-					<a class="post-category post-category-java-concurrency" href="https://lucumt.info//categories/java-concurrency">Java Concurrency</a>
+					<a class="post-category post-category-java-concurrency" href="http://lucumt.info//categories/java-concurrency">Java Concurrency</a>
 				
-					<a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="https://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
+					<a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="http://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
 				
 				</div>
 			
@@ -250,7 +260,7 @@ var _hmt = _hmt || [];
 <h2 id="并行工作者模型-parallel-workers-model:9ebec4031501f63cd264123a50a14d31">并行工作者模型(Parallel Workers model)</h2>
 
 <p>并行工作者模型是本文要说明的第一个并发模型，该模型会将系统中到来的任务分配给不同的工作者，如下图所示：<br />
-<img src="https://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png" alt="&quot;并行工作者模型&quot;" title="并行工作者模型" />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png" alt="&quot;并行工作者模型&quot;" title="并行工作者模型" />
 </p>
 
 <p>并发模型中有一个“委托者”将到来的任务分配给不同的工作者，每个工作者完成整个任务，每个工作者在不同的线程中（也有可能在不同的CPU）并行工作。</p>
@@ -272,7 +282,7 @@ var _hmt = _hmt || [];
 <h3 id="状态共享将使复杂性增加:9ebec4031501f63cd264123a50a14d31">状态共享将使复杂性增加</h3>
 
 <p>实际上并行工作者模型比上面说明的还要复杂一些，并行工作者通常需要访问一些共享数据，它们可能存储在内存中也可能存在数据库中，下面的图标展示了这种情形是如何是的并行工作者模型变得复杂的。<br />
-<img src="https://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png" alt="&quot;并行工作者访问共享数据&quot;" title="并行工作者访问共享数据" />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png" alt="&quot;并行工作者访问共享数据&quot;" title="并行工作者访问共享数据" />
 <br />
 其中的一些共享状态可能在类似于任务队列的通信过程中，但是另外一些共享状态可能是商业数据、缓存数据、数据库的连接池等。一旦共享状态引入到了并行工作者模型，问题就开始变得复杂。线程需要一种方式来访问共享数据以确保一个线程对共享数据的更改对其它线程是可见的（将其推送到主内存中，而不是仅停留在执行线程的CPU缓存中）。线程间需要避免竞争条件、死锁和其它共享状态相关的问题。</p>
 
@@ -299,29 +309,93 @@ var _hmt = _hmt || [];
 <h2 id="流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）</h2>
 
 <p>第二种并发模型我称之为流水线模型，我选择名称以符合早期“并行工作者”的含义。在不同的平台/社区中，其他的开发人员或许使用其它的名称，如反应式系统(reactive systems)，或事件驱动系统(event driven systems)，下图是流水线并发模型的一个展示<br />
-<img src="https://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png" alt="&quot;流水线并发模型&quot;" title="流水线并发模型" />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png" alt="&quot;流水线并发模型&quot;" title="流水线并发模型" />
 <br />
 这些工作者就像工厂里的工人一样组织起来，每个工作者只完成整个任务的一部分，当该部分任务完成时，该工作者将任务转移到下一个工作者。每个工作者都在自己的线程中运行，并且没有与其它的工作者共享状态，因此流水线模型有时也被称之为无共享的并发模型。</p>
 
 <p>流水线模型通常用于系统中的非阻塞IO操作，非阻塞IO意味着当一个工作者(worker)开始一个IO操作时(如从网络读取文件或数据)，该工作者(worker)不必等待IO操作结束。IO操作通常较慢，因此等待IO操作完成是对CPU时间的浪费，CPU可以在此时做一些其它事情。当IO操作完成时，IO操作的结果（如数据状态读取或输入写入）会传给下一个工作者(worker)。</p>
 
 <p>使用非阻塞IO时，IO操作的结果决定了工作者(worker)之间的边界，一个工作者(worker)在不得不开始IO操作之前可以尽可能的完成任务，然后放弃对该任务的控制，当IO操作结束时，在流水线上的另一个工作者(worker)以类似的方式继续完成该任务，直到它不得不开始IO操作。<br />
-<img src="https://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png" alt="&quot;非阻塞IO操作&quot;" title="非阻塞IO操作" />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png" alt="&quot;非阻塞IO操作&quot;" title="非阻塞IO操作" />
 </p>
 
 <p>实际中，上述这些任务可能不会沿着一条流水线流动，因为大多数操作系统可以同时运行多个任务，这些任务根据实际需求沿着流水线逐个的被工作者处理。在实际使用中可能会有多个虚拟流水线同时运行，下图展示了在实际使用中任务如何在这种流水线上流转。<br />
-<img src="https://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png" alt="&quot;多条流水线的模型&quot;" title="多条流水线的模型" />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png" alt="&quot;多条流水线的模型&quot;" title="多条流水线的模型" />
 </p>
 
-<p>任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图</p>
+<p>任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图展示了如何将三条装配线的中任务转发给同一个工作者完成（中间装配线上的最后一个工人）：<br />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-6.png" alt="&quot;多条流水线指向同一个工作者&quot;" title="多条流水线指向同一个工作者" />
+<br />
+流水线甚至可以做的比上面展示的更复杂。</p>
 
-<h2 id="assembly-line模型的优点:9ebec4031501f63cd264123a50a14d31">Assembly Line模型的优点</h2>
+<h3 id="响应式-事件驱动系统:9ebec4031501f63cd264123a50a14d31">响应式、事件驱动系统</h3>
 
-<h2 id="assembly-line模型的缺点:9ebec4031501f63cd264123a50a14d31">Assembly Line模型的缺点</h2>
+<p>使用流水线并发模型的系统有时候也被称之为 <em>响应式系统</em> 或 <em>事件驱动系统</em> 。系统工作者在事件发生时做出对应的响应：从外部接收消息或转发给其它工作者等。事件驱动的例子可能是传入的HTTP请求，也可能是某个文件完成加载到内存中等。</p>
 
-<h2 id="functional-parallelism模型:9ebec4031501f63cd264123a50a14d31">Functional Parallelism模型</h2>
+<p>在写作本文时，已经有一些有趣的响应式/事件驱动平台可以使用，并且在将来会出现更多的。其中一些比较受欢迎的如下：</p>
 
-<h2 id="哪种并发模型最适合:9ebec4031501f63cd264123a50a14d31">哪种并发模型最适合</h2>
+<ul>
+<li><strong><a href="http://tutorials.jenkov.com/vert.x/index.html">Vert.x</a></strong></li>
+<li>Akka</li>
+<li>Node.JS (JavaScript)<br /></li>
+</ul>
+
+<p>对我个人而言，我发现Vert.x十分有趣(尤其是像我这种对Java/JVM落伍的人)。</p>
+
+<h3 id="参与者-actors-与管道-channels-对比:9ebec4031501f63cd264123a50a14d31">参与者(Actors)与管道(Channels)对比</h3>
+
+<p>参与者（Actors）和管道（Channels）是两种类似的流水线（响应式/事件驱动）模型。</p>
+
+<p>在参与者模型中，每个工作者被称之为一个参与者，参与者之间可以直接发消息给对方，这些消息以异步方式来发送和处理。参与者可以用于处理如前所述的一个或多个流水线任务，下图展示了这种模型：<br />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-7.png" alt="&quot;参与者模型&quot;" title="参与者模型" />
+</p>
+
+<p>在管道(Channel)模型中，工作者之间不直接互相沟通，相反地，他们会将消息发布到不同的管道中，其他的工作者可以在这些管道上收听消息，同时消息发送者不必知道谁在收听消息。下图展示了该模型：<br />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png" alt="&quot;管道模型&quot;" title="管道模型" />
+</p>
+
+<p>在写作本文时，管道模型对我而言似乎更灵活：一个工作者不必知道在流水线上的哪个工作者要处理接下来的任务，它只需要知道需要将任务转发到哪个管道（或发送消息哪个管道等），在管道中的收听者可以订阅和取消订阅而不会影响到往管道中正在写入的工作者，这允许工作者之间有某种程度的低耦合。</p>
+
+<h2 id="流水线模型-assembly-line-的优点:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）的优点</h2>
+
+<p>相对于并行工作者模型，流水线模型有一些优点，在接下来的部分，我会叙述其中最突出的几个优点。</p>
+
+<h3 id="无共享状态:9ebec4031501f63cd264123a50a14d31">无共享状态</h3>
+
+<p>工作者之间不共享状态的情形意味着它们可以在实现时不必考虑在状态共享时所遇到的各种并发问题，这让工作者的实现变得更加容易，在实现工作者时可以假设只有一个线程在处理该工作，本质上就是一个单线程实现。</p>
+
+<h3 id="有状态的工作者:9ebec4031501f63cd264123a50a14d31">有状态的工作者</h3>
+
+<p>由于工作者知道没有其它线程修改它们的数据，这些工作者可以具有状态。在说有状态时我的意思是它们可以保留在内存中操作所需的数据，只有写入才会改变最终的外部存储系统。因此，一个有状态的工作者通常比无状态的工作者执行更快。</p>
+
+<h3 id="更好的硬件协同:9ebec4031501f63cd264123a50a14d31">更好的硬件协同</h3>
+
+<p>单线程代码的优点在于它通常更符合底层硬件的工作原理。首先你通常可以创建更优化的数据结构和算法当你能假定代码会以单线程模式执行。</p>
+
+<p>其次,如前所述单线程有状态的工作者可以在内存中缓存数据，当数据在内存中缓存时，有很大的概率该数据也会被缓存到CPU缓存中，这样数据获取变得更快。</p>
+
+<p>当代码以一种自然受益于底层硬件工作原理的方式编写时，我称之为 <em>硬件协调*，有些开发者称之为 *mechanical sympathy</em> ，我更倾向于硬件协同因为计算机只有很少的机械部件，同时单词“sympathy”在这种情况下被用作比喻“更高的匹配”，而我认为单词“conform”能更高的传达其含义。不管怎么说，这些都是吹毛求疵，可以使用你喜欢的任何术语来描述。</p>
+
+<h3 id="任务可排序:9ebec4031501f63cd264123a50a14d31">任务可排序</h3>
+
+<p>根据流水线模型实现的并发系统使得排序变得可能，任务排序使得在任何给定时间点更容易理解系统的状态。此外，你可以将所有传入的任务写入日志，如果系统的任何部分发生故障，则可以使用该日志从头重建系统的状态。这些任务以某种顺序写入日志，这个顺序称为该任务顺序，下图展示了这种设置如何实现：<br />
+<img src="http://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png" alt="&quot;任务可排序&quot;" title="任务可排序" />
+<br />
+确保一个任务的顺序实现起来不一定容易，但通常是可能的。如果你可以实现的话，它将会大大简化类似于数据备份、恢复数据、复制数据等的任务，这些都可以通过日志文件来完成。</p>
+
+<h2 id="流水线模型-assembly-line-的缺点:9ebec4031501f63cd264123a50a14d31">流水线模型（Assembly Line）的缺点</h2>
+
+<p>流水线模型的最主要缺点是通常将执行一个任务分配到多个工作者，因此，当项目中有多个类时，将难以准确的看出哪段代码在执行给定的任务。</p>
+
+<p>代码编写也可能会变得更难，工作者代码有时候被写作回调处理器(callback handlers)。在代码中有太多嵌套的回调处理器时可能会导致某些开发人员所谓的 <em>回调大坑(callback hell)</em> 。回调大坑简单的说就是在所有的回调中很难追踪代码真正在干啥以及确保每个回调都可以访问它需要的数据。</p>
+
+<p>而使用并行工作者模型，这往往很容易。你可以打开对应的工作者代码，并从头到尾读取要执行的代码。当然，并行工作者模型也可能传播到不同的类中，但是要执行的序列通常更容易从代码中读取。</p>
+
+<h2 id="功能并行-functional-parallelism-模型:9ebec4031501f63cd264123a50a14d31">功能并行(Functional Parallelism)模型</h2>
+
+<p>功能并行模型是第三种并发模型，最近谈论得很多(2015)。</p>
+
+<h2 id="孰优孰劣:9ebec4031501f63cd264123a50a14d31">孰优孰劣</h2>
 
 <p>&lt;–翻译结束!–&gt;</p>
 
@@ -336,9 +410,9 @@ var _hmt = _hmt || [];
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
-    var disqus_identifier = 'https:\/\/lucumt.info\/posts\/java-concurrency\/concurrency-models\/';
+    var disqus_identifier = 'http:\/\/lucumt.info\/posts\/java-concurrency\/concurrency-models\/';
     var disqus_title = '4. [译]并发的模型';
-    var disqus_url = 'https:\/\/lucumt.info\/posts\/java-concurrency\/concurrency-models\/';
+    var disqus_url = 'http:\/\/lucumt.info\/posts\/java-concurrency\/concurrency-models\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
