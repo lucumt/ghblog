@@ -79,7 +79,7 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
       <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
       <description>
 
-&lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;
+&lt;h2 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
 
 &lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
 
@@ -108,7 +108,7 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
 
 &lt;p&gt;&lt;em&gt;若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 &lt;strong&gt;HttpServletRequest&lt;/strong&gt; 对象，从而影响我们的测试。&lt;/em&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h1&gt;
+&lt;h2 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h2&gt;
 
 &lt;p&gt;在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 对象，如果我们想对这种方法进行测试，可以利用&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟相关的对象。&lt;/p&gt;
 

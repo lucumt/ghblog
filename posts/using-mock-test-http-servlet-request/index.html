@@ -171,8 +171,11 @@ var _hmt = _hmt || [];
 				<small class="toc-label">Contents</small>
 		   	 	<nav id="TableOfContents">
 <ul>
+<li>
+<ul>
 <li><a href="#编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</a></li>
 <li><a href="#spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</a></li>
+</ul></li>
 </ul>
 </nav>
 		    </div>
@@ -222,7 +225,7 @@ var _hmt = _hmt || [];
 
             
 
-<h1 id="编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</h1>
+<h2 id="编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</h2>
 
 <p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
 
@@ -251,7 +254,7 @@ var _hmt = _hmt || [];
 
 <p><em>若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 <strong>HttpServletRequest</strong> 对象，从而影响我们的测试。</em></p>
 
-<h1 id="spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</h1>
+<h2 id="spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2">Spring和Mock在单元测试中的使用</h2>
 
 <p>在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 <strong><em>HttpServletRequest</em></strong> 或 <strong><em>ServletContext</em></strong> 对象，如果我们想对这种方法进行测试，可以利用<strong><a href="http://mockito.org/">Mock</a></strong>来模拟相关的对象。</p>
 

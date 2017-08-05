@@ -171,9 +171,12 @@ var _hmt = _hmt || [];
 				<small class="toc-label">Contents</small>
 		   	 	<nav id="TableOfContents">
 <ul>
+<li>
+<ul>
 <li><a href="#在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989">在html5页面中播放视频</a></li>
 <li><a href="#在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989">在iframe中不能全屏播放视频</a></li>
 <li><a href="#隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989">隐藏声音调整按钮</a></li>
+</ul></li>
 </ul>
 </nav>
 		    </div>
@@ -219,7 +222,7 @@ var _hmt = _hmt || [];
 
 <p>由于项目需要，最近使用了在<code>html5</code>中播放视频的功能，期间遇到了几个坑，先简单记录下。</p>
 
-<h1 id="在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989">在html5页面中播放视频</h1>
+<h2 id="在html5页面中播放视频:29e51551d2052d8c2b6a55472d7ab989">在html5页面中播放视频</h2>
 
 <p>如何在<code>html5</code>页面中嵌入视频的代码在网上很容易直接搜索到，典型的代码如下所示：</p>
 
@@ -233,7 +236,7 @@ var _hmt = _hmt || [];
 <img src="https://ooo.0o0.ooo/2016/10/30/5815e96382a3c.png" alt="浏览器中正常播放视频" title="浏览器中正常播放视频" />
 </p>
 
-<h1 id="在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989">在iframe中不能全屏播放视频</h1>
+<h2 id="在iframe中不能全屏播放视频:29e51551d2052d8c2b6a55472d7ab989">在iframe中不能全屏播放视频</h2>
 
 <p>项目中好多地方都用<code>iframe</code>来嵌套html页面，最开始我是用类似如下代码在被<code>iframe</code>包含的页面中嵌入前面的视频播放代码，
 发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索<strong><a href="http://stackoverflow.com/">stackoverflow</a></strong>找到一个类似的问题<a href="http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe">How to make a video fullscreen when it is placed inside an iframe?</a>，阅读后发现只需要将<code>iframe</code>修改成<code>&lt;iframe … allowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot;&gt;</code>即可</p>
@@ -255,7 +258,7 @@ var _hmt = _hmt || [];
 <p><img src="https://ooo.0o0.ooo/2016/10/30/581600e124b51.png" alt="视频无法进行全屏播放" title="视频无法进行全屏播放" />
 </p>
 
-<h1 id="隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989">隐藏声音调整按钮</h1>
+<h2 id="隐藏声音调整按钮:29e51551d2052d8c2b6a55472d7ab989">隐藏声音调整按钮</h2>
 
 <p>有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于<code>webkit</code>内核的<code>Chrome</code>浏览器访问，通过Google之后在 <strong><a href="http://stackoverflow.com/">stackoverflow</a></strong>找到
 <a href="http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555">Why do no user-agents implement the CSS cursor style for video elements</a>这篇文章，其中列出了播放视频时相关控制按钮的css类：</p>
