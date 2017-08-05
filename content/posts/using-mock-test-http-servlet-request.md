@@ -9,7 +9,7 @@ title = "在Spring中利用Mock对HttpServletRequest进行单元测试"
 
 +++
 
-# 编写单元测试时的注意事项
+## 编写单元测试时的注意事项
 根据软件开发过程中的***[TDD](https://en.wikipedia.org/wiki/Test-driven_development)*** 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 ***HttpServletRequest*** , ***ServletContext*** 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 ***HttpServletRequest*** 对象，此时对此类方法进行**[JUnit](http://junit.org/)**单元测试时会较为困难，本文介绍一种在**[Spring](https://spring.io/)**中通过**[Mock](http://mockito.org/)**来模拟***HttpServletRequest*** 对象进行**[JUnit](http://junit.org/)**单元测试的方法。
 
 <!--more-->
@@ -37,7 +37,7 @@ title = "在Spring中利用Mock对HttpServletRequest进行单元测试"
 ```
 *若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 **HttpServletRequest** 对象，从而影响我们的测试。*
 
-# Spring和Mock在单元测试中的使用
+## Spring和Mock在单元测试中的使用
 在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 ***HttpServletRequest*** 或 ***ServletContext*** 对象，如果我们想对这种方法进行测试，可以利用**[Mock](http://mockito.org/)**来模拟相关的对象。
  
 由于**[Spring](https://spring.io/)**自身已经整合了**[Mock](http://mockito.org/)**相关的类，故在此处展示一个示例代码，以供参考:

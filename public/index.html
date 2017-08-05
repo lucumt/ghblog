@@ -175,7 +175,7 @@ var _hmt = _hmt || [];
               <p class="post-meta">
                   
                   <span class="post-date">
-                    <span class="post-date-day"><sup>24</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Apr</span> <span class="post-date-year">2017</span>
+                    <span class="post-date-day"><sup>5</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Aug</span> <span class="post-date-year">2017</span>
                 </span>
                 
                 
@@ -713,7 +713,7 @@ var _hmt = _hmt || [];
                 
             </p>
             <article class="post-summary">
-                  <h1 id="编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</h1>
+                  <h2 id="编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2">编写单元测试时的注意事项</h2>
 
 <p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
 

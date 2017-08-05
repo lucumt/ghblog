@@ -6,13 +6,13 @@
     <description>Recent content in Java on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 24 Apr 2017 00:10:11 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Aug 2017 00:10:11 +0800</lastBuildDate>
     <atom:link href="http://lucumt.info/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>4. [译]并发的模型</title>
       <link>http://lucumt.info/posts/java-concurrency/concurrency-models/</link>
-      <pubDate>Mon, 24 Apr 2017 00:10:11 +0800</pubDate>
+      <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
       
       <guid>http://lucumt.info/posts/java-concurrency/concurrency-models/</guid>
       <description>
@@ -159,15 +159,33 @@
 
 &lt;p&gt;流水线模型的最主要缺点是通常将执行一个任务分配到多个工作者，因此，当项目中有多个类时，将难以准确的看出哪段代码在执行给定的任务。&lt;/p&gt;
 
-&lt;p&gt;代码编写也可能会变得更难，工作者代码有时候被写作回调处理器(callback handlers)。在代码中有太多嵌套的回调处理器时可能会导致某些开发人员所谓的 &lt;em&gt;回调大坑(callback hell)&lt;/em&gt; 。回调大坑简单的说就是在所有的回调中很难追踪代码真正在干啥以及确保每个回调都可以访问它需要的数据。&lt;/p&gt;
+&lt;p&gt;代码编写也可能会变得更难，工作者代码有时候被写作回调处理器(callback handlers)。在代码中有太多嵌套的回调处理器时可能会导致某些开发人员所谓的 &lt;em&gt;回调陷阱(callback hell)&lt;/em&gt; 。回调陷阱简单的说就是在所有的回调中很难追踪代码真正在干啥以及确保每个回调都可以访问它需要的数据。&lt;/p&gt;
 
 &lt;p&gt;而使用并行工作者模型，这往往很容易。你可以打开对应的工作者代码，并从头到尾读取要执行的代码。当然，并行工作者模型也可能传播到不同的类中，但是要执行的序列通常更容易从代码中读取。&lt;/p&gt;
 
 &lt;h2 id=&#34;功能并行-functional-parallelism-模型:9ebec4031501f63cd264123a50a14d31&#34;&gt;功能并行(Functional Parallelism)模型&lt;/h2&gt;
 
-&lt;p&gt;功能并行模型是第三种并发模型，最近谈论得很多(2015)。&lt;/p&gt;
+&lt;p&gt;功能\函数并行模型是第三种并发模型，最近谈论得很多(2015)。&lt;/p&gt;
+
+&lt;p&gt;功能\函数并行性的基本思想是通过函数调用实现程序，功能可以被看作是发送消息到彼此的“代理”或“角色”，就像流水线并发模型（AKA反应或事件驱动系统）一样，当一个函数调用另一个函数时，类似于消息发送。&lt;/p&gt;
+
+&lt;p&gt;传递给函数的所有参数都被复制，所以在接收函数之外没有任何实体可以操纵数据，这种复制对于对于避免共享数据的条件竞争至关重要，它使得函数执行类似于原子操作，每个函数调用都可以独立于任何其他函数调用执行。&lt;/p&gt;
+
+&lt;p&gt;当每个函数调用可以独立执行时，可以在单独的CPU上执行每个函数调用，这意味着，在多个CPU上可以并行执行功能实现的算法。&lt;/p&gt;
+
+&lt;p&gt;使用Java 7，我们得到了包含 &lt;em&gt;ForkJoinPool&lt;/em&gt; 模型的 &lt;strong&gt;java.util.concurrent&lt;/strong&gt; 包，可以帮助您实现类似于功能并行性的功能，而使用Java 8，我们将得到并行流，可以帮助您并行化大型集合的迭代。请记住，有开发人员批评 &lt;em&gt;ForkAndJoinPool&lt;/em&gt; 模型（您可以在我的ForkAndJoinPool教程中找到一个相应的批评链接）。&lt;/p&gt;
+
+&lt;p&gt;关于功能\函数并行的难点在于知道哪个函数调用需要并行化，跨CPU的协调功能调用带来了一定的开销。只有由功能/函数完成的工作单位具有一定的大小，才能值得这个开销，如果函数调用非常小，尝试并行化它们可能比单个线程的单个CPU执行更慢。&lt;/p&gt;
+
+&lt;p&gt;从我的理解（事实上根本不完美），您可以使用事件响应驱动模型来实现实现算法，并实现与功能并行性相似的工作分解。在我看来，通过事件响应驱动模型，你可以掌握如何来实现并行化。&lt;/p&gt;
+
+&lt;p&gt;另外，只有当前任务是程序执行的唯一任务时，将任务分配给多个CPU，协调开销才有意义。然而，如果系统同时执行多个其他任务（如Web服务器，数据库服务器和许多其它系统），则无需尝试并行化单个任务。计算机中的其它CPU可能正在忙于处理其它任务，所以没有理由试图用较慢的功能并行任务来打扰他们。如有可能，你最好使用流水线并发模型，因为它在以单线程模式顺序执行的程序中具有更少的开销，并且更好的符合底层硬件的工作原理。&lt;/p&gt;
 
 &lt;h2 id=&#34;孰优孰劣:9ebec4031501f63cd264123a50a14d31&#34;&gt;孰优孰劣&lt;/h2&gt;
+
+&lt;p&gt;那么，哪种并发模型更好呢？&lt;/p&gt;
+
+&lt;p&gt;通常情况下，答案取决于你的系统应该做什么。 如果你的工作自然并行，独立，无需共享状态，则可以使用并行工作模型来实现系统。但许多任务不是自然并行和独立的，对于这些类型的系统，我相信流水线并发模型比缺点有更多的优点，比并行工作模型更有优势。你甚至不需要自己编写所有的流水线路基础设施，像Vert.x这样的现代平台为你已经实现了很多。 就个人而言，我将探索在Vert.x等平台上运行的设计，以便我的下一个项目。我个人感觉JavaEE没有尽头。&lt;/p&gt;
 
 &lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
 </description>
@@ -447,7 +465,7 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
 
 &lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;
 
-&lt;h1 id=&#34;所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535&#34;&gt;所有方法都回滚&lt;/h1&gt;
+&lt;h2 id=&#34;所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535&#34;&gt;所有方法都回滚&lt;/h2&gt;
 
 &lt;p&gt;在该单元测试类的开头加上 &lt;code&gt;@TransactionConfiguration(defaultRollback=true)&lt;/code&gt; 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。&lt;/p&gt;
 
@@ -498,7 +516,7 @@ public class ProjectServiceTest{
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535&#34;&gt;指定方法回滚&lt;/h1&gt;
+&lt;h2 id=&#34;指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535&#34;&gt;指定方法回滚&lt;/h2&gt;
 
 &lt;p&gt;若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 &lt;code&gt;@TransactionConfiguration(defaultRollback=true)&lt;/code&gt; ，同时在对应的方法上加上注解声明 &lt;code&gt;@Rollback(true)&lt;/code&gt; 即可达到目的。&lt;/p&gt;
 
@@ -608,7 +626,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
       <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
       <description>
 
-&lt;h1 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h1&gt;
+&lt;h2 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
 
 &lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
 
@@ -637,7 +655,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
 &lt;p&gt;&lt;em&gt;若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 &lt;strong&gt;HttpServletRequest&lt;/strong&gt; 对象，从而影响我们的测试。&lt;/em&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h1&gt;
+&lt;h2 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h2&gt;
 
 &lt;p&gt;在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 对象，如果我们想对这种方法进行测试，可以利用&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟相关的对象。&lt;/p&gt;
 
@@ -684,7 +702,7 @@ public void testHttpServletRequest(){
 
 &lt;p&gt;事实上，从Java5之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;
 
-&lt;h1 id=&#34;volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile变量可见性保证&lt;/h1&gt;
+&lt;h2 id=&#34;volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile变量可见性保证&lt;/h2&gt;
 
 &lt;p&gt;Java &lt;code&gt;volatile&lt;/code&gt;关键字确保了&lt;code&gt;volatile&lt;/code&gt;变量的修改在多线程中是可见的。这听起来有些抽象，接下来我将详细说明。&lt;/p&gt;
 
@@ -716,7 +734,7 @@ public void testHttpServletRequest(){
 
 &lt;p&gt;因此定义一个&lt;code&gt;volatile&lt;/code&gt;变量可以保证写变量的操作对于其它线程可见。&lt;/p&gt;
 
-&lt;h1 id=&#34;volatile先行发生原则:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile先行发生原则&lt;/h1&gt;
+&lt;h2 id=&#34;volatile先行发生原则:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile先行发生原则&lt;/h2&gt;
 
 &lt;p&gt;从Java5之后&lt;code&gt;volatile&lt;/code&gt;关键字不仅能用于确保变量从主内存中读取和写入，事实上，&lt;code&gt;volatile&lt;/code&gt;关键字还有如下作用：&lt;/p&gt;
 
@@ -807,7 +825,7 @@ int someValue3 = sharedObject.nonVolatile6;
 
 &lt;p&gt;这就是&lt;code&gt;volatile&lt;/code&gt;先行发生原则的基本含义。&lt;/p&gt;
 
-&lt;h1 id=&#34;volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile并不是万能的&lt;/h1&gt;
+&lt;h2 id=&#34;volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile并不是万能的&lt;/h2&gt;
 
 &lt;p&gt;尽管&lt;code&gt;volatile&lt;/code&gt;关键字确保了所有对于&lt;code&gt;volatile&lt;/code&gt;变量的读操作都是直接从主内存中读取的，所有对于&lt;code&gt;volatile&lt;/code&gt;变量的写操作都是直接写入主内存的，但仍有一些情况只定义一个&lt;code&gt;volatile&lt;/code&gt;变量是不够的。&lt;/p&gt;
 
@@ -825,9 +843,9 @@ int someValue3 = sharedObject.nonVolatile6;
 
 &lt;p&gt;线程1和线程2现在都没有同步，共享变量 &lt;em&gt;counter&lt;/em&gt; 的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量 &lt;em&gt;counter&lt;/em&gt; 的计算值写入到主内存中，&lt;em&gt;counter&lt;/em&gt; 的值仍然是错的。&lt;/p&gt;
 
-&lt;h1 id=&#34;volatile的适用场景:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile的适用场景&lt;/h1&gt;
+&lt;h2 id=&#34;volatile的适用场景:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile的适用场景&lt;/h2&gt;
 
-&lt;p&gt;就像我在前面提到的那样，如果两个线程同时对一个共享变量进行读和写，那么仅用&lt;code&gt;volatile&lt;/code&gt;变量是不够的。在这种情况下，你需要使用&lt;code&gt;synchronized&lt;/code&gt;来确保关于该变量的读和写都是原子操作。读或写一个&lt;code&gt;volatile&lt;/code&gt;变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用&lt;code&gt;synchronzied&lt;/code&gt;关键字来修饰你的关键代码。&lt;/p&gt;
+&lt;p&gt;就如在前面提到的那样，如果两个线程同时对一个共享变量进行读和写，那么仅用&lt;code&gt;volatile&lt;/code&gt;变量是不够的。在这种情况下，你需要使用&lt;code&gt;synchronized&lt;/code&gt;来确保关于该变量的读和写都是原子操作。读或写一个&lt;code&gt;volatile&lt;/code&gt;变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用&lt;code&gt;synchronzied&lt;/code&gt;关键字来修饰你的关键代码。&lt;/p&gt;
 
 &lt;p&gt;除了使用&lt;code&gt;synchronzied&lt;/code&gt;之外，你也可以使用 &lt;strong&gt;java.util.concurrent&lt;/strong&gt; 包中的一些原子数据类型，如 &lt;strong&gt;AtomicLong&lt;/strong&gt; ， &lt;strong&gt;AtomicReference&lt;/strong&gt; 等。&lt;/p&gt;
 
@@ -835,7 +853,7 @@ int someValue3 = sharedObject.nonVolatile6;
 
 &lt;p&gt;&lt;code&gt;Volatile&lt;/code&gt;关键字适用于32位变量和64位变量。&lt;/p&gt;
 
-&lt;h1 id=&#34;volatile性能思考:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile性能思考&lt;/h1&gt;
+&lt;h2 id=&#34;volatile性能思考:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile性能思考&lt;/h2&gt;
 
 &lt;p&gt;由于&lt;code&gt;volatile&lt;/code&gt;变量的读和写都是直接从主内存中进行的，相对于CPU缓存，直接对主内存进行读写代价更高，
 访问一个&lt;code&gt;volatile&lt;/code&gt;变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用&lt;code&gt;volatile&lt;/code&gt;变量。&lt;/p&gt;

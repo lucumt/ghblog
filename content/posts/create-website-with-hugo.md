@@ -14,26 +14,26 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 [//]:(设置前面的内容为summary)
 <!--more-->
 
-# 环境准备
+## 环境准备
 * [Go](https://golang.org/)1.4+
 * [Hugo](https://gohugo.io)v0.14+
 * [Github](https://github.com/)账号
 * [GoDaddy](https://www.godaddy.com)域名 
 
-# 过程概要
-## 在Github上创建一个自己的项目
+## 过程概要
+### 在Github上创建一个自己的项目
 1. 在`Github`上创建一个项目，本文中该项目名为 *blog*  
 	![创建Github项目](/blog_img/create-website-with-hugo/create-github-repository.png "创建Github项目")
 2. 由于`Github Pages`强制要求在托管博客时该项目必须有一个名为 *gh-pages* 的分支，所以要预先给该项目创建一个名为 *gh-pages* 的分支
 3. 在Github中打开 *blog* 项目主页面，点击 *Settings* 按钮  
 	![打开项目配置界面](/blog_img/create-website-with-hugo/open-github-project-settings.png "打开Github项目设置界面")  
-	在 *Github Pages* 这个区域可以看见本项目的发布链接为 *https\://fox321.github.io/blog/* ，点击该链接可以访问该项目对应的静态页面 
+	在 *Github Pages* 这个区域可以看见本项目的发布链接为 *https\://fox321.github.io/blog/* ，点击该链接可以访问该项目对应的静态页面   
 	![查看项目发布链接](/blog_img/create-website-with-hugo/check-github-project-address.png "查看项目发布链接")
 
-## 利用Hugo作为博客生成器
+### 利用Hugo作为博客生成器
 由于`Github Pages` 只支持静态的html页面托管，所以需要采用`Jekyll` 、`Logdown` 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习`Go`，为了加深自己对于`Go`的运用，于是便选择`Hugo` 作为自己的博客生成器。`Hugo` 是一个基于`Go]`开发的静态生成器，它采用*[Markdown](https://zh.wikipedia.org/zh-cn/Markdown)* 语法来编写博客生成，然后生成相应的HTML页面。
 
-### 安装Go
+#### 安装Go
 访问[Golang下载页](https://golang.org/dl/)根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：
 
 * 下载**go1.4.2.windows-amd64.msi**
@@ -50,7 +50,7 @@ GOROOT='D:\code\go'
 >C:\Users\Administrator>go version  
 >go version go1.4.2 windows/amd64
 
-### 安装Hugo
+#### 安装Hugo
 `Hugo`的安装过程与`Go`的类似.
 
 * 首先在[Hugo下载页](https://github.com/spf13/hugo/releases)根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的**PATH**环境变量即可。我的安装在 *D:\program\hugo* 所以相应的环境变量设置为
@@ -65,9 +65,9 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 关于`Hugo`的基本操作命令，可以参见[Hugo快速入门](https://gohugo.io/overview/quickstart/)，此处不再详述。
 
 
-## 在Github Pages上托管Hugo
+### 在Github Pages上托管Hugo
 
-### 安装命令
+#### 安装命令
 虽然官方文档[在Github Pages上托管Hugo](https://gohugo.io/tutorials/github-pages-blog/)上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：
 
 1. 将之前在Github上创建的 *blog* 项目clone到本地目录   
@@ -93,11 +93,11 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 10. 访问 *https\://fox321.github.io/blog* ，出现如下页面，至此`Hugo`博客托管到`Github Pages`成功！  
 	![访问Github Pages页面"](/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png "访问Github Pages页面")
 
-### 相关命令
+#### 相关命令
 1. 生成绑定到指定域名的页面 `hugo server -D --baseUrl="http://lucumt.info" --appendPort=false`
 2. 将 *master* 的 *public* 目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
 
-## 利用GoDaddy配置自定义域名
+### 利用GoDaddy配置自定义域名
 在[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)中有详细的说明，我自己配置的时候主要是按照[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[Godaddy](https://www.godaddy.com/)上的说明来设置的。
 
 1. 在public目录下创建一个名为 **CNAME** 的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 *http://lucumt.info* ，故填入 *lucumt.info*  

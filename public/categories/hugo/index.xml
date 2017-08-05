@@ -19,7 +19,7 @@
 
 &lt;p&gt;一直以来都想拥有一个属于自己的博客，前段时间在学习&lt;code&gt;Go&lt;/code&gt; ，于是利用&lt;code&gt;Hugo&lt;/code&gt; 和&lt;code&gt;Github Pages&lt;/code&gt; 搭建了一个简易的个人博客，先简单记录下。&lt;/p&gt;
 
-&lt;h1 id=&#34;环境准备:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;环境准备&lt;/h1&gt;
+&lt;h2 id=&#34;环境准备:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;环境准备&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt;1.4+&lt;/li&gt;
@@ -28,9 +28,9 @@
 &lt;li&gt;&lt;a href=&#34;https://www.godaddy.com&#34;&gt;GoDaddy&lt;/a&gt;域名&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;过程概要:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;过程概要&lt;/h1&gt;
+&lt;h2 id=&#34;过程概要:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;过程概要&lt;/h2&gt;
 
-&lt;h2 id=&#34;在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github上创建一个自己的项目&lt;/h2&gt;
+&lt;h3 id=&#34;在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github上创建一个自己的项目&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;在&lt;code&gt;Github&lt;/code&gt;上创建一个项目，本文中该项目名为 &lt;em&gt;blog&lt;/em&gt;&lt;br /&gt;
@@ -39,15 +39,15 @@
 &lt;li&gt;在Github中打开 &lt;em&gt;blog&lt;/em&gt; 项目主页面，点击 &lt;em&gt;Settings&lt;/em&gt; 按钮&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/open-github-project-settings.png&#34; alt=&#34;打开项目配置界面&#34; title=&#34;打开Github项目设置界面&#34; /&gt;
 &lt;br /&gt;
-在 &lt;em&gt;Github Pages&lt;/em&gt; 这个区域可以看见本项目的发布链接为 &lt;em&gt;https://fox321.github.io/blog/&lt;/em&gt; ，点击该链接可以访问该项目对应的静态页面
+在 &lt;em&gt;Github Pages&lt;/em&gt; 这个区域可以看见本项目的发布链接为 &lt;em&gt;https://fox321.github.io/blog/&lt;/em&gt; ，点击该链接可以访问该项目对应的静态页面&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/check-github-project-address.png&#34; alt=&#34;查看项目发布链接&#34; title=&#34;查看项目发布链接&#34; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用Hugo作为博客生成器&lt;/h2&gt;
+&lt;h3 id=&#34;利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用Hugo作为博客生成器&lt;/h3&gt;
 
 &lt;p&gt;由于&lt;code&gt;Github Pages&lt;/code&gt; 只支持静态的html页面托管，所以需要采用&lt;code&gt;Jekyll&lt;/code&gt; 、&lt;code&gt;Logdown&lt;/code&gt; 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习&lt;code&gt;Go&lt;/code&gt;，为了加深自己对于&lt;code&gt;Go&lt;/code&gt;的运用，于是便选择&lt;code&gt;Hugo&lt;/code&gt; 作为自己的博客生成器。&lt;code&gt;Hugo&lt;/code&gt; 是一个基于&lt;code&gt;Go]&lt;/code&gt;开发的静态生成器，它采用&lt;em&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/Markdown&#34;&gt;Markdown&lt;/a&gt;&lt;/em&gt; 语法来编写博客生成，然后生成相应的HTML页面。&lt;/p&gt;
 
-&lt;h3 id=&#34;安装go:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Go&lt;/h3&gt;
+&lt;h4 id=&#34;安装go:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Go&lt;/h4&gt;
 
 &lt;p&gt;访问&lt;a href=&#34;https://golang.org/dl/&#34;&gt;Golang下载页&lt;/a&gt;根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：&lt;/p&gt;
 
@@ -73,7 +73,7 @@ GOROOT=&amp;rsquo;D:\code\go&amp;rsquo;&lt;/p&gt;
 go version go1.4.2 windows/amd64&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Hugo&lt;/h3&gt;
+&lt;h4 id=&#34;安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装Hugo&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;Hugo&lt;/code&gt;的安装过程与&lt;code&gt;Go&lt;/code&gt;的类似.&lt;/p&gt;
 
@@ -96,9 +96,9 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 
 &lt;p&gt;关于&lt;code&gt;Hugo&lt;/code&gt;的基本操作命令，可以参见&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Hugo快速入门&lt;/a&gt;，此处不再详述。&lt;/p&gt;
 
-&lt;h2 id=&#34;在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github Pages上托管Hugo&lt;/h2&gt;
+&lt;h3 id=&#34;在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;在Github Pages上托管Hugo&lt;/h3&gt;
 
-&lt;h3 id=&#34;安装命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装命令&lt;/h3&gt;
+&lt;h4 id=&#34;安装命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;安装命令&lt;/h4&gt;
 
 &lt;p&gt;虽然官方文档&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;在Github Pages上托管Hugo&lt;/a&gt;上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：&lt;/p&gt;
 
@@ -132,14 +132,14 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00&lt;/p&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png&#34; alt=&#34;访问Github Pages页面&amp;quot;&#34; title=&#34;访问Github Pages页面&#34; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;相关命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;相关命令&lt;/h3&gt;
+&lt;h4 id=&#34;相关命令:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;相关命令&lt;/h4&gt;
 
 &lt;ol&gt;
 &lt;li&gt;生成绑定到指定域名的页面 &lt;code&gt;hugo server -D --baseUrl=&amp;quot;http://lucumt.info&amp;quot; --appendPort=false&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;将 &lt;em&gt;master&lt;/em&gt; 的 &lt;em&gt;public&lt;/em&gt; 目录同步到分支 &lt;code&gt;git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用GoDaddy配置自定义域名&lt;/h2&gt;
+&lt;h3 id=&#34;利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14&#34;&gt;利用GoDaddy配置自定义域名&lt;/h3&gt;
 
 &lt;p&gt;在&lt;a href=&#34;https://help.github.com/articles/using-a-custom-domain-with-github-pages/&#34;&gt;Using a custom domain with GitHub Pages&lt;/a&gt;中有详细的说明，我自己配置的时候主要是按照&lt;a href=&#34;https://help.github.com/articles/setting-up-an-apex-domain/&#34;&gt;Setting up an apex domain&lt;/a&gt;中的说明在&lt;a href=&#34;https://www.godaddy.com/&#34;&gt;Godaddy&lt;/a&gt;上的说明来设置的。&lt;/p&gt;
 

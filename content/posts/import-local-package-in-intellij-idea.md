@@ -12,7 +12,7 @@ title = "在Intellij IDEA中引用Golang本地包"
 
 <!--more-->
 
-# 在Eclipse中引用Golang本地包
+## 在Eclipse中引用Golang本地包
 若我们采用的是[goclipse](https://goclipse.github.io/)来开发`Golang`,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 *src* 是源代码所在的目录，在 *src* 的 *sec* 文件夹下有一个名为 *calculate.go* 的文件，其中有一个名为 *Add* 的函数用于计算两个整数的相加之和。  
 ![goclipse中的本地包](/blog_img/import-local-page-in-intellij-idea/goclipse_package.png)  
 若要在主程序main方法中调用 *Add* 方法，先通过import引入该文件的包名`import service`，然后通过包名调用该方法`service.Add(1,2)`，如下图所示，可以看出在Eclipse中引用`Golang`本地包与引用Java包没有太大的区别，都是将包文件放到 *src* 源文件夹下，然后通过包名来引用。  
@@ -21,7 +21,7 @@ title = "在Intellij IDEA中引用Golang本地包"
 ![goclipse中的本地包通过文件夹引用](/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference_folder.png)  
 可以看出在eclipse中导入`Golang`本地包时有两种方法： **通过import导入包名** 或 **通过import导入该包对应的文件夹** ，这两种方法均可使程序正常运行。
 
-# 在Intellij IDEA中引用Golang本地包
+## 在Intellij IDEA中引用Golang本地包
 下面2张图为在IDEA中建立的对应项目，图中 *gproject* 是一个项目，*gotest* 是一个模块，我们在 *gotest* 下建立相关的测试文件。  
 ![IDEA中的本地包](/blog_img/import-local-page-in-intellij-idea/idea_package.png)    
 ![IDEA中的本地包引用](/blog_img/import-local-page-in-intellij-idea/idea_package_reference.png)  
@@ -39,6 +39,6 @@ title = "在Intellij IDEA中引用Golang本地包"
 
 可以看出，不同于[goclipse](https://goclipse.github.io/)，在IDEA中只能使用 **通过import导入该包对应的文件夹** 来导入本地`Golang`包，至于原因还需要进一步研究。
 
-# 利用Goclipse时无法运行程序的解决方法
+## 利用Goclipse时无法运行程序的解决方法
 在使用[goclipse](https://goclipse.github.io/)运行`Golang`程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 *src* 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 *src* 目录添加源代码目录。在Eclipse中选中该项目然后点击 **Properties** ，会出现项目属性配置界面，点击 **Go Project Configuration** ，通过 **Add Folder** 可以将 *src* 添加到源代码中，之后程序即可正常运行。  
 ![goclipse中添加源程序目录](/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png)  
