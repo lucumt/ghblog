@@ -171,8 +171,11 @@ var _hmt = _hmt || [];
 				<small class="toc-label">Contents</small>
 		   	 	<nav id="TableOfContents">
 <ul>
+<li>
+<ul>
 <li><a href="#所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">所有方法都回滚</a></li>
 <li><a href="#指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">指定方法回滚</a></li>
+</ul></li>
 </ul>
 </nav>
 		    </div>
@@ -220,7 +223,7 @@ var _hmt = _hmt || [];
 
 <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
 
-<h1 id="所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">所有方法都回滚</h1>
+<h2 id="所有方法都回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">所有方法都回滚</h2>
 
 <p>在该单元测试类的开头加上 <code>@TransactionConfiguration(defaultRollback=true)</code> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
 
@@ -271,7 +274,7 @@ public class ProjectServiceTest{
 }
 </code></pre>
 
-<h1 id="指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">指定方法回滚</h1>
+<h2 id="指定方法回滚:ca90282e7eb1ee4fd1fb33a78c3a6535">指定方法回滚</h2>
 
 <p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <code>@TransactionConfiguration(defaultRollback=true)</code> ，同时在对应的方法上加上注解声明 <code>@Rollback(true)</code> 即可达到目的。</p>
 
