@@ -1,8 +1,8 @@
 {{ partial "header.html" . }}
 <body>
-	{{ if .Params.totop }}
+	{{ if .Site.Params.totop }}
 		<div id="nav-to-top">
-			<span class="decorative-marker">//</span><a href="#top">To Top</a>
+			<span class="decorative-marker">//</span><a href="#top">返回顶部</a>
 		</div>
 	{{ end }}
 
@@ -15,7 +15,7 @@
 
     {{ partial "sidebar.html" . }}
 	
-	{{ if .Params.banner }}
+	{{ if .Site.Params.banner }}
 	<div class="content-banner-image pure-u-1 pure-u-md-3-4" style="{{ if .Params.bannerheight }}height: {{ .Params.bannerheight }}px;{{ end }}">
 		<img src="{{ .Params.banner }}" class="pure-img" style="{{ if .Params.bannerfill }}width: 100%;{{ end }}" />
 	</div>
@@ -103,6 +103,17 @@
 	            </div>
 			{{ end }}
           </section>
+		  
+		  <div class="page-link">
+			{{ if .PrevInSection }}
+			<a href="{{.PrevInSection.Permalink}}">//下一篇</a>
+			{{ end }}
+			&nbsp;
+			{{ if .NextInSection }}
+			<a class="page-link-right" href="{{.NextInSection.Permalink}}">//上一篇</a>
+			{{ end }}
+	      </div>
+
           {{ if not .Params.nocomment }}
           	{{ template "_internal/disqus.html" . }}
           {{ end }}
@@ -110,7 +121,7 @@
       {{ partial "footer.html" . }}
     </div>
   </div>
-	{{ if .Params.totop }}
+	{{ if .Site.Params.totop }}
 		<script type="text/javascript">
 			onscroll = function() {
 			  var toTopVisible = false;

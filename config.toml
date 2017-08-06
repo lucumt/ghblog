@@ -4,6 +4,8 @@ title = "飞狐的部落格"
 canonifyurls = true
 PygmentsCodeFences=true
 disqusShortname = "rosenlu"
+Paginate = 10
+PaginatePath  = "page"
 
 [author]
     name = "飞狐"
@@ -18,6 +20,7 @@ disqusShortname = "rosenlu"
     highlightstyle="rainbow"
     gaid = ""
     baiduanalysis="true"
+    totop = true
 
 [[menu.main]] 
     pre = "<i class='fa fa-road'></i>"

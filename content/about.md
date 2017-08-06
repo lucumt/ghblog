@@ -11,13 +11,13 @@ nocomment = true
 
 一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作。
 
-# 编程领域
+## 编程领域
 * Java，主要用它进行web开发
 * Python，主要用它进行网络爬虫开发和web开发
 * [Golang](https://golang.org/ "要打开此网站请确保自己能翻墙"),个人业余爱好
 * Oracle,MySQL,MongoDB
 
-## IT技能列表
+### IT技能列表
 * Java相关：
   * 超过7年使用经验，掌握JVM调优；
   * 能熟练运用Struts2、Hibernate、Spring、SpringMVC和MyBatis，对JSF、Birt、Veloctiy有一定程度的掌握；
@@ -46,12 +46,12 @@ nocomment = true
   * 英文读写能力强，通过CET-6,能够通过Skype或Gmail用英文与老外熟练的沟通；
   * 业余爱好Golang，本博客即是利用Golang和Github Pages搭建的；
 
-## 应用领域
+### 应用领域
 * Java:主要是自己公司的各种Java项目；
 * Python：主要是在[Elance](https://www.elance.com)上给老外开发爬虫脚本和简易的web系统；
 * Golang：用于网络爬虫和个人博客搭建；
 
-## 个人项目
+### 个人项目
 **[Python Web Data Scraper](https://github.com/lucumt/myscripts/tree/master/python/alenspider)**  
 在[Elance](https://www.elance.com)上给美国人写的一系列Python爬虫脚本，主要功能是爬虫将采集到的数据存入MySQL数据库，
 将脚本部署到AWS上，并利用Crontab每天定时运行相应脚本，相应技术细节如下:
@@ -61,23 +61,23 @@ nocomment = true
 - 持久化: Python&nbsp;[SQLAlchemy](https://www.sqlalchemy.org/)
 - 运行平台: [AWS](https://aws.amazon.com)&nbsp;Ubuntu12.04，并利用[Crontab](https://en.wikipedia.org/wiki/Cron)每天定时运行一次
 
-![Python网络爬虫](/blog_img/about/elance_work_record.png)
+![Python网络爬虫](/blog_img/about/elance_work_record.png "Python网络爬虫工作截图")
 
-# 个人信息
+## 个人信息
 
-## 教育信息
+### 教育信息
 * [中国矿业大学](http://www.cumt.edu.cn/)&nbsp;(2006.9-2010.6)
 * [计算机科学与技术](http://cs.cumt.edu.cn/)&nbsp;(本科)
 
-## 个人爱好
+### 个人爱好
 &nbsp;&nbsp;&nbsp;&nbsp;上网&nbsp;看纪录片&nbsp;编程&nbsp;阅读&nbsp;睡觉
 
-## 自我评价
+### 自我评价
 * 热爱学习和使用新技术；
 * 有着十分强烈的代码洁癖；
 * 喜欢重构代码，善于分析和解决问题；
 
-## 联系方式
+### 联系方式
 * **Email**: lucumt@gmail.com或cumtlu@126.com
 * **Skype**: lu.rosen
 * **QQ**: 317801876

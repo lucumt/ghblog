@@ -4,7 +4,7 @@ categories = ["JavaScript","EasyUI"]
 date = "2017-08-06T00:06:36+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["JavaScript","EasyUI"]
-title = "解决Easyui DataGrid中的行在列冻结时无法对齐的问题"
+title = "解决EasyUI DataGrid中的行在列冻结时无法对齐的问题"
 
 +++
 

@@ -15,7 +15,7 @@
 
           <div class="posts">
             {{ $Site := .Site }}
-            {{ range .Site.Pages }}
+            {{ range .Paginator.Pages }}
 			{{if not .Params.pinned}}
             <section  class="post">
                 <header class="post-header">
@@ -58,6 +58,16 @@
           {{ end }}
 		  {{ end }}
         </div>
+		<div class="page-link">
+		    总共<b>{{.Paginator.TotalPages}}</b>页，当前第<b>{{.Paginator.PageNumber}}</b>页
+			{{if .Paginator.HasPrev}}
+			   <a href="{{.Paginator.Prev.URL}}"><span class="read-more-slashes">//</span>上一页</a>
+			{{end}}
+			&nbsp;
+			{{if .Paginator.HasNext}}
+			   <a href="{{.Paginator.Next.URL}}"><span class="read-more-slashes">//</span>下一页</a>
+			{{end}}
+		</div>
 
         {{ partial "footer.html" . }}
         </div>
