@@ -7,7 +7,7 @@ html {
 	color: #2d303b;
 }
 html, p, nav, section, article {
-	font-family: -webkit-pictograph,"Microsoft Yahei","Î¢ÈíÑÅºÚ","ËÎÌå",Tahoma,'Simsun',Arial,Helvetica,sans-serif;
+	font-family: -webkit-pictograph,"Microsoft Yahei","å¾®è½¯é›…é»‘","å®‹ä½“",Tahoma,'Simsun',Arial,Helvetica,sans-serif;
 }
 section{
 	margin:1em 5% 0 2.42857%;
@@ -31,14 +31,13 @@ section.post ul{
 #list>li>.meta {
 	float: right !important;
 }
-
 pre {
     padding: 5px 5px 5px 0px;
 	margin:0px 5px;
 }
 
 code {
-    padding: 2px 4px;
+    padding: 2px 4px !important;
     font-size: 90%;
     color: #c72f4e;
     border-radius: 4px;
@@ -57,6 +56,7 @@ blockquote p{
 
 p {
 	color: #2d303b;
+	margin:2px 0px;
 }
 a {
   -o-transition:.5s;
@@ -88,24 +88,16 @@ a.pure-button:hover, a.pure-button:focus {
 a.pure-button-primary:hover, a.pure-button-primary:focus {
 	color: #fff;
 }
-/*p a {
-	color:#7F1000;
-}*/
-/*h1 {
-	font-weight:bold;
-	font-size:1.5em;
-	margin:0.3em 0;
+.page-link{
+  margin-bottom:5px;
 }
-h2 {
-	font-weight:bold;
-	font-size:0.9em;
-	margin:0.2em 0;
+.page-link a{
+  text-decoration: none;
+  color:#7f1000;
 }
-h3{
-	font-weight:bold;
-	font-size:0.7em;
-	margin:0.2em 0;
-}*/
+.page-link-right{
+  float:right;
+}
 ul{
   margin: 0.3em 0;
 }
@@ -229,15 +221,14 @@ h2.brand-tagline {
 
 /* Nav To Top */
 #nav-to-top {
-	display: none;
+    display: none;
 	position: fixed;
-	right: 0;
-	top: 10px;
+	right: 5px;
+	bottom: 6em;
 	padding: 0.5rem 1.5rem 0.5rem 0.5rem;
 	font-size: 0.85rem;
-	background: #fff;
+	background: #d1d1d1;
 }
-
 /* Posts */
 h1.post-title>a {
 	text-decoration: none;
@@ -296,8 +287,6 @@ a.post-author {
 }
 post h3 {
 	margin-bottom: .25rem;
-	/*font-size: 1.4rem;*/
-	/*color: #7F1000;*/
 	font-weight: 500;
 }
 .post h3.post-subtitle {

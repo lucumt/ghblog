@@ -79,6 +79,10 @@ var _hmt = _hmt || [];
 </head>
 <body>
 	
+		<div id="nav-to-top">
+			<span class="decorative-marker">//</span><a href="#top">返回顶部</a>
+		</div>
+	
 
 	<div id="layout" class="pure-g">
     
@@ -269,6 +273,17 @@ setx -m PATH &quot;%Path%;C:\INTA\Database\bin;&quot;
 
 			
           </section>
+		  
+		  <div class="page-link">
+			
+			<a href="http://lucumt.info/posts/create-website-with-hugo/">//下一篇</a>
+			
+			&nbsp;
+			
+			<a class="page-link-right" href="http://lucumt.info/posts/java-concurrency/java-volatile-keyword/">//上一篇</a>
+			
+	      </div>
+
           
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -301,6 +316,22 @@ setx -m PATH &quot;%Path%;C:\INTA\Database\bin;&quot;
 </div>
     </div>
   </div>
+	
+		<script type="text/javascript">
+			onscroll = function() {
+			  var toTopVisible = false;
+			  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			  if (scrollTop > 1000) {
+			    if (!toTopVisible) {
+			      document.getElementById('nav-to-top').style.display = 'block';
+			    }
+			  } else {
+			    if (scrollTop < 1000 || toTopVisible) {
+			      document.getElementById('nav-to-top').style.display = 'none';
+			    }
+			  }
+			};
+		</script>
 	
 
 	
