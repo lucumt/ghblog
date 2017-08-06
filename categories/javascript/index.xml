@@ -10,7 +10,7 @@
     <atom:link href="http://lucumt.info/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>解决Easyui DataGrid中的行在列冻结时无法对齐的问题</title>
+      <title>解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</title>
       <link>http://lucumt.info/posts/easyui-datagrid-row-not-align-when-column-frozen/</link>
       <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
       
