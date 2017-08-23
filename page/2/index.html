@@ -163,7 +163,61 @@ var _hmt = _hmt || [];
 
           <div class="posts">
             
+			
             
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/mybatis-batch-insert-exception">mybatis batch insert exception的解决方法</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>30</sup></span><span class="post-date-separator">/</span><span class="post-date-month">May</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+                    
+                    <a class="post-category post-category-mybatis" href="http://lucumt.info//categories/mybatis">MyBatis</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
+
+<ul>
+<li><p>SQL配置文件:</p>
+
+<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
+    INSERT INTO system_authority_role(role_id,authority_id)
+      VALUES
+      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
+        (#{authRole.roleId},#{authRole.authorityId})
+      &lt;/foreach&gt;
+  &lt;/insert&gt;
+</code></pre></li>
+</ul>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/mybatis-batch-insert-exception"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
 			
             <section  class="post">
                 <header class="post-header">
@@ -507,8 +561,6 @@ Process process = runtime.exec(mysqlCmd);
               </div>
           </section>
           
-		  
-			
 		  
         </div>
 		<div class="page-link">

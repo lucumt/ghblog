@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mybatis on 飞狐的部落格</title>
+    <link>http://lucumt.info/categories/mybatis/</link>
+    <description>Recent content in Mybatis on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 30 May 2016 18:20:37 +0800</lastBuildDate>
+    <atom:link href="http://lucumt.info/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>mybatis batch insert exception的解决方法</title>
+      <link>http://lucumt.info/posts/mybatis-batch-insert-exception/</link>
+      <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/mybatis-batch-insert-exception/</guid>
+      <description>&lt;p&gt;在利用 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt; 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;SQL配置文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;insert id=&amp;quot;addAuthorityRoleBatch&amp;quot; parameterType=&amp;quot;List&amp;quot;&amp;gt;
+    INSERT INTO system_authority_role(role_id,authority_id)
+      VALUES
+      &amp;lt;foreach collection=&amp;quot;list&amp;quot; item=&amp;quot;authRole&amp;quot; separator=&amp;quot;,&amp;quot;&amp;gt;
+        (#{authRole.roleId},#{authRole.authorityId})
+      &amp;lt;/foreach&amp;gt;
+  &amp;lt;/insert&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Java代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;   public void adjustRoleAuth(String roleId, String authIdsStr) {
+        authRoleDao.deleteAuthorityRoleByRole(roleId);
+        String[] authIds=authIdsStr.split(&amp;quot;;&amp;quot;);
+        List&amp;lt;AuthorityRoleModel&amp;gt; authRoleList=new ArrayList&amp;lt;AuthorityRoleModel&amp;gt;();
+        for(String authId:authIds){
+            authRoleList.add(new AuthorityRoleModel(roleId,authId));
+        }
+        authRoleDao.addAuthorityRoleBatch(authRoleList);
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;### SQL: INSERT INTO system_authority_role(role_id,authority_id)       VALUES
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;&#39; at line 2
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;&#39; at line 2
+at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:233
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。&lt;strong&gt;该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。&lt;/strong&gt;为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public void adjustRoleAuth(String roleId, String authIdsStr) {
+    authRoleDao.deleteAuthorityRoleByRole(roleId);
+    String[] authIds=authIdsStr.split(&amp;quot;;&amp;quot;);
+    List&amp;lt;AuthorityRoleModel&amp;gt; authRoleList=new ArrayList&amp;lt;AuthorityRoleModel&amp;gt;();
+    for(String authId:authIds){
+        authRoleList.add(new AuthorityRoleModel(roleId,authId));
+    }
+    if(authRoleList.size()&amp;gt;0){//只有在List不为空时才进行插入
+        authRoleDao.addAuthorityRoleBatch(authRoleList);        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
