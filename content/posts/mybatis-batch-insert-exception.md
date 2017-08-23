@@ -1,7 +1,7 @@
 +++
 
 author = "飞狐"
-categories = ["Java"]
+categories = ["Java","MyBatis"]
 date = "2016-05-30T18:20:37+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["Java","MyBatis"]

@@ -163,7 +163,46 @@ var _hmt = _hmt || [];
 
           <div class="posts">
             
+			
             
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
+                      <a href="http://lucumt.info/posts/modify-java-class-file-content-directly">在不重新编译的情况下直接修改Java Class文件中的内容</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>12</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Aug</span> <span class="post-date-year">2017</span>
+                </span>
+                
+                
+                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>3 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="http://lucumt.info/posts/modify-java-class-file-content-directly"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
 			
             <section  class="post">
                 <header class="post-header">
@@ -539,57 +578,6 @@ var _hmt = _hmt || [];
               </article>
               <div class="read-more-link">
                   <a href="http://lucumt.info/posts/show-video-in-html5-page"><span class="read-more-slashes">//</span>Read More...</a>
-              </div>
-          </section>
-          
-		  
-			
-            <section  class="post">
-                <header class="post-header">
-                    
-                    <h1 class="post-title">
-                      <a href="http://lucumt.info/posts/mybatis-batch-insert-exception">mybatis batch insert exception的解决方法</a>
-                  </h1>
-              </header>
-              <p class="post-meta">
-                  
-                  <span class="post-date">
-                    <span class="post-date-day"><sup>30</sup></span><span class="post-date-separator">/</span><span class="post-date-month">May</span> <span class="post-date-year">2016</span>
-                </span>
-                
-                
-                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
-                
-                
-                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
-                
-                
-                <div class="post-categories">
-                    
-                    <a class="post-category post-category-java" href="http://lucumt.info//categories/java">Java</a>
-                    
-                </div>
-                
-            </p>
-            <article class="post-summary">
-                  <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
-
-<ul>
-<li><p>SQL配置文件:</p>
-
-<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
-    INSERT INTO system_authority_role(role_id,authority_id)
-      VALUES
-      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
-        (#{authRole.roleId},#{authRole.authorityId})
-      &lt;/foreach&gt;
-  &lt;/insert&gt;
-</code></pre></li>
-</ul>
-
-              </article>
-              <div class="read-more-link">
-                  <a href="http://lucumt.info/posts/mybatis-batch-insert-exception"><span class="read-more-slashes">//</span>Read More...</a>
               </div>
           </section>
           

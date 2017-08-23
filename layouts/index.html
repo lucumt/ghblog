@@ -15,7 +15,8 @@
 
           <div class="posts">
             {{ $Site := .Site }}
-            {{ range .Paginator.Pages }}
+			{{ $paginator := .Paginate (where .Data.Pages "Type" "posts") }}
+            {{ range  $paginator.Pages }}
 			{{if not .Params.pinned}}
             <section  class="post">
                 <header class="post-header">
@@ -59,13 +60,13 @@
 		  {{ end }}
         </div>
 		<div class="page-link">
-		    总共<b>{{.Paginator.TotalPages}}</b>页，当前第<b>{{.Paginator.PageNumber}}</b>页
-			{{if .Paginator.HasPrev}}
-			   <a href="{{.Paginator.Prev.URL}}"><span class="read-more-slashes">//</span>上一页</a>
+		    总共<b>{{$paginator.TotalPages}}</b>页，当前第<b>{{$paginator.PageNumber}}</b>页
+			{{if $paginator.HasPrev}}
+			   <a href="{{$paginator.Prev.URL}}"><span class="read-more-slashes">//</span>上一页</a>
 			{{end}}
 			&nbsp;
-			{{if .Paginator.HasNext}}
-			   <a href="{{.Paginator.Next.URL}}"><span class="read-more-slashes">//</span>下一页</a>
+			{{if $paginator.HasNext}}
+			   <a href="{{$paginator.Next.URL}}"><span class="read-more-slashes">//</span>下一页</a>
 			{{end}}
 		</div>
 
