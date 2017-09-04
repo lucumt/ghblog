@@ -18,7 +18,7 @@ PaginatePath  = "page"
     sidebartagline = "Rosen Lu"
     photo = "/img/photo.jpg"
     highlightstyle="rainbow"
-    gaid = ""
+    gaid = "UA-75123653-1"
     baiduanalysis="true"
     totop = true
 
