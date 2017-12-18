@@ -6,8 +6,270 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 12 Aug 2017 18:09:53 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 Dec 2017 18:33:14 +0800</lastBuildDate>
     <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
+      <link>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</link>
+      <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
+      
+      <guid>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</guid>
+      <description>
+
+&lt;p&gt;项目中ORM框架用的是 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt;，最近由于业务上的需求将 &lt;em&gt;MyBatis&lt;/em&gt; 从3.1.1升级到3.4.5，发现升级后通过 &lt;strong&gt;&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;Log4j&lt;/a&gt;&lt;/strong&gt; 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;
+
+&lt;p&gt;假设我们测试的sql文件为 &lt;em&gt;UserMapper.xml&lt;/em&gt; ， 对应的代码如下，其命名空间为 &lt;em&gt;com.lucumt.mapper.UserMappper&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; ?&amp;gt;
+&amp;lt;!DOCTYPE mapper PUBLIC &amp;quot;-//mybatis.org//DTD Mapper 3.0//EN&amp;quot; &amp;quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;quot;&amp;gt;
+
+&amp;lt;mapper namespace=&amp;quot;com.lucumt.mapper.UserMappper&amp;quot;&amp;gt;
+    &amp;lt;select id=&amp;quot;getUsers&amp;quot; parameterType=&amp;quot;String&amp;quot; resultType=&amp;quot;com.lucumt.model.UserModel&amp;quot;&amp;gt;
+        SELECT id,username,password,create_time AS createTime FROM system_users WHERE username!=#{username}
+    &amp;lt;/select&amp;gt;
+&amp;lt;/mapper&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对应的执行代码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Test
+public void testMybatis(){
+    String resource = &amp;quot;mybatis-config.xml&amp;quot;;
+    InputStream is = AppTest.class.getClassLoader().getResourceAsStream(resource);
+    SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
+    
+    SqlSession session = sessionFactory.openSession();
+    String statement = &amp;quot;com.lucumt.mapper.UserMappper.getUsers&amp;quot;;
+    List&amp;lt;UserModel&amp;gt; userList = session.selectList(statement, &amp;quot;admin&amp;quot;);
+    for(UserModel u:userList){
+    	System.out.println(u.toString());
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本文会基于上述代码说明不同版本下如何利用 &lt;em&gt;Log4j&lt;/em&gt; 在 &lt;em&gt;MyBatis&lt;/em&gt; 中配置打印日志以及其实现原理。&lt;/p&gt;
+
+&lt;h2 id=&#34;mybatis3-1-1显示sql的配置与分析:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;MyBatis3.1.1显示SQL的配置与分析&lt;/h2&gt;
+
+&lt;h3 id=&#34;log4j相关配置:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;Log4j相关配置&lt;/h3&gt;
+
+&lt;p&gt;在 &lt;em&gt;MyBatis3.1.1&lt;/em&gt; 及以前的版本中若我们想通过 &lt;em&gt;Log4j&lt;/em&gt; 配置来打印实际执行的SQL，&lt;em&gt;log4j.properties&lt;/em&gt; 的配置通常类似如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+log4j.logger.java.sql.Connection=DEBUG 
+log4j.logger.java.sql.Statement=DEBUG 
+log4j.logger.java.sql.PreparedStatement=DEBUG 
+log4j.logger.java.sql.ResultSet=DEBUG 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;原理分析:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;原理分析&lt;/h3&gt;
+
+&lt;p&gt;以 &lt;em&gt;log4j.logger.java.sql.Connection=DEBUG&lt;/em&gt;  这个配置为例，分析源码可知其sql日志来源于&lt;code&gt;ConnectionLogger&lt;/code&gt;，查看 &lt;em&gt;ConnectionLogger&lt;/em&gt; 的代码可知，&lt;em&gt;ConnectionLogger&lt;/em&gt; 以硬编码的方式生成了一个log对象,当 &lt;em&gt;DEBUG&lt;/em&gt; 模式开启时该log对象会打印sql语句等信息。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
+
+  //生成一个Connection的log
+  private static final Log log = LogFactory.getLog(Connection.class);
+
+  private Connection connection;
+
+  private ConnectionLogger(Connection conn, Log statementLog) {
+    super(statementLog);
+    this.connection = conn;
+    if (isDebugEnabled()) {
+      debug(&amp;quot;ooo Using Connection [&amp;quot; + conn + &amp;quot;]&amp;quot;);
+    }
+  }
+
+  public Object invoke(Object proxy, Method method, Object[] params)
+      throws Throwable {
+    try {
+      if (&amp;quot;prepareStatement&amp;quot;.equals(method.getName())) {
+        if (isDebugEnabled()) {//打印执行的SQL语句
+          debug(&amp;quot;==&amp;gt;  Preparing: &amp;quot; + removeBreakingWhitespace((String) params[0]));
+        }        
+        PreparedStatement stmt = (PreparedStatement) method.invoke(connection, params);
+        stmt = PreparedStatementLogger.newInstance(stmt, getStatementLog());
+        return stmt;
+      }
+      //... other code
+    } catch (Throwable t) {
+      throw ExceptionUtil.unwrapThrowable(t);
+    }
+  }
+
+  //... other code
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行结果如下&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.1.1时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis1.1.1时显示执行SQL&#34; /&gt;
+&lt;br /&gt;
+从上述代码可知在 &lt;em&gt;Mybatis3.1.1&lt;/em&gt; 中通过 &lt;em&gt;Log4j&lt;/em&gt; 实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: &lt;strong&gt;当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印&lt;/strong&gt; ，基于此 &lt;em&gt;MyBatis&lt;/em&gt; 从3.2.0版本之后重新实现了相关功能。&lt;/p&gt;
+
+&lt;h2 id=&#34;mybatis3-4-5显示sql的配置与分析:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;MyBatis3.4.5显示SQL的配置与分析&lt;/h2&gt;
+
+&lt;h3 id=&#34;log4j相关配置-1:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;Log4j相关配置&lt;/h3&gt;
+
+&lt;p&gt;在 &lt;em&gt;MyBatis3.2.0&lt;/em&gt; 及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，&lt;em&gt;log4j.properties&lt;/em&gt; 的配置通常类似如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+log4j.logger.com.lucumt.mapper=DEBUG 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在本文写作时，mybatis官网上已有关于这方面更 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/zh/logging.html&#34;&gt;详细的说明&lt;/a&gt;&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&#34;原理分析-1:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;原理分析&lt;/h3&gt;
+
+&lt;p&gt;同样以 &lt;em&gt;log4j.logger.java.sql.Connection=DEBUG&lt;/em&gt; 为例，其sql日志来源于 &lt;em&gt;ConnectionLogger&lt;/em&gt; ，对应代码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
+
+  private final Connection connection;
+
+  //通过注入的方式生成log对象
+  private ConnectionLogger(Connection conn, Log statementLog, int queryStack) {
+    super(statementLog, queryStack);
+    this.connection = conn;
+  }
+
+  @Override
+  public Object invoke(Object proxy, Method method, Object[] params)
+      throws Throwable {
+    try {
+      if (Object.class.equals(method.getDeclaringClass())) {
+        return method.invoke(this, params);
+      }    
+      if (&amp;quot;prepareStatement&amp;quot;.equals(method.getName())) {
+        if (isDebugEnabled()) {
+          debug(&amp;quot; Preparing: &amp;quot; + removeBreakingWhitespace((String) params[0]), true);
+        }        
+      }
+      //... other code
+    } catch (Throwable t) {
+      throw ExceptionUtil.unwrapThrowable(t);
+    }
+  }
+
+  //... other code
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从上述代码可知，其日志生成是调用&lt;code&gt;BaseJdbcLogger&lt;/code&gt;的构造方法生成的，&lt;em&gt;BaseJdbcLogger&lt;/em&gt; 代码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public abstract class BaseJdbcLogger {
+
+  protected Log statementLog;
+  protected int queryStack;
+
+
+  public BaseJdbcLogger(Log log, int queryStack) {
+    this.statementLog = log;
+    if (queryStack == 0) {
+      this.queryStack = 1;
+    } else {
+      this.queryStack = queryStack;
+    }
+  }
+   
+  //... other code
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;DEBUG模式下查看 &lt;em&gt;ConnectionLogger&lt;/em&gt; 的调用堆栈如下&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png&#34; alt=&#34;&amp;quot;ConnectionLogger的调用堆栈&amp;quot;&#34; title=&#34;ConnectionLogger的调用堆栈&#34; /&gt;
+&lt;br /&gt;
+从其调用堆栈可知log对象是通过&lt;code&gt;MappedStatement&lt;/code&gt;生成的，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SimpleExecutor extends BaseExecutor {
+   
+  //... other code
+
+  @Override
+  public &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; doQuery(MappedStatement ms,Object parameter,
+                  RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+    Statement stmt = null;
+    try {
+      Configuration configuration = ms.getConfiguration();
+      StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
+      //log对象通过MappedStatement生成
+      stmt = prepareStatement(handler, ms.getStatementLog());
+      return handler.&amp;lt;E&amp;gt;query(stmt, resultHandler);
+    } finally {
+      closeStatement(stmt);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 &lt;em&gt;MappedStatement&lt;/em&gt; 的源码，发现log的生成是在 &lt;em&gt;Builder&lt;/em&gt; 方法中，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public final class MappedStatement {
+
+  public static class Builder {
+    private MappedStatement mappedStatement = new MappedStatement();
+
+    public Builder(Configuration configuration, String id, SqlSource sqlSource, SqlCommandType sqlCommandType) {
+      mappedStatement.configuration = configuration;
+      mappedStatement.id = id;
+      mappedStatement.sqlSource = sqlSource;
+      mappedStatement.statementType = StatementType.PREPARED;
+      mappedStatement.parameterMap = new ParameterMap.Builder(configuration, &amp;quot;defaultParameterMap&amp;quot;, null, new ArrayList&amp;lt;ParameterMapping&amp;gt;()).build();
+      mappedStatement.resultMaps = new ArrayList&amp;lt;ResultMap&amp;gt;();
+      mappedStatement.sqlCommandType = sqlCommandType;
+      mappedStatement.keyGenerator = configuration.isUseGeneratedKeys() &amp;amp;&amp;amp; SqlCommandType.INSERT.equals(sqlCommandType) ? Jdbc3KeyGenerator.INSTANCE : NoKeyGenerator.INSTANCE;
+      String logId = id;
+      //可以通过设置logPrefix的方法来生成log对象
+      if (configuration.getLogPrefix() != null) {
+        logId = configuration.getLogPrefix() + id;
+      }
+      //通过logId生成log对象
+      mappedStatement.statementLog = LogFactory.getLog(logId);
+      mappedStatement.lang = configuration.getDefaultScriptingLanguageInstance();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 &lt;strong&gt;namespace+方法id&lt;/strong&gt; 组成，在本例中为 &lt;em&gt;com.lucumt.mapper.UserMappper.getUsers&lt;/em&gt; ，而前面的配置为 &lt;em&gt;log4j.logger.com.lucumt.mapper=DEBUG&lt;/em&gt; ，由于 &lt;em&gt;Log4j&lt;/em&gt; 中的log示例的继承关系，相当于 &lt;em&gt;com.lucumt.mapper.UserMappper.getUser&lt;/em&gt; 也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下&lt;br /&gt;
+&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.4.5时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis3.4.5时显示执行SQL&#34; /&gt;
+&lt;br /&gt;
+利用新版 &lt;em&gt;MyBatis&lt;/em&gt; 的这一特性，我们可以实现类似如下的不同粒度sql打印&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;log4j.logger.com.xxx.mapper=DEBUG #打印xxx包下所有的执行SQL
+log4j.logger.com.yyy.mapper.PersonMapper=DEBUG #打印PersonMapper下所有的执行SQL
+log4j.logger.com.zzz.mapper.GroupMapper.getGroups=DEBUG #只打印getGroups对应的执行SQL  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br/&gt;
+由前面的代码可知 &lt;em&gt;MappedStatement&lt;/em&gt; 的 &lt;em&gt;Build&lt;/em&gt; 方法在生成log对象时会检测是否有 &lt;em&gt;logPrefix&lt;/em&gt; 配置，若有则用 &lt;em&gt;logPrefix&lt;/em&gt; 来生成log对象，于是可以通过设置 &lt;em&gt;logPrefix&lt;/em&gt; 以另外一种方式配置打印sql。 可在 &lt;em&gt;MyBatis&lt;/em&gt; 配置文件中添加如下配置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;settings&amp;gt;
+   &amp;lt;setting name=&amp;quot;logPrefix&amp;quot; value=&amp;quot;dao.&amp;quot;/&amp;gt; &amp;lt;!-- 设置前缀为dao --&amp;gt;
+   &amp;lt;setting name=&amp;quot;logImpl&amp;quot; value=&amp;quot;log4j&amp;quot;/&amp;gt; &amp;lt;!-- 设置使用log4j为日志实现类 --&amp;gt;
+&amp;lt;/settings&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后将 &lt;em&gt;log4j.properties&lt;/em&gt; 的配置修改为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;log4j.logger.dao=DEBUG
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行结果与前面相同，通过 &lt;em&gt;logPrefix&lt;/em&gt; 可以在有些时候简化sql打印配置。&lt;/p&gt;
+
+&lt;h3 id=&#34;待分析问题:7eadf44b310a8365cd3dc766a1e45c58&#34;&gt;待分析问题&lt;/h3&gt;
+
+&lt;p&gt;若将 &lt;em&gt;MyBatis&lt;/em&gt; 的版本变 &lt;em&gt;3.3.0&lt;/em&gt; 时，通过 &lt;em&gt;Log4j&lt;/em&gt; 配置打印SQL时，如下所示的配置方式只有部分生效，原因待分析&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;log4j.logger.com.xxx=DEBUG #可以打印SQL
+log4j.logger.com.xxx.mapper=DEBUG #可以打印SQL
+log4j.logger.com.xxx.mapper.UserMapper=DEBUG #不能打印SQL
+log4j.logger.com.xxx.mapper.UserMapper.getUsers=DEBUG #不能打印SQL
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
@@ -584,13 +846,13 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
       <description>&lt;p&gt;由于业务要求，需要在利用MyEclipse中开发的Web项目中添加&lt;code&gt;Birt&lt;/code&gt;报表统计功能，新建完一个 &lt;em&gt;report.rptdesign&lt;/em&gt; 文件后双击该文件出现如下错误:&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png&#34; alt=&#34;无法打开报表文件&#34; title=&#34;无法打开birt报表文件&#34; /&gt;
 &lt;br /&gt;
-错误信息提示MyEclipse无法打开&lt;code&gt;Birt&lt;/code&gt;报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 &lt;em&gt;MyEclipse&lt;/em&gt; -&amp;gt; &lt;em&gt;Add Report  Capabilities&lt;/em&gt; 来对该项目添加&lt;code&gt;Birt&lt;/code&gt;报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的&lt;code&gt;Birt&lt;/code&gt;jar包和相应的report文件夹，给我们的项目造成了一定的干扰。&lt;br /&gt;
+错误信息提示MyEclipse无法打开 &lt;em&gt;Birt&lt;/em&gt; 报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 &lt;em&gt;MyEclipse&lt;/em&gt; -&amp;gt; &lt;em&gt;Add Report  Capabilities&lt;/em&gt; 来对该项目添加 &lt;em&gt;Birt&lt;/em&gt; 报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的 &lt;em&gt;Birt&lt;/em&gt; jar包和相应的report文件夹，给我们的项目造成了一定的干扰。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png&#34; alt=&#34;birt项目&#34; title=&#34;MyEclipse中的birt项目&#34; /&gt;
 &lt;/p&gt;
 
-&lt;p&gt;分析上述添加完&lt;code&gt;Birt&lt;/code&gt;报表支持的项目文件后，可发现与普通的Java Web项目相比  &lt;em&gt;.project&lt;/em&gt; 文件在 &lt;em&gt;natures&lt;/em&gt; 下面多了一个  &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 的配置项，而该配置项正是用于在项目中支持&lt;code&gt;Birt&lt;/code&gt;报表操作。&lt;/p&gt;
+&lt;p&gt;分析上述添加完 &lt;em&gt;Birt&lt;/em&gt; 报表支持的项目文件后，可发现与普通的Java Web项目相比  &lt;em&gt;.project&lt;/em&gt; 文件在 &lt;em&gt;natures&lt;/em&gt; 下面多了一个  &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 的配置项，而该配置项正是用于在项目中支持 &lt;em&gt;Birt&lt;/em&gt; 报表操作。&lt;/p&gt;
 
-&lt;p&gt;据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开&lt;code&gt;Birt&lt;/code&gt;报表的问题：&lt;strong&gt;将 &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 配置项添加到当前项目 &lt;em&gt;.project&lt;/em&gt; 文件的 &lt;em&gt;natures&lt;/em&gt; 配置项下面&lt;/strong&gt;，如下所示:&lt;/p&gt;
+&lt;p&gt;据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开 &lt;em&gt;Birt&lt;/em&gt; 报表的问题：&lt;strong&gt;将 &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 配置项添加到当前项目 &lt;em&gt;.project&lt;/em&gt; 文件的 &lt;em&gt;natures&lt;/em&gt; 配置项下面&lt;/strong&gt;，如下所示:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
 &amp;lt;projectDescription&amp;gt;
@@ -611,7 +873,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &amp;lt;/projectDescription&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;利用此种方式既可解决无法打开&lt;code&gt;Birt&lt;/code&gt;报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。&lt;/p&gt;
+&lt;p&gt;利用此种方式既可解决无法打开 &lt;em&gt;Birt&lt;/em&gt; 报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。&lt;/p&gt;
 </description>
     </item>
     
@@ -766,20 +1028,20 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
       <guid>http://lucumt.info/posts/import-local-package-in-intellij-idea/</guid>
       <description>
 
-&lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是eclpse中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;插件来进行&lt;code&gt;Golang&lt;/code&gt;编程，但其对&lt;code&gt;Golang&lt;/code&gt;的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像&lt;code&gt;Java&lt;/code&gt;那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;Golang插件&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;对&lt;code&gt;Golang&lt;/code&gt;的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;
+&lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是eclpse中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;插件来进行 &lt;em&gt;Golang&lt;/em&gt; 编程，但其对&lt;em&gt;Golang&lt;/em&gt; 的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像 &lt;em&gt;Java&lt;/em&gt; 那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;Golang插件&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;对 &lt;em&gt;Golang&lt;/em&gt; 的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;
 
 &lt;h2 id=&#34;在eclipse中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Eclipse中引用Golang本地包&lt;/h2&gt;
 
-&lt;p&gt;若我们采用的是&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;来开发&lt;code&gt;Golang&lt;/code&gt;,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 &lt;em&gt;src&lt;/em&gt; 是源代码所在的目录，在 &lt;em&gt;src&lt;/em&gt; 的 &lt;em&gt;sec&lt;/em&gt; 文件夹下有一个名为 &lt;em&gt;calculate.go&lt;/em&gt; 的文件，其中有一个名为 &lt;em&gt;Add&lt;/em&gt; 的函数用于计算两个整数的相加之和。&lt;br /&gt;
+&lt;p&gt;若我们采用的是&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;来开发 &lt;em&gt;Golang&lt;/em&gt; ,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 &lt;em&gt;src&lt;/em&gt; 是源代码所在的目录，在 &lt;em&gt;src&lt;/em&gt; 的 &lt;em&gt;sec&lt;/em&gt; 文件夹下有一个名为 &lt;em&gt;calculate.go&lt;/em&gt; 的文件，其中有一个名为 &lt;em&gt;Add&lt;/em&gt; 的函数用于计算两个整数的相加之和。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png&#34; alt=&#34;goclipse中的本地包&#34; /&gt;
 &lt;br /&gt;
-若要在主程序main方法中调用 &lt;em&gt;Add&lt;/em&gt; 方法，先通过import引入该文件的包名&lt;code&gt;import service&lt;/code&gt;，然后通过包名调用该方法&lt;code&gt;service.Add(1,2)&lt;/code&gt;，如下图所示，可以看出在Eclipse中引用&lt;code&gt;Golang&lt;/code&gt;本地包与引用Java包没有太大的区别，都是将包文件放到 &lt;em&gt;src&lt;/em&gt; 源文件夹下，然后通过包名来引用。&lt;br /&gt;
+若要在主程序main方法中调用 &lt;em&gt;Add&lt;/em&gt; 方法，先通过import引入该文件的包名&lt;code&gt;import service&lt;/code&gt;，然后通过包名调用该方法&lt;code&gt;service.Add(1,2)&lt;/code&gt;，如下图所示，可以看出在Eclipse中引用 &lt;em&gt;Golang&lt;/em&gt; 本地包与引用Java包没有太大的区别，都是将包文件放到 &lt;em&gt;src&lt;/em&gt; 源文件夹下，然后通过包名来引用。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference.png&#34; alt=&#34;goclipse中的本地包引用&#34; /&gt;
 &lt;br /&gt;
 也可以通过直接导入该包所在的文件夹的名称来调用该方法，此时需要将&lt;code&gt;import service&lt;/code&gt;改为&lt;code&gt;import sec&lt;/code&gt;，如下图所示&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference_folder.png&#34; alt=&#34;goclipse中的本地包通过文件夹引用&#34; /&gt;
 &lt;br /&gt;
-可以看出在eclipse中导入&lt;code&gt;Golang&lt;/code&gt;本地包时有两种方法： &lt;strong&gt;通过import导入包名&lt;/strong&gt; 或 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; ，这两种方法均可使程序正常运行。&lt;/p&gt;
+可以看出在eclipse中导入 &lt;em&gt;Golang&lt;/em&gt; 本地包时有两种方法： &lt;strong&gt;通过import导入包名&lt;/strong&gt; 或 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; ，这两种方法均可使程序正常运行。&lt;/p&gt;
 
 &lt;h2 id=&#34;在intellij-idea中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Intellij IDEA中引用Golang本地包&lt;/h2&gt;
 
@@ -788,26 +1050,26 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference.png&#34; alt=&#34;IDEA中的本地包引用&#34; /&gt;
 &lt;br /&gt;
-在上述代码中我们是通过&lt;code&gt;import service&lt;/code&gt;的方式来导入相应包的，由于IDEA对Golang很强，从图中可以看出 &lt;em&gt;service&lt;/em&gt; 的颜色与其它导入包的颜色不一致，当把鼠标移动到 &lt;em&gt;service&lt;/em&gt; 上时会提示 &lt;em&gt;Cannot resolve file &amp;lsquo;service&amp;rsquo;&lt;/em&gt; ，直接运行时，会出现如下图所示 &lt;em&gt;cannot find package&lt;/em&gt; 错误，将&lt;code&gt;import service&lt;/code&gt;修改为&lt;code&gt;import sec&lt;/code&gt;时，会出现同样的错误，可以看出在idea中默认不支持直接导入本地&lt;code&gt;Golang&lt;/code&gt;包。&lt;br /&gt;
+在上述代码中我们是通过&lt;code&gt;import service&lt;/code&gt;的方式来导入相应包的，由于IDEA对Golang很强，从图中可以看出 &lt;em&gt;service&lt;/em&gt; 的颜色与其它导入包的颜色不一致，当把鼠标移动到 &lt;em&gt;service&lt;/em&gt; 上时会提示 &lt;em&gt;Cannot resolve file &amp;lsquo;service&amp;rsquo;&lt;/em&gt; ，直接运行时，会出现如下图所示 &lt;em&gt;cannot find package&lt;/em&gt; 错误，将&lt;code&gt;import service&lt;/code&gt;修改为&lt;code&gt;import sec&lt;/code&gt;时，会出现同样的错误，可以看出在idea中默认不支持直接导入本地 &lt;em&gt;Golang&lt;/em&gt; 包。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference_run_error.png&#34; alt=&#34;IDEA中引用本地包运行出错&#34; /&gt;
 &lt;br /&gt;
 从报错信息可以看出，程序在运行时先去 &lt;strong&gt;GOROOT&lt;/strong&gt; 去搜索导入包，然后去 &lt;strong&gt;GOPATH&lt;/strong&gt; 寻找导入包，最后在当前项目模块下寻找导入包，但实际上不存在 &lt;em&gt;D:\program\IntelliJ IDEA 2016.2.1\workspace\gproject\gotest\src\service&lt;/em&gt; 这个目录，故而程序报错，不能正常运行。&lt;/p&gt;
 
-&lt;p&gt;解决该问题的关键是明白 &lt;strong&gt;&lt;a href=&#34;http://golang.org/doc/install#tarball_non_standard&#34;&gt;GOROOT&lt;/a&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;a href=&#34;http://golang.org/cmd/go/#hdr-GOPATH_environment_variable&#34;&gt;GOPATH&lt;/a&gt;&lt;/strong&gt; 的作用，根据官方文档的解释 &lt;strong&gt;GOPATH&lt;/strong&gt; 的主要作用是存放文件以便&lt;code&gt;Golang&lt;/code&gt;程序编译时可以进行搜索引用，&lt;strong&gt;GOPATH&lt;/strong&gt; 可以设置一个值或多个值，多个值之间以分号隔开。很明显只要我们将本地&lt;code&gt;Golang&lt;/code&gt;加入到 &lt;strong&gt;GOPATH&lt;/strong&gt;中即可在IDEA中正常运行该程序。&lt;/p&gt;
+&lt;p&gt;解决该问题的关键是明白 &lt;strong&gt;&lt;a href=&#34;http://golang.org/doc/install#tarball_non_standard&#34;&gt;GOROOT&lt;/a&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;a href=&#34;http://golang.org/cmd/go/#hdr-GOPATH_environment_variable&#34;&gt;GOPATH&lt;/a&gt;&lt;/strong&gt; 的作用，根据官方文档的解释 &lt;strong&gt;GOPATH&lt;/strong&gt; 的主要作用是存放文件以便 &lt;em&gt;Golang&lt;/em&gt; 程序编译时可以进行搜索引用，&lt;strong&gt;GOPATH&lt;/strong&gt; 可以设置一个值或多个值，多个值之间以分号隔开。很明显只要我们将本地 &lt;em&gt;Golang&lt;/em&gt; 加入到 &lt;strong&gt;GOPATH&lt;/strong&gt;中即可在IDEA中正常运行该程序。&lt;/p&gt;
 
-&lt;p&gt;如下图所示，在IDEA中依次选择 &lt;strong&gt;File-&amp;gt;Settings-&amp;gt;Language&amp;amp;Frameworks-&amp;gt;Go-&amp;gt;Go Libraries&lt;/strong&gt; ，会出现如下图所示的配置&lt;code&gt;Golang&lt;/code&gt;库的界面，在该界面可以添加&lt;code&gt;Golang&lt;/code&gt;本地包所在的路径，该界面包含3个不同作用范围的配置方式： &lt;em&gt;Global libraries&lt;/em&gt; 、 &lt;em&gt;Project libraries&lt;/em&gt; 和 &lt;em&gt;Module libraries&lt;/em&gt; ，其中 &lt;em&gt;Global libraries&lt;/em&gt; 的配置对所有项目生效为全局配置，&lt;em&gt;Project libraries&lt;/em&gt; 的配置对整个项目生效，&lt;em&gt;Module libraries&lt;/em&gt; 的配置只对模块生效，可以看出在 &lt;em&gt;Global libraries&lt;/em&gt; 默认包含了 &lt;strong&gt;GOPATH&lt;/strong&gt; 。根据实际使用的需求我们可以选择把本地包设置在 &lt;em&gt;Project libraries&lt;/em&gt; 还是 &lt;em&gt;Module libraries&lt;/em&gt; 中。&lt;br /&gt;
+&lt;p&gt;如下图所示，在IDEA中依次选择 &lt;strong&gt;File-&amp;gt;Settings-&amp;gt;Language&amp;amp;Frameworks-&amp;gt;Go-&amp;gt;Go Libraries&lt;/strong&gt; ，会出现如下图所示的配置 &lt;em&gt;Golang&lt;/em&gt; 库的界面，在该界面可以添加 &lt;em&gt;Golang&lt;/em&gt; 本地包所在的路径，该界面包含3个不同作用范围的配置方式： &lt;em&gt;Global libraries&lt;/em&gt; 、 &lt;em&gt;Project libraries&lt;/em&gt; 和 &lt;em&gt;Module libraries&lt;/em&gt; ，其中 &lt;em&gt;Global libraries&lt;/em&gt; 的配置对所有项目生效为全局配置，&lt;em&gt;Project libraries&lt;/em&gt; 的配置对整个项目生效，&lt;em&gt;Module libraries&lt;/em&gt; 的配置只对模块生效，可以看出在 &lt;em&gt;Global libraries&lt;/em&gt; 默认包含了 &lt;strong&gt;GOPATH&lt;/strong&gt; 。根据实际使用的需求我们可以选择把本地包设置在 &lt;em&gt;Project libraries&lt;/em&gt; 还是 &lt;em&gt;Module libraries&lt;/em&gt; 中。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_select_gopath.png&#34; alt=&#34;IDEA中配置程序库&#34; /&gt;
 &lt;br /&gt;
 本文的程序都是在 &lt;em&gt;gotest&lt;/em&gt; 模块下，故将其添加到 &lt;em&gt;Module libraries&lt;/em&gt; 下，添加完的结果如下所示：&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_gopath_config.png&#34; alt=&#34;IDEA中配置程序库的结果&#34; /&gt;
 &lt;br /&gt;
-将本地包添加到模块库之后，还需要在go文件中将导入包的语句设置为&lt;code&gt;import sec&lt;/code&gt;，不能设置为&lt;code&gt;import service&lt;/code&gt;，然后该&lt;code&gt;Golang&lt;/code&gt;程序即可正常运行。&lt;/p&gt;
+将本地包添加到模块库之后，还需要在go文件中将导入包的语句设置为&lt;code&gt;import sec&lt;/code&gt;，不能设置为&lt;code&gt;import service&lt;/code&gt;，然后该 &lt;em&gt;Golang&lt;/em&gt; 程序即可正常运行。&lt;/p&gt;
 
-&lt;p&gt;可以看出，不同于&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;，在IDEA中只能使用 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; 来导入本地&lt;code&gt;Golang&lt;/code&gt;包，至于原因还需要进一步研究。&lt;/p&gt;
+&lt;p&gt;可以看出，不同于&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;，在IDEA中只能使用 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; 来导入本地 &lt;em&gt;Golang&lt;/em&gt; 包，至于原因还需要进一步研究。&lt;/p&gt;
 
 &lt;h2 id=&#34;利用goclipse时无法运行程序的解决方法:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;利用Goclipse时无法运行程序的解决方法&lt;/h2&gt;
 
-&lt;p&gt;在使用&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;运行&lt;code&gt;Golang&lt;/code&gt;程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 &lt;em&gt;src&lt;/em&gt; 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 &lt;em&gt;src&lt;/em&gt; 目录添加源代码目录。在Eclipse中选中该项目然后点击 &lt;strong&gt;Properties&lt;/strong&gt; ，会出现项目属性配置界面，点击 &lt;strong&gt;Go Project Configuration&lt;/strong&gt; ，通过 &lt;strong&gt;Add Folder&lt;/strong&gt; 可以将 &lt;em&gt;src&lt;/em&gt; 添加到源代码中，之后程序即可正常运行。&lt;br /&gt;
+&lt;p&gt;在使用&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;运行 &lt;em&gt;Golang&lt;/em&gt; 程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 &lt;em&gt;src&lt;/em&gt; 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 &lt;em&gt;src&lt;/em&gt; 目录添加源代码目录。在Eclipse中选中该项目然后点击 &lt;strong&gt;Properties&lt;/strong&gt; ，会出现项目属性配置界面，点击 &lt;strong&gt;Go Project Configuration&lt;/strong&gt; ，通过 &lt;strong&gt;Add Folder&lt;/strong&gt; 可以将 &lt;em&gt;src&lt;/em&gt; 添加到源代码中，之后程序即可正常运行。&lt;br /&gt;
 &lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png&#34; alt=&#34;goclipse中添加源程序目录&#34; /&gt;
 &lt;/p&gt;
 </description>
@@ -1252,87 +1514,17 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
 &lt;p&gt;上述代码会一次性的把用户权限查询出来然后放入特定的 &lt;strong&gt;session&lt;/strong&gt; 中，但是 &lt;strong&gt;&lt;em&gt;UserDetailService&lt;/em&gt;&lt;/strong&gt; 方法一般只在用户登录web系统成功时才会被调用一次，使用范围较为局限，有时候我们需要在用户使用的过程中动态的改变用户的权限（譬如在我自己的项目中，当用户选中不同的项目之后，不同的项目对应不同的权限）。利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理权限信息时，用户的权限本质上是存储在一个 &lt;strong&gt;session&lt;/strong&gt; 中，只不过被&lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt;进行了进一步的封装而已。所以若想动态的改变用户的权限，我们只需要将用户的信息重新存储到 &lt;strong&gt;session&lt;/strong&gt; 中即可，具体代码如下所示：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  List&amp;lt;GrantedAuthority&amp;gt; authList=new ArrayList&amp;lt;GrantedAuthority&amp;gt;();//用于存储修改之后的权限列表
-  authList.add(new SimpleGrantedAuthority(&amp;quot;addUser&amp;quot;));
-  authList.add(new SimpleGrantedAuthority(&amp;quot;editUser&amp;quot;));
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;List&amp;lt;GrantedAuthority&amp;gt; authList=new ArrayList&amp;lt;GrantedAuthority&amp;gt;();//用于存储修改之后的权限列表
+authList.add(new SimpleGrantedAuthority(&amp;quot;addUser&amp;quot;));
+authList.add(new SimpleGrantedAuthority(&amp;quot;editUser&amp;quot;));
 
-  SecurityContext context=SecurityContextHolder.getContext();
+SecurityContext context=SecurityContextHolder.getContext();
 
-  UserDetails userDetails=(UserDetails) context.getAuthentication().getPrincipal();
-  Authentication auth=new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),authList);
+UserDetails userDetails=(UserDetails) context.getAuthentication().getPrincipal();
+Authentication auth=new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword(),authList);
 
-  context.setAuthentication(auth); //重新设置上下文中存储的用户权限
+context.setAuthentication(auth); //重新设置上下文中存储的用户权限
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>http://lucumt.info/posts/using-mock-test-http-servlet-request/</link>
-      <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
-      
-      <guid>http://lucumt.info/posts/using-mock-test-http-servlet-request/</guid>
-      <description>
-
-&lt;h2 id=&#34;编写单元测试时的注意事项:ce3acd839c9974eb09add799db7e87e2&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
-
-&lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
-
-&lt;p&gt;假设在 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  String userId = request.getAttribute(&amp;quot;userId&amp;quot;).toString();//先获取userId对象
-  queryUserById(userId);//然后将获取的userId传入对应方法
-
-  public User queryUserById(String userId){//相关该方法
-       User userModel = userDao.findById(userId);
-       return userModel;
-  }  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;请尽量避免使用第二种方式&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  queryUserById(request);//直接传入request对象
-  
-  public User queryUserById(HttpServletRequest request){//相关方法
-       String userId = request.getAttribute(&amp;quot;userId&amp;quot;).toString();//在该方法内部获取userId
- 
-       User userModel = userDao.findById(userId);
-       return userModel;
-  }  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 &lt;strong&gt;HttpServletRequest&lt;/strong&gt; 对象，从而影响我们的测试。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;spring和mock在单元测试中的使用:ce3acd839c9974eb09add799db7e87e2&#34;&gt;Spring和Mock在单元测试中的使用&lt;/h2&gt;
-
-&lt;p&gt;在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 对象，如果我们想对这种方法进行测试，可以利用&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟相关的对象。&lt;/p&gt;
-
-&lt;p&gt;由于&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;自身已经整合了&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;相关的类，故在此处展示一个示例代码，以供参考:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.File;
- 
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockServletContext;
- 
-public class SpringMockTest {
- 
-@Test
-public void testHttpServletRequest(){
-	String realPath =&amp;quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&amp;quot;;
-	//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错
-	MockServletContext context = new MockServletContext(realPath);
-	//获取realPath
-	System.out.println(context.getRealPath(File.separator));
-	//模拟HttpServletRequest
-	MockHttpServletRequest request = new MockHttpServletRequest(context);
-	//通过HttpServletRequest来获取realPath
-	System.out.println(request.getSession().getServletContext().getRealPath(File.separator));
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意:请在上下文路径的字符串前面加上 &lt;strong&gt;file:&lt;/strong&gt; 前缀，否则程序会报错。如上面的程序，realPath的值应为 &lt;em&gt;file:D:\Java\apache-tomcat-7.0.23\webapps\tmn&lt;/em&gt; ，若去掉 &lt;em&gt;file:&lt;/em&gt; 前缀，改为 &lt;em&gt;D:\Java\apache-tomcat-7.0.23\webapps\tmn&lt;/em&gt; ，则程序会报错。&lt;/p&gt;
 </description>
     </item>
     

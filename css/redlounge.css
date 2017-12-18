@@ -21,7 +21,7 @@ section a{
 }
 
 section.post{
-	font-size:16px;
+	font-size:14px;
 }
 
 section.post ul{
@@ -33,7 +33,8 @@ section.post ul{
 }
 pre {
     padding: 5px 5px 5px 0px;
-	margin:0px 5px;
+	margin-top:-7px;
+    margin-bottom:-7px;
 }
 
 code {
@@ -42,6 +43,14 @@ code {
     color: #c72f4e;
     border-radius: 4px;
 	line-height:normal;
+}
+
+code:not(.hljs){
+    padding: 2px 4px;
+    color: #d14;
+    white-space: nowrap;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
 }
 
 blockquote{
@@ -54,10 +63,19 @@ blockquote p{
    border-radius:4px;
 }
 
+h1,h2,h3,h4,h5{
+   margin:7px 0px;
+}
+
 p {
 	color: #2d303b;
-	margin:1em 0em 0em 0em;
+	margin:10px 0px 0px 0px;
 }
+
+pre + p{
+   margin-top:0px !important;
+}
+
 a {
   -o-transition:.5s;
   -ms-transition:.5s;
