@@ -51,7 +51,7 @@
 
     
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/rainbow.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/mono-blue.min.css">
   
   <script src="http://lucumt.info/js/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 <h3 id="在github上创建一个自己的项目:ef8b9e40461ea61e62e36d1aa4c54d14">在Github上创建一个自己的项目</h3>
 
 <ol>
-<li>在<code>Github</code>上创建一个项目，本文中该项目名为 <em>blog</em><br />
+<li>在 <em>Github</em> 上创建一个项目，本文中该项目名为 <em>blog</em><br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/create-github-repository.png" alt="创建Github项目" title="创建Github项目" /></li>
 <li>由于<code>Github Pages</code>强制要求在托管博客时该项目必须有一个名为 <em>gh-pages</em> 的分支，所以要预先给该项目创建一个名为 <em>gh-pages</em> 的分支</li>
 <li>在Github中打开 <em>blog</em> 项目主页面，点击 <em>Settings</em> 按钮<br />
@@ -279,7 +279,7 @@ var _hmt = _hmt || [];
 
 <h3 id="利用hugo作为博客生成器:ef8b9e40461ea61e62e36d1aa4c54d14">利用Hugo作为博客生成器</h3>
 
-<p>由于<code>Github Pages</code> 只支持静态的html页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择<code>Hugo</code> 作为自己的博客生成器。<code>Hugo</code> 是一个基于<code>Go]</code>开发的静态生成器，它采用<em><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></em> 语法来编写博客生成，然后生成相应的HTML页面。</p>
+<p>由于 <em>Github Pages</em> 只支持静态的html页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成HTML页面，避免纯手动编写时的费时费力。由于自己近期一直在学习 <em>Go*，为了加深自己对于 *Go</em> 的运用，于是便选择 <em>Hugo</em>  作为自己的博客生成器。 <em>Hugo</em> 是一个基于 <em>Go</em> 开发的静态生成器，它采用<em><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></em> 语法来编写博客生成，然后生成相应的HTML页面。</p>
 
 <h4 id="安装go:ef8b9e40461ea61e62e36d1aa4c54d14">安装Go</h4>
 
@@ -287,48 +287,43 @@ var _hmt = _hmt || [];
 
 <ul>
 <li>下载<strong>go1.4.2.windows-amd64.msi</strong></li>
-<li>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把<code>Go</code>安装在 <em>D:\code\go</em> 下，这三个变量相应的设置为:</li>
+
+<li><p>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把 <em>Go</em> 安装在 <em>D:\code\go</em> 下，这三个变量相应的设置为:</p>
+
+<pre><code>PATH='D:\code\go\bin';%PATH%  
+GOPATH='D:\code\gopath'  
+GOROOT='D:\code\go'
+</code></pre></li>
 </ul>
 
-<blockquote>
-<p>PATH=&rsquo;D:\code\go\bin&rsquo;;%PATH%<br />
-GOPATH=&rsquo;D:\code\gopath&rsquo;<br />
-GOROOT=&rsquo;D:\code\go&rsquo;</p>
-</blockquote>
-
-<p>其中<strong>PATH</strong>变量的作用主要是为了将<code>Go</code>的各种命令加到cmd中。<strong>GOROOT</strong>则是当我们将<code>Go</code>安装在我们的自定义目录时，需要制定该安装目录，若安装在默认目录<strong>C:\go</strong>下则不用设置<strong>GOROOT</strong>目录，官方文档原文为<em>GOROOT must be set only when installing to a custom location.</em> 比较难懂的是<strong>GOPATH</strong>,官方文档上的说明为 <em>Create a directory to contain your workspace, $HOME/work for example, and set the GOPATH environment variable to point to that location.</em> 据此我们可以将<strong>GOPATH</strong>理解为工作目录，它主要用来存放<code>Go</code>代码编译之后的可执行文件，其位置可以随意设置，只要不与<strong>GOROOT</strong>相同即可。</p>
+<p>其中<strong>PATH</strong>变量的作用主要是为了将 <em>Go</em> 的各种命令加到cmd中。<strong>GOROOT</strong>则是当我们将 <em>Go</em> 安装在我们的自定义目录时，需要制定该安装目录，若安装在默认目录<strong>C:\go</strong>下则不用设置<strong>GOROOT</strong>目录，官方文档原文为<em>GOROOT must be set only when installing to a custom location.</em> 比较难懂的是<strong>GOPATH</strong>,官方文档上的说明为 <em>Create a directory to contain your workspace, $HOME/work for example, and set the GOPATH environment variable to point to that location.</em> 据此我们可以将<strong>GOPATH</strong>理解为工作目录，它主要用来存放 <em>Go</em> 代码编译之后的可执行文件，其位置可以随意设置，只要不与<strong>GOROOT</strong>相同即可。</p>
 
 <ul>
-<li>安装完成之后，重新打开cmd窗口，输入<strong>go version</strong>之后按Enter键，若出现如下信息，则表示<code>Go</code>安装成功:</li>
-</ul>
+<li><p>安装完成之后，重新打开cmd窗口，输入<strong>go version</strong>之后按Enter键，若出现如下信息，则表示 <em>Go</em> 安装成功:</p>
 
-<blockquote>
-<p>C:\Users\Administrator&gt;go version<br />
-go version go1.4.2 windows/amd64</p>
-</blockquote>
+<pre><code>C:\Users\Administrator&gt;go version  
+go version go1.4.2 windows/amd64
+</code></pre></li>
+</ul>
 
 <h4 id="安装hugo:ef8b9e40461ea61e62e36d1aa4c54d14">安装Hugo</h4>
 
-<p><code>Hugo</code>的安装过程与<code>Go</code>的类似.</p>
+<p><em>Hugo</em> 的安装过程与 <em>Go</em> 的类似.</p>
 
 <ul>
-<li>首先在<a href="https://github.com/spf13/hugo/releases">Hugo下载页</a>根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的<strong>PATH</strong>环境变量即可。我的安装在 <em>D:\program\hugo</em> 所以相应的环境变量设置为</li>
+<li><p>首先在<a href="https://github.com/spf13/hugo/releases">Hugo下载页</a>根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的<strong>PATH</strong>环境变量即可。我的安装在 <em>D:\program\hugo</em> 所以相应的环境变量设置为</p>
+
+<pre><code>PATH='D:\program\hugo';%PATH%
+</code></pre></li>
+
+<li><p>重新打开cmd窗口，输入<strong>hugo version</strong>，若出现如下信息，则表示 <em>Hugo</em> 安装成功：</p>
+
+<pre><code>C:\Users\Administrator&gt;hugo version
+Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
+</code></pre></li>
 </ul>
 
-<blockquote>
-<p>PATH=&rsquo;D:\program\hugo&rsquo;;%PATH%</p>
-</blockquote>
-
-<ul>
-<li>重新打开cmd窗口，输入<strong>hugo version</strong>，若出现如下信息，则表示<code>Hugo</code>安装成功：</li>
-</ul>
-
-<blockquote>
-<p>C:\Users\Administrator&gt;hugo version
-Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
-</blockquote>
-
-<p>关于<code>Hugo</code>的基本操作命令，可以参见<a href="https://gohugo.io/overview/quickstart/">Hugo快速入门</a>，此处不再详述。</p>
+<p>关于 <em>Hugo</em> 的基本操作命令，可以参见<a href="https://gohugo.io/overview/quickstart/">Hugo快速入门</a>，此处不再详述。</p>
 
 <h3 id="在github-pages上托管hugo:ef8b9e40461ea61e62e36d1aa4c54d14">在Github Pages上托管Hugo</h3>
 
@@ -340,11 +335,11 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 <li>将之前在Github上创建的 <em>blog</em> 项目clone到本地目录<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/clone-github-repository.png" alt="将项目下载到本地" title="将项目下载到本地" />
 <br /></li>
-<li>切换到 <em>blog</em> 目录并利用<code>hugo new site</code>命令创建一个名为 <em>person_blog</em> 的<code>Hugo</code>站点，然后将其内容移入到 <em>blog</em> 目录下并删除 <em>person_blog</em> 目录<br />
+<li>切换到 <em>blog</em> 目录并利用<code>hugo new site</code>命令创建一个名为 <em>person_blog</em> 的 <em>Hugo</em> 站点，然后将其内容移入到 <em>blog</em> 目录下并删除 <em>person_blog</em> 目录<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/create-hugo-site-in-repository.png" alt="创建一个Hugo站点" title="创建一个Hugo站点" /></li>
 <li>利用<code>hugo new</code>命令创建一个md文件用于存储我们的第一篇博客<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/create-hugo-page.png" alt="创建一个Hugo页面" title="创建一个Hugo页面" /></li>
-<li>在 <em>blog</em> 目录下创建一个名为 <em>themes</em> 的文件夹用于存储<code>Hugo</code>样式，并将自己选中的样式下载到本地<br />
+<li>在 <em>blog</em> 目录下创建一个名为 <em>themes</em> 的文件夹用于存储 <em>Hugo</em> 样式，并将自己选中的样式下载到本地<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/clone-hugo-theme.png" alt="下载Hugo样式" title="下载Hugo样式" /></li>
 <li>输入<code>hugo server --theme=hugo-redlounge --buildDrafts</code>在本地启动Hugo，启动正常后命令行输出如下<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/start-hugo-in-local.png" alt="在本地启动Hugo" title="在本地启动Hugo" />
@@ -354,7 +349,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 <br /></li>
 <li>我们需要将相关的链接地址修改为 <em>https://fox321.github.io/blog</em> ，同时将端口号去掉，相关的命令为 <code>hugo server -D --theme=hugo-redlounge --baseUrl=&quot;https://fox321.github.io/blog&quot; --appendPort=false</code>，运行截图如下
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/update-hugo-site-url.png" alt="修改博客链接地址" title="修改博客链接地址" /></li>
-<li>修改完链接地址之后，需要将生成的页面提交到<code>Github</code>中才能被访问，首先需要将页面提交到 <em>master</em> ，由于我是在Windows操作系统上进行的，而CMD对<code>Git</code>的支持不是很好，故从此步开始切换为在<code>Git Bash</code>进行相关操作<br />
+<li>修改完链接地址之后，需要将生成的页面提交到 <em>Github</em> 中才能被访问，首先需要将页面提交到 <em>master</em> ，由于我是在Windows操作系统上进行的，而CMD对<code>Git</code>的支持不是很好，故从此步开始切换为在 <em>Git Bash</em> 进行相关操作<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-github.png" alt="提交到master" title="提交到master" /></li>
 <li>利用<code>subtree</code>命令将 <em>master</em> 中 <em>public</em> 目录下的内容同步到 <em>gh-pages</em> 目录下<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-branch.png" alt="同步到gh-pages" title="同步到gh-pages" />
@@ -362,7 +357,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00</p>
 此时访问该项目的设置页面，在 <em>Github Pages</em> 部分会看见如下信息<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/push-blog-to-branch-success.png" alt="同步到gh-pages成功" title="同步到gh-pages成功" />
 <br /></li>
-<li>访问 <em>https://fox321.github.io/blog</em> ，出现如下页面，至此<code>Hugo</code>博客托管到<code>Github Pages</code>成功！<br />
+<li>访问 <em>https://fox321.github.io/blog</em> ，出现如下页面，至此 <em>Hugo</em> 博客托管到 <em>Github Pages</em> 成功！<br />
 <img src="http://lucumt.info/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png" alt="访问Github Pages页面&quot;" title="访问Github Pages页面" /></li>
 </ol>
 
