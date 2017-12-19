@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mybatis on 飞狐的部落格</title>
-    <link>http://lucumt.info/categories/mybatis/</link>
+    <link>https://lucumt.info/categories/mybatis/</link>
     <description>Recent content in Mybatis on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 18 Dec 2017 18:33:14 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lucumt.info/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
-      <link>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</link>
+      <link>https://lucumt.info/posts/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</guid>
+      <guid>https://lucumt.info/posts/print-sql-in-different-mybatis-version/</guid>
       <description>
 
 &lt;p&gt;项目中ORM框架用的是 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt;，最近由于业务上的需求将 &lt;em&gt;MyBatis&lt;/em&gt; 从3.1.1升级到3.4.5，发现升级后通过 &lt;strong&gt;&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;Log4j&lt;/a&gt;&lt;/strong&gt; 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;
@@ -105,7 +105,7 @@ log4j.logger.java.sql.ResultSet=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;运行结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.1.1时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis1.1.1时显示执行SQL&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.1.1时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis1.1.1时显示执行SQL&#34; /&gt;
 &lt;br /&gt;
 从上述代码可知在 &lt;em&gt;Mybatis3.1.1&lt;/em&gt; 中通过 &lt;em&gt;Log4j&lt;/em&gt; 实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: &lt;strong&gt;当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印&lt;/strong&gt; ，基于此 &lt;em&gt;MyBatis&lt;/em&gt; 从3.2.0版本之后重新实现了相关功能。&lt;/p&gt;
 
@@ -180,7 +180,7 @@ log4j.logger.com.lucumt.mapper=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;DEBUG模式下查看 &lt;em&gt;ConnectionLogger&lt;/em&gt; 的调用堆栈如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png&#34; alt=&#34;&amp;quot;ConnectionLogger的调用堆栈&amp;quot;&#34; title=&#34;ConnectionLogger的调用堆栈&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png&#34; alt=&#34;&amp;quot;ConnectionLogger的调用堆栈&amp;quot;&#34; title=&#34;ConnectionLogger的调用堆栈&#34; /&gt;
 &lt;br /&gt;
 从其调用堆栈可知log对象是通过&lt;code&gt;MappedStatement&lt;/code&gt;生成的，如下&lt;/p&gt;
 
@@ -234,7 +234,7 @@ log4j.logger.com.lucumt.mapper=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 &lt;strong&gt;namespace+方法id&lt;/strong&gt; 组成，在本例中为 &lt;em&gt;com.lucumt.mapper.UserMappper.getUsers&lt;/em&gt; ，而前面的配置为 &lt;em&gt;log4j.logger.com.lucumt.mapper=DEBUG&lt;/em&gt; ，由于 &lt;em&gt;Log4j&lt;/em&gt; 中的log示例的继承关系，相当于 &lt;em&gt;com.lucumt.mapper.UserMappper.getUser&lt;/em&gt; 也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.4.5时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis3.4.5时显示执行SQL&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.4.5时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis3.4.5时显示执行SQL&#34; /&gt;
 &lt;br /&gt;
 利用新版 &lt;em&gt;MyBatis&lt;/em&gt; 的这一特性，我们可以实现类似如下的不同粒度sql打印&lt;/p&gt;
 
@@ -273,10 +273,10 @@ log4j.logger.com.xxx.mapper.UserMapper.getUsers=DEBUG #不能打印SQL
     
     <item>
       <title>mybatis batch insert exception的解决方法</title>
-      <link>http://lucumt.info/posts/mybatis-batch-insert-exception/</link>
+      <link>https://lucumt.info/posts/mybatis-batch-insert-exception/</link>
       <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/mybatis-batch-insert-exception/</guid>
+      <guid>https://lucumt.info/posts/mybatis-batch-insert-exception/</guid>
       <description>&lt;p&gt;在利用 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt; 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
 
 &lt;ul&gt;

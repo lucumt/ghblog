@@ -67,7 +67,7 @@ PaginatePath  = "page"
     weight = -10
 
  [[menu.site]]
-    url ="http://lilydjwg.is-programmer.com/"
+    url ="https://blog.lilydjwg.me/"
     name = "依云的博客"
     weight = -20
 
@@ -75,6 +75,11 @@ PaginatePath  = "page"
     url = "http://evilbinary.org/"
     name = "邪恶二进制"
     weight = -19
+
+ [[menu.site]]
+    url = "https://51itzone.cn"
+    name = "会飞的古木鱼"
+    weight = -18
 
  [[menu.site]]
     url = "http://www.wlman.cc/"

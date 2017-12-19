@@ -122,6 +122,6 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 7. 在`Github`项目中点击 *Settings* 按钮查看 *Github Pages* 区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功  
 !["增加A记录"](/blog_img/create-website-with-hugo/github-pages-configuration-check.png "增加A记录")
 
-至此利用[Godaddy](https://www.godaddy.com/)来配置自自定义域名的过程完成，输入 *https://lucumt.info* 即可访问自己的博客！
+至此利用[Godaddy](https://www.godaddy.com/)来配置自自定义域名的过程完成，输入 *http://lucumt.info* 即可访问自己的博客！
 
 <--待续-->
