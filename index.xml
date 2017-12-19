@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>飞狐的部落格</title>
-    <link>http://lucumt.info/</link>
+    <link>https://lucumt.info/</link>
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 18 Dec 2017 18:33:14 +0800</lastBuildDate>
-    <atom:link href="http://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
-      <link>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</link>
+      <link>https://lucumt.info/posts/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/print-sql-in-different-mybatis-version/</guid>
+      <guid>https://lucumt.info/posts/print-sql-in-different-mybatis-version/</guid>
       <description>
 
 &lt;p&gt;项目中ORM框架用的是 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt;，最近由于业务上的需求将 &lt;em&gt;MyBatis&lt;/em&gt; 从3.1.1升级到3.4.5，发现升级后通过 &lt;strong&gt;&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;Log4j&lt;/a&gt;&lt;/strong&gt; 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;
@@ -105,7 +105,7 @@ log4j.logger.java.sql.ResultSet=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;运行结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.1.1时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis1.1.1时显示执行SQL&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.1.1时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis1.1.1时显示执行SQL&#34; /&gt;
 &lt;br /&gt;
 从上述代码可知在 &lt;em&gt;Mybatis3.1.1&lt;/em&gt; 中通过 &lt;em&gt;Log4j&lt;/em&gt; 实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: &lt;strong&gt;当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印&lt;/strong&gt; ，基于此 &lt;em&gt;MyBatis&lt;/em&gt; 从3.2.0版本之后重新实现了相关功能。&lt;/p&gt;
 
@@ -180,7 +180,7 @@ log4j.logger.com.lucumt.mapper=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;DEBUG模式下查看 &lt;em&gt;ConnectionLogger&lt;/em&gt; 的调用堆栈如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png&#34; alt=&#34;&amp;quot;ConnectionLogger的调用堆栈&amp;quot;&#34; title=&#34;ConnectionLogger的调用堆栈&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png&#34; alt=&#34;&amp;quot;ConnectionLogger的调用堆栈&amp;quot;&#34; title=&#34;ConnectionLogger的调用堆栈&#34; /&gt;
 &lt;br /&gt;
 从其调用堆栈可知log对象是通过&lt;code&gt;MappedStatement&lt;/code&gt;生成的，如下&lt;/p&gt;
 
@@ -234,7 +234,7 @@ log4j.logger.com.lucumt.mapper=DEBUG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 &lt;strong&gt;namespace+方法id&lt;/strong&gt; 组成，在本例中为 &lt;em&gt;com.lucumt.mapper.UserMappper.getUsers&lt;/em&gt; ，而前面的配置为 &lt;em&gt;log4j.logger.com.lucumt.mapper=DEBUG&lt;/em&gt; ，由于 &lt;em&gt;Log4j&lt;/em&gt; 中的log示例的继承关系，相当于 &lt;em&gt;com.lucumt.mapper.UserMappper.getUser&lt;/em&gt; 也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.4.5时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis3.4.5时显示执行SQL&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png&#34; alt=&#34;&amp;quot;MyBatis3.4.5时显示执行SQL&amp;quot;&#34; title=&#34;MyBatis3.4.5时显示执行SQL&#34; /&gt;
 &lt;br /&gt;
 利用新版 &lt;em&gt;MyBatis&lt;/em&gt; 的这一特性，我们可以实现类似如下的不同粒度sql打印&lt;/p&gt;
 
@@ -273,10 +273,10 @@ log4j.logger.com.xxx.mapper.UserMapper.getUsers=DEBUG #不能打印SQL
     
     <item>
       <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
-      <link>http://lucumt.info/posts/modify-java-class-file-content-directly/</link>
+      <link>https://lucumt.info/posts/modify-java-class-file-content-directly/</link>
       <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/modify-java-class-file-content-directly/</guid>
+      <guid>https://lucumt.info/posts/modify-java-class-file-content-directly/</guid>
       <description>
 
 &lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。&lt;/p&gt;
@@ -302,26 +302,26 @@ public class Test {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;在cmd命令行中运行该程序的结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/simple-class-before-modifing-running-result.png&#34; alt=&#34;未修改之前的运行结果&#34; title=&#34;未修改之前的Java代码运行结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/simple-class-before-modifing-running-result.png&#34; alt=&#34;未修改之前的运行结果&#34; title=&#34;未修改之前的Java代码运行结果&#34; /&gt;
 &lt;br /&gt;
 若想将运行结果从 &lt;em&gt;Hello Java World&lt;/em&gt; 修改为 &lt;em&gt;Hello Golang China&lt;/em&gt; ，除了通过修改源代码重新编译运行这个方法之外我们还可以利用工具直接修改原有的class文件来实现。&lt;/p&gt;
 
 &lt;p&gt;首先从 &lt;strong&gt;&lt;a href=&#34;http://set.ee/jbe/&#34; title=&#34;点击链接去下载jbe&#34;&gt;JBE&lt;/a&gt;&lt;/strong&gt; 下载 JBE(Java Bytecode Editor),JBE是一个用于浏览和修改Java Class文件的开源软件，在其官网上可以看到如下图所示的说明信息&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-official-introduction.png&#34; alt=&#34;JBE介绍&#34; title=&#34;JBE官方介绍&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-official-introduction.png&#34; alt=&#34;JBE介绍&#34; title=&#34;JBE官方介绍&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;下载完该软件后，在该软件中打开我们要修改的Class文件&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/open-class-file-using-jbe.png&#34; alt=&#34;在JBE中打开文件&#34; title=&#34;在JBE中打开文件&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/open-class-file-using-jbe.png&#34; alt=&#34;在JBE中打开文件&#34; title=&#34;在JBE中打开文件&#34; /&gt;
 &lt;br /&gt;
 首先我们需要将静态变量 &lt;em&gt;language&lt;/em&gt; 的值从 &lt;em&gt;Java&lt;/em&gt; 修改为 &lt;em&gt;Golang&lt;/em&gt;, 由于 &lt;em&gt;language&lt;/em&gt; 是一个静态变量，故我们需要在class文件的 &lt;em&gt;clinit&lt;/em&gt; 方法中找到该变量并修改其值。如下图所示，展开 &lt;em&gt;clinit&lt;/em&gt; 并切换到Code Editor页，可以看到 &lt;em&gt;language&lt;/em&gt; 的值为 &lt;em&gt;Java&lt;/em&gt; ，在Code Editor部分将 &lt;em&gt;Java&lt;/em&gt; 修改为 &lt;em&gt;Golang&lt;/em&gt; 然后点击Save method即可完成静态变量值的修改。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-modify-static-field.png&#34; alt=&#34;在JBE中修改静态变量值&#34; title=&#34;在JBE中修改静态变量值&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-modify-static-field.png&#34; alt=&#34;在JBE中修改静态变量值&#34; title=&#34;在JBE中修改静态变量值&#34; /&gt;
 &lt;br /&gt;
 接着展开 &lt;em&gt;sayHello&lt;/em&gt; 方法，同样切换到Code Editor页，将 &lt;em&gt;World&lt;/em&gt; 修改为 &lt;em&gt;China&lt;/em&gt; 后点击Save method，至此整个修改操作完成。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-modify-method-value.png&#34; alt=&#34;在JBE中修改方法输出值&#34; title=&#34;在JBE中修改方法输出值&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/jbe-modify-method-value.png&#34; alt=&#34;在JBE中修改方法输出值&#34; title=&#34;在JBE中修改方法输出值&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;在命令行中重新执行该程序，输出结果为 &lt;em&gt;Hello Golang China&lt;/em&gt; ，符合我们的要求。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/simple-classa-after-modifing-running-result.png&#34; alt=&#34;修改之后的运行结果&#34; title=&#34;修改之后的Java代码运行结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/simple-classa-after-modifing-running-result.png&#34; alt=&#34;修改之后的运行结果&#34; title=&#34;修改之后的Java代码运行结果&#34; /&gt;
 &lt;/p&gt;
 
 &lt;h2 id=&#34;修改class文件中的方法:4e9cb51181f8e993ffa84b42e58265dc&#34;&gt;修改Class文件中的方法&lt;/h2&gt;
@@ -350,7 +350,7 @@ public class Test1 {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;正常情况下，其输出结果如下&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/java-method-before-modifing-running-result.png&#34; alt=&#34;未修改方法前的运行结果&#34; title=&#34;未修改方法前的运行结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/java-method-before-modifing-running-result.png&#34; alt=&#34;未修改方法前的运行结果&#34; title=&#34;未修改方法前的运行结果&#34; /&gt;
 &lt;br /&gt;
 若我们想将 &lt;em&gt;addNumber&lt;/em&gt; 的返回结果从两个数之和变为两个数立方后求和，则可以利用Javassist提供的API通过Java程序来直接修改class文件。&lt;/p&gt;
 
@@ -408,7 +408,7 @@ public class UpdateMethod {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;运行该代码后重新执行 &lt;em&gt;Test1&lt;/em&gt; 后的结果如下，从图中可以看出运行结果符合预期&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/java-method-after-modifing-runnning-result.png&#34; alt=&#34;修改方法后的运行结果&#34; title=&#34;修改方法后的运行结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/java-method-after-modifing-runnning-result.png&#34; alt=&#34;修改方法后的运行结果&#34; title=&#34;修改方法后的运行结果&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;关于 &lt;em&gt;UpdateMethod&lt;/em&gt; 工具类有如下几点说明：&lt;/p&gt;
@@ -477,7 +477,7 @@ public class AddMethod {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;运行该代码后重新执行 &lt;em&gt;Test1&lt;/em&gt; 后的结果如下，从图中可以看出运行结果符合预期&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/modify-java-class-file-content-directly/java-add-method-runnning-result.png&#34; alt=&#34;新增方法后的运行结果&#34; title=&#34;新增方法后的运行结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/modify-java-class-file-content-directly/java-add-method-runnning-result.png&#34; alt=&#34;新增方法后的运行结果&#34; title=&#34;新增方法后的运行结果&#34; /&gt;
 &lt;br /&gt;
 从上述代码可以看出，利用Javassist增加方法比修改方法更简单，先将要新增的方法内容赋值到字符串，然后分别调用相关类的 &lt;em&gt;make&lt;/em&gt; 和 &lt;em&gt;addMethod&lt;/em&gt; 方法即可。&lt;/p&gt;
 
@@ -489,10 +489,10 @@ public class AddMethod {
     
     <item>
       <title>解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</title>
-      <link>http://lucumt.info/posts/easyui-datagrid-row-not-align-when-column-frozen/</link>
+      <link>https://lucumt.info/posts/easyui-datagrid-row-not-align-when-column-frozen/</link>
       <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/easyui-datagrid-row-not-align-when-column-frozen/</guid>
+      <guid>https://lucumt.info/posts/easyui-datagrid-row-not-align-when-column-frozen/</guid>
       <description>
 
 &lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;EasyUI&lt;/a&gt;&lt;/strong&gt; 中的 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;DataGrid&lt;/a&gt;&lt;/strong&gt; 实现的表格具有很多优点，如可以 &lt;em&gt;对列宽进行拖动调整、列冻结、行冻结、自定义格式化&lt;/em&gt; 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;
@@ -500,7 +500,7 @@ public class AddMethod {
 &lt;h2 id=&#34;easyui-datagrid正常情况下的列冻结:1a1d88573c9d97df57840a524ba54e28&#34;&gt;EasyUI DataGrid正常情况下的列冻结&lt;/h2&gt;
 
 &lt;p&gt;下图为一个常见的DataGrid使用示例，该图展示了我们在使用EasyUI DataGrid时经常会遇到的一个问题：&lt;strong&gt;由于某个列的长度很长导致表格出现滚动条&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column1.png&#34; alt=&#34;&amp;quot;没有冻结列时正常显示的DataGrid&amp;quot;&#34; title=&#34;没有冻结列时正常显示的DataGrid&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column1.png&#34; alt=&#34;&amp;quot;没有冻结列时正常显示的DataGrid&amp;quot;&#34; title=&#34;没有冻结列时正常显示的DataGrid&#34; /&gt;
 &lt;br /&gt;
 对应的代码为&lt;/p&gt;
 
@@ -517,7 +517,7 @@ public class AddMethod {
 &lt;p&gt;得益于EasyUI DataGrid强大的功能，当表格中列的宽度太长时，它会自动加上横向滚动条，避免像传统的HTML TABLE表格在内容过多时会自己挤成一团，通过拖动滚动条，我们可以很方便的查看表格中各列的内容。&lt;/p&gt;
 
 &lt;p&gt;但有时候我们会运到另外一个问题，拖动滚动条时前面的某些列就不见了，如本例中的书名，在某些情况下可能会对我们的使用带来不便。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column2.png&#34; alt=&#34;&amp;quot;拖动滚动条时无法看见前面的列&amp;quot;&#34; title=&#34;拖动滚动条时无法看见前面的列&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column2.png&#34; alt=&#34;&amp;quot;拖动滚动条时无法看见前面的列&amp;quot;&#34; title=&#34;拖动滚动条时无法看见前面的列&#34; /&gt;
 &lt;br /&gt;
 此时DataGrid的列冻结功能就可以派上用场了，只需要将需要固定的列冻结即可，在本例中我想把书名列冻结，在需要修改代码如下&lt;/p&gt;
 
@@ -536,7 +536,7 @@ public class AddMethod {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;其对应的运行效果如下：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column1.png&#34; alt=&#34;&amp;quot;冻结列之后的DataGrid显示效果&amp;quot;&#34; title=&#34;冻结列之后的DataGrid显示效果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column1.png&#34; alt=&#34;&amp;quot;冻结列之后的DataGrid显示效果&amp;quot;&#34; title=&#34;冻结列之后的DataGrid显示效果&#34; /&gt;
 &lt;/p&gt;
 
 &lt;h2 id=&#34;easyui-datagrid非正常情形下的列冻结效果:1a1d88573c9d97df57840a524ba54e28&#34;&gt;EasyUI DataGrid非正常情形下的列冻结效果&lt;/h2&gt;
@@ -544,10 +544,10 @@ public class AddMethod {
 &lt;p&gt;大多数情况下这种列冻结都能满足我们的需求，但上述冻结列正常显示有一个前提：&lt;strong&gt;表格中每一行各列的高度一致&lt;/strong&gt;，若表格中某些行中存在列高超出DataGrid正常高度的情形(25px)，在进行列冻结时就会出现冻结行和非冻结行无法对齐的问题。&lt;/p&gt;
 
 &lt;p&gt;下图为一个列超出正常高度的DataGrid显示效果，从图中可以看出由于描述信息中的文字较多，导致正常的高度都比DataGrid默认的高度要很多，直观的显示就是不同行的高度不一致。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column3.png&#34; alt=&#34;&amp;quot;列高超出正常高度时的DataGrid&amp;quot;&#34; title=&#34;列高超出正常高度时的DataGrid&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column3.png&#34; alt=&#34;&amp;quot;列高超出正常高度时的DataGrid&amp;quot;&#34; title=&#34;列高超出正常高度时的DataGrid&#34; /&gt;
 &lt;br /&gt;
 此时若对该表格进列冻结，同样会出现出现如前所述的冻结效果，但 &lt;strong&gt;如果我们在一开始就将描述信息这列隐藏掉，之后通过点击等方式让该列显示，则会出现冻结行和非冻结行无法对齐的情况&lt;/strong&gt;，如下图所示&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column-not-align-row.png&#34; alt=&#34;&amp;quot;列高超出正常高度时的DataGrid&amp;quot;&#34; title=&#34;列高超出正常高度时的DataGrid&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column-not-align-row.png&#34; alt=&#34;&amp;quot;列高超出正常高度时的DataGrid&amp;quot;&#34; title=&#34;列高超出正常高度时的DataGrid&#34; /&gt;
 &lt;br /&gt;
 对应的关键代码如下，也可以点击&lt;a href=&#34;https://jsfiddle.net/wch9rnr2/8/&#34;&gt;jsfiddle.net/wch9rnr2/8/&lt;/a&gt;查看完整的代码&lt;/p&gt;
 
@@ -568,7 +568,7 @@ function toggleDescription(){
 &lt;h2 id=&#34;解决方案:1a1d88573c9d97df57840a524ba54e28&#34;&gt;解决方案&lt;/h2&gt;
 
 &lt;p&gt;要想解决该问题，首先需要找出该问题产生的根源，利用Chrome或其它浏览器调试工具可知，当有部分列冻结时，DataGrid表格被分成了两个不同的表格，一个是冻结的表格，一个是未冻结的表格。进一步分析发现导致无法对齐的问题根源为 &lt;strong&gt;由于两个表格中同一行的高度不同，导致实际显示时看起来表格行没有对齐&lt;/strong&gt;。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-source-element.png&#34; alt=&#34;&amp;quot;DataGrid列冻结时的源代码&amp;quot;&#34; title=&#34;DataGrid列冻结时的源代码&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-source-element.png&#34; alt=&#34;&amp;quot;DataGrid列冻结时的源代码&amp;quot;&#34; title=&#34;DataGrid列冻结时的源代码&#34; /&gt;
 &lt;br /&gt;
 找到问题根源后，要解决该问题，我们只需要让表格中每一行高度保持一致即可，具体来说就是 &lt;strong&gt;要在EasyUI DataGrid渲染表格之前将同一行的每一个单元格的高度保持一致即可&lt;/strong&gt;。问题转化为寻找适当的方法切入点来修改单元格高度，即对单元格的高度进行校验。&lt;/p&gt;
 
@@ -615,7 +615,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;此时当我们点击按钮来显示描述信息时，DataGrid中的每一行都已经对齐，如下图所示，至此问题获得解决！&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column2.png&#34; alt=&#34;&amp;quot;重新校验后的DataGrid冻结列显示效果&amp;quot;&#34; title=&#34;重新校验后的DataGrid冻结列显示效果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column2.png&#34; alt=&#34;&amp;quot;重新校验后的DataGrid冻结列显示效果&amp;quot;&#34; title=&#34;重新校验后的DataGrid冻结列显示效果&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;在实际使用中，我发现有时候上述JavaScript校验代码还是不能正常工作，其原因为在执行校验代码时，EasyUI DataGrid还没有完全渲染完毕，此时可以利用&lt;strong&gt;&lt;a href=&#34;https://www.w3schools.com/JSREF/met_win_setTimeout.asp&#34;&gt;setTimeout&lt;/a&gt;&lt;/strong&gt;函数来延后校验代码的执行，修改后的代码如下：&lt;/p&gt;
@@ -657,10 +657,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>4. [译]并发的模型</title>
-      <link>http://lucumt.info/posts/java-concurrency/concurrency-models/</link>
+      <link>https://lucumt.info/posts/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/concurrency-models/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/concurrency-models/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -678,7 +678,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h2 id=&#34;并行工作者模型-parallel-workers-model:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型(Parallel Workers model)&lt;/h2&gt;
 
 &lt;p&gt;并行工作者模型是本文要说明的第一个并发模型，该模型会将系统中到来的任务分配给不同的工作者，如下图所示：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png&#34; alt=&#34;&amp;quot;并行工作者模型&amp;quot;&#34; title=&#34;并行工作者模型&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png&#34; alt=&#34;&amp;quot;并行工作者模型&amp;quot;&#34; title=&#34;并行工作者模型&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;并发模型中有一个“委托者”将到来的任务分配给不同的工作者，每个工作者完成整个任务，每个工作者在不同的线程中（也有可能在不同的CPU）并行工作。&lt;/p&gt;
@@ -700,7 +700,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h3 id=&#34;状态共享将使复杂性增加:9ebec4031501f63cd264123a50a14d31&#34;&gt;状态共享将使复杂性增加&lt;/h3&gt;
 
 &lt;p&gt;实际上并行工作者模型比上面说明的还要复杂一些，并行工作者通常需要访问一些共享数据，它们可能存储在内存中也可能存在数据库中，下面的图标展示了这种情形是如何是的并行工作者模型变得复杂的。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png&#34; alt=&#34;&amp;quot;并行工作者访问共享数据&amp;quot;&#34; title=&#34;并行工作者访问共享数据&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png&#34; alt=&#34;&amp;quot;并行工作者访问共享数据&amp;quot;&#34; title=&#34;并行工作者访问共享数据&#34; /&gt;
 &lt;br /&gt;
 其中的一些共享状态可能在类似于任务队列的通信过程中，但是另外一些共享状态可能是商业数据、缓存数据、数据库的连接池等。一旦共享状态引入到了并行工作者模型，问题就开始变得复杂。线程需要一种方式来访问共享数据以确保一个线程对共享数据的更改对其它线程是可见的（将其推送到主内存中，而不是仅停留在执行线程的CPU缓存中）。线程间需要避免竞争条件、死锁和其它共享状态相关的问题。&lt;/p&gt;
 
@@ -727,22 +727,22 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h2 id=&#34;流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31&#34;&gt;流水线模型（Assembly Line）&lt;/h2&gt;
 
 &lt;p&gt;第二种并发模型我称之为流水线模型，我选择名称以符合早期“并行工作者”的含义。在不同的平台/社区中，其他的开发人员或许使用其它的名称，如反应式系统(reactive systems)，或事件驱动系统(event driven systems)，下图是流水线并发模型的一个展示&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png&#34; alt=&#34;&amp;quot;流水线并发模型&amp;quot;&#34; title=&#34;流水线并发模型&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png&#34; alt=&#34;&amp;quot;流水线并发模型&amp;quot;&#34; title=&#34;流水线并发模型&#34; /&gt;
 &lt;br /&gt;
 这些工作者就像工厂里的工人一样组织起来，每个工作者只完成整个任务的一部分，当该部分任务完成时，该工作者将任务转移到下一个工作者。每个工作者都在自己的线程中运行，并且没有与其它的工作者共享状态，因此流水线模型有时也被称之为无共享的并发模型。&lt;/p&gt;
 
 &lt;p&gt;流水线模型通常用于系统中的非阻塞IO操作，非阻塞IO意味着当一个工作者(worker)开始一个IO操作时(如从网络读取文件或数据)，该工作者(worker)不必等待IO操作结束。IO操作通常较慢，因此等待IO操作完成是对CPU时间的浪费，CPU可以在此时做一些其它事情。当IO操作完成时，IO操作的结果（如数据状态读取或输入写入）会传给下一个工作者(worker)。&lt;/p&gt;
 
 &lt;p&gt;使用非阻塞IO时，IO操作的结果决定了工作者(worker)之间的边界，一个工作者(worker)在不得不开始IO操作之前可以尽可能的完成任务，然后放弃对该任务的控制，当IO操作结束时，在流水线上的另一个工作者(worker)以类似的方式继续完成该任务，直到它不得不开始IO操作。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png&#34; alt=&#34;&amp;quot;非阻塞IO操作&amp;quot;&#34; title=&#34;非阻塞IO操作&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png&#34; alt=&#34;&amp;quot;非阻塞IO操作&amp;quot;&#34; title=&#34;非阻塞IO操作&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;实际中，上述这些任务可能不会沿着一条流水线流动，因为大多数操作系统可以同时运行多个任务，这些任务根据实际需求沿着流水线逐个的被工作者处理。在实际使用中可能会有多个虚拟流水线同时运行，下图展示了在实际使用中任务如何在这种流水线上流转。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png&#34; alt=&#34;&amp;quot;多条流水线的模型&amp;quot;&#34; title=&#34;多条流水线的模型&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png&#34; alt=&#34;&amp;quot;多条流水线的模型&amp;quot;&#34; title=&#34;多条流水线的模型&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图展示了如何将三条装配线的中任务转发给同一个工作者完成（中间装配线上的最后一个工人）：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-6.png&#34; alt=&#34;&amp;quot;多条流水线指向同一个工作者&amp;quot;&#34; title=&#34;多条流水线指向同一个工作者&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-6.png&#34; alt=&#34;&amp;quot;多条流水线指向同一个工作者&amp;quot;&#34; title=&#34;多条流水线指向同一个工作者&#34; /&gt;
 &lt;br /&gt;
 流水线甚至可以做的比上面展示的更复杂。&lt;/p&gt;
 
@@ -765,11 +765,11 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;p&gt;参与者（Actors）和管道（Channels）是两种类似的流水线（响应式/事件驱动）模型。&lt;/p&gt;
 
 &lt;p&gt;在参与者模型中，每个工作者被称之为一个参与者，参与者之间可以直接发消息给对方，这些消息以异步方式来发送和处理。参与者可以用于处理如前所述的一个或多个流水线任务，下图展示了这种模型：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-7.png&#34; alt=&#34;&amp;quot;参与者模型&amp;quot;&#34; title=&#34;参与者模型&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-7.png&#34; alt=&#34;&amp;quot;参与者模型&amp;quot;&#34; title=&#34;参与者模型&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;在管道(Channel)模型中，工作者之间不直接互相沟通，相反地，他们会将消息发布到不同的管道中，其他的工作者可以在这些管道上收听消息，同时消息发送者不必知道谁在收听消息。下图展示了该模型：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;管道模型&amp;quot;&#34; title=&#34;管道模型&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;管道模型&amp;quot;&#34; title=&#34;管道模型&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;在写作本文时，管道模型对我而言似乎更灵活：一个工作者不必知道在流水线上的哪个工作者要处理接下来的任务，它只需要知道需要将任务转发到哪个管道（或发送消息哪个管道等），在管道中的收听者可以订阅和取消订阅而不会影响到往管道中正在写入的工作者，这允许工作者之间有某种程度的低耦合。&lt;/p&gt;
@@ -797,7 +797,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h3 id=&#34;任务可排序:9ebec4031501f63cd264123a50a14d31&#34;&gt;任务可排序&lt;/h3&gt;
 
 &lt;p&gt;根据流水线模型实现的并发系统使得排序变得可能，任务排序使得在任何给定时间点更容易理解系统的状态。此外，你可以将所有传入的任务写入日志，如果系统的任何部分发生故障，则可以使用该日志从头重建系统的状态。这些任务以某种顺序写入日志，这个顺序称为该任务顺序，下图展示了这种设置如何实现：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;任务可排序&amp;quot;&#34; title=&#34;任务可排序&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;任务可排序&amp;quot;&#34; title=&#34;任务可排序&#34; /&gt;
 &lt;br /&gt;
 确保一个任务的顺序实现起来不一定容易，但通常是可能的。如果你可以实现的话，它将会大大简化类似于数据备份、恢复数据、复制数据等的任务，这些都可以通过日志文件来完成。&lt;/p&gt;
 
@@ -839,15 +839,15 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
-      <link>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</link>
+      <link>https://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</link>
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <guid>https://lucumt.info/posts/cannot-open-birt-report-in-myeclipse-project/</guid>
       <description>&lt;p&gt;由于业务要求，需要在利用MyEclipse中开发的Web项目中添加&lt;code&gt;Birt&lt;/code&gt;报表统计功能，新建完一个 &lt;em&gt;report.rptdesign&lt;/em&gt; 文件后双击该文件出现如下错误:&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png&#34; alt=&#34;无法打开报表文件&#34; title=&#34;无法打开birt报表文件&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png&#34; alt=&#34;无法打开报表文件&#34; title=&#34;无法打开birt报表文件&#34; /&gt;
 &lt;br /&gt;
 错误信息提示MyEclipse无法打开 &lt;em&gt;Birt&lt;/em&gt; 报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 &lt;em&gt;MyEclipse&lt;/em&gt; -&amp;gt; &lt;em&gt;Add Report  Capabilities&lt;/em&gt; 来对该项目添加 &lt;em&gt;Birt&lt;/em&gt; 报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的 &lt;em&gt;Birt&lt;/em&gt; jar包和相应的report文件夹，给我们的项目造成了一定的干扰。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png&#34; alt=&#34;birt项目&#34; title=&#34;MyEclipse中的birt项目&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png&#34; alt=&#34;birt项目&#34; title=&#34;MyEclipse中的birt项目&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;分析上述添加完 &lt;em&gt;Birt&lt;/em&gt; 报表支持的项目文件后，可发现与普通的Java Web项目相比  &lt;em&gt;.project&lt;/em&gt; 文件在 &lt;em&gt;natures&lt;/em&gt; 下面多了一个  &lt;em&gt;com.genuitec.eclipse.reporting.reportnature&lt;/em&gt; 的配置项，而该配置项正是用于在项目中支持 &lt;em&gt;Birt&lt;/em&gt; 报表操作。&lt;/p&gt;
@@ -879,10 +879,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>3. [译]多线程的成本</title>
-      <link>http://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
+      <link>https://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -909,10 +909,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>2. [译]多线程的优点</title>
-      <link>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
+      <link>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/multithreading-benefits/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -984,10 +984,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>1. [译]Java多线程与并发教程</title>
-      <link>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <link>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <guid>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
       <description>
 
 &lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -998,7 +998,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;
 
 &lt;p&gt;多线程虽然是提高某些类型程序性能的良方，但是多线程比多任务更具有挑战性。由于这些线程执行的是相同的程序，因此它们同时读写相同的内存，这可能会导致在单线程中不会出现的错误结果。某些错误结果不会出现在单CPU中机器中是由于两个线程不可能同时执行。现在的电脑大都拥有多核甚至多CPU，这意味着多个不同的线程可以被不同的内核或CPU同时执行。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/java-concurrency/java-concurrency-multithreading-tutorial/java-concurrency-tutorial-introduction_1.png&#34; alt=&#34;多线程介绍1&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/java-concurrency/java-concurrency-multithreading-tutorial/java-concurrency-tutorial-introduction_1.png&#34; alt=&#34;多线程介绍1&#34; /&gt;
 &lt;br /&gt;
 如果一个线程读取一个内存地址同时另一个线程向其写入信息，第一个线程在读取完成时会得到什么值呢？旧的值还是被第二个线程写入的新值？亦或是这两个值得混合？若两个线程同时向一个内存地址写入信息，当这两个线程运行完毕时，最终的值会是什么呢？是第一个线程写入的值还是第二个线程写入的值？亦或是这两个线程写入值的混合？&lt;/p&gt;
 
@@ -1022,10 +1022,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>在Intellij IDEA中引用Golang本地包</title>
-      <link>http://lucumt.info/posts/import-local-package-in-intellij-idea/</link>
+      <link>https://lucumt.info/posts/import-local-package-in-intellij-idea/</link>
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/import-local-package-in-intellij-idea/</guid>
+      <guid>https://lucumt.info/posts/import-local-package-in-intellij-idea/</guid>
       <description>
 
 &lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是eclpse中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;插件来进行 &lt;em&gt;Golang&lt;/em&gt; 编程，但其对&lt;em&gt;Golang&lt;/em&gt; 的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像 &lt;em&gt;Java&lt;/em&gt; 那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;Golang插件&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;Intellij IDEA&lt;/a&gt;对 &lt;em&gt;Golang&lt;/em&gt; 的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;
@@ -1033,35 +1033,35 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h2 id=&#34;在eclipse中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Eclipse中引用Golang本地包&lt;/h2&gt;
 
 &lt;p&gt;若我们采用的是&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;来开发 &lt;em&gt;Golang&lt;/em&gt; ,则在其中引用本地包很简单，和引用Java包类似。如下图所示，假设 &lt;em&gt;src&lt;/em&gt; 是源代码所在的目录，在 &lt;em&gt;src&lt;/em&gt; 的 &lt;em&gt;sec&lt;/em&gt; 文件夹下有一个名为 &lt;em&gt;calculate.go&lt;/em&gt; 的文件，其中有一个名为 &lt;em&gt;Add&lt;/em&gt; 的函数用于计算两个整数的相加之和。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png&#34; alt=&#34;goclipse中的本地包&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package.png&#34; alt=&#34;goclipse中的本地包&#34; /&gt;
 &lt;br /&gt;
 若要在主程序main方法中调用 &lt;em&gt;Add&lt;/em&gt; 方法，先通过import引入该文件的包名&lt;code&gt;import service&lt;/code&gt;，然后通过包名调用该方法&lt;code&gt;service.Add(1,2)&lt;/code&gt;，如下图所示，可以看出在Eclipse中引用 &lt;em&gt;Golang&lt;/em&gt; 本地包与引用Java包没有太大的区别，都是将包文件放到 &lt;em&gt;src&lt;/em&gt; 源文件夹下，然后通过包名来引用。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference.png&#34; alt=&#34;goclipse中的本地包引用&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference.png&#34; alt=&#34;goclipse中的本地包引用&#34; /&gt;
 &lt;br /&gt;
 也可以通过直接导入该包所在的文件夹的名称来调用该方法，此时需要将&lt;code&gt;import service&lt;/code&gt;改为&lt;code&gt;import sec&lt;/code&gt;，如下图所示&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference_folder.png&#34; alt=&#34;goclipse中的本地包通过文件夹引用&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_package_reference_folder.png&#34; alt=&#34;goclipse中的本地包通过文件夹引用&#34; /&gt;
 &lt;br /&gt;
 可以看出在eclipse中导入 &lt;em&gt;Golang&lt;/em&gt; 本地包时有两种方法： &lt;strong&gt;通过import导入包名&lt;/strong&gt; 或 &lt;strong&gt;通过import导入该包对应的文件夹&lt;/strong&gt; ，这两种方法均可使程序正常运行。&lt;/p&gt;
 
 &lt;h2 id=&#34;在intellij-idea中引用golang本地包:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;在Intellij IDEA中引用Golang本地包&lt;/h2&gt;
 
 &lt;p&gt;下面2张图为在IDEA中建立的对应项目，图中 &lt;em&gt;gproject&lt;/em&gt; 是一个项目，&lt;em&gt;gotest&lt;/em&gt; 是一个模块，我们在 &lt;em&gt;gotest&lt;/em&gt; 下建立相关的测试文件。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package.png&#34; alt=&#34;IDEA中的本地包&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package.png&#34; alt=&#34;IDEA中的本地包&#34; /&gt;
 &lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference.png&#34; alt=&#34;IDEA中的本地包引用&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference.png&#34; alt=&#34;IDEA中的本地包引用&#34; /&gt;
 &lt;br /&gt;
 在上述代码中我们是通过&lt;code&gt;import service&lt;/code&gt;的方式来导入相应包的，由于IDEA对Golang很强，从图中可以看出 &lt;em&gt;service&lt;/em&gt; 的颜色与其它导入包的颜色不一致，当把鼠标移动到 &lt;em&gt;service&lt;/em&gt; 上时会提示 &lt;em&gt;Cannot resolve file &amp;lsquo;service&amp;rsquo;&lt;/em&gt; ，直接运行时，会出现如下图所示 &lt;em&gt;cannot find package&lt;/em&gt; 错误，将&lt;code&gt;import service&lt;/code&gt;修改为&lt;code&gt;import sec&lt;/code&gt;时，会出现同样的错误，可以看出在idea中默认不支持直接导入本地 &lt;em&gt;Golang&lt;/em&gt; 包。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference_run_error.png&#34; alt=&#34;IDEA中引用本地包运行出错&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_reference_run_error.png&#34; alt=&#34;IDEA中引用本地包运行出错&#34; /&gt;
 &lt;br /&gt;
 从报错信息可以看出，程序在运行时先去 &lt;strong&gt;GOROOT&lt;/strong&gt; 去搜索导入包，然后去 &lt;strong&gt;GOPATH&lt;/strong&gt; 寻找导入包，最后在当前项目模块下寻找导入包，但实际上不存在 &lt;em&gt;D:\program\IntelliJ IDEA 2016.2.1\workspace\gproject\gotest\src\service&lt;/em&gt; 这个目录，故而程序报错，不能正常运行。&lt;/p&gt;
 
 &lt;p&gt;解决该问题的关键是明白 &lt;strong&gt;&lt;a href=&#34;http://golang.org/doc/install#tarball_non_standard&#34;&gt;GOROOT&lt;/a&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;a href=&#34;http://golang.org/cmd/go/#hdr-GOPATH_environment_variable&#34;&gt;GOPATH&lt;/a&gt;&lt;/strong&gt; 的作用，根据官方文档的解释 &lt;strong&gt;GOPATH&lt;/strong&gt; 的主要作用是存放文件以便 &lt;em&gt;Golang&lt;/em&gt; 程序编译时可以进行搜索引用，&lt;strong&gt;GOPATH&lt;/strong&gt; 可以设置一个值或多个值，多个值之间以分号隔开。很明显只要我们将本地 &lt;em&gt;Golang&lt;/em&gt; 加入到 &lt;strong&gt;GOPATH&lt;/strong&gt;中即可在IDEA中正常运行该程序。&lt;/p&gt;
 
 &lt;p&gt;如下图所示，在IDEA中依次选择 &lt;strong&gt;File-&amp;gt;Settings-&amp;gt;Language&amp;amp;Frameworks-&amp;gt;Go-&amp;gt;Go Libraries&lt;/strong&gt; ，会出现如下图所示的配置 &lt;em&gt;Golang&lt;/em&gt; 库的界面，在该界面可以添加 &lt;em&gt;Golang&lt;/em&gt; 本地包所在的路径，该界面包含3个不同作用范围的配置方式： &lt;em&gt;Global libraries&lt;/em&gt; 、 &lt;em&gt;Project libraries&lt;/em&gt; 和 &lt;em&gt;Module libraries&lt;/em&gt; ，其中 &lt;em&gt;Global libraries&lt;/em&gt; 的配置对所有项目生效为全局配置，&lt;em&gt;Project libraries&lt;/em&gt; 的配置对整个项目生效，&lt;em&gt;Module libraries&lt;/em&gt; 的配置只对模块生效，可以看出在 &lt;em&gt;Global libraries&lt;/em&gt; 默认包含了 &lt;strong&gt;GOPATH&lt;/strong&gt; 。根据实际使用的需求我们可以选择把本地包设置在 &lt;em&gt;Project libraries&lt;/em&gt; 还是 &lt;em&gt;Module libraries&lt;/em&gt; 中。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_select_gopath.png&#34; alt=&#34;IDEA中配置程序库&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_select_gopath.png&#34; alt=&#34;IDEA中配置程序库&#34; /&gt;
 &lt;br /&gt;
 本文的程序都是在 &lt;em&gt;gotest&lt;/em&gt; 模块下，故将其添加到 &lt;em&gt;Module libraries&lt;/em&gt; 下，添加完的结果如下所示：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_gopath_config.png&#34; alt=&#34;IDEA中配置程序库的结果&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/idea_package_gopath_config.png&#34; alt=&#34;IDEA中配置程序库的结果&#34; /&gt;
 &lt;br /&gt;
 将本地包添加到模块库之后，还需要在go文件中将导入包的语句设置为&lt;code&gt;import sec&lt;/code&gt;，不能设置为&lt;code&gt;import service&lt;/code&gt;，然后该 &lt;em&gt;Golang&lt;/em&gt; 程序即可正常运行。&lt;/p&gt;
 
@@ -1070,32 +1070,32 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;h2 id=&#34;利用goclipse时无法运行程序的解决方法:bb4f21717a930ee21245b90e8acfc2d5&#34;&gt;利用Goclipse时无法运行程序的解决方法&lt;/h2&gt;
 
 &lt;p&gt;在使用&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;goclipse&lt;/a&gt;运行 &lt;em&gt;Golang&lt;/em&gt; 程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是 &lt;em&gt;src&lt;/em&gt; 没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将 &lt;em&gt;src&lt;/em&gt; 目录添加源代码目录。在Eclipse中选中该项目然后点击 &lt;strong&gt;Properties&lt;/strong&gt; ，会出现项目属性配置界面，点击 &lt;strong&gt;Go Project Configuration&lt;/strong&gt; ，通过 &lt;strong&gt;Add Folder&lt;/strong&gt; 可以将 &lt;em&gt;src&lt;/em&gt; 添加到源代码中，之后程序即可正常运行。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png&#34; alt=&#34;goclipse中添加源程序目录&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/import-local-page-in-intellij-idea/goclipse_add_source_folder.png&#34; alt=&#34;goclipse中添加源程序目录&#34; /&gt;
 &lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>计算两个平行于坐标轴的矩形相交的面积</title>
-      <link>http://lucumt.info/posts/calculate-total-area-of-two-rectangles/</link>
+      <link>https://lucumt.info/posts/calculate-total-area-of-two-rectangles/</link>
       <pubDate>Sun, 26 Feb 2017 19:26:33 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/calculate-total-area-of-two-rectangles/</guid>
+      <guid>https://lucumt.info/posts/calculate-total-area-of-two-rectangles/</guid>
       <description>&lt;p&gt;之前面试时遇到一个算法题: &lt;strong&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/strong&gt; 此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;
 
 &lt;p&gt;很明显，此题的重点在于如何判断矩形是否相交以及检测相交形成的新矩形面积，当不相交时总面积直接为两个矩形的面积之和，当相交时需要减去相交矩形的面积，由于题目已经告诉了矩形的左下角和右上角坐标已知，问题又转化为在相交时如何计算相交矩形的左下角和右上角的坐标。&lt;/p&gt;
 
 &lt;p&gt;最开始我想通过常规的枚举法把矩形相交的所有情况都列出来，在稿纸上简单的比划后，发现采用枚举的方式太复杂，矩形相交理论上有下图所示的16种组合方式，短时间内很难一一列举出来，实际编程中不仅代码量大还很容易产生遗漏。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect1.png&#34; alt=&#34;矩形相交1&#34; title=&#34;两个矩形边角相交以及完全包含&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect1.png&#34; alt=&#34;矩形相交1&#34; title=&#34;两个矩形边角相交以及完全包含&#34; /&gt;
 
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect2.png&#34; alt=&#34;矩形相交2&#34; title=&#34;矩形横向相交&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect2.png&#34; alt=&#34;矩形相交2&#34; title=&#34;矩形横向相交&#34; /&gt;
 &lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect3.png&#34; alt=&#34;矩形相交3&#34; title=&#34;矩形纵向相交&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect3.png&#34; alt=&#34;矩形相交3&#34; title=&#34;矩形纵向相交&#34; /&gt;
 
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect4.png&#34; alt=&#34;矩形相交4&#34; title=&#34;矩形被完全包含&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/intersect4.png&#34; alt=&#34;矩形相交4&#34; title=&#34;矩形被完全包含&#34; /&gt;
 &lt;br /&gt;
 排除枚举方法之后，只能对其进行分析找出通用的处理方式。下图展示了在相交矩形的左下角和右上角的位置，仔细分析后便可发现&lt;strong&gt;相交矩形的左下角x,y坐标是两个矩形左下角x,y坐标中取较大值，相交矩形的右上角x,y坐标是两个矩形右上角x,y坐标中取较小值&lt;/strong&gt;。&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/position_calculate.png&#34; alt=&#34;矩形相交坐标计算&#34; title=&#34;矩形相交时形成的新矩形的坐标来源&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/position_calculate.png&#34; alt=&#34;矩形相交坐标计算&#34; title=&#34;矩形相交时形成的新矩形的坐标来源&#34; /&gt;
 &lt;br /&gt;
 通过分析归纳之后，我们将之前的16种相交情况统一为1个表达式，而这个表达式在编程时是很容易实现的，下面的代码展示了如何利用该表达式计算相交矩形的坐标以及其面积。&lt;/p&gt;
 
@@ -1110,7 +1110,7 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;寻找出如何计算相交矩形的面积之后，还需要解决一个问题:&lt;strong&gt;上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误&lt;/strong&gt;，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：&lt;strong&gt;如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！&lt;/strong&gt;，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4种情况：&lt;br /&gt;
-&lt;img src=&#34;http://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/no_interact_position_compare.png&#34; alt=&#34;矩形不相交坐标计算&#34; title=&#34;矩形不相交的4种情况&#34; /&gt;
+&lt;img src=&#34;https://lucumt.info/blog_img/calculate-total-area-of-two-rectangles/no_interact_position_compare.png&#34; alt=&#34;矩形不相交坐标计算&#34; title=&#34;矩形不相交的4种情况&#34; /&gt;
 &lt;br /&gt;
 相应的代码实现如下：&lt;/p&gt;
 
@@ -1157,10 +1157,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</title>
-      <link>http://lucumt.info/posts/show-video-in-html5-page/</link>
+      <link>https://lucumt.info/posts/show-video-in-html5-page/</link>
       <pubDate>Sun, 30 Oct 2016 19:48:17 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/show-video-in-html5-page/</guid>
+      <guid>https://lucumt.info/posts/show-video-in-html5-page/</guid>
       <description>
 
 &lt;p&gt;由于项目需要，最近使用了在&lt;code&gt;html5&lt;/code&gt;中播放视频的功能，期间遇到了几个坑，先简单记录下。&lt;/p&gt;
@@ -1246,10 +1246,10 @@ for(var i=0; i&amp;lt;dg.datagrid(&#39;getRows&#39;).length; i++){
     
     <item>
       <title>mybatis batch insert exception的解决方法</title>
-      <link>http://lucumt.info/posts/mybatis-batch-insert-exception/</link>
+      <link>https://lucumt.info/posts/mybatis-batch-insert-exception/</link>
       <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/mybatis-batch-insert-exception/</guid>
+      <guid>https://lucumt.info/posts/mybatis-batch-insert-exception/</guid>
       <description>&lt;p&gt;在利用 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt; 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1305,10 +1305,10 @@ at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTransla
     
     <item>
       <title>利用SpringMVC下载大文件时内存溢出的处理</title>
-      <link>http://lucumt.info/posts/download-big-file-using-springmvc/</link>
+      <link>https://lucumt.info/posts/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/download-big-file-using-springmvc/</guid>
+      <guid>https://lucumt.info/posts/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;java.io&lt;/a&gt;&lt;/strong&gt; 下面的各种IO类自己实现，或者利用 &lt;strong&gt;&lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;Commons IO&lt;/a&gt;&lt;/strong&gt; 包中的 &lt;strong&gt;&lt;em&gt;FileUtils&lt;/em&gt;&lt;/strong&gt; 、 &lt;strong&gt;&lt;em&gt;IOUtils&lt;/em&gt;&lt;/strong&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt; 来作为项目的MVC实现，所以很自然的采用 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@RequestMapping(&amp;quot;downloadRequireDocument&amp;quot;)
@@ -1367,10 +1367,10 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
     
     <item>
       <title>利用Spring和JUnit对数据库操作进行单元测试</title>
-      <link>http://lucumt.info/posts/using-junit-in-spring/</link>
+      <link>https://lucumt.info/posts/using-junit-in-spring/</link>
       <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/using-junit-in-spring/</guid>
+      <guid>https://lucumt.info/posts/using-junit-in-spring/</guid>
       <description>
 
 &lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;
@@ -1480,10 +1480,10 @@ public class ProjectServiceTest{
     
     <item>
       <title>利用Spring Security动态的改变权限</title>
-      <link>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</link>
+      <link>https://lucumt.info/posts/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
       
-      <guid>http://lucumt.info/posts/update-authority-dynamic-using-spring-security/</guid>
+      <guid>https://lucumt.info/posts/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理我们的web程序时，通常需要在&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 方法中来初始化权限信息,但 &lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 提供的API来实现。&lt;/p&gt;
 
 &lt;p&gt;以我自己的项目为例，&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 具体实现如下：&lt;/p&gt;
