@@ -203,6 +203,7 @@ var _hmt = _hmt || [];
 <li><a href="#相关命令:ef8b9e40461ea61e62e36d1aa4c54d14">相关命令</a></li>
 </ul></li>
 <li><a href="#利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14">利用GoDaddy配置自定义域名</a></li>
+<li><a href="#开启自定义域名的https访问:ef8b9e40461ea61e62e36d1aa4c54d14">开启自定义域名的HTTPS访问</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -371,7 +372,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 
 <h3 id="利用godaddy配置自定义域名:ef8b9e40461ea61e62e36d1aa4c54d14">利用GoDaddy配置自定义域名</h3>
 
-<p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">Using a custom domain with GitHub Pages</a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在<a href="https://www.godaddy.com/">Godaddy</a>上的说明来设置的。</p>
+<p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">Using a custom domain with GitHub Pages</a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在<a href="https://www.godaddy.com/">GoDaddy</a>上的说明来设置的。</p>
 
 <ol>
 <li>在public目录下创建一个名为 <strong>CNAME</strong> 的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 <em><a href="http://lucumt.info">http://lucumt.info</a></em> ，故填入 <em>lucumt.info</em><br />
@@ -385,7 +386,7 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 <li>选择完 <em>Manage DNS</em> 之后会出现如下图所示的界面，点击 <em>Add</em> 按钮会出现下拉框让我们增加A记录<br />
 <img src="https://lucumt.info/blog_img/create-website-with-hugo/godaddy-dns-records-page.png" alt="&quot;DNS管理界面&quot;" title="DNS管理界面" />
 <br /></li>
-<li>在 <em>Type</em> 部分选择 <strong>A</strong> ，<em>Host</em> 部分选择 <strong>@</strong>， <em>Poinst to</em> 根据<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在<a href="https://www.godaddy.com/">Godaddy</a>中 <em>Configuring A records with your DNS provider</em> 部分的说明添加 <strong>192.30.252.153</strong> ,点击 <em>Save</em> 即完成一条A记录的添加<br />
+<li>在 <em>Type</em> 部分选择 <strong>A</strong> ，<em>Host</em> 部分选择 <strong>@</strong>， <em>Poinst to</em> 根据<a href="https://help.github.com/articles/setting-up-an-apex-domain/">Setting up an apex domain</a>中的说明在 <em>GoDaddy</em> 中 <em>Configuring A records with your DNS provider</em> 部分的说明添加 <strong>192.30.252.153</strong> ,点击 <em>Save</em> 即完成一条A记录的添加<br />
 <img src="https://lucumt.info/blog_img/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&quot;增加A记录&quot;" title="增加A记录" />
 <br /></li>
 <li>再次点击 <em>Add</em> 添加，按照步骤5添加第二条A记录，除了 <em>Points to</em> 设置为 <strong>192.30.252.154</strong> 之外，其它的配置都相同</li>
@@ -393,7 +394,20 @@ Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
 <img src="https://lucumt.info/blog_img/create-website-with-hugo/github-pages-configuration-check.png" alt="&quot;增加A记录&quot;" title="增加A记录" /></li>
 </ol>
 
-<p>至此利用<a href="https://www.godaddy.com/">Godaddy</a>来配置自自定义域名的过程完成，输入 <em><a href="http://lucumt.info">http://lucumt.info</a></em> 即可访问自己的博客！</p>
+<p>至此利用 <em>GoDaddy</em> 来配置自自定义域名的过程完成，输入 <em><a href="http://lucumt.info">http://lucumt.info</a></em> 即可访问自己的博客！</p>
+
+<p>PS:吐槽下让人觉得不爽的几个地方：</p>
+
+<ul>
+<li>域名续费几乎没有折扣，所以建议第一次买的时间长一点。</li>
+<li>取消订单功能消失了，现在只能打人工客服电话取消。</li>
+</ul>
+
+<p>如果大家有 <em>GoDaddy</em> 之外更好的域名服务网站，欢迎给我留言，当然国内的域名服务商除外！</p>
+
+<h3 id="开启自定义域名的https访问:ef8b9e40461ea61e62e36d1aa4c54d14">开启自定义域名的HTTPS访问</h3>
+
+<p>请参见本人写的另外一篇文章 <strong><a href="https://lucumt.info/posts/migrate-github-blog-from-http-to-https/">将基于Github Pages的自定义域名博客迁移到Https</a></strong> ，此处不再详述。</p>
 
 <p>&lt;&ndash;待续&ndash;&gt;</p>
 

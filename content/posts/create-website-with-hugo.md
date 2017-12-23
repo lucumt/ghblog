@@ -106,7 +106,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 2. 将 *master* 的 *public* 目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
 
 ### 利用GoDaddy配置自定义域名
-在[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)中有详细的说明，我自己配置的时候主要是按照[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[Godaddy](https://www.godaddy.com/)上的说明来设置的。
+在[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)中有详细的说明，我自己配置的时候主要是按照[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[GoDaddy](https://www.godaddy.com/)上的说明来设置的。
 
 1. 在public目录下创建一个名为 **CNAME** 的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 *http://lucumt.info* ，故填入 *lucumt.info*  
 !["创建CNAME文件"](/blog_img/create-website-with-hugo/create-cname-file.png "创建CNAME文件并添加域名")  
@@ -116,12 +116,23 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 !["选择DNS管理界面"](/blog_img/create-website-with-hugo/godaddy-choose-manage-dns.png "选择DNS管理界面") 
 4. 选择完 *Manage DNS* 之后会出现如下图所示的界面，点击 *Add* 按钮会出现下拉框让我们增加A记录  
 !["DNS管理界面"](/blog_img/create-website-with-hugo/godaddy-dns-records-page.png "DNS管理界面")  
-5. 在 *Type* 部分选择 **A** ，*Host* 部分选择 **@**， *Poinst to* 根据[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在[Godaddy](https://www.godaddy.com/)中 *Configuring A records with your DNS provider* 部分的说明添加 **192.30.252.153** ,点击 *Save* 即完成一条A记录的添加  
+5. 在 *Type* 部分选择 **A** ，*Host* 部分选择 **@**， *Poinst to* 根据[Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)中的说明在 *GoDaddy* 中 *Configuring A records with your DNS provider* 部分的说明添加 **192.30.252.153** ,点击 *Save* 即完成一条A记录的添加  
 !["增加A记录"](/blog_img/create-website-with-hugo/godaddy-dns-add-a-records.png "增加A记录")  
 6. 再次点击 *Add* 添加，按照步骤5添加第二条A记录，除了 *Points to* 设置为 **192.30.252.154** 之外，其它的配置都相同
 7. 在`Github`项目中点击 *Settings* 按钮查看 *Github Pages* 区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功  
 !["增加A记录"](/blog_img/create-website-with-hugo/github-pages-configuration-check.png "增加A记录")
 
-至此利用[Godaddy](https://www.godaddy.com/)来配置自自定义域名的过程完成，输入 *http://lucumt.info* 即可访问自己的博客！
+至此利用 *GoDaddy* 来配置自自定义域名的过程完成，输入 *http://lucumt.info* 即可访问自己的博客！
+
+PS:吐槽下让人觉得不爽的几个地方：
+
+- 域名续费几乎没有折扣，所以建议第一次买的时间长一点。
+- 取消订单功能消失了，现在只能打人工客服电话取消。
+
+如果大家有 *GoDaddy* 之外更好的域名服务网站，欢迎给我留言，当然国内的域名服务商除外！
+
+### 开启自定义域名的HTTPS访问
+
+请参见本人写的另外一篇文章 **[将基于Github Pages的自定义域名博客迁移到Https](https://lucumt.info/posts/migrate-github-blog-from-http-to-https/)** ，此处不再详述。
 
 <--待续-->

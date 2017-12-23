@@ -181,6 +181,54 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
+                      <a href="https://lucumt.info/posts/can-not-run-program-mysqldump">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>3</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                </span>
+                
+                
+                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-mysql" href="https://lucumt.info//categories/mysql">MySQL</a>
+                    
+                    <a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<strong><a href="http://docs.oracle.com/javase/6/docs/api/">Runtime</a></strong>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
+
+<pre><code class="language-java">Runtime runtime = Runtime.getRuntime();
+String mysqlCmd = &quot;mysqldump&quot; + &quot; -u&quot; + username + &quot; -p&quot; + password + 
+           &quot;  -h &quot; + databaseAddress + &quot; &quot; +databaseName;
+Process process = runtime.exec(mysqlCmd);
+</code></pre>
+
+<p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="https://lucumt.info/posts/can-not-run-program-mysqldump"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
                       <a href="https://lucumt.info/posts/create-website-with-hugo">利用Github Pages和基于Go的Hugo搭建个人博客</a>
                   </h1>
               </header>
