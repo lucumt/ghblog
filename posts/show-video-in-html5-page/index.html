@@ -299,15 +299,15 @@ var _hmt = _hmt || [];
 
 <p>为了屏蔽掉声音播放按钮，我们只需使用 <em>video::-webkit-media-controls-volume-slider</em> 和  <em>video::-webkit-media-controls-mute-button</em> 这两个属性即可，相应的css代码如下：</p>
 
-<pre><code class="language-css">	/**隐藏视频音量大小调整控件**/
-	.no_sound_style&gt;video::-webkit-media-controls-volume-slider{
-		display:none;
-	}
-	
-	/**影藏视频音量喇叭**/
-	.no_sound_style&gt;video::-webkit-media-controls-mute-button{
-		display:none;
-	}
+<pre><code class="language-css">/**隐藏视频音量大小调整控件**/
+.no_sound_style&gt;video::-webkit-media-controls-volume-slider{
+	display:none;
+}
+
+/**隐藏视频音量喇叭**/
+.no_sound_style&gt;video::-webkit-media-controls-mute-button{
+	display:none;
+}
 </code></pre>
 
 <p>对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见<br />
