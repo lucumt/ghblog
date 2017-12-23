@@ -16,12 +16,12 @@
 
 **[MIT License](https://en.wikipedia.org/wiki/MIT_License)**，请在Fork或Download后将 **config.toml**中的 **gaid** 和 **baiduanalysis** 修改为你自己的相关账号，或者直接将这两个账户置为空。  
 ```
-	[params] 
-	sidebartitle = "飞狐的部落格"   
-	sidebartagline = "Rosen Lu"
-	photo = "/img/photo.jpg"
-	highlightstyle="mono-blue"
-	gaid = "UA-75123653-1"
-	baiduanalysis="true"
-	totop = true
+[params] 
+sidebartitle = "飞狐的部落格"   
+sidebartagline = "Rosen Lu"
+photo = "/img/photo.jpg"
+highlightstyle="mono-blue"
+gaid = "UA-75123653-1"
+baiduanalysis="true"
+totop = true
 ```
