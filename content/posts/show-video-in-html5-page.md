@@ -67,15 +67,15 @@ title = "在iframe嵌套的html5中播放视频时全屏显示和取消音量调
 
 为了屏蔽掉声音播放按钮，我们只需使用 *video::-webkit-media-controls-volume-slider* 和  *video::-webkit-media-controls-mute-button* 这两个属性即可，相应的css代码如下：  
 ``` css
-	/**隐藏视频音量大小调整控件**/
-	.no_sound_style>video::-webkit-media-controls-volume-slider{
-		display:none;
-	}
-	
-	/**影藏视频音量喇叭**/
-	.no_sound_style>video::-webkit-media-controls-mute-button{
-		display:none;
-	}
+/**隐藏视频音量大小调整控件**/
+.no_sound_style>video::-webkit-media-controls-volume-slider{
+	display:none;
+}
+
+/**隐藏视频音量喇叭**/
+.no_sound_style>video::-webkit-media-controls-mute-button{
+	display:none;
+}
 ```  
 对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见  
 ![屏蔽了声音播放按钮](https://ooo.0o0.ooo/2016/10/30/5815f41099feb.png "屏蔽了播放器中的声音播放按钮")
