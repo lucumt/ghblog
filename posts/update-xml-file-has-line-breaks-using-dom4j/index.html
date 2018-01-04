@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
   <title>
-    利用SpringMVC下载大文件时内存溢出的处理 // 飞狐的部落格
+    利用dom4j修改含有回车换行符的XML文件 // 飞狐的部落格
   </title>
 
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -11,15 +11,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
 <meta name="description" content="Blog of Rosen Lu">
-<meta name="keywords" content="Java,SpringMVC,">
+<meta name="keywords" content="Java,XML,">
 <meta name="author" content="飞狐">
 <meta name="generator" content="Hugo 0.14" />
 
-  <meta property="og:title" content="利用SpringMVC下载大文件时内存溢出的处理" />
+  <meta property="og:title" content="利用dom4j修改含有回车换行符的XML文件" />
 <meta property="og:description" content="Blog of Rosen Lu" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:url" content="https://lucumt.info/posts/download-big-file-using-springmvc/" />
+<meta property="og:url" content="https://lucumt.info/posts/update-xml-file-has-line-breaks-using-dom4j/" />
 
 
   
@@ -185,14 +185,14 @@ var _hmt = _hmt || [];
 	    
   		<section class="post">
             <h1 class="post-title">
-              <a href="https://lucumt.info/posts/download-big-file-using-springmvc">利用SpringMVC下载大文件时内存溢出的处理</a>
+              <a href="https://lucumt.info/posts/update-xml-file-has-line-breaks-using-dom4j">利用dom4j修改含有回车换行符的XML文件</a>
             </h1>
             <h3 class="post-subtitle">
             	
             </h3>
             
             	<span class="post-date">
-                	<span class="post-date-day"><sup>20</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
+                	<span class="post-date-day"><sup>4</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">2018</span>
             	</span>
             	
             
@@ -212,9 +212,7 @@ var _hmt = _hmt || [];
 				
 					<a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
 				
-					<a class="post-category post-category-spring" href="https://lucumt.info//categories/spring">Spring</a>
-				
-					<a class="post-category post-category-springmvc" href="https://lucumt.info//categories/springmvc">SpringMVC</a>
+					<a class="post-category post-category-xml" href="https://lucumt.info//categories/xml">XML</a>
 				
 				</div>
 			
@@ -223,59 +221,117 @@ var _hmt = _hmt || [];
 
 			
 
-            <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html">java.io</a></strong> 下面的各种IO类自己实现，或者利用 <strong><a href="https://commons.apache.org/proper/commons-io/">Commons IO</a></strong> 包中的 <strong><em>FileUtils</em></strong> 、 <strong><em>IOUtils</em></strong> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong> 来作为项目的MVC实现，所以很自然的采用 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
+            <p>这几天工作中遇到一个利用 <strong><a href="https://dom4j.github.io/">dom4j</a></strong> 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 <em>dom4j()1.6.1</em> 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
 
-<pre><code class="language-java">@RequestMapping(&quot;downloadRequireDocument&quot;)
-public ResponseEntity&lt;byte[]&gt; downloadRequireDocument(String fileId,String fileName,String fileType,
-     HttpServletRequest request) throws IOException{
-	String filePath=fileName+fileId+&quot;.&quot;+fileType;
-    
-	HttpHeaders headers=new HttpHeaders();
-	headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-	headers.setContentDispositionFormData(&quot;attachment&quot;,URLEncoder.encode(fileName,&quot;UTF-8&quot;)+&quot;.&quot;+fileType);
-    
-	File downloadFile=new File(request.getSession().getServletContext().getRealPath(File.separator)+filePath);
-    
-	return new ResponseEntity&lt;byte[]&gt;(FileUtils.readFileToByteArray(downloadFile),headers,HttpStatus.CREATED);
-}
-</code></pre>
+<p>对于修改XML文件，自己很自然的想到利用 <em>dom4j</em> 和 <strong><a href="https://en.wikipedia.org/wiki/XPath">XPath</a></strong> 来实现功能，使用的代码类似如下：</p>
 
-<p>该段代码在下载小文件时可以正常工作，但是当要下载的文件很大时（如几百M或上G），就会发生如下错误：</p>
+<pre><code>public static void updateXML() {
+	SAXReader saxReader = new SAXReader();
+	File oldFile = new File(&quot;D:\\test\\old_test.xml&quot;);
+	File newFile = new File(&quot;D:\\test\\new_test.xml&quot;);
+	try {
+		Document oldDoc = saxReader.read(oldFile);
+		Element oldRoot = oldDoc.getRootElement();
+		Element oldEle = (Element) oldRoot.selectSingleNode(&quot;//book[@id='01001']/name&quot;);
+		System.out.println(oldEle.attributeValue(&quot;description&quot;));
+		
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		format.setEncoding(&quot;UTF-8&quot;);
+		format.setNewLineAfterDeclaration(false);
+		
+		//写入新文件
+		XMLWriter writer = new XMLWriter(new FileWriter(newFile), format);
+		writer.write(oldDoc);
+		writer.flush();
+		writer.close();
 
-<pre><code class="language-java">java.lang.OutOfMemoryError: Java heap space
-at org.apache.commons.io.output.ByteArrayOutputStream.toByteArray(ByteArrayOutputStream.java:271)
-at org.apache.commons.io.IOUtils.toByteArray(IOUtils.java:219)
-at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)
-</code></pre>
-
-<p>去网上搜索 <strong><em>java.lang.OutOfMemoryError: Java heap space</em></strong> 这个错误时，一般都建议我们在tomcat中添加如下类似设置来提高JVM的配置:<br />
-<code>set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m -XX:MaxPermSize=256m</code></p>
-
-<p>但即使按照把上面的参数配置都扩大一倍，在下载更大的文件时还是会遇到 <strong><em>java.lang.OutOfMemoryError: Java heap space</em></strong> 这个错误，上面的解决方法治标不治本。分析下异常堆栈可以发现问题产生的根源在于 <em>at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)</em> 这行代码，<strong><em>FileUtils.readFileToByteArray</em></strong>  会把文件一次性读入内存中，要下载的文件越大，需要占用的内存也越大，当文件的大小超过JVM和Tomcat的内存配置时，<strong><em>OutOfMemoryError</em></strong> 这个问题就会不可避免的发生。</p>
-
-<p>弄清产生该问题的原因之后，解决的方法也很简单：<strong>不利用<a href="https://commons.apache.org/proper/commons-io/">Commons IO</a>把文件一次性读入内存，而是利用普通的文件输出流按字节分段写入文件，把占用的内存固定在一个指定的范围内，从根本上避免内存占用过高的问题</strong>,替代的代码如下:</p>
-
-<pre><code class="language-java">@RequestMapping(&quot;downloadRequireDocument&quot;)
-public void downloadRequireDocument(String fileId,String fileName,String fileType,
-	HttpServletRequest request,HttpServletResponse response) throws IOException {
-	
-	String filePath = request.getSession().getServletContext().getRealPath(File.separator)+fileName+&quot;.&quot;+fileType;
-	fileName = URLEncoder.encode(fileName.trim(),&quot;UTF-8&quot;)+&quot;.&quot;+fileType;
-	response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;filename=&quot;+fileName);
-
-	InputStream is = new FileInputStream(filePath);
-	
-	int read =0;
-	byte[] bytes = new byte[2048];
-	OutputStream os = response.getOutputStream();
-	while((read = is.read(bytes))!=-1){//按字节逐个写入，避免内存占用过高
-		os.write(bytes, 0, read);
+		System.out.println(&quot;\n================分隔符==================\n&quot;);
+		//从新文件中读取数据
+		Document newDoc = saxReader.read(newFile);
+		Element newRoot = newDoc.getRootElement();
+		Element newEle = (Element) newRoot.selectSingleNode(&quot;//book[@id='01001']/name&quot;);
+		System.out.println(newEle.attributeValue(&quot;description&quot;));
+	} catch (DocumentException e) {
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
 	}
-	os.flush();
-	os.close();
-	is.close();
 }
 </code></pre>
+
+<p>对应的XML文件类似如下：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;books&gt;
+  &lt;book id=&quot;01001&quot;&gt;
+    &lt;name description=&quot;New coverage includes:&amp;#xD;&amp;#xA;&amp;#xD;&amp;#xA;Functional interfaces, lambda expressions, method references, and streams&amp;#xD;&amp;#xA;Default and static methods in interfaces&amp;#xD;&amp;#xA;Type inference, including the diamond operator for generic types&amp;#xD;&amp;#xA;The @SafeVarargs annotation&amp;#xD;&amp;#xA;The try-with-resources statement&quot;&gt;Effective Java&lt;/name&gt;
+    &lt;price&gt;50.6&lt;/price&gt;
+    &lt;author&gt;Joshua Bloch&lt;/author&gt;
+    &lt;publishDate&gt;2017-12-08&lt;/publishDate&gt;
+  &lt;/book&gt;
+&lt;/books&gt;
+</code></pre>
+
+<p>上述代码的逻辑很简单：首先从XML打开一个XML文件，然后输出某个书本的描述信息，将其写入新的XML文件，然后在新XML文件中读取相同的信息。理论上前后两次输出的结果应该一样，但实际运行后发现从新的XML文件中读取出的描述信息换行符都丢失了，前后两次输出的结果不一致！<br />
+<img src="https://lucumt.info/blog_img/update-xml-file-has-line-breaks-using-dom4j/dom4j_incorrect_output.png" alt="&quot;新旧XML文件的输出格式不同&quot;" title="新旧XML文件的输入格式不同" />
+</p>
+
+<p>对比新旧XML文件后发现，产生此现象的原因是: <strong>dom4j 自作主张的在写入XML文件时将 <em>&amp;#xD;&amp;#xA;</em> 替换为了 <em>\r\n</em> ，而XML文件中标准的回车换行符是用 <em>&amp;#xD;&amp;#xA;</em> 来表示的</strong> ，将它们替换后再次读取的结果很显然不符合要求。</p>
+
+<p>了解到问题产生的根源后，则其解决思路也很明确： <strong>写入XML文件时，将 <em>\r\n</em> 再次替换为 <em>&amp;#xD;&amp;#xA;</em> 即可</strong>。最开始自己想采用如下的方法来简单替换，运行完毕后发现结果和前面的一致，问题依旧。</p>
+
+<pre><code class="language-java">String description = oldEle.attributeValue(&quot;description&quot;);
+description = description.replaceAll(&quot;\r\n&quot;,&quot;&amp;#xD;&amp;#xA;&quot;);
+oldEle.attributeValue(&quot;description&quot;,description);
+</code></pre>
+
+<p><br/>
+进一步分析后发现，<em>dom4j</em> 不仅会在读取XML文件时对 <em>&amp;#xD;&amp;#xA;</em> 进行转义，而且在写入XML文件时也会对 <em>&amp;#xD;&amp;#xA;</em> 进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。</p>
+
+<p>写入时主要的操作类是 <em>OutputFormat</em> 和 <em>XMLWriter</em> ，自己一开始以为可以通过 <em>OutputFormat</em> 进行响应的设置实现，将代码修改如下，然并卵，问题依旧！</p>
+
+<pre><code class="language-java">OutputFormat format = OutputFormat.createPrettyPrint();
+format.setNewlines(true);
+format.setLineSeparator(&quot;\r\n&quot;);
+format.setEncoding(&quot;UTF-8&quot;);
+format.setNewLineAfterDeclaration(false);
+</code></pre>
+
+<p><br/>
+<em>OutputFormat</em> 不好使，只能从 <em>XMLWriter</em> 着手，调用 <em>writer.setEscapeText(false)</em> 方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：</p>
+
+<pre><code>public class HRXMLWriter extends XMLWriter {
+
+	public HRXMLWriter(Writer wr, OutputFormat format) {
+		super(wr, format);
+	}
+
+	@Override
+	protected String escapeAttributeEntities(String text) {
+		text = super.escapeAttributeEntities(text);
+		if (text.indexOf(&quot;\r\n&quot;) &gt; -1) {
+			text = text.replaceAll(&quot;\r\n&quot;, &quot;&amp;#xD;&amp;#xA;&quot;);
+		}
+		return text;
+	}
+
+}
+</code></pre>
+
+<p>然后将写入时的代码修改如下：</p>
+
+<pre><code class="language-java">//採用定义写入类HRXMLWriter
+XMLWriter writer = new HRXMLWriter(new FileWriter(newFile), format);
+writer.write(oldDoc);
+writer.flush();
+writer.close();
+</code></pre>
+
+<p>运行结果如下，问题顺利解决！<br />
+<img src="https://lucumt.info/blog_img/update-xml-file-has-line-breaks-using-dom4j/dom4j_correct_output.png" alt="&quot;新旧XML文件的输出格式相同&quot;" title="新旧XML文件的输入格式相同" />
+</p>
+
+<p>坑爹啊！</p>
 
 	
 			
@@ -287,11 +343,9 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
 		  
 		  <div class="page-link">
 			
-			<a href="https://lucumt.info/posts/using-junit-in-spring/">//下一篇</a>
+			<a href="https://lucumt.info/posts/migrate-github-blog-from-http-to-https/">//下一篇</a>
 			
 			&nbsp;
-			
-			<a class="page-link-right" href="https://lucumt.info/posts/mybatis-batch-insert-exception/">//上一篇</a>
 			
 	      </div>
 
@@ -299,9 +353,9 @@ public void downloadRequireDocument(String fileId,String fileName,String fileTyp
           	<div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rosenlu';
-    var disqus_identifier = 'https:\/\/lucumt.info\/posts\/download-big-file-using-springmvc\/';
-    var disqus_title = '利用SpringMVC下载大文件时内存溢出的处理';
-    var disqus_url = 'https:\/\/lucumt.info\/posts\/download-big-file-using-springmvc\/';
+    var disqus_identifier = 'https:\/\/lucumt.info\/posts\/update-xml-file-has-line-breaks-using-dom4j\/';
+    var disqus_title = '利用dom4j修改含有回车换行符的XML文件';
+    var disqus_url = 'https:\/\/lucumt.info\/posts\/update-xml-file-has-line-breaks-using-dom4j\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

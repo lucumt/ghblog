@@ -3,8 +3,13 @@
   
   <url>
     <loc>https://lucumt.info/</loc>
-    <lastmod>2017-12-24T10:28:03+08:00</lastmod>
+    <lastmod>2018-01-04T11:21:42+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/posts/update-xml-file-has-line-breaks-using-dom4j/</loc>
+    <lastmod>2018-01-04T11:21:42+08:00</lastmod>
   </url>
   
   <url>
