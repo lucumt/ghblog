@@ -181,6 +181,53 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
+                      <a href="https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial">1. [译]Java多线程与并发教程</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>30</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2017</span>
+                </span>
+                
+                
+                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
+                    
+                    <a class="post-category post-category-java-concurrency" href="https://lucumt.info//categories/java-concurrency">Java Concurrency</a>
+                    
+                    <a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="https://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/index.html">Java Concurrency / Multithreading Tutorial</a></strong></p>
+
+<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
+
+<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
                       <a href="https://lucumt.info/posts/import-local-package-in-intellij-idea">在Intellij IDEA中引用Golang本地包</a>
                   </h1>
               </header>
@@ -553,52 +600,6 @@ var _hmt = _hmt || [];
           </section>
           
 		  
-			
-            <section  class="post">
-                <header class="post-header">
-                    
-                    <h1 class="post-title">
-                      <a href="https://lucumt.info/posts/java-concurrency/java-volatile-keyword">[译] Java Volatile 关键字详解</a>
-                  </h1>
-              </header>
-              <p class="post-meta">
-                  
-                  <span class="post-date">
-                    <span class="post-date-day"><sup>7</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Mar</span> <span class="post-date-year">2016</span>
-                </span>
-                
-                
-                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
-                
-                
-                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>2 min. read</em></span>
-                
-                
-                <div class="post-categories">
-                    
-                    <a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
-                    
-                    <a class="post-category post-category-java-concurrency" href="https://lucumt.info//categories/java-concurrency">Java Concurrency</a>
-                    
-                    <a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="https://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
-                    
-                </div>
-                
-            </p>
-            <article class="post-summary">
-                  <p>本文翻译自 <strong><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword</a></strong></p>
-
-<p>Java关键字<code>volatile</code>用于将一个Java变量标记为 <em>在主内中存储</em> ，更准确的解释为：每次读取一个 <em>volatile</em> 变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个 <em>volatile</em> 变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
-
-<p>事实上，从Java5之后，<em>volatile</em> 关键字不仅仅可以用来确保 <em>volatile</em> 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
-
-              </article>
-              <div class="read-more-link">
-                  <a href="https://lucumt.info/posts/java-concurrency/java-volatile-keyword"><span class="read-more-slashes">//</span>Read More...</a>
-              </div>
-          </section>
-          
-		  
         </div>
 		<div class="page-link">
 		    总共<b>3</b>页，当前第<b>2</b>页
@@ -621,7 +622,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-	<p>&copy; 2017. All rights reserved.</p>
+	<p>&copy; 2018. All rights reserved.</p>
 </div>
         </div>
     </div>
