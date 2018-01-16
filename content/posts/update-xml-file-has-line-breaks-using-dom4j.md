@@ -8,7 +8,7 @@ title = "利用dom4j修改含有回车换行符的XML文件"
 
 +++
 
-这几天工作中遇到一个利用 **[dom4j](https://dom4j.github.io/)** 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 *dom4j()1.6.1* 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。
+这几天工作中遇到一个利用 **[dom4j](https://dom4j.github.io/)** 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 *dom4j(1.6.1)* 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。
 
 <!--more-->
 
