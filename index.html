@@ -181,6 +181,48 @@ var _hmt = _hmt || [];
                 <header class="post-header">
                     
                     <h1 class="post-title">
+                      <a href="https://lucumt.info/posts/update-quartz-scheduler-dynamic">在Quartz中动态设置定时任务的执行时间</a>
+                  </h1>
+              </header>
+              <p class="post-meta">
+                  
+                  <span class="post-date">
+                    <span class="post-date-day"><sup>9</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">2018</span>
+                </span>
+                
+                
+                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
+                
+                
+                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>3 min. read</em></span>
+                
+                
+                <div class="post-categories">
+                    
+                    <a class="post-category post-category-quartz" href="https://lucumt.info//categories/quartz">Quartz</a>
+                    
+                    <a class="post-category post-category-spring" href="https://lucumt.info//categories/spring">Spring</a>
+                    
+                    <a class="post-category post-category-springmvc" href="https://lucumt.info//categories/springmvc">SpringMVC</a>
+                    
+                </div>
+                
+            </p>
+            <article class="post-summary">
+                  <p><strong><a href="http://www.quartz-scheduler.org/">Quartz</a></strong>是软件开发中常用的任务调度框架，实际中通常结合 <strong><a href="https://spring.io/">Spring</a></strong> 一起使用，并在 <em>Spring</em> 的配置文件中利用 <em>0 0 12 ? * WED</em> 这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
+
+              </article>
+              <div class="read-more-link">
+                  <a href="https://lucumt.info/posts/update-quartz-scheduler-dynamic"><span class="read-more-slashes">//</span>Read More...</a>
+              </div>
+          </section>
+          
+		  
+			
+            <section  class="post">
+                <header class="post-header">
+                    
+                    <h1 class="post-title">
                       <a href="https://lucumt.info/posts/update-xml-file-has-line-breaks-using-dom4j">利用dom4j修改含有回车换行符的XML文件</a>
                   </h1>
               </header>
@@ -207,7 +249,7 @@ var _hmt = _hmt || [];
                 
             </p>
             <article class="post-summary">
-                  <p>这几天工作中遇到一个利用 <strong><a href="https://dom4j.github.io/">dom4j</a></strong> 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 <em>dom4j()1.6.1</em> 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
+                  <p>这几天工作中遇到一个利用 <strong><a href="https://dom4j.github.io/">dom4j</a></strong> 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 <em>dom4j(1.6.1)</em> 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
 
               </article>
               <div class="read-more-link">
@@ -535,56 +577,6 @@ var _hmt = _hmt || [];
               </article>
               <div class="read-more-link">
                   <a href="https://lucumt.info/posts/java-concurrency/multithreading-costs"><span class="read-more-slashes">//</span>Read More...</a>
-              </div>
-          </section>
-          
-		  
-			
-            <section  class="post">
-                <header class="post-header">
-                    
-                    <h1 class="post-title">
-                      <a href="https://lucumt.info/posts/java-concurrency/multithreading-benefits">2. [译]多线程的优点</a>
-                  </h1>
-              </header>
-              <p class="post-meta">
-                  
-                  <span class="post-date">
-                    <span class="post-date-day"><sup>1</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Apr</span> <span class="post-date-year">2017</span>
-                </span>
-                
-                
-                    By <a class="post-author" href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" target="_new">飞狐</a>
-                
-                
-                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
-                
-                
-                <div class="post-categories">
-                    
-                    <a class="post-category post-category-java" href="https://lucumt.info//categories/java">Java</a>
-                    
-                    <a class="post-category post-category-java-concurrency" href="https://lucumt.info//categories/java-concurrency">Java Concurrency</a>
-                    
-                    <a class="post-category post-category-%E7%BF%BB%E8%AF%91" href="https://lucumt.info//categories/%E7%BF%BB%E8%AF%91">翻译</a>
-                    
-                </div>
-                
-            </p>
-            <article class="post-summary">
-                  <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/benefits.html">Java Concurrency / Multithreading Benefits</a></strong></p>
-
-<p>尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：</p>
-
-<ul>
-<li>更好的资源利用</li>
-<li>在某些场景可以简化程序设计</li>
-<li>提高程序响应</li>
-</ul>
-
-              </article>
-              <div class="read-more-link">
-                  <a href="https://lucumt.info/posts/java-concurrency/multithreading-benefits"><span class="read-more-slashes">//</span>Read More...</a>
               </div>
           </section>
           
