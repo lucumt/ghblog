@@ -5,231 +5,45 @@
     <link>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</link>
     <description>Recent content in 翻译 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
+    <language>en</language>
     <lastBuildDate>Sat, 05 Aug 2017 00:10:11 +0800</lastBuildDate>
-    <atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>4. [译]并发的模型</title>
-      <link>https://lucumt.info/posts/java-concurrency/concurrency-models/</link>
+      <link>https://lucumt.info/post/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/java-concurrency/concurrency-models/</guid>
-      <description>
-
-&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>https://lucumt.info/post/java-concurrency/concurrency-models/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;
 
-&lt;h2 id=&#34;并发模型和分布式系统相似之处:9ebec4031501f63cd264123a50a14d31&#34;&gt;并发模型和分布式系统相似之处&lt;/h2&gt;
-
-&lt;p&gt;本文中描述的并发模型与分布式系统中使用的架构类似，在一个并发系统中，不同的线程之间互相通信，在一个分布式系统中，不同的进程间彼此通信（这些进程可能在不同的电脑上）。线程和进程在本质上时非常相似的，这就是为什么不同的并发模型与不同的分布式系统架构通常看起来相似。&lt;/p&gt;
-
-&lt;p&gt;虽然分布式系统还有额外的挑战，如网络故障、远程计算机或进程关闭等，但一个运行在大型服务器上的并发系统也可能会遇到类似的问题，如CPU故障、网卡故障、硬盘故障等，虽然其发生的概率较低，但理论上仍然可以发生。&lt;/p&gt;
-
-&lt;p&gt;由于并发模型和分布式系统架构类似，它们通常可以相互借鉴，比如在线程中分配工作的模型通常与分布式系统中的负载均衡类似，它们的错误处理手段也类似，例如日志（logging）、故障切换（fail-over）和等幂性任务（idempotency of jobs）等。&lt;/p&gt;
-
-&lt;h2 id=&#34;并行工作者模型-parallel-workers-model:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型(Parallel Workers model)&lt;/h2&gt;
-
-&lt;p&gt;并行工作者模型是本文要说明的第一个并发模型，该模型会将系统中到来的任务分配给不同的工作者，如下图所示：&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-1.png&#34; alt=&#34;&amp;quot;并行工作者模型&amp;quot;&#34; title=&#34;并行工作者模型&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;并发模型中有一个“委托者”将到来的任务分配给不同的工作者，每个工作者完成整个任务，每个工作者在不同的线程中（也有可能在不同的CPU）并行工作。&lt;/p&gt;
-
-&lt;p&gt;如果一个汽车厂采用了并行工作者模型，那么每辆汽车将由一个工人根据说明书从头到尾来制造。&lt;/p&gt;
-
-&lt;p&gt;并行工作者模型是Java应用程序中使用最广泛的并发模型（尽管这种情形正在发生变化），&lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html&#34;&gt;java.util.concurrent &lt;/a&gt;&lt;/strong&gt; 中的许多包都被设计用于此模型，你也可以在Java企业级服务器的设计中找到此模型的应用踪迹。&lt;/p&gt;
-
-&lt;h2 id=&#34;并行工作者模型的优点:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型的优点&lt;/h2&gt;
-
-&lt;p&gt;并行工作者模型的优点是理解容易，当要增加应用程序的并行能力时我们只需添加更多的工作者即可。&lt;/p&gt;
-
-&lt;p&gt;例如，假设你想实现一个网络爬虫，你可以使用不同数量的工作者线程来爬取制定数量的页面，根据结果来决定使用多少个工作者线程具有最短的抓取时间（同时意味着最优性能）。由于网络爬虫是IO密集型工作，在等待下载数据时会浪费大量时间，若每个CPU只运行一个线程时效率不高，所以最终的结果可能会是在电脑中一个CPU/内核运行多个线程。&lt;/p&gt;
-
-&lt;h2 id=&#34;并行工作者模型的缺点:9ebec4031501f63cd264123a50a14d31&#34;&gt;并行工作者模型的缺点&lt;/h2&gt;
-
-&lt;p&gt;并行工作者模式在其简单外表之下还有若干缺点，我将在以下部分说明其中最为明显的几个。&lt;/p&gt;
-
-&lt;h3 id=&#34;状态共享将使复杂性增加:9ebec4031501f63cd264123a50a14d31&#34;&gt;状态共享将使复杂性增加&lt;/h3&gt;
-
-&lt;p&gt;实际上并行工作者模型比上面说明的还要复杂一些，并行工作者通常需要访问一些共享数据，它们可能存储在内存中也可能存在数据库中，下面的图标展示了这种情形是如何是的并行工作者模型变得复杂的。&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-2.png&#34; alt=&#34;&amp;quot;并行工作者访问共享数据&amp;quot;&#34; title=&#34;并行工作者访问共享数据&#34; /&gt;
-&lt;br /&gt;
-其中的一些共享状态可能在类似于任务队列的通信过程中，但是另外一些共享状态可能是商业数据、缓存数据、数据库的连接池等。一旦共享状态引入到了并行工作者模型，问题就开始变得复杂。线程需要一种方式来访问共享数据以确保一个线程对共享数据的更改对其它线程是可见的（将其推送到主内存中，而不是仅停留在执行线程的CPU缓存中）。线程间需要避免竞争条件、死锁和其它共享状态相关的问题。&lt;/p&gt;
-
-&lt;p&gt;另外，当线程间在等待彼此访问共享数据结构时，会降低应用程序的并行性。许多并发数据结构都是阻塞式的，这意味着在给定时间只有一个或一组有限的线程可以访问它们，这可能导致线程对这些共享数据的竞争，高度竞争将会导致访问共享数据的代码从本质上变为串行执行。&lt;/p&gt;
-
-&lt;p&gt;现代的 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/non-blocking-algorithms.html&#34;&gt;非阻塞并行算法(non-blocking concurrency algorithms )&lt;/a&gt;&lt;/strong&gt; 可能会减少竞争和提高性能，但是非阻塞算法很难实现。&lt;/p&gt;
-
-&lt;p&gt;持久化数据结构是另外一种选择，一个持久化数据在自身被修改时会始终保留之前的值。因此，如果多个线程同时操作一个持久化数据并且其中一个修改了该数据，该线程会得到新数据的引用，而其它线程在则保持着对未修改的旧数据的引用，从而依旧保持一致。在Scala编程中包含若干个持久化的数据结构。&lt;/p&gt;
-
-&lt;p&gt;虽然持久化数据结构是并发修改共享数据的一种看似优雅的解决方案，但其执行性能并不理想。例如，一个持久化的列表会把新元素加入其首部并且返回对该新增元素的引用（它将会指向列表的其余元素）。所有其它的线程仍然保持着对先前列表中第一个元素的引用，对这些线程而言该列表并没有发生修改，它们看不见新增加的元素。&lt;/p&gt;
-
-&lt;p&gt;这种持久化的列表可以用链表来实现，不幸的是，现在的硬件并不能很好的支持链表，链表中的每一个元素都是一个单独的对象，这些对象可以遍布计算机的内存。现在的CPU在访问连续的内存地址时速度更快，因此实现为数组(Array)结构会获得更高的性能。对于一个以数组方式存储的数据而言，CPU缓存可以一次将更大的数组块加载到缓存中，一旦数据加载完毕，CPU可以直接在缓存中访问这些数据，而这对于元素分散在RAM中的链表而言是不太可能实现的。&lt;/p&gt;
-
-&lt;h3 id=&#34;无状态的工作者:9ebec4031501f63cd264123a50a14d31&#34;&gt;无状态的工作者&lt;/h3&gt;
-
-&lt;p&gt;共享状态可以被系统中的其它线程修改，因此工作者(workers)在每次需要它们时都必须重新读取该状态，以确保它在最新的副本上工作，无论共享状态是保存在内存还是外部数据库中，都是如此。一个工作者不在其内部保存状态（而是在每次需要时都重新读取），我们称之为无状态。&lt;/p&gt;
-
-&lt;h3 id=&#34;任务顺序的不确定:9ebec4031501f63cd264123a50a14d31&#34;&gt;任务顺序的不确定&lt;/h3&gt;
-
-&lt;p&gt;并行工作者模型的另一个缺点是任务执行的顺序无法确定。没有办法来确保某个任务最先执行或最后执行，任务A在任务B之前分配给一个工作者，但是任务B可能先于任务A执行。&lt;/p&gt;
-
-&lt;p&gt;并能工作者模型的不确定性使得很难在任何给定的时间点推理系统的状态，它同样使得确保一个任务在另外一个任务之前执行变得更难（如果可能）。&lt;/p&gt;
-
-&lt;h2 id=&#34;流水线模型-assembly-line:9ebec4031501f63cd264123a50a14d31&#34;&gt;流水线模型（Assembly Line）&lt;/h2&gt;
-
-&lt;p&gt;第二种并发模型我称之为流水线模型，我选择名称以符合早期“并行工作者”的含义。在不同的平台/社区中，其他的开发人员或许使用其它的名称，如反应式系统(reactive systems)，或事件驱动系统(event driven systems)，下图是流水线并发模型的一个展示&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-3.png&#34; alt=&#34;&amp;quot;流水线并发模型&amp;quot;&#34; title=&#34;流水线并发模型&#34; /&gt;
-&lt;br /&gt;
-这些工作者就像工厂里的工人一样组织起来，每个工作者只完成整个任务的一部分，当该部分任务完成时，该工作者将任务转移到下一个工作者。每个工作者都在自己的线程中运行，并且没有与其它的工作者共享状态，因此流水线模型有时也被称之为无共享的并发模型。&lt;/p&gt;
-
-&lt;p&gt;流水线模型通常用于系统中的非阻塞IO操作，非阻塞IO意味着当一个工作者(worker)开始一个IO操作时(如从网络读取文件或数据)，该工作者(worker)不必等待IO操作结束。IO操作通常较慢，因此等待IO操作完成是对CPU时间的浪费，CPU可以在此时做一些其它事情。当IO操作完成时，IO操作的结果（如数据状态读取或输入写入）会传给下一个工作者(worker)。&lt;/p&gt;
-
-&lt;p&gt;使用非阻塞IO时，IO操作的结果决定了工作者(worker)之间的边界，一个工作者(worker)在不得不开始IO操作之前可以尽可能的完成任务，然后放弃对该任务的控制，当IO操作结束时，在流水线上的另一个工作者(worker)以类似的方式继续完成该任务，直到它不得不开始IO操作。&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-4.png&#34; alt=&#34;&amp;quot;非阻塞IO操作&amp;quot;&#34; title=&#34;非阻塞IO操作&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;实际中，上述这些任务可能不会沿着一条流水线流动，因为大多数操作系统可以同时运行多个任务，这些任务根据实际需求沿着流水线逐个的被工作者处理。在实际使用中可能会有多个虚拟流水线同时运行，下图展示了在实际使用中任务如何在这种流水线上流转。&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-5.png&#34; alt=&#34;&amp;quot;多条流水线的模型&amp;quot;&#34; title=&#34;多条流水线的模型&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图展示了如何将三条装配线的中任务转发给同一个工作者完成（中间装配线上的最后一个工人）：&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-6.png&#34; alt=&#34;&amp;quot;多条流水线指向同一个工作者&amp;quot;&#34; title=&#34;多条流水线指向同一个工作者&#34; /&gt;
-&lt;br /&gt;
-流水线甚至可以做的比上面展示的更复杂。&lt;/p&gt;
-
-&lt;h3 id=&#34;响应式-事件驱动系统:9ebec4031501f63cd264123a50a14d31&#34;&gt;响应式、事件驱动系统&lt;/h3&gt;
-
-&lt;p&gt;使用流水线并发模型的系统有时候也被称之为 &lt;em&gt;响应式系统&lt;/em&gt; 或 &lt;em&gt;事件驱动系统&lt;/em&gt; 。系统工作者在事件发生时做出对应的响应：从外部接收消息或转发给其它工作者等。事件驱动的例子可能是传入的HTTP请求，也可能是某个文件完成加载到内存中等。&lt;/p&gt;
-
-&lt;p&gt;在写作本文时，已经有一些有趣的响应式/事件驱动平台可以使用，并且在将来会出现更多的。其中一些比较受欢迎的如下：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/vert.x/index.html&#34;&gt;Vert.x&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Akka&lt;/li&gt;
-&lt;li&gt;Node.JS (JavaScript)&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;对我个人而言，我发现Vert.x十分有趣(尤其是像我这种对Java/JVM落伍的人)。&lt;/p&gt;
-
-&lt;h3 id=&#34;参与者-actors-与管道-channels-对比:9ebec4031501f63cd264123a50a14d31&#34;&gt;参与者(Actors)与管道(Channels)对比&lt;/h3&gt;
-
-&lt;p&gt;参与者（Actors）和管道（Channels）是两种类似的流水线（响应式/事件驱动）模型。&lt;/p&gt;
-
-&lt;p&gt;在参与者模型中，每个工作者被称之为一个参与者，参与者之间可以直接发消息给对方，这些消息以异步方式来发送和处理。参与者可以用于处理如前所述的一个或多个流水线任务，下图展示了这种模型：&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-7.png&#34; alt=&#34;&amp;quot;参与者模型&amp;quot;&#34; title=&#34;参与者模型&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;在管道(Channel)模型中，工作者之间不直接互相沟通，相反地，他们会将消息发布到不同的管道中，其他的工作者可以在这些管道上收听消息，同时消息发送者不必知道谁在收听消息。下图展示了该模型：&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;管道模型&amp;quot;&#34; title=&#34;管道模型&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;在写作本文时，管道模型对我而言似乎更灵活：一个工作者不必知道在流水线上的哪个工作者要处理接下来的任务，它只需要知道需要将任务转发到哪个管道（或发送消息哪个管道等），在管道中的收听者可以订阅和取消订阅而不会影响到往管道中正在写入的工作者，这允许工作者之间有某种程度的低耦合。&lt;/p&gt;
-
-&lt;h2 id=&#34;流水线模型-assembly-line-的优点:9ebec4031501f63cd264123a50a14d31&#34;&gt;流水线模型（Assembly Line）的优点&lt;/h2&gt;
-
-&lt;p&gt;相对于并行工作者模型，流水线模型有一些优点，在接下来的部分，我会叙述其中最突出的几个优点。&lt;/p&gt;
-
-&lt;h3 id=&#34;无共享状态:9ebec4031501f63cd264123a50a14d31&#34;&gt;无共享状态&lt;/h3&gt;
-
-&lt;p&gt;工作者之间不共享状态的情形意味着它们可以在实现时不必考虑在状态共享时所遇到的各种并发问题，这让工作者的实现变得更加容易，在实现工作者时可以假设只有一个线程在处理该工作，本质上就是一个单线程实现。&lt;/p&gt;
-
-&lt;h3 id=&#34;有状态的工作者:9ebec4031501f63cd264123a50a14d31&#34;&gt;有状态的工作者&lt;/h3&gt;
-
-&lt;p&gt;由于工作者知道没有其它线程修改它们的数据，这些工作者可以具有状态。在说有状态时我的意思是它们可以保留在内存中操作所需的数据，只有写入才会改变最终的外部存储系统。因此，一个有状态的工作者通常比无状态的工作者执行更快。&lt;/p&gt;
-
-&lt;h3 id=&#34;更好的硬件协同:9ebec4031501f63cd264123a50a14d31&#34;&gt;更好的硬件协同&lt;/h3&gt;
-
-&lt;p&gt;单线程代码的优点在于它通常更符合底层硬件的工作原理。首先你通常可以创建更优化的数据结构和算法当你能假定代码会以单线程模式执行。&lt;/p&gt;
-
-&lt;p&gt;其次,如前所述单线程有状态的工作者可以在内存中缓存数据，当数据在内存中缓存时，有很大的概率该数据也会被缓存到CPU缓存中，这样数据获取变得更快。&lt;/p&gt;
-
-&lt;p&gt;当代码以一种自然受益于底层硬件工作原理的方式编写时，我称之为 &lt;em&gt;硬件协调*，有些开发者称之为 *mechanical sympathy&lt;/em&gt; ，我更倾向于硬件协同因为计算机只有很少的机械部件，同时单词“sympathy”在这种情况下被用作比喻“更高的匹配”，而我认为单词“conform”能更高的传达其含义。不管怎么说，这些都是吹毛求疵，可以使用你喜欢的任何术语来描述。&lt;/p&gt;
-
-&lt;h3 id=&#34;任务可排序:9ebec4031501f63cd264123a50a14d31&#34;&gt;任务可排序&lt;/h3&gt;
-
-&lt;p&gt;根据流水线模型实现的并发系统使得排序变得可能，任务排序使得在任何给定时间点更容易理解系统的状态。此外，你可以将所有传入的任务写入日志，如果系统的任何部分发生故障，则可以使用该日志从头重建系统的状态。这些任务以某种顺序写入日志，这个顺序称为该任务顺序，下图展示了这种设置如何实现：&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/concurrency-models/concurrency-models-8.png&#34; alt=&#34;&amp;quot;任务可排序&amp;quot;&#34; title=&#34;任务可排序&#34; /&gt;
-&lt;br /&gt;
-确保一个任务的顺序实现起来不一定容易，但通常是可能的。如果你可以实现的话，它将会大大简化类似于数据备份、恢复数据、复制数据等的任务，这些都可以通过日志文件来完成。&lt;/p&gt;
-
-&lt;h2 id=&#34;流水线模型-assembly-line-的缺点:9ebec4031501f63cd264123a50a14d31&#34;&gt;流水线模型（Assembly Line）的缺点&lt;/h2&gt;
-
-&lt;p&gt;流水线模型的最主要缺点是通常将执行一个任务分配到多个工作者，因此，当项目中有多个类时，将难以准确的看出哪段代码在执行给定的任务。&lt;/p&gt;
-
-&lt;p&gt;代码编写也可能会变得更难，工作者代码有时候被写作回调处理器(callback handlers)。在代码中有太多嵌套的回调处理器时可能会导致某些开发人员所谓的 &lt;em&gt;回调陷阱(callback hell)&lt;/em&gt; 。回调陷阱简单的说就是在所有的回调中很难追踪代码真正在干啥以及确保每个回调都可以访问它需要的数据。&lt;/p&gt;
-
-&lt;p&gt;而使用并行工作者模型，这往往很容易。你可以打开对应的工作者代码，并从头到尾读取要执行的代码。当然，并行工作者模型也可能传播到不同的类中，但是要执行的序列通常更容易从代码中读取。&lt;/p&gt;
-
-&lt;h2 id=&#34;功能并行-functional-parallelism-模型:9ebec4031501f63cd264123a50a14d31&#34;&gt;功能并行(Functional Parallelism)模型&lt;/h2&gt;
-
-&lt;p&gt;功能\函数并行模型是第三种并发模型，最近谈论得很多(2015)。&lt;/p&gt;
-
-&lt;p&gt;功能\函数并行性的基本思想是通过函数调用实现程序，功能可以被看作是发送消息到彼此的“代理”或“角色”，就像流水线并发模型（AKA反应或事件驱动系统）一样，当一个函数调用另一个函数时，类似于消息发送。&lt;/p&gt;
-
-&lt;p&gt;传递给函数的所有参数都被复制，所以在接收函数之外没有任何实体可以操纵数据，这种复制对于对于避免共享数据的条件竞争至关重要，它使得函数执行类似于原子操作，每个函数调用都可以独立于任何其他函数调用执行。&lt;/p&gt;
-
-&lt;p&gt;当每个函数调用可以独立执行时，可以在单独的CPU上执行每个函数调用，这意味着，在多个CPU上可以并行执行功能实现的算法。&lt;/p&gt;
-
-&lt;p&gt;使用Java 7，我们得到了包含 &lt;em&gt;ForkJoinPool&lt;/em&gt; 模型的 &lt;strong&gt;java.util.concurrent&lt;/strong&gt; 包，可以帮助您实现类似于功能并行性的功能，而使用Java 8，我们将得到并行流，可以帮助您并行化大型集合的迭代。请记住，有开发人员批评 &lt;em&gt;ForkAndJoinPool&lt;/em&gt; 模型（您可以在我的ForkAndJoinPool教程中找到一个相应的批评链接）。&lt;/p&gt;
-
-&lt;p&gt;关于功能\函数并行的难点在于知道哪个函数调用需要并行化，跨CPU的协调功能调用带来了一定的开销。只有由功能/函数完成的工作单位具有一定的大小，才能值得这个开销，如果函数调用非常小，尝试并行化它们可能比单个线程的单个CPU执行更慢。&lt;/p&gt;
-
-&lt;p&gt;从我的理解（事实上根本不完美），您可以使用事件响应驱动模型来实现实现算法，并实现与功能并行性相似的工作分解。在我看来，通过事件响应驱动模型，你可以掌握如何来实现并行化。&lt;/p&gt;
-
-&lt;p&gt;另外，只有当前任务是程序执行的唯一任务时，将任务分配给多个CPU，协调开销才有意义。然而，如果系统同时执行多个其他任务（如Web服务器，数据库服务器和许多其它系统），则无需尝试并行化单个任务。计算机中的其它CPU可能正在忙于处理其它任务，所以没有理由试图用较慢的功能并行任务来打扰他们。如有可能，你最好使用流水线并发模型，因为它在以单线程模式顺序执行的程序中具有更少的开销，并且更好的符合底层硬件的工作原理。&lt;/p&gt;
-
-&lt;h2 id=&#34;孰优孰劣:9ebec4031501f63cd264123a50a14d31&#34;&gt;孰优孰劣&lt;/h2&gt;
-
-&lt;p&gt;那么，哪种并发模型更好呢？&lt;/p&gt;
-
-&lt;p&gt;通常情况下，答案取决于你的系统应该做什么。 如果你的工作自然并行，独立，无需共享状态，则可以使用并行工作模型来实现系统。但许多任务不是自然并行和独立的，对于这些类型的系统，我相信流水线并发模型比缺点有更多的优点，比并行工作模型更有优势。你甚至不需要自己编写所有的流水线路基础设施，像Vert.x这样的现代平台为你已经实现了很多。 就个人而言，我将探索在Vert.x等平台上运行的设计，以便我的下一个项目。我个人感觉JavaEE没有尽头。&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>3. [译]多线程的成本</title>
-      <link>https://lucumt.info/posts/java-concurrency/multithreading-costs/</link>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/java-concurrency/multithreading-costs/</guid>
-      <description>
-
-&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-costs/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;
 
-&lt;h2 id=&#34;更复杂的设计:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;更复杂的设计&lt;/h2&gt;
-
-&lt;p&gt;尽管多线程应用程序的某些部分比单线程应用程序更简单，但其它部分却更为复杂。在执行通过多线程访问共享数据时需要特别注意，同时多线程间的交互也不是那么简单,由不正确的线程同步引起的错误可能会非常难以检测、复现和修复。&lt;/p&gt;
-
-&lt;h2 id=&#34;上下文切换开销:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;上下文切换开销&lt;/h2&gt;
-
-&lt;p&gt;当CPU从执行一个线程切换到执行另外一个线程时，CPU需要保存当前线程的本地数据，程序指针等，并加载下一个线程的本地数据，程序指针等来执行线程，这种切换被称作上下文切换，CPU从一个线程的上下文中执行切换到在另一个线程的上下文中执行。&lt;/p&gt;
-
-&lt;p&gt;上下文切换的代价并不便宜，在线程间要避免不必要的切换。可以在维基百科上阅读 &lt;strong&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Context_switch&#34;&gt;Context switch&lt;/a&gt;&lt;/strong&gt;来了解更多关于上下文切换的知识。&lt;/p&gt;
-
-&lt;h2 id=&#34;加重资源消耗:40e6cc49e0f5e4f0e9401d25e902878f&#34;&gt;加重资源消耗&lt;/h2&gt;
-
-&lt;p&gt;线程需要计算机的一些资源才能运行，除了CPU时间之外，线程需要一些内存来维护其本地堆栈，它也可能会占用操作系统的一些资源来管理该线程。我们可以尝试创建100个什么操作也没有的等待线程来看看在运行这些线程时应用程序需要多少内存。&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2. [译]多线程的优点</title>
-      <link>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</link>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/java-concurrency/multithreading-benefits/</guid>
-      <description>
-
-&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-benefits/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
 
@@ -239,273 +53,36 @@
 &lt;li&gt;提高程序响应&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;更好的资源利用:03f2a6ff6ff43564d8cd77dcf4ddb389&#34;&gt;更好的资源利用&lt;/h2&gt;
-
-&lt;p&gt;假设我们有一个程序从本地磁盘中读取和处理文件，若读取和处理一个文件的耗时分别为5秒钟和2秒钟，则读取处理2个文件的耗时如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;5 seconds reading file A
-2 seconds processing file A
-5 seconds reading file B
-2 seconds processing file B
------------------------
-14 seconds total//串行读取时总共耗时14秒
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;当从磁盘读取文件时CPU的大部分时间都花费在等待从磁盘读取数据，在此期间CPU大部分时间都处于空闲状态。这些空闲时间可以做一些其它的事情，通过改变操作顺序，CPU可以被更好的利用，如下面的列子：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;5 seconds reading file A
-5 seconds reading file B + 2 seconds processing file A
-2 seconds processing file B
------------------------
-12 seconds total//并行读取时总共耗时12秒
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在上面的例子中，CPU先等待读取第一个文件，然后开始读取第二个文件，在读取第二个文件的同时，CPU可以同时处理第一个文件。请记住，当等待从磁盘读取数据时，CPU大部分时间处于空闲状态！&lt;/p&gt;
-
-&lt;p&gt;通常情况下，CPU在等待IO响应时可以做一些其它事情，这不仅适用于磁盘IO操作，也适用于网络IO操作，或者读取用户输入,网络和磁盘IO操作通常比CPU和内存IO操作慢很多。&lt;/p&gt;
-
-&lt;h2 id=&#34;简化程序设计:03f2a6ff6ff43564d8cd77dcf4ddb389&#34;&gt;简化程序设计&lt;/h2&gt;
-
-&lt;p&gt;如果在单线程应用程序中编程实现上述读取和处理文件的功能，就必须跟踪每个文件的读取和处理状态。相反的，在多线程程序中我们可以开启两个线程，每个线程读取和处理同一个文件。每个线程在等待从磁盘读取文件时都会被阻塞，但在等待的同时，其它线程可以利用CPU来处理已经读取的文件。这样能够是的CPU和磁盘都被更好的使用，而且由于每个线程只需要跟踪一个文件，编程实现也会变得更简单。&lt;/p&gt;
-
-&lt;h2 id=&#34;提高程序响应:03f2a6ff6ff43564d8cd77dcf4ddb389&#34;&gt;提高程序响应&lt;/h2&gt;
-
-&lt;p&gt;将单线程应用变为多线程应用的另一个常见目的是获得更快的响应。假设有一个服务器程序在某个端口监听请求，当接收到一个请求后，服务器处理该请求，处理完后再继续监听，该循环监听服务器的设计草图如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while(server is active){
-    listen for request //监听请求
-    process request//处理请求
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果某个请求需要花费很长的时间来处理，那么在此期间其它的客户端就不能向此服务器发送请求，只有当服务器处于监听状态时才能够接收请求。&lt;/p&gt;
-
-&lt;p&gt;一种替代方案是让监听线程将接收到的请求发送给worker线程处理，然后立即恢复监听，worker线程对请求进行处理并给客户端发送回复，此种服务器的设计草图如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while(server is active){
-    listen for request //监听请求
-    hand request to worker thread//将接收到的请求发送给worker线程处理
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在这种方式下，服务器线程会迅速返回监听，因而更多的客户端可以给服务器发送请求，服务器的响应也得以提高。&lt;/p&gt;
-
-&lt;p&gt;该方法同样适用于桌面应用程序，如果你点击一个按钮来开启一个长任务，而执行该任务的线程是更新窗口、按钮等部件的线程，那么在该任务运行期间，该桌面程序将无法响应其它操作。相反的，可以将该任务移交给一个worker线程，当worker线程处理该任务时，更新窗口的线程处于空闲状态，可以响应其它用户请求，当worker线程执行完任务时通知更新窗口线程，该窗口线程根据执行结果来更新程序。因而利用worker线程设计实现的程序对用户更具有响应性。&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>1. [译]Java多线程与并发教程</title>
-      <link>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <link>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
-      <description>
-
-&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
 
 &lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
-之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;
-
-&lt;p&gt;多线程虽然是提高某些类型程序性能的良方，但是多线程比多任务更具有挑战性。由于这些线程执行的是相同的程序，因此它们同时读写相同的内存，这可能会导致在单线程中不会出现的错误结果。某些错误结果不会出现在单CPU中机器中是由于两个线程不可能同时执行。现在的电脑大都拥有多核甚至多CPU，这意味着多个不同的线程可以被不同的内核或CPU同时执行。&lt;br /&gt;
-&lt;img src=&#34;https://lucumt.info/blog_img/java-concurrency/java-concurrency-multithreading-tutorial/java-concurrency-tutorial-introduction_1.png&#34; alt=&#34;多线程介绍1&#34; /&gt;
-&lt;br /&gt;
-如果一个线程读取一个内存地址同时另一个线程向其写入信息，第一个线程在读取完成时会得到什么值呢？旧的值还是被第二个线程写入的新值？亦或是这两个值得混合？若两个线程同时向一个内存地址写入信息，当这两个线程运行完毕时，最终的值会是什么呢？是第一个线程写入的值还是第二个线程写入的值？亦或是这两个线程写入值的混合？&lt;/p&gt;
-
-&lt;p&gt;在缺少适当措施的情况下，上述的任意一种结果都可能出现，程序的运行结果甚至不可预测，每一次的执行结果可能都不同。因此怎么处理多线程对于软件开发人员很重要，这意味着我们需要学习如何控制线程来访问共享资源如内存、文件、数据库等，而这正是本系列教程所要阐述的主题之一。&lt;/p&gt;
-
-&lt;h2 id=&#34;java中的多线程和并发:8ce159d4bfbd6fb97f86a98ef4f33138&#34;&gt;Java中的多线程和并发&lt;/h2&gt;
-
-&lt;p&gt;Java是最先让多线程对开发人员变得简单的程序语言之一，Java在最开始的时候就已经具备了多线程的能力，因此Java开发人员经常面临上文所述的并发问题。这正是我编写本系列Java并发教程的原因，作为自己的笔记以及其他可能从中获益的Java开发人员。&lt;/p&gt;
-
-&lt;p&gt;本教程将主要关注于Java中的多线程，但其中的一些多线程问题与多任务和分布式系统系统中出现的问题类似，因此在本教程中可能会出现对多任务和分布式系统的引用。并发不等于多线程，它们是不同的概念。&lt;/p&gt;
-
-&lt;h2 id=&#34;java并发在2015的现状和展望:8ce159d4bfbd6fb97f86a98ef4f33138&#34;&gt;Java并发在2015的现状和展望&lt;/h2&gt;
-
-&lt;p&gt;自从第一本Java并发书籍问世之后，关于并发架构和设计领域已经发生了很多变化，Java 5甚至提供了concurrency工具包。新的类似于Vert.x、Play/Akka和Qbit的异步无共享平台和API已经出现。这些平台使用了一个不同于标准Java/JEE并发的模型来处理线程、共享内存和锁。新的无阻塞并发算法已经公开，类似于LMax Disrupter这样的非阻塞工具也已经添加到我们的工具箱。在Java7中通过Fork和Join框架引入了并行性功能编程，并在Java8中引入了流相关的API。&lt;/p&gt;
-
-&lt;p&gt;所有这些新的进展让我觉得是时候编更新本系列的Java并发教程，因此本教程再一次处于编写中状态，新的教程会在时间允许编写时发布。&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;–翻译结束!–&amp;gt;&lt;/p&gt;
-</description>
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>[译] Java Volatile 关键字详解</title>
-      <link>https://lucumt.info/posts/java-concurrency/java-volatile-keyword/</link>
+      <link>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
       
-      <guid>https://lucumt.info/posts/java-concurrency/java-volatile-keyword/</guid>
-      <description>
-
-&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</guid>
+      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为 &lt;em&gt;在主内中存储&lt;/em&gt; ，更准确的解释为：每次读取一个 &lt;em&gt;volatile&lt;/em&gt; 变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个 &lt;em&gt;volatile&lt;/em&gt; 变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
 
-&lt;p&gt;事实上，从Java5之后，&lt;em&gt;volatile&lt;/em&gt; 关键字不仅仅可以用来确保 &lt;em&gt;volatile&lt;/em&gt; 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;
-
-&lt;h2 id=&#34;volatile变量可见性保证:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile变量可见性保证&lt;/h2&gt;
-
-&lt;p&gt;Java &lt;em&gt;volatile&lt;/em&gt; 关键字确保了 &lt;em&gt;volatile&lt;/em&gt; 变量的修改在多线程中是可见的。这听起来有些抽象，接下来我将详细说明。&lt;/p&gt;
-
-&lt;p&gt;在一个对非 &lt;em&gt;volatile&lt;/em&gt; 变量进行操作的多线程应用，由于性能的关系，当对这些变量进行读写时，每个线程都可能从主线程中拷贝变量到CPU缓存中。如果你的电脑不止一个CPU，每个线程可能会在不同的CPU上运行。这意味着，每个线程都可能将变量拷贝到不同的CPU的CPU缓存中，如下图所示：&lt;br /&gt;
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58a160db3.png&#34; alt=&#34;p1.png&#34; /&gt;
-&lt;br /&gt;
-对于非 &lt;em&gt;volatile&lt;/em&gt; 变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。&lt;/p&gt;
-
-&lt;p&gt;假设两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SharedObject {
-    public int counter = 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再次假设，只有Thread1会增加 &lt;em&gt;counter&lt;/em&gt; 变量的值，但是Thread1和Thread2都能在任意时刻读取 &lt;em&gt;counter&lt;/em&gt; 变量的值。&lt;/p&gt;
-
-&lt;p&gt;如果 &lt;em&gt;couner&lt;/em&gt; 变量没有声明为 &lt;em&gt;volatile&lt;/em&gt; 将无法保证在何时把CPU缓存中的值写入主内存中。这意味着 &lt;em&gt;counter&lt;/em&gt; 变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：&lt;br /&gt;
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58a7387d7.png&#34; alt=&#34;p2.png&#34; /&gt;
-&lt;br /&gt;
-造成线程不能获取变量最新值得原因为变量值没有被其它线程及时写回主内存中，这就是所谓的可见性问题。某个线程的更新对其它线程不可见。&lt;/p&gt;
-
-&lt;p&gt;将 &lt;em&gt;counter&lt;/em&gt; 变量声明为 &lt;em&gt;volatile&lt;/em&gt; 之后，所有对 &lt;em&gt;counter&lt;/em&gt; 变量的写操作会立即写入主内存中，同样，所有对 &lt;em&gt;counter&lt;/em&gt; 变量的读操作都会从主内存中读取数据。下面的代码块展示了如何将 &lt;em&gt;counter&lt;/em&gt; 变量声明为 &lt;em&gt;volatile&lt;/em&gt; ：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SharedObject {
-    public volatile int counter = 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;因此定义一个 &lt;em&gt;volatile&lt;/em&gt; 变量可以保证写变量的操作对于其它线程可见。&lt;/p&gt;
-
-&lt;h2 id=&#34;volatile先行发生原则:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile先行发生原则&lt;/h2&gt;
-
-&lt;p&gt;从Java5之后 &lt;em&gt;volatile&lt;/em&gt; 关键字不仅能用于确保变量从主内存中读取和写入，事实上，&lt;em&gt;volatile&lt;/em&gt; 关键字还有如下作用：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果线程A写入了一个 &lt;em&gt;volatile&lt;/em&gt; 变量然后线程B读取了这个相同的 &lt;em&gt;volatile&lt;/em&gt; 变量，那么所有在线程A写之前对其可见的变量，在线程B读取这个 &lt;em&gt;volatile&lt;/em&gt; 之后也会对其可见。&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;volatile&lt;/em&gt; 变量的读写指令不能被JVM重排序（出于性能的考虑，JVM可能会对指令重排序如果JVM检测到指令排序不会对程序运行产生变化）。
-前后的指令可以重排序，但是 &lt;em&gt;volatile&lt;/em&gt; 变量的读和写不能与这些重排序指令混在一起。任何跟随在 &lt;em&gt;volatile&lt;/em&gt; 变量读写之后的指令都会确保只有在变量的读写操作之后才能执行。&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上述说明需要更进一步的解释。&lt;/p&gt;
-
-&lt;p&gt;当一个线程向一个 &lt;em&gt;volatile&lt;/em&gt; 变量写操作，此时不仅这个 &lt;em&gt;volatile&lt;/em&gt; 变量自身会写入主内存，所有这个 &lt;em&gt;volatile&lt;/em&gt; 变量写入之前受影响发生改变的变量也会刷写入主内存。当一个线程向一个 &lt;em&gt;volatile&lt;/em&gt; 变量读操作时它同样也会从主内存中读取所有和这个 &lt;em&gt;volatile&lt;/em&gt; 变量一起刷写入主内存的变量。&lt;/p&gt;
-
-&lt;p&gt;看看下面这个示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Thread A:
-    sharedObject.nonVolatile = 123;
-    sharedObject.counter     = sharedObject.counter + 1;
-
-Thread B:
-    int counter     = sharedObject.counter;
-    int nonVolatile = sharedObject.nonVolatile;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;由于线程A在写操作 &lt;em&gt;volatile&lt;/em&gt; 变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 之前写操作非 &lt;em&gt;volatile&lt;/em&gt; 变量 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; ，因而当线程A写操作变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 后,变量 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 和 &lt;em&gt;sharedObject.counter&lt;/em&gt; 都被写入主内存。&lt;/p&gt;
-
-&lt;p&gt;由于线程B以读取 &lt;em&gt;volatile&lt;/em&gt; 变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 开始，因而变量 &lt;em&gt;sharedObject.counter&lt;/em&gt; 和变量&lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 都会被写入线程B所使用的CPU缓存中。当线程B读取 &lt;em&gt;sharedObject.nonVolatile&lt;/em&gt; 变量时，它将能看见被线程A写入的变量。&lt;/p&gt;
-
-&lt;p&gt;开发人员可以利用这个扩展的可见性来优化线程之间变量的可见性。不同于把每个变量都设置为 &lt;em&gt;volatile&lt;/em&gt; ，此时只有少部分变量需要声明为 &lt;em&gt;volatile&lt;/em&gt; 。下面是一个利用此规则编写的简单示例程序 &lt;em&gt;Exchanger&lt;/em&gt; ：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Exchanger {
-
-    private Object   object       = null;
-    private volatile hasNewObject = false;
-
-    public void put(Object newObject) {
-        while(hasNewObject) {
-            //等待，不覆盖已经存在的新对象
-        }
-        object = newObject;
-        hasNewObject = true; //volatile写入
-    }
-
-    public Object take(){
-        while(!hasNewObject){ //volatile读取
-            //等待，不获取旧的对象（或null对象）
-        }
-        Object obj = object;
-        hasNewObject = false; //volatile写入
-        return obj;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;线程A随时可能会通过调用 &lt;em&gt;put()&lt;/em&gt; 方法增加对象，线程B随时可能会通过调用 &lt;em&gt;take()&lt;/em&gt; 方法获取对象。只要线程A只调用 &lt;em&gt;put()&lt;/em&gt; ，线程B只调用 &lt;em&gt;take()&lt;/em&gt; ,这个 &lt;em&gt;Exchanger&lt;/em&gt; 就可以通过一个 &lt;em&gt;volatile&lt;/em&gt; 变量正常工作（排除 &lt;em&gt;synchronized&lt;/em&gt; 代码块的使用）。&lt;/p&gt;
-
-&lt;p&gt;然而，JVM可能会重排序Java指令来优化性能，如果JVM可以通过不改变这些重排序指令的语义来实现此功能。如果JVM调换了 &lt;em&gt;put()&lt;/em&gt; 和 &lt;em&gt;take()&lt;/em&gt; 中的读和写的指令，会发生什么呢？如果 &lt;em&gt;put()&lt;/em&gt; 真的像下面这样执行会出现什么情况呢？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;while(hasNewObject) {
-    //等待，不覆盖已经存在的新对象
-}
-hasNewObject = true; //volatile写入
-object = newObject;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;请注意此时对于 &lt;em&gt;volatile&lt;/em&gt; 变量 &lt;em&gt;hasNewObject&lt;/em&gt; 的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。&lt;/p&gt;
-
-&lt;p&gt;但是，对于执行指令重排序可能会损害 &lt;em&gt;object&lt;/em&gt; 变量的可见性。首先，线程B可能会在线程A对 &lt;em&gt;object&lt;/em&gt; 真实的写入一个值到object之前读取到 &lt;em&gt;hasNewObject&lt;/em&gt; 的值为true。其次,现在甚至不能保证什么时候写入 &lt;em&gt;object&lt;/em&gt; 的新值会刷写入主内存（好吧，下次线程A在其它地方写入  &lt;em&gt;volatile&lt;/em&gt; 变量。。。）&lt;/p&gt;
-
-&lt;p&gt;为了阻止上面所述的这种情况发生， &lt;em&gt;volatile&lt;/em&gt; 关键字提供了一个 &lt;strong&gt;先行发生原则&lt;/strong&gt;。先行发生保证确保对于 &lt;em&gt;volatile&lt;/em&gt; 变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是 &lt;em&gt;volatile&lt;/em&gt; 读写指令不能和它前后的任何指令重新排序。&lt;/p&gt;
-
-&lt;p&gt;看看下面这个例子：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;sharedObject.nonVolatile1 = 123;
-sharedObject.nonVolatile2 = 456;
-sharedObject.nonVolatile3 = 789;
-
-sharedObject.volatile     = true; //a volatile variable
-
-int someValue1 = sharedObject.nonVolatile4;
-int someValue2 = sharedObject.nonVolatile5;
-int someValue3 = sharedObject.nonVolatile6;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;JVM可能会重新排序前3条指令，只要它们都先发生于 &lt;em&gt;volatile&lt;/em&gt; 写指令（它们都必须在 &lt;em&gt;volatile&lt;/em&gt; 写指令之前执行）。&lt;/p&gt;
-
-&lt;p&gt;同样的，JVM可能会重新排序最后3条指令，只要 &lt;em&gt;volatile&lt;/em&gt; 写指令先行发生于它们，这3条指令都不能被重新排序到 &lt;em&gt;volatile&lt;/em&gt; 指令的前面。&lt;/p&gt;
-
-&lt;p&gt;这就是 &lt;em&gt;volatile&lt;/em&gt; 先行发生原则的基本含义。&lt;/p&gt;
-
-&lt;h2 id=&#34;volatile并不是万能的:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile并不是万能的&lt;/h2&gt;
-
-&lt;p&gt;尽管 &lt;em&gt;volatile&lt;/em&gt; 关键字确保了所有对于 &lt;em&gt;volatile&lt;/em&gt; 变量的读操作都是直接从主内存中读取的，所有对于 &lt;em&gt;volatile&lt;/em&gt; 变量的写操作都是直接写入主内存的，但仍有一些情况只定义一个 &lt;em&gt;volatile&lt;/em&gt; 变量是不够的。&lt;/p&gt;
-
-&lt;p&gt;在前面的场景中，线程1对共享变量 &lt;em&gt;counter&lt;/em&gt; 写入操作，声明 &lt;em&gt;counter&lt;/em&gt; 变量为 &lt;em&gt;volatile&lt;/em&gt; 之后就能够确保线程2总是可以看见最新的写入值。&lt;/p&gt;
-
-&lt;p&gt;事实上，如果写入该变量的值不依赖于它前面的值，多个线程甚至可以在写入一个共享的 &lt;em&gt;volatile&lt;/em&gt; 变量时仍然能够持有在主内存中存储的正确值。换句话解释为，如果一个线程在写入volatile共享变量时，不需要先读取该变量的值以计算下一个值。&lt;/p&gt;
-
-&lt;p&gt;一旦一个线程需要首先读取一个 &lt;em&gt;volatile&lt;/em&gt; 变量的值，然后基于该值产生 &lt;em&gt;volatile&lt;/em&gt; 共享变量的下一个值，那么该 &lt;em&gt;volatile&lt;/em&gt; 变量将不再能够完全确保正确的可见性。在读取 &lt;em&gt;volatile&lt;/em&gt; 变量和写入它的新值这个很短的时间间隔内，产生了一个 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html&#34;&gt;竞争条件&lt;/a&gt;&lt;/strong&gt; :多个线程可能会读取 &lt;em&gt;volatile&lt;/em&gt; 变量的相同值，然后产生新值并写入主内存，这样将会覆盖互相的值。&lt;/p&gt;
-
-&lt;p&gt;这种多个线程同时增加相同计数器的场景正是 &lt;em&gt;volatile&lt;/em&gt; 变量不适用的地方，接下来的部分进行了更详细的解释。&lt;/p&gt;
-
-&lt;p&gt;假设线程1读取一个值为0的共享变量 &lt;em&gt;counter&lt;/em&gt; 到它的CPU缓存中，将它加1但是并没有将增加后的值写入主内存中。线程2可能会从主内存中读取同一个 &lt;em&gt;counter&lt;/em&gt; 变量，其值仍然为0，同样不将其写入主内存中，就如下面的图片所展示的那样：&lt;br /&gt;
-&lt;img src=&#34;https://ooo.0o0.ooo/2016/03/07/56dd58ae1cdfb.png&#34; alt=&#34;p3.png&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;线程1和线程2现在都没有同步，共享变量 &lt;em&gt;counter&lt;/em&gt; 的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量 &lt;em&gt;counter&lt;/em&gt; 的计算值写入到主内存中，&lt;em&gt;counter&lt;/em&gt; 的值仍然是错的。&lt;/p&gt;
-
-&lt;h2 id=&#34;volatile的适用场景:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile的适用场景&lt;/h2&gt;
-
-&lt;p&gt;就如在前面提到的那样，如果两个线程同时对一个共享变量进行读和写，那么仅用 &lt;em&gt;volatile&lt;/em&gt; 变量是不够的。在这种情况下，你需要使用 &lt;em&gt;synchronized&lt;/em&gt; 来确保关于该变量的读和写都是原子操作。读或写一个 &lt;em&gt;volatile&lt;/em&gt; 变量时并不会阻塞其它线程对该变量的读和写。在这种情况下必须用 &lt;em&gt;synchronzied&lt;/em&gt; 关键字来修饰你的关键代码。&lt;/p&gt;
-
-&lt;p&gt;除了使用 &lt;em&gt;synchronzied&lt;/em&gt; 之外，你也可以使用 &lt;strong&gt;java.util.concurrent&lt;/strong&gt; 包中的一些原子数据类型，如 &lt;strong&gt;AtomicLong&lt;/strong&gt; ， &lt;strong&gt;AtomicReference&lt;/strong&gt; 等。&lt;/p&gt;
-
-&lt;p&gt;当只有一个线程对一个 &lt;em&gt;volatile&lt;/em&gt; 变量进行读写而其它线程只读取该变量时， &lt;em&gt;volatile&lt;/em&gt; 可以确保这些读线程读取到的是该变量的最新写入值。如果不声明该变量为 &lt;em&gt;volatile&lt;/em&gt; ，则不能这些读线程保证读取的是最新写入值。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;volatile&lt;/em&gt; 关键字适用于32位变量和64位变量。&lt;/p&gt;
-
-&lt;h2 id=&#34;volatile性能思考:a750225f0d61f6f6aa9de85e7ec295c8&#34;&gt;Volatile性能思考&lt;/h2&gt;
-
-&lt;p&gt;由于 &lt;em&gt;volatile&lt;/em&gt; 变量的读和写都是直接从主内存中进行的，相对于CPU缓存，直接对主内存进行读写代价更高，
-访问一个 &lt;em&gt;volatile&lt;/em&gt; 变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用 &lt;em&gt;volatile&lt;/em&gt; 变量。&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;&amp;ndash;终于翻译完了!&amp;ndash;&amp;gt;&lt;/p&gt;
-</description>
+&lt;p&gt;事实上，从Java5之后，&lt;em&gt;volatile&lt;/em&gt; 关键字不仅仅可以用来确保 &lt;em&gt;volatile&lt;/em&gt; 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：
+&lt;/p&gt;</description>
     </item>
     
   </channel>

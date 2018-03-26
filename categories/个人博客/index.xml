@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>个人博客 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+    <description>Recent content in 个人博客 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Dec 2017 10:28:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>将基于Github Pages的自定义域名博客迁移到HTTPS</title>
+      <link>https://lucumt.info/post/migrate-github-blog-from-http-to-https/</link>
+      <pubDate>Sun, 24 Dec 2017 10:28:03 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/migrate-github-blog-from-http-to-https/</guid>
+      <description>&lt;p&gt;越来越多的网站和个人博客都变成 &lt;strong&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/HTTPS&#34; title=&#34;https://en.wikipedia.org/wiki/HTTPS&#34;&gt;HTTPS&lt;/a&gt;&lt;/strong&gt; ，而自己的博客一直都是用的是 &lt;strong&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&#34; title=&#34;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&#34;&gt;HTTP&lt;/a&gt;&lt;/strong&gt; 协议，作为一个具有强迫症的人，每次用 &lt;strong&gt;&lt;a href=&#34;https://www.google.cn/chrome/browser/desktop/index.html&#34; title=&#34;https://www.google.cn/chrome/browser/desktop/index.html&#34;&gt;Chrome&lt;/a&gt;&lt;/strong&gt; 浏览器打开个人博客时看见浏览器地址栏显示的&lt;img src=&#34;https://lucumt.info/blog_img/migrate-github-blog-from-http-to-https/http_icon.png&#34; alt=&#34;&amp;quot;Chrome HTTP标识&amp;quot;&#34; title=&#34;Chrome HTTP标识&#34; /&gt; 都感觉很不舒服。趁着前段时间不太忙，将个人博客从 &lt;em&gt;HTTP&lt;/em&gt; 迁移到了 &lt;em&gt;HTTPS&lt;/em&gt; ，先记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Github Pages和基于Go的Hugo搭建个人博客</title>
+      <link>https://lucumt.info/post/create-website-with-hugo/</link>
+      <pubDate>Sat, 27 Feb 2016 22:23:37 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/create-website-with-hugo/</guid>
+      <description>&lt;p&gt;一直以来都想拥有一个属于自己的博客，前段时间在学习&lt;code&gt;Go&lt;/code&gt; ，于是利用&lt;code&gt;Hugo&lt;/code&gt; 和&lt;code&gt;Github Pages&lt;/code&gt; 搭建了一个简易的个人博客，先简单记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

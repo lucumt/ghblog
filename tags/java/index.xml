@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/java/</link>
+    <description>Recent content in Java on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Jan 2018 11:21:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用dom4j修改含有回车换行符的XML文件</title>
+      <link>https://lucumt.info/post/update-xml-file-has-line-breaks-using-dom4j/</link>
+      <pubDate>Thu, 04 Jan 2018 11:21:42 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/update-xml-file-has-line-breaks-using-dom4j/</guid>
+      <description>&lt;p&gt;这几天工作中遇到一个利用 &lt;strong&gt;&lt;a href=&#34;https://dom4j.github.io/&#34;&gt;dom4j&lt;/a&gt;&lt;/strong&gt; 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 &lt;em&gt;dom4j(1.6.1)&lt;/em&gt; 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
+      <link>https://lucumt.info/post/print-sql-in-different-mybatis-version/</link>
+      <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/print-sql-in-different-mybatis-version/</guid>
+      <description>&lt;p&gt;项目中ORM框架用的是 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt;，最近由于业务上的需求将 &lt;em&gt;MyBatis&lt;/em&gt; 从3.1.1升级到3.4.5，发现升级后通过 &lt;strong&gt;&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;Log4j&lt;/a&gt;&lt;/strong&gt; 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
+      <link>https://lucumt.info/post/modify-java-class-file-content-directly/</link>
+      <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/modify-java-class-file-content-directly/</guid>
+      <description>&lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>4. [译]并发的模型</title>
+      <link>https://lucumt.info/post/java-concurrency/concurrency-models/</link>
+      <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/concurrency-models/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3. [译]多线程的成本</title>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-costs/</link>
+      <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-costs/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2. [译]多线程的优点</title>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-benefits/</link>
+      <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-benefits/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;更好的资源利用&lt;/li&gt;
+&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;
+&lt;li&gt;提高程序响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1. [译]Java多线程与并发教程</title>
+      <link>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
+
+&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>mybatis batch insert exception的解决方法</title>
+      <link>https://lucumt.info/post/mybatis-batch-insert-exception/</link>
+      <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mybatis-batch-insert-exception/</guid>
+      <description>&lt;p&gt;在利用 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt; 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;SQL配置文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;insert id=&amp;quot;addAuthorityRoleBatch&amp;quot; parameterType=&amp;quot;List&amp;quot;&amp;gt;
+    INSERT INTO system_authority_role(role_id,authority_id)
+      VALUES
+      &amp;lt;foreach collection=&amp;quot;list&amp;quot; item=&amp;quot;authRole&amp;quot; separator=&amp;quot;,&amp;quot;&amp;gt;
+        (#{authRole.roleId},#{authRole.authorityId})
+      &amp;lt;/foreach&amp;gt;
+  &amp;lt;/insert&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用SpringMVC下载大文件时内存溢出的处理</title>
+      <link>https://lucumt.info/post/download-big-file-using-springmvc/</link>
+      <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/download-big-file-using-springmvc/</guid>
+      <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;java.io&lt;/a&gt;&lt;/strong&gt; 下面的各种IO类自己实现，或者利用 &lt;strong&gt;&lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;Commons IO&lt;/a&gt;&lt;/strong&gt; 包中的 &lt;strong&gt;&lt;em&gt;FileUtils&lt;/em&gt;&lt;/strong&gt; 、 &lt;strong&gt;&lt;em&gt;IOUtils&lt;/em&gt;&lt;/strong&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt; 来作为项目的MVC实现，所以很自然的采用 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Spring和JUnit对数据库操作进行单元测试</title>
+      <link>https://lucumt.info/post/using-junit-in-spring/</link>
+      <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/using-junit-in-spring/</guid>
+      <description>&lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Spring Security动态的改变权限</title>
+      <link>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</link>
+      <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</guid>
+      <description>&lt;p&gt;利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理我们的web程序时，通常需要在&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 方法中来初始化权限信息,但 &lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 提供的API来实现。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
+      <link>https://lucumt.info/post/using-mock-test-http-servlet-request/</link>
+      <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/using-mock-test-http-servlet-request/</guid>
+      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
+
+&lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译] Java Volatile 关键字详解</title>
+      <link>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</link>
+      <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</guid>
+      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为 &lt;em&gt;在主内中存储&lt;/em&gt; ，更准确的解释为：每次读取一个 &lt;em&gt;volatile&lt;/em&gt; 变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个 &lt;em&gt;volatile&lt;/em&gt; 变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
+
+&lt;p&gt;事实上，从Java5之后，&lt;em&gt;volatile&lt;/em&gt; 关键字不仅仅可以用来确保 &lt;em&gt;volatile&lt;/em&gt; 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
+      <link>https://lucumt.info/post/can-not-run-program-mysqldump/</link>
+      <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/can-not-run-program-mysqldump/</guid>
+      <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;strong&gt;&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;Runtime&lt;/a&gt;&lt;/strong&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Runtime runtime = Runtime.getRuntime();
+String mysqlCmd = &amp;quot;mysqldump&amp;quot; + &amp;quot; -u&amp;quot; + username + &amp;quot; -p&amp;quot; + password + 
+           &amp;quot;  -h &amp;quot; + databaseAddress + &amp;quot; &amp;quot; +databaseName;
+Process process = runtime.exec(mysqlCmd);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是在客户那里实际使用时，有时候会出现在cmd中&lt;code&gt;MySQL&lt;/code&gt;命令可以正常识别但是程序不能正常执行的情况，报错信息如下:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
