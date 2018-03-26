@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jvm on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/jvm/</link>
+    <description>Recent content in Jvm on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Aug 2017 18:09:53 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
+      <link>https://lucumt.info/post/modify-java-class-file-content-directly/</link>
+      <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/modify-java-class-file-content-directly/</guid>
+      <description>&lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

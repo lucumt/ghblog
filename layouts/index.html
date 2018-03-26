@@ -1,78 +1,24 @@
-{{ partial "header.html" . }}
-<body>
-    <div id="layout" class="pure-g">
-	    
-		<a href="https://github.com/lucumt/ghblog" target="_new">
-			<img style="position: absolute; top: 0; right: 0; border: 0;" 
-			src="/img/forkme_right_red.png" alt="Fork me on GitHub">
-		</a>
-
-        {{ partial "sidebar.html" . }}
-
-        <div class="content pure-u-1 pure-u-md-3-4">
-            <a name="top"></a>
-            {{ partial "listtop.html" . }}
-
-          <div class="posts">
-            {{ $Site := .Site }}
-			{{ $paginator := .Paginate (where .Data.Pages "Type" "posts") }}
-            {{ range  $paginator.Pages }}
-			{{if not .Params.pinned}}
-            <section  class="post">
-                <header class="post-header">
-                    {{ if .Params.thumbnail }}
-                    <div class="post-avatar-wrapper">
-                        <img class="post-avatar" alt="" src="{{ .Params.thumbnail }}">
-                    </div>
-                    {{ end }}
-                    <h1 class="post-title">
-                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                  </h1>
-              </header>
-              <p class="post-meta">
-                  {{ if not .Params.nodate }}
-                  <span class="post-date">
-                    <span class="post-date-day"><sup>{{ .Date.Format "2" }}</sup></span><span class="post-date-separator">/</span><span class="post-date-month">{{ .Date.Format "Jan" }}</span> <span class="post-date-year">{{ .Date.Format "2006" }}</span>
-                </span>
-                {{ end }}
-                {{ if not .Params.noauthor }}
-                    {{ if .Params.author }}By <a class="post-author" {{ if .Site.Author.link }}href="{{ .Site.Author.link }}"{{ end }} target="{{ .Site.Author.linktarget }}">{{ .Params.author }}</a>{{ end }}
-                {{ end }}
-                {{ if not .Params.noread }}
-                    <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>{{.ReadingTime}} min. read</em></span>
-                {{ end }}
-                {{ if .Params.categories }}
-                <div class="post-categories">
-                    {{ range .Params.categories }}
-                    <a class="post-category post-category-{{ . | urlize }}" href="{{ $Site.BaseURL }}/categories/{{ . | urlize }}">{{ . }}</a>
-                    {{ end }}
-                </div>
-                {{ end }}
-            </p>
-            <article class="post-summary">
-                  {{ .Summary }}
-              </article>
-              <div class="read-more-link">
-                  <a href="{{ .RelPermalink }}"><span class="read-more-slashes">//</span>Read More...</a>
-              </div>
-          </section>
-          {{ end }}
-		  {{ end }}
-        </div>
-		<div class="page-link">
-		    总共<b>{{$paginator.TotalPages}}</b>页，当前第<b>{{$paginator.PageNumber}}</b>页
-			{{if $paginator.HasPrev}}
-			   <a href="{{$paginator.Prev.URL}}"><span class="read-more-slashes">//</span>上一页</a>
-			{{end}}
-			&nbsp;
-			{{if $paginator.HasNext}}
-			   <a href="{{$paginator.Next.URL}}"><span class="read-more-slashes">//</span>下一页</a>
-			{{end}}
-		</div>
-
-        {{ partial "footer.html" . }}
-        </div>
-    </div>
-    {{ partial "bodyend.html" . }}
-</body>
-</html>
+{{ define "content" }}
+  <section id="posts" class="posts">
+    {{/* (index .Site.Paginate) */}}
+    {{ $paginator := .Paginate (where (where .Data.Pages "Type" "post") ".Params.hiddenfromhomepage" "!=" true) }}
+    {{ range $paginator.Pages }}
+      {{ .Render "summary" }}
+    {{ end }}
+  </section>
+  <!-- pagination -->
+  <nav class="pagination">
+    {{ with $paginator.Prev }}
+      <a class="prev" href="{{ .URL }}">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">{{ T "prevPage" }}</span>
+      </a>
+    {{- end }}
+    {{ with $paginator.Next }}
+      <a class="next" href="{{ .URL }}">
+        <span class="next-text">{{ T "nextPage" }}</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    {{- end }}
+  </nav>
+{{ end }}

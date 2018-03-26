@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mediawiki添加回到顶部的方法 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="飞狐" /><meta name="description" content="Blog of Rosen Lu" />
+<meta name="keywords" content="Mediawiki" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/mediawiki-back-to-top/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Mediawiki添加回到顶部的方法" />
+<meta property="og:description" content="Blog of Rosen Lu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucumt.info/post/mediawiki-back-to-top/" />
+
+
+
+<meta property="article:published_time" content="2016-03-18T23:14:59&#43;08:00"/>
+
+<meta property="article:modified_time" content="2016-03-18T23:14:59&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Mediawiki添加回到顶部的方法">
+<meta itemprop="description" content="Blog of Rosen Lu">
+
+
+<meta itemprop="datePublished" content="2016-03-18T23:14:59&#43;08:00" />
+<meta itemprop="dateModified" content="2016-03-18T23:14:59&#43;08:00" />
+<meta itemprop="wordCount" content="453">
+
+
+
+<meta itemprop="keywords" content="Mediawiki," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mediawiki添加回到顶部的方法"/>
+<meta name="twitter:description" content="Blog of Rosen Lu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mediawiki添加回到顶部的方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-03-18 </span>
+        <div class="post-category">
+            
+              <a href="/categories/%E5%85%B6%E5%AE%83/"> 其它 </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>是<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>系统所采用的框架，适合于需要快速搭建知识分享的场合。采用<strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>生成的知识共享平台和<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>的操作与使用类似，都支持采用<strong><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></strong>语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个<strong><em>回到顶部</em></strong>的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：</p>
+
+<p></p>
+
+<ul>
+<li><p>以 <strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong> 管理员身份登录mediawiki,在搜索栏输入MediaWiki:Common.js,然后输入如下代码并保存：</p>
+
+<pre><code class="language-javascript">/* 此处的JavaScript将加载于所有用户每一个页面。 */
+$(window).scroll(function(){
+   if($(window).scrollTop()&gt;100){
+    $(&quot;.back-to-top&quot;).fadeIn(1000);
+  }else{
+    $(&quot;.back-to-top&quot;).fadeOut(1000);
+  }
+});
+</code></pre></li>
+
+<li><p>在mediawiki\skins\Vector.php中的第252行添加如下代码：</p>
+
+<pre><code class="language-html">&lt;div class=&quot;back-to-top&quot; onClick=&quot;$('html,body').animate({scrollTop:0},500);&quot;&gt;
+ &lt;span&gt;返回顶部&lt;/span&gt;
+&lt;/div&gt;
+</code></pre></li>
+
+<li><p>在mediawiki\skins\vector\screen.css的最后添加如下代码：</p>
+
+<pre><code class="language-css">.back-to-top {
+    position: fixed;
+    bottom: 6em;
+    right: 3em;
+    background-color: rgba(46, 46, 46, 0.8);
+    text-align: center;
+    padding: 5px 6px;
+    color: #eee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: none;
+}
+
+.back-to-top:hover {
+    background: rgba(0, 221, 255, 0.8);
+}
+</code></pre></li>
+
+<li><p>当页面的高度超出限制时，就会出现“返回顶部”的悬浮框，效果图如下：</p>
+
+<p><img src="https://ooo.0o0.ooo/2016/03/18/56ec1de1a77ac.png" alt="Back to top.PNG" title="返回顶部示例图片" /></p></li>
+</ul>
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/mediawiki/">Mediawiki</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/using-mock-test-http-servlet-request/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">在Spring中利用Mock对HttpServletRequest进行单元测试</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/java-concurrency/java-volatile-keyword/">
+            <span class="next-text nav-default">[译] Java Volatile 关键字详解</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lucumt@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://plus.google.com/u/0/115794588502118898127/posts" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rosen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+
+
+
+
+
+
+
+
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+</html>

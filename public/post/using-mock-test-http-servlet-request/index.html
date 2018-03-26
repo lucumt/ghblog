@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在Spring中利用Mock对HttpServletRequest进行单元测试 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="飞狐" /><meta name="description" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
+<meta name="keywords" content="Java, Spring, SpringMVC, JUnit" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/using-mock-test-http-servlet-request/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
+<meta property="og:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucumt.info/post/using-mock-test-http-servlet-request/" />
+
+
+
+<meta property="article:published_time" content="2016-03-19T22:43:47&#43;08:00"/>
+
+<meta property="article:modified_time" content="2016-03-19T22:43:47&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+<meta itemprop="description" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+
+
+<meta itemprop="datePublished" content="2016-03-19T22:43:47&#43;08:00" />
+<meta itemprop="dateModified" content="2016-03-19T22:43:47&#43;08:00" />
+<meta itemprop="wordCount" content="1038">
+
+
+
+<meta itemprop="keywords" content="Java,Spring,SpringMVC,JUnit," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试"/>
+<meta name="twitter:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在Spring中利用Mock对HttpServletRequest进行单元测试</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-03-19 </span>
+        <div class="post-category">
+            
+              <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+            
+              <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
+            
+              <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#编写单元测试时的注意事项">编写单元测试时的注意事项</a></li>
+<li><a href="#spring和mock在单元测试中的使用">Spring和Mock在单元测试中的使用</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="编写单元测试时的注意事项">编写单元测试时的注意事项</h2>
+
+<p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
+
+<p></p>
+
+<p>假设在 <strong><em>HttpServletRequest</em></strong> 中有一个userId字符串对象，我们想在queryUserById方法中调用该参数来获取用户信息，则正确的做法应如下所示:</p>
+
+<pre><code class="language-java">String userId = request.getAttribute(&quot;userId&quot;).toString();//先获取userId对象
+queryUserById(userId);//然后将获取的userId传入对应方法
+
+public User queryUserById(String userId){//相关该方法
+   User userModel = userDao.findById(userId);
+   return userModel;
+}  
+</code></pre>
+
+<p>请尽量避免使用第二种方式</p>
+
+<pre><code class="language-java">queryUserById(request);//直接传入request对象
+
+public User queryUserById(HttpServletRequest request){//相关方法
+   String userId = request.getAttribute(&quot;userId&quot;).toString();//在该方法内部获取userId
+
+   User userModel = userDao.findById(userId);
+   return userModel;
+}  
+</code></pre>
+
+<p>*若采用第一种方法，我么在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个 <strong>HttpServletRequest</strong> 对象，从而影响我们的测试。*</p>
+
+<h2 id="spring和mock在单元测试中的使用">Spring和Mock在单元测试中的使用</h2>
+
+<p>在某些方法中，为了减少代码量和提高程序的可读性，我们有时候需要直接传入 <strong><em>HttpServletRequest</em></strong> 或 <strong><em>ServletContext</em></strong> 对象，如果我们想对这种方法进行测试，可以利用<strong><a href="http://mockito.org/">Mock</a></strong>来模拟相关的对象。</p>
+
+<p>由于<strong><a href="https://spring.io/">Spring</a></strong>自身已经整合了<strong><a href="http://mockito.org/">Mock</a></strong>相关的类，故在此处展示一个示例代码，以供参考:</p>
+
+<pre><code class="language-java">import java.io.File;
+ 
+import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockServletContext;
+ 
+public class SpringMockTest {
+ 
+@Test
+public void testHttpServletRequest(){
+	String realPath =&quot;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&quot;;
+	//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错
+	MockServletContext context = new MockServletContext(realPath);
+	//获取realPath
+	System.out.println(context.getRealPath(File.separator));
+	//模拟HttpServletRequest
+	MockHttpServletRequest request = new MockHttpServletRequest(context);
+	//通过HttpServletRequest来获取realPath
+	System.out.println(request.getSession().getServletContext().getRealPath(File.separator));
+	}
+}
+</code></pre>
+
+<p>注意:请在上下文路径的字符串前面加上 <strong>file:</strong> 前缀，否则程序会报错。如上面的程序，realPath的值应为 <em>file:D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，若去掉 <em>file:</em> 前缀，改为 <em>D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，则程序会报错。</p>
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/java/">Java</a>
+          
+          <a href="/tags/spring/">Spring</a>
+          
+          <a href="/tags/springmvc/">SpringMVC</a>
+          
+          <a href="/tags/junit/">JUnit</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/update-authority-dynamic-using-spring-security/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">利用Spring Security动态的改变权限</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/mediawiki-back-to-top/">
+            <span class="next-text nav-default">Mediawiki添加回到顶部的方法</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lucumt@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://plus.google.com/u/0/115794588502118898127/posts" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rosen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+
+
+
+
+
+
+
+
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+</html>

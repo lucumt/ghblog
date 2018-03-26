@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Html5 on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/html5/</link>
+    <description>Recent content in Html5 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 30 Oct 2016 19:48:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/html5/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</title>
+      <link>https://lucumt.info/post/show-video-in-html5-page/</link>
+      <pubDate>Sun, 30 Oct 2016 19:48:17 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/show-video-in-html5-page/</guid>
+      <description>&lt;p&gt;由于项目需要，最近使用了在&lt;code&gt;html5&lt;/code&gt;中播放视频的功能，期间遇到了几个坑，先简单记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

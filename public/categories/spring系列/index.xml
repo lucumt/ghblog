@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring系列 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/</link>
+    <description>Recent content in Spring系列 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Mar 2016 16:41:29 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用SpringMVC下载大文件时内存溢出的处理</title>
+      <link>https://lucumt.info/post/download-big-file-using-springmvc/</link>
+      <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/download-big-file-using-springmvc/</guid>
+      <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;java.io&lt;/a&gt;&lt;/strong&gt; 下面的各种IO类自己实现，或者利用 &lt;strong&gt;&lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;Commons IO&lt;/a&gt;&lt;/strong&gt; 包中的 &lt;strong&gt;&lt;em&gt;FileUtils&lt;/em&gt;&lt;/strong&gt; 、 &lt;strong&gt;&lt;em&gt;IOUtils&lt;/em&gt;&lt;/strong&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt; 来作为项目的MVC实现，所以很自然的采用 &lt;strong&gt;&lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;SpringMVC&lt;/a&gt;&lt;/strong&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Spring和JUnit对数据库操作进行单元测试</title>
+      <link>https://lucumt.info/post/using-junit-in-spring/</link>
+      <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/using-junit-in-spring/</guid>
+      <description>&lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;strong&gt;&lt;em&gt;覆盖度高，可重复执行，单一性&lt;/em&gt;&lt;/strong&gt; 等特点。本文主要关注&lt;strong&gt;&lt;em&gt;可重复执行&lt;/em&gt;&lt;/strong&gt; ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;数据库事务&lt;/a&gt;&lt;/strong&gt; 来进行 &lt;strong&gt;&lt;em&gt;回滚&lt;/em&gt;&lt;/strong&gt; 从而达到重复执行的目的。最原始的方法是利用 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;java.sql.Connection&lt;/a&gt;&lt;/strong&gt; 类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Spring Security动态的改变权限</title>
+      <link>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</link>
+      <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</guid>
+      <description>&lt;p&gt;利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理我们的web程序时，通常需要在&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 方法中来初始化权限信息,但 &lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 提供的API来实现。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
+      <link>https://lucumt.info/post/using-mock-test-http-servlet-request/</link>
+      <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/using-mock-test-http-servlet-request/</guid>
+      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
+
+&lt;p&gt;根据软件开发过程中的&lt;strong&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt; 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; , &lt;strong&gt;&lt;em&gt;ServletContext&lt;/em&gt;&lt;/strong&gt; 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 &lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象，此时对此类方法进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试时会较为困难，本文介绍一种在&lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt;中通过&lt;strong&gt;&lt;a href=&#34;http://mockito.org/&#34;&gt;Mock&lt;/a&gt;&lt;/strong&gt;来模拟&lt;strong&gt;&lt;em&gt;HttpServletRequest&lt;/em&gt;&lt;/strong&gt; 对象进行&lt;strong&gt;&lt;a href=&#34;http://junit.org/&#34;&gt;JUnit&lt;/a&gt;&lt;/strong&gt;单元测试的方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

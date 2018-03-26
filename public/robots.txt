@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://lucumt.info/sitemap.xml

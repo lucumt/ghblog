@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Security on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/spring-security/</link>
+    <description>Recent content in Spring Security on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Mar 2016 16:05:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/spring-security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用Spring Security动态的改变权限</title>
+      <link>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</link>
+      <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</guid>
+      <description>&lt;p&gt;利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 来管理我们的web程序时，通常需要在&lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 接口中的 &lt;strong&gt;&lt;em&gt;loadUserByUsername&lt;/em&gt;&lt;/strong&gt; 方法中来初始化权限信息,但 &lt;strong&gt;&lt;em&gt;UserDetailsService&lt;/em&gt;&lt;/strong&gt; 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 &lt;strong&gt;&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;Spring Security&lt;/a&gt;&lt;/strong&gt; 提供的API来实现。
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

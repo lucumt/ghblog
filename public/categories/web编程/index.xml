@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web编程 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in Web编程 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 09 Jan 2018 22:10:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在Quartz中动态设置定时任务的执行时间</title>
+      <link>https://lucumt.info/post/update-quartz-scheduler-dynamic/</link>
+      <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/update-quartz-scheduler-dynamic/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;Quartz&lt;/a&gt;&lt;/strong&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;strong&gt;&lt;a href=&#34;https://spring.io/&#34;&gt;Spring&lt;/a&gt;&lt;/strong&gt; 一起使用，并在 &lt;em&gt;Spring&lt;/em&gt; 的配置文件中利用 &lt;em&gt;0 0 12 ? * WED&lt;/em&gt; 这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</title>
+      <link>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</link>
+      <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</guid>
+      <description>&lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;EasyUI&lt;/a&gt;&lt;/strong&gt; 中的 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;DataGrid&lt;/a&gt;&lt;/strong&gt; 实现的表格具有很多优点，如可以 &lt;em&gt;对列宽进行拖动调整、列冻结、行冻结、自定义格式化&lt;/em&gt; 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
+      <link>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</link>
+      <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个 report.rptdesign 文件后双击该文件出现如下错误: 错误信息提</description>
+    </item>
+    
+    <item>
+      <title>在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</title>
+      <link>https://lucumt.info/post/show-video-in-html5-page/</link>
+      <pubDate>Sun, 30 Oct 2016 19:48:17 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/show-video-in-html5-page/</guid>
+      <description>&lt;p&gt;由于项目需要，最近使用了在&lt;code&gt;html5&lt;/code&gt;中播放视频的功能，期间遇到了几个坑，先简单记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
