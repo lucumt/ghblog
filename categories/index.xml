@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/</link>
+    <description>Recent content in Categories on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	<atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go编程</title>
+      <link>https://lucumt.info/categories/go%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/go%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java编程</title>
+      <link>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring系列</title>
+      <link>https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web编程</title>
+      <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>个人博客</title>
+      <link>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sun, 24 Dec 2017 10:28:03 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>其它</title>
+      <link>https://lucumt.info/categories/%E5%85%B6%E5%AE%83/</link>
+      <pubDate>Fri, 18 Mar 2016 23:14:59 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E5%85%B6%E5%AE%83/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>单元测试</title>
+      <link>https://lucumt.info/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>工具使用</title>
+      <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库</title>
+      <link>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>https://lucumt.info/categories/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 26 Feb 2017 19:26:33 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编程杂想</title>
+      <link>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</link>
+      <pubDate>Sat, 23 Dec 2017 12:07:40 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>翻译</title>
+      <link>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Easyui on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/easyui/</link>
+    <description>Recent content in Easyui on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 06 Aug 2017 00:06:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/easyui/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</title>
+      <link>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</link>
+      <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</guid>
+      <description>&lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;EasyUI&lt;/a&gt;&lt;/strong&gt; 中的 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;DataGrid&lt;/a&gt;&lt;/strong&gt; 实现的表格具有很多优点，如可以 &lt;em&gt;对列宽进行拖动调整、列冻结、行冻结、自定义格式化&lt;/em&gt; 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

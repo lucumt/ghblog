@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>其它 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/%E5%85%B6%E5%AE%83/</link>
+    <description>Recent content in 其它 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 18 Mar 2016 23:14:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/categories/%E5%85%B6%E5%AE%83/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mediawiki添加回到顶部的方法</title>
+      <link>https://lucumt.info/post/mediawiki-back-to-top/</link>
+      <pubDate>Fri, 18 Mar 2016 23:14:59 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mediawiki-back-to-top/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;是&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;系统所采用的框架，适合于需要快速搭建知识分享的场合。采用&lt;strong&gt;&lt;a href=&#34;https://www.mediawiki.org/wiki/MediaWiki&#34;&gt;Mediawiki&lt;/a&gt;&lt;/strong&gt;生成的知识共享平台和&lt;strong&gt;&lt;a href=&#34;https://www.wikipedia.org/&#34;&gt;维基百科&lt;/a&gt;&lt;/strong&gt;的操作与使用类似，都支持采用&lt;strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/Markdown&#34;&gt;Markdown&lt;/a&gt;&lt;/strong&gt;语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个&lt;strong&gt;&lt;em&gt;回到顶部&lt;/em&gt;&lt;/strong&gt;的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

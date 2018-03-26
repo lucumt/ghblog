@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="飞狐" /><meta name="description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL" />
+<meta name="keywords" content="Java, MyBatis" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/print-sql-in-different-mybatis-version/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="在不同版本的MyBatis中通过Log4j打印实际执行的SQL" />
+<meta property="og:description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucumt.info/post/print-sql-in-different-mybatis-version/" />
+
+
+
+<meta property="article:published_time" content="2017-12-18T18:33:14&#43;08:00"/>
+
+<meta property="article:modified_time" content="2017-12-18T18:33:14&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="在不同版本的MyBatis中通过Log4j打印实际执行的SQL">
+<meta itemprop="description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL">
+
+
+<meta itemprop="datePublished" content="2017-12-18T18:33:14&#43;08:00" />
+<meta itemprop="dateModified" content="2017-12-18T18:33:14&#43;08:00" />
+<meta itemprop="wordCount" content="1853">
+
+
+
+<meta itemprop="keywords" content="Java,MyBatis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在不同版本的MyBatis中通过Log4j打印实际执行的SQL"/>
+<meta name="twitter:description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在不同版本的MyBatis中通过Log4j打印实际执行的SQL</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-12-18 </span>
+        <div class="post-category">
+            
+              <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#mybatis3-1-1显示sql的配置与分析">MyBatis3.1.1显示SQL的配置与分析</a>
+<ul>
+<li><a href="#log4j相关配置">Log4j相关配置</a></li>
+<li><a href="#原理分析">原理分析</a></li>
+</ul></li>
+<li><a href="#mybatis3-4-5显示sql的配置与分析">MyBatis3.4.5显示SQL的配置与分析</a>
+<ul>
+<li><a href="#log4j相关配置-1">Log4j相关配置</a></li>
+<li><a href="#原理分析-1">原理分析</a></li>
+<li><a href="#待分析问题">待分析问题</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p>项目中ORM框架用的是 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong>，最近由于业务上的需求将 <em>MyBatis</em> 从3.1.1升级到3.4.5，发现升级后通过 <strong><a href="https://logging.apache.org/log4j/1.2/download.html">Log4j</a></strong> 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
+
+<p>
+假设我们测试的sql文件为 <em>UserMapper.xml</em> ， 对应的代码如下，其命名空间为 <em>com.lucumt.mapper.UserMappper</em></p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+   &lt;mapper namespace=&quot;com.lucumt.mapper.UserMappper&quot;&gt;
+    	&lt;select id=&quot;getUsers&quot; parameterType=&quot;String&quot; resultType=&quot;com.lucumt.model.UserModel&quot;&gt;
+        	SELECT id,username,password,create_time AS createTime FROM system_users WHERE username!=#{username}
+    	&lt;/select&gt;
+   &lt;/mapper&gt;
+</code></pre>
+
+<p>对应的执行代码如下</p>
+
+<pre><code class="language-java">@Test
+public void testMybatis(){
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream is = AppTest.class.getClassLoader().getResourceAsStream(resource);
+    SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
+    
+    SqlSession session = sessionFactory.openSession();
+    String statement = &quot;com.lucumt.mapper.UserMappper.getUsers&quot;;
+    List&lt;UserModel&gt; userList = session.selectList(statement, &quot;admin&quot;);
+    for(UserModel u:userList){
+    	System.out.println(u.toString());
+    }
+}
+</code></pre>
+
+<p>本文会基于上述代码说明不同版本下如何利用 <em>Log4j</em> 在 <em>MyBatis</em> 中配置打印日志以及其实现原理。</p>
+
+<h2 id="mybatis3-1-1显示sql的配置与分析">MyBatis3.1.1显示SQL的配置与分析</h2>
+
+<h3 id="log4j相关配置">Log4j相关配置</h3>
+
+<p>在 <em>MyBatis3.1.1</em> 及以前的版本中若我们想通过 <em>Log4j</em> 配置来打印实际执行的SQL，<em>log4j.properties</em> 的配置通常类似如下</p>
+
+<pre><code class="language-java">#在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+log4j.logger.java.sql.Connection=DEBUG 
+log4j.logger.java.sql.Statement=DEBUG 
+log4j.logger.java.sql.PreparedStatement=DEBUG 
+log4j.logger.java.sql.ResultSet=DEBUG 
+</code></pre>
+
+<h3 id="原理分析">原理分析</h3>
+
+<p>以 <em>log4j.logger.java.sql.Connection=DEBUG</em>  这个配置为例，分析源码可知其sql日志来源于<code>ConnectionLogger</code>，查看 <em>ConnectionLogger</em> 的代码可知，<em>ConnectionLogger</em> 以硬编码的方式生成了一个log对象,当 <em>DEBUG</em> 模式开启时该log对象会打印sql语句等信息。</p>
+
+<pre><code class="language-java">public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
+
+  //生成一个Connection的log
+  private static final Log log = LogFactory.getLog(Connection.class);
+
+  private Connection connection;
+
+  private ConnectionLogger(Connection conn, Log statementLog) {
+    super(statementLog);
+    this.connection = conn;
+    if (isDebugEnabled()) {
+      debug(&quot;ooo Using Connection [&quot; + conn + &quot;]&quot;);
+    }
+  }
+
+  public Object invoke(Object proxy, Method method, Object[] params)
+      throws Throwable {
+    try {
+      if (&quot;prepareStatement&quot;.equals(method.getName())) {
+        if (isDebugEnabled()) {//打印执行的SQL语句
+          debug(&quot;==&gt;  Preparing: &quot; + removeBreakingWhitespace((String) params[0]));
+        }        
+        PreparedStatement stmt = (PreparedStatement) method.invoke(connection, params);
+        stmt = PreparedStatementLogger.newInstance(stmt, getStatementLog());
+        return stmt;
+      }
+      //... other code
+    } catch (Throwable t) {
+      throw ExceptionUtil.unwrapThrowable(t);
+    }
+  }
+
+  //... other code
+
+}
+</code></pre>
+
+<p>运行结果如下<br />
+<img src="/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png" alt="&quot;MyBatis3.1.1时显示执行SQL&quot;" title="MyBatis1.1.1时显示执行SQL" /><br />
+从上述代码可知在 <em>Mybatis3.1.1</em> 中通过 <em>Log4j</em> 实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: <strong>当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印</strong> ，基于此 <em>MyBatis</em> 从3.2.0版本之后重新实现了相关功能。</p>
+
+<h2 id="mybatis3-4-5显示sql的配置与分析">MyBatis3.4.5显示SQL的配置与分析</h2>
+
+<h3 id="log4j相关配置-1">Log4j相关配置</h3>
+
+<p>在 <em>MyBatis3.2.0</em> 及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，<em>log4j.properties</em> 的配置通常类似如下</p>
+
+<pre><code class="language-java">#在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+log4j.logger.com.lucumt.mapper=DEBUG 
+</code></pre>
+
+<p>在本文写作时，mybatis官网上已有关于这方面更 <strong><a href="http://www.mybatis.org/mybatis-3/zh/logging.html">详细的说明</a></strong> 。</p>
+
+<h3 id="原理分析-1">原理分析</h3>
+
+<p>同样以 <em>log4j.logger.java.sql.Connection=DEBUG</em> 为例，其sql日志来源于 <em>ConnectionLogger</em> ，对应代码如下</p>
+
+<pre><code class="language-java">public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
+
+  private final Connection connection;
+
+  //通过注入的方式生成log对象
+  private ConnectionLogger(Connection conn, Log statementLog, int queryStack) {
+    super(statementLog, queryStack);
+    this.connection = conn;
+  }
+
+  @Override
+  public Object invoke(Object proxy, Method method, Object[] params)
+      throws Throwable {
+    try {
+      if (Object.class.equals(method.getDeclaringClass())) {
+        return method.invoke(this, params);
+      }    
+      if (&quot;prepareStatement&quot;.equals(method.getName())) {
+        if (isDebugEnabled()) {
+          debug(&quot; Preparing: &quot; + removeBreakingWhitespace((String) params[0]), true);
+        }        
+      }
+      //... other code
+    } catch (Throwable t) {
+      throw ExceptionUtil.unwrapThrowable(t);
+    }
+  }
+
+  //... other code
+
+}
+</code></pre>
+
+<p>从上述代码可知，其日志生成是调用<code>BaseJdbcLogger</code>的构造方法生成的，<em>BaseJdbcLogger</em> 代码如下</p>
+
+<pre><code class="language-java">public abstract class BaseJdbcLogger {
+
+  protected Log statementLog;
+  protected int queryStack;
+
+
+  public BaseJdbcLogger(Log log, int queryStack) {
+    this.statementLog = log;
+    if (queryStack == 0) {
+      this.queryStack = 1;
+    } else {
+      this.queryStack = queryStack;
+    }
+  }
+   
+  //... other code
+}
+</code></pre>
+
+<p>DEBUG模式下查看 <em>ConnectionLogger</em> 的调用堆栈如下<br />
+<img src="/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png" alt="&quot;ConnectionLogger的调用堆栈&quot;" title="ConnectionLogger的调用堆栈" /><br />
+从其调用堆栈可知log对象是通过<code>MappedStatement</code>生成的，如下</p>
+
+<pre><code class="language-java">public class SimpleExecutor extends BaseExecutor {
+   
+  //... other code
+
+  @Override
+  public &lt;E&gt; List&lt;E&gt; doQuery(MappedStatement ms,Object parameter,
+                  RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+    Statement stmt = null;
+    try {
+      Configuration configuration = ms.getConfiguration();
+      StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
+      //log对象通过MappedStatement生成
+      stmt = prepareStatement(handler, ms.getStatementLog());
+      return handler.&lt;E&gt;query(stmt, resultHandler);
+    } finally {
+      closeStatement(stmt);
+    }
+  }
+}
+</code></pre>
+
+<p>查看 <em>MappedStatement</em> 的源码，发现log的生成是在 <em>Builder</em> 方法中，如下</p>
+
+<pre><code class="language-java">public final class MappedStatement {
+
+  public static class Builder {
+    private MappedStatement mappedStatement = new MappedStatement();
+
+    public Builder(Configuration configuration, String id, SqlSource sqlSource, SqlCommandType sqlCommandType) {
+      mappedStatement.configuration = configuration;
+      mappedStatement.id = id;
+      mappedStatement.sqlSource = sqlSource;
+      mappedStatement.statementType = StatementType.PREPARED;
+      mappedStatement.parameterMap = new ParameterMap.Builder(configuration, &quot;defaultParameterMap&quot;, null, new ArrayList&lt;ParameterMapping&gt;()).build();
+      mappedStatement.resultMaps = new ArrayList&lt;ResultMap&gt;();
+      mappedStatement.sqlCommandType = sqlCommandType;
+      mappedStatement.keyGenerator = configuration.isUseGeneratedKeys() &amp;&amp; SqlCommandType.INSERT.equals(sqlCommandType) ? Jdbc3KeyGenerator.INSTANCE : NoKeyGenerator.INSTANCE;
+      String logId = id;
+      //可以通过设置logPrefix的方法来生成log对象
+      if (configuration.getLogPrefix() != null) {
+        logId = configuration.getLogPrefix() + id;
+      }
+      //通过logId生成log对象
+      mappedStatement.statementLog = LogFactory.getLog(logId);
+      mappedStatement.lang = configuration.getDefaultScriptingLanguageInstance();
+    }
+}
+</code></pre>
+
+<p>通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 <strong>namespace+方法id</strong> 组成，在本例中为 <em>com.lucumt.mapper.UserMappper.getUsers</em> ，而前面的配置为 <em>log4j.logger.com.lucumt.mapper=DEBUG</em> ，由于 <em>Log4j</em> 中的log示例的继承关系，相当于 <em>com.lucumt.mapper.UserMappper.getUser</em> 也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下<br />
+<img src="/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png" alt="&quot;MyBatis3.4.5时显示执行SQL&quot;" title="MyBatis3.4.5时显示执行SQL" /><br />
+利用新版 <em>MyBatis</em> 的这一特性，我们可以实现类似如下的不同粒度sql打印</p>
+
+<pre><code class="language-java">log4j.logger.com.xxx.mapper=DEBUG #打印xxx包下所有的执行SQL
+log4j.logger.com.yyy.mapper.PersonMapper=DEBUG #打印PersonMapper下所有的执行SQL
+log4j.logger.com.zzz.mapper.GroupMapper.getGroups=DEBUG #只打印getGroups对应的执行SQL  
+</code></pre>
+
+<p><br/>
+由前面的代码可知 <em>MappedStatement</em> 的 <em>Build</em> 方法在生成log对象时会检测是否有 <em>logPrefix</em> 配置，若有则用 <em>logPrefix</em> 来生成log对象，于是可以通过设置 <em>logPrefix</em> 以另外一种方式配置打印sql。 可在 <em>MyBatis</em> 配置文件中添加如下配置</p>
+
+<pre><code class="language-xml">&lt;settings&gt;
+   &lt;setting name=&quot;logPrefix&quot; value=&quot;dao.&quot;/&gt; &lt;!-- 设置前缀为dao --&gt;
+   &lt;setting name=&quot;logImpl&quot; value=&quot;log4j&quot;/&gt; &lt;!-- 设置使用log4j为日志实现类 --&gt;
+&lt;/settings&gt;
+</code></pre>
+
+<p>然后将 <em>log4j.properties</em> 的配置修改为</p>
+
+<pre><code class="language-ruby">log4j.logger.dao=DEBUG
+</code></pre>
+
+<p>执行结果与前面相同，通过 <em>logPrefix</em> 可以在有些时候简化sql打印配置。</p>
+
+<h3 id="待分析问题">待分析问题</h3>
+
+<p>若将 <em>MyBatis</em> 的版本变 <em>3.3.0</em> 时，通过 <em>Log4j</em> 配置打印SQL时，如下所示的配置方式只有部分生效，原因待分析</p>
+
+<pre><code class="language-java">log4j.logger.com.xxx=DEBUG #可以打印SQL
+log4j.logger.com.xxx.mapper=DEBUG #可以打印SQL
+log4j.logger.com.xxx.mapper.UserMapper=DEBUG #不能打印SQL
+log4j.logger.com.xxx.mapper.UserMapper.getUsers=DEBUG #不能打印SQL
+</code></pre>
+    </div>
+
+    
+    
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/java/">Java</a>
+          
+          <a href="/tags/mybatis/">MyBatis</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/different-ways-find-bug-in-complex-code/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从复杂代码中找出Bug的几种方法</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/modify-java-class-file-content-directly/">
+            <span class="next-text nav-default">在不重新编译的情况下直接修改Java Class文件中的内容</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lucumt@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://plus.google.com/u/0/115794588502118898127/posts" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rosen</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+
+
+
+
+
+
+
+
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+</html>

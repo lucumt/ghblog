@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java Concurrency on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/java-concurrency/</link>
+    <description>Recent content in Java Concurrency on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 05 Aug 2017 00:10:11 +0800</lastBuildDate>
+    
+	<atom:link href="https://lucumt.info/tags/java-concurrency/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>4. [译]并发的模型</title>
+      <link>https://lucumt.info/post/java-concurrency/concurrency-models/</link>
+      <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/concurrency-models/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;Java Concurrency / Concurrency Models&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3. [译]多线程的成本</title>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-costs/</link>
+      <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-costs/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;Java Concurrency / Multithreading Costs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2. [译]多线程的优点</title>
+      <link>https://lucumt.info/post/java-concurrency/multithreading-benefits/</link>
+      <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/multithreading-benefits/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;Java Concurrency / Multithreading Benefits&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;更好的资源利用&lt;/li&gt;
+&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;
+&lt;li&gt;提高程序响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1. [译]Java多线程与并发教程</title>
+      <link>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;Java Concurrency / Multithreading Tutorial&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
+
+&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译] Java Volatile 关键字详解</title>
+      <link>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</link>
+      <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</guid>
+      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为 &lt;em&gt;在主内中存储&lt;/em&gt; ，更准确的解释为：每次读取一个 &lt;em&gt;volatile&lt;/em&gt; 变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个 &lt;em&gt;volatile&lt;/em&gt; 变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
+
+&lt;p&gt;事实上，从Java5之后，&lt;em&gt;volatile&lt;/em&gt; 关键字不仅仅可以用来确保 &lt;em&gt;volatile&lt;/em&gt; 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
