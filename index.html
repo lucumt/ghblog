@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Rosen" />
-  <meta name="description" content="Hugo theme even example site." />
+  <meta name="description" content="飞狐的个人博客" />
   <meta name="keywords" content="Hugo, theme, even" />
 
 
@@ -51,13 +51,13 @@
 
 
 <meta property="og:title" content="飞狐的部落格" />
-<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:description" content="飞狐的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://lucumt.info/" />
 
 
 
-<meta property="og:updated_time" content="2018-01-09T22:10:30&#43;08:00"/>
+<meta property="og:updated_time" content="2018-12-15T11:57:36&#43;08:00"/>
 
 
 
@@ -69,11 +69,11 @@
 
 
 <meta itemprop="name" content="飞狐的部落格">
-<meta itemprop="description" content="Hugo theme even example site.">
+<meta itemprop="description" content="飞狐的个人博客">
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="飞狐的部落格"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta name="twitter:description" content="飞狐的个人博客"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -99,13 +99,15 @@
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
     <a href="/">
-        <li class="mobile-menu-item">Home</li>
+        <li class="mobile-menu-item">主页</li>
       </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
+        <li class="mobile-menu-item">归档</li>
       </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
+        <li class="mobile-menu-item">标签</li>
       </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
       </a>
   </ul>
 </nav>
@@ -118,13 +120,15 @@
 <nav class="site-navbar">
   <ul id="menu" class="menu">
     <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
+        <a class="menu-item-link" href="/">主页</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
+        <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
+        <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
       </li>
   </ul>
 </nav>
@@ -137,6 +141,151 @@
   <section id="posts" class="posts">
     
     
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-15 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+            <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          
+            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<strong><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">Dealing with InterruptedException</a></strong></p>
+
+<p>这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了<code>Thread.sleep()</code>来实现。
+但此时编译器或IDE会立即提示你没有处理非运行时异常<strong><a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html">InterruptedException</a></strong>。那么，什么是<code>InterruptedException</code>,为什么我们要必须处理它呢？</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/dealing-with-interrupted-exception/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/how-to-use-volatile-in-java/">volatile关键字在Java程序中的使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-08 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+            <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><code>volatile</code>关键字在Java多线程编程中很常见，由于自己之前学习多线程时一度以为只要需确保线程可见性的代码都需要使用<code>volatile</code>关键字，后来发现并不是这样的，故简单记录下。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/how-to-use-volatile-in-java/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-string-equal-compare/">Java中利用==和equals()进行字符串比较的说明</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-08 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>Java中字符串的比较在面试中很常见，我们都知道比较字符串是否相等要使用<code>equals()</code>而不是<code>==</code>。本文首先利用<code>javap</code>命令从class文件的角度来分析不同字符串比较的结果，然后分析下<code>Tomcat</code>中如何获取前端输入的字符串参数,并以此说明Java Web开发中该如何正确的进行字符串的比较。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-string-equal-compare/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/">Java中interrupt()、interrupted()、isInterrupted()的区别</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-03 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+            <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先将它们简单记录下。
+</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-03 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行<strong><a href="https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf" title="25端口解封申请">25端口解封申请</a></strong>，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     
       <article class="post">
   <header class="post-header">
@@ -159,7 +308,7 @@
       <p><strong><a href="http://www.quartz-scheduler.org/">Quartz</a></strong>是软件开发中常用的任务调度框架，实际中通常结合 <strong><a href="https://spring.io/">Spring</a></strong> 一起使用，并在 <em>Spring</em> 的配置文件中利用 <em>0 0 12 ? * WED</em> 这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
     </div>
     <div class="read-more">
-      <a href="/post/update-quartz-scheduler-dynamic/" class="read-more-link">Read more..</a>
+      <a href="/post/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -186,7 +335,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">Read more..</a>
+      <a href="/post/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -211,7 +360,7 @@
       <p>越来越多的网站和个人博客都变成 <strong><a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a></strong> ，而自己的博客一直都是用的是 <strong><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a></strong> 协议，作为一个具有强迫症的人，每次用 <strong><a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html">Chrome</a></strong> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/migrate-github-blog-from-http-to-https/http_icon.png" alt="&quot;Chrome HTTP标识&quot;" title="Chrome HTTP标识" /> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从 <em>HTTP</em> 迁移到了 <em>HTTPS</em> ，先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/migrate-github-blog-from-http-to-https/" class="read-more-link">Read more..</a>
+      <a href="/post/migrate-github-blog-from-http-to-https/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -238,7 +387,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/different-ways-find-bug-in-complex-code/" class="read-more-link">Read more..</a>
+      <a href="/post/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -263,148 +412,7 @@
       <p>项目中ORM框架用的是 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong>，最近由于业务上的需求将 <em>MyBatis</em> 从3.1.1升级到3.4.5，发现升级后通过 <strong><a href="https://logging.apache.org/log4j/1.2/download.html">Log4j</a></strong> 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/print-sql-in-different-mybatis-version/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-08-12 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/modify-java-class-file-content-directly/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-08-06 </span>
-      <div class="post-category">
-          
-            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>相对于传统的用HTML中TABLE实现的表格，利用 <strong><a href="https://www.jeasyui.com">EasyUI</a></strong> 中的 <strong><a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid">DataGrid</a></strong> 实现的表格具有很多优点，如可以 <em>对列宽进行拖动调整、列冻结、行冻结、自定义格式化</em> 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/concurrency-models/">4. [译]并发的模型</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-08-05 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html">Java Concurrency / Concurrency Models</a></strong></p>
-
-<p>并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-concurrency/concurrency-models/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cannot-open-birt-report-in-myeclipse-project/">在MyEclipse项目中不能打开birt报表的解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-04-07 </span>
-      <div class="post-category">
-          
-            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          
-            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个 report.rptdesign 文件后双击该文件出现如下错误: 错误信息提
-    </div>
-    <div class="read-more">
-      <a href="/post/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-04-01 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/costs.html">Java Concurrency / Multithreading Costs</a></strong></p>
-
-<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-concurrency/multithreading-costs/" class="read-more-link">Read more..</a>
+      <a href="/post/print-sql-in-different-mybatis-version/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -416,7 +424,7 @@
     
     
       <a class="next" href="/page/2/">
-        <span class="next-text">Next</span>
+        <span class="next-text">下一页</span>
         <i class="iconfont icon-right"></i>
       </a>
   </nav>
@@ -428,20 +436,20 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:lucumt@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="mailto:lucumt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://plus.google.com/u/0/115794588502118898127/posts" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
   <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 

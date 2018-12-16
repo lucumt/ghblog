@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Rosen" />
-  <meta name="description" content="Hugo theme even example site." />
+  <meta name="description" content="飞狐的个人博客" />
   <meta name="keywords" content="Hugo, theme, even" />
 
 
@@ -51,13 +51,13 @@
 
 
 <meta property="og:title" content="飞狐的部落格" />
-<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:description" content="飞狐的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://lucumt.info/" />
 
 
 
-<meta property="og:updated_time" content="2017-04-01T13:18:43&#43;08:00"/>
+<meta property="og:updated_time" content="2017-08-12T18:09:53&#43;08:00"/>
 
 
 
@@ -69,11 +69,11 @@
 
 
 <meta itemprop="name" content="飞狐的部落格">
-<meta itemprop="description" content="Hugo theme even example site.">
+<meta itemprop="description" content="飞狐的个人博客">
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="飞狐的部落格"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta name="twitter:description" content="飞狐的个人博客"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -99,13 +99,15 @@
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
     <a href="/">
-        <li class="mobile-menu-item">Home</li>
+        <li class="mobile-menu-item">主页</li>
       </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
+        <li class="mobile-menu-item">归档</li>
       </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
+        <li class="mobile-menu-item">标签</li>
       </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
       </a>
   </ul>
 </nav>
@@ -118,13 +120,15 @@
 <nav class="site-navbar">
   <ul id="menu" class="menu">
     <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
+        <a class="menu-item-link" href="/">主页</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
+        <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
+        <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
       </li>
   </ul>
 </nav>
@@ -137,6 +141,147 @@
   <section id="posts" class="posts">
     
     
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-12 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/modify-java-class-file-content-directly/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-06 </span>
+      <div class="post-category">
+          
+            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>相对于传统的用HTML中TABLE实现的表格，利用 <strong><a href="https://www.jeasyui.com">EasyUI</a></strong> 中的 <strong><a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid">DataGrid</a></strong> 实现的表格具有很多优点，如可以 <em>对列宽进行拖动调整、列冻结、行冻结、自定义格式化</em> 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/concurrency-models/">4. [译]并发的模型</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-05 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html">Java Concurrency / Concurrency Models</a></strong></p>
+
+<p>并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/concurrency-models/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cannot-open-birt-report-in-myeclipse-project/">在MyEclipse项目中不能打开birt报表的解决方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-07 </span>
+      <div class="post-category">
+          
+            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个 report.rptdesign 文件后双击该文件出现如下错误: 错误信息提
+    </div>
+    <div class="read-more">
+      <a href="/post/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          
+            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<strong><a href="http://tutorials.jenkov.com/java-concurrency/costs.html">Java Concurrency / Multithreading Costs</a></strong></p>
+
+<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
+
+<p></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/multithreading-costs/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     
       <article class="post">
   <header class="post-header">
@@ -169,7 +314,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/java-concurrency/multithreading-benefits/" class="read-more-link">Read more..</a>
+      <a href="/post/java-concurrency/multithreading-benefits/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -202,7 +347,7 @@
 </p>
     </div>
     <div class="read-more">
-      <a href="/post/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">Read more..</a>
+      <a href="/post/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -231,7 +376,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/import-local-package-in-intellij-idea/" class="read-more-link">Read more..</a>
+      <a href="/post/import-local-package-in-intellij-idea/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -260,7 +405,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/calculate-total-area-of-two-rectangles/" class="read-more-link">Read more..</a>
+      <a href="/post/calculate-total-area-of-two-rectangles/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -287,167 +432,7 @@
 <p></p>
     </div>
     <div class="read-more">
-      <a href="/post/show-video-in-html5-page/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-30 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
-
-<ul>
-<li><p>SQL配置文件:</p>
-
-<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
-    INSERT INTO system_authority_role(role_id,authority_id)
-      VALUES
-      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
-        (#{authRole.roleId},#{authRole.authorityId})
-      &lt;/foreach&gt;
-  &lt;/insert&gt;
-</code></pre></li>
-</ul>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mybatis-batch-insert-exception/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/download-big-file-using-springmvc/">利用SpringMVC下载大文件时内存溢出的处理</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html">java.io</a></strong> 下面的各种IO类自己实现，或者利用 <strong><a href="https://commons.apache.org/proper/commons-io/">Commons IO</a></strong> 包中的 <strong><em>FileUtils</em></strong> 、 <strong><em>IOUtils</em></strong> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong> 来作为项目的MVC实现，所以很自然的采用 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/download-big-file-using-springmvc/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/using-junit-in-spring/">利用Spring和JUnit对数据库操作进行单元测试</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-            <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
-</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/using-junit-in-spring/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-authority-dynamic-using-spring-security/">利用Spring Security动态的改变权限</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 来管理我们的web程序时，通常需要在<strong><em>UserDetailsService</em></strong> 接口中的 <strong><em>loadUserByUsername</em></strong> 方法中来初始化权限信息,但 <strong><em>UserDetailsService</em></strong> 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 提供的API来实现。
-</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/update-authority-dynamic-using-spring-security/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/using-mock-test-http-servlet-request/">在Spring中利用Mock对HttpServletRequest进行单元测试</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-19 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-            <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h2 id="编写单元测试时的注意事项">编写单元测试时的注意事项</h2>
-
-<p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/using-mock-test-http-servlet-request/" class="read-more-link">Read more..</a>
+      <a href="/post/show-video-in-html5-page/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -459,11 +444,11 @@
     
       <a class="prev" href="/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
+        <span class="prev-text">上一页</span>
       </a>
     
       <a class="next" href="/page/3/">
-        <span class="next-text">Next</span>
+        <span class="next-text">下一页</span>
         <i class="iconfont icon-right"></i>
       </a>
   </nav>
@@ -475,20 +460,20 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:lucumt@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="mailto:lucumt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://plus.google.com/u/0/115794588502118898127/posts" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
   <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
