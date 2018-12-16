@@ -286,7 +286,6 @@ public class StringTest {
 ```
 
 ```java
- 
 TestServlet.java
 public class TestServlet extends HttpServlet {
  
@@ -343,123 +342,123 @@ public String toString() {
 ```java
 public static String toString(ByteChunk bc) {
 
-	// If the cache is null, then either caching is disabled, or we're
-	// still training
-	if (bcCache == null) {
-		String value = bc.toStringInternal();
-		if (byteEnabled && (value.length() < maxStringSize)) {
-			// If training, everything is synced
-			synchronized (bcStats) {
-				// If the cache has been generated on a previous invocation
-				// while waiting for the lock, just return the toString
-				// value we just calculated
-				if (bcCache != null) {
-					return value;
-				}
-				// Two cases: either we just exceeded the train count, in
-				// which case the cache must be created, or we just update
-				// the count for the string
-				if (bcCount > trainThreshold) {
-					long t1 = System.currentTimeMillis();
-					// Sort the entries according to occurrence
-					TreeMap<Integer,ArrayList<ByteEntry>> tempMap =
-							new TreeMap<>();
-					for (Entry<ByteEntry,int[]> item : bcStats.entrySet()) {
-						ByteEntry entry = item.getKey();
-						int[] countA = item.getValue();
-						Integer count = Integer.valueOf(countA[0]);
-						// Add to the list for that count
-						ArrayList<ByteEntry> list = tempMap.get(count);
-						if (list == null) {
-							// Create list
-							list = new ArrayList<>();
-							tempMap.put(count, list);
-						}
-						list.add(entry);
-					}
-					// Allocate array of the right size
-					int size = bcStats.size();
-					if (size > cacheSize) {
-						size = cacheSize;
-					}
-					ByteEntry[] tempbcCache = new ByteEntry[size];
-					// Fill it up using an alphabetical order
-					// and a dumb insert sort
-					ByteChunk tempChunk = new ByteChunk();
-					int n = 0;
-					while (n < size) {
-						Object key = tempMap.lastKey();
-						ArrayList<ByteEntry> list = tempMap.get(key);
-						for (int i = 0; i < list.size() && n < size; i++) {
-							ByteEntry entry = list.get(i);
-							tempChunk.setBytes(entry.name, 0,
-									entry.name.length);
-							int insertPos = findClosest(tempChunk,
-									tempbcCache, n);
-							if (insertPos == n) {
-								tempbcCache[n + 1] = entry;
-							} else {
-								System.arraycopy(tempbcCache, insertPos + 1,
-										tempbcCache, insertPos + 2,
-										n - insertPos - 1);
-								tempbcCache[insertPos + 1] = entry;
-							}
-							n++;
-						}
-						tempMap.remove(key);
-					}
-					bcCount = 0;
-					bcStats.clear();
-					bcCache = tempbcCache;
-					if (log.isDebugEnabled()) {
-						long t2 = System.currentTimeMillis();
-						log.debug("ByteCache generation time: " +
-								(t2 - t1) + "ms");
-					}
-				} else {
-					bcCount++;
-					// Allocate new ByteEntry for the lookup
-					ByteEntry entry = new ByteEntry();
-					entry.value = value;
-					int[] count = bcStats.get(entry);
-					if (count == null) {
-						int end = bc.getEnd();
-						int start = bc.getStart();
-						// Create byte array and copy bytes
-						entry.name = new byte[bc.getLength()];
-						System.arraycopy(bc.getBuffer(), start, entry.name,
-								0, end - start);
-						// Set encoding
-						entry.charset = bc.getCharset();
-						// Initialize occurrence count to one
-						count = new int[1];
-						count[0] = 1;
-						// Set in the stats hash map
-						bcStats.put(entry, count);
-					} else {
-						count[0] = count[0] + 1;
-					}
-				}
-			}
-		}
-		return value;
-	} else {
-		accessCount++;
-		// Find the corresponding String
-		String result = find(bc);
-		if (result == null) {
-			return bc.toStringInternal();
-		}
-		// Note: We don't care about safety for the stats
-		hitCount++;
-		return result;
-	}
+    // If the cache is null, then either caching is disabled, or we're
+    // still training
+    if (bcCache == null) {
+        String value = bc.toStringInternal();
+        if (byteEnabled && (value.length() < maxStringSize)) {
+            // If training, everything is synced
+            synchronized (bcStats) {
+                // If the cache has been generated on a previous invocation
+                // while waiting for the lock, just return the toString
+                // value we just calculated
+                if (bcCache != null) {
+                    return value;
+                }
+                // Two cases: either we just exceeded the train count, in
+                // which case the cache must be created, or we just update
+                // the count for the string
+                if (bcCount > trainThreshold) {
+                    long t1 = System.currentTimeMillis();
+                    // Sort the entries according to occurrence
+                    TreeMap<Integer,ArrayList<ByteEntry>> tempMap =
+                            new TreeMap<>();
+                    for (Entry<ByteEntry,int[]> item : bcStats.entrySet()) {
+                        ByteEntry entry = item.getKey();
+                        int[] countA = item.getValue();
+                        Integer count = Integer.valueOf(countA[0]);
+                        // Add to the list for that count
+                        ArrayList<ByteEntry> list = tempMap.get(count);
+                        if (list == null) {
+                            // Create list
+                            list = new ArrayList<>();
+                            tempMap.put(count, list);
+                        }
+                        list.add(entry);
+                    }
+                    // Allocate array of the right size
+                    int size = bcStats.size();
+                    if (size > cacheSize) {
+                        size = cacheSize;
+                    }
+                    ByteEntry[] tempbcCache = new ByteEntry[size];
+                    // Fill it up using an alphabetical order
+                    // and a dumb insert sort
+                    ByteChunk tempChunk = new ByteChunk();
+                    int n = 0;
+                    while (n < size) {
+                        Object key = tempMap.lastKey();
+                        ArrayList<ByteEntry> list = tempMap.get(key);
+                        for (int i = 0; i < list.size() && n < size; i++) {
+                            ByteEntry entry = list.get(i);
+                            tempChunk.setBytes(entry.name, 0,
+                                    entry.name.length);
+                            int insertPos = findClosest(tempChunk,
+                                    tempbcCache, n);
+                            if (insertPos == n) {
+                                tempbcCache[n + 1] = entry;
+                            } else {
+                                System.arraycopy(tempbcCache, insertPos + 1,
+                                        tempbcCache, insertPos + 2,
+                                        n - insertPos - 1);
+                                tempbcCache[insertPos + 1] = entry;
+                            }
+                            n++;
+                        }
+                        tempMap.remove(key);
+                    }
+                    bcCount = 0;
+                    bcStats.clear();
+                    bcCache = tempbcCache;
+                    if (log.isDebugEnabled()) {
+                        long t2 = System.currentTimeMillis();
+                        log.debug("ByteCache generation time: " +
+                                (t2 - t1) + "ms");
+                    }
+                } else {
+                    bcCount++;
+                    // Allocate new ByteEntry for the lookup
+                    ByteEntry entry = new ByteEntry();
+                    entry.value = value;
+                    int[] count = bcStats.get(entry);
+                    if (count == null) {
+                        int end = bc.getEnd();
+                        int start = bc.getStart();
+                        // Create byte array and copy bytes
+                        entry.name = new byte[bc.getLength()];
+                        System.arraycopy(bc.getBuffer(), start, entry.name,
+                                0, end - start);
+                        // Set encoding
+                        entry.charset = bc.getCharset();
+                        // Initialize occurrence count to one
+                        count = new int[1];
+                        count[0] = 1;
+                        // Set in the stats hash map
+                        bcStats.put(entry, count);
+                    } else {
+                        count[0] = count[0] + 1;
+                    }
+                }
+            }
+        }
+        return value;
+    } else {
+        accessCount++;
+        // Find the corresponding String
+        String result = find(bc);
+        if (result == null) {
+            return bc.toStringInternal();
+        }
+        // Note: We don't care about safety for the stats
+        hitCount++;
+        return result;
+    }
 }
 ```
 该方法篇幅很长，但核心代码只有一行`String value = bc.toStringInternal();`而`bc`的类型为`ByteChunk`。
 
 4. 继续在**[ByteChunk](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java)**搜索`toStringInternal()`方法，其代码如下
-```
+```java
 public String toStringInternal() {
     if (charset == null) {
         charset = DEFAULT_CHARSET;
