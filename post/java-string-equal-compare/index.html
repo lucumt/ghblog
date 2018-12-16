@@ -75,7 +75,7 @@
 
 <meta itemprop="datePublished" content="2018-12-08T23:02:10&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-08T23:02:10&#43;08:00" />
-<meta itemprop="wordCount" content="3883">
+<meta itemprop="wordCount" content="3671">
 
 
 
@@ -465,8 +465,7 @@ public class StringTest {
 &lt;/html&gt;
 </code></pre>
 
-<pre><code class="language-java"> 
-TestServlet.java
+<pre><code class="language-java">TestServlet.java
 public class TestServlet extends HttpServlet {
  
 	private static final long serialVersionUID = 6174437812832777462L;
@@ -519,145 +518,146 @@ return StringCache.toString(this);
 }
 </code></pre></li>
 
-<li><p>继续查看<strong><a href="https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/StringCache.java">StringCache</a></strong>的<code>toString()</code>方法如下
-```java
-public static String toString(ByteChunk bc) {</p></li>
-</ol>
+<li><p>继续查看<strong><a href="https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/StringCache.java">StringCache</a></strong>的<code>toString()</code>方法如下</p>
 
-<p>	// If the cache is null, then either caching is disabled, or we&rsquo;re
-	// still training
-	if (bcCache == null) {
-		String value = bc.toStringInternal();
-		if (byteEnabled &amp;&amp; (value.length() &lt; maxStringSize)) {
-			// If training, everything is synced
-			synchronized (bcStats) {
-				// If the cache has been generated on a previous invocation
-				// while waiting for the lock, just return the toString
-				// value we just calculated
-				if (bcCache != null) {
-					return value;
-				}
-				// Two cases: either we just exceeded the train count, in
-				// which case the cache must be created, or we just update
-				// the count for the string
-				if (bcCount &gt; trainThreshold) {
-					long t1 = System.currentTimeMillis();
-					// Sort the entries according to occurrence
-					TreeMap<Integer,ArrayList<ByteEntry>&gt; tempMap =
-							new TreeMap&lt;&gt;();
-					for (Entry<ByteEntry,int[]> item : bcStats.entrySet()) {
-						ByteEntry entry = item.getKey();
-						int[] countA = item.getValue();
-						Integer count = Integer.valueOf(countA[0]);
-						// Add to the list for that count
-						ArrayList<ByteEntry> list = tempMap.get(count);
-						if (list == null) {
-							// Create list
-							list = new ArrayList&lt;&gt;();
-							tempMap.put(count, list);
-						}
-						list.add(entry);
-					}
-					// Allocate array of the right size
-					int size = bcStats.size();
-					if (size &gt; cacheSize) {
-						size = cacheSize;
-					}
-					ByteEntry[] tempbcCache = new ByteEntry[size];
-					// Fill it up using an alphabetical order
-					// and a dumb insert sort
-					ByteChunk tempChunk = new ByteChunk();
-					int n = 0;
-					while (n &lt; size) {
-						Object key = tempMap.lastKey();
-						ArrayList<ByteEntry> list = tempMap.get(key);
-						for (int i = 0; i &lt; list.size() &amp;&amp; n &lt; size; i++) {
-							ByteEntry entry = list.get(i);
-							tempChunk.setBytes(entry.name, 0,
-									entry.name.length);
-							int insertPos = findClosest(tempChunk,
-									tempbcCache, n);
-							if (insertPos == n) {
-								tempbcCache[n + 1] = entry;
-							} else {
-								System.arraycopy(tempbcCache, insertPos + 1,
-										tempbcCache, insertPos + 2,
-										n - insertPos - 1);
-								tempbcCache[insertPos + 1] = entry;
-							}
-							n++;
-						}
-						tempMap.remove(key);
-					}
-					bcCount = 0;
-					bcStats.clear();
-					bcCache = tempbcCache;
-					if (log.isDebugEnabled()) {
-						long t2 = System.currentTimeMillis();
-						log.debug(&ldquo;ByteCache generation time: &ldquo; +
-								(t2 - t1) + &ldquo;ms&rdquo;);
-					}
-				} else {
-					bcCount++;
-					// Allocate new ByteEntry for the lookup
-					ByteEntry entry = new ByteEntry();
-					entry.value = value;
-					int[] count = bcStats.get(entry);
-					if (count == null) {
-						int end = bc.getEnd();
-						int start = bc.getStart();
-						// Create byte array and copy bytes
-						entry.name = new byte[bc.getLength()];
-						System.arraycopy(bc.getBuffer(), start, entry.name,
-								0, end - start);
-						// Set encoding
-						entry.charset = bc.getCharset();
-						// Initialize occurrence count to one
-						count = new int[1];
-						count[0] = 1;
-						// Set in the stats hash map
-						bcStats.put(entry, count);
-					} else {
-						count[0] = count[0] + 1;
-					}
-				}
-			}
-		}
-		return value;
-	} else {
-		accessCount++;
-		// Find the corresponding String
-		String result = find(bc);
-		if (result == null) {
-			return bc.toStringInternal();
-		}
-		// Note: We don&rsquo;t care about safety for the stats
-		hitCount++;
-		return result;
-	}
-}</p>
+<pre><code class="language-java">public static String toString(ByteChunk bc) {
 
-<pre><code>该方法篇幅很长，但核心代码只有一行`String value = bc.toStringInternal();`而`bc`的类型为`ByteChunk`。
-
-4. 继续在**[ByteChunk](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java)**搜索`toStringInternal()`方法，其代码如下
+// If the cache is null, then either caching is disabled, or we're
+// still training
+if (bcCache == null) {
+    String value = bc.toStringInternal();
+    if (byteEnabled &amp;&amp; (value.length() &lt; maxStringSize)) {
+        // If training, everything is synced
+        synchronized (bcStats) {
+            // If the cache has been generated on a previous invocation
+            // while waiting for the lock, just return the toString
+            // value we just calculated
+            if (bcCache != null) {
+                return value;
+            }
+            // Two cases: either we just exceeded the train count, in
+            // which case the cache must be created, or we just update
+            // the count for the string
+            if (bcCount &gt; trainThreshold) {
+                long t1 = System.currentTimeMillis();
+                // Sort the entries according to occurrence
+                TreeMap&lt;Integer,ArrayList&lt;ByteEntry&gt;&gt; tempMap =
+                        new TreeMap&lt;&gt;();
+                for (Entry&lt;ByteEntry,int[]&gt; item : bcStats.entrySet()) {
+                    ByteEntry entry = item.getKey();
+                    int[] countA = item.getValue();
+                    Integer count = Integer.valueOf(countA[0]);
+                    // Add to the list for that count
+                    ArrayList&lt;ByteEntry&gt; list = tempMap.get(count);
+                    if (list == null) {
+                        // Create list
+                        list = new ArrayList&lt;&gt;();
+                        tempMap.put(count, list);
+                    }
+                    list.add(entry);
+                }
+                // Allocate array of the right size
+                int size = bcStats.size();
+                if (size &gt; cacheSize) {
+                    size = cacheSize;
+                }
+                ByteEntry[] tempbcCache = new ByteEntry[size];
+                // Fill it up using an alphabetical order
+                // and a dumb insert sort
+                ByteChunk tempChunk = new ByteChunk();
+                int n = 0;
+                while (n &lt; size) {
+                    Object key = tempMap.lastKey();
+                    ArrayList&lt;ByteEntry&gt; list = tempMap.get(key);
+                    for (int i = 0; i &lt; list.size() &amp;&amp; n &lt; size; i++) {
+                        ByteEntry entry = list.get(i);
+                        tempChunk.setBytes(entry.name, 0,
+                                entry.name.length);
+                        int insertPos = findClosest(tempChunk,
+                                tempbcCache, n);
+                        if (insertPos == n) {
+                            tempbcCache[n + 1] = entry;
+                        } else {
+                            System.arraycopy(tempbcCache, insertPos + 1,
+                                    tempbcCache, insertPos + 2,
+                                    n - insertPos - 1);
+                            tempbcCache[insertPos + 1] = entry;
+                        }
+                        n++;
+                    }
+                    tempMap.remove(key);
+                }
+                bcCount = 0;
+                bcStats.clear();
+                bcCache = tempbcCache;
+                if (log.isDebugEnabled()) {
+                    long t2 = System.currentTimeMillis();
+                    log.debug(&quot;ByteCache generation time: &quot; +
+                            (t2 - t1) + &quot;ms&quot;);
+                }
+            } else {
+                bcCount++;
+                // Allocate new ByteEntry for the lookup
+                ByteEntry entry = new ByteEntry();
+                entry.value = value;
+                int[] count = bcStats.get(entry);
+                if (count == null) {
+                    int end = bc.getEnd();
+                    int start = bc.getStart();
+                    // Create byte array and copy bytes
+                    entry.name = new byte[bc.getLength()];
+                    System.arraycopy(bc.getBuffer(), start, entry.name,
+                            0, end - start);
+                    // Set encoding
+                    entry.charset = bc.getCharset();
+                    // Initialize occurrence count to one
+                    count = new int[1];
+                    count[0] = 1;
+                    // Set in the stats hash map
+                    bcStats.put(entry, count);
+                } else {
+                    count[0] = count[0] + 1;
+                }
+            }
+        }
+    }
+    return value;
+} else {
+    accessCount++;
+    // Find the corresponding String
+    String result = find(bc);
+    if (result == null) {
+        return bc.toStringInternal();
+    }
+    // Note: We don't care about safety for the stats
+    hitCount++;
+    return result;
+}
+}
 </code></pre>
 
-<p>public String toStringInternal() {
-    if (charset == null) {
-        charset = DEFAULT_CHARSET;
-    }
-    // new String(byte[], int, int, Charset) takes a defensive copy of the
-    // entire byte array. This is expensive if only a small subset of the
-    // bytes will be used. The code below is from Apache Harmony.
-    CharBuffer cb = charset.decode(ByteBuffer.wrap(buff, start, end - start));
-    return new String(cb.array(), cb.arrayOffset(), cb.length());
-}</p>
+<p>该方法篇幅很长，但核心代码只有一行<code>String value = bc.toStringInternal();</code>而<code>bc</code>的类型为<code>ByteChunk</code>。</p></li>
 
-<pre><code>查看该方法可知其使用`new String(cb.array(), cb.arrayOffset(), cb.length())`的方式来构造`String`对象，故利用`==`比较字符串时其返回值为false。
+<li><p>继续在<strong><a href="https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java">ByteChunk</a></strong>搜索<code>toStringInternal()</code>方法，其代码如下</p>
 
-分析了最基本的Servelt后，由于**[SpringMVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#spring-web)**是基于Servlet实现的，故使用如下代码进行参数比较其值也为false。
-```java
-@RequestMapping(&quot;addUser&quot;)
+<pre><code class="language-java">public String toStringInternal() {
+if (charset == null) {
+    charset = DEFAULT_CHARSET;
+}
+// new String(byte[], int, int, Charset) takes a defensive copy of the
+// entire byte array. This is expensive if only a small subset of the
+// bytes will be used. The code below is from Apache Harmony.
+CharBuffer cb = charset.decode(ByteBuffer.wrap(buff, start, end - start));
+return new String(cb.array(), cb.arrayOffset(), cb.length());
+}
+</code></pre>
+
+<p>查看该方法可知其使用<code>new String(cb.array(), cb.arrayOffset(), cb.length())</code>的方式来构造<code>String</code>对象，故利用<code>==</code>比较字符串时其返回值为false。</p></li>
+</ol>
+
+<p>分析了最基本的Servelt后，由于<strong><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#spring-web">SpringMVC</a></strong>是基于Servlet实现的，故使用如下代码进行参数比较其值也为false。</p>
+
+<pre><code class="language-java">@RequestMapping(&quot;addUser&quot;)
 public String addUser(UserModel user) {
 	System.out.println(user.getUsername() == &quot;Rosen&quot;);
 	return StringConstant.SUCCESS;
