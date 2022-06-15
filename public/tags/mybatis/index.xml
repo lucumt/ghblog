@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MyBatis on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/mybatis/</link>
+    <description>Recent content in MyBatis on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Dec 2017 18:33:14 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/mybatis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
+      <link>https://lucumt.info/post/print-sql-in-different-mybatis-version/</link>
+      <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/print-sql-in-different-mybatis-version/</guid>
+      <description>&lt;p&gt;项目中ORM框架用的是 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt;，最近由于业务上的需求将 &lt;em&gt;MyBatis&lt;/em&gt; 从3.1.1升级到3.4.5，发现升级后通过 &lt;strong&gt;&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;Log4j&lt;/a&gt;&lt;/strong&gt; 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>mybatis batch insert exception的解决方法</title>
+      <link>https://lucumt.info/post/mybatis-batch-insert-exception/</link>
+      <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mybatis-batch-insert-exception/</guid>
+      <description>&lt;p&gt;在利用 &lt;strong&gt;&lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;MyBatis&lt;/a&gt;&lt;/strong&gt; 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SQL配置文件:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;insert&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;addAuthorityRoleBatch&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;parameterType=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;List&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    INSERT INTO system_authority_role(role_id,authority_id)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      VALUES
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;foreach&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;collection=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;item=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;authRole&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;separator=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        (#{authRole.roleId},#{authRole.authorityId})
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/foreach&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/insert&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

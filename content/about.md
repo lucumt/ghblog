@@ -1,7 +1,7 @@
 +++
 
 date = "2016-02-25T00:22:23+08:00"
-draft = true
+draft = false
 title = "关于我"
 pinned = true
 nodate = true

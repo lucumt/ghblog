@@ -2,6 +2,7 @@
 author = "飞狐"
 categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
+draft = false
 date = "2017-08-05T00:10:11+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["java concurrency"]

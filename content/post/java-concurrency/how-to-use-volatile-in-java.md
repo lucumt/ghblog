@@ -2,7 +2,7 @@
 title: "volatile关键字在Java程序中的使用"
 date: 2018-12-08T23:49:33+08:00
 lastmod: 2018-12-08T23:49:33+08:00
-draft: true
+draft: false
 keywords: ["volatile","Java Concurrency"]
 description: "Volatile关键字在Java程序中的使用"
 tags: ["Java"]
