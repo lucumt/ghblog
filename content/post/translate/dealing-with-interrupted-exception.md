@@ -11,10 +11,10 @@ author: "Rosen Lu"
 
 ---
 
-本文翻译自**[Dealing with InterruptedException](https://www.ibm.com/developerworks/library/j-jtp05236/)**
+本文翻译自 **[Dealing with InterruptedException](https://www.ibm.com/developerworks/library/j-jtp05236/)** 
 
 这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了`Thread.sleep()`来实现。
-但此时编译器或IDE会立即提示你没有处理非运行时异常**[InterruptedException](https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html)**。那么，什么是`InterruptedException`,为什么我们要必须处理它呢？
+但此时编译器或IDE会立即提示你没有处理非运行时异常 **[InterruptedException](https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html)**。那么，什么是`InterruptedException`,为什么我们要必须处理它呢？
 
 <!--more-->
 
