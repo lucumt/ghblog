@@ -9,11 +9,11 @@ title = "利用dom4j修改含有回车换行符的XML文件"
 
 +++
 
-这几天工作中遇到一个利用 **[dom4j](https://dom4j.github.io/)** 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 *dom4j(1.6.1)* 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。
+这几天工作中遇到一个利用[**dom4j**](https://dom4j.github.io/)更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用`dom4j(1.6.1)`默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。
 
 <!--more-->
 
-对于修改XML文件，自己很自然的想到利用 *dom4j* 和 **[XPath](https://en.wikipedia.org/wiki/XPath)** 来实现功能，使用的代码类似如下：
+对于修改XML文件，自己很自然的想到利用`dom4j`和 [**XPath**](https://en.wikipedia.org/wiki/XPath)来实现功能，使用的代码类似如下：
 
 ```java
 public static void updateXML() {
@@ -48,7 +48,7 @@ public static void updateXML() {
 		e.printStackTrace();
 	}
 }
-```    
+```
 对应的XML文件类似如下：
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -72,10 +72,9 @@ String description = oldEle.attributeValue("description");
 description = description.replaceAll("\r\n","&#xD;&#xA;");
 oldEle.attributeValue("description",description);
 ```
-<br/>
-进一步分析后发现，*dom4j* 不仅会在读取XML文件时对 *\&#xD;\&#xA;* 进行转义，而且在写入XML文件时也会对 *\&#xD;\&#xA;* 进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。
+进一步分析后发现`dom4j`不仅会在读取XML文件时对`&#xD;&#xA;`进行转义，而且在写入XML文件时也会对`&#xD;&#xA;`进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。
 
-写入时主要的操作类是 *OutputFormat* 和 *XMLWriter* ，自己一开始以为可以通过 *OutputFormat* 进行响应的设置实现，将代码修改如下，然并卵，问题依旧！
+写入时主要的操作类是`OutputFormat`和`XMLWriter`，自己一开始以为可以通过`OutputFormat`进行响应的设置实现，将代码修改如下，然并卵，问题依旧！
 ```java
 OutputFormat format = OutputFormat.createPrettyPrint();
 format.setNewlines(true);
@@ -83,8 +82,9 @@ format.setLineSeparator("\r\n");
 format.setEncoding("UTF-8");
 format.setNewLineAfterDeclaration(false);
 ```
-<br/>
-*OutputFormat* 不好使，只能从 *XMLWriter* 着手，调用 *writer.setEscapeText(false)* 方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：
+
+`OutputFormat`不好使，只能从`XMLWriter`着手，调用`writer.setEscapeText(false)`方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：
+
 ```java
 public class HRXMLWriter extends XMLWriter {
 

@@ -8,7 +8,7 @@ keywords = ["java concurrency"]
 title = "1. [译]Java多线程与并发教程"
 
 +++
-本文翻译自**[Java Concurrency / Multithreading Tutorial](http://tutorials.jenkov.com/java-concurrency/index.html)**
+本文翻译自[**Java Concurrency / Multithreading Tutorial**](http://tutorials.jenkov.com/java-concurrency/index.html)
 
 最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。
 
@@ -28,7 +28,7 @@ Java是最先让多线程对开发人员变得简单的程序语言之一，Java
 本教程将主要关注于Java中的多线程，但其中的一些多线程问题与多任务和分布式系统系统中出现的问题类似，因此在本教程中可能会出现对多任务和分布式系统的引用。并发不等于多线程，它们是不同的概念。
 
 ## Java并发在2015的现状和展望
-自从第一本Java并发书籍问世之后，关于并发架构和设计领域已经发生了很多变化，Java 5甚至提供了concurrency工具包。新的类似于Vert.x、Play/Akka和Qbit的异步无共享平台和API已经出现。这些平台使用了一个不同于标准Java/JEE并发的模型来处理线程、共享内存和锁。新的无阻塞并发算法已经公开，类似于LMax Disrupter这样的非阻塞工具也已经添加到我们的工具箱。在Java7中通过Fork和Join框架引入了并行性功能编程，并在Java8中引入了流相关的API。
+自从第一本Java并发书籍问世之后，关于并发架构和设计领域已经发生了很多变化，`Java5`甚至提供了concurrency工具包。新的类似于Vert.x、Play/Akka和Qbit的异步无共享平台和API已经出现。这些平台使用了一个不同于标准Java/JEE并发的模型来处理线程、共享内存和锁。新的无阻塞并发算法已经公开，类似于LMax Disrupter这样的非阻塞工具也已经添加到我们的工具箱。在`Java7`中通过Fork和Join框架引入了并行性功能编程，并在`Java8`中引入了流相关的API。
 
 所有这些新的进展让我觉得是时候编更新本系列的Java并发教程，因此本教程再一次处于编写中状态，新的教程会在时间允许编写时发布。
 

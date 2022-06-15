@@ -8,7 +8,7 @@ keywords = ["java concurrency"]
 title = "2. [译]多线程的优点"
 
 +++
-本文翻译自**[Java Concurrency / Multithreading Benefits](http://tutorials.jenkov.com/java-concurrency/benefits.html)**
+本文翻译自[**Java Concurrency / Multithreading Benefits**](http://tutorials.jenkov.com/java-concurrency/benefits.html)
 
 尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：
 

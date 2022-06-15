@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用SpringMVC下载大文件时内存溢出的处理">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-03-20T16:41:29+08:00" />
 <meta itemprop="dateModified" content="2016-03-20T16:41:29+08:00" />
-<meta itemprop="wordCount" content="748">
+<meta itemprop="wordCount" content="895">
 <meta itemprop="keywords" content="Java,Spring,SpringMVC," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用SpringMVC下载大文件时内存溢出的处理"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -148,7 +148,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html">java.io</a></strong> 下面的各种IO类自己实现，或者利用 <strong><a href="https://commons.apache.org/proper/commons-io/">Commons IO</a></strong> 包中的 <em><strong>FileUtils</strong></em> 、 <em><strong>IOUtils</strong></em> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong> 来作为项目的MVC实现，所以很自然的采用 **<a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a>**内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
+      <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html"><strong>java.io</strong></a>下面的各种IO类自己实现，或者利用 <a href="https://commons.apache.org/proper/commons-io/"><strong>Commons IO</strong></a>包中的<code>FileUtils</code>、 <code>IOUtils</code> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>来作为项目的MVC实现，所以很自然的采用 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -196,9 +196,9 @@
 </span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">commons</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">FileUtils</span><span class="o">.</span><span class="na">readFileToByteArray</span><span class="o">(</span><span class="n">FileUtils</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">1136</span><span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>去网上搜索 <em><strong>java.lang.OutOfMemoryError: Java heap space</strong></em> 这个错误时，一般都建议我们在tomcat中添加如下类似设置来提高JVM的配置:<br>
+</div><p>去网上搜索<code>java.lang.OutOfMemoryError: Java heap space</code> 这个错误时，一般都建议我们在tomcat中添加如下类似设置来提高JVM的配置:<br>
 <code>set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m -XX:MaxPermSize=256m</code></p>
-<p>但即使按照把上面的参数配置都扩大一倍，在下载更大的文件时还是会遇到 <em><strong>java.lang.OutOfMemoryError: Java heap space</strong></em> 这个错误，上面的解决方法治标不治本。分析下异常堆栈可以发现问题产生的根源在于 <em>at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)</em> 这行代码，<em><strong>FileUtils.readFileToByteArray</strong></em>  会把文件一次性读入内存中，要下载的文件越大，需要占用的内存也越大，当文件的大小超过JVM和Tomcat的内存配置时，<em><strong>OutOfMemoryError</strong></em> 这个问题就会不可避免的发生。</p>
+<p>但即使按照把上面的参数配置都扩大一倍，在下载更大的文件时还是会遇到<code>java.lang.OutOfMemoryError: Java heap space</code>这个错误，上面的解决方法治标不治本。分析下异常堆栈可以发现问题产生的根源在于<code>at org.apache.commons.io.FileUtils.readFileToByteArray(FileUtils.java:1136)</code>这行代码，<code>FileUtils.readFileToByteArray</code>会把文件一次性读入内存中，要下载的文件越大，需要占用的内存也越大，当文件的大小超过JVM和Tomcat的内存配置时，<code>OutOfMemoryError</code>这个问题就会不可避免的发生。</p>
 <p>弄清产生该问题的原因之后，解决的方法也很简单：<strong>不利用<a href="https://commons.apache.org/proper/commons-io/">Commons IO</a>把文件一次性读入内存，而是利用普通的文件输出流按字节分段写入文件，把占用的内存固定在一个指定的范围内，从根本上避免内存占用过高的问题</strong>,替代的代码如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

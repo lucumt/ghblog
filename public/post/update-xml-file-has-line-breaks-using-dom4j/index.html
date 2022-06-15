@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用dom4j修改含有回车换行符的XML文件">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2018-01-04T11:21:42+08:00" />
 <meta itemprop="dateModified" content="2018-01-04T11:21:42+08:00" />
-<meta itemprop="wordCount" content="1066">
+<meta itemprop="wordCount" content="1207">
 <meta itemprop="keywords" content="Java,XML," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用dom4j修改含有回车换行符的XML文件"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -147,8 +147,8 @@
   </div>
 </div>
     <div class="post-content">
-      <p>这几天工作中遇到一个利用 <strong><a href="https://dom4j.github.io/">dom4j</a></strong> 更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用 <em>dom4j(1.6.1)</em> 默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
-<p>对于修改XML文件，自己很自然的想到利用 <em>dom4j</em> 和 <strong><a href="https://en.wikipedia.org/wiki/XPath">XPath</a></strong> 来实现功能，使用的代码类似如下：</p>
+      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
+<p>对于修改XML文件，自己很自然的想到利用<code>dom4j</code>和 <a href="https://en.wikipedia.org/wiki/XPath"><strong>XPath</strong></a>来实现功能，使用的代码类似如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -260,9 +260,8 @@
 </span></span><span class="line"><span class="cl"><span class="n">oldEle</span><span class="o">.</span><span class="na">attributeValue</span><span class="o">(</span><span class="s">&#34;description&#34;</span><span class="o">,</span><span class="n">description</span><span class="o">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br/>
-进一步分析后发现，*dom4j* 不仅会在读取XML文件时对 *\&#xD;\&#xA;* 进行转义，而且在写入XML文件时也会对 *\&#xD;\&#xA;* 进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。
-<p>写入时主要的操作类是 <em>OutputFormat</em> 和 <em>XMLWriter</em> ，自己一开始以为可以通过 <em>OutputFormat</em> 进行响应的设置实现，将代码修改如下，然并卵，问题依旧！</p>
+</div><p>进一步分析后发现<code>dom4j</code>不仅会在读取XML文件时对<code>&amp;#xD;&amp;#xA;</code>进行转义，而且在写入XML文件时也会对<code>&amp;#xD;&amp;#xA;</code>进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。</p>
+<p>写入时主要的操作类是<code>OutputFormat</code>和<code>XMLWriter</code>，自己一开始以为可以通过<code>OutputFormat</code>进行响应的设置实现，将代码修改如下，然并卵，问题依旧！</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -279,24 +278,46 @@
 </span></span><span class="line"><span class="cl"><span class="n">format</span><span class="o">.</span><span class="na">setNewLineAfterDeclaration</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br/>
-*OutputFormat* 不好使，只能从 *XMLWriter* 着手，调用 *writer.setEscapeText(false)* 方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：
-```java
-public class HRXMLWriter extends XMLWriter {
-<pre><code>public HRXMLWriter(Writer wr, OutputFormat format) {
-	super(wr, format);
-}
-
-@Override
-protected String escapeAttributeEntities(String text) {
-	text = super.escapeAttributeEntities(text);
-	if (text.indexOf(&quot;\r\n&quot;) &gt; -1) {
-		text = text.replaceAll(&quot;\r\n&quot;, &quot;&amp;#xD;&amp;#xA;&quot;);
-	}
-	return text;
-}
-</code></pre>
-<p>}</p>
+</div><p><code>OutputFormat</code>不好使，只能从<code>XMLWriter</code>着手，调用<code>writer.setEscapeText(false)</code>方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HRXMLWriter</span> <span class="kd">extends</span> <span class="n">XMLWriter</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="nf">HRXMLWriter</span><span class="o">(</span><span class="n">Writer</span> <span class="n">wr</span><span class="o">,</span> <span class="n">OutputFormat</span> <span class="n">format</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">super</span><span class="o">(</span><span class="n">wr</span><span class="o">,</span> <span class="n">format</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">protected</span> <span class="n">String</span> <span class="nf">escapeAttributeEntities</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">text</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">escapeAttributeEntities</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">text</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">,</span> <span class="s">&#34;&amp;#xD;&amp;#xA;&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">text</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后将写入时的代码修改如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -304,17 +325,13 @@ protected String escapeAttributeEntities(String text) {
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">然后将写入时的代码修改如下：
-</span></span><span class="line"><span class="cl">```java
-</span></span><span class="line"><span class="cl">//採用定义写入类HRXMLWriter
-</span></span><span class="line"><span class="cl">XMLWriter writer = new HRXMLWriter(new FileWriter(newFile), format);
-</span></span><span class="line"><span class="cl">writer.write(oldDoc);
-</span></span><span class="line"><span class="cl">writer.flush();
-</span></span><span class="line"><span class="cl">writer.close();
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//採用定义写入类HRXMLWriter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">XMLWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HRXMLWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">newFile</span><span class="o">),</span> <span class="n">format</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">oldDoc</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行结果如下，问题顺利解决！<br>

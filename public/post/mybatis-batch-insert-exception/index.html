@@ -49,7 +49,7 @@
 <meta itemprop="name" content="mybatis batch insert exception的解决方法">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-05-30T18:20:37+08:00" />
 <meta itemprop="dateModified" content="2016-05-30T18:20:37+08:00" />
-<meta itemprop="wordCount" content="510">
+<meta itemprop="wordCount" content="512">
 <meta itemprop="keywords" content="Java,MyBatis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="mybatis batch insert exception的解决方法"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -147,9 +147,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
-<ul>
-<li>
+      <p>在利用 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
 <p>SQL配置文件:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -171,17 +169,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nt">&lt;/insert&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<ul>
-<li>
-<p>Java代码:</p>
+</div><p>Java代码:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -206,15 +194,7 @@
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
+</div><p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -229,7 +209,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">SQLErrorCodeSQLExceptionTranslator</span><span class="o">.</span><span class="na">doTranslate</span><span class="o">(</span><span class="n">SQLErrorCodeSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">233</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。**该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。**为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：</p>
+</div><p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<strong>该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</strong> 为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

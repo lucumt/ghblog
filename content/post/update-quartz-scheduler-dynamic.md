@@ -132,14 +132,14 @@ public class TestJob {
 
 </web-app>
 ```
-<br/>
 配置完成后，在eclipse中运行`tomcat7:run`运行结果如下，可以看出定时任务每隔10秒执行一次。  
 !["未修改之前的定时任务输出"](/blog_img/update-quartz-scheduler-dynamic/static_scheduler_output.png "未修改之前的定时任务输出")  
 上述的硬编码设置将 *Quartz* 的执行时间通过硬编码方式写入XML配置文件中，这是最常见的用法，但通过XML配置文件写入定时时间时无法动态的更改其执行时间。
 
 ## 动态设置定时时间
 为了便于演示，本文采用Web程序的方式展示相关操作过程。  
-1.增加一个 *testScheduler.jsp* 展示操作界面:  
+1.增加一个testScheduler.jsp展示操作界面:  
+
 ```html
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -207,7 +207,8 @@ public class TestJob {
 </body>
 </html>
 ```
-2.增加一个Controller类 *QuartzController* 用于响应前端重新设置定时任务时间的请求  
+2.增加一个Controller类QuartzController用于响应前端重新设置定时任务时间的请求  
+
 ```java
 @Controller("/")
 public class QuartzController {
@@ -230,7 +231,7 @@ public class QuartzController {
 
 }
 ```
-3.在时任务测试类 *TestJob* 中添加一个 *resetJob* 方法，用于重新设置定时任务执行时间  
+3.在时任务测试类TestJob中添加一个resetJob方法，用于重新设置定时任务执行时间  
 
 ```java
 public class JobScheduler implements ServletContextAware {
@@ -271,10 +272,10 @@ public class JobScheduler implements ServletContextAware {
 5.多次点击该按钮，控制台输出如下，可以看出实现了动态设置定时任务的功能  
 !["动态修改定时任务后的运行效果"](/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_output.png "动态修改定时任务后的运行效果")  
 
-上述代码是基于 *Quartz2.3.0* 来实现的，相关源代码请参见 **[quartz_demo](https://github.com/lucumt/myrepository/tree/master/java/quartz_demo)** ，其核心在于 *resetJob* 方法通过调用 **[CronTriggerImpl](https://github.com/quartz-scheduler/quartz/blob/master/quartz-core/src/main/java/org/quartz/impl/triggers/CronTriggerImpl.java)** 来重新设置定时任务执行时间，需要注意的是要确保定时任务修改前后的 *triggerKey* 一致，这样才能修改生效，否则应用程序会在执行原有的定时任务时同时以新的时间来执行新的定时任务，即同时执行两个定时任务，达不到预期效果。
+上述代码是基于`Quartz2.3.0`来实现的，相关源代码请参见 [**quartz_demo**](https://github.com/lucumt/myrepository/tree/master/java/quartz_demo) ，其核心在于 *resetJob* 方法通过调用 [**CronTriggerImpl**](https://github.com/quartz-scheduler/quartz/blob/master/quartz-core/src/main/java/org/quartz/impl/triggers/CronTriggerImpl.java) 来重新设置定时任务执行时间，需要注意的是要确保定时任务修改前后的`triggerKey`一致，这样才能修改生效，否则应用程序会在执行原有的定时任务时同时以新的时间来执行新的定时任务，即同时执行两个定时任务，达不到预期效果。
 
 ## Quartz1.7.2中的定时任务设置
-在旧版的 *Quartz(1.7.2)* 中 *rescheduleJob* 的方法参数发生了变化，相应的 *Spring* 版本也发生了变化，需要用 **[CronTriggerBean](https://docs.spring.io/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/quartz/CronTriggerBean.html)** 替换 *CronTriggerImpl*，对应的实现代码可修改为如下：  
+在旧版的`Quartz(1.7.2)`中`rescheduleJob`的方法参数发生了变化，相应的`Spring`版本也发生了变化，需要用 [**CronTriggerBean**](https://docs.spring.io/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/quartz/CronTriggerBean.html)替换 `CronTriggerImpl`，对应的实现代码可修改为如下：  
 
 ```java
 public void resetJob(String expression){
@@ -295,7 +296,7 @@ public void resetJob(String expression){
 其运行结果和前面的一致。
 
 ## 通过Spring获取Trigger导致的重复执行问题
-将上述代码中的 *CronTriggerBean* 初始化从 *new* 关键字实现变为通过 *Schduler* 获取原有的任务后重新更新，修改后的代码如下：
+将上述代码中的`CronTriggerBean`初始化从`new*`关键字实现变为通过`Schduler`获取原有的任务后重新更新，修改后的代码如下：
 
 ```java
 public void resetJob(String expression){
@@ -313,4 +314,4 @@ public void resetJob(String expression){
 ```
 实际运行时会发现每次动态切换 *Quartz* 的执行时间时都会导致该定时任务被执行两次或错误执行的现象，如下图所示：  
 !["动态修改定时任务后定时任务错误执行"](/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_output_wrong.png "动态修改定时任务后定时任务错误执行")  
-初步上述问题产生的原因为通过 *Scheduler* 获取的是已有的 *Trigger* 而导致重复执行（不论 *Quartz* 新旧版本均有此问题 ），如果采用 *new* 关键字重新创建一个 *Trigger* 则此问题会消失，至于为何采用旧的 *Trigger* 会导致定时任务错误执行，还有待进一步分析。
+初步上述问题产生的原因为通过`Scheduler`获取的是已有的`Trigger`而导致重复执行（不论 *Quartz* 新旧版本均有此问题 )，如果采用`new`关键字重新创建一个`Trigger`则此问题会消失，至于为何采用旧的`Trigger`会导致定时任务错误执行，还有待进一步分析。

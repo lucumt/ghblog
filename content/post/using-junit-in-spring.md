@@ -10,7 +10,7 @@ title = "利用Spring和JUnit对数据库操作进行单元测试"
 
 +++
 
-在进行Java程序开发时，我们偶尔会被要求使用**[JUnit](http://junit.org/)**进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 ***覆盖度高，可重复执行，单一性*** 等特点。本文主要关注***可重复执行*** ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用**[数据库事务](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1)** 来进行 ***回滚*** 从而达到重复执行的目的。最原始的方法是利用 **[java.sql.Connection](https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html)** 类的 `commit()` 或 `rollback()` 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用**[Spring](https://spring.io/)**和**[JUnit](http://junit.org/)**通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
+在进行Java程序开发时，我们偶尔会被要求使用[**JUnit**](http://junit.org/)进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 `覆盖度高`，`可重复执行`,`单一性`等特点。本文主要关注`可重复执行`，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用[**数据库事务**](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1)来进行`回滚`从而达到重复执行的目的。最原始的方法是利用 [**java.sql.Connection**](https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html)类的 `commit()` 或 `rollback()` 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用[**Spring**](https://spring.io/)和[**JUnit**](http://junit.org/)通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
 <!--more-->
 
 ## 所有方法都回滚
@@ -61,7 +61,7 @@ public class ProjectServiceTest{
 	}
  
 }
-```  
+```
 
 ## 指定方法回滚
 若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 `@TransactionConfiguration(defaultRollback=true)` ，同时在对应的方法上加上注解声明 `@Rollback(true)` 即可达到目的。
@@ -111,5 +111,5 @@ public class ProjectServiceTest{
  
 }
 ```
- 
+
  

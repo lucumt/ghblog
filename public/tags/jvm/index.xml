@@ -13,7 +13,7 @@
       <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
       
       <guid>https://lucumt.info/post/modify-java-class-file-content-directly/</guid>
-      <description>&lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和Javassist库来直接对Class文件进行修改的方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和&lt;code&gt;Javassist&lt;/code&gt;库来直接对Class文件进行修改的方法。&lt;/p&gt;</description>
     </item>
     
   </channel>

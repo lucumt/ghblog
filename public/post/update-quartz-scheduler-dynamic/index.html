@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在Quartz中动态设置定时任务的执行时间">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2018-01-09T22:10:30+08:00" />
 <meta itemprop="dateModified" content="2018-01-09T22:10:30+08:00" />
-<meta itemprop="wordCount" content="2325">
+<meta itemprop="wordCount" content="2379">
 <meta itemprop="keywords" content="Quartz,Spring,SpringMVC," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Quartz中动态设置定时任务的执行时间"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -383,13 +383,12 @@
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/web-app&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br/>
-配置完成后，在eclipse中运行`tomcat7:run`运行结果如下，可以看出定时任务每隔10秒执行一次。  
-!["未修改之前的定时任务输出"](/blog_img/update-quartz-scheduler-dynamic/static_scheduler_output.png "未修改之前的定时任务输出")  
-上述的硬编码设置将 *Quartz* 的执行时间通过硬编码方式写入XML配置文件中，这是最常见的用法，但通过XML配置文件写入定时时间时无法动态的更改其执行时间。
+</div><p>配置完成后，在eclipse中运行<code>tomcat7:run</code>运行结果如下，可以看出定时任务每隔10秒执行一次。<br>
+<img src="/blog_img/update-quartz-scheduler-dynamic/static_scheduler_output.png" alt="&amp;ldquo;未修改之前的定时任务输出&amp;rdquo;" title="未修改之前的定时任务输出"><br>
+上述的硬编码设置将 <em>Quartz</em> 的执行时间通过硬编码方式写入XML配置文件中，这是最常见的用法，但通过XML配置文件写入定时时间时无法动态的更改其执行时间。</p>
 <h2 id="动态设置定时时间">动态设置定时时间</h2>
 <p>为了便于演示，本文采用Web程序的方式展示相关操作过程。<br>
-1.增加一个 <em>testScheduler.jsp</em> 展示操作界面:</p>
+1.增加一个testScheduler.jsp展示操作界面:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -526,7 +525,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>2.增加一个Controller类 <em>QuartzController</em> 用于响应前端重新设置定时任务时间的请求</p>
+</div><p>2.增加一个Controller类QuartzController用于响应前端重新设置定时任务时间的请求</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -573,7 +572,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>3.在时任务测试类 <em>TestJob</em> 中添加一个 <em>resetJob</em> 方法，用于重新设置定时任务执行时间</p>
+</div><p>3.在时任务测试类TestJob中添加一个resetJob方法，用于重新设置定时任务执行时间</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -646,9 +645,9 @@
 <img src="/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_button.png" alt="&amp;ldquo;修改定时任务的操作界面&amp;rdquo;" title="修改定时任务的操作界面"><br>
 5.多次点击该按钮，控制台输出如下，可以看出实现了动态设置定时任务的功能<br>
 <img src="/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_output.png" alt="&amp;ldquo;动态修改定时任务后的运行效果&amp;rdquo;" title="动态修改定时任务后的运行效果"></p>
-<p>上述代码是基于 <em>Quartz2.3.0</em> 来实现的，相关源代码请参见 <strong><a href="https://github.com/lucumt/myrepository/tree/master/java/quartz_demo">quartz_demo</a></strong> ，其核心在于 <em>resetJob</em> 方法通过调用 <strong><a href="https://github.com/quartz-scheduler/quartz/blob/master/quartz-core/src/main/java/org/quartz/impl/triggers/CronTriggerImpl.java">CronTriggerImpl</a></strong> 来重新设置定时任务执行时间，需要注意的是要确保定时任务修改前后的 <em>triggerKey</em> 一致，这样才能修改生效，否则应用程序会在执行原有的定时任务时同时以新的时间来执行新的定时任务，即同时执行两个定时任务，达不到预期效果。</p>
+<p>上述代码是基于<code>Quartz2.3.0</code>来实现的，相关源代码请参见 <a href="https://github.com/lucumt/myrepository/tree/master/java/quartz_demo"><strong>quartz_demo</strong></a> ，其核心在于 <em>resetJob</em> 方法通过调用 <a href="https://github.com/quartz-scheduler/quartz/blob/master/quartz-core/src/main/java/org/quartz/impl/triggers/CronTriggerImpl.java"><strong>CronTriggerImpl</strong></a> 来重新设置定时任务执行时间，需要注意的是要确保定时任务修改前后的<code>triggerKey</code>一致，这样才能修改生效，否则应用程序会在执行原有的定时任务时同时以新的时间来执行新的定时任务，即同时执行两个定时任务，达不到预期效果。</p>
 <h2 id="quartz172中的定时任务设置">Quartz1.7.2中的定时任务设置</h2>
-<p>在旧版的 <em>Quartz(1.7.2)</em> 中 <em>rescheduleJob</em> 的方法参数发生了变化，相应的 <em>Spring</em> 版本也发生了变化，需要用 <strong><a href="https://docs.spring.io/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/quartz/CronTriggerBean.html">CronTriggerBean</a></strong> 替换 <em>CronTriggerImpl</em>，对应的实现代码可修改为如下：</p>
+<p>在旧版的<code>Quartz(1.7.2)</code>中<code>rescheduleJob</code>的方法参数发生了变化，相应的<code>Spring</code>版本也发生了变化，需要用 <a href="https://docs.spring.io/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/quartz/CronTriggerBean.html"><strong>CronTriggerBean</strong></a>替换 <code>CronTriggerImpl</code>，对应的实现代码可修改为如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -685,7 +684,7 @@
 </div>
 </div><p>其运行结果和前面的一致。</p>
 <h2 id="通过spring获取trigger导致的重复执行问题">通过Spring获取Trigger导致的重复执行问题</h2>
-<p>将上述代码中的 <em>CronTriggerBean</em> 初始化从 <em>new</em> 关键字实现变为通过 <em>Schduler</em> 获取原有的任务后重新更新，修改后的代码如下：</p>
+<p>将上述代码中的<code>CronTriggerBean</code>初始化从<code>new*</code>关键字实现变为通过<code>Schduler</code>获取原有的任务后重新更新，修改后的代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -718,7 +717,7 @@
 </div>
 </div><p>实际运行时会发现每次动态切换 <em>Quartz</em> 的执行时间时都会导致该定时任务被执行两次或错误执行的现象，如下图所示：<br>
 <img src="/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_output_wrong.png" alt="&amp;ldquo;动态修改定时任务后定时任务错误执行&amp;rdquo;" title="动态修改定时任务后定时任务错误执行"><br>
-初步上述问题产生的原因为通过 <em>Scheduler</em> 获取的是已有的 <em>Trigger</em> 而导致重复执行（不论 <em>Quartz</em> 新旧版本均有此问题 ），如果采用 <em>new</em> 关键字重新创建一个 <em>Trigger</em> 则此问题会消失，至于为何采用旧的 <em>Trigger</em> 会导致定时任务错误执行，还有待进一步分析。</p>
+初步上述问题产生的原因为通过<code>Scheduler</code>获取的是已有的<code>Trigger</code>而导致重复执行（不论 <em>Quartz</em> 新旧版本均有此问题 )，如果采用<code>new</code>关键字重新创建一个<code>Trigger</code>则此问题会消失，至于为何采用旧的<code>Trigger</code>会导致定时任务错误执行，还有待进一步分析。</p>
     </div>
 
     <div class="post-copyright">

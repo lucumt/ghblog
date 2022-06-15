@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在iframe嵌套的html5中播放视频时全屏显示和取消音量调整">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-10-30T19:48:17+08:00" />
 <meta itemprop="dateModified" content="2016-10-30T19:48:17+08:00" />
-<meta itemprop="wordCount" content="741">
+<meta itemprop="wordCount" content="815">
 <meta itemprop="keywords" content="html5," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在iframe嵌套的html5中播放视频时全屏显示和取消音量调整"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -174,11 +174,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>之后的效果显示如下，从图中我们可以看出该视频播放界面包含 <em>快进</em> 、 <em>音量调整</em> 和 <em>全屏播放</em> 这几个按钮<br>
+</div><p>之后的效果显示如下，从图中我们可以看出该视频播放界面包含<code>快进</code> 、<code>音量调整</code> 和<code>全屏播放</code>这几个按钮<br>
 <img src="https://ooo.0o0.ooo/2016/10/30/5815e96382a3c.png" alt="浏览器中正常播放视频" title="浏览器中正常播放视频"></p>
 <h2 id="在iframe中不能全屏播放视频">在iframe中不能全屏播放视频</h2>
 <p>项目中好多地方都用<code>iframe</code>来嵌套html页面，最开始我是用类似如下代码在被<code>iframe</code>包含的页面中嵌入前面的视频播放代码，
-发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索**<a href="http://stackoverflow.com/">stackoverflow</a>**找到一个类似的问题<a href="http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe">How to make a video fullscreen when it is placed inside an iframe?</a>，阅读后发现只需要将<code>iframe</code>修改成<code>&lt;iframe … allowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot;&gt;</code>即可</p>
+发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索<a href="http://stackoverflow.com/"><strong>stackoverflow</strong></a>找到一个类似的问题<a href="http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe"><strong>How to make a video fullscreen when it is placed inside an iframe?</strong></a>，阅读后发现只需要将<code>iframe</code>修改成<code>&lt;iframe … allowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot;&gt;</code>即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -211,8 +211,8 @@
 </div>
 </div><p><img src="https://ooo.0o0.ooo/2016/10/30/581600e124b51.png" alt="视频无法进行全屏播放" title="视频无法进行全屏播放"></p>
 <h2 id="隐藏声音调整按钮">隐藏声音调整按钮</h2>
-<p>有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于<code>webkit</code>内核的<code>Chrome</code>浏览器访问，通过Google之后在 **<a href="http://stackoverflow.com/">stackoverflow</a>**找到
-<a href="http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555">Why do no user-agents implement the CSS cursor style for video elements</a>这篇文章，其中列出了播放视频时相关控制按钮的css类：</p>
+<p>有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于<code>webkit</code>内核的<code>Chrome</code>浏览器访问，通过Google之后在 <a href="http://stackoverflow.com/"><strong>stackoverflow</strong></a>找到
+<a href="http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555"><strong>Why do no user-agents implement the CSS cursor style for video elements</strong></a>这篇文章，其中列出了播放视频时相关控制按钮的css类：</p>
 <ul>
 <li>video::-webkit-media-controls-panel</li>
 <li>video::-webkit-media-controls-play-button</li>
@@ -231,7 +231,7 @@
 <li>video::-webkit-media-controls-return-to-realtime-button</li>
 <li>video::-webkit-media-controls-toggle-closed-captions-button</li>
 </ul>
-<p>为了屏蔽掉声音播放按钮，我们只需使用 <em>video::-webkit-media-controls-volume-slider</em> 和  <em>video::-webkit-media-controls-mute-button</em> 这两个属性即可，相应的css代码如下：</p>
+<p>为了屏蔽掉声音播放按钮，我们只需使用<code>video::-webkit-media-controls-volume-slider</code>和<code>video::-webkit-media-controls-mute-button</code>这两个属性即可，相应的css代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
