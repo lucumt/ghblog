@@ -22,7 +22,7 @@
       <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
       
       <guid>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</guid>
-      <description>&lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;EasyUI&lt;/a&gt;&lt;/strong&gt; 中的 &lt;strong&gt;&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;DataGrid&lt;/a&gt;&lt;/strong&gt; 实现的表格具有很多优点，如可以 &lt;em&gt;对列宽进行拖动调整、列冻结、行冻结、自定义格式化&lt;/em&gt; 等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;</description>
+      <description>&lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;&lt;strong&gt;EasyUI&lt;/strong&gt;&lt;/a&gt;中的&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;&lt;strong&gt;DataGrid&lt;/strong&gt;&lt;/a&gt;实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
       
       <guid>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</guid>
-      <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个 report.rptdesign 文件后双击该文件出现如下错误: 错误信息提</description>
+      <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击</description>
     </item>
     
     <item>

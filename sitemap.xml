@@ -10,7 +10,7 @@
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,14 +38,14 @@
   
   <url>
     <loc>https://lucumt.info/post/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -59,7 +59,7 @@
   
   <url>
     <loc>https://lucumt.info/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -255,7 +255,7 @@
   
   <url>
     <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2017-04-07T10:47:28+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -290,28 +290,28 @@
   
   <url>
     <loc>https://lucumt.info/tags/go/</loc>
-    <lastmod>2017-03-05T14:04:43+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/go%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2017-03-05T14:04:43+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/tags/intellij-idea/</loc>
-    <lastmod>2017-03-05T14:04:43+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/post/import-local-package-in-intellij-idea/</loc>
-    <lastmod>2017-03-05T14:04:43+08:00</lastmod>
+    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

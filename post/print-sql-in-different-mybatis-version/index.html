@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在不同版本的MyBatis中通过Log4j打印实际执行的SQL">
 <meta itemprop="description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL"><meta itemprop="datePublished" content="2017-12-18T18:33:14+08:00" />
 <meta itemprop="dateModified" content="2017-12-18T18:33:14+08:00" />
-<meta itemprop="wordCount" content="2019">
+<meta itemprop="wordCount" content="2472">
 <meta itemprop="keywords" content="Java,MyBatis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在不同版本的MyBatis中通过Log4j打印实际执行的SQL"/>
 <meta name="twitter:description" content="在不同版本的mybatis中通过log4j打印实际执行的SQL"/>
@@ -167,8 +167,8 @@
   </div>
 </div>
     <div class="post-content">
-      <p>项目中ORM框架用的是 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong>，最近由于业务上的需求将 <em>MyBatis</em> 从3.1.1升级到3.4.5，发现升级后通过 <strong><a href="https://logging.apache.org/log4j/1.2/download.html">Log4j</a></strong> 显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
-<p>假设我们测试的sql文件为 <em>UserMapper.xml</em> ， 对应的代码如下，其命名空间为 <em>com.lucumt.mapper.UserMappper</em></p>
+      <p>项目中ORM框架用的是 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>，最近由于业务上的需求将<code>MyBatis</code>从<strong>3.1.1</strong>升级到<strong>3.4.5</strong>，发现升级后通过<a href="https://logging.apache.org/log4j/1.2/download.html"><strong>Log4j</strong></a>显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
+<p>假设我们测试的sql文件为UserMapper.xml ， 对应的代码如下，其命名空间为<code>com.lucumt.mapper.UserMappper</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -224,10 +224,10 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>本文会基于上述代码说明不同版本下如何利用 <em>Log4j</em> 在 <em>MyBatis</em> 中配置打印日志以及其实现原理。</p>
+</div><p>本文会基于上述代码说明不同版本下如何利用<code>Log4j</code>在<code>MyBatis</code>中配置打印日志以及其实现原理。</p>
 <h2 id="mybatis311显示sql的配置与分析">MyBatis3.1.1显示SQL的配置与分析</h2>
 <h3 id="log4j相关配置">Log4j相关配置</h3>
-<p>在 <em>MyBatis3.1.1</em> 及以前的版本中若我们想通过 <em>Log4j</em> 配置来打印实际执行的SQL，<em>log4j.properties</em> 的配置通常类似如下</p>
+<p>在<code>MyBatis3.1.1</code>及以前的版本中若我们想通过<code>Log4j</code>配置来打印实际执行的SQL，log4j.properties的配置通常类似如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -237,15 +237,15 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="n">在不开启log4j</span> <span class="n">DEBUG模式下显示mybatis中运行的SQL语句</span> 
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">Connection</span><span class="o">=</span><span class="n">DEBUG</span> 
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">Statement</span><span class="o">=</span><span class="n">DEBUG</span> 
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">PreparedStatement</span><span class="o">=</span><span class="n">DEBUG</span> 
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">ResultSet</span><span class="o">=</span><span class="n">DEBUG</span> 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+</span></span><span class="line"><span class="cl">log4j.logger.java.sql.Connection=DEBUG 
+</span></span><span class="line"><span class="cl">log4j.logger.java.sql.Statement=DEBUG 
+</span></span><span class="line"><span class="cl">log4j.logger.java.sql.PreparedStatement=DEBUG 
+</span></span><span class="line"><span class="cl">log4j.logger.java.sql.ResultSet=DEBUG 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="原理分析">原理分析</h3>
-<p>以 <em>log4j.logger.java.sql.Connection=DEBUG</em>  这个配置为例，分析源码可知其sql日志来源于<code>ConnectionLogger</code>，查看 <em>ConnectionLogger</em> 的代码可知，<em>ConnectionLogger</em> 以硬编码的方式生成了一个log对象,当 <em>DEBUG</em> 模式开启时该log对象会打印sql语句等信息。</p>
+<p>以<code>log4j.logger.java.sql.Connection=DEBUG</code>这个配置为例，分析源码可知其sql日志来源于<code>ConnectionLogger</code>，查看 <code>ConnectionLogger</code>的代码可知<code>ConnectionLogger</code>以硬编码的方式生成了一个log对象,当<code>DEBUG</code>模式开启时该log对象会打印sql语句等信息。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -324,23 +324,23 @@
 </div>
 </div><p>运行结果如下<br>
 <img src="/blog_img/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png" alt="&amp;ldquo;MyBatis3.1.1时显示执行SQL&amp;rdquo;" title="MyBatis1.1.1时显示执行SQL">   <br>
-从上述代码可知在 <em>Mybatis3.1.1</em> 中通过 <em>Log4j</em> 实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: <strong>当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印</strong> ，基于此 <em>MyBatis</em> 从3.2.0版本之后重新实现了相关功能。</p>
+从上述代码可知在<code>Mybatis3.1.1</code>中通过<code>Log4j</code>实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: <strong>当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印</strong> ，基于此<code>MyBatis</code>从3.2.0版本之后重新实现了相关功能。</p>
 <h2 id="mybatis345显示sql的配置与分析">MyBatis3.4.5显示SQL的配置与分析</h2>
 <h3 id="log4j相关配置-1">Log4j相关配置</h3>
-<p>在 <em>MyBatis3.2.0</em> 及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，<em>log4j.properties</em> 的配置通常类似如下</p>
+<p>在<code>MyBatis3.2.0</code>及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，<code>log4j.properties</code>的配置通常类似如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="n">在不开启log4j</span> <span class="n">DEBUG模式下显示mybatis中运行的SQL语句</span> 
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">lucumt</span><span class="o">.</span><span class="na">mapper</span><span class="o">=</span><span class="n">DEBUG</span> 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
+</span></span><span class="line"><span class="cl">log4j.logger.com.lucumt.mapper=DEBUG 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>在本文写作时，mybatis官网上已有关于这方面更 <strong><a href="http://www.mybatis.org/mybatis-3/zh/logging.html">详细的说明</a></strong> 。</p>
 <h3 id="原理分析-1">原理分析</h3>
-<p>同样以 <em>log4j.logger.java.sql.Connection=DEBUG</em> 为例，其sql日志来源于 <em>ConnectionLogger</em> ，对应代码如下</p>
+<p>同样以<code>log4j.logger.java.sql.Connection=DEBUG</code>为例，其sql日志来源于<code>ConnectionLogger</code>，对应代码如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -450,7 +450,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>DEBUG模式下查看 <em>ConnectionLogger</em> 的调用堆栈如下<br>
+</div><p>DEBUG模式下查看<code>ConnectionLogger</code>的调用堆栈如下<br>
 <img src="/blog_img/print-sql-in-different-mybatis-version/connection_logger_stack.png" alt="&amp;ldquo;ConnectionLogger的调用堆栈&amp;rdquo;" title="ConnectionLogger的调用堆栈"><br>
 从其调用堆栈可知log对象是通过<code>MappedStatement</code>生成的，如下</p>
 <div class="highlight"><div class="chroma">
@@ -497,7 +497,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>查看 <em>MappedStatement</em> 的源码，发现log的生成是在 <em>Builder</em> 方法中，如下</p>
+</div><p>查看<code>MappedStatement</code>的源码，发现log的生成是在<code>Builder</code>方法中，如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -552,9 +552,9 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 <strong>namespace+方法id</strong> 组成，在本例中为 <em>com.lucumt.mapper.UserMappper.getUsers</em> ，而前面的配置为 <em>log4j.logger.com.lucumt.mapper=DEBUG</em> ，由于 <em>Log4j</em> 中的log示例的继承关系，相当于 <em>com.lucumt.mapper.UserMappper.getUser</em> 也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下<br>
+</div><p>通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 <strong>namespace+方法id</strong> 组成，在本例中为<code>com.lucumt.mapper.UserMappper.getUsers</code>，而前面的配置为<code>log4j.logger.com.lucumt.mapper=DEBUG</code> ，由于<code>Log4j</code>中的log示例的继承关系，相当于<code>com.lucumt.mapper.UserMappper.getUser</code>也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下<br>
 <img src="/blog_img/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png" alt="&amp;ldquo;MyBatis3.4.5时显示执行SQL&amp;rdquo;" title="MyBatis3.4.5时显示执行SQL"><br>
-利用新版 <em>MyBatis</em> 的这一特性，我们可以实现类似如下的不同粒度sql打印</p>
+利用新版<code>MyBatis</code>的这一特性，我们可以实现类似如下的不同粒度sql打印</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -562,13 +562,12 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">xxx</span><span class="o">.</span><span class="na">mapper</span><span class="o">=</span><span class="n">DEBUG</span> <span class="err">#</span><span class="n">打印xxx包下所有的执行SQL</span>
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">yyy</span><span class="o">.</span><span class="na">mapper</span><span class="o">.</span><span class="na">PersonMapper</span><span class="o">=</span><span class="n">DEBUG</span> <span class="err">#</span><span class="n">打印PersonMapper下所有的执行SQL</span>
-</span></span><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">zzz</span><span class="o">.</span><span class="na">mapper</span><span class="o">.</span><span class="na">GroupMapper</span><span class="o">.</span><span class="na">getGroups</span><span class="o">=</span><span class="n">DEBUG</span> <span class="err">#</span><span class="n">只打印getGroups对应的执行SQL</span>  
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">log4j.logger.com.xxx.mapper=DEBUG #打印xxx包下所有的执行SQL
+</span></span><span class="line"><span class="cl">log4j.logger.com.yyy.mapper.PersonMapper=DEBUG #打印PersonMapper下所有的执行SQL
+</span></span><span class="line"><span class="cl">log4j.logger.com.zzz.mapper.GroupMapper.getGroups=DEBUG #只打印getGroups对应的执行SQL  
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br/>
-由前面的代码可知 *MappedStatement* 的 *Build* 方法在生成log对象时会检测是否有 *logPrefix* 配置，若有则用 *logPrefix* 来生成log对象，于是可以通过设置 *logPrefix* 以另外一种方式配置打印sql。 可在 *MyBatis* 配置文件中添加如下配置 
+</div><p>由前面的代码可知<code>MappedStatement</code>的Build方法在生成log对象时会检测是否有<code>logPrefix</code>配置，若有则用<code>logPrefix</code>来生成log对象，于是可以通过设置<code>logPrefix</code>以另外一种方式配置打印sql。 可在<code>MyBatis</code>配置文件中添加如下配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -583,18 +582,18 @@
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后将 <em>log4j.properties</em> 的配置修改为</p>
+</div><p>然后将 log4j.properties的配置修改为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">log4j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">dao</span><span class="o">=</span><span class="no">DEBUG</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">log4j.logger.dao=DEBUG
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>执行结果与前面相同，通过 <em>logPrefix</em> 可以在有些时候简化sql打印配置。</p>
+</div><p>执行结果与前面相同，通过 <code>logPrefix</code>可以在有些时候简化sql打印配置。</p>
 <h3 id="待分析问题">待分析问题</h3>
-<p>若将 <em>MyBatis</em> 的版本变 <em>3.3.0</em> 时，通过 <em>Log4j</em> 配置打印SQL时，如下所示的配置方式只有部分生效，原因待分析</p>
+<p>若将<code>MyBatis</code>的版本变<strong>3.3.0</strong>时，通过<code>Log4j</code>配置打印SQL时，如下所示的配置方式只有部分生效，原因待分析</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

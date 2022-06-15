@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用Spring和JUnit对数据库操作进行单元测试">
 <meta itemprop="description" content="本文主要介绍了基于Spring来进行JUnit单元测试时如何对数据库事务进行控制"><meta itemprop="datePublished" content="2016-03-20T16:27:21+08:00" />
 <meta itemprop="dateModified" content="2016-03-20T16:27:21+08:00" />
-<meta itemprop="wordCount" content="686">
+<meta itemprop="wordCount" content="692">
 <meta itemprop="keywords" content="Java,JUnit," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用Spring和JUnit对数据库操作进行单元测试"/>
 <meta name="twitter:description" content="本文主要介绍了基于Spring来进行JUnit单元测试时如何对数据库事务进行控制"/>
@@ -158,7 +158,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>在进行Java程序开发时，我们偶尔会被要求使用**<a href="http://junit.org/">JUnit</a><strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <em><strong>覆盖度高，可重复执行，单一性</strong></em> 等特点。本文主要关注</strong><em>可重复执行</em>** ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用**<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a>** 来进行 <em><strong>回滚</strong></em> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用**<a href="https://spring.io/">Spring</a><strong>和</strong><a href="http://junit.org/">JUnit</a>**通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
+      <p>在进行Java程序开发时，我们偶尔会被要求使用<a href="http://junit.org/"><strong>JUnit</strong></a>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <code>覆盖度高</code>，<code>可重复执行</code>,<code>单一性</code>等特点。本文主要关注<code>可重复执行</code>，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><strong>数据库事务</strong></a>来进行<code>回滚</code>从而达到重复执行的目的。最原始的方法是利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html"><strong>java.sql.Connection</strong></a>类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<a href="https://spring.io/"><strong>Spring</strong></a>和<a href="http://junit.org/"><strong>JUnit</strong></a>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
 <h2 id="所有方法都回滚">所有方法都回滚</h2>
 <p>在该单元测试类的开头加上 <code>@TransactionConfiguration(defaultRollback=true)</code> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
 <div class="highlight"><div class="chroma">
@@ -383,7 +383,7 @@
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/update-authority-dynamic-using-spring-security/">
-            <span class="next-text nav-default">利用Spring Security动态的改变权限</span>
+            <span class="next-text nav-default">利用Spring Security动态改变登录用户的权限</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

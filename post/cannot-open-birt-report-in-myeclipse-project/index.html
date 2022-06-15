@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在MyEclipse项目中不能打开birt报表的解决方法">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2017-04-07T10:47:28+08:00" />
 <meta itemprop="dateModified" content="2017-04-07T10:47:28+08:00" />
-<meta itemprop="wordCount" content="462">
+<meta itemprop="wordCount" content="626">
 <meta itemprop="keywords" content="Birt," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在MyEclipse项目中不能打开birt报表的解决方法"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -148,12 +148,15 @@
   </div>
 </div>
     <div class="post-content">
-      <p>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加<code>Birt</code>报表统计功能，新建完一个 <em>report.rptdesign</em> 文件后双击该文件出现如下错误:<br>
+      <p>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加<code>Birt</code>报表统计功能，新建完一个report.rptdesign文件后双击该文件出现如下错误:<br>
 <img src="/blog_img/cannot-open-birt-report-in-myeclipse-project/cannot-open-birt.png" alt="无法打开报表文件" title="无法打开birt报表文件"><br>
-错误信息提示MyEclipse无法打开 <em>Birt</em> 报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键 <em>MyEclipse</em> -&gt; <em>Add Report  Capabilities</em> 来对该项目添加 <em>Birt</em> 报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的 <em>Birt</em> jar包和相应的report文件夹，给我们的项目造成了一定的干扰。<br>
+错误信息提示MyEclipse无法打开<code>Birt</code>报表编辑器，对于此种情况，网上搜索相应的解决方案后一般都让我们给该项目添加报表支持，即选中该项目，然后右键<code>MyEclipse</code> -&gt; <code>Add Report  Capabilities</code>来对该项目添加Birt报表支持。此种方式虽能解决问题，但却同时额外的引入了系统内置的<code>Birt</code> jar包和相应的report文件夹，给我们的项目造成了一定的干扰。<br>
 <img src="/blog_img/cannot-open-birt-report-in-myeclipse-project/birt-project-in-myeclipse.png" alt="birt项目" title="MyEclipse中的birt项目"></p>
-<p>分析上述添加完 <em>Birt</em> 报表支持的项目文件后，可发现与普通的Java Web项目相比  <em>.project</em> 文件在 <em>natures</em> 下面多了一个  <em>com.genuitec.eclipse.reporting.reportnature</em> 的配置项，而该配置项正是用于在项目中支持 <em>Birt</em> 报表操作。</p>
-<p>据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开 <em>Birt</em> 报表的问题：<strong>将 <em>com.genuitec.eclipse.reporting.reportnature</em> 配置项添加到当前项目 <em>.project</em> 文件的 <em>natures</em> 配置项下面</strong>，如下所示:</p>
+<p>分析上述添加完<code>Birt</code>报表支持的项目文件后，可发现与普通的Java Web项目相比 .project文件在natures下面多了一个  <code>com.genuitec.eclipse.reporting.reportnature</code>的配置项，而该配置项正是用于在项目中支持<code>Birt</code>报表操作。据此，我们可以采用另外一个方式来解决在MyEclipse中无法打开<code>Birt</code>报表的问题：</p>
+<blockquote>
+<p>将 <code>com.genuitec.eclipse.reporting.reportnature</code>配置项添加到当前项目<code>.project</code>文件的<code>natures</code>配置项下面</p>
+</blockquote>
+<p>如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -194,7 +197,7 @@
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/projectDescription&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>利用此种方式既可解决无法打开 <em>Birt</em> 报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。</p>
+</div><p>利用此种方式既可解决无法打开<code>Birt</code>报表问题，又能避免添加冗余的jar文件和文件夹，给我们的开发省去不必要的麻烦。</p>
 
     </div>
 
