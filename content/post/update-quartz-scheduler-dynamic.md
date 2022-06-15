@@ -9,14 +9,15 @@ title = "在Quartz中动态设置定时任务的执行时间"
 
 +++
 
-**[Quartz](http://www.quartz-scheduler.org/)**是软件开发中常用的任务调度框架，实际中通常结合 **[Spring](https://spring.io/)** 一起使用，并在 *Spring* 的配置文件中利用 *0 0 12 ? \* WED* 这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。
+[**Quartz**](http://www.quartz-scheduler.org/)是软件开发中常用的任务调度框架，实际中通常结合 [**Spring**](https://spring.io/) 一起使用，并在Spring的配置文件中利用`0 0 12 ? \* WED`这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。
 
 <!--more-->
 为实现动态设置定时任务执行时间的功能，首先需要实现以硬编码的方式设置定时任务执行时间，然后在其基础上修改为可动态设置，本文基于这两分部分逐步介绍如何实现。
 
 ## 硬编码设置定时时间
-本文采用 Quartz + **[SpringMVC](https://spring.io/guides/gs/serving-web-content/)** 的实现框架，同时基于 **[Maven](https://maven.apache.org/)**运行，相关配置过程如下：   
-1.首先在 *POM* 文件中引入相应的依赖JAR包。  
+本文采用 Quartz + [**SpringMVC**](https://spring.io/guides/gs/serving-web-content/) 的实现框架，同时基于 [**Maven**](https://maven.apache.org/)运行，相关配置过程如下：   
+1.首先在pom.xml文件中引入相应的依赖JAR包。  
+
 ```xml
 <dependencies>
 	<dependency>
@@ -69,8 +70,9 @@ title = "在Quartz中动态设置定时任务的执行时间"
 </dependencies>
 ```
 
-2.创建一个定时任务测试类 *TestJob*  
+2.创建一个定时任务测试类TestJob  
 	
+
 ```java
 public class TestJob {
 
@@ -82,7 +84,7 @@ public class TestJob {
 }
 ```
 
-3.结合 *Spring* 进行定时任务的配置    
+3.结合Spring进行定时任务的配置    
 
 ```xml
 <beans xmlns="http://www.springframework.org/schema/beans" 
@@ -113,7 +115,7 @@ public class TestJob {
 </beans>
 ```
 
-4.*web.xml* 中配置如下：
+4.web.xml中配置如下：
 
 ```xml
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
@@ -131,7 +133,7 @@ public class TestJob {
 </web-app>
 ```
 <br/>
-配置完成后，在 *eclipse* 中运行`tomcat7:run`运行结果如下，可以看出定时任务每隔10秒执行一次。    
+配置完成后，在eclipse中运行`tomcat7:run`运行结果如下，可以看出定时任务每隔10秒执行一次。  
 !["未修改之前的定时任务输出"](/blog_img/update-quartz-scheduler-dynamic/static_scheduler_output.png "未修改之前的定时任务输出")  
 上述的硬编码设置将 *Quartz* 的执行时间通过硬编码方式写入XML配置文件中，这是最常见的用法，但通过XML配置文件写入定时时间时无法动态的更改其执行时间。
 
@@ -262,7 +264,7 @@ public class JobScheduler implements ServletContextAware {
 		}
 	}
 }
-```  
+```
 
 4.其他配置文件保持不变，修改后的运行界面如下  
 !["修改定时任务的操作界面"](/blog_img/update-quartz-scheduler-dynamic/dynamic_scheduler_button.png "修改定时任务的操作界面")  

@@ -68,15 +68,15 @@ public class VolatileTest {
 
 上述代码展示了`volatile`的典型使用场景:  
 
-**当有两个或以上的线程同时读取一个共享的可变变量时，为了确保每个线程都能获取到最新的值，应该使用`volatile`关键字对该变量进行修饰，确保该变量的可见性。**
+>  **当有两个或以上的线程同时读取一个共享的可变变量时，为了确保每个线程都能获取到最新的值，应该使用`volatile`关键字对该变量进行修饰，确保该变量的可见性**。
 
-关于`volatile`如何实现确保变量可见性，网上已经有很多资料，请自行查阅，如[volatile和lock原理分析](https://liuzhengyang.github.io/2017/03/28/volatileandlock/)。
+关于`volatile`如何实现确保变量可见性，网上已经有很多资料，请自行查阅，如[**volatile和lock原理分析**](https://liuzhengyang.github.io/2017/03/28/volatileandlock/)。
 
 ### 有独占锁时不需要使用volatile
 
-既然`volatile`变量确保的是在多个线程**同时读取**一个变量时确保内存可见性，如果有多个线程对共享变量进行读写时，若由于**排它锁(exclusive lock)**的存在导致任一时刻只能有一个线程对共享变量进行读写操作，此时是否还需要添加`volatile`关键字呢？答案是否定的，从字面意思可以看出，由于同一时刻只能有一个线程访问变量，所以变量可见性的问题不会存在，故没必要添加`volatile`关键字。
+既然`volatile`变量确保的是在多个线程**同时读取**一个变量时确保内存可见性，如果有多个线程对共享变量进行读写时，由于**排它锁(exclusive lock)** 的存在导致任一时刻只能有一个线程对共享变量进行读写操作，此时是否还需要添加`volatile`关键字呢？答案是否定的，从字面意思可以看出，由于同一时刻只能有一个线程访问变量，所以变量可见性的问题不会存在，故没必要添加`volatile`关键字。
 
-以Java8为例，在Java语言规范中有关于`volatile`的说明 **[volatile Fields](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.4)**中有如下片段:
+以Java8为例，在Java语言规范中有关于`volatile`的说明[**volatile Fields**](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.4)中有如下片段:
 
 >The Java programming language allows threads to access shared variables (§17.1). As a rule, to ensure that shared variables are consistently and reliably updated, a thread should ensure that it has exclusive use of such variables by obtaining a lock that, conventionally, enforces mutual exclusion for those shared variables.  
 <br/>
@@ -87,7 +87,7 @@ public class VolatileTest {
 从这段文字可以看出`volatile`相对于独占锁提供了更加简便的方式让变量一致且可靠的更新，`volatile`只确保读取的值正确，对写入影响不大，而独占锁则限制了同时只能有一个读或写，导致出现性能问题以及在特定的场景下无法使用的问题(如代码清单1所示，若采用独占锁则同时只能有一个线程运行，违背了设计初衷)。
 
 下述代码展示了一个典型的生产者/消费者模式，由于独占锁的存在，即使没有使用`volatile`关键字，程序也能正常工作。  
-  
+
 代码清单2: 生产者/消费者模式
 ```java
 public class ProducerConsumerTest {
@@ -160,7 +160,7 @@ public class ProducerConsumerTest {
 
 ### 利用volatile在单例模式中实现双重检查
 
-`volatile`关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了`volatile`禁止重排序的功能，详细说明请参见[Java并发编程的艺术](https://item.jd.com/11740734.html)P67中的 *双重检查锁定与延迟初始化* 。
+`volatile`关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了`volatile`禁止重排序的功能，详细说明请参见[Java并发编程的艺术](https://item.jd.com/11740734.html)P67中的 **双重检查锁定与延迟初始化** 。
 
 代码清单3: 利用双重检查实现线程安全的单例模式
 ```

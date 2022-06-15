@@ -13,7 +13,7 @@ author: "Rosen Lu"
 
 
 
-由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行**[25端口解封申请](https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf "25端口解封申请")**，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。
+由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行[**25端口解封申请**](https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf "25端口解封申请")，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。
 
 <!--more-->
 
@@ -24,7 +24,7 @@ author: "Rosen Lu"
 ![设置授权码](/blog_img/send-ssl-mail-with-126-in-aliyun/set_auth_code.png "设置授权码")
 
 ## 代码编写
-下述代码为使用25端口发送邮件的Java代码，其实现基于**[Java Mail 1.4.1](https://www.oracle.com/technetwork/java/javamail/index.html)**。
+下述代码为使用25端口发送邮件的Java代码，其实现基于[**Java Mail 1.4.1**](https://www.oracle.com/technetwork/java/javamail/index.html)。
 ```java
 public void testSendMail() {
 	
@@ -105,9 +105,9 @@ public void testSendMail() {
 ```
 
 ## 其他说明
-Java Mail中关于邮件设置的选项请参见**[com.sun.mail.smtp](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html)**,实际使用时我发现只需要添加`props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");`即可，额外的添加其它一些配置反而可能会导致不能正常使用。
+Java Mail中关于邮件设置的选项请参见[**com.sun.mail.smtp**](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html),实际使用时我发现只需要添加`props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");`即可，额外的添加其它一些配置反而可能会导致不能正常使用。
 
-如当参照Stackoverflow中的**[Using JavaMail with TLS](https://stackoverflow.com/questions/411331/using-javamail-with-tls)**这个问题的答案加上如下代码：
+如当参照Stackoverflow中的[**Using JavaMail with TLS**](https://stackoverflow.com/questions/411331/using-javamail-with-tls)这个问题的答案加上如下代码：
 ```
 props.put("mail.smtp.starttls.enable","true");
 props.put("mail.smtp.auth", "true");

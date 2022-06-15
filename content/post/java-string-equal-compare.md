@@ -80,7 +80,7 @@ public class StringTest {
      214: return
 }
 ```
-为了能读懂其内容，可先从[The Java® Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html)中了解相关的指令，本文将涉及到的指令列举如下
+为了能读懂其内容，可先从[**The Java® Virtual Machine Specification**](https://docs.oracle.com/javase/specs/jvms/se8/html)中了解相关的指令，本文将涉及到的指令列举如下
 
 * **ldc**，将字符串从运行时常量池压入操作栈中
 * **astore**，将一个数值从操作栈存入局部变量表
@@ -311,9 +311,9 @@ public class TestServlet extends HttpServlet {
 在`Tomcat7`中的运行结果如下，可以看出其运行结果符合前面基于class文件的理论分析。
 ![Web程序中的字符串比较](/blog_img/java-string-equal-compare/string_compare_result_3.png "Web程序中的字符串比较")  
 
-通过前面的分析可知通过Web服务器传递给Servlet的字符串参数肯定是一个`String`对象而非一个字符串常量。接下来通过在GitHub中分析**[Tomcat](https://github.com/apache/tomcat)**源码来了解其如何赋值。
+通过前面的分析可知通过Web服务器传递给Servlet的字符串参数肯定是一个`String`对象而非一个字符串常量。接下来通过在GitHub中分析[**Tomcat**](https://github.com/apache/tomcat)源码来了解其如何赋值。
 
-1. 在`Tomcat`中，生成参数的相关代码位于**[Parameters.java](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/http/Parameters.java)**类中`private void processParameters(byte bytes[], int start, int len, Charset charset)`方法中，该方法给参数赋值的核心代码如下：
+1. 在`Tomcat`中，生成参数的相关代码位于[**Parameters.java**](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/http/Parameters.java)类中`private void processParameters(byte bytes[], int start, int len, Charset charset)`方法中，该方法给参数赋值的核心代码如下：
 ```java
 if (valueStart >= 0) {
     if (decodeValue) {
@@ -324,9 +324,9 @@ if (valueStart >= 0) {
 } else {
     value = "";
 }
-```  
+```
 
-2. 继续查看可知`tmpValue`的类型为**[ByteChunk](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java)**,其`toString()`核心代码如下：
+2. 继续查看可知`tmpValue`的类型为[**ByteChunk**](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java),其`toString()`核心代码如下：
 ```java
 public String toString() {
     if (isNull()) {
@@ -338,7 +338,7 @@ public String toString() {
 }
 ```
 
-3. 继续查看**[StringCache](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/StringCache.java)**的`toString()`方法如下
+3. 继续查看[**StringCache**](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/StringCache.java)的`toString()`方法如下
 ```java
 public static String toString(ByteChunk bc) {
 
@@ -457,7 +457,7 @@ public static String toString(ByteChunk bc) {
 ```
 该方法篇幅很长，但核心代码只有一行`String value = bc.toStringInternal();`而`bc`的类型为`ByteChunk`。
 
-4. 继续在**[ByteChunk](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java)**搜索`toStringInternal()`方法，其代码如下
+4. 继续在[**ByteChunk**](https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/buf/ByteChunk.java)搜索`toStringInternal()`方法，其代码如下
 ```java
 public String toStringInternal() {
     if (charset == null) {
@@ -472,7 +472,7 @@ public String toStringInternal() {
 ```
 查看该方法可知其使用`new String(cb.array(), cb.arrayOffset(), cb.length())`的方式来构造`String`对象，故利用`==`比较字符串时其返回值为false。
 
-分析了最基本的Servelt后，由于**[SpringMVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#spring-web)**是基于Servlet实现的，故使用如下代码进行参数比较其值也为false。
+分析了最基本的Servelt后，由于[**SpringMVC**](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#spring-web)是基于Servlet实现的，故使用如下代码进行参数比较其值也为false。
 ```java
 @RequestMapping("addUser")
 public String addUser(UserModel user) {
