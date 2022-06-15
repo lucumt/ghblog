@@ -16,22 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen" />
-  <meta name="description" content="飞狐的个人博客" />
-  <meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="飞狐的个人博客" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.100.2 with theme even" />
 
 
-<link rel="canonical" href="https://lucumt.info/" />
-<link href="https://lucumt.info/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
-  <link href="https://lucumt.info/index.xml" rel="feed" type="application/rss+xml" title="飞狐的部落格" />
-
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="飞狐的部落格" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,38 +37,17 @@
 
 
 
-
-
-
-
-<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="飞狐的部落格" />
 <meta property="og:description" content="飞狐的个人博客" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://lucumt.info/" />
-
-
-
-<meta property="og:updated_time" content="2016-05-30T18:20:37&#43;08:00"/>
-
-
-
-
-
-
-
-
-
+<meta property="og:url" content="http://localhost:1313/" />
 
 <meta itemprop="name" content="飞狐的部落格">
-<meta itemprop="description" content="飞狐的个人博客">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="飞狐的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="飞狐的部落格"/>
 <meta name="twitter:description" content="飞狐的个人博客"/>
 
@@ -110,12 +86,21 @@
         <li class="mobile-menu-item">关于我</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">Rosen&#39;s World</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -132,314 +117,148 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          
-  <section id="posts" class="posts">
-    
-    
-    
-      <article class="post">
+          <section id="posts" class="posts">
+    <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-30 </span>
+      <span class="post-time"> 2017-04-01 </span>
       <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-        </div>
-      
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <p>在利用 <strong><a href="http://www.mybatis.org/mybatis-3/">MyBatis</a></strong> 进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
+      <p>本文翻译自**<a href="http://tutorials.jenkov.com/java-concurrency/costs.html">Java Concurrency / Multithreading Costs</a>**</p>
+<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/multithreading-costs/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
 
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/multithreading-benefits/">2. [译]多线程的优点</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自**<a href="http://tutorials.jenkov.com/java-concurrency/benefits.html">Java Concurrency / Multithreading Benefits</a>**</p>
+<p>尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：</p>
 <ul>
-<li><p>SQL配置文件:</p>
-
-<pre><code class="language-xml">&lt;insert id=&quot;addAuthorityRoleBatch&quot; parameterType=&quot;List&quot;&gt;
-    INSERT INTO system_authority_role(role_id,authority_id)
-      VALUES
-      &lt;foreach collection=&quot;list&quot; item=&quot;authRole&quot; separator=&quot;,&quot;&gt;
-        (#{authRole.roleId},#{authRole.authorityId})
-      &lt;/foreach&gt;
-  &lt;/insert&gt;
-</code></pre></li>
+<li>更好的资源利用</li>
+<li>在某些场景可以简化程序设计</li>
+<li>提高程序响应</li>
 </ul>
-
-<p></p>
     </div>
     <div class="read-more">
-      <a href="/post/mybatis-batch-insert-exception/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-concurrency/multithreading-benefits/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
-    
-      <article class="post">
+    <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/download-big-file-using-springmvc/">利用SpringMVC下载大文件时内存溢出的处理</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/java-concurrency-multithreading-tutorial/">1. [译]Java多线程与并发教程</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
+      <span class="post-time"> 2017-03-30 </span>
       <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-        </div>
-      
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html">java.io</a></strong> 下面的各种IO类自己实现，或者利用 <strong><a href="https://commons.apache.org/proper/commons-io/">Commons IO</a></strong> 包中的 <strong><em>FileUtils</em></strong> 、 <strong><em>IOUtils</em></strong> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong> 来作为项目的MVC实现，所以很自然的采用 <strong><a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html">SpringMVC</a></strong>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
-
-<p></p>
+      <p>本文翻译自**<a href="http://tutorials.jenkov.com/java-concurrency/index.html">Java Concurrency / Multithreading Tutorial</a>**</p>
+<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
+<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
     </div>
     <div class="read-more">
-      <a href="/post/download-big-file-using-springmvc/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
-    
-      <article class="post">
+    <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/using-junit-in-spring/">利用Spring和JUnit对数据库操作进行单元测试</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/import-local-package-in-intellij-idea/">在Intellij IDEA中引用Golang本地包</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
+      <span class="post-time"> 2017-03-05 </span>
       <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-            <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
-          
-        </div>
-      
+          <a href="/categories/go%E7%BC%96%E7%A8%8B/"> Go编程 </a>
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <p>在进行Java程序开发时，我们偶尔会被要求使用<strong><a href="http://junit.org/">JUnit</a></strong>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <strong><em>覆盖度高，可重复执行，单一性</em></strong> 等特点。本文主要关注<strong><em>可重复执行</em></strong> ，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<strong><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">数据库事务</a></strong> 来进行 <strong><em>回滚</em></strong> 从而达到重复执行的目的。最原始的方法是利用 <strong><a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html">java.sql.Connection</a></strong> 类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<strong><a href="https://spring.io/">Spring</a></strong>和<strong><a href="http://junit.org/">JUnit</a></strong>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。
-</p>
+      <p>在学习<code>Golang</code>时，自己最开始用的是eclpse中的<a href="https://goclipse.github.io/">goclipse</a>插件来进行 <em>Golang</em> 编程，但其对<em>Golang</em> 的支持不是太好，如代码格式化、自动导入引用包等都无法直接在eclipse中使用，并且其自动提示功能也没有像 <em>Java</em> 那么强，于是转用<a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>安装<a href="https://plugins.jetbrains.com/plugin/5047-go">Golang插件</a>来替代使用，安装完插件后的<a href="https://www.jetbrains.com/idea/">Intellij IDEA</a>对 <em>Golang</em> 的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/using-junit-in-spring/" class="read-more-link">阅读更多</a>
+      <a href="/post/import-local-package-in-intellij-idea/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
-    
-      <article class="post">
+    <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-authority-dynamic-using-spring-security/">利用Spring Security动态的改变权限</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/calculate-total-area-of-two-rectangles/">计算两个平行于坐标轴的矩形相交的面积</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
+      <span class="post-time"> 2017-02-26 </span>
       <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-        </div>
-      
+          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <p>利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 来管理我们的web程序时，通常需要在<strong><em>UserDetailsService</em></strong> 接口中的 <strong><em>loadUserByUsername</em></strong> 方法中来初始化权限信息,但 <strong><em>UserDetailsService</em></strong> 一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用 <strong><a href="http://projects.spring.io/spring-security/">Spring Security</a></strong> 提供的API来实现。
-</p>
+      <p>之前面试时遇到一个算法题: <strong>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</strong> 此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/update-authority-dynamic-using-spring-security/" class="read-more-link">阅读更多</a>
+      <a href="/post/calculate-total-area-of-two-rectangles/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/using-mock-test-http-servlet-request/">在Spring中利用Mock对HttpServletRequest进行单元测试</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-19 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          
-            <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h2 id="编写单元测试时的注意事项">编写单元测试时的注意事项</h2>
-
-<p>根据软件开发过程中的<strong><em><a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a></em></strong> 理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入 <strong><em>HttpServletRequest</em></strong> , <strong><em>ServletContext</em></strong> 等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入 <strong><em>HttpServletRequest</em></strong> 对象，此时对此类方法进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试时会较为困难，本文介绍一种在<strong><a href="https://spring.io/">Spring</a></strong>中通过<strong><a href="http://mockito.org/">Mock</a></strong>来模拟<strong><em>HttpServletRequest</em></strong> 对象进行<strong><a href="http://junit.org/">JUnit</a></strong>单元测试的方法。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/using-mock-test-http-servlet-request/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mediawiki-back-to-top/">Mediawiki添加回到顶部的方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-18 </span>
-      <div class="post-category">
-          
-            <a href="/categories/%E5%85%B6%E5%AE%83/"> 其它 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>是<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>系统所采用的框架，适合于需要快速搭建知识分享的场合。采用<strong><a href="https://www.mediawiki.org/wiki/MediaWiki">Mediawiki</a></strong>生成的知识共享平台和<strong><a href="https://www.wikipedia.org/">维基百科</a></strong>的操作与使用类似，都支持采用<strong><a href="https://zh.wikipedia.org/zh-cn/Markdown">Markdown</a></strong>语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个<strong><em>回到顶部</em></strong>的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mediawiki-back-to-top/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/java-volatile-keyword/">[译] Java Volatile 关键字详解</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-07 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自 <strong><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html">Java Volatile Keyword</a></strong></p>
-
-<p>Java关键字<code>volatile</code>用于将一个Java变量标记为 <em>在主内中存储</em> ，更准确的解释为：每次读取一个 <em>volatile</em> 变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个 <em>volatile</em> 变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
-
-<p>事实上，从Java5之后，<em>volatile</em> 关键字不仅仅可以用来确保 <em>volatile</em> 变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：
-</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/can-not-run-program-mysqldump/">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-03 </span>
-      <div class="post-category">
-          
-            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<strong><a href="http://docs.oracle.com/javase/6/docs/api/">Runtime</a></strong>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
-
-<pre><code class="language-java">Runtime runtime = Runtime.getRuntime();
-String mysqlCmd = &quot;mysqldump&quot; + &quot; -u&quot; + username + &quot; -p&quot; + password + 
-           &quot;  -h &quot; + databaseAddress + &quot; &quot; +databaseName;
-Process process = runtime.exec(mysqlCmd);
-</code></pre>
-
-<p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/can-not-run-program-mysqldump/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/create-website-with-hugo/">利用Github Pages和基于Go的Hugo搭建个人博客</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-02-27 </span>
-      <div class="post-category">
-          
-            <a href="/categories/go%E7%BC%96%E7%A8%8B/"> Go编程 </a>
-          
-            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          
-        </div>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>一直以来都想拥有一个属于自己的博客，前段时间在学习<code>Go</code> ，于是利用<code>Hugo</code> 和<code>Github Pages</code> 搭建了一个简易的个人博客，先简单记录下。</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/create-website-with-hugo/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-  </section>
+    </section>
   
   <nav class="pagination">
-    
-      <a class="prev" href="/page/2/">
+    <a class="prev" href="/page/2/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    
+    <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
-
         </div>
         
+
       </div>
     </main>
 
@@ -449,7 +268,7 @@ Process process = runtime.exec(mysqlCmd);
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
-  <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -466,49 +285,42 @@ Process process = runtime.exec(mysqlCmd);
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
-    2018
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Rosen</span>
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Rosen Lu</span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
   <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
 
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-75123653-1', 'auto');
-ga('send', 'pageview');
+
+<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-75123653-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
-<script id="baidu_analytics">
-  var _hmt = _hmt || [];
-  (function() {
-    if (window.location.hostname === 'localhost') return;
-    var hm = document.createElement("script"); hm.async = true;
-    hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
-</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 
 
 
 
-<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+
+</body>
 </html>
