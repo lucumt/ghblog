@@ -7,7 +7,7 @@
     "start": "webpack",
     "build": "webpack"
   },
-  "author": "ahonn, olOwOlo",
+  "author": "Rosen Lu",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^7.2.4",
@@ -20,7 +20,7 @@
     "expose-loader": "^0.7.4",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
-    "node-sass": "^4.7.2",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^2.0.10",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
