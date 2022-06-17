@@ -126,91 +126,6 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-09 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-04 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/migrate-github-blog-from-http-to-https/">将基于Github Pages的自定义域名博客迁移到HTTPS</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-12-24 </span>
-      <div class="post-category">
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/migrate-github-blog-from-http-to-https/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/different-ways-find-bug-in-complex-code/">从复杂代码中找出Bug的几种方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-12-23 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/"> 编程杂想 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/print-sql-in-different-mybatis-version/">在不同版本的MyBatis中通过Log4j打印实际执行的SQL</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-12-18 </span>
@@ -226,6 +141,217 @@
     </div>
     <div class="read-more">
       <a href="/post/print-sql-in-different-mybatis-version/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-12 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和<code>Javassist</code>库来直接对Class文件进行修改的方法。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/modify-java-class-file-content-directly/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-06 </span>
+      <div class="post-category">
+          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>相对于传统的用HTML中TABLE实现的表格，利用<a href="https://www.jeasyui.com"><strong>EasyUI</strong></a>中的<a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid"><strong>DataGrid</strong></a>实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/concurrency-models/">4. [译]并发的模型</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-05 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html"><strong>Java Concurrency / Concurrency Models</strong></a></p>
+<p>并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/concurrency-models/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cannot-open-birt-report-in-myeclipse-project/">在MyEclipse项目中不能打开birt报表的解决方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-07 </span>
+      <div class="post-category">
+          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击
+    </div>
+    <div class="read-more">
+      <a href="/post/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/costs.html"><strong>Java Concurrency / Multithreading Costs</strong></a></p>
+<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/multithreading-costs/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/multithreading-benefits/">2. [译]多线程的优点</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/benefits.html"><strong>Java Concurrency / Multithreading Benefits</strong></a></p>
+<p>尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：</p>
+<ul>
+<li>更好的资源利用</li>
+<li>在某些场景可以简化程序设计</li>
+<li>提高程序响应</li>
+</ul>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/multithreading-benefits/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/">1. [译]Java多线程与并发教程</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-03-30 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
+<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
+<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/import-local-package-in-intellij-idea/">在Intellij IDEA中引用Golang本地包</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-03-05 </span>
+      <div class="post-category">
+          <a href="/categories/go%E7%BC%96%E7%A8%8B/"> Go编程 </a>
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在学习<code>Golang</code>时，自己最开始用的是<code>Eclipse</code>中的<a href="https://goclipse.github.io/"><strong>goclipse</strong></a>插件来进行<code>Golang</code>编程，但其对<code>Golang</code>的支持不是太好，如代码格式化、自动导入引用包等都无法直接在<code>Eclipse</code>中使用，并且其自动提示功能也没有像<code>Java</code>那么强，于是转用<a href="https://www.jetbrains.com/idea/"><strong>Intellij IDEA</strong></a>安装<a href="https://plugins.jetbrains.com/plugin/5047-go"><strong>Golang插件</strong></a>来替代使用，安装完插件后的<a href="https://www.jetbrains.com/idea/"><strong>Intellij IDEA</strong></a>对<code>Golang</code>的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/import-local-package-in-intellij-idea/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/calculate-total-area-of-two-rectangles/">计算两个平行于坐标轴的矩形相交的面积</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-02-26 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>之前面试时遇到一个算法题:</p>
+<blockquote>
+<p>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</p>
+</blockquote>
+<p>此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/calculate-total-area-of-two-rectangles/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

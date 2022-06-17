@@ -2,28 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lucumt.info/post/translate/dealing-with-interrupted-exception/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <loc>https://lucumt.info/post/translate/java-concurrency/same-threading/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/tags/java/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/java-concurrency/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</loc>
     <lastmod>2018-12-15T11:57:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -32,34 +74,6 @@
   <url>
     <loc>https://lucumt.info/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2018-12-15T11:57:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
-    <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -233,14 +247,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-concurrency/concurrency-models/</loc>
-    <lastmod>2017-08-05T00:10:11+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/java-concurrency/</loc>
+    <loc>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</loc>
     <lastmod>2017-08-05T00:10:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -268,21 +275,21 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-concurrency/multithreading-costs/</loc>
+    <loc>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</loc>
     <lastmod>2017-04-01T21:57:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-concurrency/multithreading-benefits/</loc>
+    <loc>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</loc>
     <lastmod>2017-04-01T13:18:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</loc>
+    <loc>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</loc>
     <lastmod>2017-03-30T14:49:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -359,7 +366,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/download-big-file-using-springmvc/</loc>
+    <loc>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</loc>
     <lastmod>2016-03-20T16:41:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -401,7 +408,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/using-mock-test-http-servlet-request/</loc>
+    <loc>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</loc>
     <lastmod>2016-03-19T22:43:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -436,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/can-not-run-program-mysqldump/</loc>
+    <loc>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</loc>
     <lastmod>2016-03-03T14:33:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

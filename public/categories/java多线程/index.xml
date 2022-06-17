@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 15 Dec 2018 11:57:36 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[译]如何处理InterruptedException</title>
-      <link>https://lucumt.info/post/translate/dealing-with-interrupted-exception/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/translate/dealing-with-interrupted-exception/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</guid>
       <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。
 但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>

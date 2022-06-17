@@ -6,13 +6,24 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Dec 2018 11:57:36 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Jun 2022 12:16:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5.[译]同线程系统</title>
+      <link>https://lucumt.info/post/translate/java-concurrency/same-threading/</link>
+      <pubDate>Thu, 16 Jun 2022 12:16:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/java-concurrency/same-threading/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;
+&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]如何处理InterruptedException</title>
-      <link>https://lucumt.info/post/translate/dealing-with-interrupted-exception/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/translate/dealing-with-interrupted-exception/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</guid>
       <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。
 但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>
@@ -119,10 +130,10 @@
     
     <item>
       <title>4. [译]并发的模型</title>
-      <link>https://lucumt.info/post/java-concurrency/concurrency-models/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/java-concurrency/concurrency-models/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;&lt;strong&gt;Java Concurrency / Concurrency Models&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;</description>
     </item>
@@ -138,20 +149,20 @@
     
     <item>
       <title>3. [译]多线程的成本</title>
-      <link>https://lucumt.info/post/java-concurrency/multithreading-costs/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/java-concurrency/multithreading-costs/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Costs&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2. [译]多线程的优点</title>
-      <link>https://lucumt.info/post/java-concurrency/multithreading-benefits/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/java-concurrency/multithreading-benefits/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Benefits&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -163,10 +174,10 @@
     
     <item>
       <title>1. [译]Java多线程与并发教程</title>
-      <link>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <link>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <guid>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Tutorial&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
 &lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
@@ -237,10 +248,10 @@
     
     <item>
       <title>利用SpringMVC下载大文件时内存溢出的处理</title>
-      <link>https://lucumt.info/post/download-big-file-using-springmvc/</link>
+      <link>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/download-big-file-using-springmvc/</guid>
+      <guid>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;&lt;strong&gt;java.io&lt;/strong&gt;&lt;/a&gt;下面的各种IO类自己实现，或者利用 &lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;&lt;strong&gt;Commons IO&lt;/strong&gt;&lt;/a&gt;包中的&lt;code&gt;FileUtils&lt;/code&gt;、 &lt;code&gt;IOUtils&lt;/code&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;来作为项目的MVC实现，所以很自然的采用 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;</description>
     </item>
     
@@ -264,10 +275,10 @@
     
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>https://lucumt.info/post/using-mock-test-http-servlet-request/</link>
+      <link>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/using-mock-test-http-servlet-request/</guid>
+      <guid>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
       <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
 &lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
     </item>
@@ -294,10 +305,10 @@
     
     <item>
       <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
-      <link>https://lucumt.info/post/can-not-run-program-mysqldump/</link>
+      <link>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/can-not-run-program-mysqldump/</guid>
+      <guid>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</guid>
       <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;&lt;strong&gt;Runtime&lt;/strong&gt;&lt;/a&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
