@@ -126,7 +126,31 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/same-threading/">5.[译]同线程系统</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-06-16 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="https://jenkov.com/tutorials/java-concurrency/same-threading.html"><strong>Same-threading</strong></a>。</p>
+<p>同线程系统(Same-threading)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。</p>
+<p>同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/same-threading/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-12-15 </span>
       <div class="post-category">
@@ -144,7 +168,7 @@
 但此时编译器或IDE会立即提示你没有处理非运行时异常 <strong><a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html">InterruptedException</a></strong>。那么，什么是<code>InterruptedException</code>,为什么我们要必须处理它呢？</p>
     </div>
     <div class="read-more">
-      <a href="/post/translate/dealing-with-interrupted-exception/" class="read-more-link">阅读更多</a>
+      <a href="/post/translate/java-concurrency/dealing-with-interrupted-exception/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -231,6 +255,91 @@
     </div>
     <div class="read-more">
       <a href="/post/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-01-09 </span>
+      <div class="post-category">
+          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-01-04 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/migrate-github-blog-from-http-to-https/">将基于Github Pages的自定义域名博客迁移到HTTPS</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-24 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/migrate-github-blog-from-http-to-https/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/different-ways-find-bug-in-complex-code/">从复杂代码中找出Bug的几种方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-23 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/"> 编程杂想 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

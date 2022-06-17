@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 03 Mar 2016 14:33:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
-      <link>https://lucumt.info/post/can-not-run-program-mysqldump/</link>
+      <link>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/can-not-run-program-mysqldump/</guid>
+      <guid>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</guid>
       <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;&lt;strong&gt;Runtime&lt;/strong&gt;&lt;/a&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

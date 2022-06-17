@@ -18,10 +18,10 @@
     
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>https://lucumt.info/post/using-mock-test-http-servlet-request/</link>
+      <link>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/using-mock-test-http-servlet-request/</guid>
+      <guid>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
       <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
 &lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
     </item>
