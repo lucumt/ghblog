@@ -1,12 +1,12 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "Spring中@Component和@Configuration注解的异同与应用场景"
+date: 2022-06-25T17:04:03+08:00
+lastmod: 2022-06-25T17:04:03+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["spring","annotation","configuration"]
+description: "Spring中@Component和@Configuration注解的异同与应用场景"
+tags: ["spring","spring-boot"]
+categories: ["spring系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -39,5 +39,7 @@ sequenceDiagrams:
   options: ""
 
 ---
+
+`@Component`和`@Configuration`是在`Spring Boot`开发时使用频率很高的两个注解，本文基于网络上的相关资料整理下它们的异同以及应用场景。
 
 <!--more-->

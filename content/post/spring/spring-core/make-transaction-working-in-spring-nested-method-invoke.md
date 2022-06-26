@@ -1,12 +1,12 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "Spring中方法嵌套调用导致的事务不生效的解决方案"
+date: 2022-06-25T17:05:32+08:00
+lastmod: 2022-06-25T17:05:32+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["spring","事务","方法嵌套调用."]
+description: "Spring中方法嵌套调用导致的事务不生效的解决方案"
+tags: ["spring"]
+categories: ["spring系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -39,5 +39,7 @@ sequenceDiagrams:
   options: ""
 
 ---
+
+结合`Spring`相关源码来说明在`Spring`中存在方法嵌套调用时被嵌套的方法中事务不生效的原因以及相关的解决方案。
 
 <!--more-->

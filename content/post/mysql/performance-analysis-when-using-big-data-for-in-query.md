@@ -1,12 +1,12 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "在MySQL中使用IN查询后数据量大时的性能分析"
+date: 2022-06-25T17:08:05+08:00
+lastmod: 2022-06-25T17:08:05+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["mysql","in"]
+description: "在MySQL中使用IN查询后数据量大时的性能分析"
+tags: ["mysql"]
+categories: ["数据库"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -39,5 +39,7 @@ sequenceDiagrams:
   options: ""
 
 ---
+
+记录下在`MySQL`中使用`IN`查询后数据量大的性能分析，分为`IN(xxx,yyy,zz)`和`IN(SELECT * FROM subtable)`两种情况分别叙述。
 
 <!--more-->

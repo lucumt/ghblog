@@ -1,12 +1,12 @@
 ---
-title: "Spring中BeanFactory和FactoryBean的区别"
-date: 2022-06-16T11:00:01+08:00
-lastmod: 2022-06-16T11:00:01+08:00
+title: "Spring Cloud采用Nacos时外部配置文件不生效的原因分析"
+date: 2022-06-25T17:27:44+08:00
+lastmod: 2022-06-25T17:27:44+08:00
 draft: true
-keywords: ["Spring","BeanFactory","FactoryBean"]
-description: "简要叙述Spring中BeanFactory和FactoryBean的区别以及使用场景"
-tags: ["Spring"]
-categories: ["Spring系列"]
+keywords: ["spring","nacos","config file"]
+description: "分析自己项目中采用Nacos遇到的动态配置不生效的问题以及解决方案"
+tags: ["spring","spring-cloud","nacos"]
+categories: ["spring系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -39,5 +39,7 @@ sequenceDiagrams:
   options: ""
 
 ---
+
+最近公司的新项目中采用了基于`Spring Cloud`的微服务架构，其中在基于`Nacos`进行配置时遇到了配置文件不生效的问题，基于网上自己以及自己对`Spring boot`和`Nacos`源码的分析，最后找到了原因，故记录下。
 
 <!--more-->

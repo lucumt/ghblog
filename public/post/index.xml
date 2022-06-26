@@ -19,6 +19,15 @@
     </item>
     
     <item>
+      <title>Spring中BeanFactory和FactoryBean的区别以及使用场景</title>
+      <link>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</link>
+      <pubDate>Sun, 16 Jan 2022 11:00:01 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]如何处理InterruptedException</title>
       <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
