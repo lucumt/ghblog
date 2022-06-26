@@ -65,6 +65,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/spring/</loc>
+    <lastmod>2022-01-16T11:00:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2022-01-16T11:00:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</loc>
+    <lastmod>2022-01-16T11:00:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</loc>
     <lastmod>2018-12-15T11:57:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -108,13 +129,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/quartz/</loc>
-    <lastmod>2018-01-09T22:10:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/spring/</loc>
     <lastmod>2018-01-09T22:10:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -354,13 +368,6 @@
   <url>
     <loc>https://lucumt.info/post/mybatis-batch-insert-exception/</loc>
     <lastmod>2016-05-30T18:20:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/spring%E7%B3%BB%E5%88%97/</loc>
-    <lastmod>2016-03-20T16:41:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
