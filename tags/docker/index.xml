@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/docker/</link>
+    <description>Recent content in docker on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Aug 2022 16:56:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由于daemom.json中的配置与其它启动项冲突导致docker服务无法启动</title>
+      <link>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
+      <pubDate>Thu, 04 Aug 2022 16:56:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</guid>
+      <description>&lt;p&gt;由于公司的&lt;code&gt;docker&lt;/code&gt;容器在运行一段时间后日志变得很大，通过&lt;code&gt;shell&lt;/code&gt;脚本或者结合&lt;code&gt;docker stop&lt;/code&gt;、&lt;code&gt;docker rm&lt;/code&gt;和&lt;code&gt;docker run&lt;/code&gt;来重新创建实例方式都觉得太麻烦，按照网络上的建议在&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;中进行相关修改后却一直无法启动，同时错误信息一直提示&lt;code&gt;unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)&lt;/code&gt;，经过一番排查后终于找到原因，故记录下。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
