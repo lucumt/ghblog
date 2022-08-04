@@ -160,7 +160,7 @@ public interface FactoryBean<T> {
 * `FactoryBean`不是一个普通的Bean，它实际上是一个用于创建特定bean的工厂
 * 通过实现`FactoryBean`接口，可通过暴露对象的方式创建特定bean对象，而这个bean对象本身不会暴露
 
-到这里虽然二者的区别清楚了，但是`FactoryBean`的使用场景还是不清晰，在[**https://spring.io/blog/2011/08/09/what-s-a-factorybean**](https://spring.io/blog/2011/08/09/what-s-a-factorybean)这篇文章中，`Spring`的作者之一**[JOSH LONG](https://spring.io/team/joshlong) **用如下文字阐述了`FactoryBean`的使用场景
+到这里虽然二者的区别清楚了，但是`FactoryBean`的使用场景还是不清晰，在[**https://spring.io/blog/2011/08/09/what-s-a-factorybean**](https://spring.io/blog/2011/08/09/what-s-a-factorybean)这篇文章中，`Spring`的作者之一[**JOSH LONG**](https://spring.io/team/joshlong)用如下文字阐述了`FactoryBean`的使用场景
 
 > A `FactoryBean` is a pattern to encapsulate interesting object construction logic in a class. It might be used, for example, to encode the construction of a complex object graph in a reusable way. Often this is used to construct complex objects that have many dependencies. It might also be used when the construction logic itself is highly volatile and depends on the configuration. A `FactoryBean` is also useful to help Spring construct objects that it couldn’t easily construct itself.
 
@@ -252,7 +252,7 @@ public static void main(String[] args) {
 }
 ```
 
-输出结果为Group@fdefd3f，如前面通过`BeanFactory` 创建的对象类似，接下来将**groupFactoryBean**添加一个**&**前缀，变为**&groupFactoryBean**后再次进行测试
+输出结果为Group@fdefd3f，如前面通过`BeanFactory` 创建的对象类似，接下来将**groupFactoryBean**添加一个`&`前缀，变为`&groupFactoryBean`后再次进行测试
 
 ```java
 public static void main(String[] args) {

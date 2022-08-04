@@ -4,16 +4,27 @@
 
 .back-to-top {
   display: none;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
   transition-property: transform;
   transition-timing-function: ease-out;
   transition-duration: 0.3s;
   z-index: 10;
+  background-color: #f8f5ec;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  height: 30px;
+  width: 50px;
+  text-align: center;
+  padding-top: 20px;
+  border-radius: 20%;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-5px); 
+  }
+  
+  .icon-up {
+     vertical-align: top;
   }
 }
 

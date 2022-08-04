@@ -52,13 +52,21 @@ $global-body-width: 800px !default;
 $global-container-padding: 0 20px !default;
 
 // Default line height for all type. `$global-lineheight` is 24px while `$global-font-size` is 16px.
-$global-lineheight: 1.5 !default;
+$global-lineheight: 2 !default;
 
 // Font family of the site.
-$global-font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif !default;
+$global-font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
+
+// Global title font weight
+$global-title-font-weight: 700;
+
+// Global body font weight
+$global-body-font-weight: 300;
+
+$global-list-font-weight: 400;
 
 // Serif font family of the site.
-$global-serif-font-family: Athelas, STHeiti, Microsoft Yahei, serif !default;
+$global-serif-font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
 
 // Background color of the site.
 $global-background: $white !default;
@@ -124,7 +132,7 @@ $post-border: 1px solid $light-gray !default;
 $post-title-font-size: 27px !default;
 
 // Font weight of post title.
-$post-title-font-weight: 400 !default;
+$post-title-font-weight: $global-title-font-weight;
 
 // Margin top of the post meta (post time).
 $post-meta-margin-top: 5px !default;

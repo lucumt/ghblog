@@ -19,6 +19,7 @@
 
   .post-toc-content {
     font-size: $post-toc-content;
+	font-weight: $global-title-font-weight;
 
     &.always-active ul {
       display: block;

@@ -112,7 +112,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 ### 相关命令
 
 1. 生成绑定到指定域名的页面 `hugo server -D --baseUrl="http://lucumt.info" --appendPort=false` 
-1. 新版本的命令为`hugo server -D --baseUrl="https://lucumt.info/" --appendPort=false --renderToDisk`
+1. 新版本的命令为`hugo server --baseUrl="https://lucumt.info/" --appendPort=false --renderToDisk`
 2. 将 `master`的`public`目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
 
 ## 利用GoDaddy配置自定义域名

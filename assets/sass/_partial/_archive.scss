@@ -8,6 +8,7 @@
 
   .archive-title {
     font-family: $global-serif-font-family;
+	font-weight: $global-list-font-weight;
 
     &.tag,
     &.category {
@@ -24,6 +25,7 @@
 
     .archive-post-counter {
       color: $dark-gray;
+	  font-weight: $global-title-font-weight;
     }
   }
 
@@ -32,7 +34,7 @@
   
     .archive-year {
       margin: 15px 0;
-      font-weight: 400;
+      font-weight: $global-title-font-weight;
       font-size: $collection-title-font-size;
       line-height: $collection-title-font-size + 2px;
     }

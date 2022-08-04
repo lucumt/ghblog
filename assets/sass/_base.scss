@@ -9,7 +9,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: $global-font-family;
-  font-weight: normal;
+  font-weight: $global-body-font-weight;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: $global-lineheight;
