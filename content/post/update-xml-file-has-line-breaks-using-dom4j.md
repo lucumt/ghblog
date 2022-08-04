@@ -6,6 +6,7 @@ date = "2018-01-04T11:21:42+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["Java","XML"]
 title = "利用dom4j修改含有回车换行符的XML文件"
+toc = false
 
 +++
 

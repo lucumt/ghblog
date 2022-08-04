@@ -2,14 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lucumt.info/post/translate/java-concurrency/same-threading/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <loc>https://lucumt.info/categories/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/</loc>
+    <loc>https://lucumt.info/tags/docker/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</loc>
+    <lastmod>2022-08-04T16:56:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/translate/java-concurrency/same-threading/</loc>
     <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,28 +79,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -191,7 +212,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/migrate-github-blog-from-http-to-https/</loc>
+    <loc>https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/</loc>
     <lastmod>2017-12-24T10:28:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -478,7 +499,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/create-website-with-hugo/</loc>
+    <loc>https://lucumt.info/post/hugo/create-website-with-hugo/</loc>
     <lastmod>2016-02-27T22:23:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
