@@ -1,5 +1,5 @@
 ---
-title: "由于daemom.json中的配置与其它启动项冲突导致docker服务无法启动"
+title: "由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动"
 date: 2022-08-04T16:56:18+08:00
 lastmod: 2022-08-04T16:56:18+08:00
 draft: false

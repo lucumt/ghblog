@@ -1,12 +1,12 @@
 ---
-title: "Difference Between Using Index and Using Index Condition"
+title: "MySQL中using index和using index condition的区别"
 date: 2022-07-02T17:00:43+08:00
 lastmod: 2022-07-02T17:00:43+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["mysql","index"]
+description: "MySQL中using index和using index condition的区别"
+tags: ["mysql"]
+categories: ["数据库"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
