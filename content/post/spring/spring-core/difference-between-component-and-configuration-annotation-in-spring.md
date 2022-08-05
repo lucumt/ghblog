@@ -1,7 +1,7 @@
 ---
 title: "Spring中@Component和@Configuration注解的异同与应用场景"
-date: 2022-06-25T17:04:03+08:00
-lastmod: 2022-06-25T17:04:03+08:00
+date: 2020-03-25T17:04:03+08:00
+lastmod: 2020-03-25T17:04:03+08:00
 draft: true
 keywords: ["spring","annotation","configuration"]
 description: "Spring中@Component和@Configuration注解的异同与应用场景"

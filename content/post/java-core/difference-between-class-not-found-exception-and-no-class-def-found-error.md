@@ -1,18 +1,18 @@
 ---
-title: "加快Spring Boot的启动速度"
-date: 2019-06-08T17:19:54+08:00
-lastmod: 2019-06-08T17:19:54+08:00
+title: "ClassNotFoundException与NoClassDefFoundError对比"
+date: 2019-01-02T14:18:46+08:00
+lastmod: 2019-01-02T14:18:46+08:00
 draft: true
-keywords: ["spring boot","配置","启动速度"]
-description: "通过去掉各种无用的启动配置来加快Spring Boot的启动速度"
-tags: ["spring","spring-boot"]
-categories: ["spring系列"]
+keywords: ["ClassNotFoundException","NoClassDefFoundErro"]
+description: "简要说明ClassNotFoundException与NoClassDefFoundError对比"
+tags: ["Java"]
+categories: ["Java编程"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
-comment: false
-toc: false
+comment: true
+toc: true
 autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
@@ -37,9 +37,15 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: false
   options: ""
-
 ---
 
-之前面试时被问到过此题，基于网上资料以及个人理解，简单记录下如果根据实际项目需求通过去掉各种无用的配置来缩短`Spring Boot`的启动时间。
+基于个人工作中遇到的场景以及网上的资料，总结[**ClassNotFoundException**](https://docs.oracle.com/javase/9/docs/api/java/lang/ClassNotFoundException.html)与[**NoClassDefFoundError**](https://docs.oracle.com/javase/9/docs/api/java/lang/NoClassDefFoundError.html)的差异、出现场景以及解决方案。
 
 <!--more-->
+
+# 对比
+
+# 触发场景
+
+# 修复方案
+

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>飞狐的部落格</title>
@@ -285,7 +285,7 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/using-junit-in-spring/">利用Spring和JUnit对数据库操作进行单元测试</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/spring/spring-core/using-junit-in-spring/">利用Spring和JUnit对数据库操作进行单元测试</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-03-20 </span>
       <div class="post-category">
@@ -301,7 +301,7 @@
       <p>在进行Java程序开发时，我们偶尔会被要求使用<a href="http://junit.org/"><strong>JUnit</strong></a>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <code>覆盖度高</code>，<code>可重复执行</code>,<code>单一性</code>等特点。本文主要关注<code>可重复执行</code>，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><strong>数据库事务</strong></a>来进行<code>回滚</code>从而达到重复执行的目的。最原始的方法是利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html"><strong>java.sql.Connection</strong></a>类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<a href="https://spring.io/"><strong>Spring</strong></a>和<a href="http://junit.org/"><strong>JUnit</strong></a>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
     </div>
     <div class="read-more">
-      <a href="/post/using-junit-in-spring/" class="read-more-link">阅读更多</a>
+      <a href="/post/spring/spring-core/using-junit-in-spring/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

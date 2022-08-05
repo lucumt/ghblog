@@ -11,7 +11,7 @@ author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
-comment: false
+comment: true
 toc: true
 autoCollapseToc: false
 postMetaInFooter: false

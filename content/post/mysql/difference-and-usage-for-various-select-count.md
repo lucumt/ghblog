@@ -1,7 +1,7 @@
 ---
 title: "MySQL中不同SELECT COUNT统计总数时的区别"
-date: 2022-06-25T17:18:27+08:00
-lastmod: 2022-06-25T17:18:27+08:00
+date: 2019-01-25T17:18:27+08:00
+lastmod: 2019-01-25T17:18:27+08:00
 draft: true
 keywords: ["mysql","select count"]
 description: "记录mysql中select count(id)、select count(*)以及select count(1)的区别"

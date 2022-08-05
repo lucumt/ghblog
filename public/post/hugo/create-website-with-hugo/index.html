@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>利用Github Pages和基于Go的Hugo搭建个人博客 - 飞狐的部落格</title>
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00" />
 <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00" />
-<meta itemprop="wordCount" content="2568">
+<meta itemprop="wordCount" content="2569">
 <meta itemprop="keywords" content="Go,Hugo,Github Pages," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -286,7 +286,7 @@
 <h3 id="相关命令">相关命令</h3>
 <ol>
 <li>生成绑定到指定域名的页面 <code>hugo server -D --baseUrl=&quot;http://lucumt.info&quot; --appendPort=false</code></li>
-<li>新版本的命令为<code>hugo server --baseUrl=&quot;https://lucumt.info/&quot; --appendPort=false --renderToDisk</code></li>
+<li>新版本的命令为<code>hugo server --baseUrl=&quot;https://lucumt.info/&quot; --watch=false --appendPort=false --renderToDisk</code></li>
 <li>将 <code>master</code>的<code>public</code>目录同步到分支 <code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code></li>
 </ol>
 <h2 id="利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</h2>

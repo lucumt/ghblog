@@ -1,7 +1,7 @@
 ---
 title: "MySQL中using index和using index condition的区别"
-date: 2022-07-02T17:00:43+08:00
-lastmod: 2022-07-02T17:00:43+08:00
+date: 2021-02-02T17:00:43+08:00
+lastmod: 2021-02-02T17:00:43+08:00
 draft: true
 keywords: ["mysql","index"]
 description: "MySQL中using index和using index condition的区别"
