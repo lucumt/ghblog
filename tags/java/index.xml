@@ -181,10 +181,10 @@
     
     <item>
       <title>利用Spring和JUnit对数据库操作进行单元测试</title>
-      <link>https://lucumt.info/post/using-junit-in-spring/</link>
+      <link>https://lucumt.info/post/spring/spring-core/using-junit-in-spring/</link>
       <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/using-junit-in-spring/</guid>
+      <guid>https://lucumt.info/post/spring/spring-core/using-junit-in-spring/</guid>
       <description>&lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;code&gt;覆盖度高&lt;/code&gt;，&lt;code&gt;可重复执行&lt;/code&gt;,&lt;code&gt;单一性&lt;/code&gt;等特点。本文主要关注&lt;code&gt;可重复执行&lt;/code&gt;，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;&lt;strong&gt;数据库事务&lt;/strong&gt;&lt;/a&gt;来进行&lt;code&gt;回滚&lt;/code&gt;从而达到重复执行的目的。最原始的方法是利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;&lt;strong&gt;java.sql.Connection&lt;/strong&gt;&lt;/a&gt;类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;</description>
     </item>
     
