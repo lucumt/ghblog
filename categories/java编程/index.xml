@@ -163,10 +163,10 @@
     
     <item>
       <title>mybatis batch insert exception的解决方法</title>
-      <link>https://lucumt.info/post/mybatis-batch-insert-exception/</link>
+      <link>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</link>
       <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/mybatis-batch-insert-exception/</guid>
+      <guid>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</guid>
       <description>&lt;p&gt;在利用 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
 &lt;p&gt;SQL配置文件:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

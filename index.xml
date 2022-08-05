@@ -8,12 +8,22 @@
     <language>en</language>
     <lastBuildDate>Thu, 04 Aug 2022 16:56:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>由于daemom.json中的配置与其它启动项冲突导致docker服务无法启动</title>
+      <title>由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</title>
       <link>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
       <pubDate>Thu, 04 Aug 2022 16:56:18 +0800</pubDate>
       
       <guid>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</guid>
       <description>&lt;p&gt;由于公司的&lt;code&gt;docker&lt;/code&gt;容器在运行一段时间后日志变得很大，通过&lt;code&gt;shell&lt;/code&gt;脚本或者结合&lt;code&gt;docker stop&lt;/code&gt;、&lt;code&gt;docker rm&lt;/code&gt;和&lt;code&gt;docker run&lt;/code&gt;来重新创建实例方式都觉得太麻烦，按照网络上的建议在&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;中进行相关修改后却一直无法启动，同时错误信息一直提示&lt;code&gt;unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)&lt;/code&gt;，经过一番排查后终于找到原因，故记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Hugo生成的博客中动态的修改样式</title>
+      <link>https://lucumt.info/post/hugo/change-hugo-style-in-even-theme/</link>
+      <pubDate>Mon, 01 Aug 2022 17:04:09 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/change-hugo-style-in-even-theme/</guid>
+      <description>&lt;p&gt;自己一直特别羡慕&lt;a href=&#34;https://www.cnblogs.com&#34;&gt;&lt;strong&gt;博客园&lt;/strong&gt;&lt;/a&gt;上某些博主的博文样式（如&lt;a href=&#34;https://www.cnblogs.com/wupeixuan/p/13450815.html&#34;&gt;武培轩&lt;/a&gt;,&lt;a href=&#34;https://www.cnblogs.com/javaguide/p/16385150.html&#34;&gt;JavaGuide&lt;/a&gt;)，这些博文样式第一眼看起来就很清爽,让人很有阅读的欲望，而我总感觉自己博客的样式特丑陋。即使不关注内容，只看排版布局和样式，有时候自己写完一篇文章自己都不想去看，何况别人！&lt;/p&gt;
+&lt;p&gt;终于有一天我受不了自己的博客样式，决定对其升级一版，在这个过程中发现个人采用的博客主题&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;功能很强大，基于上没做啥修改就达到了自己想要的效果，特此记录下。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -235,10 +245,10 @@
     
     <item>
       <title>mybatis batch insert exception的解决方法</title>
-      <link>https://lucumt.info/post/mybatis-batch-insert-exception/</link>
+      <link>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</link>
       <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/mybatis-batch-insert-exception/</guid>
+      <guid>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</guid>
       <description>&lt;p&gt;在利用 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
 &lt;p&gt;SQL配置文件:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

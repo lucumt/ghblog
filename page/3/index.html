@@ -126,6 +126,31 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/">1. [译]Java多线程与并发教程</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-03-30 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
+<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
+<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/import-local-package-in-intellij-idea/">在Intellij IDEA中引用Golang本地包</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-03-05 </span>
@@ -195,7 +220,7 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-30 </span>
       <div class="post-category">
@@ -231,7 +256,7 @@
 </div>
     </div>
     <div class="read-more">
-      <a href="/post/mybatis-batch-insert-exception/" class="read-more-link">阅读更多</a>
+      <a href="/post/mybatis/mybatis-batch-insert-exception/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -344,30 +369,6 @@
     </div>
     <div class="read-more">
       <a href="/post/mediawiki-back-to-top/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/java-volatile-keyword/">[译] Java Volatile 关键字详解</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-07 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自 <a href="http://tutorials.jenkov.com/java-concurrency/volatile.html"><strong>Java Volatile Keyword</strong></a></p>
-<p>Java关键字<code>volatile</code>用于将一个Java变量标记为<strong>在主内中存储</strong>，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
-<p>事实上，从<code>Java5</code>之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
