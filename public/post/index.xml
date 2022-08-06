@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>ClassNotFoundException与NoClassDefFoundError对比</title>
+      <link>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</link>
+      <pubDate>Wed, 02 Jan 2019 14:18:46 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/ClassNotFoundException.html&#34;&gt;&lt;strong&gt;ClassNotFoundException&lt;/strong&gt;&lt;/a&gt;与&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/NoClassDefFoundError.html&#34;&gt;&lt;strong&gt;NoClassDefFoundError&lt;/strong&gt;&lt;/a&gt;是&lt;code&gt;Java&lt;/code&gt;开发中经常会遇到的异常与错误，本文基于个人工作中遇到的场景以及网上的资料，简要总结它们的差异、出现场景以及规避方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]如何处理InterruptedException</title>
       <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>

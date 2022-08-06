@@ -2,7 +2,7 @@
 title: "ClassNotFoundException与NoClassDefFoundError对比"
 date: 2019-01-02T14:18:46+08:00
 lastmod: 2019-01-02T14:18:46+08:00
-draft: true
+draft: false
 keywords: ["ClassNotFoundException","NoClassDefFoundErro"]
 description: "简要说明ClassNotFoundException与NoClassDefFoundError对比"
 tags: ["Java"]

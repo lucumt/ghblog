@@ -135,6 +135,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</loc>
+    <lastmod>2019-01-02T14:18:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</loc>
     <lastmod>2018-12-15T11:57:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
