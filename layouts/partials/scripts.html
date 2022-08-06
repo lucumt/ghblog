@@ -92,42 +92,48 @@
   {{- end }}
 {{- end }}
 
-<!-- Analytics -->
-{{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") | and .Site.GoogleAnalytics -}}
-  {{ template "_internal/google_analytics_async.html" . }}
+<!-- only work in production mode -->
+{{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
+
+	<!-- Analytics -->
+	{{- if .Site.GoogleAnalytics -}}
+	  {{ template "_internal/google_analytics_async.html" . }}
+	{{- end -}}
+
+	{{- with .Site.Params.baiduAnalytics -}}
+	<script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?{{.}}";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+	{{- end }}
+
+
+	<!-- baidu push -->
+	{{- if .Site.Params.baiduPush -}}
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+	{{- end }}
+
 {{- end -}}
-
-{{- with .Site.Params.baiduAnalytics -}}
-<script id="baidu_analytics">
-  var _hmt = _hmt || [];
-  (function() {
-    if (window.location.hostname === 'localhost') return;
-    var hm = document.createElement("script"); hm.async = true;
-    hm.src = "https://hm.baidu.com/hm.js?{{.}}";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
-</script>
-{{- end }}
-
-<!-- baidu push -->
-{{- if .Site.Params.baiduPush -}}
-<script id="baidu_push">
-  (function(){
-    if (window.location.hostname === 'localhost') return;
-    var bp = document.createElement('script'); bp.async = true;
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  })();
-</script>
-{{- end }}
 
 <!-- custom js -->
 {{ range .Site.Params.customJS -}}

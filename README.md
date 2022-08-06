@@ -12,9 +12,18 @@
 ## 博客截图
 ![个人博客截图](static/blog_img/lucumt.info.png)  
 
-## License
+# 其它
 
-**[MIT License](https://en.wikipedia.org/wiki/MIT_License)**，请在Fork或Clone后将 **config.toml**中的 **gaid** 和 **baiduanalysis** 修改为你自己的相关账号，或者直接将这两个账户置为空。  
+## 参考说明
+
+* [利用Github Pages和基于Go的Hugo搭建个人博客](https://lucumt.info/post/hugo/create-website-with-hugo/)
+* [在Hugo生成的博客中动态的修改样式](https://lucumt.info/post/hugo/change-hugo-style-in-even-theme/)
+* [将基于Github Pages的自定义域名博客迁移到HTTPS](https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/)
+
+## 引用说明
+
+请在Fork或Clone后将 **config.toml**中的 **gaid** 和 **baiduanalysis** 修改为你自己的相关账号，或者直接将这两个账户置为空。  
+
 ```
 [params] 
 sidebartitle = "飞狐的部落格"   
@@ -23,5 +32,8 @@ photo = "/img/photo.jpg"
 highlightstyle="mono-blue"
 gaid = "UA-75123653-1"
 baiduanalysis="true"
-totop = true
 ```
+
+## License
+
+**[MIT License](https://en.wikipedia.org/wiki/MIT_License)**

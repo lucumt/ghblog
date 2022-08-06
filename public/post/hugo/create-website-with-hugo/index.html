@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00" />
 <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00" />
-<meta itemprop="wordCount" content="2569">
+<meta itemprop="wordCount" content="2571">
 <meta itemprop="keywords" content="Go,Hugo,Github Pages," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -286,7 +286,7 @@
 <h3 id="相关命令">相关命令</h3>
 <ol>
 <li>生成绑定到指定域名的页面 <code>hugo server -D --baseUrl=&quot;http://lucumt.info&quot; --appendPort=false</code></li>
-<li>新版本的命令为<code>hugo server --baseUrl=&quot;https://lucumt.info/&quot; --watch=false --appendPort=false --renderToDisk</code></li>
+<li>新版本的命令为<code>hugo server --baseUrl=&quot;https://lucumt.info/&quot; --watch=false --appendPort=false --renderToDisk --environment production</code></li>
 <li>将 <code>master</code>的<code>public</code>目录同步到分支 <code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code></li>
 </ol>
 <h2 id="利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</h2>
@@ -415,10 +415,40 @@
 <script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
 
 
-
-
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
 
 
 </body>
