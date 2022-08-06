@@ -25,13 +25,18 @@
 请在Fork或Clone后将 **config.toml**中的 **gaid** 和 **baiduanalysis** 修改为你自己的相关账号，或者直接将这两个账户置为空。  
 
 ```
-[params] 
-sidebartitle = "飞狐的部落格"   
-sidebartagline = "Rosen Lu"
-photo = "/img/photo.jpg"
-highlightstyle="mono-blue"
-gaid = "UA-75123653-1"
-baiduanalysis="true"
+title = "飞狐的部落格"
+
+logoTitle = "Rosen's World"
+keywords = ["Hugo", "theme","even"]
+description = "飞狐的个人博客"
+  
+baiduPush = true        # baidu push                 
+baiduAnalytics = "cabc0a71f63da092412d82d1aefe7d1c"      
+baiduVerification = ""   # Baidu Verification
+googleVerification = ""  # Google Verification
+
+googleAnalytics = "UA-75123653-1"  
 ```
 
 ## License
