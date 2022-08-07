@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
 <meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00" />
 <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00" />
-<meta itemprop="wordCount" content="2571">
+<meta itemprop="wordCount" content="2550">
 <meta itemprop="keywords" content="Go,Hugo,Github Pages," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客"/>
 <meta name="twitter:description" content="Blog of Rosen Lu"/>
@@ -174,8 +174,8 @@
       <p>一直以来都想拥有一个属于自己的博客，前段时间在学习<code>Go</code> ，于是利用<code>Hugo</code> 和<code>Github Pages</code> 搭建了一个简易的个人博客，先简单记录下。</p>
 <h1 id="环境准备">环境准备</h1>
 <ul>
-<li><a href="https://golang.org/"><strong>Go</strong></a>1.4+</li>
-<li><a href="https://gohugo.io"><strong>Hugo</strong></a>v0.14+</li>
+<li><a href="https://golang.org/"><strong>Go</strong></a>1.18.3+</li>
+<li><a href="https://gohugo.io"><strong>Hugo</strong></a>v0.100+</li>
 <li><a href="https://github.com/"><strong>Github</strong></a>账号</li>
 <li><a href="https://www.godaddy.com"><strong>GoDaddy</strong></a>域名</li>
 </ul>
@@ -196,7 +196,7 @@
 <p>访问<a href="https://golang.org/dl/"><strong>Golang下载页</strong></a>根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：</p>
 <ol>
 <li>
-<p>下载<strong>go1.4.2.windows-amd64.msi</strong></p>
+<p>下载<code>Go</code>安装文件</p>
 </li>
 <li>
 <p>双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置<code>PATH</code>、<code>GOPATH</code>和<code>GOROOT</code>这三个环境变量，我自己把<code>Go</code>安装在D:\code\go下，这三个变量相应的设置为:</p>
@@ -222,7 +222,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator&gt;go version  
-</span></span><span class="line"><span class="cl">go version go1.4.2 windows/amd64
+</span></span><span class="line"><span class="cl">go version go1.18.3 windows/amd64
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -250,7 +250,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator&gt;hugo version
-</span></span><span class="line"><span class="cl">Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
+</span></span><span class="line"><span class="cl">hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284+extended windows/amd64 <span class="nv">BuildDate</span><span class="o">=</span>2022-06-08T10:25:57Z <span class="nv">VendorInfo</span><span class="o">=</span>gohugoio
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
