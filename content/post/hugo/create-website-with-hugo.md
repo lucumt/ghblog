@@ -17,8 +17,8 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 # 环境准备
 
-* [**Go**](https://golang.org/)1.4+
-* [**Hugo**](https://gohugo.io)v0.14+
+* [**Go**](https://golang.org/)1.18.3+
+* [**Hugo**](https://gohugo.io)v0.100+
 * [**Github**](https://github.com/)账号
 * [**GoDaddy**](https://www.godaddy.com)域名 
 
@@ -42,7 +42,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 访问[**Golang下载页**](https://golang.org/dl/)根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：
 
-1. 下载**go1.4.2.windows-amd64.msi**
+1. 下载`Go`安装文件
 
 2. 双击安装，默认是安装在C盘下，由于windows操作系统的特性，我通常不倾向于安装在C盘，故需要设置`PATH`、`GOPATH`和`GOROOT`这三个环境变量，我自己把`Go`安装在D:\code\go下，这三个变量相应的设置为:
 
@@ -56,7 +56,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
    ```bash
    C:\Users\Administrator>go version  
-   go version go1.4.2 windows/amd64
+   go version go1.18.3 windows/amd64
    ```
 
    
@@ -75,7 +75,7 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
   ```bash
   C:\Users\Administrator>hugo version
-  Hugo Static Site Generator v0.14 BuildDate: 2015-05-26T01:29:16+08:00
+  hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284+extended windows/amd64 BuildDate=2022-06-08T10:25:57Z VendorInfo=gohugoio
   ```
 
 关于`Hugo`的基本操作命令，可以参见[**Hugo快速入门**](https://gohugo.io/overview/quickstart/)，此处不再详述。
