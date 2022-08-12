@@ -135,6 +135,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/mysql/</loc>
+    <lastmod>2019-01-25T17:18:27+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/mysql/difference-and-usage-for-various-select-count/</loc>
+    <lastmod>2019-01-25T17:18:27+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-01-25T17:18:27+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</loc>
     <lastmod>2019-01-02T14:18:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -493,20 +514,6 @@
   
   <url>
     <loc>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</loc>
-    <lastmod>2016-03-03T14:33:43+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/mysql/</loc>
-    <lastmod>2016-03-03T14:33:43+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2016-03-03T14:33:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
