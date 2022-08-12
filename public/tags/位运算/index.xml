@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>位运算 on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+    <description>Recent content in 位运算 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 12 Aug 2016 11:03:09 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不通过第三方变量来交换两个变量的值</title>
+      <link>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</link>
+      <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</guid>
+      <description>&lt;p&gt;变量交换是编程中经常使用的功能，本文记录几种不通过不添加第三方变量来交换两个变量的实现方式。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

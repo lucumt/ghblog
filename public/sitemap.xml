@@ -401,7 +401,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/calculate-total-area-of-two-rectangles/</loc>
+    <loc>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</loc>
     <lastmod>2017-02-26T19:26:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -424,6 +424,20 @@
   <url>
     <loc>https://lucumt.info/post/show-video-in-html5-page/</loc>
     <lastmod>2016-10-30T19:48:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</loc>
+    <lastmod>2016-08-12T11:03:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/</loc>
+    <lastmod>2016-08-12T11:03:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
