@@ -150,7 +150,7 @@ sequenceDiagrams:
 >
 > The searched-for class definition existed when the currently executing class was compiled, but the definition can no longer be found.
 
-基于上述描述可知``NoClassDefFoundError`产生的根本原因如下：
+基于上述描述可知`NoClassDefFoundError`产生的根本原因如下：
 
 > 程序在编译时该类存在，在调用过程中JVM虚拟机加载该类时找不到该类的Class文件
 

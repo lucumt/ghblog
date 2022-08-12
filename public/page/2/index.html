@@ -126,6 +126,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-03 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行<a href="https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf" title="25端口解封申请"><strong>25端口解封申请</strong></a>，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-01-09 </span>
@@ -313,29 +334,6 @@
     </div>
     <div class="read-more">
       <a href="/post/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-04-01 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/costs.html"><strong>Java Concurrency / Multithreading Costs</strong></a></p>
-<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/java-concurrency/multithreading-costs/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
