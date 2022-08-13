@@ -10,7 +10,7 @@ categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
 
 ---
-最近复习Java多线程相关知识时，发现线程中断的`interrupt()`、`interrupted()`、`isInterrupted()`这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先将它们简单记录下。
+最近复习Java多线程相关知识时，发现线程中断的`interrupt()`、`interrupted()`、`isInterrupted()`这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。
 <!--more-->
 
 ## 相关使用说明
@@ -56,7 +56,7 @@ public class InterruptedTest {
 }
 ```
 根据前述的方法说明，程序的输出结果应改为true、true、false，实际运行结果类似如下,从图中可知其输出结果与理论分析相符。  
-![程序运行结果1](/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_1.png "程序运行结果")  
+![程序运行结果1](/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_1.png "程序运行结果")  
 
 将上述代码修改如下,首先给`threadA`加上同步锁并调用`wait()`或`sleep()`方法，然后检测其中断状态。  
 ```java
@@ -96,7 +96,7 @@ public class InterruptedTest {
 }
 ```
 分别调用`sleep()`和`wait()`时的运行结果如下  
-![程序运行结果2](/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_2.png "程序运行结果")  
+![程序运行结果2](/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_2.png "程序运行结果")  
 分析运行结果可知：无论调用哪种方法，在中断线程时都会抛出`InterruptedException`异常，其运行结果都为false则意味着中断状态也不会设置。
 
 以`JDK1.8`为例，关于调用`interrupt()`方法时中断状态的设置，可以从官网上看到如下描述：
@@ -159,7 +159,7 @@ public void testThread() {
 }
 ```
 程序运行结果如下：  
-![程序运行结果3](/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_3.png "程序运行结果")   
+![程序运行结果3](/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_3.png "程序运行结果")   
 从上图中可以看出`LockSupport`中的方法来阻塞和唤醒线程时(更准确的说法是通过许可来觉得线程是否可运行)，既不修改线程的中断状态也不抛出`InterruptedException`异常。
 
 参考文章：
@@ -168,4 +168,4 @@ public void testThread() {
 * https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html
 * https://www.ibm.com/developerworks/library/j-jtp05236/
 
-关于如何处理`InterruptedException`异常，请参见本人翻译一篇文章**[[译]如何处理InterruptedException](/post/translate/dealing-with-interrupted-exception/)**
+关于如何处理`InterruptedException`异常，请参见本人翻译一篇文章 [[译]如何处理InterruptedException](/post/translate/java-concurrency/dealing-with-interrupted-exception/)

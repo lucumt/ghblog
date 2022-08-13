@@ -18,10 +18,10 @@
     
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
-      <link>https://lucumt.info/post/update-quartz-scheduler-dynamic/</link>
+      <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/update-quartz-scheduler-dynamic/</guid>
+      <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
     
@@ -36,10 +36,10 @@
     
     <item>
       <title>利用Spring Security动态改变登录用户的权限</title>
-      <link>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</link>
+      <link>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</guid>
+      <guid>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;来管理我们的web程序时，通常需要在&lt;code&gt;UserDetailsService&lt;/code&gt;接口中的&lt;code&gt;loadUserByUsername&lt;/code&gt;方法中来初始化权限信息,但&lt;code&gt;UserDetailsService&lt;/code&gt;一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;提供的API来实现。&lt;/p&gt;</description>
     </item>
     

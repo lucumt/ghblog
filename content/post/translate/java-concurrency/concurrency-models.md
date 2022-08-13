@@ -25,7 +25,7 @@ title = "4. [译]并发的模型"
 
 ## 并行工作者模型(Parallel Workers model)
 并行工作者模型是本文要说明的第一个并发模型，该模型会将系统中到来的任务分配给不同的工作者，如下图所示：  
-!["并行工作者模型"](/blog_img/concurrency-models/concurrency-models-1.png "并行工作者模型")  
+!["并行工作者模型"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-1.png "并行工作者模型")  
 
 并发模型中有一个“委托者”将到来的任务分配给不同的工作者，每个工作者完成整个任务，每个工作者在不同的线程中（也有可能在不同的CPU）并行工作。
 
@@ -43,7 +43,7 @@ title = "4. [译]并发的模型"
 
 ### 状态共享将使复杂性增加
 实际上并行工作者模型比上面说明的还要复杂一些，并行工作者通常需要访问一些共享数据，它们可能存储在内存中也可能存在数据库中，下面的图标展示了这种情形是如何是的并行工作者模型变得复杂的。  
-!["并行工作者访问共享数据"](/blog_img/concurrency-models/concurrency-models-2.png "并行工作者访问共享数据")  
+!["并行工作者访问共享数据"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-2.png "并行工作者访问共享数据")  
 其中的一些共享状态可能在类似于任务队列的通信过程中，但是另外一些共享状态可能是商业数据、缓存数据、数据库的连接池等。一旦共享状态引入到了并行工作者模型，问题就开始变得复杂。线程需要一种方式来访问共享数据以确保一个线程对共享数据的更改对其它线程是可见的（将其推送到主内存中，而不是仅停留在执行线程的CPU缓存中）。线程间需要避免竞争条件、死锁和其它共享状态相关的问题。  
 
 另外，当线程间在等待彼此访问共享数据结构时，会降低应用程序的并行性。许多并发数据结构都是阻塞式的，这意味着在给定时间只有一个或一组有限的线程可以访问它们，这可能导致线程对这些共享数据的竞争，高度竞争将会导致访问共享数据的代码从本质上变为串行执行。   
@@ -67,19 +67,19 @@ title = "4. [译]并发的模型"
 
 ## 流水线模型（Assembly Line）
 第二种并发模型我称之为流水线模型，我选择名称以符合早期“并行工作者”的含义。在不同的平台/社区中，其他的开发人员或许使用其它的名称，如反应式系统(reactive systems)，或事件驱动系统(event driven systems)，下图是流水线并发模型的一个展示  
-!["流水线并发模型"](/blog_img/concurrency-models/concurrency-models-3.png "流水线并发模型")    
+!["流水线并发模型"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-3.png "流水线并发模型")    
 这些工作者就像工厂里的工人一样组织起来，每个工作者只完成整个任务的一部分，当该部分任务完成时，该工作者将任务转移到下一个工作者。每个工作者都在自己的线程中运行，并且没有与其它的工作者共享状态，因此流水线模型有时也被称之为无共享的并发模型。
 
 流水线模型通常用于系统中的非阻塞IO操作，非阻塞IO意味着当一个工作者(worker)开始一个IO操作时(如从网络读取文件或数据)，该工作者(worker)不必等待IO操作结束。IO操作通常较慢，因此等待IO操作完成是对CPU时间的浪费，CPU可以在此时做一些其它事情。当IO操作完成时，IO操作的结果（如数据状态读取或输入写入）会传给下一个工作者(worker)。
 
 使用非阻塞IO时，IO操作的结果决定了工作者(worker)之间的边界，一个工作者(worker)在不得不开始IO操作之前可以尽可能的完成任务，然后放弃对该任务的控制，当IO操作结束时，在流水线上的另一个工作者(worker)以类似的方式继续完成该任务，直到它不得不开始IO操作。  
-!["非阻塞IO操作"](/blog_img/concurrency-models/concurrency-models-4.png "非阻塞IO操作")  
+!["非阻塞IO操作"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-4.png "非阻塞IO操作")  
 
 实际中，上述这些任务可能不会沿着一条流水线流动，因为大多数操作系统可以同时运行多个任务，这些任务根据实际需求沿着流水线逐个的被工作者处理。在实际使用中可能会有多个虚拟流水线同时运行，下图展示了在实际使用中任务如何在这种流水线上流转。  
-!["多条流水线的模型"](/blog_img/concurrency-models/concurrency-models-5.png "多条流水线的模型") 
+!["多条流水线的模型"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-5.png "多条流水线的模型") 
 
 任务甚至可以转发给多个工作者进行并发处理，例如，一个任务可以被同时转发给一个任务执行器和一个任务日志记录器。下图展示了如何将三条装配线的中任务转发给同一个工作者完成（中间装配线上的最后一个工人）：  
-!["多条流水线指向同一个工作者"](/blog_img/concurrency-models/concurrency-models-6.png "多条流水线指向同一个工作者")   
+!["多条流水线指向同一个工作者"](/blog_img/translate/java-concurrency/concurrency-models/concurrency-models-6.png "多条流水线指向同一个工作者")   
 流水线甚至可以做的比上面展示的更复杂。
 
 ### 响应式、事件驱动系统

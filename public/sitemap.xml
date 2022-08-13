@@ -184,7 +184,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-string-equal-compare/</loc>
+    <loc>https://lucumt.info/post/java-core/java-string-equal-compare/</loc>
     <lastmod>2018-12-08T23:02:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -198,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/send-ssl-mail-with-126-in-aliyun/</loc>
+    <loc>https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/</loc>
     <lastmod>2018-12-03T21:54:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -226,7 +226,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/update-quartz-scheduler-dynamic/</loc>
+    <loc>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</loc>
     <lastmod>2018-01-09T22:10:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/update-xml-file-has-line-breaks-using-dom4j/</loc>
+    <loc>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</loc>
     <lastmod>2018-01-04T11:21:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -275,7 +275,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/different-ways-find-bug-in-complex-code/</loc>
+    <loc>https://lucumt.info/post/other/different-ways-find-bug-in-complex-code/</loc>
     <lastmod>2017-12-23T12:07:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -289,7 +289,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/print-sql-in-different-mybatis-version/</loc>
+    <loc>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</loc>
     <lastmod>2017-12-18T18:33:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -303,7 +303,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/modify-java-class-file-content-directly/</loc>
+    <loc>https://lucumt.info/post/java-core/modify-java-class-file-content-directly/</loc>
     <lastmod>2017-08-12T18:09:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -324,7 +324,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/easyui-datagrid-row-not-align-when-column-frozen/</loc>
+    <loc>https://lucumt.info/post/web/easyui-datagrid-row-not-align-when-column-frozen/</loc>
     <lastmod>2017-08-06T00:06:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -352,7 +352,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</loc>
+    <loc>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</loc>
     <lastmod>2017-04-07T10:47:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -394,7 +394,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/import-local-package-in-intellij-idea/</loc>
+    <loc>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</loc>
     <lastmod>2022-06-15T22:08:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -422,7 +422,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/show-video-in-html5-page/</loc>
+    <loc>https://lucumt.info/post/web/show-video-in-html5-page/</loc>
     <lastmod>2016-10-30T19:48:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -485,7 +485,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</loc>
+    <loc>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</loc>
     <lastmod>2016-03-20T16:05:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -506,7 +506,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/mediawiki-back-to-top/</loc>
+    <loc>https://lucumt.info/post/web/mediawiki-back-to-top/</loc>
     <lastmod>2016-03-18T23:14:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

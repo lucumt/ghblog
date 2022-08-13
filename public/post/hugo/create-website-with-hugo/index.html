@@ -183,12 +183,12 @@
 <h2 id="在github上创建一个自己的项目">在Github上创建一个自己的项目</h2>
 <ol>
 <li>在<code>Github</code>上创建一个项目，本文中该项目名为blog<br>
-<img src="/blog_img/create-website-with-hugo/create-github-repository.png" alt="创建Github项目" title="创建Github项目"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/create-github-repository.png" alt="创建Github项目" title="创建Github项目"></li>
 <li>由于<code>Github Pages</code>强制要求在托管博客时该项目必须有一个名为<code>gh-pages</code>的分支，所以要预先给该项目创建一个名为<code>gh-pages</code>的分支</li>
 <li>在<code>Github</code>中打开blog项目主页面，点击 Settings按钮<br>
-<img src="/blog_img/create-website-with-hugo/open-github-project-settings.png" alt="打开项目配置界面" title="打开Github项目设置界面"><br>
+<img src="/blog_img/hugo/create-website-with-hugo/open-github-project-settings.png" alt="打开项目配置界面" title="打开Github项目设置界面"><br>
 在 <code>Github Pages</code>这个区域可以看见本项目的发布链接为<code>https://fox321.github.io/blog/</code> ，点击该链接可以访问该项目对应的静态页面<br>
-<img src="/blog_img/create-website-with-hugo/check-github-project-address.png" alt="查看项目发布链接" title="查看项目发布链接"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/check-github-project-address.png" alt="查看项目发布链接" title="查看项目发布链接"></li>
 </ol>
 <h2 id="利用hugo作为博客生成器">利用Hugo作为博客生成器</h2>
 <p>由于<code>Github Pages</code>只支持静态的<code>HTML</code>页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成<code>HTML</code>页面，避免纯手动编写时的费时费力。由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择 <code>Hugo</code>作为自己的博客生成器。 <code>Hugo</code>是一个基于<code>Go</code>开发的静态生成器，它采用<a href="https://zh.wikipedia.org/zh-cn/Markdown"><strong>Markdown</strong></a>语法来编写博客生成，然后生成相应的<code>HTML</code>页面。</p>
@@ -261,27 +261,27 @@
 <p>虽然官方文档<a href="https://gohugo.io/tutorials/github-pages-blog/"><strong>在Github Pages上托管Hugo</strong></a>上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：</p>
 <ol>
 <li>将之前在Github上创建的blog项目<code>clone</code>到本地目录<br>
-<img src="/blog_img/create-website-with-hugo/clone-github-repository.png" alt="将项目下载到本地" title="将项目下载到本地"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/clone-github-repository.png" alt="将项目下载到本地" title="将项目下载到本地"></li>
 <li>切换到blog目录并利用<code>hugo new site</code>命令创建一个名为person_blog的<code>Hugo</code>站点，然后将其内容移入到blog目录下并删除 person_blog目录<br>
-<img src="/blog_img/create-website-with-hugo/create-hugo-site-in-repository.png" alt="创建一个Hugo站点" title="创建一个Hugo站点"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/create-hugo-site-in-repository.png" alt="创建一个Hugo站点" title="创建一个Hugo站点"></li>
 <li>利用<code>hugo new</code>命令创建一个md文件用于存储我们的第一篇博客<br>
-<img src="/blog_img/create-website-with-hugo/create-hugo-page.png" alt="创建一个Hugo页面" title="创建一个Hugo页面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/create-hugo-page.png" alt="创建一个Hugo页面" title="创建一个Hugo页面"></li>
 <li>在 <em>blog</em> 目录下创建一个名为<code>themes</code>的文件夹用于存储<code>Hugo</code>样式，并将自己选中的样式下载到本地<br>
-<img src="/blog_img/create-website-with-hugo/clone-hugo-theme.png" alt="下载Hugo样式" title="下载Hugo样式"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/clone-hugo-theme.png" alt="下载Hugo样式" title="下载Hugo样式"></li>
 <li>输入<code>hugo server --theme=hugo-redlounge --buildDrafts</code>在本地启动<code>Hugo</code>，启动正常后命令行输出如下<br>
-<img src="/blog_img/create-website-with-hugo/start-hugo-in-local.png" alt="在本地启动Hugo" title="在本地启动Hugo"><br>
+<img src="/blog_img/hugo/create-website-with-hugo/start-hugo-in-local.png" alt="在本地启动Hugo" title="在本地启动Hugo"><br>
 此时在浏览器中输入<code>http://127.0.0.1:1313</code>会看到如下输出，该页面意味着本地博客创建成功，接下来要将其上传到<code>Github Pages</code>中托管 <br>
-<img src="/blog_img/create-website-with-hugo/visit-local-hugo-site.png" alt="在本地访问Hugo站点" title="在本地访问Hugo站点"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/visit-local-hugo-site.png" alt="在本地访问Hugo站点" title="在本地访问Hugo站点"></li>
 <li>我们需要将相关的链接地址修改为<code>https://fox321.github.io/blog</code>，同时将端口号去掉，相关的命令为 <code>hugo server -D --theme=hugo-redlounge --baseUrl=&quot;https://fox321.github.io/blog&quot; --appendPort=false</code>，运行截图如下
-<img src="/blog_img/create-website-with-hugo/update-hugo-site-url.png" alt="修改博客链接地址" title="修改博客链接地址"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/update-hugo-site-url.png" alt="修改博客链接地址" title="修改博客链接地址"></li>
 <li>修改完链接地址之后，需要将生成的页面提交到<code>Github</code>中才能被访问，首先需要将页面提交到<code>master</code>，由于我是在Windows操作系统上进行的，而CMD对<code>Git</code>的支持不是很好，故从此步开始切换为在<code>Git Bash</code>进行相关操作 <br>
-<img src="/blog_img/create-website-with-hugo/push-blog-to-github.png" alt="提交到master" title="提交到master"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/push-blog-to-github.png" alt="提交到master" title="提交到master"></li>
 <li>利用<code>subtree</code>命令将<code>master</code>中<code>public</code>目录下的内容同步到<code>gh-pages</code>目录下<br>
-<img src="/blog_img/create-website-with-hugo/push-blog-to-branch.png" alt="同步到gh-pages" title="同步到gh-pages"><br>
+<img src="/blog_img/hugo/create-website-with-hugo/push-blog-to-branch.png" alt="同步到gh-pages" title="同步到gh-pages"><br>
 此时访问该项目的设置页面，在<code>Github Pages</code>部分会看见如下信息<br>
-<img src="/blog_img/create-website-with-hugo/push-blog-to-branch-success.png" alt="同步到gh-pages成功" title="同步到gh-pages成功"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/push-blog-to-branch-success.png" alt="同步到gh-pages成功" title="同步到gh-pages成功"></li>
 <li>访问 <code>https://fox321.github.io/blog</code> ，出现如下页面，至此<code>Hugo</code>博客托管到<code>Github Pages</code>成功！<br>
-<img src="/blog_img/create-website-with-hugo/visit-github-pages-hugo-site.png" alt="访问Github Pages页面&quot;" title="访问Github Pages页面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/visit-github-pages-hugo-site.png" alt="访问Github Pages页面&quot;" title="访问Github Pages页面"></li>
 </ol>
 <h3 id="相关命令">相关命令</h3>
 <ol>
@@ -293,18 +293,18 @@
 <p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/"><strong>Using a custom domain with GitHub Pages</strong></a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<a href="https://www.godaddy.com/"><strong>GoDaddy</strong></a>上的说明来设置的。</p>
 <ol>
 <li>在<code>public</code>目录下创建一个名为 <code>CNAME</code>的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 <code>http://lucumt.info</code> ，故填入<code>lucumt.info</code><br>
-<img src="/blog_img/create-website-with-hugo/create-cname-file.png" alt="&amp;ldquo;创建CNAME文件&amp;rdquo;" title="创建CNAME文件并添加域名"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/create-cname-file.png" alt="&amp;ldquo;创建CNAME文件&amp;rdquo;" title="创建CNAME文件并添加域名"></li>
 <li>登陆<code>Godaddy</code>，然后在页面右上角点击自己的用户名，出现如下图所示的页面，选择Manage My Domains<br>
-<img src="/blog_img/create-website-with-hugo/godaddy-choose-manage-page.png" alt="&amp;ldquo;选择域名管理界面&amp;rdquo;" title="选择域名管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-page.png" alt="&amp;ldquo;选择域名管理界面&amp;rdquo;" title="选择域名管理界面"></li>
 <li>选择完Manage My Domains之后会出现如下图所示的界面，选择Manage DNS<br>
-<img src="/blog_img/create-website-with-hugo/godaddy-choose-manage-dns.png" alt="&amp;ldquo;选择DNS管理界面&amp;rdquo;" title="选择DNS管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-dns.png" alt="&amp;ldquo;选择DNS管理界面&amp;rdquo;" title="选择DNS管理界面"></li>
 <li>选择完Manage DNS之后会出现如下图所示的界面，点击Add按钮会出现下拉框让我们增加A记录<br>
-<img src="/blog_img/create-website-with-hugo/godaddy-dns-records-page.png" alt="&amp;ldquo;DNS管理界面&amp;rdquo;" title="DNS管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-records-page.png" alt="&amp;ldquo;DNS管理界面&amp;rdquo;" title="DNS管理界面"></li>
 <li>在Type部分选择 <strong>A</strong> ，Host部分选择 <strong>@</strong>， Poinst to根据<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<code>GoDaddy</code>中<code>Configuring A records with your DNS provider</code>部分的说明添加 <strong>192.30.252.153</strong> ,点击Save即完成一条A记录的添加<br>
-<img src="/blog_img/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
 <li>再次点击Add添加，按照步骤5添加第二条A记录，除了Points to设置为 <strong>192.30.252.154</strong> 之外，其它的配置都相同</li>
 <li>在<code>Github</code>项目中点击Settings按钮查看<code>Github Pages</code>区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功<br>
-<img src="/blog_img/create-website-with-hugo/github-pages-configuration-check.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/github-pages-configuration-check.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
 </ol>
 <p>至此利用<code>GoDaddy</code>来配置自自定义域名的过程完成，输入 <strong><a href="http://lucumt.info">http://lucumt.info</a></strong> 即可访问自己的博客！</p>
 <p>PS:吐槽下让人觉得不爽的几个地方：</p>
