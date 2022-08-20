@@ -126,7 +126,30 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-authority-dynamic-using-spring-security/">利用Spring Security动态改变登录用户的权限</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/spring/spring-core/using-junit-in-spring/">利用Spring和JUnit对数据库操作进行单元测试</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-03-20 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
+          <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在进行Java程序开发时，我们偶尔会被要求使用<a href="http://junit.org/"><strong>JUnit</strong></a>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <code>覆盖度高</code>，<code>可重复执行</code>,<code>单一性</code>等特点。本文主要关注<code>可重复执行</code>，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><strong>数据库事务</strong></a>来进行<code>回滚</code>从而达到重复执行的目的。最原始的方法是利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html"><strong>java.sql.Connection</strong></a>类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<a href="https://spring.io/"><strong>Spring</strong></a>和<a href="http://junit.org/"><strong>JUnit</strong></a>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/spring/spring-core/using-junit-in-spring/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/spring/update-authority-dynamic-using-spring-security/">利用Spring Security动态改变登录用户的权限</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-03-20 </span>
       <div class="post-category">
@@ -141,7 +164,7 @@
       <p>利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>来管理我们的web程序时，通常需要在<code>UserDetailsService</code>接口中的<code>loadUserByUsername</code>方法中来初始化权限信息,但<code>UserDetailsService</code>一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>提供的API来实现。</p>
     </div>
     <div class="read-more">
-      <a href="/post/update-authority-dynamic-using-spring-security/" class="read-more-link">阅读更多</a>
+      <a href="/post/spring/update-authority-dynamic-using-spring-security/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -172,7 +195,7 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mediawiki-back-to-top/">Mediawiki添加回到顶部的方法</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/web/mediawiki-back-to-top/">Mediawiki添加回到顶部的方法</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-03-18 </span>
       <div class="post-category">
@@ -186,7 +209,7 @@
       <p><a href="https://www.mediawiki.org/wiki/MediaWiki"><strong>Mediawiki</strong></a>是<a href="https://www.wikipedia.org/"><strong>维基百科</strong></a>系统所采用的框架，适合于需要快速搭建知识分享的场合。采用<a href="https://www.mediawiki.org/wiki/MediaWiki"><strong>Mediawiki</strong></a>生成的知识共享平台和<a href="https://www.wikipedia.org/"><strong>维基百科</strong></a>的操作与使用类似，都支持采用<a href="https://zh.wikipedia.org/zh-cn/Markdown"><strong>Markdown</strong></a>语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个<strong>回到顶部</strong>的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：</p>
     </div>
     <div class="read-more">
-      <a href="/post/mediawiki-back-to-top/" class="read-more-link">阅读更多</a>
+      <a href="/post/web/mediawiki-back-to-top/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

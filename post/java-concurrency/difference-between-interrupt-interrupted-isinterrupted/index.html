@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Java中interrupt()、interrupted()、isInterrupted()的区别">
 <meta itemprop="description" content="Java中interrupt()、interrupted()、isInterrupted()的区别"><meta itemprop="datePublished" content="2018-12-03T22:57:56+08:00" />
 <meta itemprop="dateModified" content="2018-12-03T22:57:56+08:00" />
-<meta itemprop="wordCount" content="1985">
+<meta itemprop="wordCount" content="1978">
 <meta itemprop="keywords" content="Java," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java中interrupt()、interrupted()、isInterrupted()的区别"/>
 <meta name="twitter:description" content="Java中interrupt()、interrupted()、isInterrupted()的区别"/>
@@ -158,7 +158,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先将它们简单记录下。</p>
+      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。</p>
 <h2 id="相关使用说明">相关使用说明</h2>
 <p>下表是根据JDK官网的API总结出的这3个方法的使用说明,从表中可以看出中断线程实际使用的是<code>interrupt()</code>，而<code>interrupted()</code>和<code>isInterrupted()</code>则用来检测线程是否中断，区别为前者会清除中断状态标记。</p>
 <table>
@@ -257,7 +257,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据前述的方法说明，程序的输出结果应改为true、true、false，实际运行结果类似如下,从图中可知其输出结果与理论分析相符。<br>
-<img src="/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_1.png" alt="程序运行结果1" title="程序运行结果"></p>
+<img src="/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_1.png" alt="程序运行结果1" title="程序运行结果"></p>
 <p>将上述代码修改如下,首先给<code>threadA</code>加上同步锁并调用<code>wait()</code>或<code>sleep()</code>方法，然后检测其中断状态。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -334,7 +334,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>分别调用<code>sleep()</code>和<code>wait()</code>时的运行结果如下<br>
-<img src="/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_2.png" alt="程序运行结果2" title="程序运行结果"><br>
+<img src="/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_2.png" alt="程序运行结果2" title="程序运行结果"><br>
 分析运行结果可知：无论调用哪种方法，在中断线程时都会抛出<code>InterruptedException</code>异常，其运行结果都为false则意味着中断状态也不会设置。</p>
 <p>以<code>JDK1.8</code>为例，关于调用<code>interrupt()</code>方法时中断状态的设置，可以从官网上看到如下描述：</p>
 <blockquote>
@@ -430,7 +430,7 @@ If none of the previous conditions hold then this thread&rsquo;s interrupt statu
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>程序运行结果如下：<br>
-<img src="/blog_img/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_3.png" alt="程序运行结果3" title="程序运行结果"><br>
+<img src="/blog_img/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/thread_interrupted_running_result_3.png" alt="程序运行结果3" title="程序运行结果"><br>
 从上图中可以看出<code>LockSupport</code>中的方法来阻塞和唤醒线程时(更准确的说法是通过许可来觉得线程是否可运行)，既不修改线程的中断状态也不抛出<code>InterruptedException</code>异常。</p>
 <p>参考文章：</p>
 <ul>
@@ -438,7 +438,7 @@ If none of the previous conditions hold then this thread&rsquo;s interrupt statu
 <li><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html">https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html</a></li>
 <li><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">https://www.ibm.com/developerworks/library/j-jtp05236/</a></li>
 </ul>
-<p>关于如何处理<code>InterruptedException</code>异常，请参见本人翻译一篇文章**<a href="/post/translate/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a>**</p>
+<p>关于如何处理<code>InterruptedException</code>异常，请参见本人翻译一篇文章 <a href="/post/translate/java-concurrency/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></p>
     </div>
 
     <div class="post-copyright">
@@ -461,12 +461,12 @@ If none of the previous conditions hold then this thread&rsquo;s interrupt statu
           <a href="/tags/java/">Java</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/java-string-equal-compare/">
+        <a class="prev" href="/post/java-core/java-string-equal-compare/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Java中利用==和equals()进行字符串比较的说明</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/send-ssl-mail-with-126-in-aliyun/">
+        <a class="next" href="/post/java-core/send-ssl-mail-with-126-in-aliyun/">
             <span class="next-text nav-default">利用126邮箱在阿里云中发送SSL/TSL加密邮件</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>

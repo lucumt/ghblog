@@ -126,6 +126,28 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/service-node-port-range-config-not-working-in-k8s/">在Kubernetes中配置service-node-port-range不生效的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-08-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>近期在公司内部搭建基于<a href="https://kubesphere.com.cn/"><strong>KubeSphere</strong></a>的持续集成平台时，发现其底层的<a href="https://kubernetes.io/"><strong>Kubernetes</strong></a>默认的端口范围为<strong>30000-32767</strong>而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/service-node-port-range-config-not-working-in-k8s/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/">由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-08-04 </span>
@@ -303,7 +325,7 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-string-equal-compare/">Java中利用==和equals()进行字符串比较的说明</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/java-string-equal-compare/">Java中利用==和equals()进行字符串比较的说明</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-12-08 </span>
       <div class="post-category">
@@ -317,29 +339,7 @@
       <p>Java中字符串的比较在面试中很常见，我们都知道比较字符串是否相等要使用<code>equals()</code>而不是<code>==</code>。本文首先利用<code>javap</code>命令从class文件的角度来分析不同字符串比较的结果，然后分析下<code>Tomcat</code>中如何获取前端输入的字符串参数,并以此说明Java Web开发中该如何正确的进行字符串的比较。</p>
     </div>
     <div class="read-more">
-      <a href="/post/java-string-equal-compare/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/">Java中interrupt()、interrupted()、isInterrupted()的区别</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-12-03 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先将它们简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-core/java-string-equal-compare/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

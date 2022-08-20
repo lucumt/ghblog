@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 09 Jan 2018 22:10:30 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/springmvc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
-      <link>https://lucumt.info/post/update-quartz-scheduler-dynamic/</link>
+      <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/update-quartz-scheduler-dynamic/</guid>
+      <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
     

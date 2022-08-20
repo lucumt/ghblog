@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 23 Dec 2017 12:07:40 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从复杂代码中找出Bug的几种方法</title>
-      <link>https://lucumt.info/post/different-ways-find-bug-in-complex-code/</link>
+      <link>https://lucumt.info/post/other/different-ways-find-bug-in-complex-code/</link>
       <pubDate>Sat, 23 Dec 2017 12:07:40 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/different-ways-find-bug-in-complex-code/</guid>
+      <guid>https://lucumt.info/post/other/different-ways-find-bug-in-complex-code/</guid>
       <description>&lt;p&gt;工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。&lt;/p&gt;</description>
     </item>
     

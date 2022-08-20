@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 18 Dec 2017 18:33:14 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/mybatis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
-      <link>https://lucumt.info/post/print-sql-in-different-mybatis-version/</link>
+      <link>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/print-sql-in-different-mybatis-version/</guid>
+      <guid>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</guid>
       <description>&lt;p&gt;项目中ORM框架用的是 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;，最近由于业务上的需求将&lt;code&gt;MyBatis&lt;/code&gt;从&lt;strong&gt;3.1.1&lt;/strong&gt;升级到&lt;strong&gt;3.4.5&lt;/strong&gt;，发现升级后通过&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;&lt;strong&gt;Log4j&lt;/strong&gt;&lt;/a&gt;显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;</description>
     </item>
     

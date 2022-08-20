@@ -126,7 +126,29 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/">Java中interrupt()、interrupted()、isInterrupted()的区别</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-03 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-12-03 </span>
       <div class="post-category">
@@ -140,14 +162,14 @@
       <p>由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行<a href="https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf" title="25端口解封申请"><strong>25端口解封申请</strong></a>，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。</p>
     </div>
     <div class="read-more">
-      <a href="/post/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-core/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/quartz/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-01-09 </span>
       <div class="post-category">
@@ -162,14 +184,14 @@
       <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
     </div>
     <div class="read-more">
-      <a href="/post/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
+      <a href="/post/quartz/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-01-04 </span>
       <div class="post-category">
@@ -183,7 +205,7 @@
       <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -201,7 +223,7 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
+      <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
     </div>
     <div class="read-more">
       <a href="/post/hugo/migrate-github-blog-from-http-to-https/" class="read-more-link">阅读更多</a>
@@ -211,7 +233,7 @@
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/different-ways-find-bug-in-complex-code/">从复杂代码中找出Bug的几种方法</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/other/different-ways-find-bug-in-complex-code/">从复杂代码中找出Bug的几种方法</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-12-23 </span>
       <div class="post-category">
@@ -225,14 +247,14 @@
       <p>工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。</p>
     </div>
     <div class="read-more">
-      <a href="/post/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
+      <a href="/post/other/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/print-sql-in-different-mybatis-version/">在不同版本的MyBatis中通过Log4j打印实际执行的SQL</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis/print-sql-in-different-mybatis-version/">在不同版本的MyBatis中通过Log4j打印实际执行的SQL</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-12-18 </span>
       <div class="post-category">
@@ -246,14 +268,14 @@
       <p>项目中ORM框架用的是 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>，最近由于业务上的需求将<code>MyBatis</code>从<strong>3.1.1</strong>升级到<strong>3.4.5</strong>，发现升级后通过<a href="https://logging.apache.org/log4j/1.2/download.html"><strong>Log4j</strong></a>显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/print-sql-in-different-mybatis-version/" class="read-more-link">阅读更多</a>
+      <a href="/post/mybatis/print-sql-in-different-mybatis-version/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-08-12 </span>
       <div class="post-category">
@@ -267,14 +289,14 @@
       <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和<code>Javassist</code>库来直接对Class文件进行修改的方法。</p>
     </div>
     <div class="read-more">
-      <a href="/post/modify-java-class-file-content-directly/" class="read-more-link">阅读更多</a>
+      <a href="/post/java-core/modify-java-class-file-content-directly/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/web/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-08-06 </span>
       <div class="post-category">
@@ -288,7 +310,7 @@
       <p>相对于传统的用HTML中TABLE实现的表格，利用<a href="https://www.jeasyui.com"><strong>EasyUI</strong></a>中的<a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid"><strong>DataGrid</strong></a>实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
     </div>
     <div class="read-more">
-      <a href="/post/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">阅读更多</a>
+      <a href="/post/web/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -312,28 +334,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/concurrency-models/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cannot-open-birt-report-in-myeclipse-project/">在MyEclipse项目中不能打开birt报表的解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-04-07 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击
-    </div>
-    <div class="read-more">
-      <a href="/post/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

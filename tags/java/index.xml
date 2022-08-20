@@ -49,10 +49,10 @@
     
     <item>
       <title>Java中利用==和equals()进行字符串比较的说明</title>
-      <link>https://lucumt.info/post/java-string-equal-compare/</link>
+      <link>https://lucumt.info/post/java-core/java-string-equal-compare/</link>
       <pubDate>Sat, 08 Dec 2018 23:02:10 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/java-string-equal-compare/</guid>
+      <guid>https://lucumt.info/post/java-core/java-string-equal-compare/</guid>
       <description>&lt;p&gt;Java中字符串的比较在面试中很常见，我们都知道比较字符串是否相等要使用&lt;code&gt;equals()&lt;/code&gt;而不是&lt;code&gt;==&lt;/code&gt;。本文首先利用&lt;code&gt;javap&lt;/code&gt;命令从class文件的角度来分析不同字符串比较的结果，然后分析下&lt;code&gt;Tomcat&lt;/code&gt;中如何获取前端输入的字符串参数,并以此说明Java Web开发中该如何正确的进行字符串的比较。&lt;/p&gt;</description>
     </item>
     
@@ -62,42 +62,42 @@
       <pubDate>Mon, 03 Dec 2018 22:57:56 +0800</pubDate>
       
       <guid>https://lucumt.info/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/</guid>
-      <description>&lt;p&gt;最近复习Java多线程相关知识时，发现线程中断的&lt;code&gt;interrupt()&lt;/code&gt;、&lt;code&gt;interrupted()&lt;/code&gt;、&lt;code&gt;isInterrupted()&lt;/code&gt;这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先将它们简单记录下。&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近复习Java多线程相关知识时，发现线程中断的&lt;code&gt;interrupt()&lt;/code&gt;、&lt;code&gt;interrupted()&lt;/code&gt;、&lt;code&gt;isInterrupted()&lt;/code&gt;这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>利用126邮箱在阿里云中发送SSL/TSL加密邮件</title>
-      <link>https://lucumt.info/post/send-ssl-mail-with-126-in-aliyun/</link>
+      <link>https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/</link>
       <pubDate>Mon, 03 Dec 2018 21:54:05 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/send-ssl-mail-with-126-in-aliyun/</guid>
+      <guid>https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/</guid>
       <description>&lt;p&gt;由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行&lt;a href=&#34;https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf&#34; title=&#34;25端口解封申请&#34;&gt;&lt;strong&gt;25端口解封申请&lt;/strong&gt;&lt;/a&gt;，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>利用dom4j修改含有回车换行符的XML文件</title>
-      <link>https://lucumt.info/post/update-xml-file-has-line-breaks-using-dom4j/</link>
+      <link>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</link>
       <pubDate>Thu, 04 Jan 2018 11:21:42 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/update-xml-file-has-line-breaks-using-dom4j/</guid>
+      <guid>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</guid>
       <description>&lt;p&gt;这几天工作中遇到一个利用&lt;a href=&#34;https://dom4j.github.io/&#34;&gt;&lt;strong&gt;dom4j&lt;/strong&gt;&lt;/a&gt;更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用&lt;code&gt;dom4j(1.6.1)&lt;/code&gt;默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
-      <link>https://lucumt.info/post/print-sql-in-different-mybatis-version/</link>
+      <link>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/print-sql-in-different-mybatis-version/</guid>
+      <guid>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</guid>
       <description>&lt;p&gt;项目中ORM框架用的是 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;，最近由于业务上的需求将&lt;code&gt;MyBatis&lt;/code&gt;从&lt;strong&gt;3.1.1&lt;/strong&gt;升级到&lt;strong&gt;3.4.5&lt;/strong&gt;，发现升级后通过&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;&lt;strong&gt;Log4j&lt;/strong&gt;&lt;/a&gt;显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
-      <link>https://lucumt.info/post/modify-java-class-file-content-directly/</link>
+      <link>https://lucumt.info/post/java-core/modify-java-class-file-content-directly/</link>
       <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/modify-java-class-file-content-directly/</guid>
+      <guid>https://lucumt.info/post/java-core/modify-java-class-file-content-directly/</guid>
       <description>&lt;p&gt;Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和&lt;code&gt;Javassist&lt;/code&gt;库来直接对Class文件进行修改的方法。&lt;/p&gt;</description>
     </item>
     
@@ -199,10 +199,10 @@
     
     <item>
       <title>利用Spring Security动态改变登录用户的权限</title>
-      <link>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</link>
+      <link>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/update-authority-dynamic-using-spring-security/</guid>
+      <guid>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;来管理我们的web程序时，通常需要在&lt;code&gt;UserDetailsService&lt;/code&gt;接口中的&lt;code&gt;loadUserByUsername&lt;/code&gt;方法中来初始化权限信息,但&lt;code&gt;UserDetailsService&lt;/code&gt;一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;提供的API来实现。&lt;/p&gt;</description>
     </item>
     

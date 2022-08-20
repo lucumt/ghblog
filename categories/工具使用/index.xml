@@ -9,19 +9,19 @@
     <lastBuildDate>Fri, 07 Apr 2017 10:47:28 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
-      <link>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</link>
+      <link>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</link>
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <guid>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</guid>
       <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击</description>
     </item>
     
     <item>
       <title>在Intellij IDEA中引用Golang本地包</title>
-      <link>https://lucumt.info/post/import-local-package-in-intellij-idea/</link>
+      <link>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</link>
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
       
-      <guid>https://lucumt.info/post/import-local-package-in-intellij-idea/</guid>
+      <guid>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</guid>
       <description>&lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是&lt;code&gt;Eclipse&lt;/code&gt;中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;&lt;strong&gt;goclipse&lt;/strong&gt;&lt;/a&gt;插件来进行&lt;code&gt;Golang&lt;/code&gt;编程，但其对&lt;code&gt;Golang&lt;/code&gt;的支持不是太好，如代码格式化、自动导入引用包等都无法直接在&lt;code&gt;Eclipse&lt;/code&gt;中使用，并且其自动提示功能也没有像&lt;code&gt;Java&lt;/code&gt;那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;&lt;strong&gt;Intellij IDEA&lt;/strong&gt;&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;&lt;strong&gt;Golang插件&lt;/strong&gt;&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;&lt;strong&gt;Intellij IDEA&lt;/strong&gt;&lt;/a&gt;对&lt;code&gt;Golang&lt;/code&gt;的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;</description>
     </item>
     
