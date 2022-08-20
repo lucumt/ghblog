@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Aug 2022 18:27:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Kubernetes中配置service-node-port-range不生效的问题</title>
+      <link>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</link>
+      <pubDate>Mon, 15 Aug 2022 18:27:59 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</guid>
+      <description>&lt;p&gt;近期在公司内部搭建基于&lt;a href=&#34;https://kubesphere.com.cn/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;的持续集成平台时，发现其底层的&lt;a href=&#34;https://kubernetes.io/&#34;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;默认的端口范围为&lt;strong&gt;30000-32767&lt;/strong&gt;而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

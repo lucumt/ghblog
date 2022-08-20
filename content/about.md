@@ -43,6 +43,7 @@ nocomment = true
 * **Email**: lucumt@gmail.com或cumtlu@126.com
 * **Skype**: lu.rosen
 * **QQ**: 317801876
+* **领英**: [卢运强](https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/)
 
 ## 友情链接
 
