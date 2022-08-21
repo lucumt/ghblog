@@ -3,7 +3,7 @@
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,14 +17,14 @@
   
   <url>
     <loc>https://lucumt.info/post/</loc>
-    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,7 +38,7 @@
   
   <url>
     <loc>https://lucumt.info/</loc>
-    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -130,6 +130,34 @@
   <url>
     <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2022-06-16T12:16:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/html5/</loc>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/javascript/</loc>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</loc>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -240,13 +268,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2018-01-09T22:10:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</loc>
     <lastmod>2018-01-09T22:10:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -310,6 +331,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/categories/mybatis%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2017-12-18T18:33:14+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</loc>
     <lastmod>2017-12-18T18:33:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -332,13 +360,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/easyui/</loc>
-    <lastmod>2017-08-06T00:06:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/javascript/</loc>
     <lastmod>2017-08-06T00:06:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -431,13 +452,6 @@
   <url>
     <loc>https://lucumt.info/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2017-02-26T19:26:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/html5/</loc>
-    <lastmod>2016-10-30T19:48:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

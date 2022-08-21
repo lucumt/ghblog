@@ -50,7 +50,7 @@
 <meta itemprop="name" content="在Kubernetes中配置service-node-port-range不生效的问题">
 <meta itemprop="description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。"><meta itemprop="datePublished" content="2022-08-15T18:27:59+08:00" />
 <meta itemprop="dateModified" content="2022-08-15T18:27:59+08:00" />
-<meta itemprop="wordCount" content="853">
+<meta itemprop="wordCount" content="912">
 <meta itemprop="keywords" content="kubernetes," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Kubernetes中配置service-node-port-range不生效的问题"/>
 <meta name="twitter:description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。"/>
@@ -211,7 +211,7 @@
 <p><img src="/blog_img/k8s/service-node-port-range-config-not-working-in-k8s/service-node-port-range-not-find.png" alt="service-node-port-range不生效" title="service-node-port-range不生效"></p>
 </li>
 <li>
-<p>之后搜索网上的各种解决方案，都是和前述的操作类似，尝试后都不生效，没办法只能继续搜索，直到发现https://www.modb.pro/db/146676这篇文章，在其中有如下说明</p>
+<p>之后搜索网上的各种解决方案，都是和前述的操作类似，尝试后都不生效，没办法只能继续搜索，直到发现<a href="https://www.modb.pro/db/146676">https://www.modb.pro/db/146676</a>这篇文章，在其中有如下说明</p>
 <p><img src="/blog_img/k8s/service-node-port-range-config-not-working-in-k8s/service-node-port-range-not-find-analysis.png" alt="service-node-port-range不生效排查" title="service-node-port-range不生效排查"></p>
 </li>
 <li>
@@ -225,8 +225,9 @@
 </ol>
 <p>总结：</p>
 <ol>
-<li>虽然这次问题是由于备份文件引起的，但是在<code>Linux</code>中修改重要配置文件时提前进行备份是个好习惯，从这次修改过程中学到的经验是<strong>不要在同目录下备份，要去专门的目录下备份</strong></li>
+<li>虽然这次问题是由于备份文件引起的，但是在<code>Linux</code>中修改重要配置文件时提前进行备份是个好习惯，从这次修改过程中学到的经验是<strong>不要在同目录下备份，要去专门的目录下备份</strong>。</li>
 <li><code>Kubernetes</code>底层的动态加载配置文件的原理需要进一步学习！</li>
+<li>感谢<a href="https://www.modb.pro/db/146676">https://www.modb.pro/db/146676</a>的作者<a href="https://www.modb.pro/u/447187">埋头过坎</a>，由于其无私分享避免了我走更多的弯路。</li>
 </ol>
     </div>
 
