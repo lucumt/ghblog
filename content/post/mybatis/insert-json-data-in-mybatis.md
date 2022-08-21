@@ -6,7 +6,7 @@ draft: true
 keywords: ["Java","MyBatis","JSON"]
 description: ""
 tags: ["Java","MyBatis"]
-categories: ["Java编程"]
+categories: ["Java编程","MyBatis系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

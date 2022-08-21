@@ -1,12 +1,12 @@
 ---
-title: "在MyBatis接口中使用Optional进行非空判断"
-date: 2019-02-13T14:40:19+08:00
-lastmod: 2019-02-13T14:40:19+08:00
+title: "将MinIO中的文件夹下载为zip文件"
+date: 2022-08-20T20:35:44+08:00
+lastmod: 2022-08-20T20:35:44+08:00
 draft: true
-keywords: ["mybatis","optional"]
+keywords: []
 description: ""
-tags: ["mybatis"]
-categories: ["Java编程","MyBatis系列"]
+tags: []
+categories: []
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

@@ -1,6 +1,6 @@
 +++
 author = "飞狐"
-categories = ["Java编程"]
+categories = ["Java编程","MyBatis系列"]
 tags = ["Java","MyBatis"]
 date = "2017-12-18T18:33:14+08:00"
 description = "在不同版本的mybatis中通过log4j打印实际执行的SQL"

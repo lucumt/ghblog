@@ -1,5 +1,5 @@
 ---
-title: "Mysql Create Massive Test Data Quickly"
+title: "Mysql中快速创建大量测试数据"
 date: 2022-08-17T13:57:45+08:00
 lastmod: 2022-08-17T13:57:45+08:00
 draft: true

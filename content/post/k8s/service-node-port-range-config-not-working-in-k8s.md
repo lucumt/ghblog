@@ -80,7 +80,7 @@ sequenceDiagrams:
 
    ![service-node-port-range不生效](/blog_img/k8s/service-node-port-range-config-not-working-in-k8s/service-node-port-range-not-find.png "service-node-port-range不生效") 
 
-5. 之后搜索网上的各种解决方案，都是和前述的操作类似，尝试后都不生效，没办法只能继续搜索，直到发现https://www.modb.pro/db/146676这篇文章，在其中有如下说明
+5. 之后搜索网上的各种解决方案，都是和前述的操作类似，尝试后都不生效，没办法只能继续搜索，直到发现[https://www.modb.pro/db/146676](https://www.modb.pro/db/146676)这篇文章，在其中有如下说明
 
    ![service-node-port-range不生效排查](/blog_img/k8s/service-node-port-range-config-not-working-in-k8s/service-node-port-range-not-find-analysis.png "service-node-port-range不生效排查") 
 
@@ -94,6 +94,7 @@ sequenceDiagrams:
 
 总结：
 
-1. 虽然这次问题是由于备份文件引起的，但是在`Linux`中修改重要配置文件时提前进行备份是个好习惯，从这次修改过程中学到的经验是**不要在同目录下备份，要去专门的目录下备份**
+1. 虽然这次问题是由于备份文件引起的，但是在`Linux`中修改重要配置文件时提前进行备份是个好习惯，从这次修改过程中学到的经验是**不要在同目录下备份，要去专门的目录下备份**。
 2. `Kubernetes`底层的动态加载配置文件的原理需要进一步学习！
+3. 感谢[https://www.modb.pro/db/146676](https://www.modb.pro/db/146676)的作者[埋头过坎](https://www.modb.pro/u/447187)，由于其无私分享避免了我走更多的弯路。
 

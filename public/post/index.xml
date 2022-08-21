@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>在Chrome中将上传的文件夹数据转化为按树结构展示</title>
+      <link>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</link>
+      <pubDate>Sun, 20 Feb 2022 20:38:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</guid>
+      <description>&lt;p&gt;项目中有个模块支持按文件夹选中批量上传，用户希望在真正上传之前能够在浏览器中实时预览选中的文件夹层级结构，本文基于&lt;code&gt;Chrome&lt;/code&gt;浏览器为例，简要说明这一实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Spring中BeanFactory和FactoryBean的区别以及使用场景</title>
       <link>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</link>
       <pubDate>Sun, 16 Jan 2022 11:00:01 +0800</pubDate>

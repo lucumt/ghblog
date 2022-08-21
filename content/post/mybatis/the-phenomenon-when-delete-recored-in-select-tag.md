@@ -1,12 +1,12 @@
 ---
-title: "The Phenomenon When Delete Recored in Select Tag"
+title: "在MyBatis的SELECT标签中进行DELETE操作"
 date: 2022-08-20T18:48:27+08:00
 lastmod: 2022-08-20T18:48:27+08:00
 draft: true
 keywords: []
 description: ""
 tags: []
-categories: []
+categories: ["Java编程","MyBatis系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

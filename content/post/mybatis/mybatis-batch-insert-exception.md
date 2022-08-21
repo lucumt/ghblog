@@ -1,7 +1,7 @@
 +++
 
 author = "飞狐"
-categories = ["Java编程"]
+categories = ["Java编程","MyBatis系列"]
 tags = ["Java","MyBatis"]
 date = "2016-05-30T18:20:37+08:00"
 description = "Blog of Rosen Lu"

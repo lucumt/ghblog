@@ -1,12 +1,12 @@
 ---
-title: "在MyBatis接口中使用Optional进行非空判断"
-date: 2019-02-13T14:40:19+08:00
-lastmod: 2019-02-13T14:40:19+08:00
+title: "Spring中@Autowire、@Ressource和@Component注解的比较"
+date: 2022-08-21T13:15:07+08:00
+lastmod: 2022-08-21T13:15:07+08:00
 draft: true
-keywords: ["mybatis","optional"]
-description: ""
-tags: ["mybatis"]
-categories: ["Java编程","MyBatis系列"]
+keywords: ["spring","annotation","autowire","resource","component"]
+description: "Spring中@Autowire、@Ressource和@Component注解的比较"
+tags: ["spring","spring-boot"]
+categories: ["spring系列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
