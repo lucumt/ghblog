@@ -126,6 +126,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/web/easyui-datagrid-row-not-align-when-column-frozen/">解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-06 </span>
+      <div class="post-category">
+          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>相对于传统的用HTML中TABLE实现的表格，利用<a href="https://www.jeasyui.com"><strong>EasyUI</strong></a>中的<a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid"><strong>DataGrid</strong></a>实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/web/easyui-datagrid-row-not-align-when-column-frozen/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/concurrency-models/">4. [译]并发的模型</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-08-05 </span>
@@ -332,50 +353,6 @@
     </div>
     <div class="read-more">
       <a href="/post/algorithm/swap-two-variables-without-temp-variable/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-30 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在利用 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
-<p>SQL配置文件:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">&#34;addAuthorityRoleBatch&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;List&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    INSERT INTO system_authority_role(role_id,authority_id)
-</span></span><span class="line"><span class="cl">      VALUES
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;foreach</span> <span class="na">collection=</span><span class="s">&#34;list&#34;</span> <span class="na">item=</span><span class="s">&#34;authRole&#34;</span> <span class="na">separator=</span><span class="s">&#34;,&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        (#{authRole.roleId},#{authRole.authorityId})
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/foreach&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/insert&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/post/mybatis/mybatis-batch-insert-exception/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

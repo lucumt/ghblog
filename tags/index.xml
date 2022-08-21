@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Aug 2022 18:27:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Aug 2022 20:35:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java</title>
+      <link>https://lucumt.info/tags/java/</link>
+      <pubDate>Sat, 20 Aug 2022 20:35:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MinIO</title>
+      <link>https://lucumt.info/tags/minio/</link>
+      <pubDate>Sat, 20 Aug 2022 20:35:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/minio/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>kubernetes</title>
       <link>https://lucumt.info/tags/kubernetes/</link>
@@ -40,15 +58,6 @@
       <pubDate>Mon, 01 Aug 2022 17:04:09 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://lucumt.info/tags/java/</link>
-      <pubDate>Thu, 16 Jun 2022 12:16:44 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/java/</guid>
       <description></description>
     </item>
     
