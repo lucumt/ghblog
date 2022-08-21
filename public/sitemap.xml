@@ -9,8 +9,22 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/kubernetes/</loc>
-    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
+    <loc>https://lucumt.info/tags/java/</loc>
+    <lastmod>2022-08-20T20:35:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-08-20T20:35:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/minio/</loc>
+    <lastmod>2022-08-20T20:35:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -30,15 +44,29 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</loc>
+    <lastmod>2022-08-20T20:35:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/kubernetes/</loc>
     <lastmod>2022-08-15T18:27:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
+    <lastmod>2022-08-15T18:27:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -107,21 +135,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/java/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/java-concurrency/</loc>
-    <lastmod>2022-06-16T12:16:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-06-16T12:16:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MinIO on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/minio/</link>
+    <description>Recent content in MinIO on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 20 Aug 2022 20:35:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/minio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将MinIO中的文件夹下载为ZIP文件</title>
+      <link>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</link>
+      <pubDate>Sat, 20 Aug 2022 20:35:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</guid>
+      <description>&lt;p&gt;公司项目采用&lt;a href=&#34;https://min.io/&#34;&gt;&lt;strong&gt;MinIO&lt;/strong&gt;&lt;/a&gt;作为数据存储，最近遇到一个需求是将其中的某个文件夹的数据基于其原有的结构下载为&lt;code&gt;ZIP&lt;/code&gt;文件，网上有很多下载为&lt;code&gt;ZIP&lt;/code&gt;的代码，个人觉得其中好多不够精简，简单记录下自己的实现。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
