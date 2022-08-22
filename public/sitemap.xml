@@ -199,20 +199,27 @@
   
   <url>
     <loc>https://lucumt.info/tags/mysql/</loc>
-    <lastmod>2019-01-25T17:18:27+08:00</lastmod>
+    <lastmod>2019-08-22T11:32:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/mysql/difference-and-usage-for-various-select-count/</loc>
-    <lastmod>2019-01-25T17:18:27+08:00</lastmod>
+    <loc>https://lucumt.info/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/</loc>
+    <lastmod>2019-08-22T11:32:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-08-22T11:32:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/mysql/difference-and-usage-for-various-select-count/</loc>
     <lastmod>2019-01-25T17:18:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

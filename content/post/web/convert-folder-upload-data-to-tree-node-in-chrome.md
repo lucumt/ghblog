@@ -177,6 +177,117 @@ function getfolder(event) {
 
 ![树结构展示](/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/tree-structure-display.png "树结构展示") 
 
+## Java版本实现
+
+```java
+public class TestFilePathConvert {
+
+    public static void main(String[] args) {
+        String[] paths = {
+                "a/b1/c1/d1.txt",
+                "a/b1/c1/d2.txt",
+                "a/b1/c1/d2/e1/f.txt",
+                "a/b2/c2/d1",
+                "a/b3/c1",
+                "a/b4/c1/d1/e1/f1",
+                "a/b4/c1/d1/e1/f2/g1.png",
+                "a/b5/c1"
+        };
+        convertPathToTreeNode(paths);
+    }
+
+    public static void convertPathToTreeNode(String[] paths) {
+
+
+        Map<String, Node> map = new HashMap<>();
+        for (String path : paths) {
+            while (true) {
+                Node node, pNode;
+                String nodeName;
+                if (map.containsKey(path)) {
+                    node = map.get(path);
+                    nodeName = node.getName();
+                } else {
+                    int index = path.lastIndexOf("/");
+                    nodeName = path.substring(index + 1);
+                    node = new Node(nodeName);
+                    map.put(path, node);
+                }
+
+                String parentPath = StringUtils.substringBeforeLast(path, "/");
+                if (path.equals(parentPath)) {
+                    break;
+                }
+
+                // 处理父节点
+                if (map.containsKey(parentPath)) {
+                    pNode = map.get(parentPath);
+                } else {
+                    int index = parentPath.lastIndexOf("/");
+                    String pName = parentPath.substring(index + 1);
+                    pNode = new Node(pName);
+                    map.put(parentPath, pNode);
+                }
+                //检查当前节点是否存在
+                boolean add = true;
+                for (Node n : pNode.getChildren()) {
+                    if (nodeName.equals(n.getName())) {
+                        add = false;
+                        break;
+                    }
+                }
+                // 避免当前节点的重复添加
+                if (add) {
+                    pNode.getChildren().add(node);
+                }
+                path = parentPath;
+            }
+        }
+        String root = StringUtils.substringBefore(paths[0], "/");
+        Node rootNode = map.get(root);
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(rootNode));
+    }
+
+    static class Node {
+        private String name;
+
+        private List<Node> children = new ArrayList<>();
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public List<Node> getChildren() {
+            return children;
+        }
+
+        public void setChildren(List<Node> children) {
+            this.children = children;
+        }
+
+        public Node(String name) {
+            this.name = name;
+        }
+
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "name='" + name + '\'' +
+                    ", children=" + children.size() +
+                    '}';
+        }
+    }
+}
+```
+
+
+
 
 
 [^1]: https://stackoverflow.com/questions/50225019/how-to-remove-warning-message-in-chrome-when-uploading-a-directory
