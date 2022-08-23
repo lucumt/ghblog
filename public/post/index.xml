@@ -74,6 +74,15 @@
     </item>
     
     <item>
+      <title>MyBatis中插入JSON格式数据</title>
+      <link>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</link>
+      <pubDate>Thu, 15 Apr 2021 09:37:41 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</guid>
+      <description>&lt;p&gt;简单记录下如何在&lt;a href=&#34;https://mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;中插入&lt;a href=&#34;https://www.json.org/json-en.html&#34;&gt;&lt;strong&gt;JSON&lt;/strong&gt;&lt;/a&gt;，以备参考。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>MySQL中由于user表中错误的host配置导入无法登录数据库</title>
       <link>https://lucumt.info/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/</link>
       <pubDate>Thu, 22 Aug 2019 11:32:19 +0800</pubDate>

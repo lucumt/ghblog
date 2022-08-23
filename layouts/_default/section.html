@@ -24,9 +24,19 @@
       <span class="archive-post-time">
         {{ $element.Date.Format "01-02" }}
       </span>
+	  <!-- show draft status in none production environment -->
+	  {{- if not (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
+		  <span class="archive-post-status">
+			  {{ if .Draft }} 
+				 &#9711;
+			  {{ else }}
+				 &#9632;
+			  {{ end }}
+		  </span>
+	  {{ end }}
       <span class="archive-post-title">
         <a href="{{ $element.RelPermalink }}" class="archive-post-link">
-          {{ .Title }}
+		  {{ .Title }}
         </a>
       </span>
     </div>

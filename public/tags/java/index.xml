@@ -28,6 +28,15 @@
     </item>
     
     <item>
+      <title>MyBatis中插入JSON格式数据</title>
+      <link>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</link>
+      <pubDate>Thu, 15 Apr 2021 09:37:41 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</guid>
+      <description>&lt;p&gt;简单记录下如何在&lt;a href=&#34;https://mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;中插入&lt;a href=&#34;https://www.json.org/json-en.html&#34;&gt;&lt;strong&gt;JSON&lt;/strong&gt;&lt;/a&gt;，以备参考。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>ClassNotFoundException与NoClassDefFoundError对比</title>
       <link>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</link>
       <pubDate>Wed, 02 Jan 2019 14:18:46 +0800</pubDate>
