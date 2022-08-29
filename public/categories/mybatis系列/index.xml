@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>在MyBatis接口中使用Optional进行非空判断</title>
+      <link>https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/</link>
+      <pubDate>Thu, 13 Feb 2020 14:40:19 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/</guid>
+      <description>&lt;p&gt;在进行&lt;code&gt;Java&lt;/code&gt;开发时，&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html&#34;&gt;&lt;strong&gt;NullPointerException&lt;/strong&gt;&lt;/a&gt;是一个很常见的异常，在&lt;code&gt;Java8&lt;/code&gt;中提供了&lt;a href=&#34;https://www.oracle.com/technical-resources/articles/java/java8-optional.html&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/a&gt;来避免此问题，而在&lt;a href=&#34;https://blog.mybatis.org/2019/01/mybatis-350-released.html&#34;&gt;&lt;strong&gt;MyBatis 3.5.0&lt;/strong&gt;&lt;/a&gt;中也提供了对&lt;code&gt;Optional&lt;/code&gt;的支持，本文简要叙述如何在&lt;code&gt;MyBatis&lt;/code&gt;中使用&lt;code&gt;Optional&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
       <link>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>

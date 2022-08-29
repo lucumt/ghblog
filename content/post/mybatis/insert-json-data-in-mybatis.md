@@ -276,7 +276,7 @@ public interface UserMapper {
 
     <insert id="addUser" parameterType="userModel" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO user_info(name,info) VALUES
-        (#{name},#{info,typeHandler=com.lucumt.handler.mybatis.JsonNodeTypeHandler})
+        (#{name},#{info})
     </insert>
 
     <delete id="deleteUser" parameterType="Integer">
