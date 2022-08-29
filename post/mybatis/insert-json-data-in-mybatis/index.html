@@ -615,7 +615,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">&#34;addUser&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;userModel&#34;</span> <span class="na">useGeneratedKeys=</span><span class="s">&#34;true&#34;</span> <span class="na">keyProperty=</span><span class="s">&#34;id&#34;</span> <span class="na">keyColumn=</span><span class="s">&#34;id&#34;</span><span class="nt">&gt;</span>
 </span></span><span class="line"><span class="cl">        INSERT INTO user_info(name,info) VALUES
-</span></span><span class="line"><span class="cl">        (#{name},#{info,typeHandler=com.lucumt.handler.mybatis.JsonNodeTypeHandler})
+</span></span><span class="line"><span class="cl">        (#{name},#{info})
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;/insert&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;delete</span> <span class="na">id=</span><span class="s">&#34;deleteUser&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;Integer&#34;</span><span class="nt">&gt;</span>
@@ -778,8 +778,8 @@
             <span class="prev-text nav-default">Spring中BeanFactory和FactoryBean的区别以及使用场景</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/">
-            <span class="next-text nav-default">MySQL中由于user表中错误的host配置导入无法登录数据库</span>
+        <a class="next" href="/post/mybatis/using-optional-in-mybatis-mapper/">
+            <span class="next-text nav-default">在MyBatis接口中使用Optional进行非空判断</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
