@@ -1,5 +1,5 @@
 ---
-title: "Control Distribute System Lock Using Zookeeper"
+title: "利用Zookeeper实现分布式系统"
 date: 2022-08-24T10:19:01+08:00
 lastmod: 2022-08-24T10:19:01+08:00
 draft: true

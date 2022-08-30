@@ -1,5 +1,5 @@
 ---
-title: "Random and Threadlocal Random in Java"
+title: "Java中的Random和ThreadLocalRandom原理与使用场景比较"
 date: 2022-08-24T09:50:56+08:00
 lastmod: 2022-08-24T09:50:56+08:00
 draft: true

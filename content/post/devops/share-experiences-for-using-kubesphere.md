@@ -80,7 +80,7 @@ sequenceDiagrams:
 * 一套`Jenkins`流水线可以根据使用需求灵活的往`dev`、`sit`、`test`、`prod`这4套环境之一进行部署
 * `dev`、`sit`、`test`、`prod`对于同一套代码而言是分别部署的，即4套环境互不影响
 
-# 动态参数设置
+# 动态参数
 
 ![Jenkins构建流程](/blog_img/devops/share-experiences-for-using-kubesphere/jenkins-build-flow.png "Jenkins构建流程")  
 
@@ -91,36 +91,140 @@ sequenceDiagrams:
 3. **容器端口**，`Kubernetes`中创建容器时对外暴露的端口，主要用于程序访问 
 4. **镜像版本**，前后端程序构建镜像时，对应tag的动态设置
 
-## shell脚本
+![KubeSphere中的Shell与Script](/blog_img/devops/share-experiences-for-using-kubesphere/shell-and-script-in-kubesphere.png "KubeSphere中的Shell与Script")  
 
-## scripti脚本
+在`Jenkins`中的脚本类型主要有`shell`脚本和`script`脚本2种类型，其中[**script**](https://www.jenkins.io/doc/book/managing/script-console/)是基于`Grovvy`实现的，而[**Groovy**](https://groovy-lang.org/)是基于`JVM`实现的，其在时使用上比`shell`更灵活，故在流水线实现时对于参数设置与获取确定了一个如下的大致原则:
 
-[script console](https://www.jenkins.io/doc/book/managing/script-console/)
+> **能通过`Groovy`脚本获取的变量与参数尽量通过`Grovvy`获取，`Shell`脚本只负责使用**
 
-# 代码编译
+## script中定义参数
+
+在`script`中输入符合 `Groovy`语法的代码即可，为了在多个steps之间实现参数共享，需要在定义参数时加上`env.`前缀[^2]，类似如下：
+
+```groovy
+switch(PRODUCT_PHASE) {
+    case "sit":
+        env.NODE_PORT = 13003
+        env.DUBBO_PORT = 13903
+        break
+    case "test":
+        env.NODE_PORT = 14003
+        env.DUBBO_PORT = 14903
+        break
+    case "prod":
+        env.NODE_PORT = 15003
+        env.DUBBO_PORT = 15903
+        break
+}
+env.DUBBO_IP = "10.30.5.170"
+```
+
+## script中读取参数
+
+```groovy
+print env.DUBBO_IP
+```
+
+## shell中读取参数
+
+需要采用`$参数名`(去掉`env.`前缀)的方式，类似如下 
+
+```shell
+docker build -f kubesphere/Dockerfile \
+-t idp-data:$BUILD_TAG  \
+--build-arg  PROJECT_VERSION=$PROJECT_VERSION \
+--build-arg  NODE_PORT=$NODE_PORT \
+--build-arg  DUBBO_PORT=$DUBBO_PORT \
+--build-arg PRODUCT_PHASE=$PRODUCT_PHASE .
+```
+
+## yaml文件中读取参数
+
+在`Kubernetes`中需要一个yaml文件来配置要生成的pod，其参数的获取也是采用`$参数名`的方式
+
+```yaml
+spec:
+  ports:
+    - name: http
+      port: $NODE_PORT
+      protocol: TCP
+      targetPort: $NODE_PORT
+      nodePort: $NODE_PORT
+    - name: dubbo
+      port: $DUBBO_PORT
+      protocol: TCP
+      targetPort: $DUBBO_PORT
+      nodePort: $DUBBO_PORT
+  selector:
+    app: lucumt-data-$PRODUCT_PHASE
+  sessionAffinity: None
+  type: NodePort
+```
+
+## Dockerfile中读取参数
+
+当在`docker`的build阶段传递正确的参数后，在Dockerfile中需要采用`${参数名}`的方式获取参数
+
+```dockerfile
+# 基础镜像
+FROM  openjdk:8-jdk
+# author
+LABEL maintainer=luyunqiang
+
+# 创建目录
+RUN mkdir -p /home/lucumt
+# 指定路径
+WORKDIR /home/lucumt
+
+ARG PRODUCT_PHASE
+ARG NODE_PORT
+ARG DUBBO_PORT
+ENV PARAMS="--server.port=${NODE_PORT} --spring.application.name=lucumt-data --spring.profiles.active=${PRODUCT_PHASE} --dubbo.protocol.port=${DUBBO_PORT}"
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
+```
+
+# 编译与部署
 
 由于公司研发环境与互联网隔离，故需要在前后端分别设置可用的镜像才能确保编译正常。
 
 ## 前端
 
-由于`KubeSphere`中的[Node.js](https://nodejs.org/en/)的版本落后于项目中使用的版本，故需要通过如下命令升级其版本：
+* `Nodejs`版本号升级：
 
-`npm install node@16.13.1 --registry https://mirrors.xxx.com/repository/NPM/`
+  由于`KubeSphere`中的[Node.js](https://nodejs.org/en/)的版本落后于项目中使用的版本，故需要通过如下命令升级其版本：
+
+  `npm install node@16.13.1 --registry https://mirrors.xxx.com/repository/NPM/`
+
+* `Nginx`默认的端口为80，且其默认的conf文件较为简陋，为了实现`nginx`的个性化配置，可以自己预先配置好一个conf文件，然后在docker构建时，将其覆盖即可
+
+  ```dockerfile
+  FROM nginx
+  
+  RUN mkdir -p /usr/share/nginx/html/idp-web
+  
+  COPY dist /usr/share/nginx/html/idp-web
+  
+  # 采用自己定义的配置文件
+  COPY kubesphere/idp.conf /etc/nginx/conf.d/
+  
+  EXPOSE 8080
+  ```
 
 ## 后端
 
 * 获取`Maven`版本号：
 
-  `mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+  ```shell
+  mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+  ```
 
-* Script脚本：
+* 由于在`shell`中不方便定义全局变量，而`Maven`的版本号只能在执行相关命令时获取，为了实现版本号的共享，可将两者结合起来，在`shell`中利用`maven`命令获取版本号，然后再由`Groovy`脚本将其赋值为全局环境变量:
 
   ```groovy
   env.PROJECT_VERSION = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true)
-  env.BUILD_TIME = new Date().format(“yyyyMMdd-HHmmss“)
-  env.BUILD_TAG = PROJECT_VERSION + “-“ + BUILD_TIME
+  env.BUILD_TIME = new Date().format("yyyyMMdd-HHmmss")
+  env.BUILD_TAG = PROJECT_VERSION + "-" + BUILD_TIME
   ```
-
 
 # K8S容器探活
 
@@ -132,7 +236,7 @@ sequenceDiagrams:
 
 ```yaml
 containers:
-  - image: '$REGISTRY/$DOCKERHUB_NAMESPACE/idp-system:${BUILD_TAG}'
+  - image: '$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system:${BUILD_TAG}'
     readinessProbe:
       httpGet:
         path: idp-system/actuator/health
@@ -148,7 +252,7 @@ containers:
 
 ```yaml
 containers:
-  - image: '$REGISTRY/$DOCKERHUB_NAMESPACE/idp-system-web:${BUILD_TAG}'
+  - image: '$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system-web:${BUILD_TAG}'
     readinessProbe:
       exec:
         command:
@@ -175,3 +279,4 @@ containers:
 1. https://askubuntu.com/questions/76808/how-do-i-use-variables-in-a-sed-command
 
 [^1]: 理论上来说此处的端口不用暴露，只需要在容器创建时进行对应的端口映射即可，不过由于公司项目采用[nacos](https://nacos.io/zh-cn/)进行动态配置与服务发现，为了方便统一管理，故也将此处的端口做成动态配置
+[^2]: 实际测试发现不加`env.`也能在其它的步骤中正常获取

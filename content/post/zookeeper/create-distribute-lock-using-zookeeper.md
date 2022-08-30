@@ -1,5 +1,5 @@
 ---
-title: "Create Distribute Lock Using Zookeeper"
+title: "利用Zookeeper实现分布式锁"
 date: 2022-08-24T10:18:57+08:00
 lastmod: 2022-08-24T10:18:57+08:00
 draft: true

@@ -37,7 +37,12 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: false
   options: ""
-
 ---
 
+总结下`Spring`中最常见的3种依赖注入标签`@Component`、`@Autowire`、`@Resource`之间的区别。
+
 <!--more-->
+
+参考文档:
+
+1. https://www.cnblogs.com/vipstone/p/16634716.html
