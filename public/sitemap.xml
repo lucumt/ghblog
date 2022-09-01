@@ -86,6 +86,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/jenkins/</loc>
+    <lastmod>2022-08-06T18:00:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/kubesphere/</loc>
+    <lastmod>2022-08-06T18:00:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</loc>
+    <lastmod>2022-08-06T18:00:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/docker/</loc>
     <lastmod>2022-08-04T16:56:18+08:00</lastmod>
     <changefreq>weekly</changefreq>

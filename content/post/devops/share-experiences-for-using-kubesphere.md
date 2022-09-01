@@ -2,7 +2,7 @@
 title: "KubeSphere使用心得"
 date: 2022-08-06T18:00:08+08:00
 lastmod: 2022-08-06T18:00:08+08:00
-draft: true
+draft: false
 keywords: ["kubesphere","Jenkins","持续集成","持续部署"]
 description: "KubeSphere使用心得分享"
 tags: ["kubesphere","jenkins"]
@@ -200,9 +200,9 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shang
   ```dockerfile
   FROM nginx
   
-  RUN mkdir -p /usr/share/nginx/html/idp-web
+  RUN mkdir -p /usr/share/nginx/html/lucumt-web
   
-  COPY dist /usr/share/nginx/html/idp-web
+  COPY dist /usr/share/nginx/html/lucumt-web
   
   # 采用自己定义的配置文件
   COPY kubesphere/idp.conf /etc/nginx/conf.d/
@@ -239,7 +239,7 @@ containers:
   - image: '$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system:${BUILD_TAG}'
     readinessProbe:
       httpGet:
-        path: idp-system/actuator/health
+        path: lucumt-system/actuator/health
         port: $NODE_PORT
       timeoutSeconds: 10
       failureThreshold: 30
@@ -262,17 +262,23 @@ containers:
       periodSeconds: 5
 ```
 
+# 运行效果
+
+运行效果如下，可实现动态的指定测试阶段和代码分支：
+
+![KubeSphere流水线运行效果](/blog_img/devops/share-experiences-for-using-kubesphere/kubesphere-jenkins-pipeline-run-dialog.png "KubeSphere流水线运行效果")  
+
 # 参考代码
 
 * 前端部分:
-  * **Dockerfile**：
-  * **depoly.yml**：
-  * **Jenkins流水线**，参见[idp-common-web.groovy](https://github.com/lucumt/myrepository/blob/master/jenkins/idp-common-web.groovy "点击跳转到对应的Github链接")
-
+  * **Dockerfile**，参见[lucumt-common-web.dockerfile](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-common-web.Dockerfile "点击跳转到对应的Github链接")
+  * **depoly.yml**，参见[lucumt-common-web.yaml](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-common-web.yaml "点击跳转到对应的Github链接")
+  * **Jenkins流水线**，参见[lucumt-common-web.groovy](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-common-web.groovy "点击跳转到对应的Github链接")
+  * **Nginx配置文件**，参见[lucumt-common-web-nginx.conf](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-common-web-nginx.conf "点击跳转到对应的Github链接")
 * 后端部分:
-  * **Dockerfile**：
-  * **depoly.yml**：
-  * **Jenkins流水线**，参见[idp-system.groovy](https://github.com/lucumt/myrepository/blob/master/jenkins/idp-system.groovy "点击跳转到对应的Github链接")
+  * **Dockerfile**，参见[lucumt-system.dockerfile](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-system.Dockerfile "点击跳转到对应的Github链接")
+  * **depoly.yml**，参见[lucumt-system.yaml](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-system.yaml "点击跳转到对应的Github链接")
+  * **Jenkins流水线**，参见[lucumt-system.groovy](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-system.groovy "点击跳转到对应的Github链接")
 
 参考:
 

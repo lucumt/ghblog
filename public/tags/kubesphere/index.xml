@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubesphere on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/kubesphere/</link>
+    <description>Recent content in kubesphere on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 06 Aug 2022 18:00:08 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KubeSphere使用心得</title>
+      <link>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</link>
+      <pubDate>Sat, 06 Aug 2022 18:00:08 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</guid>
+      <description>&lt;p&gt;目前公司的开发方式都是手工编译&amp;amp;部署，十分低效，最近将Web开发相关的项目都基于&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;通过基于&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;的流水线方式实现了自动部署，在此过程中遇到了一些阻塞点，简单记录下它们的解决方案。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
