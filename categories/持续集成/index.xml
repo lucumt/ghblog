@@ -16,5 +16,14 @@
       <description>&lt;p&gt;近期在公司内部搭建基于&lt;a href=&#34;https://kubesphere.com.cn/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;的持续集成平台时，发现其底层的&lt;a href=&#34;https://kubernetes.io/&#34;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;默认的端口范围为&lt;strong&gt;30000-32767&lt;/strong&gt;而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>KubeSphere使用心得</title>
+      <link>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</link>
+      <pubDate>Sat, 06 Aug 2022 18:00:08 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</guid>
+      <description>&lt;p&gt;目前公司的开发方式都是手工编译&amp;amp;部署，十分低效，最近将Web开发相关的项目都基于&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;通过基于&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;的流水线方式实现了自动部署，在此过程中遇到了一些阻塞点，简单记录下它们的解决方案。&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
