@@ -268,6 +268,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/</loc>
+    <lastmod>2019-02-08T13:57:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/mysql/difference-and-usage-for-various-select-count/</loc>
     <lastmod>2019-01-25T17:18:27+08:00</lastmod>
     <changefreq>weekly</changefreq>

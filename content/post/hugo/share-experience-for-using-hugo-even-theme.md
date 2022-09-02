@@ -1,12 +1,12 @@
 ---
-title: "Share Experience for Using Hugo Even Theme"
+title: "个人Hugo博客关于Even主题的一些使用改进"
 date: 2022-08-31T09:43:19+08:00
 lastmod: 2022-08-31T09:43:19+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["hugo","theme","even"]
+description: "个人Hugo博客关于Even主题的一些使用改进"
+tags: ["hugo","Go"]
+categories: ["个人博客"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -37,7 +37,22 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: false
   options: ""
-
 ---
 
+记录下个人[**Hugo**](https://gohugo.io/)博客使用[**Even**](https://github.com/olOwOlo/hugo-theme-even)主题时的一些使用心得与个人改进。
+
 <!--more-->
+
+# 个人改进
+
+## 添加Fork me on Github
+
+## 改进Back to top
+
+## 区分Draft与非Draft
+
+## 部署时才添加访问统计
+
+# 使用分享
+
+## 部署时排除Draft

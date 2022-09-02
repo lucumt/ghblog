@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-本文基于[InnoDB](https://en.wikipedia.org/wiki/InnoDB)和[MyISAM](https://en.wikipedia.org/wiki/MyISAM)这两种常见的`MySQL`引擎，利用名为[add_user_batch](#存储过程)的存储过程向`system_user`表中插入1000万数据，对比测试它们的查询结果和响应性能。
+本文基于[InnoDB](https://en.wikipedia.org/wiki/InnoDB)和[MyISAM](https://en.wikipedia.org/wiki/MyISAM)这两种常见的`MySQL`引擎，利用名为[add_user_batch](https://github.com/lucumt/myrepository/blob/master/mysql/add_user_batch.sql)的存储过程向`system_user`表中插入1000万数据，对比测试它们的查询结果和响应性能。
 
 ```sql
 CREATE TABLE `system_user` (
@@ -143,87 +143,11 @@ CREATE TABLE `system_user` (
   * `SELECT COUNT(1)`，由于在`MyISAM`中只有在特定场景下优化才会生效，此种用法较为偏僻不符合SQL规范，不建议使用
   * `SELECT COUNT(列名)`，查询对应列的非空总行数
 
-
-
-{{% admonition type="info" title="add_user_batch存储过程代码" details="true"  %}}
-
-```sql
-DELIMITER $$
-
-USE `test`$$
-
-DROP PROCEDURE IF EXISTS `add_user_batch`$$
-
-CREATE DEFINER=`root`@`%` PROCEDURE `add_user_batch`(IN COUNT INT)
-BEGIN
-    DECLARE i INT;
-    DECLARE t_name VARCHAR(8);
-    DECLARE t_tag VARCHAR(20);
-    DECLARE t_age INT(2);
-    DECLARE t_sql_template VARCHAR(100);
-    DECLARE t_sql TEXT;   
-    DECLARE t_tag_mod_val INT DEFAULT(25);
-    DECLARE t_commit_mod_val INT DEFAULT(100);
-    
-    DECLARE t_start_time DATETIME;
-    DECLARE t_end_time DATETIME;    
-    
-    TRUNCATE TABLE `system_user`;
-    
-    SET t_start_time=NOW();
-    SET t_sql_template = “INSERT INTO `system_user`(NAME, age, tag) VALUES“;
-    SET t_sql = t_sql_template;
-    SET i = 1;
-    WHILE i <= COUNT
-        DO
-            SET t_age = FLOOR(1 + RAND() * 60);
-            SET t_name = LEFT(UUID(), 8);
-            -- 给tag随机制造空值
-            IF MOD(i, t_tag_mod_val) = 0 THEN
-                SET t_tag = “NULL“;
-            ELSE
-                SET t_tag = CONCAT(“'“,LEFT(UUID(), 8),“'“);
-            END IF;
- 
-            SET t_sql = CONCAT(t_sql,“('“,t_name,“',“,t_age,“,“,t_tag,“)“);
-            
-            IF MOD(i,t_commit_mod_val) != 0 THEN
-              SET t_sql = CONCAT(t_sql,“,“);
-            ELSE
-              SET t_sql = CONCAT(t_sql,“;“);
-                   -- 只要达到t_commit_mod_val要求的次数，就执行并提交
-                   SET @insert_sql = t_sql;
-                   PREPARE stmt FROM @insert_sql;
-                   EXECUTE stmt;
-                   DEALLOCATE PREPARE stmt;
-                   COMMIT;
-              SET t_sql=t_sql_template;
-            END IF;
-            SET i = i + 1;
-        END WHILE;
-        
-        -- 不能被t_commit_mod_val整除时，余下的数据处理
-        IF LENGTH(t_sql) > LENGTH(t_sql_template) THEN
-                   SET t_sql=CONCAT(SUBSTRING(t_sql,1,LENGTH(t_sql)-1),';');
-                   SET @insert_sql = t_sql;
-                   PREPARE stmt FROM @insert_sql;
-                   EXECUTE stmt;
-                   DEALLOCATE PREPARE stmt;
-                   COMMIT;
-        END IF;
-        SET t_end_time=NOW();
-        SELECT CONCAT('insert data success,time cost ',TIMEDIFF(t_end_time,t_start_time)) AS finishedTag;
-END$$
-
-DELIMITER ;
-```
-
-{{% /admonition %}}
-
 参考文档:
 
 1. https://segmentfault.com/a/1190000040733649
 2. https://stackoverflow.com/questions/2710621/count-vs-count1-vs-countpk-which-is-better
+3. https://github.com/lucumt/myrepository/blob/master/mysql/add_user_batch.sql
 
 [^1]: 即`WHERE`后面的过滤条件相同
 [^2]: 相等的场景为`SELECT`返回的行中该列数据全部不为空

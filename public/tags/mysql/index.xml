@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Mysql中快速创建大量测试数据</title>
+      <link>https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/</link>
+      <pubDate>Fri, 08 Feb 2019 13:57:45 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/</guid>
+      <description>&lt;p&gt;在学习&lt;code&gt;MySQL&lt;/code&gt;索引和分库分表等知识的过程中，经常会涉及到创建大批量的测试数据，本文简要说明自己常用的几种创建方式以及各自的优劣对比。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>MySQL中不同SELECT COUNT统计总数时的区别</title>
       <link>https://lucumt.info/post/mysql/difference-and-usage-for-various-select-count/</link>
       <pubDate>Fri, 25 Jan 2019 17:18:27 +0800</pubDate>

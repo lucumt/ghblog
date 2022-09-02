@@ -40,9 +40,9 @@ nocomment = true
 * 学习
 
 ### 联系方式
-* **Email**: lucumt@gmail.com或cumtlu@126.com
-* **Skype**: lu.rosen
-* **QQ**: 317801876
+* **Email**: `lucumt@gmail.com`,`cumtlu@126.com`
+* **Skype**: `lu.rosen`
+* **QQ**: `317801876`
 * **领英**: [卢运强](https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/)
 
 ## 友情链接
@@ -51,3 +51,4 @@ nocomment = true
 * [cold's world](https://www.linuxzen.com/)
 * [邪恶二进制](http://evilbinary.org/)
 * [Javmain's Blog](https://blog.51itzone.cn/)
+* [小林Coding](https://xiaolincoding.com)
