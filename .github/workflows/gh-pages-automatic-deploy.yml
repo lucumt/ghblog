@@ -1,5 +1,6 @@
 name: gh-pages-automatic-build-deploy
 on:
+  workflow_dispatch: 
   push:
     branches:
       - master
@@ -27,4 +28,4 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PAGE_ACTION_TOKEN }}
           publish_dir: ./public
-          commit_message: ${{ github.event.head_commit.message }}
+          full_commit_message: ${{ github.event.head_commit.message }}
