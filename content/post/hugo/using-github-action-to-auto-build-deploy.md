@@ -2,7 +2,7 @@
 title: "利用GitHub Action实现Hugo博客在GitHub Pages自动部署"
 date: 2022-09-03T18:35:57+08:00
 lastmod: 2022-09-03T18:35:57+08:00
-draft: true
+draft: false
 keywords: ["hugo","theme","even"]
 description: "简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署"
 tags: ["hugo","github-pages","go"]
