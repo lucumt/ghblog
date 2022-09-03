@@ -1,6 +1,6 @@
 name: gh-pages-automatic-build-deploy
 on:
-  workflow_dispatch: 
+  # workflow_dispatch: 
   push:
     branches:
       - master
