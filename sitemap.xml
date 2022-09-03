@@ -3,7 +3,63 @@
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/github-pages/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/go/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/hugo/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</loc>
+    <lastmod>2022-09-03T18:35:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -25,27 +81,6 @@
   <url>
     <loc>https://lucumt.info/tags/minio/</loc>
     <lastmod>2022-08-20T20:35:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -116,27 +151,6 @@
   <url>
     <loc>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</loc>
     <lastmod>2022-08-04T16:56:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/go/</loc>
-    <lastmod>2022-08-01T17:04:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/hugo/</loc>
-    <lastmod>2022-08-01T17:04:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2022-08-01T17:04:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -361,13 +375,6 @@
   <url>
     <loc>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</loc>
     <lastmod>2018-01-04T11:21:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/github-pages/</loc>
-    <lastmod>2017-12-24T10:28:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -6,7 +6,16 @@
     <description>Recent content in Github Pages on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Dec 2017 10:28:03 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2022 18:35:57 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/github-pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用GitHub Action实现Hugo博客在GitHub Pages自动部署</title>
+      <link>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</link>
+      <pubDate>Sat, 03 Sep 2022 18:35:57 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</guid>
+      <description>&lt;p&gt;作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用&lt;a href=&#34;https://github.com/features/actions&#34;&gt;GitHub Actions&lt;/a&gt;实现个人&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;博客在&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt;中的自动化部署。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>将基于Github Pages的自定义域名博客迁移到HTTPS</title>
       <link>https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/</link>
