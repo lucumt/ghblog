@@ -1,6 +1,7 @@
 ![](https://img.shields.io/github/forks/lucumt/ghblog)
 ![](https://img.shields.io/github/stars/lucumt/ghblog)
 ![](https://img.shields.io/github/license/lucumt/ghblog)
+![](https://img.shields.io/github/workflow/status/lucumt/ghblog/pages-auto-build-deploy)
 
 # 我的个人博客
 个人博客的源代码和相关说明。
