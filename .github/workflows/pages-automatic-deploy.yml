@@ -1,4 +1,4 @@
-name: gh-pages-automatic-build-deploy
+name: pages-auto-build-deploy
 on:
   # workflow_dispatch: 
   push:
