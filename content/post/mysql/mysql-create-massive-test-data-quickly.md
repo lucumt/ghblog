@@ -1,10 +1,10 @@
 ---
-title: "Mysql中快速创建大量测试数据"
+title: "MySQL中快速创建大量测试数据"
 date: 2019-02-08T13:57:45+08:00
 lastmod: 2019-02-08T13:57:45+08:00
 draft: false
 keywords: ["mysql","大量","测试数据"]
-description: "简要介绍如何在Mysql中快速创建大量测试数据"
+description: "简要介绍如何在MySQL中快速创建大量测试数据"
 tags: ["mysql"]
 categories: ["数据库"]
 author: "Rosen Lu"

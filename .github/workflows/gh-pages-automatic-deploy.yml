@@ -1,0 +1,30 @@
+name: GitHub Pages Automatic Build And Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.100.2'
+          # extended: true
+
+      - name: Build
+        run: hugo server --baseUrl="https://lucumt.info/" --watch=false --appendPort=false --renderToDisk --environment production
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_ACTION_TOKEN }}
+          publish_dir: ./public
