@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Kubesphere集成LDAP踩坑记录 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要记录自己Kubesphere集成LDAP中所遇到的坑" /><meta name="keywords" content="kubesphere, Jenkins, 持续集成, 持续部署, LDAP" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.100.2 with theme even" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/devops/setting-ldap-for-kubesphere/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.42582d13b483cd0f7dec049cf819eefca048379b10708ab4de86a139d1b963a1.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Kubesphere集成LDAP踩坑记录" />
+<meta property="og:description" content="简要记录自己Kubesphere集成LDAP中所遇到的坑" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucumt.info/post/devops/setting-ldap-for-kubesphere/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-04T09:35:50+08:00" />
+<meta property="article:modified_time" content="2022-09-04T09:35:50+08:00" />
+
+<meta itemprop="name" content="Kubesphere集成LDAP踩坑记录">
+<meta itemprop="description" content="简要记录自己Kubesphere集成LDAP中所遇到的坑"><meta itemprop="datePublished" content="2022-09-04T09:35:50+08:00" />
+<meta itemprop="dateModified" content="2022-09-04T09:35:50+08:00" />
+<meta itemprop="wordCount" content="840">
+<meta itemprop="keywords" content="kubesphere,jenkins,LDAP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kubesphere集成LDAP踩坑记录"/>
+<meta name="twitter:description" content="简要记录自己Kubesphere集成LDAP中所遇到的坑"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+
+  
+	  
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a>
+  
+
+
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Kubesphere集成LDAP踩坑记录</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-09-04 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>之前在公司内部推广<a href="https://kubesphere.io/">KubeSphere</a>用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>整合其它系统的成熟经验，很自然的想将<code>LDAP</code>集成到<code>KubeSphere</code>中。原以为会很容易，一番折腾下来费了不好功夫(<strong><code>KubeSphere</code>要求使用<code>LDAP</code>时必须设置管理员账号和密码</strong>)，简单记录下。</p>
+<p>公司内部的<code>LDAP</code>系统支持匿名登录，在给其它系统(如<a href="https://github.com/fjc0k/docker-YApi">yapi</a>)集成<code>LDAP</code>时，只需要输入对应的<code>host</code>、<code>uid</code>、<code>searchDN</code>即可，整合起来十分便捷，类似如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;ldapLogin&#34;</span><span class="err">:</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;enable&#34;</span><span class="p">:</span><span class="s2">&#34;true&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;server&#34;</span><span class="p">:</span><span class="s2">&#34;ldap://192.168.0.2:389&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;searchDn&#34;</span><span class="p">:</span><span class="s2">&#34;dc=lucumt,dc=info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;searchStandard&#34;</span><span class="p">:</span><span class="s2">&#34;uid&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;usernameKey&#34;</span><span class="p">:</span><span class="s2">&#34;uid&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>公司内部的<code>KubeSphere</code>版本为<code>v3.1.1</code>，在集成<code>LDAP</code>之前先去官网查看了相关说明，在<a href="https://kubesphere.io/zh/docs/v3.3/access-control-and-account-management/external-authentication/use-an-ldap-service/">LDAP身份提供者</a>中有如下说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">authentication</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">jwtSecret</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">maximumClockSkew</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">multipleLogin</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">oauthOptions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">accessTokenMaxAge</span><span class="p">:</span><span class="w"> </span><span class="l">1h</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">accessTokenInactivityTimeout</span><span class="p">:</span><span class="w"> </span><span class="l">30m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">identityProviders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">LDAP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LDAPIdentityProvider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="nt">mappingMethod</span><span class="p">:</span><span class="w"> </span><span class="l">auto</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="nt">provider</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.0.2</span><span class="p">:</span><span class="m">389</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">managerDN</span><span class="p">:</span><span class="w"> </span><span class="l">uid=root,cn=users,dc=nas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">managerPassword</span><span class="p">:</span><span class="w"> </span><span class="cp">********</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">userSearchBase</span><span class="p">:</span><span class="w"> </span><span class="l">cn=users,dc=nas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">loginAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">uid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">mailAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">mail</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看出其默认多了<code>managerDN</code>和<code>managerPassword</code>这两个管理员属性，但由于公司的<code>LDAP</code>默认对外不提供管理员账号和密码，只能匿名登录认证，且自己之前在其它系统中匿名配置<code>LDAP</code>都很顺畅，于是通过匿名方式配置如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">provider</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.1.22</span><span class="p">:</span><span class="m">389</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#managerDN: uid=root,cn=users,dc=nas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#managerPassword: ********</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">userSearchBase</span><span class="p">:</span><span class="w"> </span><span class="l">dc=lucumt,dc=info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">loginAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">uid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mailAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">mail</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>将官方文档中要求的<code>managerDN</code>和<code>managerPassword</code>屏蔽掉，接着重启<code>KubeSphere</code>系统，登录过程出现如下提示：</p>
+<p><img src="/blog_img/devops/setting-ldap-for-kubesphere/kubesphere-ldap-login-failed.png" alt="集成LDAP登录失败" title="集成LDAP登录失败"></p>
+<p>错误信息提示说密码不能为空，但是我们登录的时候肯定有输入密码的，那只可能是<code>managerPassword</code>为空导致的。</p>
+<p>查找<code>KubeSphere</code>官网相关说明发现其对于<code>managerDN</code>和<code>managerPassword</code>没有说明是选填项，结合前面的报错信息，可得出如下结论</p>
+<blockquote>
+<p><strong><code>KubeSphere</code>不支持<code>LDAP</code>匿名登录</strong></p>
+</blockquote>
+<p><img src="/blog_img/devops/setting-ldap-for-kubesphere/kubesphere-ldap-setting-explanation.png" alt="集成LDAP登录参数说明" title="集成LDAP参数说明"></p>
+<p>于是只能找公司相关部门申请<code>LDAP</code>具有只读账号的管理员权限，配置类似如下，之后重启<code>KubeSphere</code>可正常集成<code>LDAP</code>登录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">provider</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.1.22</span><span class="p">:</span><span class="m">389</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">managerDN</span><span class="p">:</span><span class="w"> </span><span class="l">admin=cn,dc=lucumt,dc=info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">managerPassword</span><span class="p">:</span><span class="w"> </span><span class="cp">********</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">userSearchBase</span><span class="p">:</span><span class="w"> </span><span class="l">dc=lucumt,dc=info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">loginAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">uid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mailAttribute</span><span class="p">:</span><span class="w"> </span><span class="l">mail</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>只能说<code>KubeSphere</code>在这方面做的不太好，已经在其官网反馈此问题!</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/kubesphere/">kubesphere</a>
+          <a href="/tags/jenkins/">jenkins</a>
+          <a href="/tags/ldap/">LDAP</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/hugo/using-github-action-to-auto-build-deploy/">
+            <span class="next-text nav-default">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lucumt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="https://lucumt.info/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Rosen Lu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+
+
+
+
+</body>
+</html>

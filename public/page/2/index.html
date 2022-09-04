@@ -64,12 +64,14 @@
 <body>
 
   
+	  
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a>
   
-  <a href="https://github.com/lucumt" title="https://github.com/lucumt" target="_blank">  
-  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
-	 src="/blog_img/forkme_right_gray.png" 
-	 alt="Fork me on GitHub">
-  </a>
 
 
   <div id="mobile-navbar" class="mobile-navbar">
@@ -134,6 +136,50 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis/insert-json-data-in-mybatis/">MyBatis中插入JSON格式数据</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-04-15 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>简单记录下如何在<a href="https://mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>中插入<a href="https://www.json.org/json-en.html"><strong>JSON</strong></a>，以备参考。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mybatis/insert-json-data-in-mybatis/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis/using-optional-in-mybatis-mapper/">在MyBatis接口中使用Optional进行非空判断</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-13 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在进行<code>Java</code>开发时，<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html"><strong>NullPointerException</strong></a>是一个很常见的异常，在<code>Java8</code>中提供了<a href="https://www.oracle.com/technical-resources/articles/java/java8-optional.html"><strong>Optional</strong></a>来避免此问题，而在<a href="https://blog.mybatis.org/2019/01/mybatis-350-released.html"><strong>MyBatis 3.5.0</strong></a>中也提供了对<code>Optional</code>的支持，本文简要叙述如何在<code>MyBatis</code>中使用<code>Optional</code>。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mybatis/using-optional-in-mybatis-mapper/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/">MySQL中由于user表中错误的host配置导入无法登录数据库</a></h1>
@@ -308,49 +354,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-12-03 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行<a href="https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf" title="25端口解封申请"><strong>25端口解封申请</strong></a>，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/quartz/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-09 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/quartz/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -412,40 +415,6 @@
 <script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-75123653-1');
-</script><script id="baidu_analytics">
-	  var _hmt = _hmt || [];
-	  (function() {
-		if (window.location.hostname === 'localhost') return;
-		var hm = document.createElement("script"); hm.async = true;
-		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hm, s);
-	  })();
-	</script>
-
-
-	<script id="baidu_push">
-	  (function(){
-		if (window.location.hostname === 'localhost') return;
-		var bp = document.createElement('script'); bp.async = true;
-		var curProtocol = window.location.protocol.split(':')[0];
-		if (curProtocol === 'https') {
-		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-		}
-		else {
-		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-		}
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(bp, s);
-	  })();
-	</script>
 
 
 </body>

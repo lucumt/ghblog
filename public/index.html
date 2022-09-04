@@ -64,12 +64,14 @@
 <body>
 
   
+	  
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a>
   
-  <a href="https://github.com/lucumt" title="https://github.com/lucumt" target="_blank">  
-  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
-	 src="/blog_img/forkme_right_gray.png" 
-	 alt="Fork me on GitHub">
-  </a>
 
 
   <div id="mobile-navbar" class="mobile-navbar">
@@ -134,6 +136,48 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/devops/setting-ldap-for-kubesphere/">Kubesphere集成LDAP踩坑记录</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-04 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>之前在公司内部推广<a href="https://kubesphere.io/">KubeSphere</a>用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>整合其它系统的成熟经验，很自然的想将<code>LDAP</code>集成到<code>KubeSphere</code>中。原以为会很容易，一番折腾下来费了不好功夫(<strong><code>KubeSphere</code>要求使用<code>LDAP</code>时必须设置管理员账号和密码</strong>)，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/devops/setting-ldap-for-kubesphere/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-03 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用<a href="https://github.com/features/actions">GitHub Actions</a>实现个人<a href="https://gohugo.io/">Hugo</a>博客在<a href="https://pages.github.com/">GitHub Pages</a>中的自动化部署。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/hugo/using-github-action-to-auto-build-deploy/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/minio/download-minio-folder-as-zip-file/">将MinIO中的文件夹下载为ZIP文件</a></h1>
@@ -307,50 +351,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis/insert-json-data-in-mybatis/">MyBatis中插入JSON格式数据</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-04-15 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>简单记录下如何在<a href="https://mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>中插入<a href="https://www.json.org/json-en.html"><strong>JSON</strong></a>，以备参考。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mybatis/insert-json-data-in-mybatis/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis/using-optional-in-mybatis-mapper/">在MyBatis接口中使用Optional进行非空判断</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-02-13 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在进行<code>Java</code>开发时，<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html"><strong>NullPointerException</strong></a>是一个很常见的异常，在<code>Java8</code>中提供了<a href="https://www.oracle.com/technical-resources/articles/java/java8-optional.html"><strong>Optional</strong></a>来避免此问题，而在<a href="https://blog.mybatis.org/2019/01/mybatis-350-released.html"><strong>MyBatis 3.5.0</strong></a>中也提供了对<code>Optional</code>的支持，本文简要叙述如何在<code>MyBatis</code>中使用<code>Optional</code>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mybatis/using-optional-in-mybatis-mapper/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -409,40 +409,6 @@
 <script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-75123653-1');
-</script><script id="baidu_analytics">
-	  var _hmt = _hmt || [];
-	  (function() {
-		if (window.location.hostname === 'localhost') return;
-		var hm = document.createElement("script"); hm.async = true;
-		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(hm, s);
-	  })();
-	</script>
-
-
-	<script id="baidu_push">
-	  (function(){
-		if (window.location.hostname === 'localhost') return;
-		var bp = document.createElement('script'); bp.async = true;
-		var curProtocol = window.location.protocol.split(':')[0];
-		if (curProtocol === 'https') {
-		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-		}
-		else {
-		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-		}
-		var s = document.getElementsByTagName("script")[0];
-		s.parentNode.insertBefore(bp, s);
-	  })();
-	</script>
 
 
 </body>

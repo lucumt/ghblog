@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LDAP on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/ldap/</link>
+    <description>Recent content in LDAP on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 04 Sep 2022 09:35:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubesphere集成LDAP踩坑记录</title>
+      <link>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</link>
+      <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</guid>
+      <description>&lt;p&gt;之前在公司内部推广&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;LDAP&lt;/a&gt;整合其它系统的成熟经验，很自然的想将&lt;code&gt;LDAP&lt;/code&gt;集成到&lt;code&gt;KubeSphere&lt;/code&gt;中。原以为会很容易，一番折腾下来费了不好功夫(&lt;strong&gt;&lt;code&gt;KubeSphere&lt;/code&gt;要求使用&lt;code&gt;LDAP&lt;/code&gt;时必须设置管理员账号和密码&lt;/strong&gt;)，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

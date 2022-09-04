@@ -6,7 +6,25 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Aug 2022 20:35:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Sep 2022 09:35:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubesphere集成LDAP踩坑记录</title>
+      <link>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</link>
+      <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</guid>
+      <description>&lt;p&gt;之前在公司内部推广&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;LDAP&lt;/a&gt;整合其它系统的成熟经验，很自然的想将&lt;code&gt;LDAP&lt;/code&gt;集成到&lt;code&gt;KubeSphere&lt;/code&gt;中。原以为会很容易，一番折腾下来费了不好功夫(&lt;strong&gt;&lt;code&gt;KubeSphere&lt;/code&gt;要求使用&lt;code&gt;LDAP&lt;/code&gt;时必须设置管理员账号和密码&lt;/strong&gt;)，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用GitHub Action实现Hugo博客在GitHub Pages自动部署</title>
+      <link>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</link>
+      <pubDate>Sat, 03 Sep 2022 18:35:57 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</guid>
+      <description>&lt;p&gt;作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用&lt;a href=&#34;https://github.com/features/actions&#34;&gt;GitHub Actions&lt;/a&gt;实现个人&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;博客在&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt;中的自动化部署。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>将MinIO中的文件夹下载为ZIP文件</title>
       <link>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</link>
