@@ -147,10 +147,17 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     clientSecret = ""       # Your client secret
 
   [params.utterances]       # https://utteranc.es/
-    owner = "lucumt"              # Your GitHub ID
-    repo = "ghblog"               # The repo to store comments
-	issueTerm = "pathname"
-    theme = "github-light"
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+	issueTerm = ""
+    theme = ""
+	
+  [params.giscus]           # https://giscus.app/
+    repo = "lucumt/ghblog"
+    repoId = "MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+    category = "General"
+    categoryId = "DIC_kwDOAnjIus4CRN6c"
+    theme = "light" 	
 
   [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
     owner = ""              # Your GitHub ID
