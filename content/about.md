@@ -47,7 +47,7 @@ nocomment = true
 
 ## 友情链接
 
-* [Frantic log#1048](http://frantic1048.logdown.com/)
+* [Frantic log#1048](https://pyonpyon.today/)
 * [cold's world](https://www.linuxzen.com/)
 * [邪恶二进制](http://evilbinary.org/)
 * [Javmain's Blog](https://blog.51itzone.cn/)

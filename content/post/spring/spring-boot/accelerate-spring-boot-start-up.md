@@ -43,3 +43,8 @@ sequenceDiagrams:
 之前面试时被问到过此题，基于网上资料以及个人理解，简单记录下如果根据实际项目需求通过去掉各种无用的配置来缩短`Spring Boot`的启动时间。
 
 <!--more-->
+
+参考文档:
+
+1. https://www.helloworld.net/p/2393829294
+2. https://segmentfault.com/a/1190000042204196
