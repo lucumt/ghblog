@@ -296,6 +296,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/mysql/limit-large-size-data-in-mysql/</loc>
+    <lastmod>2019-02-11T09:52:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/</loc>
     <lastmod>2019-02-08T13:57:45+08:00</lastmod>
     <changefreq>weekly</changefreq>

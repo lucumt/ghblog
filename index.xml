@@ -128,6 +128,15 @@
     </item>
     
     <item>
+      <title>在MySQL中对大量数据进行limit offset分页查询的优化</title>
+      <link>https://lucumt.info/post/mysql/limit-large-size-data-in-mysql/</link>
+      <pubDate>Mon, 11 Feb 2019 09:52:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/mysql/limit-large-size-data-in-mysql/</guid>
+      <description>&lt;p&gt;在软件开发中采用&lt;code&gt;LIMIT OFFSET&lt;/code&gt;对数据库进行分页是常见操作，但在数据量很大时直接使用&lt;code&gt;LIMIT OFFSET&lt;/code&gt;查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>MySQL中快速创建大量测试数据</title>
       <link>https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/</link>
       <pubDate>Fri, 08 Feb 2019 13:57:45 +0800</pubDate>
