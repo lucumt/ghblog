@@ -2,7 +2,7 @@
 title: "在MySQL中对大量数据进行limit offset分页查询的优化"
 date: 2019-02-11T09:52:31+08:00
 lastmod: 2019-02-11T09:52:31+08:00
-draft: true
+draft: false
 keywords: ["mysql","limit"]
 description: "在MySQL中对大量数据进行limit offset分页查询的优化"
 tags: ["mysql"]
@@ -91,6 +91,69 @@ SELECT * FROM `system_user` WHERE id>=9999990 LIMIT 10;
 采用此种方式性能提升的原因如下：
 
 1. `MySQL`中的主键默认有索引，基于索引查询速度很快
-2. `WHERE`优先于`LIMIT`执行，数据量变小
+2. `WHERE`优先于`LIMIT`执行，数据量相对之前，变得很小
+
+其中最关键的是第2点，只要查询的数据量变小，查询速度自然会提升。 
 
 # 覆盖索引过滤
+
+基于自增主键过滤要求主键必须**主键连续自增**，若主键不连续(如主键采用`UUID`生成)则上述方案不可行，此时可基于[覆盖索引](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_covering_index)来减少获取和传输的数据量大小。
+
+将查询sql修改为类似如下
+
+```sql
+SELECT u1.* FROM `system_user` u1
+JOIN 
+(SELECT id FROM `system_user` LIMIT 9999990,10) u2 ON u1.id=u2.id;
+```
+
+执行结果如下，可以看出耗时只比最初的少1秒
+
+![自增主键limit查询](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-join-filter-limit-offset-query.png "自增主键limit查询") 
+
+查看其执行计划，发现获取的数据量仍然很大
+
+![自增主键limit查询分析](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-join-filter-limit-offset-query-explain.png "自增主键limit查询分析") 
+
+由于`MySQL`在数据量为千万级时查询速度会变慢，将数据库表中的数据量缩小到500万，执行如下：
+
+![自增主键limit缩小数据查询](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-join-filter-limit-offset-query-small.png "自增主键limit缩小数据查询") 
+
+问题的根源在`SELECT id FROM system_user LIMIT 9999990,10`，虽然此时只查询id，但是id的数量仍然很庞大，由此造成查询速度变慢。
+
+
+
+此时可通过在数据库表中添加一列`num`并对其创建唯一索引，之后基于`num`进行过滤查询
+
+```sql
+-- 添加索引
+ALTER TABLE `system_user` ADD COLUMN `num` INT NOT NULL DEFAULT 1;
+ALTER TABLE `system_user` ADD UNIQUE INDEX `user_num_index` (`num`);
+
+-- 重新制造数据
+TRUNCATE TABLE `system_user`;
+CALL add_user_batch(10000000);
+```
+
+改进后的sql如下
+
+```sql
+SELECT u1.* FROM `system_user` u1
+JOIN 
+(SELECT num FROM `system_user` WHERE num>=9999990 LIMIT 10) u2 ON u1.num=u2.num;
+```
+
+执行结果耗时如下：
+
+![利用索引列过滤查询](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-unique-index-filter-limit-offset-query.png "利用索引列过滤查询") 
+
+可以看出其耗时和采用**自增连续主键**时类似。对应的执行计划如下，从图中也能看出要获取的数据量明显变小。
+
+![利用索引列过滤查询分析](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-unique-index-filter-limit-offset-query-explain.png "利用索引列过滤查询分析") 
+
+# 总结
+
+上述两种方案归根到底均为要通过`WHERE`提前过滤不需要的数据，减少返回的数据量，总结如下：
+
+* 若**主键连续且自增**，则通过主键进行过滤
+* 若**主键不连续自增**，可额外创建一个自增列或者采用`覆盖索引`的方式改写
