@@ -19,6 +19,24 @@
     </item>
     
     <item>
+      <title>volatile关键字在Java程序中的使用</title>
+      <link>https://lucumt.info/post/java-concurrency/how-to-use-volatile-in-java/</link>
+      <pubDate>Sat, 08 Dec 2018 23:49:33 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/how-to-use-volatile-in-java/</guid>
+      <description>&lt;p&gt;&lt;code&gt;volatile&lt;/code&gt;关键字在Java多线程编程中很常见，由于自己之前学习多线程时一度以为只要需确保线程可见性的代码都需要使用&lt;code&gt;volatile&lt;/code&gt;关键字，后来发现并不是这样的，故简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java中interrupt()、interrupted()、isInterrupted()的区别</title>
+      <link>https://lucumt.info/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/</link>
+      <pubDate>Mon, 03 Dec 2018 22:57:56 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/</guid>
+      <description>&lt;p&gt;最近复习Java多线程相关知识时，发现线程中断的&lt;code&gt;interrupt()&lt;/code&gt;、&lt;code&gt;interrupted()&lt;/code&gt;、&lt;code&gt;isInterrupted()&lt;/code&gt;这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>4. [译]并发的模型</title>
       <link>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
