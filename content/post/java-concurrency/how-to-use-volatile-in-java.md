@@ -5,7 +5,7 @@ lastmod: 2018-12-08T23:49:33+08:00
 draft: false
 keywords: ["volatile","Java Concurrency"]
 description: "Volatile关键字在Java程序中的使用"
-tags: ["Java"]
+tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
 

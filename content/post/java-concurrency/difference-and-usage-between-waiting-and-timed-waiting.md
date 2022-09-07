@@ -5,7 +5,7 @@ lastmod: 2020-08-05T09:28:43+08:00
 draft: true
 keywords: ["Java多线程"]
 description: "Java中WAITING和TIMED_WAITING的区别与使用场景"
-tags: ["Java"]
+tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
 

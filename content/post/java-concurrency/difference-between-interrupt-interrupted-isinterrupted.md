@@ -5,7 +5,7 @@ lastmod: 2018-12-03T22:57:56+08:00
 draft: false
 keywords: ["Java多线程"]
 description: "Java中interrupt()、interrupted()、isInterrupted()的区别"
-tags: ["Java"]
+tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
 
