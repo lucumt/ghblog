@@ -37,6 +37,15 @@
     </item>
     
     <item>
+      <title>多种方式实现在Java中用线程轮流打印ABC</title>
+      <link>https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/</link>
+      <pubDate>Tue, 08 Sep 2020 11:11:06 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/</guid>
+      <description>&lt;p&gt;在&lt;code&gt;Java&lt;/code&gt;中采用3个线程不停的轮流打印ABC这3个字符，采用不同的方式实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>ClassNotFoundException与NoClassDefFoundError对比</title>
       <link>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</link>
       <pubDate>Wed, 02 Jan 2019 14:18:46 +0800</pubDate>
