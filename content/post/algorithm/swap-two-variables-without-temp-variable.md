@@ -5,8 +5,8 @@ lastmod: 2016-08-12T11:03:09+08:00
 draft: false
 keywords: ["交换变量","位运算"]
 description: ""
-tags: ["位运算"]
-categories: ["算法","Java编程"]
+tags: ["bit"]
+categories: ["算法","Java编程","位运算"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

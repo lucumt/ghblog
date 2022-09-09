@@ -1,18 +1,18 @@
 ---
-title: "Java中WAITING和TIMED_WAITING的区别与使用场景"
-date: 2020-08-05T09:28:43+08:00
-lastmod: 2020-08-05T09:28:43+08:00
+title: "Java中SLEEP和WAIT的区别"
+date: 2020-08-01T09:59:29+08:00
+lastmod: 2020-08-01T09:59:29+08:00
 draft: true
-keywords: ["Java多线程"]
-description: "Java中WAITING和TIMED_WAITING的区别与使用场景"
+keywords: ["Java","wait","sleep"]
+description: "Java中SLEEP和WAIT的区别"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
-comment: false
-toc: false
+comment: true
+toc: true
 autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
