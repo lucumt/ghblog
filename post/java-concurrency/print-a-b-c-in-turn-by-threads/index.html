@@ -49,7 +49,7 @@
 <meta itemprop="name" content="多种方式实现在Java中用线程轮流打印ABC">
 <meta itemprop="description" content="多种方式实现在Java中用线程轮流打印ABC"><meta itemprop="datePublished" content="2020-09-08T11:11:06+08:00" />
 <meta itemprop="dateModified" content="2020-09-08T11:11:06+08:00" />
-<meta itemprop="wordCount" content="726">
+<meta itemprop="wordCount" content="740">
 <meta itemprop="keywords" content="Java,Java Concurrency," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="多种方式实现在Java中用线程轮流打印ABC"/>
 <meta name="twitter:description" content="多种方式实现在Java中用线程轮流打印ABC"/>
@@ -162,7 +162,7 @@
     <li><a href="#代码实现">代码实现</a>
       <ul>
         <li><a href="#基于waitnotify">基于wait&amp;notify</a></li>
-        <li><a href="#基于reentrandlockcondition">基于ReentrandLock&amp;Condition</a></li>
+        <li><a href="#基于reentrantlockcondition">基于ReentrantLock&amp;Condition</a></li>
         <li><a href="#基于semaphore">基于Semaphore</a></li>
       </ul>
     </li>
@@ -176,8 +176,8 @@
 <p>实现思路如下：</p>
 <ul>
 <li>要在一个<code>while</code>循环中，实现不停的打印</li>
-<li>多个线程间需要依次唤醒下一个线程，实现依次打印</li>
-<li>为了启动线程，还需要一个唤醒线程</li>
+<li>多个线程间需要依次唤醒下一个线程，实现依次打印，此时会形成死循环</li>
+<li>为了打破死循环，还需要一个启动线程延后调用</li>
 </ul>
 <p><img src="/blog_img/java-concurrency/print-a-b-c-in-turn-by-threads/threads-print-character-process.png" alt="原理图" title="原理图"></p>
 <h1 id="代码实现">代码实现</h1>
@@ -300,7 +300,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="基于reentrandlockcondition">基于ReentrandLock&amp;Condition</h2>
+</div><h2 id="基于reentrantlockcondition">基于ReentrantLock&amp;Condition</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
