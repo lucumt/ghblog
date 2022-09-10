@@ -49,8 +49,8 @@ sequenceDiagrams:
 实现思路如下：
 
 * 要在一个`while`循环中，实现不停的打印
-* 多个线程间需要依次唤醒下一个线程，实现依次打印
-* 为了启动线程，还需要一个唤醒线程
+* 多个线程间需要依次唤醒下一个线程，实现依次打印，此时会形成死循环
+* 为了打破死循环，还需要一个启动线程延后调用
 
 ![原理图](/blog_img/java-concurrency/print-a-b-c-in-turn-by-threads/threads-print-character-process.png "原理图") 
 
@@ -117,7 +117,7 @@ public class ThreadPrint1Test {
 }
 ```
 
-## 基于ReentrandLock&Condition
+## 基于ReentrantLock&Condition
 
 ```java
 public class ThreadPrint2Test {
