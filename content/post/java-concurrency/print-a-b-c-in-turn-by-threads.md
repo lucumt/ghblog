@@ -6,7 +6,7 @@ draft: false
 keywords: ["java","thread"]
 description: "多种方式实现在Java中用线程轮流打印ABC"
 tags: ["Java","Java Concurrency"]
-categories: ["Java编程","Java多线程"]
+categories: ["Java编程"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
