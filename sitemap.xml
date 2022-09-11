@@ -268,13 +268,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2020-09-08T11:11:06+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/</loc>
     <lastmod>2020-09-08T11:11:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -339,6 +332,13 @@
   
   <url>
     <loc>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</loc>
+    <lastmod>2018-12-15T11:57:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2018-12-15T11:57:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
