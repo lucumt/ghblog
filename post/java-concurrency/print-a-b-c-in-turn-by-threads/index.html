@@ -49,7 +49,7 @@
 <meta itemprop="name" content="多种方式实现在Java中用线程轮流打印ABC">
 <meta itemprop="description" content="多种方式实现在Java中用线程轮流打印ABC"><meta itemprop="datePublished" content="2020-09-08T11:11:06+08:00" />
 <meta itemprop="dateModified" content="2020-09-08T11:11:06+08:00" />
-<meta itemprop="wordCount" content="740">
+<meta itemprop="wordCount" content="978">
 <meta itemprop="keywords" content="Java,Java Concurrency," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="多种方式实现在Java中用线程轮流打印ABC"/>
 <meta name="twitter:description" content="多种方式实现在Java中用线程轮流打印ABC"/>
@@ -163,6 +163,7 @@
         <li><a href="#基于waitnotify">基于wait&amp;notify</a></li>
         <li><a href="#基于reentrantlockcondition">基于ReentrantLock&amp;Condition</a></li>
         <li><a href="#基于semaphore">基于Semaphore</a></li>
+        <li><a href="#单个锁volatile变量">单个锁&amp;volatile变量</a></li>
       </ul>
     </li>
   </ul>
@@ -521,6 +522,116 @@
 </span></span><span class="line"><span class="cl">                <span class="o">}</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="单个锁volatile变量">单个锁&amp;volatile变量</h2>
+<p>此种方式不需要唤醒线程，同时便于很方便的修改线程数目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadPrint4Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">ThreadPrint4Test</span><span class="o">().</span><span class="na">testPrint</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testPrint</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">PrintThread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">,</span> <span class="n">lock</span><span class="o">),</span> <span class="s">&#34;thread-A&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">PrintThread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">,</span> <span class="n">lock</span><span class="o">),</span> <span class="s">&#34;thread-B&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">PrintThread</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">,</span> <span class="n">lock</span><span class="o">),</span> <span class="s">&#34;thread-C&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">class</span> <span class="nc">PrintThread</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">Object</span> <span class="n">lock</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">String</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="nf">PrintThread</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">,</span> <span class="n">Object</span> <span class="n">lock</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">lock</span> <span class="o">=</span> <span class="n">lock</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">synchronized</span> <span class="o">(</span><span class="n">lock</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="kt">boolean</span> <span class="n">process</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">value</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">count</span> <span class="o">%</span> <span class="n">3</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="o">(</span><span class="n">process</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">process</span> <span class="o">=</span> <span class="n">process</span> <span class="o">||</span> <span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">value</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">count</span> <span class="o">%</span> <span class="n">3</span> <span class="o">==</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">process</span> <span class="o">=</span> <span class="n">process</span> <span class="o">||</span> <span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">value</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">count</span> <span class="o">%</span> <span class="n">3</span> <span class="o">==</span> <span class="n">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="o">(</span><span class="n">process</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">lock</span><span class="o">.</span><span class="na">wait</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">count</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">500</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">lock</span><span class="o">.</span><span class="na">notifyAll</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
