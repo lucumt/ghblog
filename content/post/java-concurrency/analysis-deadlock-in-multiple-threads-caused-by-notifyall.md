@@ -186,7 +186,7 @@ public void run() {
 
 1. 线程A调用`wait()`方法进入`WAITING`状态
 2. 其它线程调用`notifyAll()`方法唤醒处于`WAITING`状态的线程，线程A碰巧被唤醒
-3. 线程A获得执行机会，打印输出字符A
+3. 线程A获得锁，得到执行机会，打印输出字符A
 4. 线程A调用`notifyAll()`方法唤醒其它全部处于`WAITING`状态的线程
 5. 在线程A没有释放锁之前，线程B和线程C均处于`BLOCKED`状态
 6. 线程A释放锁，接着通过`while`再次进入循环
@@ -200,7 +200,80 @@ public void run() {
 
 图示说明如下：
 
+* 线程A在打印输出后通过`while`和`synchronized`再次获取锁，线程B和线程C依旧处于`BLOCKED`状态
+
+  ![分析图示1](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-notifyall/multi-thread-deadlock-analysis-1.png "分析图示1") 
+
+* ce
+
+* ce
+
+* ce
+
 # 改进代码
+
+找到问题原因后，要修复此问题也很容，只需要在调用`wait()`时判断下前一次执行打印输出的线程和当前线程是否为同一个线程，若为同一个线程，则直接跳过`wait()`调用即可(`notifyAll()`方法需要保留，确保能正常唤醒其它线程)
+
+## 消除死循环
+
+```java
+public class ThreadPrint4Test {
+
+    public static void main(String[] args) {
+        new ThreadPrint4Test().testPrint();
+    }
+
+    private volatile String runThread;
+
+    public void testPrint() {
+        Object lock = new Object();
+        new Thread(new PrintThread("A", lock), "thread-A").start();
+        new Thread(new PrintThread("B", lock), "thread-B").start();
+        new Thread(new PrintThread("C", lock), "thread-C").start();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        new Thread(() -> {
+            synchronized (lock) {
+                lock.notifyAll();
+            }
+        }).start();
+    }
+
+    class PrintThread implements Runnable {
+
+        private Object lock;
+        private String value;
+
+        public PrintThread(String value, Object lock) {
+            this.value = value;
+            this.lock = lock;
+        }
+
+        public void run() {
+            while (true) {
+                try {
+                    synchronized (lock) {
+                        boolean process = value.equals(runThread);
+                        if (!process) {
+                            lock.wait();
+                            System.out.println(LocalTime.now() + "\t" + value);
+                            runThread = value;
+                        }
+                        lock.notifyAll();
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+}
+```
+
+## 实现轮流打印
 
 
 

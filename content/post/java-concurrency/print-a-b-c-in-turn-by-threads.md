@@ -233,3 +233,61 @@ public class ThreadPrint3Test {
 }
 ```
 
+## 单个锁&volatile变量
+
+此种方式不需要唤醒线程，同时便于很方便的修改线程数目。
+
+```java
+public class ThreadPrint4Test {
+
+    public static void main(String[] args) {
+        new ThreadPrint4Test().testPrint();
+    }
+
+    private volatile int count = 0;
+
+    public void testPrint() {
+        Object lock = new Object();
+        new Thread(new PrintThread("A", lock), "thread-A").start();
+        new Thread(new PrintThread("B", lock), "thread-B").start();
+        new Thread(new PrintThread("C", lock), "thread-C").start();
+    }
+
+    class PrintThread implements Runnable {
+
+        private Object lock;
+        private String value;
+
+        public PrintThread(String value, Object lock) {
+            this.value = value;
+            this.lock = lock;
+        }
+
+        public void run() {
+            while (true) {
+                try {
+                    synchronized (lock) {
+                        boolean process = "A".equals(value) && count % 3 == 0;
+                        if (process) {
+                            count = 0;
+                        }
+                        process = process || ("B".equals(value) && count % 3 == 1);
+                        process = process || ("C".equals(value) && count % 3 == 2);
+                        if (process) {
+                            lock.wait();
+                            System.out.println(value);
+                            count++;
+                            Thread.sleep(500);
+                        }
+                        lock.notifyAll();
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+    }
+}
+```
+
