@@ -642,8 +642,10 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
     wrapper.appendChild(highlightDiv);
   }
 
-  document.querySelectorAll(".highlight")
-    .forEach((highlightDiv) => createCopyButton(highlightDiv));
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+  }
 </script>  
 
 

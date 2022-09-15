@@ -621,8 +621,10 @@ If none of the previous conditions hold then this thread&rsquo;s interrupt statu
     wrapper.appendChild(highlightDiv);
   }
 
-  document.querySelectorAll(".highlight")
-    .forEach((highlightDiv) => createCopyButton(highlightDiv));
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+  }
 </script>  
 
 
