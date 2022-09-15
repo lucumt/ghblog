@@ -59,6 +59,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
   
   githubForkUrl = "https://github.com/lucumt/ghblog"
+  enableCopyCode = true
 
   since = "2016"            # Site creation time          # 站点建立时间
   # use public git repo url to link lastmod git commit, enableGitInfo should be true.
