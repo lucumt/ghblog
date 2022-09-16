@@ -1,10 +1,10 @@
 ---
-title: "一次由notifyAll造成的死锁问题分析"
+title: "一次由wait造成的死锁问题分析"
 date: 2020-09-12T18:07:27+08:00
 lastmod: 2020-09-12T18:07:27+08:00
-draft: true
+draft: false
 keywords: ["java","multiple-threads","deadlock"]
-description: "一次由notifyAll造成的死锁问题分析"
+description: "一次由wait造成的死锁问题分析"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程"]
 author: "Rosen Lu"
@@ -40,7 +40,7 @@ sequenceDiagrams:
 
 ---
 
-在[多种方式实现在Java中用线程轮流打印ABC](/post/java-concurrency/print-a-b-c-in-turn-by-threads/)中自己本想用单个锁通过调用`notifyAll()`实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。
+在[多种方式实现在Java中用线程轮流打印ABC](/post/java-concurrency/print-a-b-c-in-turn-by-threads/)中自己本想用单个锁通过调用`wait()`实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。
 
 <!--more-->
 
@@ -101,11 +101,11 @@ public class ThreadPrint4Test {
 
 运行上述程序，可发现在输出若干字符后，程序处于阻塞状态，输出停止：
 
-![程序停止输出](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-notifyall/all-threads-stopped-print-characters.png "程序停止输出") 
+![程序停止输出](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/all-threads-stopped-print-characters.png "程序停止输出") 
 
 利用`jps`和`jstack`命令查看，可发现3个进程都处于`WAITING`状态形成类似死锁的现象，由此导致程序停止输出。
 
-analysis-deadlock-in-multiple-threads-caused-by-notifyall![线程都处于等待状态](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads/all-threads-are-waiting-for-awake.png "线程都处于等待状态") 
+![线程都处于等待状态](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/all-threads-are-waiting-for-awake.png "线程都处于等待状态") 
 
 由于多次运行上述代码，均能出现此问题(只不过出现的时间间隔不同)，可知程序代码肯定编写不正确。 
 
@@ -161,58 +161,44 @@ public void run() {
 
 之后多次重新执行该程序，执行结果类似如下：
 
-![所有线程均调用wait方法](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-notifyall/all-threads-invoke-wait-method.png "所有线程均调用wait方法") 
+![所有线程均调用wait方法](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/all-threads-invoke-wait-method.png "所有线程均调用wait方法") 
 
-从上图可以看出当3个线程全部进入`WAITING`状态后的一个共同点：线程在执行打印输出后，又率先调用了`wait()`方法。
+从上图可以看出中无法找出具体的问题复现规律，查看`wait()`的[官方文档](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--)，有如下说明
 
-至此，造成3个线程停止打印输出的原因已经明确：
+> The current thread must own this object's monitor. The thread releases ownership of this monitor and waits until another thread notifies threads waiting on this object's monitor to wake up either through a call to the `notify` method or the `notifyAll` method. The thread then waits until it can re-obtain ownership of the monitor and resumes execution.
 
->  某个线程在执行打印输出后，通过`notifyAll()`方法**唤醒的是线程自身**，然后该线程又调用`wait()`方法导致所有线程都处于`WAITING`状态，从而停止打印！
-
-对于同一把锁而言，难道`notifyAll()`唤醒的不是已经调用`wait()`方法的线程么，为什么还能唤醒线程本身呢，查看其[官方文档](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notifyAll--)，有如下说明：
+查看`notifyAll()`的[官方文档](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notifyAll--)，有如下说明：
 
 > The awakened threads will not be able to proceed until the current thread relinquishes the lock on this object. The awakened threads will compete in the usual manner with any other threads that might be actively competing to synchronize on this object;
 
 从上述说明中可获得如下信息：
 
-1. 被`notifyAll()`唤醒的线程并不会立即执行，需要等当前调用`notifyAll()`的线程释放对应的锁
-2. 被`notfiyAll()`唤醒的线程需要与其它正在执行的线程一并去竞争获取锁，并没有区别对待
+1. 调用`wait()`方法后，程序会处于等待状态，同时释放锁
+2. 被`notifyAll()`唤醒的线程并不会立即执行，需要等当前调用`notifyAll()`的线程释放对应的锁
+3. 被`notfiyAll()`唤醒的线程需要与其它正在执行的线程一并去竞争获取锁，并没有区别对待
 
-至此，造成死锁的原因已经找出:
+至此，可以大致找出问题原因
 
-> 某个线程调用 `notifyAll()`来唤醒其它的线程后，被唤醒的线程不会立即执行而是需要等当前线程释放锁之后才能执行，但是当前线程在释放锁之后通过`while`循环再次由`synchronized`获取锁时**先于其它被`notifyAll()`唤醒的线程获取到了锁**，之后执行`wait()`导致3个线程全部处于等待状态!
+> 三个线程在某个时间段先后调用了`wait()`方法都进入了`WAITING`状态，同时没有其它线程来唤醒它们，导致最终程序停止输出。
 
 以线程A造成死锁为例，其过程如下:
 
-1. 线程A调用`wait()`方法进入`WAITING`状态
-2. 其它线程调用`notifyAll()`方法唤醒处于`WAITING`状态的线程，线程A碰巧被唤醒
-3. 线程A获得锁，得到执行机会，打印输出字符A
-4. 线程A调用`notifyAll()`方法唤醒其它全部处于`WAITING`状态的线程
-5. 在线程A没有释放锁之前，线程B和线程C均处于`BLOCKED`状态
-6. 线程A释放锁，接着通过`while`再次进入循环
-7. 线程A通过`synchronzied`与其它线程处于`BLOCKED`状态的线程竞争锁[^1]
-8. 线程A竞争锁成功，调用`wait()`方法处于`WAITING`状态并释放锁
-9. 线程B获得锁，进入`synchronized`同步块
-10. 线程B调用`wait()`方法并释放锁，线程B处于`WAITING`状态
-11. 线程C获得锁，进入`synchronized` 同步块
-12. 线程C调用`wait()`方法并释放锁，线程C处于`WAITING`状态
-13. 至此3个线程都处于`WAITING`状态，产生死锁，程序停止输出
+1. 线程A调用`wait()`方法进入`WAITING`状态并释放锁
+2. 线程B获得锁，进入`synchronized`代码块
+3. 线程B执行`wait()`方法进行`WAITING`状态并释放锁
+4. 线程C获得锁，进入`synchronized`代码块
+5. 线程C执行`wait()`方法进行`WAITING`状态并释放锁
+6. 至此线程A、线程B、线程C均处于`WAITING`状态，程序停止输出
 
 图示说明如下：
 
-* 线程A在打印输出后通过`while`和`synchronized`再次获取锁，线程B和线程C依旧处于`BLOCKED`状态
+![分析图示1](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/multi-thread-deadlock-analysis.png "分析图示") 
 
-  ![分析图示1](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-notifyall/multi-thread-deadlock-analysis-1.png "分析图示1") 
 
-* ce
-
-* ce
-
-* ce
 
 # 改进代码
 
-找到问题原因后，要修复此问题也很容，只需要在调用`wait()`时判断下前一次执行打印输出的线程和当前线程是否为同一个线程，若为同一个线程，则直接跳过`wait()`调用即可(`notifyAll()`方法需要保留，确保能正常唤醒其它线程)
+找到问题原因后，要修复此问题也很容，只需要避免所有的线程同时调用`wait()`方法即可，可在调用`wait()`前加个判断，确保始终有一个线程不用进入`WAITING`状态，能够释放锁。
 
 ## 消除死循环
 
@@ -328,8 +314,4 @@ public class ThreadPrint4Test {
     }
 }
 ```
-
-
-
-[^1]: 基于`Java` 中多线程的执行机制，此种情况是可能发生的
 
