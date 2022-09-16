@@ -268,7 +268,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-notifyall/</loc>
+    <loc>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/</loc>
     <lastmod>2020-09-12T18:07:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
