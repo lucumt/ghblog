@@ -187,8 +187,27 @@ jobs:
 
 ![GitHub Actions执行结果](/blog_img/hugo/using-github-action-to-auto-build-deploy/hugo-automatic-build-result.png "GitHub Actions执行结果")  
 
+# 其它
+
+由于`GitHub Action`支持定时语法，将流水线触发条件修改如下
+
+```yaml
+on:
+  push:
+    branches:
+      - master
+  schedule:
+      # Runs everyday at 8:00 AM
+      - cron: "0 8 * * *"
+```
+
+可实现每天上午8点自动触发构建，由于构建过程中会往`gh-pages`分支下提交代码，从而间接达成在`GitHub`中每天提交代码，在`GitHub`主页面展示时保持全绿的功能！[^1]
+
+![GitHub实现每天都提交](/blog_img/hugo/using-github-action-to-auto-build-deploy/github-commit-everyday.png "GitHub实现每天都提交")  
+
 参考文档:
 
 1. https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
 2. https://www.pseudoyu.com/zh/2022/05/29/deploy_your_blog_using_hugo_and_github_action/
 
+[^1]: 个人观点**质量优于数量**，不推荐这么做
