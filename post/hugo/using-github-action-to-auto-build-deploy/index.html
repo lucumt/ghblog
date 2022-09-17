@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
 <meta itemprop="description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署"><meta itemprop="datePublished" content="2022-09-03T18:35:57+08:00" />
 <meta itemprop="dateModified" content="2022-09-03T18:35:57+08:00" />
-<meta itemprop="wordCount" content="1394">
+<meta itemprop="wordCount" content="1578">
 <meta itemprop="keywords" content="hugo,github-pages,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用GitHub Action实现Hugo博客在GitHub Pages自动部署"/>
 <meta name="twitter:description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署"/>
@@ -362,11 +362,43 @@
 </div><p>将该<code>yaml</code>文件放到对应<code>GitHub</code>项目下的<code>.github/workflows</code>目录下即完成全部配置。</p>
 <p>当执行<code>git push origin master</code>后，<code>GitHub Actions</code>会开启自动构建部署，运行结果如下，至此整个设置过程完毕！</p>
 <p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/hugo-automatic-build-result.png" alt="GitHub Actions执行结果" title="GitHub Actions执行结果"></p>
+<h1 id="其它">其它</h1>
+<p>由于<code>GitHub Action</code>支持定时语法，将流水线触发条件修改如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># Runs everyday at 8:00 AM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0 8 * * *&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可实现每天上午8点自动触发构建，由于构建过程中会往<code>gh-pages</code>分支下提交代码，从而间接达成在<code>GitHub</code>中每天提交代码，在<code>GitHub</code>主页面展示时保持全绿的功能！<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/github-commit-everyday.png" alt="GitHub实现每天都提交" title="GitHub实现每天都提交"></p>
 <p>参考文档:</p>
 <ol>
 <li><a href="https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html</a></li>
 <li><a href="https://www.pseudoyu.com/zh/2022/05/29/deploy_your_blog_using_hugo_and_github_action/">https://www.pseudoyu.com/zh/2022/05/29/deploy_your_blog_using_hugo_and_github_action/</a></li>
 </ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>个人观点<strong>质量优于数量</strong>，不推荐这么做&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
     </div>
 
     
