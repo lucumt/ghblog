@@ -52,3 +52,4 @@ nocomment = true
 * [邪恶二进制](http://evilbinary.org/)
 * [Javmain's Blog](https://blog.51itzone.cn/)
 * [小林Coding](https://xiaolincoding.com)
+* [云原生实验室](https://icloudnative.io/)
