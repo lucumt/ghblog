@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Sep 2022 09:35:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Sep 2022 10:04:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bit</title>
+      <link>https://lucumt.info/tags/bit/</link>
+      <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/bit/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>jenkins</title>
       <link>https://lucumt.info/tags/jenkins/</link>
@@ -220,15 +229,6 @@
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/intellij-idea/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bit</title>
-      <link>https://lucumt.info/tags/bit/</link>
-      <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/bit/</guid>
       <description></description>
     </item>
     
