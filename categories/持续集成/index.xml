@@ -6,7 +6,16 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Sep 2022 09:35:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 15:46:24 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Nacos与KubeSphere创建多套开发与测试环境</title>
+      <link>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</link>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/&#34;&gt;KubeSphere使用心得&lt;/a&gt;给部门搭建了&lt;code&gt;dev&lt;/code&gt;、&lt;code&gt;sit&lt;/code&gt;、&lt;code&gt;test&lt;/code&gt;、&lt;code&gt;prod&lt;/code&gt;这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合&lt;a href=&#34;https://nacos.io/zh-cn/docs/what-is-nacos.html&#34;&gt;Nacos&lt;/a&gt;在&lt;code&gt;KubeSphere&lt;/code&gt;中动态配置多套环境功能，通过修改&lt;code&gt;Nacos&lt;/code&gt;中的&lt;code&gt;JSON&lt;/code&gt;配置文件可很容易的从4套扩展为16套甚至更多。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Kubesphere集成LDAP踩坑记录</title>
       <link>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</link>

@@ -6,20 +6,11 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 08 Sep 2022 10:04:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>bit</title>
-      <link>https://lucumt.info/tags/bit/</link>
-      <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/bit/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Thu, 15 Sep 2022 15:46:24 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>jenkins</title>
       <link>https://lucumt.info/tags/jenkins/</link>
-      <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/jenkins/</guid>
       <description></description>
@@ -28,7 +19,7 @@
     <item>
       <title>kubesphere</title>
       <link>https://lucumt.info/tags/kubesphere/</link>
-      <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/kubesphere/</guid>
       <description></description>
@@ -37,9 +28,27 @@
     <item>
       <title>LDAP</title>
       <link>https://lucumt.info/tags/ldap/</link>
-      <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/ldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nacos</title>
+      <link>https://lucumt.info/tags/nacos/</link>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/nacos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bit</title>
+      <link>https://lucumt.info/tags/bit/</link>
+      <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/bit/</guid>
       <description></description>
     </item>
     
