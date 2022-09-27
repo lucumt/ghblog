@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Sep 2022 15:46:24 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Sep 2022 09:43:19 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>个人Hugo博客关于Even主题的一些使用改进</title>
+      <link>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</link>
+      <pubDate>Sun, 18 Sep 2022 09:43:19 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</guid>
+      <description>&lt;p&gt;记录下个人&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客使用&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;主题时的一些使用心得与个人改进。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Nacos与KubeSphere创建多套开发与测试环境</title>
       <link>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</link>

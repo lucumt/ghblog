@@ -6,7 +6,16 @@
     <description>Recent content in 个人博客 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 03 Sep 2022 18:35:57 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Sep 2022 09:43:19 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>个人Hugo博客关于Even主题的一些使用改进</title>
+      <link>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</link>
+      <pubDate>Sun, 18 Sep 2022 09:43:19 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</guid>
+      <description>&lt;p&gt;记录下个人&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客使用&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;主题时的一些使用心得与个人改进。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用GitHub Action实现Hugo博客在GitHub Pages自动部署</title>
       <link>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</link>
