@@ -72,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/ldap/</loc>
-    <lastmod>2022-09-15T15:46:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/nacos/</loc>
     <lastmod>2022-09-15T15:46:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -129,6 +122,13 @@
   
   <url>
     <loc>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</loc>
+    <lastmod>2022-09-04T09:35:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/ldap/</loc>
     <lastmod>2022-09-04T09:35:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
