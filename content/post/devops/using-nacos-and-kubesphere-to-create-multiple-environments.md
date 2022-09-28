@@ -5,7 +5,7 @@ lastmod: 2022-09-15T15:46:24+08:00
 draft: false
 keywords: ["kubesphere","jenkins","nacos","动态配置","多套环境"]
 description: "利用Nacos与KubeSphere创建多套开发与测试环境"
-tags: ["kubesphere","jenkins","LDAP","nacos"]
+tags: ["kubesphere","jenkins","nacos"]
 categories: ["持续集成"]
 author: "Rosen Lu"
 

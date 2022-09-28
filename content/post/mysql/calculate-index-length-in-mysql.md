@@ -1,7 +1,7 @@
 ---
 title: "MySQL中计算索引长度"
-date: 2022-08-24T09:55:14+08:00
-lastmod: 2022-08-24T09:55:14+08:00
+date: 2021-03-24T09:55:14+08:00
+lastmod: 2021-03-24T09:55:14+08:00
 draft: true
 keywords: ["mysql","index"]
 description: "简要叙述MySQL中是如何计算索引长度的"

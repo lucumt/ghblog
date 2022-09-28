@@ -1,10 +1,10 @@
 ---
-title: "JavaScript学习(1)-reduce函数"
+title: "JavaScript学习[1]-reduce函数"
 date: 2022-09-26T09:39:47+08:00
 lastmod: 2022-09-26T09:39:47+08:00
 draft: true
 keywords: []
-description: "JavaScript学习(1)-reduce函数"
+description: "简要记录自己对于JavaScript中reduce函数的学习"
 tags: ["javascript"]
 categories: ["web编程"]
 author: "Rosen Lu"
