@@ -37,7 +37,46 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: false
   options: ""
-
 ---
 
+自己尚未找出原因
+
 <!--more-->
+
+```java
+public class CompletableFutureTest {
+
+    public static void main(String[] args) {
+        test1();
+    }
+
+    private static void test1() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        List<Integer> dataList = Arrays.asList(1, 2, 3);
+        for (Integer data : dataList) {
+            CompletableFuture.supplyAsync(() -> {
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                String result = LocalDateTime.now().format(formatter) + "\t结果\t" + data;
+                return result;
+            }, executorService).whenCompleteAsync((result, exception) -> {
+                System.out.println(result);
+            });
+        }
+        executorService.shutdown();
+
+        try {
+            String startTime = "Started at:\t" + LocalDateTime.now().format(formatter);
+            System.out.println(startTime);
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
