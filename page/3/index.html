@@ -143,6 +143,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql/limit-large-size-data-in-mysql/">在MySQL中对大量数据进行limit offset分页查询的优化</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-02-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在软件开发中采用<code>LIMIT OFFSET</code>对数据库进行分页是常见操作，但在数据量很大时直接使用<code>LIMIT OFFSET</code>查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql/limit-large-size-data-in-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/mysql-create-massive-test-data-quickly/">MySQL中快速创建大量测试数据</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-02-08 </span>
@@ -337,27 +358,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-04 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -379,7 +379,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:lucumt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>

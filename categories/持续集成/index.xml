@@ -6,7 +6,16 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Sep 2022 15:46:24 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2022 18:19:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由于k8s中的错误配置导致无法创建新节点</title>
+      <link>https://lucumt.info/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</link>
+      <pubDate>Fri, 11 Nov 2022 18:19:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
+      <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Nacos与KubeSphere创建多套开发与测试环境</title>
       <link>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</link>

@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。
-" /><meta name="keywords" content="kubernetes, service-node-port-range" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要自己在kubernetes中配置service-node-port-range不生效问题的解决方案" /><meta name="keywords" content="kubernetes, service-node-port-range" />
 
 
 
@@ -41,19 +40,19 @@
 
 
 <meta property="og:title" content="在Kubernetes中配置service-node-port-range不生效的问题" />
-<meta property="og:description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。" />
+<meta property="og:description" content="简要自己在kubernetes中配置service-node-port-range不生效问题的解决方案" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-08-15T18:27:59+08:00" />
 <meta property="article:modified_time" content="2022-08-15T18:27:59+08:00" />
 
 <meta itemprop="name" content="在Kubernetes中配置service-node-port-range不生效的问题">
-<meta itemprop="description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。"><meta itemprop="datePublished" content="2022-08-15T18:27:59+08:00" />
+<meta itemprop="description" content="简要自己在kubernetes中配置service-node-port-range不生效问题的解决方案"><meta itemprop="datePublished" content="2022-08-15T18:27:59+08:00" />
 <meta itemprop="dateModified" content="2022-08-15T18:27:59+08:00" />
 <meta itemprop="wordCount" content="912">
 <meta itemprop="keywords" content="kubernetes," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Kubernetes中配置service-node-port-range不生效的问题"/>
-<meta name="twitter:description" content="近期在公司内部搭建基于KubeSphere的持续集成平台时，发现其底层的Kubernetes默认的端口范围为30000-32767而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。"/>
+<meta name="twitter:description" content="简要自己在kubernetes中配置service-node-port-range不生效问题的解决方案"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -297,7 +296,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:lucumt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
