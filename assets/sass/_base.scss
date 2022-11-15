@@ -105,6 +105,10 @@ a {
 	height: 100%;
 }
 
-.search_list + .search_list {
+#search-results-info {
+  display: none;
+}
+
+.search_list {
   border-top: $post-border;
 }
