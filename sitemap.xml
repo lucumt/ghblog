@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/search/</loc>
+    <lastmod>2022-11-15T11:49:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/</loc>
     <lastmod>2022-09-18T09:43:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
