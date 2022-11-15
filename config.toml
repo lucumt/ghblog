@@ -23,6 +23,9 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 [author]                  # essential                     # 必需
   name = "Rosen Lu"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [sitemap]                 # essential                     # 必需
   changefreq = "weekly"
   priority = 0.5
@@ -48,11 +51,16 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   weight = 40
   identifier = "categories"
   url = "/categories/"
- [[menu.main]]
-  name = "关于我"
-  weight = 50
-  identifier = "about"
-  url = "/about/"
+[[menu.main]]
+	name = "搜索"
+	weight = 50
+	identifier = "search"
+	url = "/search/"
+[[menu.main]]
+	name = "关于我"
+	weight = 50
+	identifier = "about"
+	url = "/about/"
 
 [params]
   version = "4.x"           # Used to give a friendly message when you have an incompatible update
