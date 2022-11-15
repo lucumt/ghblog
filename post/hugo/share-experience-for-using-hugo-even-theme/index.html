@@ -49,7 +49,7 @@
 <meta itemprop="name" content="个人Hugo博客关于Even主题的一些使用改进">
 <meta itemprop="description" content="个人Hugo博客关于Even主题的一些使用改进"><meta itemprop="datePublished" content="2022-09-18T09:43:19+08:00" />
 <meta itemprop="dateModified" content="2022-09-18T09:43:19+08:00" />
-<meta itemprop="wordCount" content="2058">
+<meta itemprop="wordCount" content="2393">
 <meta itemprop="keywords" content="hugo,Go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="个人Hugo博客关于Even主题的一些使用改进"/>
 <meta name="twitter:description" content="个人Hugo博客关于Even主题的一些使用改进"/>
@@ -159,10 +159,10 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#利用github-actions自动部署">利用GitHub Actions自动部署</a></li>
+    <li><a href="#github-actions自动部署">GitHub Actions自动部署</a></li>
     <li><a href="#改进back-to-top">改进Back to top</a>
       <ul>
         <li><a href="#背景">背景</a></li>
@@ -185,7 +185,7 @@
         <li><a href="#使用方式">使用方式</a></li>
       </ul>
     </li>
-    <li><a href="#添加fork-me-on-github">添加Fork me on Github</a>
+    <li><a href="#fork-me-on-github">Fork me on Github</a>
       <ul>
         <li><a href="#修改代码-3">修改代码</a></li>
         <li><a href="#运行效果-2">运行效果</a></li>
@@ -197,13 +197,19 @@
         <li><a href="#运行效果-3">运行效果</a></li>
       </ul>
     </li>
+    <li><a href="#添加搜索功能">添加搜索功能</a>
+      <ul>
+        <li><a href="#修改代码-5">修改代码</a></li>
+        <li><a href="#运行效果3">运行效果</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>记录下个人<a href="https://gohugo.io/"><strong>Hugo</strong></a>博客使用<a href="https://github.com/olOwOlo/hugo-theme-even"><strong>Even</strong></a>主题时的一些使用心得与个人改进。</p>
-<h1 id="利用github-actions自动部署">利用GitHub Actions自动部署</h1>
+<h1 id="github-actions自动部署">GitHub Actions自动部署</h1>
 <p>参见<a href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a>。</p>
 <h1 id="改进back-to-top">改进Back to top</h1>
 <h2 id="背景">背景</h2>
@@ -510,7 +516,7 @@
 </div>
 </div><h2 id="使用方式">使用方式</h2>
 <p>在项目部署时通过添加<code>-e &quot;production&quot;</code>来指定为生产环境，如<code>hugo -b &quot;https://lucumt.info/&quot; -e &quot;production&quot;</code>。</p>
-<h1 id="添加fork-me-on-github">添加Fork me on Github</h1>
+<h1 id="fork-me-on-github">Fork me on Github</h1>
 <p>原始代码来源<a href="https://github.com/olOwOlo/hugo-theme-even/pull/412">https://github.com/olOwOlo/hugo-theme-even/pull/412</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，参考代码见<a href="https://www.cnblogs.com/quanxiaoha/p/10490484.html">如何在博客园添加 Fork me on GitHub 彩带效果</a></p>
 <h2 id="修改代码-3">修改代码</h2>
 <ul>
@@ -705,6 +711,85 @@
 <h2 id="运行效果-3">运行效果</h2>
 <p>在非手机浏览器中当开启<code>enableCopyCode</code>开关后，在代码左侧会出现如下效果<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/copy-code-button-on-top-right.png" alt="复制代码按钮" title="复制代码按钮"></p>
+<h1 id="添加搜索功能">添加搜索功能</h1>
+<h2 id="修改代码-5">修改代码</h2>
+<p>此部分的代码主要参考<a href="https://sobaigu.com/hugo-set-featuer-search.html">给hugo添加搜索功能</a>基于<a href="https://fusejs.io/">fuse</a>实现的，由于基于此博文实现的搜索效果展示比较简陋，故个人做了如下改进:</p>
+<ul>
+<li>
+<p>在<code>layouts/_default/search.html</code>下添加了，用于将搜索结果用博客默认的风格包装起来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ define &#34;main&#34; }} … {{ end }}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在<code>layouts/_default/baseof.html</code>实现前述步骤中相关的定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ block &#34;main&#34; . }}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;content-wrapper&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;content&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                {{ block &#34;content&#34; . }}{{ end }}
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            {{ partial &#34;comments.html&#34; . }}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在<code>assets/sass/_base.scss</code>添加下述样式，用于分隔显示不同的检索结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-scss" data-lang="scss"><span class="line"><span class="cl"><span class="nn">#search-results-info</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">display</span><span class="o">:</span> <span class="ni">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nc">.search_list</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">border-top</span><span class="o">:</span> <span class="nv">$post-border</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="运行效果3">运行效果<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></h2>
+<ul>
+<li>
+<p>默认的搜索界面</p>
+<p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-default-search-page.png" alt="默认搜索界面" title="默认搜索界面"></p>
+</li>
+<li>
+<p>输入关键字后，有显示结果的界面</p>
+<p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-search-page-with-results.png" alt="有搜索结果的界面" title="有搜索结果的界面"></p>
+</li>
+</ul>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -713,6 +798,9 @@
 </li>
 <li id="fn:2">
 <p>此部分的提示文字采用硬编码<code>copy</code>，尚未做成通用的国际化代码&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>由于分词的原因，中文检测结果可能存在一定误差&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
