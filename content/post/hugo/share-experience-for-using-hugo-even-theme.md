@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -43,7 +43,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 利用GitHub Actions自动部署
+# GitHub Actions自动部署
 
 参见[利用GitHub Action实现Hugo博客在GitHub Pages自动部署](/post/hugo/using-github-action-to-auto-build-deploy/)。
 
@@ -236,7 +236,7 @@ sequenceDiagrams:
 
 在项目部署时通过添加`-e "production"`来指定为生产环境，如`hugo -b "https://lucumt.info/" -e "production"`。
 
-# 添加Fork me on Github
+# Fork me on Github
 
 原始代码来源[https://github.com/olOwOlo/hugo-theme-even/pull/412](https://github.com/olOwOlo/hugo-theme-even/pull/412)[^1]，参考代码见[如何在博客园添加 Fork me on GitHub 彩带效果](https://www.cnblogs.com/quanxiaoha/p/10490484.html)
 
@@ -351,7 +351,57 @@ sequenceDiagrams:
 
 ![复制代码按钮](/blog_img/hugo/share-experience-for-using-hugo-even-theme/copy-code-button-on-top-right.png "复制代码按钮") 
 
+# 添加搜索功能
+
+## 修改代码
+
+此部分的代码主要参考[给hugo添加搜索功能](https://sobaigu.com/hugo-set-featuer-search.html)基于[fuse](https://fusejs.io/)实现的，由于基于此博文实现的搜索效果展示比较简陋，故个人做了如下改进:
+
+* 在`layouts/_default/search.html`下添加了，用于将搜索结果用博客默认的风格包装起来
+
+  ```html
+  {{ define "main" }} … {{ end }}
+  ```
+
+* 在`layouts/_default/baseof.html`实现前述步骤中相关的定义
+
+  ```html
+  {{ block "main" . }}
+      <main id="main" class="main">
+          <div class="content-wrapper">
+              <div id="content" class="content">
+                  {{ block "content" . }}{{ end }}
+              </div>
+              {{ partial "comments.html" . }}
+          </div>
+      </main>
+  {{ end }}
+  ```
+
+* 在`assets/sass/_base.scss`添加下述样式，用于分隔显示不同的检索结果
+
+  ```scss
+  #search-results-info {
+    display: none;
+  }
+  
+  .search_list {
+    border-top: $post-border;
+  }
+  ```
+
+## 运行效果[^3]
+
+* 默认的搜索界面
+
+  ![默认搜索界面](/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-default-search-page.png "默认搜索界面") 
+
+* 输入关键字后，有显示结果的界面
+
+  ![有搜索结果的界面](/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-search-page-with-results.png "有搜索结果的界面") 
+
 
 
 [^1]: 截至本文编写时(2022年9月)[Even](https://github.com/olOwOlo/hugo-theme-even/)主题的作者尚未merge这些pull request
 [^2]:  此部分的提示文字采用硬编码`copy`，尚未做成通用的国际化代码
+[^3]: 由于分词的原因，中文检测结果可能存在一定误差
