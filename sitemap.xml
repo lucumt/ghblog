@@ -2,15 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lucumt.info/search/</loc>
-    <lastmod>2022-11-15T11:49:21+08:00</lastmod>
+    <loc>https://lucumt.info/categories/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2022-09-18T09:43:19+08:00</lastmod>
+    <loc>https://lucumt.info/tags/java/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</loc>
+    <lastmod>2022-11-15T16:20:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/search/</loc>
+    <lastmod>2022-11-15T11:49:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,27 +66,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/hugo/</loc>
-    <lastmod>2022-09-18T09:43:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2022-09-18T09:43:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2022-09-18T09:43:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2022-09-18T09:43:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -107,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2022-09-08T10:04:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</loc>
     <lastmod>2022-09-08T10:04:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -151,13 +165,6 @@
   <url>
     <loc>https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/</loc>
     <lastmod>2022-09-03T18:35:57+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/java/</loc>
-    <lastmod>2022-08-20T20:35:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

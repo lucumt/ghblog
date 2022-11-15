@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Sep 2022 09:43:19 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Nov 2022 16:20:57 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Java8中的lambda来实现字符串的解析与分组</title>
+      <link>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</link>
+      <pubDate>Tue, 15 Nov 2022 16:20:57 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</guid>
+      <description>&lt;p&gt;在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的&lt;code&gt;Map&lt;/code&gt;与&lt;code&gt;List&lt;/code&gt;组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用&lt;code&gt;Java8&lt;/code&gt;中引入的&lt;code&gt;lambda&lt;/code&gt;表达式后代码变的更简洁、更优雅，故简单记录下。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>个人Hugo博客关于Even主题的一些使用改进</title>
       <link>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</link>
