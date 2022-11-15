@@ -4,7 +4,7 @@ date: 2022-08-15T18:27:59+08:00
 lastmod: 2022-08-15T18:27:59+08:00
 draft: false
 keywords: ["kubernetes","service-node-port-range"]
-description: ""
+description: "简要自己在kubernetes中配置service-node-port-range不生效问题的解决方案"
 tags: ["kubernetes"]
 categories: ["持续集成","容器化"]
 author: "Rosen Lu"

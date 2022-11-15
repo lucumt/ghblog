@@ -207,7 +207,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
-    a-email = "mailto:lucumt@gmail.com"
+    a-email = "mailto:cumtlu@126.com"
     b-stack-overflow = "https://stackoverflow.com/users/3176419"
     #c-twitter = "http://localhost:1313"
     #d-facebook = "http://localhost:1313"
