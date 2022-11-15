@@ -21,7 +21,7 @@ if(searchQuery){
   $("#search-query").val(searchQuery);
   executeSearch(searchQuery);
 }else {
-  $('#search-results').append("<p>Please enter a word or phrase above</p>");
+  $('#search-results').append("<p>请在上面输入一个词或词组</p>");
 }
 
 function executeSearch(searchQuery){
@@ -29,11 +29,11 @@ function executeSearch(searchQuery){
     var pages = data;
     var fuse = new Fuse(pages, fuseOptions);
     var result = fuse.search(searchQuery);
-    console.log({"matches":result});
     if(result.length > 0){
+	  $('#search-results-info').html("共检索到" + result.length + "条记录").show();
       populateResults(result);
     }else{
-      $('#search-results').append("<p>No matches found</p>");
+      $('#search-results-info').html("没有搜索到结果!").show();
     }
   });
 }
