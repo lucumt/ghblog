@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Nov 2022 16:20:57 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Jan 2023 11:31:45 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</title>
+      <link>https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</link>
+      <pubDate>Wed, 11 Jan 2023 11:31:45 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</guid>
+      <description>&lt;p&gt;工作中涉及到&lt;code&gt;Kubernetes&lt;/code&gt;相关知识，自己之前一直没有系统性的学习&lt;code&gt;Kubernetes&lt;/code&gt;，近期在腾讯云上想安装&lt;code&gt;Kubernetes&lt;/code&gt;时一直遇到在执行&lt;code&gt;kubeadm init&lt;/code&gt;时&lt;code&gt;6443&lt;/code&gt;和&lt;code&gt;10280&lt;/code&gt;端口无法访问导致操作失败进而无法顺利安装&lt;code&gt;Kubernetes&lt;/code&gt;。一番排查后发现是由于从&lt;code&gt;1.24.0&lt;/code&gt;之后&lt;code&gt;Kubernetes&lt;/code&gt;默认采用&lt;code&gt;containerd&lt;/code&gt;作为运行时容器，其默认镜像为&lt;code&gt;registry.k8s.io&lt;/code&gt;，该镜像在国内无法访问导致的，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Java8中的lambda来实现字符串的解析与分组</title>
       <link>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</link>
