@@ -23,11 +23,11 @@ title = "将基于Github Pages的自定义域名博客迁移到HTTPS"
 ### 利用Cloudflare修改DNS服务器
 
 1. 打开`Cloudflare官网`注册一个`Cloudflare` 账户。注册成功之后，点击页面右上角的add site 链接，添加一个网站，在下图输入框中输入自己的域名，点击 Begin Scan 按钮开始扫描。  
-  !["在Cloudflare中扫描站点"](/blog_img/hugo/migrate-github-blog-from-http-to-https/add_site_in_cloudflare.png "在Cloudflare中扫描站点")  
+    !["在Cloudflare中扫描站点"](/blog_img/hugo/migrate-github-blog-from-http-to-https/add_site_in_cloudflare.png "在Cloudflare中扫描站点")  
 2. 扫描完毕后点击 Contiue Setup ，在类似如下图所示的界面中选择Free Website，然后点击页面底部的Continue按钮。  
-  !["选择Cloudflare免费站点"](/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_free_website.png "选择Cloudflare免费站点")  
+    !["选择Cloudflare免费站点"](/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_free_website.png "选择Cloudflare免费站点")  
 3. 在下图所示的Cloudflare Nameservers说明界面中根据要求来修改自定义域名的DNS服务器。
-  !["Cloudflare扫描结果"](/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_nameservers.png "Cloudflare扫描结果")  
+    !["Cloudflare扫描结果"](/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_nameservers.png "Cloudflare扫描结果")  
 4. 登录`GoDaddy`，打开响应域名的Manage DNS界面，将Nameservers从**Default**修改为**Custom** 然后添加前一个步骤中的两个值分别加上并点击保存。  
 !["Cloudflare扫描结果"](/blog_img/hugo/migrate-github-blog-from-http-to-https/modify_dns_server_in_godaddy.png "Cloudflare扫描结果")  
 5. 回到`Cloudflare`网站，点击Overview按钮，查看域名的状态是否为如下所示的**Active**，若是则表示DNS服务器修改成功，若不是 **Active**请等待几分钟。  
@@ -62,7 +62,13 @@ title = "将基于Github Pages的自定义域名博客迁移到HTTPS"
 - 由于经过`Cloudflare`这层代码，访问速度肯定没有直接访问原始服务器那么快，对于响应速度要求高的用户不合适。
 - 由于众所周知的原因，在天朝`Cloudflare`访问速度比国内慢，而且指不定哪天就被ban了。
 
+# 更新
+
+`Github`从2018年5月份开始支持自定义域名使用`HTTPS`[^1]，具体操作说明请参见[**securing-your-github-pages-site-with-https**](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https)，通过此种方式可以绕过`Cloudflare`作为中间层的问题，但是仍然无法解决由于qiang存在导致的访问缓慢的问题。
+
 参考:
 
 - [https://bakumon.me/blog/p/github-pages-https-ssl.html](https://bakumon.me/blog/p/github-pages-https-ssl.html)
 - [https://help.github.com/articles/securing-your-github-pages-site-with-https/](https://help.github.com/articles/securing-your-github-pages-site-with-https/)
+
+[^1]: https://github.blog/2018-05-01-github-pages-custom-domains-https/
