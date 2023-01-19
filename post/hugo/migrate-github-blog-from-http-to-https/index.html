@@ -49,7 +49,7 @@
 <meta itemprop="name" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
 <meta itemprop="description" content="将基于Github Pages的自定义域名博客迁移到HTTPS"><meta itemprop="datePublished" content="2017-12-24T10:28:03+08:00" />
 <meta itemprop="dateModified" content="2017-12-24T10:28:03+08:00" />
-<meta itemprop="wordCount" content="1774">
+<meta itemprop="wordCount" content="1919">
 <meta itemprop="keywords" content="Github Pages,HTTPS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="将基于Github Pages的自定义域名博客迁移到HTTPS"/>
 <meta name="twitter:description" content="将基于Github Pages的自定义域名博客迁移到HTTPS"/>
@@ -175,6 +175,7 @@
         <li><a href="#注意事项">注意事项</a></li>
       </ul>
     </li>
+    <li><a href="#更新">更新</a></li>
   </ul>
 </nav>
   </div>
@@ -227,11 +228,21 @@
 <li>由于经过<code>Cloudflare</code>这层代码，访问速度肯定没有直接访问原始服务器那么快，对于响应速度要求高的用户不合适。</li>
 <li>由于众所周知的原因，在天朝<code>Cloudflare</code>访问速度比国内慢，而且指不定哪天就被ban了。</li>
 </ul>
+<h1 id="更新">更新</h1>
+<p><code>Github</code>从2018年5月份开始支持自定义域名使用<code>HTTPS</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，具体操作说明请参见<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https"><strong>securing-your-github-pages-site-with-https</strong></a>，通过此种方式可以绕过<code>Cloudflare</code>作为中间层的问题，但是仍然无法解决由于qiang存在导致的访问缓慢的问题。</p>
 <p>参考:</p>
 <ul>
 <li><a href="https://bakumon.me/blog/p/github-pages-https-ssl.html">https://bakumon.me/blog/p/github-pages-https-ssl.html</a></li>
 <li><a href="https://help.github.com/articles/securing-your-github-pages-site-with-https/">https://help.github.com/articles/securing-your-github-pages-site-with-https/</a></li>
 </ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://github.blog/2018-05-01-github-pages-custom-domains-https/">https://github.blog/2018-05-01-github-pages-custom-domains-https/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
     </div>
 
     <div class="post-copyright">
