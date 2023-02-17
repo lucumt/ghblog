@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Jan 2023 11:31:45 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Feb 2023 13:48:05 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Java中解析和存储包含微秒与纳秒的时间</title>
+      <link>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</link>
+      <pubDate>Fri, 17 Feb 2023 13:48:05 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</guid>
+      <description>&lt;p&gt;在软件开发领域，大部分时间精确到秒或毫秒即可满足日常需求，但在某些对时间要求严格的场景中需要使用微秒、纳秒等更精确的时间值，本文简要记录如何在Java中通过&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html&#34;&gt;LocalDateTime&lt;/a&gt;实现对于微秒、纳秒的精确解析以及转化为&lt;code&gt;long&lt;/code&gt;型时间戳。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</title>
       <link>https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</link>
