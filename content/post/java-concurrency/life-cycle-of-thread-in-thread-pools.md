@@ -1,5 +1,5 @@
 ---
-title: "Life Cycle of Thread Pools"
+title: "线程池中线程的生命周期分析"
 date: 2023-01-28T11:09:10+08:00
 lastmod: 2023-01-28T11:09:10+08:00
 draft: true
