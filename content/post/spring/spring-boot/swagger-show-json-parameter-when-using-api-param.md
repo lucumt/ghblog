@@ -6,7 +6,7 @@ draft: true
 keywords: []
 description: ""
 tags: []
-categories: []
+categories: ["spring-boot"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

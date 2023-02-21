@@ -6,7 +6,7 @@ draft: true
 keywords: ["spring boot","配置","启动速度"]
 description: "通过去掉各种无用的启动配置来加快Spring Boot的启动速度"
 tags: ["spring","spring-boot"]
-categories: ["spring系列"]
+categories: ["spring系列","spring-boot"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
