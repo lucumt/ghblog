@@ -91,6 +91,15 @@
     </item>
     
     <item>
+      <title>Arrays.asList类型转换结果的坑</title>
+      <link>https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/</link>
+      <pubDate>Mon, 22 Jul 2019 10:47:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/</guid>
+      <description>&lt;p&gt;在各种&lt;code&gt;Java&lt;/code&gt;编程规范中都强调尽量不用&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-&#34;&gt;java.util.Arrays.asList()&lt;/a&gt;方法以避免调用此方法生成的&lt;code&gt;List&lt;/code&gt;无法进行修改操作，个人近期在使用过程中发现该方法的另外一个坑，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>ClassNotFoundException与NoClassDefFoundError对比</title>
       <link>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</link>
       <pubDate>Wed, 02 Jan 2019 14:18:46 +0800</pubDate>
