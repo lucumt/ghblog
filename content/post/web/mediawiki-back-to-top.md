@@ -14,7 +14,7 @@ title = "Mediawiki添加回到顶部的方法"
 
 <!--more-->
 
-* 以 [**Mediawiki**](https://www.mediawiki.org/wiki/MediaWiki) 管理员身份登录mediawiki,在搜索栏输入MediaWiki:Common.js,然后输入如下代码并保存：
+* 以 [**Mediawiki**](https://www.mediawiki.org/wiki/MediaWiki) 管理员身份登录mediawiki,在搜索栏输入`MediaWiki:Common.js`,然后输入如下代码并保存：
 
     ``` javascript
     /* 此处的JavaScript将加载于所有用户每一个页面。 */
@@ -26,7 +26,7 @@ title = "Mediawiki添加回到顶部的方法"
       }
     });
     ```
-* 在mediawiki\skins\Vector.php中的第252行添加如下代码： 
+* 在`mediawiki\skins\Vector.php`中的第252行添加如下代码： 
 
      ```html
        <div class="back-to-top" onClick="$('html,body').animate({scrollTop:0},500);">
