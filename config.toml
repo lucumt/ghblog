@@ -57,6 +57,11 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 	identifier = "search"
 	url = "/search/"
 [[menu.main]]
+	name = "外链"
+	weight = 50
+	identifier = "links"
+	url = "/links/"
+[[menu.main]]
 	name = "关于我"
 	weight = 50
 	identifier = "about"

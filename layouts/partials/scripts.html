@@ -101,7 +101,7 @@
 {{- end }}
 
 <!-- only work in production mode -->
-{{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
+{{- if and (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") (ne (trim .Page.RelPermalink "/") "links") -}}
 
 	<!-- Analytics -->
 	{{- if .Site.GoogleAnalytics -}}

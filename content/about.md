@@ -1,17 +1,49 @@
-+++
+---
+title: "关于我"
+date: 2023-02-27T18:44:29+08:00
+lastmod: 2023-02-27T18:44:29+08:00
+draft: false
+keywords: []
+description: ""
+tags: []
+categories: []
+author: "Rosen Lu"
 
-date = "2016-02-25T00:22:23+08:00"
-draft = false
-title = "关于我"
-pinned = true
-nodate = true
-nocomment = true
+# You can also close(false) or open(true) something for this content.
+# P.S. comment can only be closed
+comment: true
+toc: false
+autoCollapseToc: false
+postMetaInFooter: false
+hiddenFromHomePage: false
+# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
+contentCopyright: false
+reward: false
+mathjax: false
+mathjaxEnableSingleDollar: false
+mathjaxEnableAutoNumber: false
 
-+++
+# You unlisted posts you might want not want the header or footer to show
+hideHeaderAndFooter: false
+
+# You can enable or disable out-of-date content warning for individual post.
+# Comment this out to use the global config.
+#enableOutdatedInfoWarning: false
+
+flowchartDiagrams:
+  enable: false
+  options: ""
+
+sequenceDiagrams: 
+  enable: false
+  options: ""
+
+---
 
 一个混迹于帝都的程序猿，主要从事`Java`、`Python`和`Golang`相关的开发工作。
 
 ## 编程领域
+
 * `Java`，主要用它进行web开发
 * `Python`，主要用它进行网络爬虫开发和web开发
 * `Golang`,个人业余爱好
@@ -25,10 +57,12 @@ nocomment = true
 ## 个人信息
 
 ### 教育信息
+
 * [中国矿业大学](http://www.cumt.edu.cn/)&nbsp;(2006.9-2010.6)
 * [计算机科学与技术](http://cs.cumt.edu.cn/)&nbsp;(本科)
 
 ### 自我评价
+
 * 热爱学习和使用新技术；
 * 有着十分强烈的代码洁癖；
 * 喜欢重构代码，善于分析和解决问题；
@@ -40,6 +74,7 @@ nocomment = true
 * 学习
 
 ### 联系方式
+
 * **Email**: `lucumt@gmail.com`,`cumtlu@126.com`
 * **Skype**: `lu.rosen`
 * **QQ**: `317801876`
