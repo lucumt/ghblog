@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/about/</loc>
+    <lastmod>2023-02-27T18:44:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/links/</loc>
+    <lastmod>2023-02-27T18:40:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/</loc>
     <lastmod>2023-02-17T13:48:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -767,13 +781,6 @@
   <url>
     <loc>https://lucumt.info/post/hugo/create-website-with-hugo/</loc>
     <lastmod>2016-02-27T22:23:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/about/</loc>
-    <lastmod>2016-02-25T00:22:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

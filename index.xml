@@ -8,6 +8,24 @@
     <language>en</language>
     <lastBuildDate>Fri, 17 Feb 2023 13:48:05 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>关于我</title>
+      <link>https://lucumt.info/about/</link>
+      <pubDate>Mon, 27 Feb 2023 18:44:29 +0800</pubDate>
+      
+      <guid>https://lucumt.info/about/</guid>
+      <description>一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作。 编程领域 Java，主要用它进行web开发 Python，主</description>
+    </item>
+    
+    <item>
+      <title>各种外链</title>
+      <link>https://lucumt.info/links/</link>
+      <pubDate>Mon, 27 Feb 2023 18:40:33 +0800</pubDate>
+      
+      <guid>https://lucumt.info/links/</guid>
+      <description>记录个人觉得有意义的各种博客、公众号页面、视频等。 博客园 地址 内容 其它 程序员自由之路 主要是JavaEE开发，关于Java框架的文章很多 Mich</description>
+    </item>
+    
+    <item>
       <title>在Java中解析和存储包含微秒与纳秒的时间</title>
       <link>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</link>
       <pubDate>Fri, 17 Feb 2023 13:48:05 +0800</pubDate>
@@ -587,15 +605,6 @@
       
       <guid>https://lucumt.info/post/hugo/create-website-with-hugo/</guid>
       <description>&lt;p&gt;一直以来都想拥有一个属于自己的博客，前段时间在学习&lt;code&gt;Go&lt;/code&gt; ，于是利用&lt;code&gt;Hugo&lt;/code&gt; 和&lt;code&gt;Github Pages&lt;/code&gt; 搭建了一个简易的个人博客，先简单记录下。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>关于我</title>
-      <link>https://lucumt.info/about/</link>
-      <pubDate>Thu, 25 Feb 2016 00:22:23 +0800</pubDate>
-      
-      <guid>https://lucumt.info/about/</guid>
-      <description>一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作。 编程领域 Java，主要用它进行web开发 Python，主</description>
     </item>
     
   </channel>
