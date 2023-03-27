@@ -1,10 +1,10 @@
 ---
-title: "在SpringBoot中自己实现一个starter"
+title: "在SpringBoot中自己实现一个Starter"
 date: 2023-02-21T15:32:50+08:00
 lastmod: 2023-02-21T15:32:50+08:00
 draft: true
 keywords: []
-description: ""
+description: "在SpringBoot中自己实现一个Starter"
 tags: []
 categories: ["spring-boot"]
 author: "Rosen Lu"

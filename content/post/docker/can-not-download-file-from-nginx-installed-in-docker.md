@@ -1,9 +1,9 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "利用在docker中安装的nginx无法下载文件的原因分析"
+date: 2023-03-23T10:46:12+08:00
+lastmod: 2023-03-23T10:46:12+08:00
 draft: true
-keywords: ["maven"]
+keywords: []
 description: ""
 tags: []
 categories: []

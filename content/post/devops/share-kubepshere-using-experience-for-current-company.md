@@ -1,12 +1,12 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "KubeSphere在当前公司提升研发效率的使用实践分享"
+date: 2023-03-24T14:31:45+08:00
+lastmod: 2023-03-24T14:31:45+08:00
 draft: true
-keywords: ["maven"]
-description: ""
-tags: []
-categories: []
+tags: ["kubesphere","kubernetes","docker","jenkins","nacos","shell"]
+description: "KubeSphere在当前公司提升研发效率的使用实践分享"
+tags: ["kubesphere","kubernetes","docker","jenkins","nacos","shell"]
+categories: ["持续集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

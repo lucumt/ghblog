@@ -1,12 +1,12 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "利用shell脚本实现将微服务程序以docker容器方式自动部署"
+date: 2023-03-16T11:22:47+08:00
+lastmod: 2023-03-16T11:22:47+08:00
 draft: true
-keywords: ["maven"]
-description: ""
-tags: []
-categories: []
+keywords: ["linux","docker","shell","微服务"]
+description: "利用shell脚本实现将微服务程序以docker容器方式自动部署"
+tags: ["linux"]
+categories: ["操作系统"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

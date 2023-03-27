@@ -1,9 +1,9 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "在Jenkins中根据配置从不同的仓库中Checkout代码"
+date: 2023-03-10T22:48:50+08:00
+lastmod: 2023-03-10T22:48:50+08:00
 draft: true
-keywords: ["maven"]
+keywords: []
 description: ""
 tags: []
 categories: []

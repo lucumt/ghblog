@@ -1,12 +1,12 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "给基于VMware创建的Ubuntu系统设置固定IP"
+date: 2023-03-01T10:10:59+08:00
+lastmod: 2023-03-01T10:10:59+08:00
 draft: true
-keywords: ["maven"]
+keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["linux"]
+categories: ["操作系统"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

@@ -50,6 +50,7 @@ sequenceDiagrams:
 | **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                           | 微信公众号`Coder 魔法院` |
 | **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                     |                          |
 | **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                   |                          |
+| **[Throwable](https://www.cnblogs.com/)**                    | 主要是`JavaEE`开发                           |                          |
 
 
 

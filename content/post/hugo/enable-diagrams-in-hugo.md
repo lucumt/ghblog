@@ -1,11 +1,11 @@
 ---
-title: "在Maven中打包和调用dll文件"
-date: 2023-01-30T09:45:46+08:00
-lastmod: 2023-01-30T09:45:46+08:00
+title: "在Hugo中开启图表和流程图支持"
+date: 2023-03-27T09:46:50+08:00
+lastmod: 2023-03-27T09:46:50+08:00
 draft: true
-keywords: ["maven"]
+keywords: []
 description: ""
-tags: []
+tags: ["hugo","Go"]
 categories: []
 author: "Rosen Lu"
 
