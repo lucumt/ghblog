@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/">构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-03-24 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><code>Nacos</code>官方的<code>docker</code>镜像不支持<code>LDAP</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>同时在连接<code>mysql</code>方面在某些版本中会出现<strong>No Datasource Set</strong> 的异常，而其官方的release版本则很很稳定，同时又支持<code>LDAP</code>。目前部门很多项目都是基于<code>docker</code>部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的<code>nacos</code>镜像，在确保性能稳定的同时也能支持<code>ldap</code>登录。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/">在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2023-03-10 </span>
@@ -332,27 +353,6 @@
     </div>
     <div class="read-more">
       <a href="/post/devops/setting-ldap-for-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-03 </span>
-      <div class="post-category">
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用<a href="https://github.com/features/actions">GitHub Actions</a>实现个人<a href="https://gohugo.io/">Hugo</a>博客在<a href="https://pages.github.com/">GitHub Pages</a>中的自动化部署。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/using-github-action-to-auto-build-deploy/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

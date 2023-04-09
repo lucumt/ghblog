@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 10 Mar 2023 22:48:56 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Mar 2023 15:59:58 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</title>
+      <link>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</link>
+      <pubDate>Fri, 24 Mar 2023 15:59:58 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</guid>
+      <description>&lt;p&gt;&lt;code&gt;Nacos&lt;/code&gt;官方的&lt;code&gt;docker&lt;/code&gt;镜像不支持&lt;code&gt;LDAP&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;同时在连接&lt;code&gt;mysql&lt;/code&gt;方面在某些版本中会出现&lt;strong&gt;No Datasource Set&lt;/strong&gt; 的异常，而其官方的release版本则很很稳定，同时又支持&lt;code&gt;LDAP&lt;/code&gt;。目前部门很多项目都是基于&lt;code&gt;docker&lt;/code&gt;部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的&lt;code&gt;nacos&lt;/code&gt;镜像，在确保性能稳定的同时也能支持&lt;code&gt;ldap&lt;/code&gt;登录。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起</title>
       <link>https://lucumt.info/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/</link>
