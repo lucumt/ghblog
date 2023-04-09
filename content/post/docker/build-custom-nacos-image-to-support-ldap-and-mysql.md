@@ -331,21 +331,21 @@ ENTRYPOINT ["/bin/bash","/home/nacos/bin/docker-startup.sh","-m","standalone"]
 
 ## 镜像参数说明
 
-| 属性                       | 作用                     | 默认值 | 可选值      |
-| -------------------------- | ------------------------ | ------ | ----------- |
-| NACOS_SERVER_PORT          | nacos服务器端口          | 8848   |             |
-| SPRING_DATASOURCE_PLATFORM | 指定nacos的数据源        | mysql  | `mysql`或空 |
-| MYSQL_SERVICE_HOST         | mysql服务器地址          |        |             |
-| MYSQL_SERVICE_PORT         | mysql服务器端口          | 3306   |             |
-| MYSQL_SERVICE_DB_NAME      | mysql数据库名称          |        |             |
-| MYSQL_SERVICE_USER         | mysql数据库用户名        | root   |             |
-| MYSQL_SERVICE_PASSWORD     | mysql数据据密码          |        |             |
-| LDAP_URL                   | ldap服务的地址和端口号   |        |             |
-| LDAP_BASE_DC               | ldap搜索范围             |        |             |
-| LDAP_USER_DN               | ldap绑定账号[^4]         |        |             |
-| LDAP_USER_PASSWORD         | ldap绑定账号的密码       |        |             |
-| LDAP_UID                   | 用户账号字段             |        |             |
-| LDAP_CASE_SENSITIVE        | ldap认证时是否大小写敏感 |        |             |
+| 属性                           | 作用                     | 默认值 | 可选值      |
+| ------------------------------ | ------------------------ | ------ | ----------- |
+| **NACOS_SERVER_PORT**          | nacos服务器端口          | 8848   |             |
+| **SPRING_DATASOURCE_PLATFORM** | 指定nacos的数据源        | mysql  | `mysql`或空 |
+| **MYSQL_SERVICE_HOST**         | mysql服务器地址          |        |             |
+| **MYSQL_SERVICE_PORT**         | mysql服务器端口          | 3306   |             |
+| **MYSQL_SERVICE_DB_NAME**      | mysql数据库名称          |        |             |
+| **MYSQL_SERVICE_USER**         | mysql数据库用户名        | root   |             |
+| **MYSQL_SERVICE_PASSWORD**     | mysql数据据密码          |        |             |
+| **LDAP_URL**                   | ldap服务的地址和端口号   |        |             |
+| **LDAP_BASE_DC**               | ldap搜索范围             |        |             |
+| **LDAP_USER_DN**               | ldap绑定账号[^4]         |        |             |
+| **LDAP_USER_PASSWORD**         | ldap绑定账号的密码       |        |             |
+| **LDAP_UID**                   | 用户账号字段             |        |             |
+| **LDAP_CASE_SENSITIVE**        | ldap认证时是否大小写敏感 |        |             |
 
 [^1]: https://github.com/alibaba/nacos/issues/9751
 [^2]:https://unix.stackexchange.com/questions/268284/nohup-doesnt-work-as-expected-in-docker-script
