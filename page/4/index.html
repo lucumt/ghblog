@@ -37,7 +37,7 @@
 
 
 
-<link href="/sass/main.min.bc92a2e4e31e771b916544338c65f505e63dad3d850c46a68003afbdcbd218eb.css" rel="stylesheet">
+<link href="/sass/main.min.732e9f76532ae5709f547a4981dfeab8eaecbd39f3c21f302aa111cdc36f9797.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -145,6 +145,31 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-15 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自 <strong><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">Dealing with InterruptedException</a></strong></p>
+<p>这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了<code>Thread.sleep()</code>来实现。
+但此时编译器或IDE会立即提示你没有处理非运行时异常 <strong><a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html">InterruptedException</a></strong>。那么，什么是<code>InterruptedException</code>,为什么我们要必须处理它呢？</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/dealing-with-interrupted-exception/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/how-to-use-volatile-in-java/">volatile关键字在Java程序中的使用</a></h1>
@@ -338,27 +363,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/modify-java-class-file-content-directly/">在不重新编译的情况下直接修改Java Class文件中的内容</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-08-12 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>Java程序实际上执行的是Java文件编译后的Class文件，这是任何一个Java开发人员都了解的基本知识。若Java程序执行的结果不符合要求，通常的解决方法是先修改Java文件，重新编译成Class文件后再次执行。但有时候我们不能直接修改Java文件（如只有包含class文件的jar包），此时我们就只能直接修改Class文件，本文将展示在基于不同的需求通过可视化工具和<code>Javassist</code>库来直接对Class文件进行修改的方法。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/modify-java-class-file-content-directly/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -415,6 +419,11 @@
   <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
   <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+
+
 
 
 

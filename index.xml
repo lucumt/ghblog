@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Mar 2023 15:59:58 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Mar 2023 09:46:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Hugo中开启图表支持</title>
+      <link>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</link>
+      <pubDate>Mon, 27 Mar 2023 09:46:50 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</guid>
+      <description>&lt;p&gt;简要介绍在&lt;code&gt;hugo&lt;/code&gt;中基于&lt;code&gt;even&lt;/code&gt;主题开启图表支持&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</title>
       <link>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</link>
