@@ -2,7 +2,7 @@
 title: "在Hugo中开启图表支持"
 date: 2023-03-27T09:46:50+08:00
 lastmod: 2023-03-27T09:46:50+08:00
-draft: true
+draft: false
 keywords: []
 description: ""
 tags: ["hugo","Go"]
@@ -88,7 +88,7 @@ sequenceDiagrams:
             }"
 ---
 
-简要介绍在`hugo`中基于`even`主题开启流程图的支持
+简要介绍在`hugo`中基于`even`主题开启图表支持
 
 <!--more-->
 
