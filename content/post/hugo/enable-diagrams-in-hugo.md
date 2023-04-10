@@ -60,18 +60,23 @@ flowchartDiagrams:
                   }
               },
               'flowstate': {
-                'request': {'fill': 'pink'},
+                'aaa': {'fill': 'pink'},
                 'approved': {'fill': 'peru'}
               }
             }"
 
 sequenceDiagrams: 
-  enable: false
-  options: ""
-
+  enable: true
+  options: "{
+               theme: 'simple'
+            }"
 ---
 
+简要介绍在`hugo`中基于`even`主题开启流程图的支持
+
 <!--more-->
+
+# flowchart图表
 
 * 图表1
 
@@ -112,12 +117,12 @@ sequenceDiagrams:
   st=>start: Start|past:>http://www.google.com[blank]
   e=>end: End:>http://www.google.com
   op1=>operation: My Operation|past
-  op2=>operation: Stuff|current
+  op2=>operation: Stuff|aaa
   sub1=>subroutine: My Subroutine|invalid
   cond=>condition: Yes
   or No?|approved:>http://www.google.com
   c2=>condition: Good idea|rejected
-  io=>inputoutput: catch something...|request
+  io=>inputoutput: catch something...|aaa
   
   st->op1(right)->cond
   cond(yes, right)->c2
@@ -125,5 +130,49 @@ sequenceDiagrams:
   c2(yes)->io->e
   c2(no)->op2->e
   ```
+
+  
+
+# sequence图表
+
+* 图表1
+
+  ```sequence
+  Title: Here is a title
+  A->B: Normal line
+  B-->C: Dashed line
+  C->>D: Open arrow
+  D-->>A: Dashed open arrow
+  ```
+
+* 图表2
+
+  ```sequence
+  # Example of a comment.
+  Note left of A: Note to the\n left of A
+  Note right of A: Note to the\n right of A
+  Note over A: Note over A
+  Note over A,B: Note over both A and B
+  ```
+
+* 图表3
+
+  ```sequence
+  participant C
+  participant B
+  participant A
+  Note right of A: By listing the participants\n you can change their order
+  ```
+
+* 图表4
+
+  ```sequence
+  Andrew->China: Says Hello
+  Note right of China: China thinks\nabout it
+  China-->Andrew: How are you?
+  Andrew->>China: I am good thanks!
+  ```
+
+* 图表5
 
   

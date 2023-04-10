@@ -52,28 +52,21 @@
 	{{- else if .Site.Params.flowchartDiagrams.options -}}
 	  window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
 	{{- end -}}
-	let pageOptions = {{ .Page.Params.flowchartDiagrams.options }};
-	let siteOptions = {{ .Site.Params.flowchartDiagrams.options }};
-	pageOptions = !!pageOptions ? pageOptions : "{}"
-	siteOptions = !!siteOptions ? siteOptions : "{}"
+	let flowPageOptions = {{ .Page.Params.flowchartDiagrams.options }};
+	let flowSiteOptions = {{ .Site.Params.flowchartDiagrams.options }};
+	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
+	flowSiteOptions = !!flowSiteOptions ? flowSiteOptions : "{}"
 	
-	pageOptions = eval("(" + pageOptions + ")")
-	siteOptions = eval("(" + siteOptions + ")")
+	flowPageOptions = eval("(" + flowPageOptions + ")")
+	flowSiteOptions = eval("(" + flowSiteOptions + ")")
 	// page options have high priority then site options
-	let options = {...siteOptions, ...pageOptions}; 
-	$("[id^=flow_]").flowChart(options);
+	let flowOptions = {...flowSiteOptions, ...flowPageOptions}; 
+	$("[id^=flow_]").flowChart(flowOptions);
 	</script>
 {{- end -}}
 
 <!-- js-sequence-diagrams -->
 {{- if and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) -}}
-  <script>
-    {{- if .Params.sequenceDiagrams.options -}}
-      window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
-    {{- else if .Site.Params.sequenceDiagrams.options -}}
-      window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
-    {{- end -}}
-  </script>
   {{- if .Site.Params.publicCDN.enable -}}
     {{ .Site.Params.publicCDN.sequenceDiagramsJS | safeHTML }}
     {{ .Site.Params.publicCDN.sequenceDiagramsCSS | safeHTML }}
@@ -84,6 +77,23 @@
     <script src="{{ "lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" | relURL }}" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ "lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" | relURL }}" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
   {{- end -}}
+  <script>
+    {{- if .Params.sequenceDiagrams.options -}}
+      window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
+    {{- else if .Site.Params.sequenceDiagrams.options -}}
+      window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
+    {{- end -}}
+    let seqPageOptions = {{ .Page.Params.sequenceDiagrams.options }};
+	let seqSiteOptions = {{ .Site.Params.sequenceDiagrams.options }};
+	seqPageOptions = !!seqPageOptions ? seqPageOptions : "{}"
+	seqSiteOptions = !!seqSiteOptions ? seqSiteOptions : "{}"
+	
+	seqPageOptions = eval("(" + seqPageOptions + ")")
+	seqSiteOptions = eval("(" + seqSiteOptions + ")")
+	// page options have high priority then site options
+	let seqOptions = {...seqSiteOptions, ...seqPageOptions}; 
+	$("[id^=sequence_]").sequenceDiagram(seqOptions);
+  </script>
 {{- end }}
 {{ $even := resources.Get "js/even.js" }}
 {{ $main := resources.Get "js/main.js" }}
