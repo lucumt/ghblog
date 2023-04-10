@@ -1,5 +1,5 @@
 ---
-title: "在Hugo中开启图表和流程图支持"
+title: "在Hugo中开启图表支持"
 date: 2023-03-27T09:46:50+08:00
 lastmod: 2023-03-27T09:46:50+08:00
 draft: true
@@ -68,7 +68,23 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: true
   options: "{
-               theme: 'simple'
+               'theme': 'simple',
+               'width':1,
+               'line-width': 1,
+               'font-size': 14,
+               'font-family': 'Andale Mono, monospace',
+               'line':{
+                   'stroke-width': 1
+                },
+               'rect':{
+                   'stroke-width': 1,
+                   'fill':'#deffcc'
+                },
+                'text':{
+                    'fill':'#219b15',
+                    'stroke-width':1,
+                    'stroke':'#219b15'
+                }
             }"
 ---
 
@@ -175,4 +191,211 @@ sequenceDiagrams:
 
 * 图表5
 
+  ```sequence
+  participant System
+  participant App
+  System->>App: Do you hear me
+  App-->>Module: Alive?
+  Module-->>App: Yay!
+  App->>System: Stop
+  ```
+
+# mermaid图表
+
+* 图表1
+
+  ```mermaid
+  graph TB
+      c1-->a2
+      subgraph one
+      a1-->a2
+      end
+      subgraph two
+      b1-->b2
+      end
+      subgraph three
+      c1-->c2
+      end
+  ```
+
+* 图表2
+
+  ```mermaid
+  graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
+  ```
+
+* 图表3
+
+  ```mermaid
+  sequenceDiagram
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+      John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+  ```
+
+* 图表4
+
+  ```mermaid
+  gantt
+      section Section
+      Completed :done,    des1, 2014-01-06,2014-01-08
+      Active        :active,  des2, 2014-01-07, 3d
+      Parallel 1   :         des3, after des1, 1d
+      Parallel 2   :         des4, after des1, 1d
+      Parallel 3   :         des5, after des3, 1d
+      Parallel 4   :         des6, after des4, 1d
+  ```
+
+* 图表5
+
+  ```mermaid
+  classDiagram
+      Animal <|-- Duck
+      Animal <|-- Fish
+      Animal <|-- Zebra
+      Animal : +int age
+      Animal : +String gender
+      Animal: +isMammal()
+      Animal: +mate()
+      class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+      }
+      class Fish{
+        -int sizeInFeet
+        -canEat()
+      }
+      class Zebra{
+        +bool is_wild
+        +run()
+      }
+  ```
+
+* 图表6
+
+  ```mermaid
+  gantt
+      title Git Issues - days since last update
+      dateFormat  X
+      axisFormat %s
   
+      section Issue19062
+      71   : 0, 71
+      section Issue19401
+      36   : 0, 36
+      section Issue193
+      34   : 0, 34
+      section Issue7441
+      9    : 0, 9
+      section Issue1300
+      5    : 0, 5
+  ```
+
+* 图表7
+
+  ```mermaid
+  pie
+  "Dogs" : 386
+  "Cats" : 85.9
+  "Rats" : 15
+  ```
+
+* 图表8
+
+  ```mermaid
+  gitGraph
+      commit
+      commit
+      branch develop
+      checkout develop
+      commit
+      commit
+      checkout main
+      merge develop
+      commit
+      commit
+  ```
+
+* 图表9
+
+  ```mermaid
+  journey
+      title My working day
+      section Go to work
+        Make tea: 5: Me
+        Go upstairs: 3: Me
+        Do work: 1: Me, Cat
+      section Go home
+        Go downstairs: 5: Me
+        Sit down: 3: Me
+  ```
+
+  
+
+* 图表10
+
+  ```mermaid
+  mindmap
+    root((mindmap))
+      Origins
+        Long history
+        ::icon(fa fa-book)
+        Popularisation
+          British popular psychology author Tony Buzan
+      Research
+        On effectivness<br/>and features
+        On Automatic creation
+          Uses
+              Creative techniques
+              Strategic planning
+              Argument mapping
+      Tools
+        Pen and paper
+        Mermaid
+  ```
+
+* 图表11
+
+  ```mermaid
+  erDiagram
+      CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+      CUSTOMER ||--o{ ORDER : places
+      CUSTOMER ||--o{ INVOICE : "liable for"
+      DELIVERY-ADDRESS ||--o{ ORDER : receives
+      INVOICE ||--|{ ORDER : covers
+      ORDER ||--|{ ORDER-ITEM : includes
+      PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+      PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+  ```
+
+  
+
+* 图表12
+
+  ```mermaid
+          timeline
+          title My day
+          section Go to work
+            1930 : first step : second step
+                 : third step
+            1940 : fourth step : fifth step
+  ```
+
+  
+
+* 图表13
+
+参考文章:
+
+1. https://snowdreams1006.github.io/write/mermaid-flow-chart.html
