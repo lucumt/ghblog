@@ -16,8 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍在hugo中基于even主题开启图表支持
-" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。
+" /><meta name="keywords" content="flowchart, sequence, mermaid, hugo, markdown" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="在Hugo中开启图表支持" />
-<meta property="og:description" content="简要介绍在hugo中基于even主题开启图表支持" />
+<meta property="og:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-03-27T09:46:50+08:00" />
 <meta property="article:modified_time" content="2023-03-27T09:46:50+08:00" />
 
 <meta itemprop="name" content="在Hugo中开启图表支持">
-<meta itemprop="description" content="简要介绍在hugo中基于even主题开启图表支持"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
+<meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="692">
+<meta itemprop="wordCount" content="727">
 <meta itemprop="keywords" content="hugo,Go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
-<meta name="twitter:description" content="简要介绍在hugo中基于even主题开启图表支持"/>
+<meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -155,7 +155,9 @@
 
       <div class="post-meta">
         <span class="post-time"> 2023-03-27 </span>
-        
+        <div class="post-category">
+            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
+            </div>
         
       </div>
     </header>
@@ -165,6 +167,7 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#背景">背景</a></li>
     <li><a href="#flowchart图表">flowchart图表</a></li>
     <li><a href="#sequence图表">sequence图表</a></li>
     <li><a href="#mermaid图表">mermaid图表</a></li>
@@ -173,7 +176,8 @@
   </div>
 </div>
     <div class="post-content">
-      <p>简要介绍在<code>hugo</code>中基于<code>even</code>主题开启图表支持</p>
+      <p>简要介绍在如何在<code>Hugo</code>博客中基于<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a>主题开启<a href="https://flowchart.js.org/">flowchart</a>、<a href="https://bramp.github.io/js-sequence-diagrams/">sequence</a>和<a href="https://mermaid.js.org/">mermaid</a>图表的支持。</p>
+<h1 id="背景">背景</h1>
 <h1 id="flowchart图表">flowchart图表</h1>
 <ul>
 <li>
@@ -560,13 +564,23 @@ Bob-->>John: Jolly good!
   </script>
 
 
+	  <script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
+		
+		
+		let mermaidPageOptions = "{ 'theme':'forest' }";
+		let mermaidSiteOptions = "{theme: 'default',startOnLoad: true }";
+		mermaidPageOptions = !!mermaidPageOptions ? mermaidPageOptions : "{}"
+		mermaidSiteOptions = !!mermaidSiteOptions ? mermaidSiteOptions : "{}"
 
-  <script type="module">
-	import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
+		mermaidPageOptions = eval("(" + mermaidPageOptions + ")")
+		mermaidSiteOptions = eval("(" + mermaidSiteOptions + ")")
+		
+		let mermaidOptions = {...mermaidSiteOptions, ...mermaidPageOptions}; 
+
+		mermaid.initialize(mermaidOptions);
+	  </script>
 	
-    mermaid.initialize({theme: 'forest',startOnLoad: true });
-  </script>
-
 
 
 

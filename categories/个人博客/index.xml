@@ -6,7 +6,16 @@
     <description>Recent content in 个人博客 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Sep 2022 09:43:19 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Mar 2023 09:46:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Hugo中开启图表支持</title>
+      <link>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</link>
+      <pubDate>Mon, 27 Mar 2023 09:46:50 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</guid>
+      <description>&lt;p&gt;简要介绍在如何在&lt;code&gt;Hugo&lt;/code&gt;博客中基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题开启&lt;a href=&#34;https://flowchart.js.org/&#34;&gt;flowchart&lt;/a&gt;、&lt;a href=&#34;https://bramp.github.io/js-sequence-diagrams/&#34;&gt;sequence&lt;/a&gt;和&lt;a href=&#34;https://mermaid.js.org/&#34;&gt;mermaid&lt;/a&gt;图表的支持。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>个人Hugo博客关于Even主题的一些使用改进</title>
       <link>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</link>
