@@ -19,7 +19,7 @@ siteUV:
   other: "本站总访客数 %s 人"
 
 sitePV:
-  other: "本站总访问量 %s 次"
+  other: "服务器勉强渲染了 %s 次"
 
 pagePV:
   other: "%s 次阅读"
