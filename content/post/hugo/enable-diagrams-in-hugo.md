@@ -5,7 +5,7 @@ lastmod: 2023-03-27T09:46:50+08:00
 draft: false
 keywords: ["flowchart","sequence","mermaid","hugo","markdown"]
 description: ""
-tags: ["hugo","Go"]
+tags: ["hugo","go"]
 categories: ["个人博客"]
 author: "Rosen Lu"
 
@@ -100,7 +100,7 @@ mermaidDiagrams:
 
 # 背景
 
-
+个人`Hugo`博客切换为`Even`已经有好几年了
 
 # flowchart图表
 
