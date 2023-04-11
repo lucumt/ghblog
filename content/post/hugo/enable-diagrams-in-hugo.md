@@ -94,10 +94,6 @@ mermaidDiagrams:
   }"
 ---
 
-
-
-
-
 简要介绍在如何在`Hugo`博客中基于[Even](https://github.com/olOwOlo/hugo-theme-even)主题开启[flowchart](https://flowchart.js.org/)、[sequence](https://bramp.github.io/js-sequence-diagrams/)和[mermaid](https://mermaid.js.org/)图表的支持。
 
 <!--more-->
