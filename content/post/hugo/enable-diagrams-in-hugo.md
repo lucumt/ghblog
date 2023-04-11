@@ -3,10 +3,10 @@ title: "在Hugo中开启图表支持"
 date: 2023-03-27T09:46:50+08:00
 lastmod: 2023-03-27T09:46:50+08:00
 draft: false
-keywords: []
+keywords: ["flowchart","sequence","mermaid","hugo","markdown"]
 description: ""
 tags: ["hugo","Go"]
-categories: []
+categories: ["个人博客"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -86,11 +86,25 @@ sequenceDiagrams:
                     'stroke':'#219b15'
                 }
             }"
+
+mermaidDiagrams: 
+  enable: true
+  options: "{
+     'theme':'forest'
+  }"
 ---
 
-简要介绍在`hugo`中基于`even`主题开启图表支持
+
+
+
+
+简要介绍在如何在`Hugo`博客中基于[Even](https://github.com/olOwOlo/hugo-theme-even)主题开启[flowchart](https://flowchart.js.org/)、[sequence](https://bramp.github.io/js-sequence-diagrams/)和[mermaid](https://mermaid.js.org/)图表的支持。
 
 <!--more-->
+
+# 背景
+
+
 
 # flowchart图表
 

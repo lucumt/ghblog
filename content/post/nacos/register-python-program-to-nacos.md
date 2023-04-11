@@ -1,11 +1,11 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "将Python程序注册到Nacos"
+date: 2023-04-11T09:25:53+08:00
+lastmod: 2023-04-11T09:25:53+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
+tags: ["nacos","python"]
 categories: []
 author: "Rosen Lu"
 
@@ -38,9 +38,6 @@ sequenceDiagrams:
   enable: false
   options: ""
 
-mermaidDiagrams: 
-  enable: false
-  options: ""
 ---
 
 <!--more-->
