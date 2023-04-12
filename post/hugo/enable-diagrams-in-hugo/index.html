@@ -16,7 +16,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。
+<meta name="author" content="Rosen Lu" /><meta name="description" content="说明
+若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。
 " /><meta name="keywords" content="flowchart, sequence, mermaid, hugo, markdown" />
 
 
@@ -41,19 +43,28 @@
 
 
 <meta property="og:title" content="在Hugo中开启图表支持" />
-<meta property="og:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。" />
+<meta property="og:description" content="说明
+若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
+
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-03-27T09:46:50+08:00" />
 <meta property="article:modified_time" content="2023-03-27T09:46:50+08:00" />
 
 <meta itemprop="name" content="在Hugo中开启图表支持">
-<meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
+<meta itemprop="description" content="说明
+若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
+
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="5511">
+<meta itemprop="wordCount" content="5554">
 <meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
-<meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
+<meta name="twitter:description" content="说明
+若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
+
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -224,7 +235,10 @@
   </div>
 </div>
     <div class="post-content">
-      <p>简要介绍在如何在<code>Hugo</code>博客中基于<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a>主题开启<a href="https://flowchart.js.org/">flowchart</a>、<a href="https://bramp.github.io/js-sequence-diagrams/">sequence</a>和<a href="https://mermaid.js.org/">mermaid</a>图表的支持。</p>
+      <div class="admonition info"><p class="admonition-title">说明</p>
+<p>若页面中图表显示不正常，可能是由于<code>js</code>文件加载和图表渲染需要时间，请多等待几秒钟！</p>
+</div>
+<p>简要介绍在如何在<code>Hugo</code>博客中基于<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a>主题开启<a href="https://flowchart.js.org/">flowchart</a>、<a href="https://bramp.github.io/js-sequence-diagrams/">sequence</a>和<a href="https://mermaid.js.org/">mermaid</a>图表的支持。</p>
 <h1 id="背景">背景</h1>
 <p>个人<code>Hugo</code>博客切换为<code>Even</code>已经有好几年了，相关功能也是基于此主题扩展而来，不过<code>Even</code>主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，同时个人发现该主题下<code>layouts/partials/scripts.html</code>对于<code>flowchart</code>和<code>sequence</code>的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！</p>
 <p>PS: <code>Even</code>主题<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>很受欢迎，希望作者早日恢复维护!</p>

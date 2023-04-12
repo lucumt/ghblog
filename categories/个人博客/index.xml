@@ -13,7 +13,10 @@
       <pubDate>Mon, 27 Mar 2023 09:46:50 +0800</pubDate>
       
       <guid>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</guid>
-      <description>&lt;p&gt;简要介绍在如何在&lt;code&gt;Hugo&lt;/code&gt;博客中基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题开启&lt;a href=&#34;https://flowchart.js.org/&#34;&gt;flowchart&lt;/a&gt;、&lt;a href=&#34;https://bramp.github.io/js-sequence-diagrams/&#34;&gt;sequence&lt;/a&gt;和&lt;a href=&#34;https://mermaid.js.org/&#34;&gt;mermaid&lt;/a&gt;图表的支持。&lt;/p&gt;</description>
+      <description>&lt;div class=&#34;admonition info&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;
+&lt;p&gt;若页面中图表显示不正常，可能是由于&lt;code&gt;js&lt;/code&gt;文件加载和图表渲染需要时间，请多等待几秒钟！&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;简要介绍在如何在&lt;code&gt;Hugo&lt;/code&gt;博客中基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题开启&lt;a href=&#34;https://flowchart.js.org/&#34;&gt;flowchart&lt;/a&gt;、&lt;a href=&#34;https://bramp.github.io/js-sequence-diagrams/&#34;&gt;sequence&lt;/a&gt;和&lt;a href=&#34;https://mermaid.js.org/&#34;&gt;mermaid&lt;/a&gt;图表的支持。&lt;/p&gt;</description>
     </item>
     
     <item>
