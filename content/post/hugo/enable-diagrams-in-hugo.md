@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -365,9 +365,128 @@ flowchartDiagrams:
   c2(no)->op2->e
   ```
 
-# sequence图表1
+# sequence图表
 
-* 图表1
+## 修改过程
+
+* 在`layouts/_default/_markup`创建文件`render-codeblock-sequence.html`并添加如下代码
+
+  ```html
+  <div id="sequence_{{ .Ordinal }}">
+      {{- .Inner | safeHTML }}
+  </div>
+  ```
+
+* 在`layouts/partials/scripts.html`补充原有的代码，添加上初始化功能
+
+  ```html
+  <!-- js-sequence-diagrams -->
+  {{- if and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) -}}
+    {{- if .Site.Params.publicCDN.enable -}}
+      {{ .Site.Params.publicCDN.sequenceDiagramsJS | safeHTML }}
+      {{ .Site.Params.publicCDN.sequenceDiagramsCSS | safeHTML }}
+    {{- else -}}
+      <script src="{{ "lib/js-sequence-diagrams/webfontloader-1.6.28.js" | relURL }}" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+      <script src="{{ "lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" | relURL }}" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+      <script src="{{ "lib/js-sequence-diagrams/underscore-1.8.3.min.js" | relURL }}" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+      <script src="{{ "lib/js-sequence-diagrams/sequence-diagram.js" | relURL }}"></script>
+  	<!--<script src="{{ "lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" | relURL }}" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>-->
+  	<link rel="stylesheet" href="{{ "lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" | relURL }}" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+    {{- end -}}
+    <script>
+      /*{{- if .Params.sequenceDiagrams.options -}}
+        window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
+      {{- else if .Site.Params.sequenceDiagrams.options -}}
+        window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
+      {{- end -}}*/
+  	<!-- below is newly added code -->
+      let seqPageOptions = {{ .Page.Params.sequenceDiagrams.options }};
+  	let seqSiteOptions = {{ .Site.Params.sequenceDiagrams.options }};
+  	seqPageOptions = !!seqPageOptions ? seqPageOptions : "{}"
+  	seqSiteOptions = !!seqSiteOptions ? seqSiteOptions : "{}"
+  	
+  	seqPageOptions = eval("(" + seqPageOptions + ")")
+  	seqSiteOptions = eval("(" + seqSiteOptions + ")")
+  	// page options have high priority then site options
+  	let seqOptions = {...seqSiteOptions, ...seqPageOptions}; 
+  	$("[id^=sequence_]").sequenceDiagram(seqOptions);
+    </script>
+  {{- end }}
+  ```
+
+  可以看出，其实现代码与`flowchart`的类似。
+
+* 在对应的`markdown`页面头部开启`sequence`的展示，可根据实际情况添加自定义配置，保存对应`markdown`文件后页面会自动刷新并展示对应效果。
+
+  ```json
+  sequenceDiagrams: 
+    enable: true
+    options: "{
+                 'theme': 'simple',
+                 'font-size': 14,
+                 'font-family': 'Andale Mono, monospace'
+              }"
+  ```
+
+## 自定义样式
+
+在`sequence`的[官方网站](https://bramp.github.io/js-sequence-diagrams/)上对于该图表的初始化只提供的`theme`这一个属性而且其值也只有simple和hand两个选项，对于字体，背景色等没有像`flowchart`那么丰富的支持。
+
+经过多次尝试后发现支持`theme`、`fonts-size`和`font-family`这3个属性配置，显然不能满足使用要求。
+
+一开始自己以为是自己没找到地方，翻遍其[GitHub项目](https://github.com/bramp/js-sequence-diagrams)后在[sequence-diagram.js](https://github.com/bramp/js-sequence-diagrams/blob/master/dist/sequence-diagram.js)上找到了如下说明，**作者自己承认实现不够完善，但此项目已经至少3年没有维护！**
+
+![sequence不能动态配置的说明](/blog_img/hugo/enable-diagrams-in-hugo/seqence-bug-for-dynamic-config.png "sequence不能动态配置的说明") 
+
+What，于是乎我只能自己fork源码自己修改了，修改好的代码参见[sequence-diagram.js](https://github.com/lucumt/js-sequence-diagrams/blob/master/src/sequence-diagram.js),在使用时用此文件或者压缩后的替换原有的，然后修改`integrity`即可。
+
+`sequence`图表是基于[SVG](https://www.w3schools.com/graphics/svg_intro.asp)实现，故而自己的修改也是从`SVG`着手，由于时间关系自己只修改了[SVG Line](https://www.w3schools.com/graphics/svg_line.asp)和[SVG Rectangle](https://www.w3schools.com/graphics/svg_rect.asp)两个组件，修改后的使用效果如下：
+
+![sequence图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/sequence-flowstate-custom-config.png "sequence图表动态配置") 
+
+## 展示效果
+
+基于对应`markdown`页面的下述配置展示相关效果
+
+```jso
+sequenceDiagrams: 
+  enable: true
+  options: "{
+               'theme': 'simple',
+               'width':1,
+               'line-width': 1,
+               'font-size': 14,
+               'font-family': 'Andale Mono, monospace',
+               'line':{
+                   'stroke-width': 1
+                },
+               'rect':{
+                   'stroke-width': 1,
+                   'fill':'#deffcc'
+                },
+                'text':{
+                    'fill':'#219b15',
+                    'stroke-width':1,
+                    'stroke':'#219b15'
+                }
+            }"
+```
+
+### 图表1
+
+* 原始代码
+
+  ```
+  ​```sequence
+  Title: Here is a title
+  A->B: Normal line
+  B-->C: Dashed line
+  C->>D: Open arrow
+  D-->>A: Dashed open arrow
+  ​```
+  ```
+
+* 展示效果
 
   ```sequence
   Title: Here is a title
@@ -377,7 +496,21 @@ flowchartDiagrams:
   D-->>A: Dashed open arrow
   ```
 
-* 图表2
+### 图表2
+
+* 原始代码
+
+  ```
+  ​```sequence
+  # Example of a comment.
+  Note left of A: Note to the\n left of A
+  Note right of A: Note to the\n right of A
+  Note over A: Note over A
+  Note over A,B: Note over both A and B
+  ​```
+  ```
+
+* 展示效果
 
   ```sequence
   # Example of a comment.
@@ -387,7 +520,20 @@ flowchartDiagrams:
   Note over A,B: Note over both A and B
   ```
 
-* 图表3
+### 图表3
+
+* 原始代码
+
+  ```
+  ​```sequence
+  participant C
+  participant B
+  participant A
+  Note right of A: By listing the participants\n you can change their order
+  ​```
+  ```
+
+* 展示效果
 
   ```sequence
   participant C
@@ -396,7 +542,20 @@ flowchartDiagrams:
   Note right of A: By listing the participants\n you can change their order
   ```
 
-* 图表4
+### 图表4
+
+* 原始代码
+
+  ```
+  ​```sequence
+  Andrew->China: Says Hello
+  Note right of China: China thinks\nabout it
+  China-->Andrew: How are you?
+  Andrew->>China: I am good thanks!
+  ​```
+  ```
+
+* 展示效果
 
   ```sequence
   Andrew->China: Says Hello
@@ -405,7 +564,22 @@ flowchartDiagrams:
   Andrew->>China: I am good thanks!
   ```
 
-* 图表5
+### 图表5
+
+* 原始代码
+
+  ```
+  ​```sequence
+  participant System
+  participant App
+  System->>App: Do you hear me
+  App-->>Module: Alive?
+  Module-->>App: Yay!
+  App->>System: Stop
+  ​```
+  ```
+
+* 展示效果
 
   ```sequence
   participant System
