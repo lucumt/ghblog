@@ -100,9 +100,193 @@ mermaidDiagrams:
 
 # 背景
 
-个人`Hugo`博客切换为`Even`已经有好几年了
+个人`Hugo`博客切换为`Even`已经有好几年了，相关功能也是基于此主题扩展而来，不过`Even`主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭[^1]，同时个人发现该主题下`layouts/partials/scripts.html`对于`flowchart`和`sequence`的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！
+
+PS: `Even`主题很受欢迎，希望作者早日恢复维护!
+
+![Even主题的作者已经没有维护](/blog_img/hugo/enable-diagrams-in-hugo/even-theme-website-not-display-diagram.png "Even主题的作者已经没有维护") 
+
+![Even主题无法初始化图表](/blog_img/hugo/enable-diagrams-in-hugo/even-theme-does-not-have-diagram-init-code.png "Even主题无法初始化图表") 
+
+# 修改说明
+
+由于`Hugo`支持代码高亮，当图表相关的数据当采用`Markdown`的codeblock方式写入时，如下图所示默认情况下，其会以代码高亮的方式显示，很明显此种方式不满足要求。
+
+![默认情况下按照代码高亮显示](/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-code.png "默认情况下按照代码高亮显示") 
+
+从上图可知经过高亮处理后的图表代码已经与`html`标签混杂在一起，为了能正常展示图表数据，必须要有一种方式能够准确的获取原始的图表代码，此时需要借助`Hugo`的[Render Hooks](https://gohugo.io/templates/render-hooks/)功能，其主要功能是**让我们通过自定义的模板来覆盖`Hugo`默认的功能实现**。如下图所示经过Markup处理后的，会将原始的代码文件基于对应codeblock文件中的代码来展示，在对应的`html`中包含我们原始的代码块文件，采用`JavaScript`或`jQuery`都能快速的获取到对应代码，之后调用对应图表`JavaScript`库来进行渲染或初始化即可。
+
+![经过render hooks处理后按html展示](/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-html.png "经过render hooks处理后按html展示") 
+
+根据`Hugo`官方[Render Hooks](https://gohugo.io/templates/render-hooks/)上的说明，需要在`layouts/_default/_markup`文件夹下建立对应的`html`文件，其命名规则为`render-xxx-[yyy].html`,其中xxx为一级类别，yyy为二级类别(可选的)，如要重写所有的代码展示可创建文件`render-codeblock.html`，要重写所有的图片展示可创建文件`render-image.html`,要重写所有的`mermaid`代码展示则需要添加上二级分类`render-codeblock-mermiad.html`。
+
+```
+layouts/
+└── _default/
+    └── _markup/
+        ├── render-codeblock-bash.html
+        ├── render-codeblock.html
+        ├── render-heading.html
+        ├── render-image.html
+        ├── render-image.rss.xml
+        └── render-link.html
+```
+
+{{% admonition  warning "注意" false %}}
+
+当我们最终修改完毕后，若页面上没有正常展示相关的图表且浏览器控制台出现如下错误，需要在`layouts/partials/scripts.html`或`config.toml`中重新修改相关报错文件的`integrity`值，或在`static/lib`下重新下载相关的文件，确保其校验值一致，即可消除错误。
+
+{{% /admonition %}}
+
+![加载js和css文件时提示资源完整性校验不通过](/blog_img/hugo/enable-diagrams-in-hugo/invalid_integrity_check_for_js_and_css.png "加载js和css文件时提示资源完整性校验不通过") 
 
 # flowchart图表
+
+## 修改过程
+
+* 在`layouts/_default/_markup`创建文件`render-codeblock-flow.html`并添加如下代码
+
+  ```html
+  <div id="flow_{{ .Ordinal }}">
+    {{- .Inner | safeHTML }}
+  </div>
+  ```
+
+* 在`layouts/partials/scripts.html`补充原有的代码，添加上初始化功能
+
+  ```html
+  <!-- flowchart -->
+  {{- if and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) -}}
+    {{- if .Site.Params.publicCDN.enable -}}
+      {{ .Site.Params.publicCDN.flowchartDiagramsJS | safeHTML }}
+    {{- else -}}
+      <script src="{{ "lib/flowchartDiagrams/raphael-2.2.7.min.js" | relURL }}" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+      <script src="{{ "lib/flowchartDiagrams/flowchart-1.8.0.min.js" | relURL }}" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script>
+    {{- end -}}
+  	<script>
+  	{{- if .Params.flowchartDiagrams.options -}}
+  	  window.flowchartDiagramsOptions = {{ .Params.flowchartDiagrams.options | safeJS }};
+  	{{- else if .Site.Params.flowchartDiagrams.options -}}
+  	  window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
+  	{{- end -}}
+      <!-- below is newly added code -->
+  	let flowPageOptions = {{ .Page.Params.flowchartDiagrams.options }};
+  	let flowSiteOptions = {{ .Site.Params.flowchartDiagrams.options }};
+  	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
+  	flowSiteOptions = !!flowSiteOptions ? flowSiteOptions : "{}"
+  	
+  	flowPageOptions = eval("(" + flowPageOptions + ")")
+  	flowSiteOptions = eval("(" + flowSiteOptions + ")")
+  	// page options have high priority then site options
+  	let flowOptions = {...flowSiteOptions, ...flowPageOptions}; 
+  	$("[id^=flow_]").flowChart(flowOptions);
+  	</script>
+  {{- end -}}
+  ```
+
+  上述代码中通过`let flowOptions = {...flowSiteOptions, ...flowPageOptions};`来确保页面上的配置覆盖全局配置，优先级更高。
+
+* 在对应的`markdown`页面头部开启`flowchart`的展示，可根据实际情况添加自定义配置，保存对应`markdown`文件后页面会自动刷新并展示对应效果[^2]。
+
+  ```json
+  flowchartDiagrams:
+    enable: true
+    options: "{
+                'x': 0,
+                'y': 0,
+                'width':1,
+                'line-width': 1,
+                'line-length': 50,
+                'text-margin': 10
+              }"
+  ```
+
+## 关于自定义样式的展示
+
+
+
+## 展示效果
+
+基于对应`markdown`页面的下述配置展示相关效果
+
+```json
+flowchartDiagrams:
+  enable: true
+  options: "{
+              'x': 0,
+              'y': 0,
+              'width':1,
+              'line-width': 1,
+              'line-length': 50,
+              'text-margin': 10,
+              'font-size': 14,
+              'font-color': 'black',
+              'line-color': 'black',
+              'element-color': 'black',
+              'fill': 'white',
+              'yes-text': 'yes',
+              'no-text': 'no',
+              'arrow-end': 'block',
+              'scale': 1,
+              'symbols': {
+                  'start': {
+                    'font-color': 'red',
+                    'element-color': 'green',
+                    'fill': 'yellow'
+                  },
+                  'end': {
+                      'class': 'end-element',
+                      'element-color': 'green'
+                  }
+              },
+              'flowstate': {
+                'aaa': {'fill': 'pink'},
+                'approved': {'fill': 'peru'}
+              }
+            }"
+```
+
+### 图表1
+
+* 原始代码
+
+  ```
+  ​```flow
+  st=>start: 开始框
+  op=>operation: 处理框
+  cond=>condition: 判断框(是或否?)
+  sub1=>subroutine: 子流程
+  io=>inputoutput: 输入输出框|approved
+  e=>end: 结束框
+  st->op->cond
+  cond(yes)->io->e
+  cond(no)->sub1(right)->op
+  ​```
+  ```
+
+* 展示效果
+
+  ```flow
+  st=>start: 开始框
+  op=>operation: 处理框
+  cond=>condition: 判断框(是或否?)
+  sub1=>subroutine: 子流程
+  io=>inputoutput: 输入输出框|approved
+  e=>end: 结束框
+  st->op->cond
+  cond(yes)->io->e
+  cond(no)->sub1(right)->op
+  ```
+
+### 图表2
+
+### 图表3
+
+### 图表4
+
+
+
+# flowchart图表1
 
 * 图表1
 
@@ -159,7 +343,7 @@ mermaidDiagrams:
 
   
 
-# sequence图表
+# sequence图表1
 
 * 图表1
 
@@ -210,7 +394,7 @@ mermaidDiagrams:
   App->>System: Stop
   ```
 
-# mermaid图表
+# mermaid图表1
 
 * 图表1
 
@@ -261,9 +445,9 @@ mermaidDiagrams:
       Completed :done,    des1, 2014-01-06,2014-01-08
       Active        :active,  des2, 2014-01-07, 3d
       Parallel 1   :         des3, after des1, 1d
-      Parallel 2   :         des4, after des1, 1d
-      Parallel 3   :         des5, after des3, 1d
-      Parallel 4   :         des6, after des4, 1d
+      Parallel 2   :         des4, after des1, d
+      Parallel 3   :         des5, after des3, 3d
+      Parallel 4   :         des6, after des2, 1d
   ```
 
 * 图表5
@@ -395,11 +579,11 @@ mermaidDiagrams:
 
   ```mermaid
           timeline
-          title My day
-          section Go to work
-            1930 : first step : second step
-                 : third step
-            1940 : fourth step : fifth step
+          title 我的日常
+          section 努力搬砖
+            上午 : 早会: 收邮件/回复邮件 : 查看线上问题
+            下午 : 需求评审会 : 小组周会: coding
+            晚上: 加班coding
   ```
 
   
@@ -409,3 +593,8 @@ mermaidDiagrams:
 参考文章:
 
 1. https://snowdreams1006.github.io/write/mermaid-flow-chart.html
+
+[^1]:https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed
+[^2]:https://gohugo.io/getting-started/configuration-markup/
+[^3]: 此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
+
