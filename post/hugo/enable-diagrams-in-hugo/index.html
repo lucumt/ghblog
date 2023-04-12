@@ -50,7 +50,7 @@
 <meta itemprop="name" content="在Hugo中开启图表支持">
 <meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="2920">
+<meta itemprop="wordCount" content="4133">
 <meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
 <meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
@@ -164,7 +164,7 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
     <li><a href="#背景">背景</a></li>
@@ -182,7 +182,21 @@
         </li>
       </ul>
     </li>
-    <li><a href="#sequence图表1">sequence图表1</a></li>
+    <li><a href="#sequence图表">sequence图表</a>
+      <ul>
+        <li><a href="#修改过程-1">修改过程</a></li>
+        <li><a href="#自定义样式-1">自定义样式</a></li>
+        <li><a href="#展示效果-1">展示效果</a>
+          <ul>
+            <li><a href="#图表1-1">图表1</a></li>
+            <li><a href="#图表2-1">图表2</a></li>
+            <li><a href="#图表3-1">图表3</a></li>
+            <li><a href="#图表4">图表4</a></li>
+            <li><a href="#图表5">图表5</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#mermaid图表1">mermaid图表1</a></li>
   </ul>
 </nav>
@@ -582,41 +596,340 @@ c2(yes)->io->e
 c2(no)->op2->e
 </div></li>
 </ul>
-<h1 id="sequence图表1">sequence图表1</h1>
+<h1 id="sequence图表">sequence图表</h1>
+<h2 id="修改过程-1">修改过程</h2>
 <ul>
 <li>
-<p>图表1</p>
-<div id="sequence_11">Title: Here is a title
+<p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-sequence.html</code>并添加如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;sequence_{{ .Ordinal }}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- .Inner | safeHTML }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在<code>layouts/partials/scripts.html</code>补充原有的代码，添加上初始化功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- js-sequence-diagrams --&gt;</span>
+</span></span><span class="line"><span class="cl">{{- if and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) -}}
+</span></span><span class="line"><span class="cl">  {{- if .Site.Params.publicCDN.enable -}}
+</span></span><span class="line"><span class="cl">    {{ .Site.Params.publicCDN.sequenceDiagramsJS | safeHTML }}
+</span></span><span class="line"><span class="cl">    {{ .Site.Params.publicCDN.sequenceDiagramsCSS | safeHTML }}
+</span></span><span class="line"><span class="cl">  {{- else -}}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">js-sequence-diagrams</span><span class="err">/</span><span class="na">webfontloader-1</span><span class="err">.</span><span class="na">6</span><span class="err">.</span><span class="na">28</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">js-sequence-diagrams</span><span class="err">/</span><span class="na">snap</span><span class="err">.</span><span class="na">svg-0</span><span class="err">.</span><span class="na">5</span><span class="err">.</span><span class="na">1</span><span class="err">.</span><span class="na">min</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">js-sequence-diagrams</span><span class="err">/</span><span class="na">underscore-1</span><span class="err">.</span><span class="na">8</span><span class="err">.</span><span class="na">3</span><span class="err">.</span><span class="na">min</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">js-sequence-diagrams</span><span class="err">/</span><span class="na">sequence-diagram</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!--&lt;script src=&#34;{{ &#34;lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js&#34; | relURL }}&#34; integrity=&#34;sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;--&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">js-sequence-diagrams</span><span class="err">/</span><span class="na">sequence-diagram-2</span><span class="err">.</span><span class="na">0</span><span class="err">.</span><span class="na">1</span><span class="err">.</span><span class="na">min</span><span class="err">.</span><span class="na">css</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- end -}}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*{{- if .Params.sequenceDiagrams.options -}}
+</span></span></span><span class="line"><span class="cl"><span class="cm">      window.sequenceDiagramsOptions = {{ .Params.sequenceDiagrams.options | safeJS }};
+</span></span></span><span class="line"><span class="cl"><span class="cm">    {{- else if .Site.Params.sequenceDiagrams.options -}}
+</span></span></span><span class="line"><span class="cl"><span class="cm">      window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
+</span></span></span><span class="line"><span class="cl"><span class="cm">    {{- end -}}*/</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!--</span> <span class="nx">below</span> <span class="nx">is</span> <span class="nx">newly</span> <span class="nx">added</span> <span class="nx">code</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">seqPageOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">sequenceDiagrams</span><span class="p">.</span><span class="nx">options</span> <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">seqSiteOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Site</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">sequenceDiagrams</span><span class="p">.</span><span class="nx">options</span> <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">seqPageOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">seqPageOptions</span> <span class="o">?</span> <span class="nx">seqPageOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">seqSiteOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">seqSiteOptions</span> <span class="o">?</span> <span class="nx">seqSiteOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">seqPageOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">seqPageOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">seqSiteOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">seqSiteOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// page options have high priority then site options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">let</span> <span class="nx">seqOptions</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">seqSiteOptions</span><span class="p">,</span> <span class="p">...</span><span class="nx">seqPageOptions</span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">$</span><span class="p">(</span><span class="s2">&#34;[id^=sequence_]&#34;</span><span class="p">).</span><span class="nx">sequenceDiagram</span><span class="p">(</span><span class="nx">seqOptions</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end }}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看出，其实现代码与<code>flowchart</code>的类似。</p>
+</li>
+<li>
+<p>在对应的<code>markdown</code>页面头部开启<code>sequence</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">sequenceDiagrams:</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">enable:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="err">options:</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">               &#39;theme&#39;: &#39;simple&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">               &#39;font-size&#39;: 14,
+</span></span></span><span class="line"><span class="cl"><span class="s2">               &#39;font-family&#39;: &#39;Andale Mono, monospace&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">            }&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="自定义样式-1">自定义样式</h2>
+<p>在<code>sequence</code>的<a href="https://bramp.github.io/js-sequence-diagrams/">官方网站</a>上对于该图表的初始化只提供的<code>theme</code>这一个属性而且其值也只有simple和hand两个选项，对于字体，背景色等没有像<code>flowchart</code>那么丰富的支持。</p>
+<p>经过多次尝试后发现支持<code>theme</code>、<code>fonts-size</code>和<code>font-family</code>这3个属性配置，显然不能满足使用要求。</p>
+<p>一开始自己以为是自己没找到地方，翻遍其<a href="https://github.com/bramp/js-sequence-diagrams">GitHub项目</a>后在<a href="https://github.com/bramp/js-sequence-diagrams/blob/master/dist/sequence-diagram.js">sequence-diagram.js</a>上找到了如下说明，<strong>作者自己承认实现不够完善，但此项目已经至少3年没有维护！</strong></p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/seqence-bug-for-dynamic-config.png" alt="sequence不能动态配置的说明" title="sequence不能动态配置的说明"></p>
+<p>What，于是乎我只能自己fork源码自己修改了，修改好的代码参见<a href="https://github.com/lucumt/js-sequence-diagrams/blob/master/src/sequence-diagram.js">sequence-diagram.js</a>,在使用时用此文件或者压缩后的替换原有的，然后修改<code>integrity</code>即可。</p>
+<p><code>sequence</code>图表是基于<a href="https://www.w3schools.com/graphics/svg_intro.asp">SVG</a>实现，故而自己的修改也是从<code>SVG</code>着手，由于时间关系自己只修改了<a href="https://www.w3schools.com/graphics/svg_line.asp">SVG Line</a>和<a href="https://www.w3schools.com/graphics/svg_rect.asp">SVG Rectangle</a>两个组件，修改后的使用效果如下：</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/sequence-flowstate-custom-config.png" alt="sequence图表动态配置" title="sequence图表动态配置"></p>
+<h2 id="展示效果-1">展示效果</h2>
+<p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sequenceDiagrams: 
+</span></span><span class="line"><span class="cl">  enable: true
+</span></span><span class="line"><span class="cl">  options: &#34;{
+</span></span><span class="line"><span class="cl">               &#39;theme&#39;: &#39;simple&#39;,
+</span></span><span class="line"><span class="cl">               &#39;width&#39;:1,
+</span></span><span class="line"><span class="cl">               &#39;line-width&#39;: 1,
+</span></span><span class="line"><span class="cl">               &#39;font-size&#39;: 14,
+</span></span><span class="line"><span class="cl">               &#39;font-family&#39;: &#39;Andale Mono, monospace&#39;,
+</span></span><span class="line"><span class="cl">               &#39;line&#39;:{
+</span></span><span class="line"><span class="cl">                   &#39;stroke-width&#39;: 1
+</span></span><span class="line"><span class="cl">                },
+</span></span><span class="line"><span class="cl">               &#39;rect&#39;:{
+</span></span><span class="line"><span class="cl">                   &#39;stroke-width&#39;: 1,
+</span></span><span class="line"><span class="cl">                   &#39;fill&#39;:&#39;#deffcc&#39;
+</span></span><span class="line"><span class="cl">                },
+</span></span><span class="line"><span class="cl">                &#39;text&#39;:{
+</span></span><span class="line"><span class="cl">                    &#39;fill&#39;:&#39;#219b15&#39;,
+</span></span><span class="line"><span class="cl">                    &#39;stroke-width&#39;:1,
+</span></span><span class="line"><span class="cl">                    &#39;stroke&#39;:&#39;#219b15&#39;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="图表1-1">图表1</h3>
+<ul>
+<li>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```sequence
+</span></span><span class="line"><span class="cl">Title: Here is a title
+</span></span><span class="line"><span class="cl">A-&gt;B: Normal line
+</span></span><span class="line"><span class="cl">B--&gt;C: Dashed line
+</span></span><span class="line"><span class="cl">C-&gt;&gt;D: Open arrow
+</span></span><span class="line"><span class="cl">D--&gt;&gt;A: Dashed open arrow
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="sequence_16">Title: Here is a title
 A->B: Normal line
 B-->C: Dashed line
 C->>D: Open arrow
 D-->>A: Dashed open arrow
 </div></li>
+</ul>
+<h3 id="图表2-1">图表2</h3>
+<ul>
 <li>
-<p>图表2</p>
-<div id="sequence_12"># Example of a comment.
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```sequence
+</span></span><span class="line"><span class="cl"># Example of a comment.
+</span></span><span class="line"><span class="cl">Note left of A: Note to the\n left of A
+</span></span><span class="line"><span class="cl">Note right of A: Note to the\n right of A
+</span></span><span class="line"><span class="cl">Note over A: Note over A
+</span></span><span class="line"><span class="cl">Note over A,B: Note over both A and B
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="sequence_18"># Example of a comment.
 Note left of A: Note to the\n left of A
 Note right of A: Note to the\n right of A
 Note over A: Note over A
 Note over A,B: Note over both A and B
 </div></li>
+</ul>
+<h3 id="图表3-1">图表3</h3>
+<ul>
 <li>
-<p>图表3</p>
-<div id="sequence_13">participant C
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```sequence
+</span></span><span class="line"><span class="cl">participant C
+</span></span><span class="line"><span class="cl">participant B
+</span></span><span class="line"><span class="cl">participant A
+</span></span><span class="line"><span class="cl">Note right of A: By listing the participants\n you can change their order
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="sequence_20">participant C
 participant B
 participant A
 Note right of A: By listing the participants\n you can change their order
 </div></li>
+</ul>
+<h3 id="图表4">图表4</h3>
+<ul>
 <li>
-<p>图表4</p>
-<div id="sequence_14">Andrew->China: Says Hello
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```sequence
+</span></span><span class="line"><span class="cl">Andrew-&gt;China: Says Hello
+</span></span><span class="line"><span class="cl">Note right of China: China thinks\nabout it
+</span></span><span class="line"><span class="cl">China--&gt;Andrew: How are you?
+</span></span><span class="line"><span class="cl">Andrew-&gt;&gt;China: I am good thanks!
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="sequence_22">Andrew->China: Says Hello
 Note right of China: China thinks\nabout it
 China-->Andrew: How are you?
 Andrew->>China: I am good thanks!
 </div></li>
+</ul>
+<h3 id="图表5">图表5</h3>
+<ul>
 <li>
-<p>图表5</p>
-<div id="sequence_15">participant System
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```sequence
+</span></span><span class="line"><span class="cl">participant System
+</span></span><span class="line"><span class="cl">participant App
+</span></span><span class="line"><span class="cl">System-&gt;&gt;App: Do you hear me
+</span></span><span class="line"><span class="cl">App--&gt;&gt;Module: Alive?
+</span></span><span class="line"><span class="cl">Module--&gt;&gt;App: Yay!
+</span></span><span class="line"><span class="cl">App-&gt;&gt;System: Stop
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="sequence_24">participant System
 participant App
 System->>App: Do you hear me
 App-->>Module: Alive?
