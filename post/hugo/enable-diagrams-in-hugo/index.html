@@ -50,7 +50,7 @@
 <meta itemprop="name" content="在Hugo中开启图表支持">
 <meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="749">
+<meta itemprop="wordCount" content="2780">
 <meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
 <meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
@@ -168,9 +168,22 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#背景">背景</a></li>
-    <li><a href="#flowchart图表">flowchart图表</a></li>
-    <li><a href="#sequence图表">sequence图表</a></li>
-    <li><a href="#mermaid图表">mermaid图表</a></li>
+    <li><a href="#修改说明">修改说明</a></li>
+    <li><a href="#flowchart图表">flowchart图表</a>
+      <ul>
+        <li><a href="#修改过程">修改过程</a></li>
+        <li><a href="#自定义样式">自定义样式</a></li>
+        <li><a href="#展示效果">展示效果</a>
+          <ul>
+            <li><a href="#图表1">图表1</a></li>
+            <li><a href="#图表2">图表2</a></li>
+            <li><a href="#图表3">图表3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#sequence图表1">sequence图表1</a></li>
+    <li><a href="#mermaid图表1">mermaid图表1</a></li>
   </ul>
 </nav>
   </div>
@@ -178,12 +191,272 @@
     <div class="post-content">
       <p>简要介绍在如何在<code>Hugo</code>博客中基于<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a>主题开启<a href="https://flowchart.js.org/">flowchart</a>、<a href="https://bramp.github.io/js-sequence-diagrams/">sequence</a>和<a href="https://mermaid.js.org/">mermaid</a>图表的支持。</p>
 <h1 id="背景">背景</h1>
-<p>个人<code>Hugo</code>博客切换为<code>Even</code>已经有好几年了</p>
+<p>个人<code>Hugo</code>博客切换为<code>Even</code>已经有好几年了，相关功能也是基于此主题扩展而来，不过<code>Even</code>主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，同时个人发现该主题下<code>layouts/partials/scripts.html</code>对于<code>flowchart</code>和<code>sequence</code>的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！</p>
+<p>PS: <code>Even</code>主题<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>很受欢迎，希望作者早日恢复维护!</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/even-theme-website-not-display-diagram.png" alt="Even主题的作者已经没有维护" title="Even主题的作者已经没有维护"></p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/even-theme-does-not-have-diagram-init-code.png" alt="Even主题无法初始化图表" title="Even主题无法初始化图表"></p>
+<h1 id="修改说明">修改说明</h1>
+<p>由于<code>Hugo</code>支持代码高亮，当图表相关的数据当采用<code>Markdown</code>的codeblock方式写入时，如下图所示默认情况下，其会以代码高亮的方式显示，很明显此种方式不满足要求。</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-code.png" alt="默认情况下按照代码高亮显示" title="默认情况下按照代码高亮显示"></p>
+<p>从上图可知经过高亮处理后的图表代码已经与<code>html</code>标签混杂在一起，为了能正常展示图表数据，必须要有一种方式能够准确的获取原始的图表代码，此时需要借助<code>Hugo</code>的<a href="https://gohugo.io/templates/render-hooks/">Render Hooks</a>功能，其主要功能是<strong>让我们通过自定义的模板来覆盖<code>Hugo</code>默认的功能实现</strong>。如下图所示经过Markup处理后的，会将原始的代码文件基于对应codeblock文件中的代码来展示，在对应的<code>html</code>中包含我们原始的代码块文件，采用<code>JavaScript</code>或<code>jQuery</code>都能快速的获取到对应代码，之后调用对应图表<code>JavaScript</code>库来进行渲染或初始化即可。</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-html.png" alt="经过render hooks处理后按html展示" title="经过render hooks处理后按html展示"></p>
+<p>根据<code>Hugo</code>官方<a href="https://gohugo.io/templates/render-hooks/">Render Hooks</a>上的说明，需要在<code>layouts/_default/_markup</code>文件夹下建立对应的<code>html</code>文件，其命名规则为<code>render-xxx-[yyy].html</code>,其中xxx为一级类别，yyy为二级类别(可选的)，如要重写所有的代码展示可创建文件<code>render-codeblock.html</code>，要重写所有的图片展示可创建文件<code>render-image.html</code>,要重写所有的<code>mermaid</code>代码展示则需要添加上二级分类<code>render-codeblock-mermiad.html</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">layouts/
+</span></span><span class="line"><span class="cl">└── _default/
+</span></span><span class="line"><span class="cl">    └── _markup/
+</span></span><span class="line"><span class="cl">        ├── render-codeblock-bash.html
+</span></span><span class="line"><span class="cl">        ├── render-codeblock.html
+</span></span><span class="line"><span class="cl">        ├── render-heading.html
+</span></span><span class="line"><span class="cl">        ├── render-image.html
+</span></span><span class="line"><span class="cl">        ├── render-image.rss.xml
+</span></span><span class="line"><span class="cl">        └── render-link.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="admonition warning"><p class="admonition-title">注意</p>
+<p>当我们最终修改完毕后，若页面上没有正常展示相关的图表且浏览器控制台出现如下错误，需要在<code>layouts/partials/scripts.html</code>或<code>config.toml</code>中重新修改相关报错文件的<code>integrity</code>值，或在<code>static/lib</code>下重新下载相关的文件，确保其校验值一致，即可消除错误。</p>
+</div>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/invalid_integrity_check_for_js_and_css.png" alt="加载js和css文件时提示资源完整性校验不通过" title="加载js和css文件时提示资源完整性校验不通过"></p>
 <h1 id="flowchart图表">flowchart图表</h1>
+<h2 id="修改过程">修改过程</h2>
 <ul>
 <li>
-<p>图表1</p>
-<div id="flow_0">st=>start: 开始框
+<p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-flow.html</code>并添加如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;flow_{{ .Ordinal }}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- .Inner | safeHTML }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在<code>layouts/partials/scripts.html</code>补充原有的代码，添加上初始化功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- flowchart --&gt;</span>
+</span></span><span class="line"><span class="cl">{{- if and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) -}}
+</span></span><span class="line"><span class="cl">  {{- if .Site.Params.publicCDN.enable -}}
+</span></span><span class="line"><span class="cl">    {{ .Site.Params.publicCDN.flowchartDiagramsJS | safeHTML }}
+</span></span><span class="line"><span class="cl">  {{- else -}}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">flowchartDiagrams</span><span class="err">/</span><span class="na">raphael-2</span><span class="err">.</span><span class="na">2</span><span class="err">.</span><span class="na">7</span><span class="err">.</span><span class="na">min</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ &#34;</span><span class="na">lib</span><span class="err">/</span><span class="na">flowchartDiagrams</span><span class="err">/</span><span class="na">flowchart-1</span><span class="err">.</span><span class="na">8</span><span class="err">.</span><span class="na">0</span><span class="err">.</span><span class="na">min</span><span class="err">.</span><span class="na">js</span><span class="err">&#34;</span> <span class="err">|</span> <span class="na">relURL</span> <span class="err">}}&#34;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=&#34;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- end -}}
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*{{- if .Params.flowchartDiagrams.options -}}
+</span></span></span><span class="line"><span class="cl"><span class="cm">	  window.flowchartDiagramsOptions = {{ .Params.flowchartDiagrams.options | safeJS }};
+</span></span></span><span class="line"><span class="cl"><span class="cm">	{{- else if .Site.Params.flowchartDiagrams.options -}}
+</span></span></span><span class="line"><span class="cl"><span class="cm">	  window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
+</span></span></span><span class="line"><span class="cl"><span class="cm">	{{- end -}}*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!--</span> <span class="nx">below</span> <span class="nx">is</span> <span class="nx">newly</span> <span class="nx">added</span> <span class="nx">code</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">flowPageOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">flowchartDiagrams</span><span class="p">.</span><span class="nx">options</span>  <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">flowSiteOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Site</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">flowchartDiagrams</span><span class="p">.</span><span class="nx">options</span>  <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flowPageOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">flowPageOptions</span> <span class="o">?</span> <span class="nx">flowPageOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flowSiteOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">flowSiteOptions</span> <span class="o">?</span> <span class="nx">flowSiteOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">flowPageOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">flowPageOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flowSiteOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">flowSiteOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// page options have high priority then site options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">let</span> <span class="nx">flowOptions</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">flowSiteOptions</span><span class="p">,</span> <span class="p">...</span><span class="nx">flowPageOptions</span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">$</span><span class="p">(</span><span class="s2">&#34;[id^=flow_]&#34;</span><span class="p">).</span><span class="nx">flowChart</span><span class="p">(</span><span class="nx">flowOptions</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end -}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上述代码中通过<code>let flowOptions = {...flowSiteOptions, ...flowPageOptions};</code>来确保页面上的配置覆盖全局配置，优先级更高。</p>
+</li>
+<li>
+<p>在对应的<code>markdown</code>页面头部开启<code>flowchart</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">flowchartDiagrams:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">enable:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="err">options:</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;x&#39;: 0,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;y&#39;: 0,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;width&#39;:1,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;line-width&#39;: 1,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;line-length&#39;: 50,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;text-margin&#39;: 10
+</span></span></span><span class="line"><span class="cl"><span class="s2">            }&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="自定义样式">自定义样式</h2>
+<p>不同于<code>sequence</code>,<code>flowchart</code>的使用很灵活，其<a href="https://flowchart.js.org/">官网</a>上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何根据实际情况自定义样式。</p>
+<h2 id="展示效果">展示效果</h2>
+<p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">flowchartDiagrams:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">enable:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="err">options:</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;x&#39;: 0,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;y&#39;: 0,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;width&#39;:1,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;line-width&#39;: 1,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;line-length&#39;: 50,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;text-margin&#39;: 10,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;font-size&#39;: 14,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;font-color&#39;: &#39;black&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;line-color&#39;: &#39;black&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;element-color&#39;: &#39;black&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;fill&#39;: &#39;white&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;yes-text&#39;: &#39;yes&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;no-text&#39;: &#39;no&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;arrow-end&#39;: &#39;block&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;scale&#39;: 1,
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;symbols&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                  &#39;start&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    &#39;font-color&#39;: &#39;red&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    &#39;element-color&#39;: &#39;green&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    &#39;fill&#39;: &#39;yellow&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                  },
+</span></span></span><span class="line"><span class="cl"><span class="s2">                  &#39;end&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                      &#39;class&#39;: &#39;end-element&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                      &#39;element-color&#39;: &#39;green&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                  }
+</span></span></span><span class="line"><span class="cl"><span class="s2">              },
+</span></span></span><span class="line"><span class="cl"><span class="s2">              &#39;flowstate&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                &#39;aaa&#39;: {&#39;fill&#39;: &#39;pink&#39;},
+</span></span></span><span class="line"><span class="cl"><span class="s2">                &#39;approved&#39;: {&#39;fill&#39;: &#39;peru&#39;}
+</span></span></span><span class="line"><span class="cl"><span class="s2">              }
+</span></span></span><span class="line"><span class="cl"><span class="s2">            }&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="图表1">图表1</h3>
+<ul>
+<li>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```flow
+</span></span><span class="line"><span class="cl">st=&gt;start: 开始框
+</span></span><span class="line"><span class="cl">op=&gt;operation: 处理框
+</span></span><span class="line"><span class="cl">cond=&gt;condition: 判断框(是或否?)
+</span></span><span class="line"><span class="cl">sub1=&gt;subroutine: 子流程
+</span></span><span class="line"><span class="cl">io=&gt;inputoutput: 输入输出框|approved
+</span></span><span class="line"><span class="cl">e=&gt;end: 结束框
+</span></span><span class="line"><span class="cl">st-&gt;op-&gt;cond
+</span></span><span class="line"><span class="cl">cond(yes)-&gt;io-&gt;e
+</span></span><span class="line"><span class="cl">cond(no)-&gt;sub1(right)-&gt;op
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="flow_6">st=>start: 开始框
 op=>operation: 处理框
 cond=>condition: 判断框(是或否?)
 sub1=>subroutine: 子流程
@@ -193,9 +466,45 @@ st->op->cond
 cond(yes)->io->e
 cond(no)->sub1(right)->op
 </div></li>
+</ul>
+<h3 id="图表2">图表2</h3>
+<ul>
 <li>
-<p>图表2</p>
-<div id="flow_1">st=>start: 开始节点
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```flow
+</span></span><span class="line"><span class="cl">st=&gt;start: 开始节点
+</span></span><span class="line"><span class="cl">in=&gt;inputoutput: 输入
+</span></span><span class="line"><span class="cl">e=&gt;end: 结束节点
+</span></span><span class="line"><span class="cl">op=&gt;operation: 操作节点
+</span></span><span class="line"><span class="cl">cond=&gt;condition: 条件节点
+</span></span><span class="line"><span class="cl">sub=&gt;subroutine: 子例程
+</span></span><span class="line"><span class="cl">out=&gt;inputoutput: 输出
+</span></span><span class="line"><span class="cl">st(right)-&gt;in-&gt;op-&gt;cond
+</span></span><span class="line"><span class="cl">cond(yes,right)-&gt;out-&gt;e
+</span></span><span class="line"><span class="cl">cond(no)-&gt;sub
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="flow_8">st=>start: 开始节点
 in=>inputoutput: 输入
 e=>end: 结束节点
 op=>operation: 操作节点
@@ -206,9 +515,55 @@ st(right)->in->op->cond
 cond(yes,right)->out->e
 cond(no)->sub
 </div></li>
+</ul>
+<h3 id="图表3">图表3</h3>
+<ul>
 <li>
-<p>图表3</p>
-<div id="flow_2">st=>start: Start|past:>http://www.google.com[blank]
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```flow
+</span></span><span class="line"><span class="cl">st=&gt;start: Start|past:&gt;http://www.google.com[blank]
+</span></span><span class="line"><span class="cl">e=&gt;end: End:&gt;http://www.google.com
+</span></span><span class="line"><span class="cl">op1=&gt;operation: My Operation|past
+</span></span><span class="line"><span class="cl">op2=&gt;operation: Stuff|aaa
+</span></span><span class="line"><span class="cl">sub1=&gt;subroutine: My Subroutine|invalid
+</span></span><span class="line"><span class="cl">cond=&gt;condition: Yes
+</span></span><span class="line"><span class="cl">or No?|approved:&gt;http://www.google.com
+</span></span><span class="line"><span class="cl">c2=&gt;condition: Good idea|rejected
+</span></span><span class="line"><span class="cl">io=&gt;inputoutput: catch something...|aaa
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">st-&gt;op1(right)-&gt;cond
+</span></span><span class="line"><span class="cl">cond(yes, right)-&gt;c2
+</span></span><span class="line"><span class="cl">cond(no)-&gt;sub1(left)-&gt;op1
+</span></span><span class="line"><span class="cl">c2(yes)-&gt;io-&gt;e
+</span></span><span class="line"><span class="cl">c2(no)-&gt;op2-&gt;e
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div id="flow_10">st=>start: Start|past:>http://www.google.com[blank]
 e=>end: End:>http://www.google.com
 op1=>operation: My Operation|past
 op2=>operation: Stuff|aaa
@@ -225,11 +580,11 @@ c2(yes)->io->e
 c2(no)->op2->e
 </div></li>
 </ul>
-<h1 id="sequence图表">sequence图表</h1>
+<h1 id="sequence图表1">sequence图表1</h1>
 <ul>
 <li>
 <p>图表1</p>
-<div id="sequence_3">Title: Here is a title
+<div id="sequence_11">Title: Here is a title
 A->B: Normal line
 B-->C: Dashed line
 C->>D: Open arrow
@@ -237,7 +592,7 @@ D-->>A: Dashed open arrow
 </div></li>
 <li>
 <p>图表2</p>
-<div id="sequence_4"># Example of a comment.
+<div id="sequence_12"># Example of a comment.
 Note left of A: Note to the\n left of A
 Note right of A: Note to the\n right of A
 Note over A: Note over A
@@ -245,21 +600,21 @@ Note over A,B: Note over both A and B
 </div></li>
 <li>
 <p>图表3</p>
-<div id="sequence_5">participant C
+<div id="sequence_13">participant C
 participant B
 participant A
 Note right of A: By listing the participants\n you can change their order
 </div></li>
 <li>
 <p>图表4</p>
-<div id="sequence_6">Andrew->China: Says Hello
+<div id="sequence_14">Andrew->China: Says Hello
 Note right of China: China thinks\nabout it
 China-->Andrew: How are you?
 Andrew->>China: I am good thanks!
 </div></li>
 <li>
 <p>图表5</p>
-<div id="sequence_7">participant System
+<div id="sequence_15">participant System
 participant App
 System->>App: Do you hear me
 App-->>Module: Alive?
@@ -267,7 +622,7 @@ Module-->>App: Yay!
 App->>System: Stop
 </div></li>
 </ul>
-<h1 id="mermaid图表">mermaid图表</h1>
+<h1 id="mermaid图表1">mermaid图表1</h1>
 <ul>
 <li>
 <p>图表1</p>
@@ -314,9 +669,9 @@ Bob-->>John: Jolly good!
     Completed :done,    des1, 2014-01-06,2014-01-08
     Active        :active,  des2, 2014-01-07, 3d
     Parallel 1   :         des3, after des1, 1d
-    Parallel 2   :         des4, after des1, 1d
-    Parallel 3   :         des5, after des3, 1d
-    Parallel 4   :         des6, after des4, 1d
+    Parallel 2   :         des4, after des1, d
+    Parallel 3   :         des5, after des3, 3d
+    Parallel 4   :         des6, after des2, 1d
 </div>
 </li>
 <li>
@@ -436,11 +791,11 @@ Bob-->>John: Jolly good!
 <li>
 <p>图表12</p>
 <div class="mermaid">        timeline
-        title My day
-        section Go to work
-          1930 : first step : second step
-               : third step
-          1940 : fourth step : fifth step
+        title 我的日常
+        section 努力搬砖
+          上午 : 早会: 收邮件/回复邮件 : 查看线上问题
+          下午 : 需求评审会 : 小组周会: coding
+          晚上: 加班coding
 </div>
 </li>
 <li>
@@ -451,6 +806,20 @@ Bob-->>John: Jolly good!
 <ol>
 <li><a href="https://snowdreams1006.github.io/write/mermaid-flow-chart.html">https://snowdreams1006.github.io/write/mermaid-flow-chart.html</a></li>
 </ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed">https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>作者个人网站地址为<a href="https://olowolo.com">https://olowolo.com</a>，GitHub地址为<a href="https://github.com/olOwOlo/hugo-theme-even">https://github.com/olOwOlo/hugo-theme-even</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>此处假设我们采用<code>hugo server -w -D</code>来开启草稿模式和动态监测模式&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
     </div>
 
     
@@ -541,7 +910,11 @@ Bob-->>John: Jolly good!
 
 
 <script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script>window.flowchartDiagramsOptions = { 'x': 0, 'y': 0, 'width':1, 'line-width': 1, 'line-length': 50, 'text-margin': 10, 'font-size': 14, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'yes-text': 'yes', 'no-text': 'no', 'arrow-end': 'block', 'scale': 1, 'symbols': { 'start': { 'font-color': 'red', 'element-color': 'green', 'fill': 'yellow' }, 'end': { 'class': 'end-element', 'element-color': 'green' } }, 'flowstate': { 'aaa': {'fill': 'pink'}, 'approved': {'fill': 'peru'} } };let flowPageOptions = "{ 'x': 0, 'y': 0, 'width':1, 'line-width': 1, 'line-length': 50, 'text-margin': 10, 'font-size': 14, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'yes-text': 'yes', 'no-text': 'no', 'arrow-end': 'block', 'scale': 1, 'symbols': { 'start': { 'font-color': 'red', 'element-color': 'green', 'fill': 'yellow' }, 'end': { 'class': 'end-element', 'element-color': 'green' } }, 'flowstate': { 'aaa': {'fill': 'pink'}, 'approved': {'fill': 'peru'} } }";
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script>
+	   
+	
+	<!-- below is newly added code -->
+	let flowPageOptions = "{ 'x': 0, 'y': 0, 'width':1, 'line-width': 1, 'line-length': 50, 'text-margin': 10, 'font-size': 14, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'yes-text': 'yes', 'no-text': 'no', 'arrow-end': 'block', 'scale': 1, 'symbols': { 'start': { 'font-color': 'red', 'element-color': 'green', 'fill': 'yellow' }, 'end': { 'class': 'end-element', 'element-color': 'green' } }, 'flowstate': { 'aaa': {'fill': 'pink'}, 'approved': {'fill': 'peru'} } }";
 	let flowSiteOptions = "";
 	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
 	flowSiteOptions = !!flowSiteOptions ? flowSiteOptions : "{}"
@@ -556,7 +929,9 @@ Bob-->>John: Jolly good!
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram.js"></script>
 	
-	<link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous"><script>window.sequenceDiagramsOptions = { 'theme': 'simple', 'width':1, 'line-width': 1, 'font-size': 14, 'font-family': 'Andale Mono, monospace', 'line':{ 'stroke-width': 1 }, 'rect':{ 'stroke-width': 1, 'fill':'#deffcc' }, 'text':{ 'fill':'#219b15', 'stroke-width':1, 'stroke':'#219b15' } };let seqPageOptions = "{ 'theme': 'simple', 'width':1, 'line-width': 1, 'font-size': 14, 'font-family': 'Andale Mono, monospace', 'line':{ 'stroke-width': 1 }, 'rect':{ 'stroke-width': 1, 'fill':'#deffcc' }, 'text':{ 'fill':'#219b15', 'stroke-width':1, 'stroke':'#219b15' } }";
+	<link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous"><script>
+       
+    let seqPageOptions = "{ 'theme': 'simple', 'width':1, 'line-width': 1, 'font-size': 14, 'font-family': 'Andale Mono, monospace', 'line':{ 'stroke-width': 1 }, 'rect':{ 'stroke-width': 1, 'fill':'#deffcc' }, 'text':{ 'fill':'#219b15', 'stroke-width':1, 'stroke':'#219b15' } }";
 	let seqSiteOptions = "";
 	seqPageOptions = !!seqPageOptions ? seqPageOptions : "{}"
 	seqSiteOptions = !!seqSiteOptions ? seqSiteOptions : "{}"
