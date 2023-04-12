@@ -50,7 +50,7 @@
 <meta itemprop="name" content="在Hugo中开启图表支持">
 <meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="2780">
+<meta itemprop="wordCount" content="2920">
 <meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
 <meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
@@ -344,7 +344,11 @@
 </div></li>
 </ul>
 <h2 id="自定义样式">自定义样式</h2>
-<p>不同于<code>sequence</code>,<code>flowchart</code>的使用很灵活，其<a href="https://flowchart.js.org/">官网</a>上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何根据实际情况自定义样式。</p>
+<p>不同于<code>sequence</code>,<code>flowchart</code>的使用很灵活，其<a href="https://flowchart.js.org/">官网</a>上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何对其中的<code>flowstate</code>进行配置从而让图表展示不同的样式。</p>
+<p>为了实现自定义样式的展示，需要了解<code>flowchart</code>的语法,下图展示了其主要语法，更具体的可参见<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，实际使用中我们主要通过对<code>flowstate</code>来实现自定义样式显示。</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/flowchart-grammer-explanation.png" alt="flowchart流程图语法展示" title="flowchart流程图语法展示"></p>
+<p>下图展示了一个通过设置不同<code>flowstate</code>来设置流程图不同组件样式的示例。
+<img src="/blog_img/hugo/enable-diagrams-in-hugo/flowchart-flowstate-custom-config.png" alt="flowstate自定义样式设置" title="flowstate自定义样式设置"></p>
 <h2 id="展示效果">展示效果</h2>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
 <div class="highlight"><div class="chroma">
@@ -538,7 +542,6 @@ cond(no)->sub
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```flow
@@ -547,8 +550,7 @@ cond(no)->sub
 </span></span><span class="line"><span class="cl">op1=&gt;operation: My Operation|past
 </span></span><span class="line"><span class="cl">op2=&gt;operation: Stuff|aaa
 </span></span><span class="line"><span class="cl">sub1=&gt;subroutine: My Subroutine|invalid
-</span></span><span class="line"><span class="cl">cond=&gt;condition: Yes
-</span></span><span class="line"><span class="cl">or No?|approved:&gt;http://www.google.com
+</span></span><span class="line"><span class="cl">cond=&gt;condition: Yes or No?|approved:&gt;http://www.google.com
 </span></span><span class="line"><span class="cl">c2=&gt;condition: Good idea|rejected
 </span></span><span class="line"><span class="cl">io=&gt;inputoutput: catch something...|aaa
 </span></span><span class="line"><span class="cl">
@@ -570,7 +572,7 @@ op2=>operation: Stuff|aaa
 sub1=>subroutine: My Subroutine|invalid
 cond=>condition: Yes
 or No?|approved:>http://www.google.com
-c2=>condition: Good idea|rejected
+c2=>condition: Good idea | rejected
 io=>inputoutput: catch something...|aaa
 
 st->op1(right)->cond
@@ -817,6 +819,9 @@ Bob-->>John: Jolly good!
 </li>
 <li id="fn:3">
 <p>此处假设我们采用<code>hugo server -w -D</code>来开启草稿模式和动态监测模式&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://github.com/adrai/flowchart.js">https://github.com/adrai/flowchart.js</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
