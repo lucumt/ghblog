@@ -50,7 +50,7 @@
 <meta itemprop="name" content="在Hugo中开启图表支持">
 <meta itemprop="description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
 <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="4133">
+<meta itemprop="wordCount" content="5511">
 <meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Hugo中开启图表支持"/>
 <meta name="twitter:description" content="简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
@@ -197,7 +197,28 @@
         </li>
       </ul>
     </li>
-    <li><a href="#mermaid图表1">mermaid图表1</a></li>
+    <li><a href="#mermaid图表">mermaid图表</a>
+      <ul>
+        <li><a href="#修改过程-2">修改过程</a></li>
+        <li><a href="#自定义样式-2">自定义样式</a></li>
+        <li><a href="#展示效果-2">展示效果</a>
+          <ul>
+            <li><a href="#图表1-sequence">图表1-Sequence</a></li>
+            <li><a href="#图表2-flow">图表2-Flow</a></li>
+            <li><a href="#图表3-class">图表3-Class</a></li>
+            <li><a href="#图表4-state">图表4-State</a></li>
+            <li><a href="#图表5-er">图表5-ER</a></li>
+            <li><a href="#图表6-gantt">图表6-Gantt</a></li>
+            <li><a href="#图表7-userjourney">图表7-UserJourney</a></li>
+            <li><a href="#图表8-git">图表8-Git</a></li>
+            <li><a href="#图表9-pie">图表9-Pie</a></li>
+            <li><a href="#图表10-mindmap">图表10-Mindmap</a></li>
+            <li><a href="#图表11-timeline">图表11-timeline</a></li>
+            <li><a href="#图表12-graph">图表12-graph</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -719,7 +740,7 @@ c2(no)->op2->e
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/seqence-bug-for-dynamic-config.png" alt="sequence不能动态配置的说明" title="sequence不能动态配置的说明"></p>
 <p>What，于是乎我只能自己fork源码自己修改了，修改好的代码参见<a href="https://github.com/lucumt/js-sequence-diagrams/blob/master/src/sequence-diagram.js">sequence-diagram.js</a>,在使用时用此文件或者压缩后的替换原有的，然后修改<code>integrity</code>即可。</p>
 <p><code>sequence</code>图表是基于<a href="https://www.w3schools.com/graphics/svg_intro.asp">SVG</a>实现，故而自己的修改也是从<code>SVG</code>着手，由于时间关系自己只修改了<a href="https://www.w3schools.com/graphics/svg_line.asp">SVG Line</a>和<a href="https://www.w3schools.com/graphics/svg_rect.asp">SVG Rectangle</a>两个组件，修改后的使用效果如下：</p>
-<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/sequence-flowstate-custom-config.png" alt="sequence图表动态配置" title="sequence图表动态配置"></p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/sequence-custom-config.png" alt="sequence图表动态配置" title="sequence图表动态配置"></p>
 <h2 id="展示效果-1">展示效果</h2>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
 <div class="highlight"><div class="chroma">
@@ -937,35 +958,154 @@ Module-->>App: Yay!
 App->>System: Stop
 </div></li>
 </ul>
-<h1 id="mermaid图表1">mermaid图表1</h1>
+<h1 id="mermaid图表">mermaid图表</h1>
+<p><a href="https://mermaid.js.org/">mermaid</a>是一个功能强大的<code>Markdown</code>图表显示控件，其本身的功能已经包含前述的<code>flowchart</code>和<code>sequence</code>，但由于<code>Even</code>主题的作者默认并没有加上此图表的支持，同时<code>Hugo</code>的官网有专门的配置说明<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，故本次一并加上。</p>
+<h2 id="修改过程-2">修改过程</h2>
 <ul>
 <li>
-<p>图表1</p>
-<div class="mermaid">graph TB
-    c1-->a2
-    subgraph one
-    a1-->a2
-    end
-    subgraph two
-    b1-->b2
-    end
-    subgraph three
-    c1-->c2
-    end
+<p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-mermaid.html</code>并添加如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mermaid&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{- .Inner | safeHTML }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ .Page.Store.Set &#34;hasMermaid&#34; true }}
+</span></span></code></pre></td></tr></table>
 </div>
-</li>
+</div></li>
 <li>
-<p>图表2</p>
-<div class="mermaid">graph TD
-  A[Christmas] -->|Get money| B(Go shopping)
-  B --> C{Let me think}
-  C -->|One| D[Laptop]
-  C -->|Two| E[iPhone]
-  C -->|Three| F[fa:fa-car Car]
+<p>在<code>layouts/partials/scripts.html</code>添加如下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- mermaid js --&gt;</span>
+</span></span><span class="line"><span class="cl">{{- if and (or .Params.mermaidDiagrams.enable (and .Site.Params.mermaidDiagrams.enable (ne .Params.mermaidDiagrams.enable false))) (or .IsPage .IsHome) -}}
+</span></span><span class="line"><span class="cl">	{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
+</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm&#39;</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//import mermaid from &#39;{{ &#34;lib/mermaid/mermaid.esm.min.mjs&#34; | relURL }}&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="kd">let</span> <span class="nx">mermaidPageOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Page</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">mermaidDiagrams</span><span class="p">.</span><span class="nx">options</span> <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">let</span> <span class="nx">mermaidSiteOptions</span> <span class="o">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Site</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">mermaidDiagrams</span><span class="p">.</span><span class="nx">options</span> <span class="p">}};</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mermaidPageOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">mermaidPageOptions</span> <span class="o">?</span> <span class="nx">mermaidPageOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mermaidSiteOptions</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">mermaidSiteOptions</span> <span class="o">?</span> <span class="nx">mermaidSiteOptions</span> <span class="o">:</span> <span class="s2">&#34;{}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">mermaidPageOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">mermaidPageOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mermaidSiteOptions</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;(&#34;</span> <span class="o">+</span> <span class="nx">mermaidSiteOptions</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// page options have high priority then site options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kd">let</span> <span class="nx">mermaidOptions</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">mermaidSiteOptions</span><span class="p">,</span> <span class="p">...</span><span class="nx">mermaidPageOptions</span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">mermaidOptions</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	{{ end }}
+</span></span><span class="line"><span class="cl">{{- end }}
+</span></span></code></pre></td></tr></table>
 </div>
-</li>
+</div></li>
 <li>
-<p>图表3</p>
+<p>在对应的<code>markdown</code>页面头部开启<code>mermaid</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">mermaidDiagrams:</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">enable:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="err">options:</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">     &#39;theme&#39;:&#39;forest&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  }&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="自定义样式-2">自定义样式</h2>
+<p><code>mermaid</code>图表的自定义配置主要基于themes来实现，在其<a href="https://mermaid.js.org/config/theming.html">官网文档</a>上有很详细的说明，下图为一个简单的示例</p>
+<p><img src="/blog_img/hugo/enable-diagrams-in-hugo/mermaid-custom-config.png" alt="mermaid图表动态配置" title="mermaid图表动态配置"></p>
+<h2 id="展示效果-2">展示效果</h2>
+<p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">mermaidDiagrams:</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">enable:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="err">options:</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">     &#39;theme&#39;:&#39;forest&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  }&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="图表1-sequence">图表1-Sequence</h3>
+<ul>
+<li>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">sequenceDiagram
+</span></span><span class="line"><span class="cl">Alice-&gt;&gt;John: Hello John, how are you?
+</span></span><span class="line"><span class="cl">loop Healthcheck
+</span></span><span class="line"><span class="cl">    John-&gt;&gt;John: Fight against hypochondria
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">Note right of John: Rational thoughts!
+</span></span><span class="line"><span class="cl">John--&gt;&gt;Alice: Great!
+</span></span><span class="line"><span class="cl">John-&gt;&gt;Bob: How about you?
+</span></span><span class="line"><span class="cl">Bob--&gt;&gt;John: Jolly good!
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
 <div class="mermaid">sequenceDiagram
 Alice->>John: Hello John, how are you?
 loop Healthcheck
@@ -977,20 +1117,104 @@ John->>Bob: How about you?
 Bob-->>John: Jolly good!
 </div>
 </li>
+</ul>
+<h3 id="图表2-flow">图表2-Flow</h3>
+<ul>
 <li>
-<p>图表4</p>
-<div class="mermaid">gantt
-    section Section
-    Completed :done,    des1, 2014-01-06,2014-01-08
-    Active        :active,  des2, 2014-01-07, 3d
-    Parallel 1   :         des3, after des1, 1d
-    Parallel 2   :         des4, after des1, d
-    Parallel 3   :         des5, after des3, 3d
-    Parallel 4   :         des6, after des2, 1d
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">flowchart TD
+</span></span><span class="line"><span class="cl">    A[Christmas] --&gt;|Get money| B(Go shopping)
+</span></span><span class="line"><span class="cl">    B --&gt; C{Let me think}
+</span></span><span class="line"><span class="cl">    C --&gt;|One| D[Laptop]
+</span></span><span class="line"><span class="cl">    C --&gt;|Two| E[iPhone]
+</span></span><span class="line"><span class="cl">    C --&gt;|Three| F[fa:fa-car Car]
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div class="mermaid">flowchart TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
 </div>
 </li>
+</ul>
+<h3 id="图表3-class">图表3-Class</h3>
+<ul>
 <li>
-<p>图表5</p>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermiad
+</span></span><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">    Animal &lt;|-- Duck
+</span></span><span class="line"><span class="cl">    Animal &lt;|-- Fish
+</span></span><span class="line"><span class="cl">    Animal &lt;|-- Zebra
+</span></span><span class="line"><span class="cl">    Animal : +int age
+</span></span><span class="line"><span class="cl">    Animal : +String gender
+</span></span><span class="line"><span class="cl">    Animal: +isMammal()
+</span></span><span class="line"><span class="cl">    Animal: +mate()
+</span></span><span class="line"><span class="cl">    class Duck{
+</span></span><span class="line"><span class="cl">      +String beakColor
+</span></span><span class="line"><span class="cl">      +swim()
+</span></span><span class="line"><span class="cl">      +quack()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    class Fish{
+</span></span><span class="line"><span class="cl">      -int sizeInFeet
+</span></span><span class="line"><span class="cl">      -canEat()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    class Zebra{
+</span></span><span class="line"><span class="cl">      +bool is_wild
+</span></span><span class="line"><span class="cl">      +run()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
 <div class="mermaid">classDiagram
     Animal <|-- Duck
     Animal <|-- Fish
@@ -1014,35 +1238,225 @@ Bob-->>John: Jolly good!
     }
 </div>
 </li>
+</ul>
+<h3 id="图表4-state">图表4-State</h3>
+<ul>
 <li>
-<p>图表6</p>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">stateDiagram-v2
+</span></span><span class="line"><span class="cl">    [*] --&gt; Still
+</span></span><span class="line"><span class="cl">    Still --&gt; [*]
+</span></span><span class="line"><span class="cl">    Still --&gt; Moving
+</span></span><span class="line"><span class="cl">    Moving --&gt; Still
+</span></span><span class="line"><span class="cl">    Moving --&gt; Crash
+</span></span><span class="line"><span class="cl">    Crash --&gt; [*]
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>显示效果</p>
+<div class="mermaid">stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+</div>
+</li>
+</ul>
+<h3 id="图表5-er">图表5-ER</h3>
+<ul>
+<li>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">erDiagram
+</span></span><span class="line"><span class="cl">    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+</span></span><span class="line"><span class="cl">    CUSTOMER ||--o{ ORDER : places
+</span></span><span class="line"><span class="cl">    CUSTOMER ||--o{ INVOICE : &#34;liable for&#34;
+</span></span><span class="line"><span class="cl">    DELIVERY-ADDRESS ||--o{ ORDER : receives
+</span></span><span class="line"><span class="cl">    INVOICE ||--|{ ORDER : covers
+</span></span><span class="line"><span class="cl">    ORDER ||--|{ ORDER-ITEM : includes
+</span></span><span class="line"><span class="cl">    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+</span></span><span class="line"><span class="cl">    PRODUCT ||--o{ ORDER-ITEM : &#34;ordered in&#34;
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div class="mermaid">erDiagram
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+    CUSTOMER ||--o{ ORDER : places
+    CUSTOMER ||--o{ INVOICE : "liable for"
+    DELIVERY-ADDRESS ||--o{ ORDER : receives
+    INVOICE ||--|{ ORDER : covers
+    ORDER ||--|{ ORDER-ITEM : includes
+    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+    PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+</div>
+</li>
+</ul>
+<h3 id="图表6-gantt">图表6-Gantt</h3>
+<ul>
+<li>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">gantt
+</span></span><span class="line"><span class="cl">    section Section
+</span></span><span class="line"><span class="cl">    Completed :done,    des1, 2014-01-06,2014-01-08
+</span></span><span class="line"><span class="cl">    Active        :active,  des2, 2014-01-07, 3d
+</span></span><span class="line"><span class="cl">    Parallel 1   :         des3, after des1, 1d
+</span></span><span class="line"><span class="cl">    Parallel 2   :         des4, after des1, d
+</span></span><span class="line"><span class="cl">    Parallel 3   :         des5, after des3, 3d
+</span></span><span class="line"><span class="cl">    Parallel 4   :         des6, after des2, 1d
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
 <div class="mermaid">gantt
-    title Git Issues - days since last update
-    dateFormat  X
-    axisFormat %s
-
-    section Issue19062
-    71   : 0, 71
-    section Issue19401
-    36   : 0, 36
-    section Issue193
-    34   : 0, 34
-    section Issue7441
-    9    : 0, 9
-    section Issue1300
-    5    : 0, 5
+    section Section
+    Completed :done,    des1, 2014-01-06,2014-01-08
+    Active        :active,  des2, 2014-01-07, 3d
+    Parallel 1   :         des3, after des1, 1d
+    Parallel 2   :         des4, after des1, d
+    Parallel 3   :         des5, after des3, 3d
+    Parallel 4   :         des6, after des2, 1d
 </div>
 </li>
+</ul>
+<h3 id="图表7-userjourney">图表7-UserJourney</h3>
+<ul>
 <li>
-<p>图表7</p>
-<div class="mermaid">pie
-"Dogs" : 386
-"Cats" : 85.9
-"Rats" : 15
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">journey
+</span></span><span class="line"><span class="cl">    title My working day
+</span></span><span class="line"><span class="cl">    section Go to work
+</span></span><span class="line"><span class="cl">      Make tea: 5: Me
+</span></span><span class="line"><span class="cl">      Go upstairs: 3: Me
+</span></span><span class="line"><span class="cl">      Do work: 1: Me, Cat
+</span></span><span class="line"><span class="cl">    section Go home
+</span></span><span class="line"><span class="cl">      Go downstairs: 5: Me
+</span></span><span class="line"><span class="cl">      Sit down: 3: Me
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div class="mermaid">journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 3: Me
 </div>
 </li>
+</ul>
+<h3 id="图表8-git">图表8-Git</h3>
+<ul>
 <li>
-<p>图表8</p>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">gitGraph
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">    branch develop
+</span></span><span class="line"><span class="cl">    checkout develop
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">    checkout main
+</span></span><span class="line"><span class="cl">    merge develop
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">    commit
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
 <div class="mermaid">gitGraph
     commit
     commit
@@ -1056,21 +1470,90 @@ Bob-->>John: Jolly good!
     commit
 </div>
 </li>
+</ul>
+<h3 id="图表9-pie">图表9-Pie</h3>
+<ul>
 <li>
-<p>图表9</p>
-<div class="mermaid">journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 3: Me
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">pie title Pets adopted by volunteers
+</span></span><span class="line"><span class="cl">    &#34;Dogs&#34; : 386
+</span></span><span class="line"><span class="cl">    &#34;Cats&#34; : 85
+</span></span><span class="line"><span class="cl">    &#34;Rats&#34; : 15
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div class="mermaid">pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
 </div>
 </li>
+</ul>
+<h3 id="图表10-mindmap">图表10-Mindmap</h3>
+<ul>
 <li>
-<p>图表10</p>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">mindmap
+</span></span><span class="line"><span class="cl">  root((mindmap))
+</span></span><span class="line"><span class="cl">    Origins
+</span></span><span class="line"><span class="cl">      Long history
+</span></span><span class="line"><span class="cl">      ::icon(fa fa-book)
+</span></span><span class="line"><span class="cl">      Popularisation
+</span></span><span class="line"><span class="cl">        British popular psychology author Tony Buzan
+</span></span><span class="line"><span class="cl">    Research
+</span></span><span class="line"><span class="cl">      On effectivness&lt;br/&gt;and features
+</span></span><span class="line"><span class="cl">      On Automatic creation
+</span></span><span class="line"><span class="cl">        Uses
+</span></span><span class="line"><span class="cl">            Creative techniques
+</span></span><span class="line"><span class="cl">            Strategic planning
+</span></span><span class="line"><span class="cl">            Argument mapping
+</span></span><span class="line"><span class="cl">    Tools
+</span></span><span class="line"><span class="cl">      Pen and paper
+</span></span><span class="line"><span class="cl">      Mermaid
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
 <div class="mermaid">mindmap
   root((mindmap))
     Origins
@@ -1090,21 +1573,36 @@ Bob-->>John: Jolly good!
       Mermaid
 </div>
 </li>
+</ul>
+<h3 id="图表11-timeline">图表11-timeline</h3>
+<ul>
 <li>
-<p>图表11</p>
-<div class="mermaid">erDiagram
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : has
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER ||--o{ INVOICE : "liable for"
-    DELIVERY-ADDRESS ||--o{ ORDER : receives
-    INVOICE ||--|{ ORDER : covers
-    ORDER ||--|{ ORDER-ITEM : includes
-    PRODUCT-CATEGORY ||--|{ PRODUCT : contains
-    PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">        timeline
+</span></span><span class="line"><span class="cl">        title 我的日常
+</span></span><span class="line"><span class="cl">        section 努力搬砖
+</span></span><span class="line"><span class="cl">          上午 : 早会: 收邮件/回复邮件 : 查看线上问题
+</span></span><span class="line"><span class="cl">          下午 : 需求评审会 : 小组周会: coding
+</span></span><span class="line"><span class="cl">          晚上: 加班coding
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
 </div>
-</li>
+</div></li>
 <li>
-<p>图表12</p>
+<p>展示效果</p>
 <div class="mermaid">        timeline
         title 我的日常
         section 努力搬砖
@@ -1113,8 +1611,58 @@ Bob-->>John: Jolly good!
           晚上: 加班coding
 </div>
 </li>
+</ul>
+<h3 id="图表12-graph">图表12-graph</h3>
+<ul>
 <li>
-<p>图表13</p>
+<p>原始代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```mermaid
+</span></span><span class="line"><span class="cl">graph TB
+</span></span><span class="line"><span class="cl">    c1--&gt;a2
+</span></span><span class="line"><span class="cl">    subgraph one
+</span></span><span class="line"><span class="cl">    a1--&gt;a2
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    subgraph two
+</span></span><span class="line"><span class="cl">    b1--&gt;b2
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    subgraph three
+</span></span><span class="line"><span class="cl">    c1--&gt;c2
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">​```
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>展示效果</p>
+<div class="mermaid">graph TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
+</div>
 </li>
 </ul>
 <p>参考文章:</p>
@@ -1135,6 +1683,9 @@ Bob-->>John: Jolly good!
 </li>
 <li id="fn:4">
 <p><a href="https://github.com/adrai/flowchart.js">https://github.com/adrai/flowchart.js</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://gohugo.io/content-management/diagrams/#mermaid-diagrams">https://gohugo.io/content-management/diagrams/#mermaid-diagrams</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
