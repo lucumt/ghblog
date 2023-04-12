@@ -102,7 +102,7 @@ mermaidDiagrams:
 
 个人`Hugo`博客切换为`Even`已经有好几年了，相关功能也是基于此主题扩展而来，不过`Even`主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭[^1]，同时个人发现该主题下`layouts/partials/scripts.html`对于`flowchart`和`sequence`的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！
 
-PS: `Even`主题很受欢迎，希望作者早日恢复维护!
+PS: `Even`主题[^2]很受欢迎，希望作者早日恢复维护!
 
 ![Even主题的作者已经没有维护](/blog_img/hugo/enable-diagrams-in-hugo/even-theme-website-not-display-diagram.png "Even主题的作者已经没有维护") 
 
@@ -186,7 +186,7 @@ layouts/
 
   上述代码中通过`let flowOptions = {...flowSiteOptions, ...flowPageOptions};`来确保页面上的配置覆盖全局配置，优先级更高。
 
-* 在对应的`markdown`页面头部开启`flowchart`的展示，可根据实际情况添加自定义配置，保存对应`markdown`文件后页面会自动刷新并展示对应效果[^2]。
+* 在对应的`markdown`页面头部开启`flowchart`的展示，可根据实际情况添加自定义配置，保存对应`markdown`文件后页面会自动刷新并展示对应效果[^3]。
 
   ```json
   flowchartDiagrams:
@@ -595,6 +595,8 @@ flowchartDiagrams:
 1. https://snowdreams1006.github.io/write/mermaid-flow-chart.html
 
 [^1]:https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed
-[^2]:https://gohugo.io/getting-started/configuration-markup/
-[^3]: 此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
+[^2]:作者个人网站地址https://olowolo.com
+[^3]:此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
+
+
 
