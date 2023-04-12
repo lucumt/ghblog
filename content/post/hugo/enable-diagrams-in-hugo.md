@@ -204,7 +204,16 @@ layouts/
 
 ## 自定义样式
 
- 不同于`sequence`,`flowchart`的使用很灵活，其[官网](https://flowchart.js.org/)上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何根据实际情况自定义样式。
+ 不同于`sequence`,`flowchart`的使用很灵活，其[官网](https://flowchart.js.org/)上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何对其中的`flowstate`进行配置从而让图表展示不同的样式。
+
+
+
+为了实现自定义样式的展示，需要了解`flowchart`的语法,下图展示了其主要语法，更具体的可参见[^4]，实际使用中我们主要通过对`flowstate`来实现自定义样式显示。
+
+![flowchart流程图语法展示](/blog_img/hugo/enable-diagrams-in-hugo/flowchart-grammer-explanation.png "flowchart流程图语法展示") 
+
+下图展示了一个通过设置不同`flowstate`来设置流程图不同组件样式的示例。
+![flowstate自定义样式设置](/blog_img/hugo/enable-diagrams-in-hugo/flowchart-flowstate-custom-config.png "flowstate自定义样式设置") 
 
 ## 展示效果
 
@@ -324,8 +333,7 @@ flowchartDiagrams:
   op1=>operation: My Operation|past
   op2=>operation: Stuff|aaa
   sub1=>subroutine: My Subroutine|invalid
-  cond=>condition: Yes
-  or No?|approved:>http://www.google.com
+  cond=>condition: Yes or No?|approved:>http://www.google.com
   c2=>condition: Good idea|rejected
   io=>inputoutput: catch something...|aaa
   
@@ -347,7 +355,7 @@ flowchartDiagrams:
   sub1=>subroutine: My Subroutine|invalid
   cond=>condition: Yes
   or No?|approved:>http://www.google.com
-  c2=>condition: Good idea|rejected
+  c2=>condition: Good idea | rejected
   io=>inputoutput: catch something...|aaa
   
   st->op1(right)->cond
@@ -611,3 +619,4 @@ flowchartDiagrams:
 [^1]:https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed
 [^2]:作者个人网站地址为[https://olowolo.com](https://olowolo.com)，GitHub地址为[https://github.com/olOwOlo/hugo-theme-even](https://github.com/olOwOlo/hugo-theme-even)
 [^3]:此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
+[^4]:https://github.com/adrai/flowchart.js
