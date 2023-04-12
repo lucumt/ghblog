@@ -442,7 +442,7 @@ What，于是乎我只能自己fork源码自己修改了，修改好的代码参
 
 `sequence`图表是基于[SVG](https://www.w3schools.com/graphics/svg_intro.asp)实现，故而自己的修改也是从`SVG`着手，由于时间关系自己只修改了[SVG Line](https://www.w3schools.com/graphics/svg_line.asp)和[SVG Rectangle](https://www.w3schools.com/graphics/svg_rect.asp)两个组件，修改后的使用效果如下：
 
-![sequence图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/sequence-flowstate-custom-config.png "sequence图表动态配置") 
+![sequence图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/sequence-custom-config.png "sequence图表动态配置") 
 
 ## 展示效果
 
@@ -590,36 +590,94 @@ sequenceDiagrams:
   App->>System: Stop
   ```
 
-# mermaid图表1
+# mermaid图表
 
-* 图表1
+[mermaid](https://mermaid.js.org/)是一个功能强大的`Markdown`图表显示控件，其本身的功能已经包含前述的`flowchart`和`sequence`，但由于`Even`主题的作者默认并没有加上此图表的支持，同时`Hugo`的官网有专门的配置说明[^5]，故本次一并加上。
 
-  ```mermaid
-  graph TB
-      c1-->a2
-      subgraph one
-      a1-->a2
-      end
-      subgraph two
-      b1-->b2
-      end
-      subgraph three
-      c1-->c2
-      end
+## 修改过程
+
+* 在`layouts/_default/_markup`创建文件`render-codeblock-mermaid.html`并添加如下代码
+
+  ```html
+  <div class="mermaid">
+    {{- .Inner | safeHTML }}
+  </div>
+  {{ .Page.Store.Set "hasMermaid" true }}
   ```
 
-* 图表2
+* 在`layouts/partials/scripts.html`添加如下代码
 
-  ```mermaid
-  graph TD
-    A[Christmas] -->|Get money| B(Go shopping)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-    C -->|Three| F[fa:fa-car Car]
+  ```html
+  <!-- mermaid js -->
+  {{- if and (or .Params.mermaidDiagrams.enable (and .Site.Params.mermaidDiagrams.enable (ne .Params.mermaidDiagrams.enable false))) (or .IsPage .IsHome) -}}
+  	{{ if .Page.Store.Get "hasMermaid" }}
+  	  <script type="module">
+  		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
+  		//import mermaid from '{{ "lib/mermaid/mermaid.esm.min.mjs" | relURL }}'
+  		
+  		let mermaidPageOptions = {{ .Page.Params.mermaidDiagrams.options }};
+  		let mermaidSiteOptions = {{ .Site.Params.mermaidDiagrams.options }};
+  		mermaidPageOptions = !!mermaidPageOptions ? mermaidPageOptions : "{}"
+  		mermaidSiteOptions = !!mermaidSiteOptions ? mermaidSiteOptions : "{}"
+  
+  		mermaidPageOptions = eval("(" + mermaidPageOptions + ")")
+  		mermaidSiteOptions = eval("(" + mermaidSiteOptions + ")")
+  		// page options have high priority then site options
+  		let mermaidOptions = {...mermaidSiteOptions, ...mermaidPageOptions}; 
+  
+  		mermaid.initialize(mermaidOptions);
+  	  </script>
+  	{{ end }}
+  {{- end }}
   ```
 
-* 图表3
+* 在对应的`markdown`页面头部开启`mermaid`的展示，可根据实际情况添加自定义配置，保存对应`markdown`文件后页面会自动刷新并展示对应效果
+
+  ```json
+  mermaidDiagrams: 
+    enable: true
+    options: "{
+       'theme':'forest'
+    }"
+  ```
+
+## 自定义样式
+
+`mermaid`图表的自定义配置主要基于themes来实现，在其[官网文档](https://mermaid.js.org/config/theming.html)上有很详细的说明，下图为一个简单的示例
+
+![mermaid图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/mermaid-custom-config.png "mermaid图表动态配置") 
+
+## 展示效果
+
+基于对应`markdown`页面的下述配置展示相关效果
+
+```json
+mermaidDiagrams: 
+  enable: true
+  options: "{
+     'theme':'forest'
+  }"
+```
+
+### 图表1-Sequence
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  sequenceDiagram
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+      John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
   sequenceDiagram
@@ -633,20 +691,63 @@ sequenceDiagrams:
   Bob-->>John: Jolly good!
   ```
 
-* 图表4
+### 图表2-Flow
 
-  ```mermaid
-  gantt
-      section Section
-      Completed :done,    des1, 2014-01-06,2014-01-08
-      Active        :active,  des2, 2014-01-07, 3d
-      Parallel 1   :         des3, after des1, 1d
-      Parallel 2   :         des4, after des1, d
-      Parallel 3   :         des5, after des3, 3d
-      Parallel 4   :         des6, after des2, 1d
+* 原始代码
+
+  ```
+  ​```mermaid
+  flowchart TD
+      A[Christmas] -->|Get money| B(Go shopping)
+      B --> C{Let me think}
+      C -->|One| D[Laptop]
+      C -->|Two| E[iPhone]
+      C -->|Three| F[fa:fa-car Car]
+  ​```
   ```
 
-* 图表5
+* 展示效果
+
+  ```mermaid
+  flowchart TD
+      A[Christmas] -->|Get money| B(Go shopping)
+      B --> C{Let me think}
+      C -->|One| D[Laptop]
+      C -->|Two| E[iPhone]
+      C -->|Three| F[fa:fa-car Car]
+  ```
+
+### 图表3-Class
+
+* 原始代码
+
+  ```
+  ​```mermiad
+  classDiagram
+      Animal <|-- Duck
+      Animal <|-- Fish
+      Animal <|-- Zebra
+      Animal : +int age
+      Animal : +String gender
+      Animal: +isMammal()
+      Animal: +mate()
+      class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+      }
+      class Fish{
+        -int sizeInFeet
+        -canEat()
+      }
+      class Zebra{
+        +bool is_wild
+        +run()
+      }
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
   classDiagram
@@ -672,36 +773,149 @@ sequenceDiagrams:
       }
   ```
 
-* 图表6
+### 图表4-State
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  stateDiagram-v2
+      [*] --> Still
+      Still --> [*]
+      Still --> Moving
+      Moving --> Still
+      Moving --> Crash
+      Crash --> [*]
+  ​```
+  ```
+
+* 显示效果
+
+  ```mermaid
+  stateDiagram-v2
+      [*] --> Still
+      Still --> [*]
+      Still --> Moving
+      Moving --> Still
+      Moving --> Crash
+      Crash --> [*]
+  ```
+
+### 图表5-ER
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  erDiagram
+      CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+      CUSTOMER ||--o{ ORDER : places
+      CUSTOMER ||--o{ INVOICE : "liable for"
+      DELIVERY-ADDRESS ||--o{ ORDER : receives
+      INVOICE ||--|{ ORDER : covers
+      ORDER ||--|{ ORDER-ITEM : includes
+      PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+      PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+  ​```
+  ```
+
+* 展示效果
+
+  ```mermaid
+  erDiagram
+      CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+      CUSTOMER ||--o{ ORDER : places
+      CUSTOMER ||--o{ INVOICE : "liable for"
+      DELIVERY-ADDRESS ||--o{ ORDER : receives
+      INVOICE ||--|{ ORDER : covers
+      ORDER ||--|{ ORDER-ITEM : includes
+      PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+      PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+  ```
+
+### 图表6-Gantt
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  gantt
+      section Section
+      Completed :done,    des1, 2014-01-06,2014-01-08
+      Active        :active,  des2, 2014-01-07, 3d
+      Parallel 1   :         des3, after des1, 1d
+      Parallel 2   :         des4, after des1, d
+      Parallel 3   :         des5, after des3, 3d
+      Parallel 4   :         des6, after des2, 1d
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
   gantt
-      title Git Issues - days since last update
-      dateFormat  X
-      axisFormat %s
-  
-      section Issue19062
-      71   : 0, 71
-      section Issue19401
-      36   : 0, 36
-      section Issue193
-      34   : 0, 34
-      section Issue7441
-      9    : 0, 9
-      section Issue1300
-      5    : 0, 5
+      section Section
+      Completed :done,    des1, 2014-01-06,2014-01-08
+      Active        :active,  des2, 2014-01-07, 3d
+      Parallel 1   :         des3, after des1, 1d
+      Parallel 2   :         des4, after des1, d
+      Parallel 3   :         des5, after des3, 3d
+      Parallel 4   :         des6, after des2, 1d
   ```
 
-* 图表7
+### 图表7-UserJourney
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  journey
+      title My working day
+      section Go to work
+        Make tea: 5: Me
+        Go upstairs: 3: Me
+        Do work: 1: Me, Cat
+      section Go home
+        Go downstairs: 5: Me
+        Sit down: 3: Me
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
-  pie
-  "Dogs" : 386
-  "Cats" : 85.9
-  "Rats" : 15
+  journey
+      title My working day
+      section Go to work
+        Make tea: 5: Me
+        Go upstairs: 3: Me
+        Do work: 1: Me, Cat
+      section Go home
+        Go downstairs: 5: Me
+        Sit down: 3: Me
   ```
 
-* 图表8
+### 图表8-Git
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  gitGraph
+      commit
+      commit
+      branch develop
+      checkout develop
+      commit
+      commit
+      checkout main
+      merge develop
+      commit
+      commit
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
   gitGraph
@@ -717,23 +931,55 @@ sequenceDiagrams:
       commit
   ```
 
-* 图表9
+### 图表9-Pie
 
-  ```mermaid
-  journey
-      title My working day
-      section Go to work
-        Make tea: 5: Me
-        Go upstairs: 3: Me
-        Do work: 1: Me, Cat
-      section Go home
-        Go downstairs: 5: Me
-        Sit down: 3: Me
+* 原始代码
+
+  ```
+  ​```mermaid
+  pie title Pets adopted by volunteers
+      "Dogs" : 386
+      "Cats" : 85
+      "Rats" : 15
+  ​```
   ```
 
-  
+* 展示效果
 
-* 图表10
+  ```mermaid
+  pie title Pets adopted by volunteers
+      "Dogs" : 386
+      "Cats" : 85
+      "Rats" : 15
+  ```
+
+### 图表10-Mindmap
+
+* 原始代码
+
+  ```
+  ​```mermaid
+  mindmap
+    root((mindmap))
+      Origins
+        Long history
+        ::icon(fa fa-book)
+        Popularisation
+          British popular psychology author Tony Buzan
+      Research
+        On effectivness<br/>and features
+        On Automatic creation
+          Uses
+              Creative techniques
+              Strategic planning
+              Argument mapping
+      Tools
+        Pen and paper
+        Mermaid
+  ​```
+  ```
+
+* 展示效果
 
   ```mermaid
   mindmap
@@ -755,23 +1001,22 @@ sequenceDiagrams:
         Mermaid
   ```
 
-* 图表11
+### 图表11-timeline
 
-  ```mermaid
-  erDiagram
-      CUSTOMER }|..|{ DELIVERY-ADDRESS : has
-      CUSTOMER ||--o{ ORDER : places
-      CUSTOMER ||--o{ INVOICE : "liable for"
-      DELIVERY-ADDRESS ||--o{ ORDER : receives
-      INVOICE ||--|{ ORDER : covers
-      ORDER ||--|{ ORDER-ITEM : includes
-      PRODUCT-CATEGORY ||--|{ PRODUCT : contains
-      PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+* 原始代码
+
+  ```
+  ​```mermaid
+          timeline
+          title 我的日常
+          section 努力搬砖
+            上午 : 早会: 收邮件/回复邮件 : 查看线上问题
+            下午 : 需求评审会 : 小组周会: coding
+            晚上: 加班coding
+  ​```
   ```
 
-  
-
-* 图表12
+* 展示效果
 
   ```mermaid
           timeline
@@ -782,9 +1027,41 @@ sequenceDiagrams:
             晚上: 加班coding
   ```
 
-  
+### 图表12-graph
 
-* 图表13
+* 原始代码
+
+  ```
+  ​```mermaid
+  graph TB
+      c1-->a2
+      subgraph one
+      a1-->a2
+      end
+      subgraph two
+      b1-->b2
+      end
+      subgraph three
+      c1-->c2
+      end
+  ​```
+  ```
+
+* 展示效果
+
+  ```mermaid
+  graph TB
+      c1-->a2
+      subgraph one
+      a1-->a2
+      end
+      subgraph two
+      b1-->b2
+      end
+      subgraph three
+      c1-->c2
+      end
+  ```
 
 参考文章:
 
@@ -794,3 +1071,4 @@ sequenceDiagrams:
 [^2]:作者个人网站地址为[https://olowolo.com](https://olowolo.com)，GitHub地址为[https://github.com/olOwOlo/hugo-theme-even](https://github.com/olOwOlo/hugo-theme-even)
 [^3]:此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
 [^4]:https://github.com/adrai/flowchart.js
+[^5]:https://gohugo.io/content-management/diagrams/#mermaid-diagrams
