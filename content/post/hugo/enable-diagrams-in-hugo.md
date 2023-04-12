@@ -164,14 +164,15 @@ layouts/
       <script src="{{ "lib/flowchartDiagrams/flowchart-1.8.0.min.js" | relURL }}" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script>
     {{- end -}}
   	<script>
-  	{{- if .Params.flowchartDiagrams.options -}}
+  	/*{{- if .Params.flowchartDiagrams.options -}}
   	  window.flowchartDiagramsOptions = {{ .Params.flowchartDiagrams.options | safeJS }};
   	{{- else if .Site.Params.flowchartDiagrams.options -}}
   	  window.flowchartDiagramsOptions = {{ .Site.Params.flowchartDiagrams.options | safeJS }};
-  	{{- end -}}
-      <!-- below is newly added code -->
-  	let flowPageOptions = {{ .Page.Params.flowchartDiagrams.options }};
-  	let flowSiteOptions = {{ .Site.Params.flowchartDiagrams.options }};
+  	{{- end -}}*/
+  	
+  	<!-- below is newly added code -->
+  	let flowPageOptions = {{ .Page.Params.flowchartDiagrams.options  }};
+  	let flowSiteOptions = {{ .Site.Params.flowchartDiagrams.options  }};
   	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
   	flowSiteOptions = !!flowSiteOptions ? flowSiteOptions : "{}"
   	
@@ -201,9 +202,9 @@ layouts/
               }"
   ```
 
-## 关于自定义样式的展示
+## 自定义样式
 
-
+ 不同于`sequence`,`flowchart`的使用很灵活，其[官网](https://flowchart.js.org/)上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何根据实际情况自定义样式。
 
 ## 展示效果
 
@@ -280,31 +281,24 @@ flowchartDiagrams:
 
 ### 图表2
 
-### 图表3
+* 原始代码
 
-### 图表4
-
-
-
-# flowchart图表1
-
-* 图表1
-
-  ```flow
-  st=>start: 开始框
-  op=>operation: 处理框
-  cond=>condition: 判断框(是或否?)
-  sub1=>subroutine: 子流程
-  io=>inputoutput: 输入输出框|approved
-  e=>end: 结束框
-  st->op->cond
-  cond(yes)->io->e
-  cond(no)->sub1(right)->op
+  ```
+  ​```flow
+  st=>start: 开始节点
+  in=>inputoutput: 输入
+  e=>end: 结束节点
+  op=>operation: 操作节点
+  cond=>condition: 条件节点
+  sub=>subroutine: 子例程
+  out=>inputoutput: 输出
+  st(right)->in->op->cond
+  cond(yes,right)->out->e
+  cond(no)->sub
+  ​```
   ```
 
-  
-
-* 图表2
+* 展示效果
 
   ```flow
   st=>start: 开始节点
@@ -319,9 +313,31 @@ flowchartDiagrams:
   cond(no)->sub
   ```
 
-  
+### 图表3
 
-* 图表3
+* 原始代码
+
+  ```
+  ​```flow
+  st=>start: Start|past:>http://www.google.com[blank]
+  e=>end: End:>http://www.google.com
+  op1=>operation: My Operation|past
+  op2=>operation: Stuff|aaa
+  sub1=>subroutine: My Subroutine|invalid
+  cond=>condition: Yes
+  or No?|approved:>http://www.google.com
+  c2=>condition: Good idea|rejected
+  io=>inputoutput: catch something...|aaa
+  
+  st->op1(right)->cond
+  cond(yes, right)->c2
+  cond(no)->sub1(left)->op1
+  c2(yes)->io->e
+  c2(no)->op2->e
+  ​```
+  ```
+
+* 展示效果
 
   ```flow
   st=>start: Start|past:>http://www.google.com[blank]
@@ -340,8 +356,6 @@ flowchartDiagrams:
   c2(yes)->io->e
   c2(no)->op2->e
   ```
-
-  
 
 # sequence图表1
 
@@ -595,8 +609,5 @@ flowchartDiagrams:
 1. https://snowdreams1006.github.io/write/mermaid-flow-chart.html
 
 [^1]:https://github.com/olOwOlo/hugo-theme-even/issues?q=is%3Aissue+is%3Aclosed
-[^2]:作者个人网站地址https://olowolo.com
+[^2]:作者个人网站地址为[https://olowolo.com](https://olowolo.com)，GitHub地址为[https://github.com/olOwOlo/hugo-theme-even](https://github.com/olOwOlo/hugo-theme-even)
 [^3]:此处假设我们采用`hugo server -w -D`来开启草稿模式和动态监测模式
-
-
-
