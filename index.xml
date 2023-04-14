@@ -38,6 +38,18 @@
     </item>
     
     <item>
+      <title>在Jenkins中根据配置从不同的仓库中Checkout代码</title>
+      <link>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</link>
+      <pubDate>Fri, 10 Mar 2023 22:48:50 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</guid>
+      <description>&lt;style&gt;
+div.mermaid &gt; svg { max-width: 60% !important; }
+&lt;/style&gt;
+&lt;p&gt;简要介绍如何在&lt;a href=&#34;https://kubesphere.io/zh/&#34;&gt;KubeSphere&lt;/a&gt;中使用&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;基于用户选择的不同&lt;a href=&#34;https://gitlab.com&#34;&gt;GitLab&lt;/a&gt;工程模块利用&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;进行动态的代码下载和编译构建，&lt;strong&gt;将多条流水线缩减为一条，减少&lt;code&gt;Jenkins&lt;/code&gt;流水线的开发与维护成本&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>关于我</title>
       <link>https://lucumt.info/about/</link>
       <pubDate>Mon, 27 Feb 2023 18:44:29 +0800</pubDate>
