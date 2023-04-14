@@ -41,6 +41,10 @@ sequenceDiagrams:
 mermaidDiagrams: 
   enable: false
   options: ""
+
+highchartsDiagrams: 
+  enable: false
+  options: ""
 ---
 
 <!--more-->

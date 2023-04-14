@@ -1,9 +1,9 @@
 ---
-title: "给禅道软件集成LDAP实现单点登录"
-date: 2023-03-28T10:04:00+08:00
-lastmod: 2023-03-28T10:04:00+08:00
+title: "给Yapi添加LDAP登录认证"
+date: 2023-04-14T11:23:00+08:00
+lastmod: 2023-04-14T11:23:00+08:00
 draft: true
-keywords: ["ldap","禅道"]
+keywords: []
 description: ""
 tags: ["ldap"]
 categories: ["工具使用","系统集成"]
@@ -38,6 +38,13 @@ sequenceDiagrams:
   enable: false
   options: ""
 
+mermaidDiagrams: 
+  enable: false
+  options: ""
+
+highchartsDiagrams: 
+  enable: false
+  options: ""
 ---
 
 <!--more-->

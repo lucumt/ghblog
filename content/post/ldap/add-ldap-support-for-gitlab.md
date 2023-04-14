@@ -1,12 +1,12 @@
 ---
-title: "在Jenkins中根据配置从不同的仓库中Checkout代码"
-date: 2023-03-10T22:48:50+08:00
-lastmod: 2023-03-10T22:48:50+08:00
+title: "给Gitlab添加LDAP登录认证"
+date: 2023-04-14T11:22:34+08:00
+lastmod: 2023-04-14T11:22:34+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["ldap"]
+categories: ["工具使用","系统集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -38,6 +38,13 @@ sequenceDiagrams:
   enable: false
   options: ""
 
+mermaidDiagrams: 
+  enable: false
+  options: ""
+
+highchartsDiagrams: 
+  enable: false
+  options: ""
 ---
 
 <!--more-->

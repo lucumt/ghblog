@@ -1,12 +1,12 @@
 ---
-title: "给禅道软件集成LDAP实现单点登录"
-date: 2023-03-28T10:04:00+08:00
-lastmod: 2023-03-28T10:04:00+08:00
+title: "在KubeSphere中开启Jenkins创建多个从节点支持并发构建"
+date: 2023-04-14T11:33:52+08:00
+lastmod: 2023-04-14T11:33:52+08:00
 draft: true
-keywords: ["ldap","禅道"]
+keywords: []
 description: ""
-tags: ["ldap"]
-categories: ["工具使用","系统集成"]
+tags: ["kubesphere","jenkins"]
+categories: ["持续集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -38,6 +38,13 @@ sequenceDiagrams:
   enable: false
   options: ""
 
+mermaidDiagrams: 
+  enable: false
+  options: ""
+
+highchartsDiagrams: 
+  enable: false
+  options: ""
 ---
 
 <!--more-->
