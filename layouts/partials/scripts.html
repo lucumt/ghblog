@@ -104,7 +104,7 @@
 	{{ if .Page.Store.Get "hasMermaid" }}
 	  <script type="module">
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
-		//import mermaid from '{{ "lib/mermaid/mermaid.esm.min.mjs" | relURL }}'
+		 //import mermaid from {{ "lib/mermaid/mermaid.esm.min.mjs" | relURL }}
 		
 		let mermaidPageOptions = {{ .Page.Params.mermaidDiagrams.options }};
 		let mermaidSiteOptions = {{ .Site.Params.mermaidDiagrams.options }};

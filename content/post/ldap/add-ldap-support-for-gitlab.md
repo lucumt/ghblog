@@ -48,3 +48,8 @@ highchartsDiagrams:
 ---
 
 <!--more-->
+
+```ba
+docker run -id -p 3555:80 -p 9922:22 -v $PWD/gitlab/etc:/etc/gitlab  -v $PWD/gitlab/log:/var/log/gitlab -v $PWD/gitlab/opt:/var/opt/gitlab --restart always --privileged=true --name gitlab-test gitlab/gitlab-ce
+```
+
