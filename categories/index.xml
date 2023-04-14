@@ -6,7 +6,25 @@
     <description>Recent content in Categories on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Mar 2023 09:46:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Apr 2023 11:22:34 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>工具使用</title>
+      <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>系统集成</title>
+      <link>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</link>
+      <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>个人博客</title>
       <link>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
@@ -121,15 +139,6 @@
       <pubDate>Sat, 23 Dec 2017 12:07:40 +0800</pubDate>
       
       <guid>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>工具使用</title>
-      <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
-      
-      <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
       <description></description>
     </item>
     
