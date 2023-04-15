@@ -6,7 +6,7 @@ draft: false
 keywords: ["flowchart","sequence","mermaid","hugo","markdown"]
 description: ""
 tags: ["hugo","go"]
-categories: ["个人博客"]
+categories: ["个人博客","系统集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

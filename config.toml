@@ -202,7 +202,11 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 	
   [params.mermaidDiagrams] # see https://mermaid.js.org/
     enable = false
-    options = "{theme: 'default',startOnLoad: true }"            
+    options = "{theme: 'default',startOnLoad: true }"      
+
+  [params.highchartsDiagrams] # see https://www.highcharts.com/
+    enable = false
+    options ="{}" 	
 
   [params.busuanzi]         # count web traffic by busuanzi                             # 是否使用不蒜子统计站点访问量
     enable = true

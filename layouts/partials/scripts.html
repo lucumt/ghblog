@@ -121,6 +121,36 @@
 	{{ end }}
 {{- end }}
 
+<!-- highcharts js -->
+{{- if and (or .Params.highchartsDiagrams.enable (and .Site.Params.highchartsDiagrams.enable (ne .Params.highchartsDiagrams.enable false))) (or .IsPage .IsHome) -}}
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="https://code.highcharts.com/modules/tilemap.js"></script>
+  <script src="https://code.highcharts.com/modules/sankey.js"></script>
+  <script type="text/javascript">
+	  document.addEventListener('DOMContentLoaded', initHighcharts);
+	  function initHighcharts(){
+		let highchartsPageOptions = {{ .Page.Params.highchartsDiagrams.options }};
+		let highchartsSiteOptions = {{ .Site.Params.highchartsDiagrams.options }};
+		highchartsPageOptions = !!highchartsPageOptions ? highchartsPageOptions : "{}"
+		highchartsSiteOptions = !!highchartsSiteOptions ? highchartsSiteOptions : "{}"
+
+		highchartsPageOptions = eval("(" + highchartsPageOptions + ")")
+		highchartsSiteOptions = eval("(" + highchartsSiteOptions + ")")
+		// page options have high priority then site options
+		let highchartsOptions = {...highchartsSiteOptions, ...highchartsPageOptions}; 
+		let highchartsConfigs = document.querySelectorAll("[id^=highcharts_]");
+		for(config of highchartsConfigs){
+		  console.log("-----------------------");
+		  console.log(config.innerText);
+		  Highcharts.chart(config.id,eval("(" + config.innerText + ")"));
+		}
+	  }
+  </script>
+{{- end }}
+
 
 {{ $even := resources.Get "js/even.js" }}
 {{ $main := resources.Get "js/main.js" }}

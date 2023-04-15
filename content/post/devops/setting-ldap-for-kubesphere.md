@@ -6,7 +6,7 @@ draft: false
 keywords: ["kubesphere","Jenkins","持续集成","持续部署","LDAP"]
 description: "简要记录自己Kubesphere集成LDAP中所遇到的坑"
 tags: ["kubesphere","jenkins","LDAP"]
-categories: ["持续集成"]
+categories: ["持续集成","系统集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
