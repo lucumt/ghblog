@@ -111,7 +111,7 @@
 		mermaidPageOptions = !!mermaidPageOptions ? mermaidPageOptions : "{}"
 		mermaidSiteOptions = !!mermaidSiteOptions ? mermaidSiteOptions : "{}"
 
-		mermaidPageOptions = eval("(" + mermaidPageOptions + ")")
+	    mermaidPageOptions = eval("(" + mermaidPageOptions + ")")
 		mermaidSiteOptions = eval("(" + mermaidSiteOptions + ")")
 		// page options have high priority then site options
 		let mermaidOptions = {...mermaidSiteOptions, ...mermaidPageOptions}; 
@@ -142,10 +142,13 @@
 		// page options have high priority then site options
 		let highchartsOptions = {...highchartsSiteOptions, ...highchartsPageOptions}; 
 		let highchartsConfigs = document.querySelectorAll("[id^=highcharts_]");
+		console.log(highchartsOptions)
 		for(config of highchartsConfigs){
-		  console.log("-----------------------");
-		  console.log(config.innerText);
-		  Highcharts.chart(config.id,eval("(" + config.innerText + ")"));
+		  let chartData = eval("(" + config.innerText + ")");
+		  chartData = {...highchartsOptions,...chartData}
+		  console.log("-------------------------------------------")
+		  console.log(chartData)
+		  Highcharts.chart(config.id,chartData);
 		}
 	  }
   </script>

@@ -3,16 +3,16 @@ title: "在Hugo中开启Highcharts图表支持"
 date: 2023-04-02T16:39:51+08:00
 lastmod: 2023-04-03T16:39:51+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["hugo","highcharts","go"]
+description: "简要介绍如何在Hugo中开启Highcharts图表支持"
+tags: ["hugo","highcharts","go"]
+categories: ["个人博客","系统集成"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
-toc: false
+toc: true
 autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
@@ -44,16 +44,28 @@ mermaidDiagrams:
 
 highchartsDiagrams: 
   enable: true
-  options: ""
+  options: "
+   {
+    subtitle: {
+        style: {
+            color: 'red'
+        }
+    }
+  }
+"
 ---
 
 简要说明如何在`Hugo`中集成[Highcharts](https://www.highcharts.com/)。
 
 <!--more-->
 
-* 测试代码1
+# 修改过程
 
-  ```highcharts
+# 展示效果
+
+## 图表1-Bubble chart
+
+```highcharts
   {
   
       chart: {
@@ -180,11 +192,85 @@ highchartsDiagrams:
       }]
   
   }
-  ```
+```
 
-* 测试代码2
+## 图表2-Basic column
 
-  ```highcharts
+```highcharts
+{
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Monthly Average Rainfall'
+      },
+      subtitle: {
+          text: 'Source: WorldClimate.com'
+      },
+      xAxis: {
+          categories: [
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec'
+          ],
+          crosshair: true
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Rainfall (mm)'
+          }
+      },
+      tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [{
+          name: 'Tokyo',
+          data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
+              194.1, 95.6, 54.4]
+  
+      }, {
+          name: 'New York',
+          data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
+              106.6, 92.3]
+  
+      }, {
+          name: 'London',
+          data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
+              51.2]
+  
+      }, {
+          name: 'Berlin',
+          data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
+              51.1]
+  
+      }]
+  }
+```
+
+## 图表3-Basic line
+
+```highcharts
   {
   
       title: {
@@ -261,155 +347,12 @@ highchartsDiagrams:
           }]
       }
   }
-  ```
+```
 
-* 测试代码3
+## 图表4-3D donut
 
-  ```highcharts
-  {
-      chart: {
-          type: 'column'
-      },
-      title: {
-          text: 'Monthly Average Rainfall'
-      },
-      subtitle: {
-          text: 'Source: WorldClimate.com'
-      },
-      xAxis: {
-          categories: [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec'
-          ],
-          crosshair: true
-      },
-      yAxis: {
-          min: 0,
-          title: {
-              text: 'Rainfall (mm)'
-          }
-      },
-      tooltip: {
-          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-          footerFormat: '</table>',
-          shared: true,
-          useHTML: true
-      },
-      plotOptions: {
-          column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-          }
-      },
-      series: [{
-          name: 'Tokyo',
-          data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-              194.1, 95.6, 54.4]
-  
-      }, {
-          name: 'New York',
-          data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-              106.6, 92.3]
-  
-      }, {
-          name: 'London',
-          data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-              51.2]
-  
-      }, {
-          name: 'Berlin',
-          data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-              51.1]
-  
-      }]
-  }
-  ```
-
-* 测试代码4
-
-  ```highcharts
-  {
-      chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-      },
-      title: {
-          text: 'Browser market shares in May, 2020',
-          align: 'left'
-      },
-      tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      accessibility: {
-          point: {
-              valueSuffix: '%'
-          }
-      },
-      plotOptions: {
-          pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                  enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-              }
-          }
-      },
-      series: [{
-          name: 'Brands',
-          colorByPoint: true,
-          data: [{
-              name: 'Chrome',
-              y: 70.67,
-              sliced: true,
-              selected: true
-          }, {
-              name: 'Edge',
-              y: 14.77
-          },  {
-              name: 'Firefox',
-              y: 4.86
-          }, {
-              name: 'Safari',
-              y: 2.63
-          }, {
-              name: 'Internet Explorer',
-              y: 1.53
-          },  {
-              name: 'Opera',
-              y: 1.40
-          }, {
-              name: 'Sogou Explorer',
-              y: 0.84
-          }, {
-              name: 'QQ',
-              y: 0.51
-          }, {
-              name: 'Other',
-              y: 2.6
-          }]
-      }]
-  }
-  ```
-
-* 测试代码5
-
-  ```highcharts
-  {
+```highcharts
+ {
       chart: {
           type: 'pie',
           options3d: {
@@ -447,11 +390,11 @@ highchartsDiagrams:
           ]
       }]
   }
-  ```
+```
 
-* 测试代码6
+## 图表5-Tile map
 
-  ```highcharts
+```highcharts
   {
       chart: {
           type: 'tilemap',
@@ -892,12 +835,12 @@ highchartsDiagrams:
           }]
       }]
   }
-  ```
+```
 
-* 测试代码7
+## 图表6-Sankey diagram
 
-  ```highcharts
-   {
+```highcharts
+{
   
       title: {
           text: 'Highcharts Sankey Diagram'
@@ -962,8 +905,104 @@ highchartsDiagrams:
       }]
   
   }
-  ```
+```
 
-* 测试代码8
+## 图表7-Gauge series
 
-* 测试代码9
+```highcharts
+{
+
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false,
+        height: '80%'
+    },
+
+    title: {
+        text: 'Speedometer'
+    },
+
+    pane: {
+        startAngle: -90,
+        endAngle: 89.9,
+        background: null,
+        center: ['50%', '75%'],
+        size: '110%'
+    },
+
+
+    yAxis: {
+        min: 0,
+        max: 200,
+        tickPixelInterval: 72,
+        tickPosition: 'inside',
+        tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
+        tickLength: 20,
+        tickWidth: 2,
+        minorTickInterval: null,
+        labels: {
+            distance: 20,
+            style: {
+                fontSize: '14px'
+            }
+        },
+        plotBands: [{
+            from: 0,
+            to: 120,
+            color: '#55BF3B', 
+            thickness: 20
+        }, {
+            from: 120,
+            to: 160,
+            color: '#DDDF0D',
+            thickness: 20
+        }, {
+            from: 160,
+            to: 200,
+            color: '#DF5353',
+            thickness: 20
+        }]
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [80],
+        tooltip: {
+            valueSuffix: ' km/h'
+        },
+        dataLabels: {
+            format: '{y} km/h',
+            borderWidth: 0,
+            color: (
+                Highcharts.defaultOptions.title &&
+                Highcharts.defaultOptions.title.style &&
+                Highcharts.defaultOptions.title.style.color
+            ) || '#333333',
+            style: {
+                fontSize: '16px'
+            }
+        },
+        dial: {
+            radius: '80%',
+            backgroundColor: 'gray',
+            baseWidth: 12,
+            baseLength: '0%',
+            rearLength: '0%'
+        },
+        pivot: {
+            backgroundColor: 'gray',
+            radius: 6
+        }
+
+    }]
+
+}
+```
+
+# 特殊图表展示
+
+
+
