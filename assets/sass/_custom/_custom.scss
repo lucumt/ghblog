@@ -4,15 +4,18 @@
 // You can override the variables in _variables.scss to customize the style
 
 div[id^=flow_] {
-  text-align:center
+  text-align:center;
+  border: 1px dashed #c9c9c9;
 }
 
 div[id^=sequence_] {
-  text-align:center
+  text-align:center;
+  border: 1px dashed #c9c9c9;
 }
 
 .mermaid {
-  text-align:center
+  text-align:center;
+  border: 1px dashed #c9c9c9;
 }
 
 .highcharts {

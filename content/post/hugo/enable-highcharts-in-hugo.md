@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
