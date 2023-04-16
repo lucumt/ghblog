@@ -129,6 +129,7 @@
   <script src="https://code.highcharts.com/modules/heatmap.js"></script>
   <script src="https://code.highcharts.com/modules/tilemap.js"></script>
   <script src="https://code.highcharts.com/modules/sankey.js"></script>
+  <!-- depends on your requirements,needs to add more extra js file -->
   <script type="text/javascript">
 	  document.addEventListener('DOMContentLoaded', initHighcharts);
 	  function initHighcharts(){
@@ -146,8 +147,6 @@
 		for(config of highchartsConfigs){
 		  let chartData = eval("(" + config.innerText + ")");
 		  chartData = {...highchartsOptions,...chartData}
-		  console.log("-------------------------------------------")
-		  console.log(chartData)
 		  Highcharts.chart(config.id,chartData);
 		}
 	  }

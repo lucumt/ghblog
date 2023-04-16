@@ -45,25 +45,235 @@ mermaidDiagrams:
 highchartsDiagrams: 
   enable: true
   options: "
-   {
-    subtitle: {
-        style: {
+     {
+        subtitle: {
+           style: {
             color: 'red'
-        }
+           }
+       }
     }
-  }
-"
+   "
 ---
 
-简要说明如何在`Hugo`中集成[Highcharts](https://www.highcharts.com/)。
+基于[在Hugo中开启图表支持](/post/hugo/enable-diagrams-in-hugo/)一文，简要说明如何在`Hugo`中基于`Markdown`以优雅的方式集成[Highcharts](https://www.highcharts.com/)。
 
 <!--more-->
 
 # 修改过程
 
+1. 在`assets/sass/_custom_custom.scss`中添加如下代码
+
+   ```scss
+   .highcharts {
+      border: 1px dashed #c9c9c9;
+   }
+   ```
+
+2. 在`layouts/_default/_markup`创建文件`render-codeblock-highcharts.html`并添加如下代码
+
+   ```html
+   <div id="highcharts_{{ .Ordinal }}" class="highcharts">
+       {{- .Inner }}
+   </div>
+   ```
+
+3. 在`layouts/partials/scripts.html`补充原有的代码，添加上初始化功能
+
+   ```html
+   <!-- highcharts js -->
+   {{- if and (or .Params.highchartsDiagrams.enable (and .Site.Params.highchartsDiagrams.enable (ne .Params.highchartsDiagrams.enable false))) (or .IsPage .IsHome) -}}
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+     <script src="https://code.highcharts.com/highcharts-more.js"></script>
+     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+     <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+     <script src="https://code.highcharts.com/modules/tilemap.js"></script>
+     <script src="https://code.highcharts.com/modules/sankey.js"></script>
+     <!-- depends on your requirements,needs to add more extra js file -->
+     <script type="text/javascript">
+   	  document.addEventListener('DOMContentLoaded', initHighcharts);
+   	  function initHighcharts(){
+   		let highchartsPageOptions = {{ .Page.Params.highchartsDiagrams.options }};
+   		let highchartsSiteOptions = {{ .Site.Params.highchartsDiagrams.options }};
+   		highchartsPageOptions = !!highchartsPageOptions ? highchartsPageOptions : "{}"
+   		highchartsSiteOptions = !!highchartsSiteOptions ? highchartsSiteOptions : "{}"
+   
+   		highchartsPageOptions = eval("(" + highchartsPageOptions + ")")
+   		highchartsSiteOptions = eval("(" + highchartsSiteOptions + ")")
+   		// page options have high priority then site options
+   		let highchartsOptions = {...highchartsSiteOptions, ...highchartsPageOptions}; 
+   		let highchartsConfigs = document.querySelectorAll("[id^=highcharts_]");
+   		console.log(highchartsOptions)
+   		for(config of highchartsConfigs){
+   		  let chartData = eval("(" + config.innerText + ")");
+   		  chartData = {...highchartsOptions,...chartData}
+   		  Highcharts.chart(config.id,chartData);
+   		}
+   	  }
+     </script>
+   {{- end }}
+   ```
+
+4. 在对应的`markdown`页面头部开启`highcharts`的展示，可根据实际情况添加自定义配置
+
+   ```json
+   highchartsDiagrams: 
+     enable: true
+     options: "
+        {
+           subtitle: {
+              style: {
+               color: 'red'
+              }
+          }
+       }
+      "
+   ```
+
+5. 仿照如下的代码，将`Highcharts`的代码块以`JavaScript`对象的形式加入特定`Markdown`代码标签中
+
+   ```
+   ​```highcharts
+    {
+       chart: {
+           plotBackgroundColor: null,
+           plotBorderWidth: null,
+           plotShadow: false,
+           type: 'pie'
+       },
+       title: {
+           text: 'Browser market shares in May, 2020',
+           align: 'left'
+       },
+       tooltip: {
+           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+       },
+       accessibility: {
+           point: {
+               valueSuffix: '%'
+           }
+       },
+       plotOptions: {
+           pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                   enabled: true,
+                   format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+               }
+           }
+       },
+       series: [{
+           name: 'Brands',
+           colorByPoint: true,
+           data: [{
+               name: 'Chrome',
+               y: 70.67,
+               sliced: true,
+               selected: true
+           }, {
+               name: 'Edge',
+               y: 14.77
+           },  {
+               name: 'Firefox',
+               y: 4.86
+           }, {
+               name: 'Safari',
+               y: 2.63
+           }, {
+               name: 'Internet Explorer',
+               y: 1.53
+           },  {
+               name: 'Opera',
+               y: 1.40
+           }, {
+               name: 'Sogou Explorer',
+               y: 0.84
+           }, {
+               name: 'QQ',
+               y: 0.51
+           }, {
+               name: 'Other',
+               y: 2.6
+           }]
+       }]
+   }
+   ​```
+   ```
+
+   让`Hugo`重新选然后即可展示出类似如下效果
+
+   ```highcharts
+    {
+       chart: {
+           plotBackgroundColor: null,
+           plotBorderWidth: null,
+           plotShadow: false,
+           type: 'pie'
+       },
+       title: {
+           text: 'Browser market shares in May, 2020',
+           align: 'left'
+       },
+       tooltip: {
+           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+       },
+       accessibility: {
+           point: {
+               valueSuffix: '%'
+           }
+       },
+       plotOptions: {
+           pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                   enabled: true,
+                   format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+               }
+           }
+       },
+       series: [{
+           name: 'Brands',
+           colorByPoint: true,
+           data: [{
+               name: 'Chrome',
+               y: 70.67,
+               sliced: true,
+               selected: true
+           }, {
+               name: 'Edge',
+               y: 14.77
+           },  {
+               name: 'Firefox',
+               y: 4.86
+           }, {
+               name: 'Safari',
+               y: 2.63
+           }, {
+               name: 'Internet Explorer',
+               y: 1.53
+           },  {
+               name: 'Opera',
+               y: 1.40
+           }, {
+               name: 'Sogou Explorer',
+               y: 0.84
+           }, {
+               name: 'QQ',
+               y: 0.51
+           }, {
+               name: 'Other',
+               y: 2.6
+           }]
+       }]
+   }
+   ```
+
 # 展示效果
 
-## 图表1-Bubble chart
+处于篇幅考虑，在展示部分只展示最终效果，原始代码请参见[enable-highcharts-in-hugo.md](https://raw.githubusercontent.com/lucumt/ghblog/master/content/post/hugo/enable-highcharts-in-hugo.md)
+
+## 图1-Bubble chart
 
 ```highcharts
   {
@@ -194,7 +404,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表2-Basic column
+## 图2-Basic column
 
 ```highcharts
 {
@@ -268,7 +478,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表3-Basic line
+## 图3-Basic line
 
 ```highcharts
   {
@@ -349,7 +559,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表4-3D donut
+## 图4-3D donut
 
 ```highcharts
  {
@@ -392,7 +602,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表5-Tile map
+## 图5-Tile map
 
 ```highcharts
   {
@@ -837,7 +1047,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表6-Sankey diagram
+## 图6-Sankey diagram
 
 ```highcharts
 {
@@ -907,7 +1117,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图表7-Gauge series
+## 图7-Gauge series
 
 ```highcharts
 {
@@ -1003,6 +1213,3 @@ highchartsDiagrams:
 ```
 
 # 特殊图表展示
-
-
-
