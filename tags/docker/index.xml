@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>利用shell脚本实现将微服务程序以docker容器方式自动部署</title>
+      <link>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</link>
+      <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/&#34;&gt;在Jenkins中根据配置从不同的仓库中Checkout代码&lt;/a&gt;一文，说明如何利用&lt;code&gt;shell&lt;/code&gt;脚本在&lt;code&gt;Linux&lt;/code&gt;系统中实现自动化的部署与升级。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</title>
       <link>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
       <pubDate>Thu, 04 Aug 2022 16:56:18 +0800</pubDate>

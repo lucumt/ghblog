@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>利用shell脚本实现将微服务程序以docker容器方式自动部署</title>
+      <link>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</link>
+      <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/&#34;&gt;在Jenkins中根据配置从不同的仓库中Checkout代码&lt;/a&gt;一文，说明如何利用&lt;code&gt;shell&lt;/code&gt;脚本在&lt;code&gt;Linux&lt;/code&gt;系统中实现自动化的部署与升级。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起</title>
       <link>https://lucumt.info/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/</link>
       <pubDate>Fri, 10 Mar 2023 22:48:56 +0800</pubDate>

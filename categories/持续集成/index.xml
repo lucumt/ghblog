@@ -6,7 +6,16 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 10 Mar 2023 22:48:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Mar 2023 11:22:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用shell脚本实现将微服务程序以docker容器方式自动部署</title>
+      <link>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</link>
+      <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/linux/using-script-to-deploy-microservice-application-in-docker/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/&#34;&gt;在Jenkins中根据配置从不同的仓库中Checkout代码&lt;/a&gt;一文，说明如何利用&lt;code&gt;shell&lt;/code&gt;脚本在&lt;code&gt;Linux&lt;/code&gt;系统中实现自动化的部署与升级。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Jenkins中根据配置从不同的仓库中Checkout代码</title>
       <link>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</link>
