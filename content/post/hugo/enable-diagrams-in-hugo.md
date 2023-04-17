@@ -456,7 +456,7 @@ What，于是乎我只能自己fork源码自己修改了，修改好的代码参
 
 基于对应`markdown`页面的下述配置展示相关效果
 
-```jso
+```json
 sequenceDiagrams: 
   enable: true
   options: "{
