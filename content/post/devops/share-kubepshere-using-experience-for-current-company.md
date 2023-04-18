@@ -2,7 +2,7 @@
 title: "KubeSphere在当前公司提升研发效率的使用实践分享"
 date: 2023-04-17T14:31:45+08:00
 lastmod: 2023-04-17T14:31:45+08:00
-draft: true
+draft: false
 tags: ["kubesphere","kubernetes","docker","jenkins","nacos","shell"]
 description: "KubeSphere在当前公司提升研发效率的使用实践分享"
 tags: ["kubesphere","kubernetes","docker","jenkins","nacos","shell"]
@@ -87,23 +87,38 @@ sequenceDiagrams:
 
 `KubeSphere`在多个指标上优于`Zadig`，但在使用客户上没有像`Zadig`这么多知名的客户，不过我们的第一考量点还是能否满足自身要求，结合上述对比指标，尤其是`KubeSphere`的UI界面十分美观比`Zadig`强很多，故最终选定`KubeSphere`作为部门内部的持续集成与容器化管理系统！
 
-
-
 至此，部门内部经历了`手工操作`->`Jenkins`->`KubeSphere`这3个阶段，各阶段的主要使用点如下：
 
 ![不同类型的构建方式比较](/blog_img/devops/share-kubepshere-using-experience-for-current-company/different-type-of-deploy-compare.png "不同类型的构建方式比较") 
 
 # 实践过程
 
-## 自动化部署
+`KubeSphere`在公司内部的整体部署架构如下图所示，其作为最顶层的应用程序直接与使用人员交互，提供主动 /定时触发构建、应用监控等功能，使用人员不必关心底层的`Jenkins`、`Kubernetes`等依赖组件。s
 
-## 自动化监控
+![kubesphere整合架构图](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-integration-architecture.png "kubesphere整合架构图") 
 
-## 集成审核功能
+## 持续集成
 
-## 软件交互标准化
+## 应用监控
 
+## 外部部署
 
+部门内部的软件最终都会销售并交付给相关客户，由于客户网络与公司网络不通以及代码保密等要求，无法在客户现场使用原有的`Jenkins`流水线进行部署交付。基于此部门采取折中方案：**在公司内部通过`KubeSphere`进行编译打包，导出`docker`镜像，拷贝到客户处然后基于`docker`镜像部署运行**,具体请参见如下链接:
+
+* [在Jenkins中根据配置从不同的仓库中Checkout代码](/post/devops/git-checkout-by-dynamic-repository-in-jenkins/)
+* [利用shell脚本实现将微服务程序以docker容器方式自动部署](/post/linux/using-script-to-deploy-microservice-application-in-docker/)
+
+![客户环境部署流程图](/blog_img/devops/share-kubepshere-using-experience-for-current-company/software-deploy-in-customer-environment.png "客户环境部署流程图") 
+
+## 使用协助
+
+在使用过程中确实遇到了不少问题，主要通过如下三条途径解决:
+
+* 阅读[官方文档](https://kubesphere.io/zh/docs/v3.3)，根据文档说明操作
+* 若官网文档没有，则去[用户论坛](https://kubesphere.io/forum/)查看是否有人遇到类似问题或直接发帖
+* 通过微信群寻求协助
+
+根据部门经验，90%的问题可通过官方文档或用户论坛解决。
 
 # 使用效果
 
