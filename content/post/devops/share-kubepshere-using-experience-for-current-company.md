@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -57,20 +57,66 @@ sequenceDiagrams:
 * 缺乏监控功能，后续不同团队、项目采用的监控方案不统一，不利于知识的积累
 * 不同客户的定制化功能太多(logo,字体，ip地址，业务逻辑等)，采用手工打包的方式效率低，容易遗漏
 
-基于上述原因，部门准备选用网络上开源的系统来尽可能的解决上述痛点，在技术选型时有如下考量点：
+在竞争日益激烈的市场环境下，**公司需要把有限的人力资源优先用于业务迭代开发**，解决上述问题变得愈发迫切。
+
+# 选型说明
+
+基于前述原因，部门准备选用网络上开源的系统来尽可能的解决上述痛点，在技术选型时有如下考量点：
 
 * 采用尽量少的系统，最好一套系统能解决前述所有问题，避免多个系统维护和整合的成本
+* 采用开源版本，避免公司内部手工开发，节约人力
 * 安装过程简洁，不需要复杂的操作，能支持离线安装
 * 文档丰富、社区活跃、使用人员较多，遇到问题能较容易的找到答案
-* 受限于部门预算，尽量使用开源版本，使用成熟后可考虑商业版本
+* 支持容器化部署，公司和部门的业务中自动驾驶和云仿真相关的越来越多，此部分对算力和资源提出了更高的要求
 
-# 实践过程
+最开始采用的是[Jenkins](https://www.jenkins.io/)，通过`Jenkins`基本上能解决我们90%的问题，但依旧有如下问题影使用体验:
+
+* 对于云原生支持不太好，不利于部门后续云仿真相关的业务使用
+* UI界面简陋，交互方式不友好(项目构建日志输出等)
+* 对于项目，资源的权限分配与隔离过于简陋，不满足多项目多部门使用时细粒度的区分要求
+
+在网络上查找后发现类似的工具有很多，经过初步对比筛选后倾向于`KubeSphere`、[Walle](https://github.com/meolu/walle-web)，[Zadig](https://koderover.com/)这2款产品，它们的基本功能都类似，进一步对比如下：
+
+|                  | KubeSphere |        Zadig         |
+| ---------------- | :--------: | :------------------: |
+| **云原生支持**   |   **高**   |         一般         |
+| **UI美观度**     |   **高**   |         一般         |
+| **GitHub Star**  | **12.4k**  |          2k          |
+| **社区活跃度**   |   **高**   |         一般         |
+| **知名使用客户** |  去哪儿网  | **飞书、腾讯、华为** |
+
+`KubeSphere`在多个指标上优于`Zadig`，但在使用客户上没有像`Zadig`这么多知名的客户，不过我们的第一考量点还是能否满足自身要求，结合上述对比指标，尤其是`KubeSphere`的UI界面十分美观比`Zadig`强很多，故最终选定`KubeSphere`作为部门内部的持续集成与容器化管理系统！
+
+
+
+至此，部门内部经历了`手工操作`->`Jenkins`->`KubeSphere`这3个阶段，各阶段的主要使用点如下：
 
 ![不同类型的构建方式比较](/blog_img/devops/share-kubepshere-using-experience-for-current-company/different-type-of-deploy-compare.png "不同类型的构建方式比较") 
 
+# 实践过程
+
+## 自动化部署
+
+## 自动化监控
+
+## 集成审核功能
+
+## 软件交互标准化
+
+
+
 # 使用效果
 
+部分同事习惯于原始的手工操作或基于`docker`部署，导致在推广过程中受到了一定的阻力，部门内部基于充分沟通和逐步替换的方式引导相关同事来慢慢适应。经过约一年的时间磨合，大家都认可了拥抱云原生和`KubeSphere`给我们带来的便利。
 
+对我司而言，有如下几个方面的提升:
+
+* 研发人员几乎不用耗费时间在软件的部署和监控上，节省约20%时间，产品迭代速度更快
+* 定制化的功能通过脚本实现，彻底杜绝了给客户交付软件时由于人工疏漏导致的偶发问题，在提高软件交付质量的同时也提升了客户我司的认可度
+* 软件开发、测试流程更规范，通过在`Jenkins`流水线强制添加各种规范检查和审核流程，实现了软件研发的规范统一，代码质量更高，更利于扩展维护，同时也在一定程序上减少了由于人员流失/变更对项目造成的影响
+* 基于`KubeSphere`的云原生部署结合`Nacos`可以更快速的分配多套环境，有效的实现了`开发`、`测试`、`生产`环境的隔离，在云仿真相关的业务场景中可基于业务场景更方便的对`pod`进行监控与调整，前瞻性的业务研发开展更顺利
+
+![日常开发中采用KubeSphere进行集成](/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-kubesphere-to-deploy.png "日常开发中采用KubeSphere进行集成") 
 
 # 规划&反馈
 
@@ -78,10 +124,10 @@ sequenceDiagrams:
 
 结合公司与部门的实际情况，短期的规划依然是完善基于`Jenkins`的`CI`/`CD`使用来完善打包与部署流程，部门内部在进行全面`web`化，基于此中长期拥抱云原生。
 
-* 接入企业微信，将构建与运行结果随时通知相关人
+* 接入企业微信，将构建与运行结果随时通知相关人，构建结果与项目监控更实时
 * 将部门内部基于`Eclipse RCP`的桌面应用程序通过`Jenkins`实现标准化与自动化的构建
-* 部门内部的`web`项目全部通过`KubeSphere`构建部署，完善其使用文档，挖掘`KubeSphere`在部门业务中新的应用场景
 * 将底层的`Kubernetes`从单机升级为集群，支持更多`pod`的部署，支持公司内部需要大量`pod`并发运行的云仿真项目
+* 部门内部的`web`项目全部通过`KubeSphere`构建部署，完善其使用文档，挖掘`KubeSphere`在部门业务中新的应用场景(如对设计文档、开发文档、bug修复的定时与强制检查通知等)
 
 ## 问题反馈
 
@@ -101,7 +147,7 @@ sequenceDiagrams:
 
      ![非admin角色无法看见终端](/blog_img/devops/share-kubepshere-using-experience-for-current-company/no-admin-role-can-not-see-terminal.png "非admin角色无法看见终端") 
 
-   * 公司网络环境多变且随着使用项目的增多，经常需要备份/迁移，目前的方式是手工备份`Jenkins`文件，但在`Jenkins`流水线构建参数无法体现在`Jenkins`流水线中，每次备份/迁移后都需要手工创建参数
+   * 公司网络环境多变且随着使用项目的增多，经常需要备份/迁移，目前的方式是手工备份`Jenkins`文件，但在`Jenkins`流水线构建参数无法体现在`Jenkins`流水线中，每次备份/迁移后都需要手工创建参数,此问题是我们目前的一大痛点，个人感觉`Zadig`做的不错(这部分感觉`Zadig`也是`KubeSphere`的有力竞争者)
 
      ![有多个构建参数的流水线](/blog_img/devops/share-kubepshere-using-experience-for-current-company/jenkins-pipeline-with-multiple-parameters.png "有多个构建参数的流水线") 
 
