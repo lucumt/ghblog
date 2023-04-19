@@ -49,7 +49,7 @@
 <meta itemprop="name" content="利用Nacos与KubeSphere创建多套开发与测试环境">
 <meta itemprop="description" content="利用Nacos与KubeSphere创建多套开发与测试环境"><meta itemprop="datePublished" content="2022-09-15T15:46:24+08:00" />
 <meta itemprop="dateModified" content="2022-09-15T15:46:24+08:00" />
-<meta itemprop="wordCount" content="1723">
+<meta itemprop="wordCount" content="1720">
 <meta itemprop="keywords" content="kubesphere,jenkins,nacos," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用Nacos与KubeSphere创建多套开发与测试环境"/>
 <meta name="twitter:description" content="利用Nacos与KubeSphere创建多套开发与测试环境"/>
@@ -237,7 +237,7 @@
 <li>由于环境的增多，不可能每套环境都准备一个<code>YAML</code>文件，此时需要动态的读取并更新<code>YAML</code>文件</li>
 </ul>
 <h2 id="安装pipeline-utility-steps插件">安装Pipeline Utility Steps插件</h2>
-<p><code>Jenkins</code>默认不支持<code>JSON</code>、<code>YAML</code>的解析，需要在<code>KubeSphere</code>中预先安装<a href="https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/">Pipeline Utility Steps</a>插件，该插件提供了对<code>JSON</code>、<code>YAML</code>、<code>CSV</code>、<code>PROPERTIES</code>等常见文件格式的读取与修改操作。</p>
+<p><code>Jenkins</code>默认不支持<code>JSON</code>、<code>YAML</code>的解析，需要在<code>Jenkins</code>中预先安装<a href="https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/">Pipeline Utility Steps</a>插件，该插件提供了对<code>JSON</code>、<code>YAML</code>、<code>CSV</code>、<code>PROPERTIES</code>等常见文件格式的读取与修改操作。</p>
 <h2 id="json文件设计">JSON文件设计</h2>
 <p><code>JSON</code>文件设计如下，通过env、server、dubbo等属性记录环境和端口信息，通过project来记录具体的项目名称，由于配置文件中的key都是固定的，后续<code>Groovy</code>解析时会较为方便，在需要扩展环境时只需要更新此<code>JSON</code>文件即可。</p>
 <div class="highlight"><div class="chroma">
