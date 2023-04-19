@@ -55,7 +55,7 @@ sequenceDiagrams:
 * 缺乏审核功能，对于测试环境和生产环境的操作需要审批流程，之前通过邮件和企业微信无法串联
 * 缺乏准入功能，随着团队规模扩大，人员素质参差不齐，需要对软件开发流程、代码风格都需要强制固化
 * 缺乏监控功能，后续不同团队、项目采用的监控方案不统一，不利于知识的积累
-* 不同客户的定制化功能太多(logo,字体，ip地址，业务逻辑等)，采用手工打包的方式效率低，容易遗漏
+* 不同客户的定制化功能太多(logo,字体，ip地址，业务逻辑等)，采用手工打包的方式效率低，容易遗漏出错
 
 在竞争日益激烈的市场环境下，**公司需要把有限的人力资源优先用于业务迭代开发**，解决上述问题变得愈发迫切。
 
@@ -75,17 +75,17 @@ sequenceDiagrams:
 * UI界面简陋，交互方式不友好(项目构建日志输出等)
 * 对于项目，资源的权限分配与隔离过于简陋，不满足多项目多部门使用时细粒度的区分要求
 
-在网络上查找后发现类似的工具有很多，经过初步对比筛选后倾向于`KubeSphere`、[Walle](https://github.com/meolu/walle-web)，[Zadig](https://koderover.com/)这2款产品，它们的基本功能都类似，进一步对比如下：
+在网络上查找后发现类似的工具有很多，经过初步对比筛选后倾向于`KubeSphere`，[Zadig](https://koderover.com/)这2款产品，它们的基本功能都类似，进一步对比如下：
 
-|                  | KubeSphere |        Zadig         |
-| ---------------- | :--------: | :------------------: |
-| **云原生支持**   |   **高**   |         一般         |
-| **UI美观度**     |   **高**   |         一般         |
-| **GitHub Star**  | **12.4k**  |          2k          |
-| **社区活跃度**   |   **高**   |         一般         |
-| **知名使用客户** |  去哪儿网  | **飞书、腾讯、华为** |
+|                  |      KubeSphere      |      Zadig       |
+| ---------------- | :------------------: | :--------------: |
+| **云原生支持**   |        **高**        |       一般       |
+| **UI美观度**     |        **高**        |       一般       |
+| **GitHub Star**  |      **12.4k**       |        2k        |
+| **社区活跃度**   |        **高**        |       一般       |
+| **知名使用客户** | 去哪儿网、农行、移动 | 飞书、腾讯、华为 |
 
-`KubeSphere`在多个指标上优于`Zadig`，但在使用客户上没有像`Zadig`这么多知名的客户，不过我们的第一考量点还是能否满足自身要求，结合上述对比指标，尤其是`KubeSphere`的UI界面十分美观比`Zadig`强很多，故最终选定`KubeSphere`作为部门内部的持续集成与容器化管理系统！
+`KubeSphere`在多个指标上优于`Zadig`，尤其是`KubeSphere`的UI界面十分美观比`Zadig`强很多，故最终选定`KubeSphere`作为部门内部的持续集成与容器化管理系统！
 
 至此，部门内部经历了`手工操作`->`Jenkins`->`KubeSphere`这3个阶段，各阶段的主要使用点如下：
 
@@ -93,13 +93,203 @@ sequenceDiagrams:
 
 # 实践过程
 
-`KubeSphere`在公司内部的整体部署架构如下图所示，其作为最顶层的应用程序直接与使用人员交互，提供主动 /定时触发构建、应用监控等功能，使用人员不必关心底层的`Jenkins`、`Kubernetes`等依赖组件。s
+`KubeSphere`在公司内部的整体部署架构如下图所示，其作为最顶层的应用程序直接与使用人员交互，提供主动 /定时触发构建、应用监控等功能，使用人员不必关心底层的`Jenkins`、`Kubernetes`等依赖组件，只需要与`Gitlab`和`KubeSphere`交互即可。
 
 ![kubesphere整合架构图](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-integration-architecture.png "kubesphere整合架构图") 
 
 ## 持续集成
 
-## 应用监控
+### 初始实现
+
+在最初的尝试阶段只规划了4套环境:`dev`(开发环境)、`sit`(调试环境)、`test`(测试环境)、`prod`(生产环境)。
+
+![利用Jenkins进行自动部署](/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-jekins-to-deploy-automatic.png "利用Jenkins进行自动部署") 
+
+出于简化使用与维护的考虑，计划对每个工程模块只维护一条流水线，通过构建时选择不同的环境参数来实现定制化打包与部署。
+
+`KubeSphere`和`Kubernetes`目前在部门是以单机版形式安装的，故对于不同环境的区分主要是通过分配不同端口来实现，具体实现时需要能在`Jenkins`和`Kubernetes`的`yaml`文件中都能动态的获取对应的端口参数和项目名称，参考实现代码如下：
+
+* 在基于`Groovy`的`script`中根据选择环境动态分配相关端口
+
+  ```groovy
+  switch(PRODUCT_PHASE) {
+      case "sit":
+          env.NODE_PORT = 13003
+          env.DUBBO_PORT = 13903
+          break
+      case "test":
+          env.NODE_PORT = 14003
+          env.DUBBO_PORT = 14903
+          break
+      case "prod":
+          env.NODE_PORT = 15003
+          env.DUBBO_PORT = 15903
+          break
+  }
+  ```
+
+* `script`中读取参数
+
+  ```groovy
+  print env.DUBBO_IP
+  ```
+
+* `shell`中读取参数
+
+  ```bash
+  docker build -f kubesphere/Dockerfile \
+  -t idp-data:$BUILD_TAG  \
+  --build-arg  PROJECT_VERSION=$PROJECT_VERSION \
+  --build-arg  NODE_PORT=$NODE_PORT \
+  --build-arg  DUBBO_PORT=$DUBBO_PORT \
+  --build-arg PRODUCT_PHASE=$PRODUCT_PHASE .
+  ```
+
+* `yaml`文件中读取参数
+
+  ```yaml
+  spec:
+    ports:
+      - name: http
+        port: $NODE_PORT
+        protocol: TCP
+        targetPort: $NODE_PORT
+        nodePort: $NODE_PORT
+      - name: dubbo
+        port: $DUBBO_PORT
+        protocol: TCP
+        targetPort: $DUBBO_PORT
+        nodePort: $DUBBO_PORT
+    selector:
+      app: lucumt-data-$PRODUCT_PHASE
+    sessionAffinity: None
+    type: NodePort
+  ```
+
+运行效果类似下图
+
+![KubeSphere流水线运行效果](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-run-dialog.png "KubeSphere流水线运行效果") 
+
+详细内容请参见[KubeSphere使用心得](/post/devops/share-experiences-for-using-kubesphere/)。
+
+### 环境扩容
+
+基于前述方式搭建的4套环境一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合[Nacos](https://nacos.io/zh-cn/docs/what-is-nacos.html)在`KubeSphere`中动态配置多套环境功能，通过修改`Nacos`中的`JSON`配置文件可很容易的从4套扩展为16套甚至更多。
+
+结合项目实际情况以及避免后续再次修改`KubeSphere`流水线，为了实现**灵活的配置多套环境**，制定了如下2个规则：
+
+1. 端口信息存放到配置文件中，`KubeSphere`在构建时去流水线读取相关配置
+2. 当需要扩展环境或修改端口时，不需要修改`KubeSphere`中的流水线，只需要修改对应的端口配置文件即可
+
+由于项目中采用`Nacos`作为配置中心与服务管理平台，故决定采用`Nacos`作为端口的配置中心，实现流程如下：
+
+![KubeSphere结合Nacos构建](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-build-with-nacos-config.png "KubeSphere结合Nacos构建") 
+
+基于上述流程，在具体实现时面临如下问题：
+
+* 利用`Groovy`代码获取`Nacos`中特定的端口`JSON`配置文件，并能动态解析
+* 利用`Groovy`代码根据输入输入参数动态的获取`Nacos`中对应的`namespace`
+* 由于环境的增多，不可能每套环境都准备一个`YAML`文件，此时需要动态的读取并更新`YAML`文件
+
+由于`Jenkins`默认不支持`JSON`、`YAML`的解析，需要在`Jenkins`中预先安装[Pipeline Utility Steps](https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/)插件，该插件提供了对`JSON`、`YAML`、`CSV`、`PROPERTIES`等常见文件格式的读取与修改操作。
+
+* `JSON`文件设计如下，通过env、server、dubbo等属性记录环境和端口信息，通过project来记录具体的项目名称，由于配置文件中的key都是固定的，后续`Groovy`解析时会较为方便，在需要扩展环境时只需要更新此`JSON`文件即可。
+
+  ```json
+  {
+      "portConfig":[
+          {
+              "project":"lucumt-system",
+              "ports":[
+                  {
+                      "env":"dev-1",
+                      "server":12001,
+                      "dubbo":12002
+                  },
+                  {
+                      "env":"dev-2",
+                      "server":12201,
+                      "dubbo":12202
+                  }
+              ]
+          },
+          {
+              "project":"lucumt-idp",
+              "ports":[
+                  {
+                      "env":"dev-1",
+                      "server":13001,
+                      "dubbo":13002
+                  },
+                  {
+                      "env":"dev-2",
+                      "server":13201,
+                      "dubbo":13202
+                  }
+              ]
+          }
+      ]
+  }
+  ```
+
+* [Nacos Open Api](https://nacos.io/zh-cn/docs/open-api.html)中可知查询`namespace`的请求为`/nacos/v1/console/namespaces`，查询配置文件的请求为`/nacos/v1/cs/configs`，基于`Groovy`的读取代码如下：
+
+  ```groovy
+  response = sh(script: "curl -X GET 'http://xxx.xxx.xxx.xxx:8848/nacos/v1/console/namespaces'", returnStdout: true)
+  jsonData = readJSON text: response
+  namespaces = jsonData.data
+  for(nm in namespaces){
+      if(BUILD_TYPE==nm.namespaceShowName){
+          NACOS_NAMESPACE = nm.namespace
+      }
+  }
+  
+  response = sh(script: "curl -X GET 'http://xxx.xxx.xxx.xxx:8848/nacos/v1/cs/configs?dataId=idp-custom-config.json&group=idp-custom-config&tenant=0f894ca6-4231-43dd-b9f3-960c02ad20fa'", returnStdout: true)
+  jsonData = readJSON text: response
+  configs = jsonData.portConfig
+  for(config in configs){
+      project = config.project
+      if(project!=PROJECT_NAME){
+         continue
+      }
+      ports = config.ports
+      for(port in ports){
+          if(port.env!=BUILD_TYPE){
+              continue
+          }
+          env.NODE_PORT = port.server
+  	}
+  }
+  ```
+
+* 动态更新`yaml`文件
+
+  ```yaml
+  yamlFile = 'src/main/resources/bootstrap-dev.yml'
+  yamlData = readYaml file: yamlFile
+  yamlData.spring.cloud.nacos.discovery.group = BUILD_TYPE
+  yamlData.spring.cloud.nacos.discovery.namespace = NACOS_NAMESPACE
+  yamlData.spring.cloud.nacos.config.namespace = NACOS_NAMESPACE
+  sh "rm $yamlFile"
+  
+  writeYaml file: yamlFile, data: yamlData
+  ```
+
+详细内容请参见[利用Nacos与KubeSphere创建多套开发与测试环境](/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/)。
+
+### 扩展功能
+
+* 在项目构建时添加审核功能，对于`test`和`prod`环境必须经过相关人的审核才能进行后续构建流程，避免破坏相关版本的稳定性
+
+  ![项目构建时添加审核功能](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-execute-review.png "项目构建时添加审核功能") 
+
+* 在`KubeSphere`的容器组页面可以查看pod节点的CPU和内存消耗，可初步满足对代码潜在性能问题的排查
+
+  ![监控pod节点资源消耗](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-monitor-resouce-consumption.png "监控pod节点资源消耗") 
+
+* 在项目构建完成时发送邮件通知给相关人
+
+  ![项目构建完毕发送邮件通知](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-mail-notification.png "项目构建完毕发送邮件通知") 
 
 ## 外部部署
 
@@ -118,11 +308,11 @@ sequenceDiagrams:
 * 若官网文档没有，则去[用户论坛](https://kubesphere.io/forum/)查看是否有人遇到类似问题或直接发帖
 * 通过微信群寻求协助
 
-根据部门经验，90%的问题可通过官方文档或用户论坛解决。
+根据部门使用经验，90%的问题可通过官方文档或用户论坛获得答案。
 
 # 使用效果
 
-部分同事习惯于原始的手工操作或基于`docker`部署，导致在推广过程中受到了一定的阻力，部门内部基于充分沟通和逐步替换的方式引导相关同事来慢慢适应。经过约一年的时间磨合，大家都认可了拥抱云原生和`KubeSphere`给我们带来的便利。
+部分同事习惯于原始的手工操作或基于`docker`部署，导致在推广过程中受到了一定的阻力，部门内部基于充分沟通和逐步替换的方式引导相关同事来慢慢适应。经过约一年的时间磨合，大家都认可了拥抱云原生和`KubeSphere`给我们带来的便利，使用过的同事都说很香!
 
 对我司而言，有如下几个方面的提升:
 
@@ -133,9 +323,7 @@ sequenceDiagrams:
 
 ![日常开发中采用KubeSphere进行集成](/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-kubesphere-to-deploy.png "日常开发中采用KubeSphere进行集成") 
 
-# 规划&反馈
-
-## 规划
+# 规划
 
 结合公司与部门的实际情况，短期的规划依然是完善基于`Jenkins`的`CI`/`CD`使用来完善打包与部署流程，部门内部在进行全面`web`化，基于此中长期拥抱云原生。
 
@@ -143,28 +331,6 @@ sequenceDiagrams:
 * 将部门内部基于`Eclipse RCP`的桌面应用程序通过`Jenkins`实现标准化与自动化的构建
 * 将底层的`Kubernetes`从单机升级为集群，支持更多`pod`的部署，支持公司内部需要大量`pod`并发运行的云仿真项目
 * 部门内部的`web`项目全部通过`KubeSphere`构建部署，完善其使用文档，挖掘`KubeSphere`在部门业务中新的应用场景(如对设计文档、开发文档、bug修复的定时与强制检查通知等)
-
-## 问题反馈
-
-1. **对离线操作提供更多支持**，同很多其它公司一样，我司的研发主要在公司内部网络进行，对于互联网的连接受限制，只开放了对于`docker`，`maven`等少数仓库的代理镜像访问，希望能对离线安装与升级提供更多的支持，类似`kubekey`这种，在内部网络简单配置镜像地址后即可快速安装
-
-2. **使用体验优化**,基于公司内部使用过程中大家反馈的一些问题：
-
-   * 重复执行流水线时，显示的用户为`admin`而非当前实际登录的用户
-
-     ![重复执行时用户名显示为admin](/blog_img/devops/share-kubepshere-using-experience-for-current-company/rerun-username-displays-as-admin.png "重复执行时用户名显示为admin") 
-
-   * 制品文件通过下载按钮无法下载，只能通过文件名下载
-
-     ![制品文件下载出错](/blog_img/devops/share-kubepshere-using-experience-for-current-company/archive-download-error-occurs.png "制品文件下载出错") 
-
-   * 之前从`3.1`升级到`3.3` 版本的一个主要原因是`3.1`的权限控制不完善，但在`3.3`时发现当把用户角色设置为非`admin`时，导致相关用户无法看见终端，部分场景下分析调试不方便
-
-     ![非admin角色无法看见终端](/blog_img/devops/share-kubepshere-using-experience-for-current-company/no-admin-role-can-not-see-terminal.png "非admin角色无法看见终端") 
-
-   * 公司网络环境多变且随着使用项目的增多，经常需要备份/迁移，目前的方式是手工备份`Jenkins`文件，但在`Jenkins`流水线构建参数无法体现在`Jenkins`流水线中，每次备份/迁移后都需要手工创建参数,此问题是我们目前的一大痛点，个人感觉`Zadig`做的不错(这部分感觉`Zadig`也是`KubeSphere`的有力竞争者)
-
-     ![有多个构建参数的流水线](/blog_img/devops/share-kubepshere-using-experience-for-current-company/jenkins-pipeline-with-multiple-parameters.png "有多个构建参数的流水线") 
 
 # 参考文章
 

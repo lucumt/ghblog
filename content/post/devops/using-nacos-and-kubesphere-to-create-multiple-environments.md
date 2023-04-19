@@ -88,7 +88,7 @@ sequenceDiagrams:
 
 ## 安装Pipeline Utility Steps插件
 
-`Jenkins`默认不支持`JSON`、`YAML`的解析，需要在`KubeSphere`中预先安装[Pipeline Utility Steps](https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/)插件，该插件提供了对`JSON`、`YAML`、`CSV`、`PROPERTIES`等常见文件格式的读取与修改操作。
+`Jenkins`默认不支持`JSON`、`YAML`的解析，需要在`Jenkins`中预先安装[Pipeline Utility Steps](https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/)插件，该插件提供了对`JSON`、`YAML`、`CSV`、`PROPERTIES`等常见文件格式的读取与修改操作。
 
 ## JSON文件设计
 
