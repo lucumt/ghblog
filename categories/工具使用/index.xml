@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>给Sonarqube软件集成LDAP实现单点登录</title>
+      <link>https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/</link>
+      <pubDate>Sun, 04 Dec 2022 11:29:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.sonarqube.org/latest/&#34;&gt;SonarQube&lt;/a&gt;是管理代码质量一个开放平台，可以快速的定位代码中潜在的或者明显的错误，本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;SonarQube&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>给Yapi添加LDAP登录认证</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-yapi/</link>
       <pubDate>Thu, 01 Dec 2022 11:23:00 +0800</pubDate>

@@ -87,7 +87,7 @@
   
   <url>
     <loc>https://lucumt.info/tags/ldap/</loc>
-    <lastmod>2023-04-14T11:23:00+08:00</lastmod>
+    <lastmod>2023-04-14T11:29:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -101,14 +101,14 @@
   
   <url>
     <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2023-04-14T11:23:00+08:00</lastmod>
+    <lastmod>2023-04-14T11:29:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2023-04-14T11:23:00+08:00</lastmod>
+    <lastmod>2023-04-14T11:29:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -256,6 +256,13 @@
   <url>
     <loc>https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</loc>
     <lastmod>2023-01-11T11:31:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/</loc>
+    <lastmod>2023-04-14T11:29:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
