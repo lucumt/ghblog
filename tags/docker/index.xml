@@ -44,6 +44,15 @@
     </item>
     
     <item>
+      <title>给Yapi添加LDAP登录认证</title>
+      <link>https://lucumt.info/post/ldap/add-ldap-support-for-yapi/</link>
+      <pubDate>Thu, 01 Dec 2022 11:23:00 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/ldap/add-ldap-support-for-yapi/</guid>
+      <description>&lt;p&gt;&lt;code&gt;YApi&lt;/code&gt; 是&lt;strong&gt;高效&lt;/strong&gt;、&lt;strong&gt;易用&lt;/strong&gt;、&lt;strong&gt;功能强大&lt;/strong&gt;的 api 管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，由去哪儿网开发，本文基于&lt;a href=&#34;https://www.jianshu.com/p/a97d2efb23c5&#34;&gt;为 Yapi 定制 apline 版 Docker 镜像&lt;/a&gt;简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;Yapi&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</title>
       <link>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
       <pubDate>Thu, 04 Aug 2022 16:56:18 +0800</pubDate>
