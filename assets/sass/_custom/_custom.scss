@@ -21,3 +21,21 @@ div[id^=sequence_] {
 .highcharts {
    border: 1px dashed #c9c9c9;
 }
+
+figure {
+    margin: 1em 40px;
+	display: block;
+}
+
+figure.center {
+    text-align: center;
+}
+
+figure img {
+  border: 0
+}
+
+figure figcaption h4 {
+    color: #b5b5b5;
+    font-size: .9rem;
+}
