@@ -3,12 +3,14 @@
 {{- $paginator := .Paginate .Data.Pages.ByDate.Reverse .Site.Params.archivePaginate }}
 <section id="archive" class="archive">
    
+   {{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
    <figure class="center">
         <a class="fancybox" href="https://lucumt.info/blog_img/custom/黄山-1.jpg" data-fancybox="gallery" data-caption=""><img src="/blog_img/custom/黄山-1.jpg"></a>
         <figcaption>
           <h4>| 云海之巅 |</h4>
         </figcaption>
    </figure>
+   {{ end }}
 
   {{- if .Site.Params.showArchiveCount }}
     <div class="archive-title">
