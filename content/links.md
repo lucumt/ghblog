@@ -50,7 +50,7 @@ sequenceDiagrams:
 | **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                           | 微信公众号`Coder 魔法院` |
 | **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                     |                          |
 | **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                   |                          |
-| **[Throwable](https://www.cnblogs.com/)**                    | 主要是`JavaEE`开发                           |                          |
+| **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                           |                          |
 
 
 
@@ -61,3 +61,21 @@ sequenceDiagrams:
 # 单个博文
 
 * [docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
+
+# 其它
+
+* 线程生命周期
+
+  ![线程生命周期](/blog_img/links/线程生命周期.jpg "线程生命周期")
+
+* 云原生技术栈
+
+  ![云原生技术栈](/blog_img/links/云原生.jpg "云原生技术栈")
+
+*  其它
+
+  |                            icon                             |                         stop the war                         |
+  | :---------------------------------------------------------: | :----------------------------------------------------------: |
+  | ![flying_fox](/blog_img/links/flying_fox.jfif "flying_fox") | ![russia-stop-the-war-in-ukraine](/blog_img/links/Jenkins-stop-the-war.svg "russia-stop-the-war-in-ukraine") |
+
+  

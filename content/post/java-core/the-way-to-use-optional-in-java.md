@@ -37,7 +37,11 @@ flowchartDiagrams:
 sequenceDiagrams: 
   enable: false
   options: ""
-
 ---
 
+基于实际工作需求，说明对`Optional`关键字的用法
+
 <!--more-->
+
+https://stackoverflow.com/questions/35337020/optional-ofnullable-and-method-chaining
+
