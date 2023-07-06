@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/">利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-01-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>工作中涉及到<code>Kubernetes</code>相关知识，自己之前一直没有系统性的学习<code>Kubernetes</code>，近期在腾讯云上想安装<code>Kubernetes</code>时一直遇到在执行<code>kubeadm init</code>时<code>6443</code>和<code>10280</code>端口无法访问导致操作失败进而无法顺利安装<code>Kubernetes</code>。一番排查后发现是由于从<code>1.24.0</code>之后<code>Kubernetes</code>默认采用<code>containerd</code>作为运行时容器，其默认镜像为<code>registry.k8s.io</code>，该镜像在国内无法访问导致的，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/ldap/add-ldap-support-for-grafana/">给Grafana软件集成LDAP实现单点登录</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-12-11 </span>
@@ -336,27 +357,6 @@
     </div>
     <div class="read-more">
       <a href="/post/devops/setting-ldap-for-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-03 </span>
-      <div class="post-category">
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用<a href="https://github.com/features/actions">GitHub Actions</a>实现个人<a href="https://gohugo.io/">Hugo</a>博客在<a href="https://pages.github.com/">GitHub Pages</a>中的自动化部署。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/using-github-action-to-auto-build-deploy/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

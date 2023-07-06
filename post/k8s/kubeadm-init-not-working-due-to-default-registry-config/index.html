@@ -50,7 +50,7 @@
 <meta itemprop="name" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
 <meta itemprop="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。"><meta itemprop="datePublished" content="2023-01-11T11:31:45+08:00" />
 <meta itemprop="dateModified" content="2023-01-11T11:31:45+08:00" />
-<meta itemprop="wordCount" content="1536">
+<meta itemprop="wordCount" content="1532">
 <meta itemprop="keywords" content="kubernetes,linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败"/>
 <meta name="twitter:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。"/>
@@ -379,7 +379,7 @@
 </div>
 </div></li>
 <li>
-<p>执行下述指令，修改<code>kubelet</code>配置**（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）**</p>
+<p>执行下述指令，修改<code>kubelet</code>配置 <strong>（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

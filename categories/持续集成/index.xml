@@ -6,7 +6,16 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Apr 2023 14:31:45 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jul 2023 09:54:01 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
+      <link>https://lucumt.info/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>
+      <pubDate>Thu, 06 Jul 2023 09:54:01 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</guid>
+      <description>&lt;p&gt;近期在给公司内部安装&lt;code&gt;KubeSphere&lt;/code&gt;新环境和维护原有&lt;code&gt;KubeSphere&lt;/code&gt;环境的过程中，频繁遇到&lt;code&gt;x509: certificate relies on legacy Common Name field, use SANs instead&lt;/code&gt;，此问题会影响正常功能的使用，简要介绍其解决方案。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
       <link>https://lucumt.info/post/devops/share-kubepshere-using-experience-for-current-company/</link>
