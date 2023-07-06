@@ -153,7 +153,7 @@ EOF
    yum -y install kubectl kubelet kubeadm
    ```
 
-2. 执行下述指令，修改`kubelet`配置**（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）**
+2. 执行下述指令，修改`kubelet`配置 **（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）**
 
    ```bash
    cat <<EOF >/etc/sysconfig/kubelet
