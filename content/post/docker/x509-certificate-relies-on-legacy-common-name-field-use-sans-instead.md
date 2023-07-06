@@ -109,7 +109,7 @@ highchartsDiagrams:
 
    从中可知在`Go10.15`之后`Common Name`这个字段已经废弃，可在`GODEBUG`中通过配置`x509ignoreCN=0`来重新启用此字段，不过我们是基于`Go`的`Docker`应用环境，而非`Go`开发环境，显然此种方式不大可行。
 
-2. 继续搜索，找到这篇文章[https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name](https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name)，其中提供了一个解决思路
+2. 继续搜索，找到这篇文章[how-do-i-use-sans-with-openssl-instead-of-common-name](https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name)，其中提供了一个解决思路
 
    ![Stackoverflow解决方案](/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/stackoverflow-solution.png "Stackoverflow解决方案") 
 
