@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决">
 <meta itemprop="description" content="在KubeSphere使用过程中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决，简要介绍其解决方案"><meta itemprop="datePublished" content="2023-07-06T09:54:01+08:00" />
 <meta itemprop="dateModified" content="2023-07-06T09:54:01+08:00" />
-<meta itemprop="wordCount" content="912">
+<meta itemprop="wordCount" content="867">
 <meta itemprop="keywords" content="docker,kubernetes,kubesphere," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决"/>
 <meta name="twitter:description" content="在KubeSphere使用过程中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决，简要介绍其解决方案"/>
@@ -256,7 +256,7 @@
 <p>从中可知在<code>Go10.15</code>之后<code>Common Name</code>这个字段已经废弃，可在<code>GODEBUG</code>中通过配置<code>x509ignoreCN=0</code>来重新启用此字段，不过我们是基于<code>Go</code>的<code>Docker</code>应用环境，而非<code>Go</code>开发环境，显然此种方式不大可行。</p>
 </li>
 <li>
-<p>继续搜索，找到这篇文章<a href="https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name">https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name</a>，其中提供了一个解决思路</p>
+<p>继续搜索，找到这篇文章<a href="https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name">how-do-i-use-sans-with-openssl-instead-of-common-name</a>，其中提供了一个解决思路</p>
 <p><img src="/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/stackoverflow-solution.png" alt="Stackoverflow解决方案" title="Stackoverflow解决方案"></p>
 </li>
 <li>
@@ -276,6 +276,7 @@
 </li>
 <li>
 <p>前述执行结果任然报错的原因为镜像不存在，切换为一个已经存在的镜像重新执行即可</p>
+<p><img src="/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/docker-registry-pull-success.png" alt="docker可正常拉取镜像" title="docker可正常拉取镜像"></p>
 </li>
 </ol>
     </div>
