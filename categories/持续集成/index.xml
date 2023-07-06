@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</title>
+      <link>https://lucumt.info/post/devops/prometheus-k8s-0-pending-in-kubesphere/</link>
+      <pubDate>Tue, 06 Jun 2023 16:17:41 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/prometheus-k8s-0-pending-in-kubesphere/</guid>
+      <description>&lt;p&gt;简要记录下在安装完成&lt;a href=&#34;https://www.kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;后由于缺少&lt;a href=&#34;https://openebs.io/&#34;&gt;OpenEBS&lt;/a&gt;而导致名为&lt;code&gt;prometheus-k8s-0&lt;/code&gt;的pod节点一直处于&lt;code&gt;Pending&lt;/code&gt;状态，进而导致在&lt;code&gt;KubeSphere&lt;/code&gt;集群管理中资源统计部分出现NaN的问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
       <link>https://lucumt.info/post/devops/share-kubepshere-using-experience-for-current-company/</link>
       <pubDate>Mon, 17 Apr 2023 14:31:45 +0800</pubDate>
