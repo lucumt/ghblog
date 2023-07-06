@@ -125,3 +125,4 @@ highchartsDiagrams:
 
 5. 前述执行结果任然报错的原因为镜像不存在，切换为一个已经存在的镜像重新执行即可
 
+   ![docker可正常拉取镜像](/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/docker-registry-pull-success.png "docker可正常拉取镜像") 
