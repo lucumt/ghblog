@@ -323,6 +323,16 @@ div.mermaid &gt; svg { max-width: 60% !important; }
     </item>
     
     <item>
+      <title>[译]Spring中@Configuration和@Component的对比</title>
+      <link>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</link>
+      <pubDate>Wed, 08 Jan 2020 16:21:26 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>MySQL中由于user表中错误的host配置导入无法登录数据库</title>
       <link>https://lucumt.info/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/</link>
       <pubDate>Thu, 22 Aug 2019 11:32:19 +0800</pubDate>
