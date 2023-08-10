@@ -46,6 +46,15 @@
     </item>
     
     <item>
+      <title>利用JDK8时区常量进行时区相关操作</title>
+      <link>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</link>
+      <pubDate>Tue, 08 Jun 2021 16:01:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</guid>
+      <description>&lt;p&gt;在进行&lt;code&gt;Java&lt;/code&gt;编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用&lt;code&gt;JDK&lt;/code&gt;内置的时区常量来进行时区相关操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>MyBatis中插入JSON格式数据</title>
       <link>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</link>
       <pubDate>Thu, 15 Apr 2021 09:37:41 +0800</pubDate>
