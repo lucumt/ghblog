@@ -44,13 +44,14 @@ sequenceDiagrams:
 
 # 博客园
 
-| 地址                                                         | 内容                                         | 其它                     |
-| ------------------------------------------------------------ | -------------------------------------------- | ------------------------ |
-| **[程序员自由之路](https://www.cnblogs.com/54chensongxia/)** | 主要是`JavaEE`开发，关于`Java`框架的文章很多 |                          |
-| **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                           | 微信公众号`Coder 魔法院` |
-| **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                     |                          |
-| **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                   |                          |
-| **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                           |                          |
+| 地址                                                         | 内容                                                         | 其它                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------ |
+| **[程序员自由之路](https://www.cnblogs.com/54chensongxia/)** | 主要是`JavaEE`开发，关于`Java`框架的文章很多                 |                          |
+| **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                                           | 微信公众号`Coder 魔法院` |
+| **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                                     |                          |
+| **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                                   |                          |
+| **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                                           |                          |
+| [**ChokCoco**](https://www.cnblogs.com/coco1s)               | 某个`CSS`大佬，国服第一切图仔，有很多关于`CSS`炫酷特性的文章 |                          |
 
 
 
@@ -72,10 +73,18 @@ sequenceDiagrams:
 
   ![云原生技术栈](/blog_img/links/云原生.jpg "云原生技术栈")
 
-*  其它
+* 其它
 
-  |                            icon                             |                         stop the war                         |
-  | :---------------------------------------------------------: | :----------------------------------------------------------: |
-  | ![flying_fox](/blog_img/links/flying_fox.jfif "flying_fox") | ![russia-stop-the-war-in-ukraine](/blog_img/links/Jenkins-stop-the-war.svg "russia-stop-the-war-in-ukraine") |
+  <table>
+    <tbody style="text-align:center">
+      <tr>
+  	  <td><b>icon</b></td>
+  	  <td><b>stop the war</b></td>
+  	</tr>
+  	<tr>
+  	  <td><img style="height:200px" src="/blog_img/links/flying_fox.jfif"/></td>
+  	  <td><img style="height:200px" src="/blog_img/links/Jenkins-stop-the-war.svg"/></td>
+  	</tr>
+    </tbody>
+  </table>
 
-  
