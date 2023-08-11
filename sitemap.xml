@@ -932,4 +932,10 @@
     <priority>0.5</priority>
   </url>
   
+  <url>
+    <loc>https://lucumt.info/categories/junit%E7%BF%BB%E8%AF%91/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
 </urlset>
