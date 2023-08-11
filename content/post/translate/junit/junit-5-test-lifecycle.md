@@ -6,7 +6,7 @@ draft: true
 keywords: []
 description: ""
 tags: ["junit"]
-categories: []
+categories: ["翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -46,5 +46,7 @@ highchartsDiagrams:
   enable: false
   options: ""
 ---
+
+本文翻译自[**JUnit 5 Test Lifecycle: Before and After Annotations**](https://www.arhohuttunen.com/junit-5-test-lifecycle/)。
 
 <!--more-->
