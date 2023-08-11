@@ -6,7 +6,7 @@ draft: true
 keywords: []
 description: ""
 tags: ["junit"]
-categories: ["翻译"]
+categories: ["翻译","JUnit翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
