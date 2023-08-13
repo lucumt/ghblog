@@ -6,7 +6,25 @@
     <description>Recent content in 翻译 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Jun 2022 12:16:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Aug 2023 17:49:14 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]4000个点赞并且在不断增加，回忆之旅</title>
+      <link>https://lucumt.info/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</link>
+      <pubDate>Sun, 13 Aug 2023 17:49:14 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</guid>
+      <description>&lt;style&gt;
+    .content img {
+      margin-left: auto;
+      margin-right: auto;
+      display: block !important;
+    }
+&lt;/style&gt;
+&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;
+&lt;p&gt;在阅读阮一峰老师的&lt;a href=&#34;https://www.ruanyifeng.com/blog/2023/08/weekly-issue-266.html&#34;&gt;&lt;strong&gt;科技爱好者周刊（第 266 期）&lt;/strong&gt;&lt;/a&gt;时，发现其中一篇关于&lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;&lt;strong&gt;Docker Compose&lt;/strong&gt;&lt;/a&gt;的文章&lt;a href=&#34;https://brianchristner.io/4000-stars-and-counting-a-trip-down-memory-lane/&#34;&gt;&lt;strong&gt;4&#39;000 Stars and counting, a trip down memory lane&lt;/strong&gt;&lt;/a&gt;很有意思，基于自己粗浅的英文翻译一下。&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
     <item>
       <title>5.[译]同线程系统</title>
       <link>https://lucumt.info/post/translate/java-concurrency/same-threading/</link>
