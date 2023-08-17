@@ -53,6 +53,7 @@ sequenceDiagrams:
 | **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                                           |                          |
 | [**ChokCoco**](https://www.cnblogs.com/coco1s)               | 某个`CSS`大佬，国服第一切图仔，有很多关于`CSS`炫酷特性的文章 |                          |
 | [**CODE WITH ARHO**](https://www.arhohuttunen.com)           | 一个芬兰码农，博客内容大部分是`JUnit`测试相关                |                          |
+| [**cloudchewie.com**](https://cloudchewie.com/)              | 一个华中科技大学学生的个人博客，样式很炫                     |                          |
 
 
 

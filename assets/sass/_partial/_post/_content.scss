@@ -85,7 +85,8 @@
       }
 
       th, td {
-        padding: 5px 15px;
+        padding: 2.5px 15px;
+		font-size: $global-table-font-size-13;
         border: 1px double $content-table-border-color;
       }
 
