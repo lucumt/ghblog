@@ -21,7 +21,7 @@ Java关键字`volatile`用于将一个Java变量标记为**在主内中存储**�
 Java中的`volatile`关键字确保了 `volatile`变量的修改在多线程中是可见的。这听起来有些抽象，接下来我将详细说明。
 
 在一个对非`volatile`变量进行操作的多线程应用，由于性能的关系，当对这些变量进行读写时，每个线程都可能从主线程中拷贝变量到CPU缓存中。如果你的电脑不止一个CPU，每个线程可能会在不同的CPU上运行。这意味着，每个线程都可能将变量拷贝到不同的CPU的CPU缓存中，如下图所示：  
-![p1.png](https://ooo.0o0.ooo/2016/03/07/56dd58a160db3.png)  
+![java-volatile-1.png](/blog_img/translate/java-concurrency/java-volatile-keyword/java-volatile-1.png "java-volatile-1.png")  
 对于非`volatile`变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。
 
 假设两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：
@@ -33,7 +33,7 @@ public class SharedObject {
 再次假设，只有Thread1会增加counter变量的值，但是Thread1和Thread2都能在任意时刻读取counter变量的值。
 
 如果couner变量没有声明为`volatile`将无法保证在何时把CPU缓存中的值写入主内存中。这意味着counter变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：  
-![p2.png](https://ooo.0o0.ooo/2016/03/07/56dd58a7387d7.png)  
+![java-volatile-2.png](/blog_img/translate/java-concurrency/java-volatile-keyword/java-volatile-2.png "java-volatile-2.png")  
 造成线程不能获取变量最新值得原因为变量值没有被其它线程及时写回主内存中，这就是所谓的可见性问题。某个线程的更新对其它线程不可见。  
 
 将counter变量声明为`volatile`之后，所有对counter变量的写操作会立即写入主内存中，同样，所有对counter变量的读操作都会从主内存中读取数据。下面的代码块展示了如何将counter变量声明为`volatile` ：  
@@ -143,7 +143,7 @@ JVM可能会重新排序前3条指令，只要它们都先发生于`volatile`写
 这种多个线程同时增加相同计数器的场景正是`volatile`变量不适用的地方，接下来的部分进行了更详细的解释。
 
 假设线程1读取一个值为0的共享变量counter到它的CPU缓存中，将它加1但是并没有将增加后的值写入主内存中。线程2可能会从主内存中读取同一个counter变量，其值仍然为0，同样不将其写入主内存中，就如下面的图片所展示的那样：  
-![p3.png](https://ooo.0o0.ooo/2016/03/07/56dd58ae1cdfb.png)  
+![java-volatile-3.png](/blog_img/translate/java-concurrency/java-volatile-keyword/java-volatile-3.png "java-volatile-3.png")  
 
 线程1和线程2现在都没有同步，共享变量counter的真实值应该是2，但是在每个线程的CPU缓存中，其值都为1，并且主内存中的值仍然是0。它成了一个烂摊子，即使这些线程终于它们对共享变量counter的计算值写入到主内存中，counter的值仍然是错的。
 
