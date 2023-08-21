@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -179,9 +179,9 @@
   </ul>
 </nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>本文翻译自 <a href="http://tutorials.jenkov.com/java-concurrency/volatile.html"><strong>Java Volatile Keyword</strong></a></p>
+</div>  
+	   <div class="post-content">
+		<p>本文翻译自 <a href="http://tutorials.jenkov.com/java-concurrency/volatile.html"><strong>Java Volatile Keyword</strong></a></p>
 <p>Java关键字<code>volatile</code>用于将一个Java变量标记为<strong>在主内中存储</strong>，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
 <p>事实上，从<code>Java5</code>之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
 <h2 id="volatile变量可见性保证">Volatile变量可见性保证</h2>
@@ -369,7 +369,7 @@
 <p>由于<code>volatile</code>变量的读和写都是直接从主内存中进行的，相对于CPU缓存，直接对主内存进行读写代价更高，
 访问一个<code>volatile</code>变量也会阻止指令重新排序，而指令排序也是一个常用的性能增强技术。因此，你应该在只有当你确实需要确保变量可见性的时候才使用<code>volatile</code>变量。</p>
 <p>&lt;&ndash;终于翻译完了!&ndash;&gt;</p>
-    </div>
+       </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

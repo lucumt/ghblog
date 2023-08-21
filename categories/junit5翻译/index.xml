@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JUnit5翻译系列集合 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</link>
+    <description>Recent content in JUnit5翻译系列集合 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 May 2023 09:51:22 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]JUnit5入门-编写第一段测试代码</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</link>
+      <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-getting-started&#34;&gt;&lt;strong&gt;Getting Started with JUnit 5: Writing Your First Test&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -167,9 +167,9 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents"></nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html"><strong>java.io</strong></a>下面的各种IO类自己实现，或者利用 <a href="https://commons.apache.org/proper/commons-io/"><strong>Commons IO</strong></a>包中的<code>FileUtils</code>、 <code>IOUtils</code> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>来作为项目的MVC实现，所以很自然的采用 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
+</div>  
+	   <div class="post-content">
+		<p>文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html"><strong>java.io</strong></a>下面的各种IO类自己实现，或者利用 <a href="https://commons.apache.org/proper/commons-io/"><strong>Commons IO</strong></a>包中的<code>FileUtils</code>、 <code>IOUtils</code> 类中封装好的方法直接调用。由于目前我所开发的系统采用了 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>来作为项目的MVC实现，所以很自然的采用 <a href="http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html"><strong>SpringMVC</strong></a>内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -268,7 +268,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
-    </div>
+       </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -162,9 +162,9 @@
       </div>
     </header>
 
-    
-    <div class="post-content">
-      <p>利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>来管理我们的web程序时，通常需要在<code>UserDetailsService</code>接口中的<code>loadUserByUsername</code>方法中来初始化权限信息,但<code>UserDetailsService</code>一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>提供的API来实现。</p>
+      
+	   <div class="post-content">
+		<p>利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>来管理我们的web程序时，通常需要在<code>UserDetailsService</code>接口中的<code>loadUserByUsername</code>方法中来初始化权限信息,但<code>UserDetailsService</code>一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>提供的API来实现。</p>
 <p>以我自己的项目为例，<code>UserDetailsService</code>接口中的<code>loadUserByUsername</code>具体实现如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -244,7 +244,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-    </div>
+       </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

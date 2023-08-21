@@ -93,6 +93,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</loc>
+    <lastmod>2023-05-01T09:51:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/junit5/</loc>
+    <lastmod>2023-05-01T09:51:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2023-05-01T09:51:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/jenkins/</loc>
     <lastmod>2023-04-17T14:31:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -935,12 +956,6 @@
   <url>
     <loc>https://lucumt.info/post/hugo/create-website-with-hugo/</loc>
     <lastmod>2016-02-27T22:23:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/junit%E7%BF%BB%E8%AF%91/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

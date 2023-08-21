@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -161,9 +161,9 @@
       </div>
     </header>
 
-    
-    <div class="post-content">
-      <p>在软件开发中采用<code>LIMIT OFFSET</code>对数据库进行分页是常见操作，但在数据量很大时直接使用<code>LIMIT OFFSET</code>查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。</p>
+      
+	   <div class="post-content">
+		<p>在软件开发中采用<code>LIMIT OFFSET</code>对数据库进行分页是常见操作，但在数据量很大时直接使用<code>LIMIT OFFSET</code>查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。</p>
 <p>以<code>system_user</code>表为例，基于<a href="../mysql-create-massive-test-data-quickly/">MySQL中快速创建大量测试数据</a>一文中的介绍给其添加1000万的测试数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -281,7 +281,7 @@
 <li>若<strong>主键连续且自增</strong>，则通过主键进行过滤</li>
 <li>若<strong>主键不连续自增</strong>，可额外创建一个自增列或者采用<code>覆盖索引</code>的方式改写</li>
 </ul>
-    </div>
+       </div>
 
     
 <footer class="post-footer">

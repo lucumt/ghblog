@@ -35,6 +35,15 @@
     </item>
     
     <item>
+      <title>JUnit5翻译系列集合</title>
+      <link>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</guid>
+      <description>下述文章翻译自CODE WITH ARHO JUnit 5 教程 JUnit5教程关注于如何为Java和Kotlin代码块编写和运行单元测试，本教程针对初学者和已经熟悉JU</description>
+    </item>
+    
+    <item>
       <title>系统集成</title>
       <link>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</link>
       <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
@@ -185,15 +194,6 @@
       
       <guid>https://lucumt.info/categories/%E5%85%B6%E5%AE%83/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>JUnit翻译系列集合</title>
-      <link>https://lucumt.info/categories/junit%E7%BF%BB%E8%AF%91/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lucumt.info/categories/junit%E7%BF%BB%E8%AF%91/</guid>
-      <description>下述文章翻译自CODE WITH ARHO JUnit 5 教程 JUnit5教程关注于如何为Java和Kotlin代码块编写和运行单元测试，本教程针对初学者和已经熟悉JU</description>
     </item>
     
   </channel>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -181,9 +181,9 @@
   </ul>
 </nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
+</div>  
+	   <div class="post-content">
+		<p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
 <h1 id="原实现方式">原实现方式</h1>
 <p>最开始自己只准备了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境，由于环境数量不多，对于不同环境的端口配置自己是在代码中直接实现的<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <div class="highlight"><div class="chroma">
@@ -421,7 +421,7 @@
 </li>
 </ol>
 </div>
-    </div>
+       </div>
 
     
 <footer class="post-footer">

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -178,9 +178,9 @@
   </ul>
 </nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>近期在工作中遇到由于<code>HTTP</code>返回的内容较多导致系统响应延迟的问题，最终自己结合<a href="https://en.wikipedia.org/wiki/Gzip">gzip</a>、<a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a>、<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C">位运算</a>等将<code>HTTP</code>响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于<code>位运算</code>部分自己是结合业务实际，将3个小型<code>int</code>转化为1个<code>long</code>，将数据量减少三分之一，简单记录下其实现(以<code>Java</code>实现为例)。</p>
+</div>  
+	   <div class="post-content">
+		<p>近期在工作中遇到由于<code>HTTP</code>返回的内容较多导致系统响应延迟的问题，最终自己结合<a href="https://en.wikipedia.org/wiki/Gzip">gzip</a>、<a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a>、<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C">位运算</a>等将<code>HTTP</code>响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于<code>位运算</code>部分自己是结合业务实际，将3个小型<code>int</code>转化为1个<code>long</code>，将数据量减少三分之一，简单记录下其实现(以<code>Java</code>实现为例)。</p>
 <h1 id="背景">背景</h1>
 <p>某个项目模块要将一系列的坐标数据返回给前端页面，坐标数据由x、y、z这3个维度来定义且用<code>float</code>表示，它们的约束条件如下：</p>
 <blockquote>
@@ -411,7 +411,7 @@
 </li>
 </ol>
 </div>
-    </div>
+       </div>
 
     
 <footer class="post-footer">

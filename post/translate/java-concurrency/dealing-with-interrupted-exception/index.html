@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -200,9 +200,9 @@
   </ul>
 </nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>本文翻译自 <strong><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">Dealing with InterruptedException</a></strong></p>
+</div>  
+	   <div class="post-content">
+		<p>本文翻译自 <strong><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">Dealing with InterruptedException</a></strong></p>
 <p>这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了<code>Thread.sleep()</code>来实现。
 但此时编译器或IDE会立即提示你没有处理非运行时异常 <strong><a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html">InterruptedException</a></strong>。那么，什么是<code>InterruptedException</code>,为什么我们要必须处理它呢？</p>
 <p>最常见的处理方式是将该异常吞没掉: 通过<code>try-catch</code>捕获该异常然后不进行任何处理(或许会用日志来记录异常，但并没有改进多少)，
@@ -508,7 +508,7 @@
 </div><h2 id="总结">总结</h2>
 <p>你可以使用Java平台提供的协作中断机制来构建灵活的取消策略。线程活动可以决定它们是否可以取消、如何响应中断，如果立即返回会影响应用程序的完整性时，它们可以推迟中断以执行特定于任务的清理活动。即是想完全忽略代码中的中断，也要确保在捕获<code>InterruptedException</code>时恢复中断状态，并且不要重新抛出它以便调用它的代码不会被剥夺对于中断发生的感知。</p>
 <p>&lt;–翻译结束!–&gt;</p>
-    </div>
+       </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

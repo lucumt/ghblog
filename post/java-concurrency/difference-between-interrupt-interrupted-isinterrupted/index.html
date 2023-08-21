@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f3f61a49781ad6749ab3e3a7777874a56f2d0ad6759586ed0be1a0c691359c6f.css" rel="stylesheet">
+<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -177,9 +177,9 @@
   </ul>
 </nav>
   </div>
-</div>
-    <div class="post-content">
-      <p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。</p>
+</div>  
+	   <div class="post-content">
+		<p>最近复习Java多线程相关知识时，发现线程中断的<code>interrupt()</code>、<code>interrupted()</code>、<code>isInterrupted()</code>这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。</p>
 <h2 id="相关使用说明">相关使用说明</h2>
 <p>下表是根据JDK官网的API总结出的这3个方法的使用说明,从表中可以看出中断线程实际使用的是<code>interrupt()</code>，而<code>interrupted()</code>和<code>isInterrupted()</code>则用来检测线程是否中断，区别为前者会清除中断状态标记。</p>
 <table>
@@ -460,7 +460,7 @@ If none of the previous conditions hold then this thread&rsquo;s interrupt statu
 <li><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">https://www.ibm.com/developerworks/library/j-jtp05236/</a></li>
 </ul>
 <p>关于如何处理<code>InterruptedException</code>异常，请参见本人翻译一篇文章 <a href="/post/translate/java-concurrency/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></p>
-    </div>
+       </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
