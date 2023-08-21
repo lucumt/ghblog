@@ -3,10 +3,10 @@ title: "[翻译]JUnit5生命周期"
 date: 2023-06-16T19:21:43+08:00
 lastmod: 2023-06-16T19:21:43+08:00
 draft: true
-keywords: []
+keywords: ["junit5"]
 description: ""
-tags: ["junit"]
-categories: ["翻译","JUnit翻译"]
+tags: ["junit5"]
+categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

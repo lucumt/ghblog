@@ -1,19 +1,19 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "[译]二叉树莫里斯遍历"
+date: 2023-08-18T11:18:47+08:00
+lastmod: 2023-08-18T11:18:47+08:00
 draft: true
 keywords: []
 description: ""
 tags: []
-categories: []
+categories: ["翻译","算法"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: true
+autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -22,7 +22,6 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
-centerImage: false
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -47,5 +46,7 @@ highchartsDiagrams:
   enable: false
   options: ""
 ---
+
+本文翻译自[**What is Morris traversal**](https://www.educative.io/answers/what-is-morris-traversal)
 
 <!--more-->

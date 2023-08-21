@@ -1,6 +1,6 @@
 ---
-layout: junit_translate_layout
-title: JUnit翻译系列集合
+layout: junit5_translate_layout
+title: JUnit5翻译系列集合
 ---
 
 下述文章翻译自[**CODE WITH ARHO**](https://www.arhohuttunen.com/)
@@ -17,7 +17,9 @@ title: JUnit翻译系列集合
               <br/>
               <small><code>JUnit5</code>的基本特性</small>
           </td>
-          <td>Getting Started with JUnit 5: Writing Your First Test</td>
+          <td>
+              <b><a href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit5入门-编写第一段测试代码</a></b>
+          </td>
         </tr>
         <tr>
             <td>JUnit 5 Assertions: Verifying Test Results</td>

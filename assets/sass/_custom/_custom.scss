@@ -3,6 +3,11 @@
 // ==============================
 // You can override the variables in _variables.scss to customize the style
 
+.image-center img { 
+margin-left: 50%;
+transform: translateX(-50%);
+}
+
 div[id^=flow_] {
   text-align:center;
   border: 1px dashed #c9c9c9;

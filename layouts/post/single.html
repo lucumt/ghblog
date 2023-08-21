@@ -31,9 +31,15 @@
     {{- partial "post/outdated-info-warning.html" . -}}
 
     <!-- Content -->
-    <div class="post-content">
-      {{ .Content }}
-    </div>
+	{{- if.Page.Params.centerImage }} 
+	   <div class="post-content image-center">
+		{{ .Content }}
+       </div>
+	{{ else }}  
+	   <div class="post-content">
+		{{ .Content }}
+       </div>
+	{{- end }}
 
     <!-- Copyright -->
     {{- partial "post/copyright.html" . -}}
