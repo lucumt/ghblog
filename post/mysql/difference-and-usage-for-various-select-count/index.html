@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -176,9 +176,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>在数据库中使用<code>COUNT</code>函数统计总数是常用操作，本文参考网上资料以及个人实际操作记录下<code>MySQL</code>中通过<code>COUNT(列名)</code>、<code>COUNT(常量)</code>以及<code>COUNT(*)</code>在<strong>相同查询条件下<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> 的区别以及使用场景。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>在数据库中使用<code>COUNT</code>函数统计总数是常用操作，本文参考网上资料以及个人实际操作记录下<code>MySQL</code>中通过<code>COUNT(列名)</code>、<code>COUNT(常量)</code>以及<code>COUNT(*)</code>在<strong>相同查询条件下<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong> 的区别以及使用场景。</p>
 <p>本文基于<a href="https://en.wikipedia.org/wiki/InnoDB">InnoDB</a>和<a href="https://en.wikipedia.org/wiki/MyISAM">MyISAM</a>这两种常见的<code>MySQL</code>引擎，利用名为<a href="https://github.com/lucumt/myrepository/blob/master/mysql/add_user_batch.sql">add_user_batch</a>的存储过程向<code>system_user</code>表中插入1000万数据，对比测试它们的查询结果和响应性能。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -294,7 +297,7 @@
 </li>
 </ol>
 </div>
-       </div>
+    </div>
 
     
 <footer class="post-footer">

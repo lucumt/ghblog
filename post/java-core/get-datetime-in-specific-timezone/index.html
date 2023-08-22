@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -161,9 +161,12 @@
       </div>
     </header>
 
-      
-	   <div class="post-content">
-		<p>在进行<code>Java</code>编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用<code>JDK</code>内置的时区常量来进行时区相关操作。</p>
+    
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>在进行<code>Java</code>编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用<code>JDK</code>内置的时区常量来进行时区相关操作。</p>
 <h1 id="zoneid使用">ZoneId使用</h1>
 <p>在涉及到时区的操作时，通常采用类似如下的代码以<a href="https://zh.wikipedia.org/zh-cn/%E5%AF%AB%E6%AD%BB"><strong>硬编码</strong></a>方式实现相关功能。</p>
 <div class="highlight"><div class="chroma">
@@ -447,7 +450,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>SHORT_IDS</code>中内置的时区总共有28条，但从上述输出结果来看，仍有个别时区遗漏在其中，在<code>ZoneId</code>的API文档中说明<code>SHORT_IDS</code>是来源于<code>TZDB 2005r</code>，不过我没有在网上找到这方面的详细资料。对于不在<code>SHORT_IDS</code>中的，可从<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"><strong>List of tz database time zones</strong></a>中获取响应的时区然后通过硬编码方式实现。</p>
-       </div>
+    </div>
 
     
 <footer class="post-footer">

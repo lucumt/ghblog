@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -179,9 +179,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。</p>
 <h2 id="将log级别开启到debug">将Log级别开启到Debug</h2>
 <p>将Log的级别变为Debug后，会比INFO状态下看到更多的详细日志信息，仔细分析这些输出信息，有时候可以发现是哪一步不能按照预期工作，据此缩小查找范围，从而解决缺陷。<br>
 <img src="/blog_img/other/different-ways-find-bug-in-complex-code/debug_log_output.png" alt="&amp;ldquo;Debug级别的日志输出&amp;rdquo;" title="Debug级别的日志输出"><br>
@@ -213,7 +216,7 @@
 <p>好的代码会自己说话，平时编码时要注意细节、符合规范，必要时对代码进行重构，将复杂的代码进行抽取简化。代码重构虽然对我们的工作产出不会有立竿见影的效果，但也绝不是白白浪费我们的时间，不断重构后的实现良好的代码，不仅有利于调试分析，也有利于他人顺利接手。</p>
 <p>在一些成立时间较长的公司或多或少都会存在一些<strong>炸弹代码</strong>，此处说的炸弹代码是指那些功能很重要实现又很复杂的代码，最开始开发该功能的人离职后，后面接手的人看不懂该代码，由于各种原因无法对其进行重构，在后续开发时，只能不断的在其后面添加新的业务逻辑，而不敢修改已有的，导致代码量越来越臃肿，越臃肿就越看不懂，陷入恶性循环。这样的代码在后续每次调试分析时都是大坑，而如果一开始就进行适当的重构，或许不会发生这种情况。</p>
 <p>Orz~ 我承认<strong>炸弹代码</strong> 这个词是我自己发明的！</p>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

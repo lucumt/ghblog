@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -201,9 +201,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html"><strong>Java Concurrency / Concurrency Models</strong></a></p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html"><strong>Java Concurrency / Concurrency Models</strong></a></p>
 <p>并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。</p>
 <h2 id="并发模型和分布式系统相似之处">并发模型和分布式系统相似之处</h2>
 <p>本文中描述的并发模型与分布式系统中使用的架构类似，在一个并发系统中，不同的线程之间互相通信，在一个分布式系统中，不同的进程间彼此通信（这些进程可能在不同的电脑上）。线程和进程在本质上时非常相似的，这就是为什么不同的并发模型与不同的分布式系统架构通常看起来相似。</p>
@@ -293,7 +296,7 @@
 <p>那么，哪种并发模型更好呢？</p>
 <p>通常情况下，答案取决于你的系统应该做什么。 如果你的工作自然并行，独立，无需共享状态，则可以使用并行工作模型来实现系统。但许多任务不是自然并行和独立的，对于这些类型的系统，我相信流水线并发模型比缺点有更多的优点，比并行工作模型更有优势。你甚至不需要自己编写所有的流水线路基础设施，像Vert.x这样的现代平台为你已经实现了很多。 就个人而言，我将探索在Vert.x等平台上运行的设计，以便我的下一个项目。我个人感觉JavaEE没有尽头。</p>
 <p>&lt;–翻译结束!–&gt;</p>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

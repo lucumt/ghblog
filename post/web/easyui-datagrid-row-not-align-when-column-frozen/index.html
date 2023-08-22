@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -176,9 +176,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>相对于传统的用HTML中TABLE实现的表格，利用<a href="https://www.jeasyui.com"><strong>EasyUI</strong></a>中的<a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid"><strong>DataGrid</strong></a>实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>相对于传统的用HTML中TABLE实现的表格，利用<a href="https://www.jeasyui.com"><strong>EasyUI</strong></a>中的<a href="https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid"><strong>DataGrid</strong></a>实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。</p>
 <h2 id="easyui-datagrid正常情况下的列冻结">EasyUI DataGrid正常情况下的列冻结</h2>
 <p>下图为一个常见的DataGrid使用示例，该图展示了我们在使用EasyUI DataGrid时经常会遇到的一个问题：<strong>由于某个列的长度很长导致表格出现滚动条</strong><br>
 <img src="/blog_img/web/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column1.png" alt="&amp;ldquo;没有冻结列时正常显示的DataGrid&amp;rdquo;" title="没有冻结列时正常显示的DataGrid"><br>
@@ -426,7 +429,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>考虑到实际使用中EasyUI DataGrid的渲染时间无法确定，用<a href="https://www.w3schools.com/JSREF/met_win_setTimeout.asp"><strong>setTimeout</strong></a>并非最优解，希望EasyUI官方后续能为该问题提供更合理的解决方案!</p>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

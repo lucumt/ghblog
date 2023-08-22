@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -163,9 +163,12 @@
       </div>
     </header>
 
-      
-	   <div class="post-content">
-		<p>简要记录下在安装完成<a href="https://www.kubesphere.io/">KubeSphere</a>后由于缺少<a href="https://openebs.io/">OpenEBS</a>而导致名为<code>prometheus-k8s-0</code>的pod节点一直处于<code>Pending</code>状态，进而导致在<code>KubeSphere</code>集群管理中资源统计部分出现NaN的问题。</p>
+    
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>简要记录下在安装完成<a href="https://www.kubesphere.io/">KubeSphere</a>后由于缺少<a href="https://openebs.io/">OpenEBS</a>而导致名为<code>prometheus-k8s-0</code>的pod节点一直处于<code>Pending</code>状态，进而导致在<code>KubeSphere</code>集群管理中资源统计部分出现NaN的问题。</p>
 <ol>
 <li>
 <p><code>KubeSphere</code>初步安装完成之后，以<code>admin</code>账户登录该系统，依次点击<code>平台管理</code>-&gt;<code>集群管理</code>，可发现界面正中的<strong>资源统计</strong>部分很多数据都为<strong>NaN</strong>，影响使用</p>
@@ -195,7 +198,7 @@
 <p><img src="/blog_img/devops/prometheus-k8s-0-pending-in-kubesphere/kubesphere-resources-statistics-normal.png" alt="kubesphere统计结果恢复正常" title="kubesphere统计结果恢复正常"></p>
 </li>
 </ol>
-       </div>
+    </div>
 
     
 <footer class="post-footer">

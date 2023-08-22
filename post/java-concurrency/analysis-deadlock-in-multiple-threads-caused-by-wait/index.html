@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -178,9 +178,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>在<a href="/post/java-concurrency/print-a-b-c-in-turn-by-threads/">多种方式实现在Java中用线程轮流打印ABC</a>中自己本想用单个锁通过调用<code>wait()</code>实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>在<a href="/post/java-concurrency/print-a-b-c-in-turn-by-threads/">多种方式实现在Java中用线程轮流打印ABC</a>中自己本想用单个锁通过调用<code>wait()</code>实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。</p>
 <h1 id="原始代码">原始代码</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -631,7 +634,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
-       </div>
+    </div>
 
     
 <footer class="post-footer">

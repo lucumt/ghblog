@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -146,7 +146,13 @@
         <div id="content" class="content">
           <article class="post">
   <div class="post-content">
-    <p>下述文章翻译自<a href="https://www.arhohuttunen.com/"><strong>CODE WITH ARHO</strong></a></p>
+	<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+	<label for="toggle-on" class="toggle-btn">自定义样式</label>
+	<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+	<label for="toggle-off" class="toggle-btn">默认样式</label>
+    
+	<div class="toggle-on-content">
+	<p>下述文章翻译自<a href="https://www.arhohuttunen.com/"><strong>CODE WITH ARHO</strong></a></p>
 <ul>
 <li>
 <p><a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a></p>
@@ -167,7 +173,7 @@
       </tr>
       <tr>
           <td>
-              <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言：验证测试结果</b></a>
+              <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言-验证测试结果</b></a>
           </td>
       </tr>
       <tr>
@@ -176,7 +182,7 @@
           </td>
       </tr>
       <tr>
-          <td>JUnit 5 Test Lifecycle: Before and After Annotations</td>
+          <td><a href="/post/translate/junit5/junit-5-test-lifecycle/"><b>[译]JUnit 5 生命周期-注释之前和之后</b></a></td>
       </tr>
       <tr>
           <td>A More Practical Guide to JUnit 5 Parameterized Tests</td>  
@@ -269,6 +275,53 @@
 </table></li>
 </ul>
 
+	</div>
+	
+	<div class="toggle-off-content">
+		  <section id="archive" class="archive">
+  <div class="archive-title category">
+        <h2 class="archive-name">JUnit5翻译系列集合</h2>
+      </div>
+
+  <div class="archive-post">
+      <span class="archive-post-time">
+        2023-05-02
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/translate/junit5/junit-5-nested-tests/" class="archive-post-link">
+		  [译]JUnit 5 嵌套测试-将关联的测试分组在一起
+        </a>
+      </span>
+    </div><div class="archive-post">
+      <span class="archive-post-time">
+        2023-05-01
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/translate/junit5/junit-5-assertions/" class="archive-post-link">
+		  [译]JUnit 5 断言-验证测试结果
+        </a>
+      </span>
+    </div><div class="archive-post">
+      <span class="archive-post-time">
+        2023-05-01
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/translate/junit5/junit-5-getting-started/" class="archive-post-link">
+		  [译]JUnit 5 入门-编写第一段测试代码
+        </a>
+      </span>
+    </div>
+</section>
+
+<nav class="pagination">
+  
+  
+</nav>
+
+	</div>
   </div>
 </article>
         </div>

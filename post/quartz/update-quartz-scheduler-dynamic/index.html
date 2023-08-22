@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -178,9 +178,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
 <p>为实现动态设置定时任务执行时间的功能，首先需要实现以硬编码的方式设置定时任务执行时间，然后在其基础上修改为可动态设置，本文基于这两分部分逐步介绍如何实现。</p>
 <h2 id="硬编码设置定时时间">硬编码设置定时时间</h2>
 <p>本文采用 Quartz + <a href="https://spring.io/guides/gs/serving-web-content/"><strong>SpringMVC</strong></a> 的实现框架，同时基于 <a href="https://maven.apache.org/"><strong>Maven</strong></a>运行，相关配置过程如下：<br>
@@ -739,7 +742,7 @@
 </div><p>实际运行时会发现每次动态切换 <em>Quartz</em> 的执行时间时都会导致该定时任务被执行两次或错误执行的现象，如下图所示：<br>
 <img src="/blog_img/quartz/update-quartz-scheduler-dynamic/dynamic_scheduler_output_wrong.png" alt="&amp;ldquo;动态修改定时任务后定时任务错误执行&amp;rdquo;" title="动态修改定时任务后定时任务错误执行"><br>
 初步上述问题产生的原因为通过<code>Scheduler</code>获取的是已有的<code>Trigger</code>而导致重复执行（不论 <em>Quartz</em> 新旧版本均有此问题 )，如果采用<code>new</code>关键字重新创建一个<code>Trigger</code>则此问题会消失，至于为何采用旧的<code>Trigger</code>会导致定时任务错误执行，还有待进一步分析。</p>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

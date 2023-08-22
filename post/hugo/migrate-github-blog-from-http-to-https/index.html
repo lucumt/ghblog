@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -179,9 +179,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
 <p>一开始我想直接通过在 <strong><a href="https://www.godaddy.com/">GoDaddy</a></strong> 上直接购买<code>HTTPS</code> 服务来实现，去官网查看后发现费用太高，一年大约100美刀，果断弃之。 Google后发现很多人都用<a href="https://www.cloudflare.com/"><strong>Cloudflare</strong></a>通过转发请求来实现<code>HTTPS</code>访问，操作起来也很快，自己便也采用<code>Cloudflare</code>实现， 本文主要是基于<code>Cloudflare</code> 的实现说明。</p>
 <h1 id="操作过程">操作过程</h1>
 <h2 id="给博客添加自定义域名">给博客添加自定义域名</h2>
@@ -339,7 +342,7 @@
 </li>
 </ol>
 </div>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">

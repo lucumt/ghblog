@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.160888754a1bf89b4a56720c718ae1315fac06add82ff159a9039c46f34c40fe.css" rel="stylesheet">
+<link href="/sass/main.min.f7f4d73c43a767e434997279164764c32c7f0f3b1ec88bfb5bfc297b77fd7e7a.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -176,9 +176,12 @@
   </ul>
 </nav>
   </div>
-</div>  
-	   <div class="post-content">
-		<p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
 <p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
 <p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
 之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
@@ -193,7 +196,7 @@
 <p>自从第一本Java并发书籍问世之后，关于并发架构和设计领域已经发生了很多变化，<code>Java5</code>甚至提供了concurrency工具包。新的类似于Vert.x、Play/Akka和Qbit的异步无共享平台和API已经出现。这些平台使用了一个不同于标准Java/JEE并发的模型来处理线程、共享内存和锁。新的无阻塞并发算法已经公开，类似于LMax Disrupter这样的非阻塞工具也已经添加到我们的工具箱。在<code>Java7</code>中通过Fork和Join框架引入了并行性功能编程，并在<code>Java8</code>中引入了流相关的API。</p>
 <p>所有这些新的进展让我觉得是时候编更新本系列的Java并发教程，因此本教程再一次处于编写中状态，新的教程会在时间允许编写时发布。</p>
 <p>&lt;–翻译结束!–&gt;</p>
-       </div>
+    </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
