@@ -44,6 +44,15 @@
     </item>
     
     <item>
+      <title>[译]JUnit 5 断言-验证测试结果</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-assertions/</link>
+      <pubDate>Mon, 01 May 2023 13:37:22 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-assertions/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-assertions/&#34;&gt;&lt;strong&gt;JUnit 5 Assertions: Verifying Test Results&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]JUnit5入门-编写第一段测试代码</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</link>
       <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
