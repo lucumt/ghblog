@@ -8,6 +8,7 @@
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/lucumt/ghblog)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/lucumt/ghblog)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lucumt/ghblog)
+![GitHub repo size](https://img.shields.io/github/repo-size/lucumt/ghblog)
 <br/>
 ![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Hugo)
 ![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Even)
