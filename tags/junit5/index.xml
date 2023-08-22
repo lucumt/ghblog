@@ -6,7 +6,16 @@
     <description>Recent content in junit5 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 May 2023 13:37:22 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit5/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 May 2023 13:12:24 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]JUnit 5 嵌套测试-将关联的测试分组在一起</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</link>
+      <pubDate>Tue, 02 May 2023 13:12:24 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-nested-tests/&#34;&gt;&lt;strong&gt;JUnit 5 Nested Tests: Grouping Related Tests Together&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]JUnit 5 断言-验证测试结果</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-assertions/</link>
@@ -17,7 +26,7 @@
     </item>
     
     <item>
-      <title>[译]JUnit5入门-编写第一段测试代码</title>
+      <title>[译]JUnit 5 入门-编写第一段测试代码</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</link>
       <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
       
