@@ -5,7 +5,7 @@ lastmod: 2023-05-01T09:51:22+08:00
 draft: false
 keywords: ["junit5"]
 description: "简要介绍如何开始编写基于JUnit5的测试程序"
-tags: ["junit5"]
+tags: ["junit5","java"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

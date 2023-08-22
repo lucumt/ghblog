@@ -5,7 +5,7 @@ lastmod: 2023-06-16T19:21:43+08:00
 draft: true
 keywords: ["junit5"]
 description: "翻译关于JUnit5生命周期的博文"
-tags: ["junit5"]
+tags: ["junit5","java"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

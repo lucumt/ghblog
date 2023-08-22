@@ -5,7 +5,7 @@ lastmod: 2023-05-02T13:12:24+08:00
 draft: false
 keywords: ["junit5"]
 description: "翻译关于JUnit 5中关联测试的实现与使用"
-tags: ["junit5"]
+tags: ["junit5","java"]
 categories: ["翻译","JUnit5翻译"]
 
 # You can also close(false) or open(true) something for this content.
