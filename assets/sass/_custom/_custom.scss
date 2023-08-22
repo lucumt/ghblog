@@ -4,8 +4,12 @@
 // You can override the variables in _variables.scss to customize the style
 
 .image-center img { 
-margin-left: 50%;
-transform: translateX(-50%);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.image-border img {
+  border: 1px dashed #a9a4a4;
 }
 
 div[id^=flow_] {

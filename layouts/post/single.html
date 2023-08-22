@@ -31,15 +31,16 @@
     {{- partial "post/outdated-info-warning.html" . -}}
 
     <!-- Content -->
-	{{- if.Page.Params.centerImage }} 
-	   <div class="post-content image-center">
-		{{ .Content }}
-       </div>
-	{{ else }}  
-	   <div class="post-content">
-		{{ .Content }}
-       </div>
-	{{- end }}
+	{{ $class := slice "post-content" }}
+	{{- if eq .Page.Params.centerImage true }} 
+	  	{{ $class = $class | append "image-center" }}
+	{{ end }}
+	{{- if not (eq .Page.Params.borderImage false) }} 
+	  	{{ $class = $class | append "image-border" }}
+	{{ end }}
+    <div class="{{ delimit ($class) " " }}">
+	 {{ .Content }}
+    </div>
 
     <!-- Copyright -->
     {{- partial "post/copyright.html" . -}}

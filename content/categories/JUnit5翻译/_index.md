@@ -23,7 +23,7 @@ title: JUnit5翻译系列集合
         </tr>
         <tr>
             <td>
-                <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言：验证测试结果</b></a>
+                <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言-验证测试结果</b></a>
             </td>
         </tr>
         <tr>
@@ -32,7 +32,7 @@ title: JUnit5翻译系列集合
             </td>
         </tr>
         <tr>
-            <td>JUnit 5 Test Lifecycle: Before and After Annotations</td>
+            <td><a href="/post/translate/junit5/junit-5-test-lifecycle/"><b>[译]JUnit 5 生命周期-注释之前和之后</b></a></td>
         </tr>
         <tr>
             <td>A More Practical Guide to JUnit 5 Parameterized Tests</td>  
