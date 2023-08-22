@@ -1,5 +1,5 @@
 ---
-title: "[翻译]JUnit5生命周期"
+title: "[译]JUnit 5 生命周期"
 date: 2023-06-16T19:21:43+08:00
 lastmod: 2023-06-16T19:21:43+08:00
 draft: true

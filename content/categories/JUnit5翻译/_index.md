@@ -5,7 +5,7 @@ title: JUnit5翻译系列集合
 
 下述文章翻译自[**CODE WITH ARHO**](https://www.arhohuttunen.com/)
 
-* **JUnit 5 教程**
+* [**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)
 
   > `JUnit5`教程关注于如何为`Java`和`Kotlin`代码块编写和运行单元测试，本教程针对初学者和已经熟悉`JUnit`某些版本的人员，本教程中的文章已分为不同的部分。
 
@@ -27,7 +27,9 @@ title: JUnit5翻译系列集合
             </td>
         </tr>
         <tr>
-            <td>JUnit 5 Nested Tests: Grouping Related Tests Together</td>
+            <td>
+                <a href="/post/translate/junit5/junit-5-nested-tests/"><b>[译]JUnit 5 嵌套测试-将关联的测试分组在一起</b></a>
+            </td>
         </tr>
         <tr>
             <td>JUnit 5 Test Lifecycle: Before and After Annotations</td>
@@ -39,7 +41,7 @@ title: JUnit5翻译系列集合
           <td rowspan="3">
               <b>进阶</b>
               <br/>
-              <small>当已经掌握基础知识后</small>
+              <small>已经掌握基础知识后</small>
           </td>
           <td>A More Practical Guide to JUnit 5 Parameterized Tests</td>
         </tr>
@@ -74,7 +76,7 @@ title: JUnit5翻译系列集合
     </tbody>    
   </table>
 
-* **SpringBoot单元测试教程**
+* [**SpringBoot单元测试教程**](https://www.arhohuttunen.com/spring-boot-testing-tutorial/)
 
   > 在本教程中，我们将了解如何为`Spring Boot`应用程序编写测试，我们将使用`Spring Boot`提供的测试支持和附加测试库。
   >
@@ -106,7 +108,7 @@ title: JUnit5翻译系列集合
           <td rowspan="4">
               <b>中级主题</b>
               <br/>
-              <small>当已经掌握基础知识后</small>
+              <small>已经掌握基础知识后</small>
           </td>
           <td>Testing Serialization With Spring Boot @JsonTest</td>
         </tr>
