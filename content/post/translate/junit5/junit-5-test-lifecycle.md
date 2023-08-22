@@ -55,9 +55,13 @@ highchartsDiagrams:
 
 ![JUnit 5 Chart Diagram](/blog_img/translate/junit5/junit-5-test-lifecycle/junit-5-chart-diagram.webp "JUnit 5 Chart Diagram") 
 
+在本教程中我们将学习如何在测试类的每个测试方法或测试类中所有方法之前和之后运行代码，同时将了解嵌套测试和扩展测试时的执行顺序。
+
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
 # 生命周期相关方法
+
+一个生命周期方法是指任何添加了`@BeforeAll`、`@AfterAll`、`@BeforeEach`或`@AfterEach`注解的方法，生命周期方法在实际测试方法之前或之后执行。
 
 # 测试生命周期
 
