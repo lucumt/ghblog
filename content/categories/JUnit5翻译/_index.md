@@ -22,7 +22,9 @@ title: JUnit5翻译系列集合
           </td>
         </tr>
         <tr>
-            <td>JUnit 5 Assertions: Verifying Test Results</td>
+            <td>
+                <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言：验证测试结果</b></a>
+            </td>
         </tr>
         <tr>
             <td>JUnit 5 Nested Tests: Grouping Related Tests Together</td>
