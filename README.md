@@ -2,6 +2,20 @@
 ![](https://img.shields.io/github/stars/lucumt/ghblog)
 ![](https://img.shields.io/github/license/lucumt/ghblog)
 ![](https://img.shields.io/github/actions/workflow/status/lucumt/ghblog/pages-automatic-deploy.yml)
+![GitHub language count](https://img.shields.io/github/languages/count/lucumt/ghblog)
+![GitHub top language](https://img.shields.io/github/languages/top/lucumt/ghblog)
+<br/>
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/lucumt/ghblog)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/lucumt/ghblog)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lucumt/ghblog)
+<br/>
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Hugo)
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Even)
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Java)
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Spring)
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/MySQL)
+![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Golang)
+
 
 # 我的个人博客
 个人博客的源代码和相关说明。
