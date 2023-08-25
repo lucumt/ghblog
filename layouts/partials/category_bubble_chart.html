@@ -1,23 +1,23 @@
 {{ $terms := .Data.Terms.ByCount -}}
-{{ $tagCount := dict }}
-{{range $name, $taxonomy := .Site.Taxonomies.tags}} 
-	{{ $tagCount = merge $tagCount (dict $name .Count) }}
+{{ $tagCount := dict -}}
+{{range $name, $taxonomy := .Site.Taxonomies.tags -}} 
+	{{ $tagCount = merge $tagCount (dict $name .Count) -}}
 {{end}}
-{{ $data := slice }}
+{{ $data := slice -}}
 {{ range $key, $value := $terms -}}
 	 {{ $tags := (slice) }} 
 	 {{ range $k1, $v1 := $value.Pages -}}
 		  {{ range $k2, $v2 := $v1.Params.tags -}}
-				{{ $tag := $v2 | lower }}
-				{{ $tags = union $tags ( slice $tag ) }}
+				{{ $tag := $v2 | lower -}}
+				{{ $tags = union $tags ( slice $tag ) -}}
 		  {{ end -}}
 	 {{ end -}}
-	 {{ $subData := slice }}
+	 {{ $subData := slice -}}
 	 {{ range $kt, $vt := $tags -}}
-		 {{ $subData = $subData | append (dict "name" $vt "value" (index $tagCount $vt)) }}
+		 {{ $subData = $subData | append (dict "name" $vt "value" (index $tagCount $vt)) -}}
 	 {{ end -}}
-	 {{ $cateData := dict "name" $value.Term "data" $subData }}
-	 {{ $data = $data | append $cateData }}
+	 {{ $cateData := dict "name" $value.Term "data" $subData -}}
+	 {{ $data = $data | append $cateData -}}
 {{ end -}}
 <div id="category_bubble_chart"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -70,5 +70,4 @@
     },
 	series: JSON.parse({{ jsonify $data }})
 });
-
 </script>
