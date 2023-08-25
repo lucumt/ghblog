@@ -40,6 +40,8 @@ sequenceDiagrams:
 
 ---
 
-最近公司的新项目中采用了基于`Spring Cloud`的微服务架构，其中在基于`Nacos`进行配置时遇到了配置文件不生效的问题，基于网上自己以及自己对`Spring boot`和`Nacos`源码的分析，最后找到了原因，故记录下。
+最近公司的新项目中采用了基于`Spring Cloud`的微服务架构，其中在基于`Nacos`进行配置时遇到了配置文件不生效的问题，基于网上自己以及自己对`Spring Boot`和`Nacos`源码的分析，最后找到了原因，故记录下。
+
+主要是要放到到`boostrap.yml`文件而不是`application.yml`文件中，只有这样才能生效。
 
 <!--more-->
