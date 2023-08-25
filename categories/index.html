@@ -286,6 +286,18 @@
         useHTML: true,
         pointFormat: '<b>{point.name}:</b> {point.value}'
     },
+	responsive: {  
+	  rules: [{  
+		condition: {  
+		  maxWidth: 500  
+		},  
+		chartOptions: {  
+		  legend: {  
+			enabled: false  
+		  }  
+		}  
+	  }]  
+	},
     plotOptions: {
         packedbubble: {
             minSize: '20%',
