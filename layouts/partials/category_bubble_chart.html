@@ -1,0 +1,74 @@
+{{ $terms := .Data.Terms.ByCount -}}
+{{ $tagCount := dict }}
+{{range $name, $taxonomy := .Site.Taxonomies.tags}} 
+	{{ $tagCount = merge $tagCount (dict $name .Count) }}
+{{end}}
+{{ $data := slice }}
+{{ range $key, $value := $terms -}}
+	 {{ $tags := (slice) }} 
+	 {{ range $k1, $v1 := $value.Pages -}}
+		  {{ range $k2, $v2 := $v1.Params.tags -}}
+				{{ $tag := $v2 | lower }}
+				{{ $tags = union $tags ( slice $tag ) }}
+		  {{ end -}}
+	 {{ end -}}
+	 {{ $subData := slice }}
+	 {{ range $kt, $vt := $tags -}}
+		 {{ $subData = $subData | append (dict "name" $vt "value" (index $tagCount $vt)) }}
+	 {{ end -}}
+	 {{ $cateData := dict "name" $value.Term "data" $subData }}
+	 {{ $data = $data | append $cateData }}
+{{ end -}}
+<div id="category_bubble_chart"></div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script type="text/javascript">
+	Highcharts.chart('category_bubble_chart', {
+    chart: {
+        type: 'packedbubble',
+        height: '70%'
+    },
+    colors: [ "#16982B","#2caffe", "#544fc5", "#00e272", "#fe6a35"],
+    title: {
+        text: '',
+    },
+	legend:{ 
+       enabled:true
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.value}'
+    },
+    plotOptions: {
+        packedbubble: {
+            minSize: '20%',
+            maxSize: '100%',
+            zMin: 0,
+            zMax: 1000,
+            layoutAlgorithm: {
+                gravitationalConstant: 0.05,
+                splitSeries: true,
+                seriesInteraction: false,
+                dragBetweenSeries: true,
+                parentNodeLimit: true
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                filter: {
+                    property: 'y',
+                    operator: '>',
+                    value: 10
+                },
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
+                }
+            }
+        }
+    },
+	series: JSON.parse({{ jsonify $data }})
+});
+
+</script>

@@ -4,24 +4,38 @@
   {{ $name := .Data.Plural -}}
   {{ $terms := .Data.Terms.ByCount -}}
   {{ $length := len $terms -}}
+  
   {{ if eq $name "categories" -}}
-    <div class="terms">
-      <div class="terms-title">
-        {{ if eq $length 0 -}}
-          {{ T "zeroCategoryCounter" }}
-        {{- else -}}
-          {{ T "categoryCounter" $length }}
-        {{- end }}
-      </div>
-      <div class="terms-tags">
-        {{ range $key, $value := $terms -}}
-          <a class="terms-link" href="{{ $name | relLangURL }}/{{ $value.Term | urlize }}{{ if $.Site.Params.uglyURLs }}.html{{else}}/{{ end }}">
-            {{ $value.Term }}
-            <span class="terms-count">{{ len $value.Pages }}</span>
-          </a>
-        {{ end -}}
-      </div>
-    </div>
+		<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+		<label for="toggle-on" class="toggle-btn">列表</label>
+		<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+		<label for="toggle-off" class="toggle-btn">图表</label>
+		
+		<div class="toggle-on-content">
+			<div class="terms">
+			  <div class="terms-title">
+				{{ if eq $length 0 -}}
+				  {{ T "zeroCategoryCounter" }}
+				{{- else -}}
+				  {{ T "categoryCounter" $length }}
+				{{- end }}
+			  </div>
+			  <div class="terms-tags">
+				{{ range $key, $value := $terms -}}
+				  <a class="terms-link" href="{{ $name | relLangURL }}/{{ $value.Term | urlize }}{{ if $.Site.Params.uglyURLs }}.html{{else}}/{{ end }}">
+					{{ $value.Term }}
+					<span class="terms-count">{{ len $value.Pages }}</span>
+				  </a>
+				{{ end -}}
+			  </div>
+			</div>
+		</div>
+		
+		<div class="toggle-off-content">
+            {{ partial "category_bubble_chart.html" . }}
+		</div>
+
+  
   {{- else if eq $name "tags" -}}
     <div class="terms">
       <div class="terms-title">
