@@ -1,0 +1,61 @@
+{{ $yearData := slice}}
+{{ $totalData := slice }}
+{{ $total := 0 }}
+{{ range (.Site.RegularPages.GroupByDate "2006" "asc") }}
+	{{ $yearData = $yearData | append (len (where .Pages "Section" "post")) }}
+	{{ $total = add $total (len (where .Pages "Section" "post")) }}
+	{{ $totalData = $totalData | append $total }}
+{{ end }}
+<div id="section_chart" style="margin-top:30px;"></div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script type="text/javascript">
+Highcharts.chart('section_chart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: ''
+    },
+    yAxis: {
+        title: {
+            text: '篇'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true,
+            pointStart: 2016
+        }
+    },
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    },
+    series: [
+	  {
+        name: '按年统计',
+	    color:"#0047AB",
+        data: JSON.parse({{ jsonify $yearData }})
+      },
+	  {
+        name: '按年累计',
+	    color:"#16982b",
+        data: JSON.parse({{ jsonify $totalData }})
+      }
+	]
+});
+</script>

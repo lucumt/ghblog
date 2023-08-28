@@ -1,0 +1,66 @@
+{{- $paginator := .Paginate .Data.Pages.ByDate.Reverse .Site.Params.archivePaginate }}
+<section id="archive" class="archive">
+   
+   {{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
+   <figure class="center">
+        <a class="fancybox" href="https://lucumt.info/blog_img/custom/黄山-1.jpg" data-fancybox="gallery" data-caption=""><img src="/blog_img/custom/黄山-1.jpg"></a>
+        <figcaption>
+          <h4>| 云海之巅 |</h4>
+        </figcaption>
+   </figure>
+   {{ end }}
+
+  {{- if .Site.Params.showArchiveCount }}
+    <div class="archive-title">
+      <span class="archive-post-counter">
+        {{ T "archiveCounter" (len .Data.Pages) }}
+      </span>
+    </div>
+  {{- end -}}
+
+  {{- range $index, $element := $paginator.Pages -}}
+    {{- $thisYear := $element.Date.Format "2006" }}
+    {{- $lastElement := $index | add -1 | index $paginator.Pages }}
+    {{- if or (eq $index 0) ( ne ($lastElement.Date.Format "2006") $thisYear ) }}
+      <div class="collection-title">
+        <h2 class="archive-year">{{ $thisYear }}</h2>
+      </div>
+    {{- end }}
+
+    <div class="archive-post">
+      <span class="archive-post-time">
+        {{ $element.Date.Format "01-02" }}
+      </span>
+	  <!-- show draft status in none production environment -->
+	  {{- if not (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
+		  <span class="archive-post-status">
+			  {{ if .Draft }} 
+				 &#9711;
+			  {{ else }}
+				 &#9632;
+			  {{ end }}
+		  </span>
+	  {{ end }}
+      <span class="archive-post-title">
+        <a href="{{ $element.RelPermalink }}" class="archive-post-link">
+		  {{ .Title }}
+        </a>
+      </span>
+    </div>
+  {{- end -}}
+</section>
+<!-- pagination -->
+<nav class="pagination">
+  {{ with $paginator.Prev -}}
+    <a class="prev" href="{{ .URL }}">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">{{ T "prevPage" }}</span>
+    </a>
+  {{- end }}
+  {{ with $paginator.Next -}}
+    <a class="next" href="{{ .URL }}">
+      <span class="next-text">{{ T "nextPage" }}</span>
+      <i class="iconfont icon-right"></i>
+    </a>
+  {{- end }}
+</nav>
