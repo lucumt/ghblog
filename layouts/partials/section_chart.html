@@ -6,7 +6,7 @@
 	{{ $total = add $total (len (where .Pages "Section" "post")) }}
 	{{ $totalData = $totalData | append $total }}
 {{ end }}
-<div id="section_chart" style="margin-top:30px;"></div>
+<div id="section_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
@@ -15,7 +15,7 @@ Highcharts.chart('section_chart', {
         type: 'line'
     },
     title: {
-        text: ''
+        text: '按年统计'
     },
     yAxis: {
         title: {
@@ -47,7 +47,7 @@ Highcharts.chart('section_chart', {
     },
     series: [
 	  {
-        name: '按年统计',
+        name: '按年新增',
 	    color:"#0047AB",
         data: JSON.parse({{ jsonify $yearData }})
       },
