@@ -1,3 +1,4 @@
+<!-- 按年统计 -->
 {{ $yearAddData := slice -}}
 {{ $yearTotalData := slice -}}
 {{ $yearTotal := 0 -}}
@@ -6,7 +7,19 @@
 	{{ $yearTotal = add $yearTotal (len (where .Pages "Section" "post")) -}}
 	{{ $yearTotalData = $yearTotalData | append $yearTotal -}}
 {{ end -}}
+
+<!-- 按月统计 -->
+{{ $monthAddData := slice -}}
+{{ $monthTotalData := slice -}}
+{{ $monthTotal := 0 -}}
+{{ range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
+	{{ $month := ((print .Key "-01") | time.AsTime).UnixMilli -}} 
+    {{ $monthAddData = $monthAddData | append (dict "x" $month "y" (len (where .Pages "Section" "post"))) -}}
+	{{ $monthTotal = add $monthTotal (len (where .Pages "Section" "post")) -}}
+	{{ $monthTotalData = $monthTotalData | append (dict "x" $month "y" $monthTotal) -}}
+{{ end -}}
 <div id="section_year_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
+<div id="section_month_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
@@ -55,6 +68,56 @@ Highcharts.chart('section_year_chart', {
         name: '按年累计',
 	    color:"#16982b",
         data: JSON.parse({{ jsonify $yearTotalData }})
+      }
+	]
+});
+Highcharts.chart('section_month_chart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '按月统计'
+    },
+    yAxis: {
+        title: {
+            text: '篇'
+        }
+    },
+	xAxis: {
+      type: 'datetime'
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: false
+            },
+            enableMouseTracking: true
+        }
+    },
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    },
+    series: [
+	  {
+        name: '按月新增',
+	    color:"#0047AB",
+        data: JSON.parse({{ jsonify $monthAddData }})
+      },
+	  {
+        name: '按月累计',
+	    color:"#16982b",
+        data: JSON.parse({{ jsonify $monthTotalData }})
       }
 	]
 });
