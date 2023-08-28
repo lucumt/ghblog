@@ -1,9 +1,11 @@
 <!-- 按年统计 -->
-{{ $yearAddData := slice -}}
+{{ $yearAddLineData := slice -}}
+{{ $yearAddPieData := slice -}}
 {{ $yearTotalData := slice -}}
 {{ $yearTotal := 0 -}}
 {{ range (.Site.RegularPages.GroupByDate "2006" "asc") -}}
-	{{ $yearAddData = $yearAddData | append (len (where .Pages "Section" "post")) -}}
+	{{ $yearAddLineData = $yearAddLineData | append (len (where .Pages "Section" "post")) -}}
+    {{ $yearAddPieData = $yearAddPieData | append (dict "name" .Key "y" (len (where .Pages "Section" "post"))) -}}
 	{{ $yearTotal = add $yearTotal (len (where .Pages "Section" "post")) -}}
 	{{ $yearTotalData = $yearTotalData | append $yearTotal -}}
 {{ end -}}
@@ -18,12 +20,19 @@
 	{{ $monthTotal = add $monthTotal (len (where .Pages "Section" "post")) -}}
 	{{ $monthTotalData = $monthTotalData | append (dict "x" $month "y" $monthTotal) -}}
 {{ end -}}
-<div id="section_year_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
-<div id="section_month_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
+<style type="text/css">
+  .chart_style{
+     margin-top:30px;
+	 border:1px dashed #a9a4a4;
+  }
+</style>
+<div id="section_year_chart_1" class="chart_style"></div>
+<div id="section_month_chart" class="chart_style"></div>
+<div id="section_year_chart_2" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
-Highcharts.chart('section_year_chart', {
+Highcharts.chart('section_year_chart_1', {
     chart: {
         type: 'line'
     },
@@ -62,7 +71,7 @@ Highcharts.chart('section_year_chart', {
 	  {
         name: '按年新增',
 	    color:"#0047AB",
-        data: JSON.parse({{ jsonify $yearAddData }})
+        data: JSON.parse({{ jsonify $yearAddLineData }})
       },
 	  {
         name: '按年累计',
@@ -70,6 +79,41 @@ Highcharts.chart('section_year_chart', {
         data: JSON.parse({{ jsonify $yearTotalData }})
       }
 	]
+});
+Highcharts.chart('section_year_chart_2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: '按年统计'
+    },
+    tooltip: {
+        pointFormat: '数量:{point.y}<br/>百分比:{point.percentage:.1f} %'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+		    showInLegend: true,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '{point.percentage:.1f} %'
+            }
+        }
+    },
+    series:[{
+	    name: '百分比统计',
+        colorByPoint: true,
+        data: JSON.parse({{ jsonify $yearAddPieData }})
+	}] 
 });
 Highcharts.chart('section_month_chart', {
     chart: {
