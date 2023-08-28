@@ -145,6 +145,14 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           
+   
+   	<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+	<label for="toggle-on" class="toggle-btn">列表</label>
+	<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+	<label for="toggle-off" class="toggle-btn">统计</label>
+    
+	<div class="toggle-on-content">
+	    
 <section id="archive" class="archive"><figure class="center">
         <a class="fancybox" href="https://lucumt.info/blog_img/custom/黄山-1.jpg" data-fancybox="gallery" data-caption=""><img src="/blog_img/custom/黄山-1.jpg"></a>
         <figcaption>
@@ -486,6 +494,99 @@
     </a>
   
 </nav>
+	</div>
+	
+	<div class="toggle-off-content">
+	   	
+
+
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+
+<div id="section_chart" style="margin-top:30px;"></div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script type="text/javascript">
+Highcharts.chart('section_chart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: ''
+    },
+    yAxis: {
+        title: {
+            text: '篇'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true,
+            pointStart: 2016
+        }
+    },
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    },
+    series: [
+	  {
+        name: '按年统计',
+	    color:"#0047AB",
+        data: JSON.parse("[11,12,7,6,4,2,18,16]")
+      },
+	  {
+        name: '按年累计',
+	    color:"#16982b",
+        data: JSON.parse("[11,23,30,36,40,42,60,76]")
+      }
+	]
+});
+</script>
+	</div>
         </div>
         
 
