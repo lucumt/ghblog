@@ -796,12 +796,19 @@
 	<div class="toggle-off-content">
 	   	
 
-<div id="section_year_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
-<div id="section_month_chart" style="margin-top:30px;border:1px dashed #a9a4a4;"></div>
+<style type="text/css">
+  .chart_style{
+     margin-top:30px;
+	 border:1px dashed #a9a4a4;
+  }
+</style>
+<div id="section_year_chart_1" class="chart_style"></div>
+<div id="section_month_chart" class="chart_style"></div>
+<div id="section_year_chart_2" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
-Highcharts.chart('section_year_chart', {
+Highcharts.chart('section_year_chart_1', {
     chart: {
         type: 'line'
     },
@@ -848,6 +855,41 @@ Highcharts.chart('section_year_chart', {
         data: JSON.parse("[11,23,30,36,40,42,60,76]")
       }
 	]
+});
+Highcharts.chart('section_year_chart_2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: '按年统计'
+    },
+    tooltip: {
+        pointFormat: '数量:{point.y}<br/>百分比:{point.percentage:.1f} %'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+		    showInLegend: true,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '{point.percentage:.1f} %'
+            }
+        }
+    },
+    series:[{
+	    name: '百分比统计',
+        colorByPoint: true,
+        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":7},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":4},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":18},{\"name\":\"2023\",\"y\":16}]")
+	}] 
 });
 Highcharts.chart('section_month_chart', {
     chart: {
