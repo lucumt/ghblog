@@ -896,51 +896,63 @@
 <script type="text/javascript">
 Highcharts.chart('section_year_chart_1', {
     chart: {
-        type: 'line'
+        zoomType: 'xy'
     },
     title: {
         text: '按年统计'
     },
-    yAxis: {
-        title: {
-            text: '篇'
-        }
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: true,
-            pointStart: 2016
-        }
-    },
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
+    xAxis: [{
+        categories: JSON.parse("[\"2016\",\"2017\",\"2018\",\"2019\",\"2020\",\"2021\",\"2022\",\"2023\"]"),
+        crosshair: true
+    }],
+    yAxis: [{ 
+        labels: {
+            format: '{value} 篇',
+            style: {
+                color: Highcharts.getOptions().colors[1]
             }
-        }]
+        },
+        title: {
+            text: '按年累计',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        }
+    }, { 
+        title: {
+            text: '按年新增',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        labels: {
+            format: '{value} 篇',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
     },
-    series: [
-	  {
-        name: '按年新增',
-	    color:"#0047AB",
-        data: JSON.parse("[11,12,7,6,4,2,18,16]")
-      },
-	  {
+    series: [{
         name: '按年累计',
-	    color:"#16982b",
-        data: JSON.parse("[11,23,30,36,40,42,60,76]")
-      }
-	]
+        type: 'column',
+        yAxis: 1,
+        data: JSON.parse("[11,23,30,36,40,42,60,76]"),
+        tooltip: {
+            valueSuffix: ' 篇'
+        }
+
+    }, {
+        name: '按年新增',
+        type: 'spline',
+        data: JSON.parse("[11,12,7,6,4,2,18,16]"),
+        tooltip: {
+            valueSuffix: ' 篇'
+        }
+    }]
 });
 Highcharts.chart('section_year_chart_2', {
     chart: {
