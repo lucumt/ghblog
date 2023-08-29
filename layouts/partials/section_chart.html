@@ -99,6 +99,20 @@ Highcharts.chart('section_year_chart_1', {
     tooltip: {
         shared: true
     },
+	responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    },
     series: [{
         name: '按年累计',
         type: 'column',
