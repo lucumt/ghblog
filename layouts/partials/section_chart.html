@@ -4,7 +4,7 @@
 {{ $yearTotalData := slice -}}
 {{ $yearTotal := 0 -}}
 {{ $yearData := slice -}}
-{{ range (.Site.RegularPages.GroupByDate "2006" "asc") -}}
+{{- range (.Site.RegularPages.GroupByDate "2006" "asc") -}}
     {{ $yearValue := (len (where .Pages "Section" "post")) -}}
 	{{ $yearAddLineData = $yearAddLineData | append $yearValue -}}
     {{ $yearAddPieData = $yearAddPieData | append (dict "name" .Key "y" $yearValue) -}}
@@ -18,9 +18,9 @@
 {{ $monthAddData := slice -}}
 {{ $monthTotalData := slice -}}
 {{ $monthTotal := 0 -}}
-{{ range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
-    {{ $yearIndex := index (split .Key "-") 0 }}
-	{{ $monthIndex := strings.TrimLeft "0" (index (split .Key "-") 1) }}
+{{- range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
+    {{ $yearIndex := index (split .Key "-") 0 -}}
+	{{ $monthIndex := strings.TrimLeft "0" (index (split .Key "-") 1) -}}
 	{{ $dataIndex := (print $yearIndex "-" $monthIndex) -}}
 	{{ $monthValue := (len (where .Pages "Section" "post")) -}}
 	
@@ -34,10 +34,10 @@
 
 <!-- 按月和年统计 -->
 {{ $monthYearData := slice -}}
-{{ range seq 12 -}}
+{{- range seq 12 -}}
 	{{ $monthData := slice -}}
-	{{ $seqIndex := . }}
-	{{ range $yearData -}}
+	{{ $seqIndex := . -}}
+	{{- range $yearData -}}
 	        {{ $ymIndex := (print . "-" $seqIndex) -}}
 			{{ $value := (default 0 (index $monthYearMapData $ymIndex)) -}}
 	        {{ $monthData = $monthData | append $value -}}
