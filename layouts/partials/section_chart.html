@@ -3,22 +3,45 @@
 {{ $yearAddPieData := slice -}}
 {{ $yearTotalData := slice -}}
 {{ $yearTotal := 0 -}}
+{{ $yearData := slice -}}
 {{ range (.Site.RegularPages.GroupByDate "2006" "asc") -}}
-	{{ $yearAddLineData = $yearAddLineData | append (len (where .Pages "Section" "post")) -}}
-    {{ $yearAddPieData = $yearAddPieData | append (dict "name" .Key "y" (len (where .Pages "Section" "post"))) -}}
-	{{ $yearTotal = add $yearTotal (len (where .Pages "Section" "post")) -}}
+    {{ $yearValue := (len (where .Pages "Section" "post")) -}}
+	{{ $yearAddLineData = $yearAddLineData | append $yearValue -}}
+    {{ $yearAddPieData = $yearAddPieData | append (dict "name" .Key "y" $yearValue) -}}
+	{{ $yearTotal = add $yearTotal $yearValue -}}
 	{{ $yearTotalData = $yearTotalData | append $yearTotal -}}
+	{{ $yearData = $yearData | append .Key -}}
 {{ end -}}
 
 <!-- 按月统计 -->
+{{ $monthYearMapData := dict -}}
 {{ $monthAddData := slice -}}
 {{ $monthTotalData := slice -}}
 {{ $monthTotal := 0 -}}
 {{ range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
+    {{ $yearIndex := index (split .Key "-") 0 }}
+	{{ $monthIndex := trim (index (split .Key "-") 1) "0" }}
+	{{ $dataIndex := (print $yearIndex "-" $monthIndex) -}}
+	{{ $monthValue := (len (where .Pages "Section" "post")) -}}
+	
 	{{ $month := ((print .Key "-01") | time.AsTime).UnixMilli -}} 
-    {{ $monthAddData = $monthAddData | append (dict "x" $month "y" (len (where .Pages "Section" "post"))) -}}
+    {{ $monthAddData = $monthAddData | append (dict "x" $month "y" $monthValue) -}}
 	{{ $monthTotal = add $monthTotal (len (where .Pages "Section" "post")) -}}
 	{{ $monthTotalData = $monthTotalData | append (dict "x" $month "y" $monthTotal) -}}
+	{{ $monthYearMapData = merge $monthYearMapData (dict $dataIndex $monthValue) -}}
+{{ end -}}
+
+<!-- 按月和年统计 -->
+{{ $monthYearData := slice -}}
+{{ range seq 12 -}}
+	{{ $monthData := slice -}}
+	{{ $seqIndex := . }}
+	{{ range $yearData -}}
+	        {{ $ymIndex := (print . "-" $seqIndex) -}}
+			{{ $value := (default 0 (index $monthYearMapData $ymIndex)) -}}
+	        {{ $monthData = $monthData | append $value -}}
+	{{ end -}}
+    {{ $monthYearData = $monthYearData | append (dict "name" . "data" $monthData) -}}
 {{ end -}}
 <style type="text/css">
   .chart_style{
@@ -27,8 +50,9 @@
   }
 </style>
 <div id="section_year_chart_1" class="chart_style"></div>
-<div id="section_month_chart" class="chart_style"></div>
+<div id="section_month_chart_1" class="chart_style"></div>
 <div id="section_year_chart_2" class="chart_style"></div>
+<div id="section_month_chart_2" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
@@ -112,10 +136,10 @@ Highcharts.chart('section_year_chart_2', {
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
-        data: JSON.parse({{ jsonify $yearAddPieData }})
+        data: JSON.parse({{ jsonify $yearAddPieData -}})
 	}] 
 });
-Highcharts.chart('section_month_chart', {
+Highcharts.chart('section_month_chart_1', {
     chart: {
         type: 'line'
     },
@@ -156,13 +180,53 @@ Highcharts.chart('section_month_chart', {
 	  {
         name: '按月新增',
 	    color:"#0047AB",
-        data: JSON.parse({{ jsonify $monthAddData }})
+        data: JSON.parse({{ jsonify $monthAddData -}})
       },
 	  {
         name: '按月累计',
 	    color:"#16982b",
-        data: JSON.parse({{ jsonify $monthTotalData }})
+        data: JSON.parse({{ jsonify $monthTotalData -}})
       }
 	]
+});
+Highcharts.chart('section_month_chart_2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: '基于年份按月统计',
+    },
+    xAxis: {
+        categories: JSON.parse({{ jsonify $yearData -}})
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '篇'
+        },
+        stackLabels: {
+            enabled: true
+        }
+    },
+    legend: {
+        borderWidth: 1,
+        shadow: false,
+        labelFormatter:function(){
+           return this.name + "月份";
+        }
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    series: JSON.parse({{ jsonify $monthYearData -}})
 });
 </script>
