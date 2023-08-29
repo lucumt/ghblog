@@ -134,6 +134,25 @@ Highcharts.chart('section_year_chart_2', {
             }
         }
     },
+    legend: {
+        labelFormatter:function(){
+           return this.name + "年";
+        }
+    },
+	responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    },
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
@@ -210,8 +229,6 @@ Highcharts.chart('section_month_chart_2', {
         }
     },
     legend: {
-        borderWidth: 1,
-        shadow: false,
         labelFormatter:function(){
            return this.name + "月份";
         }
@@ -227,6 +244,20 @@ Highcharts.chart('section_month_chart_2', {
                 enabled: true
             }
         }
+    },
+	responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
     },
     series: JSON.parse({{ jsonify $monthYearData -}})
 });
