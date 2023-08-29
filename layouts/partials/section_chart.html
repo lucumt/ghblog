@@ -20,7 +20,7 @@
 {{ $monthTotal := 0 -}}
 {{ range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
     {{ $yearIndex := index (split .Key "-") 0 }}
-	{{ $monthIndex := trim (index (split .Key "-") 1) "0" }}
+	{{ $monthIndex := strings.TrimLeft "0" (index (split .Key "-") 1) }}
 	{{ $dataIndex := (print $yearIndex "-" $monthIndex) -}}
 	{{ $monthValue := (len (where .Pages "Section" "post")) -}}
 	
@@ -28,6 +28,7 @@
     {{ $monthAddData = $monthAddData | append (dict "x" $month "y" $monthValue) -}}
 	{{ $monthTotal = add $monthTotal (len (where .Pages "Section" "post")) -}}
 	{{ $monthTotalData = $monthTotalData | append (dict "x" $month "y" $monthTotal) -}}
+	
 	{{ $monthYearMapData = merge $monthYearMapData (dict $dataIndex $monthValue) -}}
 {{ end -}}
 
