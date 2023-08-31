@@ -757,7 +757,7 @@ Highcharts.chart('section_month_chart_2', {
             dataLabels: {
                 enabled: true,
 				formatter: function(){
-                    var val = this.y;
+                    let val = this.y;
                     if (val < 0) {
                         return '';
                     }
