@@ -1052,7 +1052,14 @@ Highcharts.chart('section_month_chart_2', {
         column: {
             stacking: 'normal',
             dataLabels: {
-                enabled: true
+                enabled: true,
+				formatter: function(){
+                    var val = this.y;
+                    if (val < 0) {
+                        return '';
+                    }
+                    return val;
+                }
             }
         }
     },
