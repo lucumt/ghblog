@@ -18,6 +18,7 @@
 {{ $monthAddData := slice -}}
 {{ $monthTotalData := slice -}}
 {{ $monthTotal := 0 -}}
+{{ $monthData := slice -}}
 {{- range (.Site.RegularPages.GroupByDate "2006-01" "asc") -}}
     {{ $yearIndex := index (split .Key "-") 0 -}}
 	{{ $monthIndex := strings.TrimLeft "0" (index (split .Key "-") 1) -}}
@@ -25,9 +26,10 @@
 	{{ $monthValue := (len (where .Pages "Section" "post")) -}}
 	
 	{{ $month := ((print .Key "-01") | time.AsTime).UnixMilli -}} 
-    {{ $monthAddData = $monthAddData | append (dict "x" $month "y" $monthValue) -}}
-	{{ $monthTotal = add $monthTotal (len (where .Pages "Section" "post")) -}}
-	{{ $monthTotalData = $monthTotalData | append (dict "x" $month "y" $monthTotal) -}}
+    {{ $monthAddData = $monthAddData | append $monthValue -}}
+	{{ $monthTotal = add $monthTotal $monthValue -}}
+	{{ $monthTotalData = $monthTotalData | append $monthTotal -}}
+	{{ $monthData = $monthData | append .Key -}}
 	
 	{{ $monthYearMapData = merge $monthYearMapData (dict $dataIndex $monthValue) -}}
 {{ end -}}
@@ -35,15 +37,16 @@
 <!-- 按月和年统计 -->
 {{ $monthYearData := slice -}}
 {{- range seq 12 -}}
-	{{ $monthData := slice -}}
+	{{ $monthValue := slice -}}
 	{{ $seqIndex := . -}}
 	{{- range $yearData -}}
 	        {{ $ymIndex := (print . "-" $seqIndex) -}}
 			{{ $value := (default 0 (index $monthYearMapData $ymIndex)) -}}
-	        {{ $monthData = $monthData | append $value -}}
+	        {{ $monthValue = $monthValue | append $value -}}
 	{{ end -}}
-    {{ $monthYearData = $monthYearData | append (dict "name" . "data" $monthData) -}}
+    {{ $monthYearData = $monthYearData | append (dict "name" . "data" $monthValue) -}}
 {{ end -}}
+
 <style type="text/css">
   .chart_style{
      margin-top:30px;
@@ -72,26 +75,26 @@ Highcharts.chart('section_year_chart_1', {
         labels: {
             format: '{value} 篇',
             style: {
-                color: Highcharts.getOptions().colors[1]
+                color: "#16982b"
             }
         },
         title: {
-            text: '按年累计',
+            text: '按年新增',
             style: {
-                color: Highcharts.getOptions().colors[1]
+                color:"#16982b"
             }
         }
     }, { // Secondary yAxis
         title: {
-            text: '按年新增',
+            text: '按年累计',
             style: {
-                color: Highcharts.getOptions().colors[0]
+                color: "#0047AB"
             }
         },
         labels: {
             format: '{value} 篇',
             style: {
-                color: Highcharts.getOptions().colors[0]
+                color: "#0047AB"
             }
         },
         opposite: true
@@ -114,18 +117,20 @@ Highcharts.chart('section_year_chart_1', {
         }]
     },
     series: [{
-        name: '按年累计',
+        name: '按年新增',
         type: 'column',
+		color:"#16982b",
         yAxis: 1,
-        data: JSON.parse({{ jsonify $yearTotalData -}}),
+        data: JSON.parse({{ jsonify $yearAddLineData -}}),
         tooltip: {
             valueSuffix: ' 篇'
         }
-
-    }, {
-        name: '按年新增',
+    },
+	{
+        name: '按年累计',
+		color:"#0047AB",
         type: 'spline',
-        data: JSON.parse({{ jsonify $yearAddLineData -}}),
+        data: JSON.parse({{ jsonify $yearTotalData -}}),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -187,28 +192,50 @@ Highcharts.chart('section_year_chart_2', {
 });
 Highcharts.chart('section_month_chart_1', {
     chart: {
-        type: 'line'
+        zoomType: 'xy'
     },
     title: {
         text: '按月统计'
     },
-    yAxis: {
+    xAxis: [{
+        categories: JSON.parse({{ jsonify $monthData -}}),
+		crosshair: true,
+        labels:{
+           step: 10
+        }
+    }],
+    yAxis: [{ // Primary yAxis
+        labels: {
+            format: '{value} 篇',
+            style: {
+                color: "#16982b"
+            }
+        },
         title: {
-            text: '篇'
+            text: '按月新增',
+            style: {
+                color: "#16982b"
+            }
         }
+    }, { // Secondary yAxis
+        title: {
+            text: '按月累计',
+            style: {
+                color: "#0047AB"
+            }
+        },
+        labels: {
+            format: '{value} 篇',
+            style: {
+                color: "#0047AB"
+            }
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
     },
-	xAxis: {
-      type: 'datetime'
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: false
-            },
-            enableMouseTracking: true
-        }
-    },
-    responsive: {
+	responsive: {
         rules: [{
             condition: {
                 maxWidth: 500
@@ -222,18 +249,26 @@ Highcharts.chart('section_month_chart_1', {
             }
         }]
     },
-    series: [
-	  {
+    series: [{
         name: '按月新增',
-	    color:"#0047AB",
-        data: JSON.parse({{ jsonify $monthAddData -}})
-      },
-	  {
+		color:"#16982b",
+        type: 'column',
+        data: JSON.parse({{ jsonify $monthAddData -}}),
+        tooltip: {
+            valueSuffix: ' 篇'
+        }
+    },
+	{
         name: '按月累计',
-	    color:"#16982b",
-        data: JSON.parse({{ jsonify $monthTotalData -}})
-      }
-	]
+        type: 'spline',
+		color:"#0047AB",
+        yAxis: 1,
+        data: JSON.parse({{ jsonify $monthTotalData -}}),
+        tooltip: {
+            valueSuffix: ' 篇'
+        }
+
+    }]
 });
 Highcharts.chart('section_month_chart_2', {
     chart: {
