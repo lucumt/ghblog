@@ -184,6 +184,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/python/</loc>
+    <lastmod>2023-04-11T09:25:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/python%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2023-04-11T09:25:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</loc>
+    <lastmod>2023-04-11T09:25:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/go/</loc>
     <lastmod>2023-04-03T16:39:51+08:00</lastmod>
     <changefreq>weekly</changefreq>

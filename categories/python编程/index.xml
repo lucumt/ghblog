@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python编程 on 飞狐的部落格</title>
+    <link>https://lucumt.info/categories/python%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in python编程 on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 11 Apr 2023 09:25:53 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/python%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Python程序中使用Nacos</title>
+      <link>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</link>
+      <pubDate>Tue, 11 Apr 2023 09:25:53 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</guid>
+      <description>&lt;p&gt;简要介绍如何在基于&lt;a href=&#34;https://flask.palletsprojects.com/en/2.3.x/&#34;&gt;&lt;strong&gt;Flask&lt;/strong&gt;&lt;/a&gt;开发的程序中通过&lt;a href=&#34;https://nacos.io/en-us/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;提供的&lt;a href=&#34;https://github.com/nacos-group/nacos-sdk-python&#34;&gt;&lt;strong&gt;nacos-sdk-python&lt;/strong&gt;&lt;/a&gt;实现在&lt;code&gt;Python&lt;/code&gt;程序中整合&lt;code&gt;Nacos&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
