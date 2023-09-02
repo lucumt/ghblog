@@ -537,19 +537,6 @@ Highcharts.chart('section_year_chart_1', {
         crosshair: true
     }],
     yAxis: [{ 
-        labels: {
-            format: '{value} 篇',
-            style: {
-                color: "#16982b"
-            }
-        },
-        title: {
-            text: '按年新增',
-            style: {
-                color:"#16982b"
-            }
-        }
-    }, { 
         title: {
             text: '按年累计',
             style: {
@@ -563,6 +550,20 @@ Highcharts.chart('section_year_chart_1', {
             }
         },
         opposite: true
+    },
+	{ 
+        labels: {
+            format: '{value} 篇',
+            style: {
+                color: "#16982b"
+            }
+        },
+        title: {
+            text: '按年新增',
+            style: {
+                color:"#16982b"
+            }
+        }
     }],
     tooltip: {
         shared: true
