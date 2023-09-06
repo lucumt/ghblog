@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在Python程序中使用Nacos">
 <meta itemprop="description" content="简要介绍如何基于nacos官方的sdk将python程序集成到nacos中去"><meta itemprop="datePublished" content="2023-04-11T09:25:53+08:00" />
 <meta itemprop="dateModified" content="2023-04-11T09:25:53+08:00" />
-<meta itemprop="wordCount" content="1409">
+<meta itemprop="wordCount" content="1417">
 <meta itemprop="keywords" content="nacos,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Python程序中使用Nacos"/>
 <meta name="twitter:description" content="简要介绍如何基于nacos官方的sdk将python程序集成到nacos中去"/>
@@ -269,6 +269,9 @@
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">NACOS_SERVER</span> <span class="o">=</span> <span class="kc">None</span>
@@ -288,18 +291,21 @@
 </span></span><span class="line"><span class="cl">    <span class="c1"># 调用方配置</span>
 </span></span><span class="line"><span class="cl">    <span class="n">namespace</span> <span class="o">=</span> <span class="n">yml_data</span><span class="p">[</span><span class="s1">&#39;nacos&#39;</span><span class="p">][</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="n">service_address</span> <span class="o">=</span> <span class="n">yml_data</span><span class="p">[</span><span class="s1">&#39;nacos&#39;</span><span class="p">][</span><span class="s1">&#39;service_address&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_port</span> <span class="o">=</span> <span class="n">yml_data</span><span class="p">[</span><span class="s1">&#39;nacos&#39;</span><span class="p">][</span><span class="s1">&#39;service_port&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="n">service_name</span> <span class="o">=</span> <span class="n">yml_data</span><span class="p">[</span><span class="s1">&#39;nacos&#39;</span><span class="p">][</span><span class="s1">&#39;service_name&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="n">group_name</span> <span class="o">=</span> <span class="n">yml_data</span><span class="p">[</span><span class="s1">&#39;nacos&#39;</span><span class="p">][</span><span class="s1">&#39;group_name&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">NACOS_SERVICE</span>
-</span></span><span class="line"><span class="cl">    <span class="n">NACOS_SERVICE</span> <span class="o">=</span> <span class="n">NacosService</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NACOS_SERVICE</span> <span class="o">=</span> <span class="n">NacosService</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">,</span> <span class="n">service_port</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">NACOS_CLIENT</span>
 </span></span><span class="line"><span class="cl">    <span class="n">NACOS_CLIENT</span> <span class="o">=</span> <span class="n">nacos</span><span class="o">.</span><span class="n">NacosClient</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">NACOS_CLIENT</span><span class="o">.</span><span class="n">add_naming_instance</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NACOS_CLIENT</span><span class="o">.</span><span class="n">add_naming_instance</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">,</span> <span class="n">service_port</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;=========register nacos success===========&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">send_heartbeat</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;send_heartbeat_threads&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                              <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">NACOS_CLIENT</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">group_name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">NACOS_CLIENT</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">service_address</span><span class="p">,</span> <span class="n">service_port</span><span class="p">,</span> <span class="n">group_name</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">

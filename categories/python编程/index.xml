@@ -16,5 +16,14 @@
       <description>&lt;p&gt;简要介绍如何在基于&lt;a href=&#34;https://flask.palletsprojects.com/en/2.3.x/&#34;&gt;&lt;strong&gt;Flask&lt;/strong&gt;&lt;/a&gt;开发的程序中通过&lt;a href=&#34;https://nacos.io/en-us/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;提供的&lt;a href=&#34;https://github.com/nacos-group/nacos-sdk-python&#34;&gt;&lt;strong&gt;nacos-sdk-python&lt;/strong&gt;&lt;/a&gt;实现在&lt;code&gt;Python&lt;/code&gt;程序中整合&lt;code&gt;Nacos&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>在Python的不同模块中使用全局变量</title>
+      <link>https://lucumt.info/post/python/using-global-variable-in-different-module/</link>
+      <pubDate>Thu, 05 Jan 2023 10:55:48 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/python/using-global-variable-in-different-module/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;Python&lt;/code&gt;中利用&lt;a href=&#34;https://docs.python.org/3/reference/simple_stmts.html#global&#34;&gt;&lt;strong&gt;global&lt;/strong&gt;&lt;/a&gt;关键字定义的全局变量在不同模块间共享，避免后续重复犯错。&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
