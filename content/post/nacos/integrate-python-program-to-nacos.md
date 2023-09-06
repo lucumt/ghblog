@@ -102,18 +102,21 @@ def register_nacos(yml_data):
     # 调用方配置
     namespace = yml_data['nacos']['namespace']
     service_address = yml_data['nacos']['service_address']
+    service_port = yml_data['nacos']['service_port']
     service_name = yml_data['nacos']['service_name']
     group_name = yml_data['nacos']['group_name']
+
     global NACOS_SERVICE
-    NACOS_SERVICE = NacosService(namespace, group_name, service_name, service_address)
+    NACOS_SERVICE = NacosService(namespace, group_name, service_name, service_address, service_port)
 
     global NACOS_CLIENT
     NACOS_CLIENT = nacos.NacosClient(server_address, namespace=namespace)
-    NACOS_CLIENT.add_naming_instance(service_name, service_address, port, group_name=group_name)
+    NACOS_CLIENT.add_naming_instance(service_name, service_address, service_port, group_name=group_name)
     logger.info("=========register nacos success===========")
 
     thread = threading.Thread(target=send_heartbeat, name="send_heartbeat_threads",
-                              args=(NACOS_CLIENT, service_name, service_address, port, group_name))
+                              args=(NACOS_CLIENT, service_name, service_address, service_port, group_name),
+                              daemon=True)
     thread.start()
 
 
