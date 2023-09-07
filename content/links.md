@@ -54,6 +54,7 @@ sequenceDiagrams:
 | [**ChokCoco**](https://www.cnblogs.com/coco1s)               | 某个`CSS`大佬，国服第一切图仔，有很多关于`CSS`炫酷特性的文章 |                          |
 | [**CODE WITH ARHO**](https://www.arhohuttunen.com)           | 一个芬兰码农，博客内容大部分是`JUnit`测试相关                |                          |
 | [**cloudchewie.com**](https://cloudchewie.com/)              | 一个华中科技大学学生的个人博客，样式很炫                     |                          |
+| [**Why技术-博客园**](https://www.cnblogs.com/thisiswhy/)<br/>[**Why技术-个人网站**](https://www.whywhy.vip/) | 里面有很多高质量的关于`Java`源码阅读分析的博文               | 微信公众号`why技术`      |
 
 
 
@@ -64,6 +65,7 @@ sequenceDiagrams:
 # 单个博文
 
 * [docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
+* [我试图通过这篇文章，教会你一种阅读源码的方式](https://www.cnblogs.com/thisiswhy/p/17261155.html)
 
 # 其它
 
