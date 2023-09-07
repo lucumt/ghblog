@@ -1,8 +1,8 @@
 ---
 title: "在KubeSphere的流水线中下载构建具有子模块的项目"
-date: 2023-09-07T14:27:13+08:00
-lastmod: 2023-09-07T14:27:13+08:00
-draft: true
+date: 2023-06-17T14:27:13+08:00
+lastmod: 2023-06-17T14:27:13+08:00
+draft: false
 keywords: ["devops","jenkins","git","kubesphere","submodule","子模块"]
 description: "记录如何在KubeSphere的流水线中下载构建具有子模块的项目"
 tags: ["devops","jenkins","git","kubesphere"]
@@ -90,13 +90,58 @@ stage('拉取代码') {
 }
 ```
 
-实际运行后很快发现问题
+实际运行后很快发现问题：由于`Gitlab`需要授权访问导致请求被拒绝！可之前的为啥好使？因为之前的是通过`git`函数基于token的方式访问的，但直接在命令行中通过`git`命令访问的话，又没法使用token，而每次`git clone`时手工输入用户密码又很不方便，怎么办？
+
+
+
+对`KubeSphere`和`Jenkins`进行深入研究，并结合实际使用流程后，确定了如下考量点：
+
+1. 出于简化的考虑，`Gitlab`的用户名和密码不能每次都输入，故只能用原来的token方式
+2. 单次`git clone`无法下载所有工程的话，可考虑分批多次下载，每次下载对应一个`Gitlab`工程地址
+3. 去`Jenkins`官网查看是否有支持下载子模块的插件或函数
+
+接下来基于2和3分别说明对应的实现。 
 
 ## 分批下载
 
+既然没有submodules时直接下载没问题，那将子模块也当成一个独立的`Gitlab`工程(事实就是这样)再次复用之前的代码去下载，之后将其移动到对应的位置不就行了吗？有问题没，完全没有问题！相关代码实现如下：
+
+```groovy
+stage('拉取代码') {
+    agent none
+    steps {
+        dir('system') {
+            git(credentialsId: 'gitlab-token', url: 'http://gitlab.xxx.com/lucumt-group/system.git',
+                branch: '$BRANCH_NAME', changelog: true, poll: false)
+        }
+
+        dir('module1') {
+            git(credentialsId: 'gitlab-token', url: 'http://gitlab.xxx.com/lucumt-group/module_1.git', 
+                branch: 'dev', changelog: true, poll: false)
+        }
+
+        dir('module2') {
+            git(credentialsId: 'gitlab-token', url: 'http://gitlab.xxx.com/lucumt-group/module_2.git', 
+                branch: 'dev', changelog: true, poll: false)
+        }
+
+        sh '''rm -rf system/module_1 system/module_2
+			mv module1 system/
+			mv module2 system/
+			'''
+    }
+}
+```
+
+此种方式实现起来很简单，但存在以下缺陷：
+
+1. 每个子工程都需要单独的配置与单独下载，工作量增加
+2. 每个子工程的分支需要手工指定，无法进行原生关联，增加了复杂度
+3. 子工程下载完毕后需要通过`shell`脚本将其移动到对应目录下，才能形成完整的项目结构
+
 ## 递归下载
 
-基于`Jenkins`中的[**GitSCM**](https://www.jenkins.io/doc/pipeline/steps/params/gitscm/)，通过此种方式可以在下载主工程时将其附带的子模块功能一并下载下来，同时还能确保子模块的分支也是正确的，不需要显示指定，相对于前一种方式更简洁。最终代码如下：
+基于`Jenkins`中的[**GitSCM**](https://www.jenkins.io/doc/pipeline/steps/params/gitscm/)，通过此种方式可以在下载主工程时将其附带的子模块功能一并下载下来，同时还能确保子模块的分支也是正确的，不需要显示指定，相对于前一种方式更简洁，最终代码如下：
 
 ```groovy
 stage('拉取代码') {
