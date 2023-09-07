@@ -62,6 +62,15 @@
     </item>
     
     <item>
+      <title>将Windows中的画图工具默认菜单从“文件”切换到“菜单”</title>
+      <link>https://lucumt.info/post/other/switch-windows-paint-default-tab-to-home/</link>
+      <pubDate>Tue, 07 Apr 2020 15:21:27 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/other/switch-windows-paint-default-tab-to-home/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;Windows&lt;/code&gt;中的画图工具新打开一个画图时将其默认菜单从&lt;code&gt;文件&lt;/code&gt;切换到&lt;code&gt;菜单&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
       <link>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</link>
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>

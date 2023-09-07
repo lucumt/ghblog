@@ -597,6 +597,20 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/windows/</loc>
+    <lastmod>2020-04-07T15:21:27+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/other/switch-windows-paint-default-tab-to-home/</loc>
+    <lastmod>2020-04-07T15:21:27+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/</loc>
     <lastmod>2020-02-13T14:40:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
