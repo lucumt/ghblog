@@ -6,7 +6,16 @@
     <description>Recent content in git on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 10 Mar 2023 22:48:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jun 2023 14:27:13 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
+      <link>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</link>
+      <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</guid>
+      <description>&lt;p&gt;在使用&lt;a href=&#34;https://www.kubesphere.io/zh/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;对公司项目进行持续集成时，有一个项目在&lt;code&gt;Gitlab&lt;/code&gt;中采用了&lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;&lt;strong&gt;Submodules&lt;/strong&gt;&lt;/a&gt;结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Jenkins中根据配置从不同的仓库中Checkout代码</title>
       <link>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</link>
