@@ -55,22 +55,67 @@ highchartsDiagrams:
 
 # 没有子模块
 
-在没有子模块时，之后自动生成的`Jenkins`代码类似如下
+在没有子模块时，自己是直接通过`KubeSphere`的图形界面操作，类似下图，只需根据实际情况填入必要的参数保存即可。
+
+![利用KubeSphere图形界面配置Git下载](/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-git-checkout-config.png "利用KubeSphere图形界面配置Git下载") 
+
+之后`KubeSphere`会自动生成对应的`Jenkins`代码：
 
 ```groovy
 stage('拉取代码') {
     agent none
     steps {
-        git(credentialsId: 'gitlab-account', url: 'http://gitlab.xxx.com/lucumt-group/system.git', branch: '$BRANCH_NAME', changelog: true, poll: false)
+        git(credentialsId: 'gitlab-account', url: 'http://gitlab.xxx.com/lucumt-group/system.git',
+            branch: '$BRANCH_NAME', changelog: true, poll: false)
     }
 }
 ```
 
-
+可以看到生成的代码是通过调用`Jekins`中的`git`方法封装实现的，而不是原始的`git clone xxx`。
 
 # 有子模块时
 
-## 多次下载
+前述pipeline代码在没有submodules时能正常工作，但遇到有submodules的工程时，无法将其对应的子模块下载下来导致在后续的代码编译阶段出错。
+
+
+
+最开始自己参考的是[**How do I git clone a repo, including its submodules**](https://stackoverflow.com/questions/3796927/how-do-i-git-clone-a-repo-including-its-submodules)中`--recurse-submodules`标识，想直接通过`git`命令直接下载，类似代码如下：
+
+```groovy
+stage('拉取代码') {
+    agent none
+    steps {
+        sh '''git clone --recurse-submodules -j8 http://gitlab.xxx.com/lucumt-group/system.git	'''
+    }
+}
+```
+
+实际运行后很快发现问题
+
+## 分批下载
 
 ## 递归下载
 
+基于`Jenkins`中的[**GitSCM**](https://www.jenkins.io/doc/pipeline/steps/params/gitscm/)，通过此种方式可以在下载主工程时将其附带的子模块功能一并下载下来，同时还能确保子模块的分支也是正确的，不需要显示指定，相对于前一种方式更简洁。最终代码如下：
+
+```groovy
+stage('拉取代码') {
+    agent none
+    steps {
+        checkout([$class: 'GitSCM',
+                  branches: [[name: '$BRANCH_NAME']],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [[$class: 'SubmoduleOption',
+                                disableSubmodules: false,
+                                parentCredentials: true,
+                                recursiveSubmodules: true,
+                                reference: '',
+                                trackingSubmodules: false]], 
+                  userRemoteConfigs: [[url: 'http://gitlab.xxx.com/lucumt-group/system.git',credentialsId:'gitlab-token']]])
+    }
+}
+```
+
+需要注意的是截止本文写作时`KubeSphere v3.3.1`不支持此种方式的图形化编辑，当采用图形化编辑时会出现雷系如下界面，没有正确的展示出实际配置的代码，此时若再次保存，会导致之前的配置丢失，故在此种方式下不能使用图形化方式对其进行二次修改。
+
+![GitSCM在KubeSphere图形化编辑时的界面](/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-gitscm-checkout-config.png "GitSCM在KubeSphere图形化编辑时的界面") 
