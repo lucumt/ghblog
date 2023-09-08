@@ -117,12 +117,12 @@ stage('拉取代码') {
 
         dir('module1') {
             git(credentialsId: 'gitlab-token', url: 'http://gitlab.xxx.com/lucumt-group/module_1.git', 
-                branch: 'dev', changelog: true, poll: false)
+                branch: '$MODULE_BRANCH_1', changelog: true, poll: false)
         }
 
         dir('module2') {
             git(credentialsId: 'gitlab-token', url: 'http://gitlab.xxx.com/lucumt-group/module_2.git', 
-                branch: 'dev', changelog: true, poll: false)
+                branch: '$MODULE_BRANCH_2', changelog: true, poll: false)
         }
 
         sh '''rm -rf system/module_1 system/module_2
@@ -160,6 +160,10 @@ stage('拉取代码') {
     }
 }
 ```
+
+在上述代码中重点是通过`recursiveSubmodules`来递归下载子模块，通过`parentCredentials`来使用父模块下载时使用的token。
+
+
 
 需要注意的是截止本文写作时`KubeSphere v3.3.1`不支持此种方式的图形化编辑，当采用图形化编辑时会出现雷系如下界面，没有正确的展示出实际配置的代码，此时若再次保存，会导致之前的配置丢失，故在此种方式下不能使用图形化方式对其进行二次修改。
 

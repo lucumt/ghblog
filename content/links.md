@@ -66,6 +66,7 @@ sequenceDiagrams:
 
 * [docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
 * [我试图通过这篇文章，教会你一种阅读源码的方式](https://www.cnblogs.com/thisiswhy/p/17261155.html)
+* [LGTM? 那些迷之缩写](https://farer.org/2017/03/01/code-review-acronyms/)
 
 # 其它
 
