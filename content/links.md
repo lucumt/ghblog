@@ -44,23 +44,19 @@ sequenceDiagrams:
 
 # 博客园
 
-| 地址                                                         | 内容                                                         | 其它                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------ |
-| **[程序员自由之路](https://www.cnblogs.com/54chensongxia/)** | 主要是`JavaEE`开发，关于`Java`框架的文章很多                 |                          |
-| **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                                           | 微信公众号`Coder 魔法院` |
-| **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                                     |                          |
-| **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                                   |                          |
-| **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                                           |                          |
-| [**ChokCoco**](https://www.cnblogs.com/coco1s)               | 某个`CSS`大佬，国服第一切图仔，有很多关于`CSS`炫酷特性的文章 |                          |
-| [**CODE WITH ARHO**](https://www.arhohuttunen.com)           | 一个芬兰码农，博客内容大部分是`JUnit`测试相关                |                          |
-| [**cloudchewie.com**](https://cloudchewie.com/)              | 一个华中科技大学学生的个人博客，样式很炫                     |                          |
-| [**Why技术-博客园**](https://www.cnblogs.com/thisiswhy/)<br/>[**Why技术-个人网站**](https://www.whywhy.vip/) | 里面有很多高质量的关于`Java`源码阅读分析的博文               | 微信公众号`why技术`      |
-
-
-
-# 简书
-
-
+| 地址                                                         | 内容                                                         | 微信公众号     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
+| **[程序员自由之路](https://www.cnblogs.com/54chensongxia/)** | 主要是`JavaEE`开发，关于`Java`框架的文章很多                 |                |
+| **[Michael翔](https://www.cnblogs.com/michael-xiang/)**      | 主要是`JavaEE`开发                                           | `Coder 魔法院` |
+| **[秋风飒飒吹](https://www.cnblogs.com/wwjj4811/)**          | 软件开发的各方面均有涉及                                     |                |
+| **[Ccww](https://www.cnblogs.com/Ccwwlx)**                   | 主要是`Java`和`Spring`框架                                   |                |
+| **[Throwable](https://www.cnblogs.com/throwable)**           | 主要是`JavaEE`开发                                           |                |
+| [**ChokCoco**](https://www.cnblogs.com/coco1s)               | 某个`CSS`大佬，国服第一切图仔，有很多关于`CSS`炫酷特性的文章 |                |
+| [**CODE WITH ARHO**](https://www.arhohuttunen.com)           | 一个芬兰码农，博客内容大部分是`JUnit`测试相关                |                |
+| [**cloudchewie.com**](https://cloudchewie.com/)              | 一个华中科技大学学生的个人博客，样式很炫                     |                |
+| [**Why技术-博客园**](https://www.cnblogs.com/thisiswhy/)<br/>[**Why技术-个人网站**](https://www.whywhy.vip/) | 里面有很多高质量的关于`Java`源码阅读分析的博文💚              | `why技术`      |
+| [**Hello 算法**](https://www.hello-algo.com/)                | 关于算法学习的网站                                           |                |
+| [**小林coding**](https://xiaolincoding.com/)                 | 关于计算机网络、计算机基础等的网站，质量很高💚                | `小林coding`   |
 
 # 单个博文
 
