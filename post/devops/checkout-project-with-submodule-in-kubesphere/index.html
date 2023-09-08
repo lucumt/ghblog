@@ -49,7 +49,7 @@
 <meta itemprop="name" content="在KubeSphere的流水线中下载构建具有子模块的项目">
 <meta itemprop="description" content="记录如何在KubeSphere的流水线中下载构建具有子模块的项目"><meta itemprop="datePublished" content="2023-06-17T14:27:13+08:00" />
 <meta itemprop="dateModified" content="2023-06-17T14:27:13+08:00" />
-<meta itemprop="wordCount" content="1412">
+<meta itemprop="wordCount" content="1488">
 <meta itemprop="keywords" content="devops,jenkins,git,kubesphere," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在KubeSphere的流水线中下载构建具有子模块的项目"/>
 <meta name="twitter:description" content="记录如何在KubeSphere的流水线中下载构建具有子模块的项目"/>
@@ -277,12 +277,12 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">dir</span><span class="o">(</span><span class="s1">&#39;module1&#39;</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/module_1.git&#39;</span><span class="o">,</span> 
-</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;dev&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;$MODULE_BRANCH_1&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">dir</span><span class="o">(</span><span class="s1">&#39;module2&#39;</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/module_2.git&#39;</span><span class="o">,</span> 
-</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;dev&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;$MODULE_BRANCH_2&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;rm -rf system/module_1 system/module_2
@@ -337,7 +337,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>需要注意的是截止本文写作时<code>KubeSphere v3.3.1</code>不支持此种方式的图形化编辑，当采用图形化编辑时会出现雷系如下界面，没有正确的展示出实际配置的代码，此时若再次保存，会导致之前的配置丢失，故在此种方式下不能使用图形化方式对其进行二次修改。</p>
+</div><p>在上述代码中重点是通过<code>recursiveSubmodules</code>来递归下载子模块，通过<code>parentCredentials</code>来使用父模块下载时使用的token。</p>
+<p>需要注意的是截止本文写作时<code>KubeSphere v3.3.1</code>不支持此种方式的图形化编辑，当采用图形化编辑时会出现雷系如下界面，没有正确的展示出实际配置的代码，此时若再次保存，会导致之前的配置丢失，故在此种方式下不能使用图形化方式对其进行二次修改。</p>
 <p><img src="/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-gitscm-checkout-config.png" alt="GitSCM在KubeSphere图形化编辑时的界面" title="GitSCM在KubeSphere图形化编辑时的界面"></p>
     </div>
 

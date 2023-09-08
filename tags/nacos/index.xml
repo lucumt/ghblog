@@ -6,7 +6,16 @@
     <description>Recent content in nacos on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Apr 2023 14:31:45 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/nacos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/nacos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
+      <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
+      <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
+      <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
       <link>https://lucumt.info/post/devops/share-kubepshere-using-experience-for-current-company/</link>

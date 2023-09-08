@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Aug 2023 17:49:14 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java编程</title>
+      <link>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>翻译</title>
       <link>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</link>
@@ -85,15 +94,6 @@
       <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
       
       <guid>https://lucumt.info/categories/%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java编程</title>
-      <link>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Fri, 17 Feb 2023 13:48:05 +0800</pubDate>
-      
-      <guid>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
