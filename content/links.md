@@ -67,6 +67,9 @@ sequenceDiagrams:
 * [docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
 * [我试图通过这篇文章，教会你一种阅读源码的方式](https://www.cnblogs.com/thisiswhy/p/17261155.html)
 * [LGTM? 那些迷之缩写](https://farer.org/2017/03/01/code-review-acronyms/)
+* [Oracle官方的JDK各版本特性说明](https://docs.oracle.com/en/java/javase/18/language/java-language-changes.html)
+* [斯坦福大学关于位运算技巧的总结](https://graphics.stanford.edu/~seander/bithacks.html)
+* [Vim快捷键集合](https://linux.cn/article-8144-1.html)
 
 # 其它
 
