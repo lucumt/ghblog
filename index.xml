@@ -190,7 +190,7 @@ div.mermaid &gt; svg { max-width: 60% !important; }
       <pubDate>Mon, 27 Feb 2023 18:40:33 +0800</pubDate>
       
       <guid>https://lucumt.info/links/</guid>
-      <description>记录个人觉得有意义的各种博客、公众号页面、视频等。 博客园 地址 内容 其它 程序员自由之路 主要是JavaEE开发，关于Java框架的文章很多 Mich</description>
+      <description>记录个人觉得有意义的各种博客、公众号页面、视频等。 博客园 地址 内容 微信公众号 程序员自由之路 主要是JavaEE开发，关于Java框架的文章很多 M</description>
     </item>
     
     <item>
@@ -272,6 +272,15 @@ div.mermaid &gt; svg { max-width: 60% !important; }
       
       <guid>https://lucumt.info/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
       <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在Log4j2中实现只有在traceId有值时才输出</title>
+      <link>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</link>
+      <pubDate>Thu, 13 Oct 2022 17:47:46 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</guid>
+      <description>&lt;p&gt;记录如何在&lt;a href=&#34;https://logging.apache.org/log4j/2.x/&#34;&gt;&lt;strong&gt;Log4j2&lt;/strong&gt;&lt;/a&gt;中使用traceId实现&lt;a href=&#34;https://blog.51cto.com/u_15501087/5834195&#34;&gt;&lt;strong&gt;链路追踪&lt;/strong&gt;&lt;/a&gt;时只有在请求header中有&lt;code&gt;trace-id&lt;/code&gt;时才显示前端发送过来的&lt;code&gt;trace-id&lt;/code&gt;值。&lt;/p&gt;</description>
     </item>
     
     <item>

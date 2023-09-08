@@ -35,6 +35,15 @@
     </item>
     
     <item>
+      <title>在Log4j2中实现只有在traceId有值时才输出</title>
+      <link>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</link>
+      <pubDate>Thu, 13 Oct 2022 17:47:46 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</guid>
+      <description>&lt;p&gt;记录如何在&lt;a href=&#34;https://logging.apache.org/log4j/2.x/&#34;&gt;&lt;strong&gt;Log4j2&lt;/strong&gt;&lt;/a&gt;中使用traceId实现&lt;a href=&#34;https://blog.51cto.com/u_15501087/5834195&#34;&gt;&lt;strong&gt;链路追踪&lt;/strong&gt;&lt;/a&gt;时只有在请求header中有&lt;code&gt;trace-id&lt;/code&gt;时才显示前端发送过来的&lt;code&gt;trace-id&lt;/code&gt;值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>将3个小int整数合并到1个long中从而缩小数据量</title>
       <link>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</link>
       <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>

@@ -429,6 +429,20 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/log4j/</loc>
+    <lastmod>2022-10-13T17:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</loc>
+    <lastmod>2022-10-13T17:47:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/</loc>
     <lastmod>2022-09-18T09:43:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
