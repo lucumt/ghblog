@@ -53,6 +53,15 @@
     </item>
     
     <item>
+      <title>[译]JUnit 5 生命周期-注释之前和之后</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</link>
+      <pubDate>Fri, 16 Jun 2023 19:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-test-lifecycle/&#34;&gt;&lt;strong&gt;JUnit 5 Test Lifecycle: Before and After Annotations&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</title>
       <link>https://lucumt.info/post/devops/prometheus-k8s-0-pending-in-kubesphere/</link>
       <pubDate>Tue, 06 Jun 2023 16:17:41 +0800</pubDate>

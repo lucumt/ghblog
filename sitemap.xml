@@ -149,6 +149,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</loc>
+    <lastmod>2023-06-16T19:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/java/</loc>
+    <lastmod>2023-06-16T19:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/junit5/</loc>
+    <lastmod>2023-06-16T19:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2023-06-16T19:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/devops/prometheus-k8s-0-pending-in-kubesphere/</loc>
     <lastmod>2023-06-06T16:17:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -157,27 +185,6 @@
   
   <url>
     <loc>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</loc>
-    <lastmod>2023-05-02T13:12:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/java/</loc>
-    <lastmod>2023-05-02T13:12:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/junit5/</loc>
-    <lastmod>2023-05-02T13:12:24+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2023-05-02T13:12:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
