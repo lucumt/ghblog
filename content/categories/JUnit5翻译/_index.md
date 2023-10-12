@@ -45,7 +45,9 @@ title: JUnit5翻译系列集合
               <br/>
               <small>已经掌握基础知识后</small>
           </td>
-          <td>A More Practical Guide to JUnit 5 Parameterized Tests</td>
+          <td>
+	           <a href="/post/translate/junit5/using-mockito-in-junit5/"><b>[译]在JUnit 5 中使用Mockito</b></a>
+		  </td>
         </tr>
         <tr>
             <td>JUnit 5 with Kotlin for Java developers</td>  
