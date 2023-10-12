@@ -53,6 +53,15 @@
     </item>
     
     <item>
+      <title>[译]JUnit 5 参数化测试实用指南</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-parameterized-tests/</link>
+      <pubDate>Sat, 17 Jun 2023 09:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-parameterized-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-parameterized-tests/&#34;&gt;&lt;strong&gt;A More Practical Guide to JUnit 5 Parameterized Tests&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]JUnit 5 生命周期-注释之前和之后</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</link>
       <pubDate>Fri, 16 Jun 2023 19:21:43 +0800</pubDate>

@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-01-04 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/hugo/migrate-github-blog-from-http-to-https/">将基于Github Pages的自定义域名博客迁移到HTTPS</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-12-24 </span>
@@ -343,31 +364,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/multithreading-benefits/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/">1. [译]Java多线程与并发教程</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-03-30 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
-<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
-<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
-之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
