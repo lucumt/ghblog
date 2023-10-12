@@ -18,7 +18,7 @@ title: JUnit5翻译系列集合
               <small><code>JUnit5</code>的基本特性</small>
           </td>
           <td>
-              <b><a href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit5入门-编写第一段测试代码</a></b>
+              <b><a href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit 5 入门-编写第一段测试代码</a></b>
           </td>
         </tr>
         <tr>
@@ -35,7 +35,9 @@ title: JUnit5翻译系列集合
             <td><a href="/post/translate/junit5/junit-5-test-lifecycle/"><b>[译]JUnit 5 生命周期-注释之前和之后</b></a></td>
         </tr>
         <tr>
-            <td>A More Practical Guide to JUnit 5 Parameterized Tests</td>  
+            <td>
+                <a href="/post/translate/junit5/junit-5-parameterized-tests/"><b>[译]JUnit 5 参数化测试实用指南</b></a>
+            </td>  
         </tr>
         <tr>
           <td rowspan="3">

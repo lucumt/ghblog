@@ -59,8 +59,7 @@ highchartsDiagrams:
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
 
-
-如果您喜欢通过视频学习，请务必查看`YouTube`中的[**相关视频**](https://www.youtube.com/watch?v=TsCew_Oq6uE)。
+如果你喜欢通过视频学习，可以查看`Youtube`中相关的[**学习视频**](https://www.youtube.com/watch?v=TsCew_Oq6uE)
 
 # 无嵌套测试
 
