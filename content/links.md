@@ -58,6 +58,7 @@ sequenceDiagrams:
 | [**Hello 算法**](https://www.hello-algo.com/)                | 关于算法学习的网站                                           |                |
 | [**小林coding**](https://xiaolincoding.com/)                 | 关于计算机网络、计算机基础等的网站，质量很高💚                | `小林coding`   |
 | [**Xianhuii**](https://www.cnblogs.com/Xianhuii/)            | 关于`Spring`和`MyBatis`框架源码分析的博文，部分文章质量较高  |                |
+| [**努力的小雨**](https://www.cnblogs.com/guoxiaoyu/)         | 关于`Spring`源码和计算机网络的高质量博文💚                    |                |
 
 # 单个博文
 

@@ -46,7 +46,7 @@ title: JUnit5翻译系列集合
               <small>已经掌握基础知识后</small>
           </td>
           <td>
-	           <a href="/post/translate/junit5/using-mockito-in-junit5/"><b>[译]在JUnit 5 中使用Mockito</b></a>
+	           <a href="/post/translate/junit5/using-mockito-in-junit5/"><b>[译]JUnit 5 中使用Mockito</b></a>
 		  </td>
         </tr>
         <tr>
