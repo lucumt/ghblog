@@ -49,7 +49,7 @@
 <meta itemprop="name" content="[译]在JUnit 5中使用Mockito">
 <meta itemprop="description" content="在JUnit 5中使用Mockito"><meta itemprop="datePublished" content="2023-06-19T19:21:43+08:00" />
 <meta itemprop="dateModified" content="2023-06-18T19:21:43+08:00" />
-<meta itemprop="wordCount" content="384">
+<meta itemprop="wordCount" content="1917">
 <meta itemprop="keywords" content="junit5,java,mockito," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[译]在JUnit 5中使用Mockito"/>
 <meta name="twitter:description" content="在JUnit 5中使用Mockito"/>
@@ -188,7 +188,7 @@
 <h1 id="相关视频">相关视频</h1>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=p7_cTAF39A8"><strong>学习视频</strong></a>。</p>
 <h1 id="手工初始化">手工初始化</h1>
-<p>在做其它事情之前，我们需要添加<code>Mockito</code>相关的依赖：</p>
+<p>在做其它事情之前，需要添加<code>Mockito</code>相关的依赖：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -251,10 +251,332 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>手工初始化在我们没有太多要mock的对象时是一个合法的解决方案。</p>
+<p><strong>优点</strong>:</p>
+<ul>
+<li>对要mock的对象有最大程度的控制</li>
+</ul>
+<p><strong>缺点</strong>:</p>
+<ul>
+<li>代码会变得很冗长</li>
+<li>无法检测框架的使用情况以及检测不正常的打桩</li>
+</ul>
 <h1 id="基于注解初始化">基于注解初始化</h1>
+<p><code>Mockito.mock()</code>的一种声明式替代方案为给要mock的对象上添加<code>@Mock</code>注解，同时需要调用一个特殊方法来初始化被注解的对象。</p>
+<p>在<code>Mockito 2</code>中有一个<code>MockitoAnnotations.initMocks()</code>方法，该方法已经被废弃并在<code>Mockito 3</code>中被<code>MockitoAnnotations.openMocks()</code>替代，该方法返回一个<code>AutoCloseable</code>对象可用于在测试之后关闭资源。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MockitoAnnotationTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Mock</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderRepository</span> <span class="n">orderRepository</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">AutoCloseable</span> <span class="n">closeable</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderService</span> <span class="n">orderService</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@BeforeEach</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">initService</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closeable</span> <span class="o">=</span> <span class="n">MockitoAnnotations</span><span class="o">.</span><span class="na">openMocks</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">orderService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OrderService</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@AfterEach</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">closeService</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closeable</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">createOrderSetsTheCreationDate</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">when</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">then</span><span class="o">(</span><span class="n">returnsFirstArg</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">savedOrder</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">assertNotNull</span><span class="o">(</span><span class="n">savedOrder</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>MockitoAnnotations.openMocks(this)</code>方法的调用可告知<code>Mockito</code>扫描测试类中任何包含有<code>@Mock</code>注解的属性并将这些属性初始化为mock对象。</p>
+<p><strong>优点</strong>:</p>
+<ul>
+<li>容易创建mock对象</li>
+<li>可读性更高</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>无法检测框架的使用情况以及检测不正常的打桩</li>
+</ul>
 <h1 id="mock自动注入">Mock自动注入</h1>
+<p>同样可以通过给对应属性添加<code>@InjectMocks</code>注解来自动注入mock对象。</p>
+<p>当调用<code>MockitoAnnotations.openMocks()</code>时,<code>Mockito</code>会执行如下操作：</p>
+<ul>
+<li>对有<code>@Mock</code>注解的属性创建mock对象</li>
+<li>对有<code>@InjectMocks</code>的属性创建实例并尝试将前一个步骤中创建的mock对象注入其中</li>
+</ul>
+<p>使用<code>@InjectMocks</code>与我们手工创建实例所做的相同，但现在是自动化的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MockitoInjectMocksTests</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Mock</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderRepository</span> <span class="n">orderRepository</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">AutoCloseable</span> <span class="n">closeable</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@InjectMocks</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderService</span> <span class="n">orderService</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@BeforeEach</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">initService</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closeable</span> <span class="o">=</span> <span class="n">MockitoAnnotations</span><span class="o">.</span><span class="na">openMocks</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@AfterEach</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">closeService</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closeable</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">createOrderSetsTheCreationDate</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">when</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">then</span><span class="o">(</span><span class="n">returnsFirstArg</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">savedOrder</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">assertNotNull</span><span class="o">(</span><span class="n">savedOrder</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Mockito</code>将首先尝试通过构造器注入的方式注入mock对象，之后为setter注入、属性注入。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>容易注入mock对象</li>
+</ul>
+<p><strong>缺点</strong>:</p>
+<ul>
+<li>无法强制使用构造器注入</li>
+</ul>
+<div class="admonition danger"><p class="admonition-title">注意</p>
+<p>不推荐使用属性注入或setter注入，使用构造器注入时，我们可以百分百确定没有注入相关依赖之前无法实例化该类。</p>
+</div>
 <h1 id="junit5-mockito插件">JUnit5 Mockito插件</h1>
+<p><code>JUnit 5</code>中同样有一个<code>Mockito</code>插件让实例化更简单。</p>
+<p>要使用该插件，首先需要添加对应的依赖。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">testImplementation</span><span class="o">(</span><span class="s1">&#39;org.mockito:mockito-junit-jupiter:3.12.4&#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在可使用该插件并避免对<code>MockitoAnnotations.openMocks()</code>的方法调用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="o">(</span><span class="n">MockitoExtension</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MockitoExtensionTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Mock</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderRepository</span> <span class="n">orderRepository</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderService</span> <span class="n">orderService</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@BeforeEach</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">initService</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">orderService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OrderService</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">createOrderSetsTheCreationDate</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">when</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">then</span><span class="o">(</span><span class="n">returnsFirstArg</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">savedOrder</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">assertNotNull</span><span class="o">(</span><span class="n">savedOrder</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同样可以在<code>MockitoExtension</code>中使用<code>@InjectMocks</code>注解来进一步的简化配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="o">(</span><span class="n">MockitoExtension</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MockitoExtensionInjectMocksTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Mock</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderRepository</span> <span class="n">orderRepository</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@InjectMocks</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">OrderService</span> <span class="n">orderService</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">createOrderSetsTheCreationDate</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">when</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">then</span><span class="o">(</span><span class="n">returnsFirstArg</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Order</span> <span class="n">savedOrder</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">assertNotNull</span><span class="o">(</span><span class="n">savedOrder</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们不像在测试用例间共享mock变量，可将mock对象注入到方法参数中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Test</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">createOrderSetsTheCreationDate</span><span class="o">(</span><span class="nd">@Mock</span> <span class="n">OrderRepository</span> <span class="n">orderRepository</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">OrderService</span> <span class="n">orderService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OrderService</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">when</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">any</span><span class="o">(</span><span class="n">Order</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">then</span><span class="o">(</span><span class="n">returnsFirstArg</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Order</span> <span class="n">savedOrder</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">assertNotNull</span><span class="o">(</span><span class="n">savedOrder</span><span class="o">.</span><span class="na">getCreationDate</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将mock对象注入方法参数中既适用于生命周期方法也适用于测试方法本身。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>不需要调用<code>MockitoAnnotations.openMocks()</code>方法</li>
+<li>能检测框架使用情况以及不正确的打桩</li>
+<li>容易创建mock对象</li>
+<li>容易阅读</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>需要一个额外的依赖<code>org.mockito:mockito-junit-jupiter</code></li>
+</ul>
 <h1 id="总结">总结</h1>
+<p>在<code>JUnit 5</code>中有3种不同的方式使用<code>Mockito</code>，前2种方式可独立于框架单独使用，而第3种方式需使用<code>JUnit 5</code>中的<code>Mockito</code>插件。</p>
+<p>Mock对象可通过一下方式创建和初始化:</p>
+<ul>
+<li>通过调用<code>Mockito.mock()</code>手工创建</li>
+<li>添加<code>@Mock</code>注解并通过调用<code>MockitoAnnotations.openMocks()</code>方法来初始化</li>
+<li>添加<code>@Mock</code>注解并在测试中使用<code>MockitoExtension</code>插件</li>
+</ul>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-mockito"><strong>GitHub</strong></a>中找到。</p>
     </div>
 
