@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>JUnit5 整合Kotlin</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</link>
+      <pubDate>Wed, 21 Jun 2023 19:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-kotlin//&#34;&gt;&lt;strong&gt;JUnit 5 With Kotlin for Java Developers&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]在JUnit 5中使用Mockito</title>
       <link>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</link>
       <pubDate>Mon, 19 Jun 2023 19:21:43 +0800</pubDate>

@@ -171,7 +171,7 @@
     <li><a href="#手工初始化">手工初始化</a></li>
     <li><a href="#基于注解初始化">基于注解初始化</a></li>
     <li><a href="#mock自动注入">Mock自动注入</a></li>
-    <li><a href="#junit5-mockito插件">JUnit5 Mockito插件</a></li>
+    <li><a href="#junit5-mockito扩展">JUnit5 Mockito扩展</a></li>
     <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
@@ -180,10 +180,10 @@
 	 
 	  	
 	
-    <div class="post-content image-border">
+    <div class="post-content image-center">
 	 <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-mockito/"><strong>Using Mockito With JUnit 5</strong></a>。</p>
 <p><img src="/blog_img/translate/junit5/using-mockito-in-junit5/junit-5-mockito.webp" alt="JUnit 5 Mockito" title="JUnit 5 Mockito"></p>
-<p>在本教程中将学习在<code>JUnit 5</code>中如何使用<code>Mockito</code>框架，我们将以独立的方式学习测试框架，之后学习如何在<code>JUnit 5</code>中使用<code>Mockito</code>插件。</p>
+<p>在本教程中将学习在<code>JUnit 5</code>中如何使用<code>Mockito</code>框架，我们将以独立的方式学习测试框架，之后学习如何在<code>JUnit 5</code>中使用<code>Mockito</code>扩展。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
 <h1 id="相关视频">相关视频</h1>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=p7_cTAF39A8"><strong>学习视频</strong></a>。</p>
@@ -417,9 +417,9 @@
 <div class="admonition danger"><p class="admonition-title">注意</p>
 <p>不推荐使用属性注入或setter注入，使用构造器注入时，我们可以百分百确定没有注入相关依赖之前无法实例化该类。</p>
 </div>
-<h1 id="junit5-mockito插件">JUnit5 Mockito插件</h1>
-<p><code>JUnit 5</code>中同样有一个<code>Mockito</code>插件让实例化更简单。</p>
-<p>要使用该插件，首先需要添加对应的依赖。</p>
+<h1 id="junit5-mockito扩展">JUnit5 Mockito扩展</h1>
+<p><code>JUnit 5</code>中同样有一个<code>Mockito</code>扩展让实例化更简单。</p>
+<p>要使用该扩展，首先需要添加对应的依赖。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -432,7 +432,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>现在可使用该插件并避免对<code>MockitoAnnotations.openMocks()</code>的方法调用：</p>
+</div><p>现在可使用该扩展并避免对<code>MockitoAnnotations.openMocks()</code>的方法调用：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -570,12 +570,12 @@
 <li>需要一个额外的依赖<code>org.mockito:mockito-junit-jupiter</code></li>
 </ul>
 <h1 id="总结">总结</h1>
-<p>在<code>JUnit 5</code>中有3种不同的方式使用<code>Mockito</code>，前2种方式可独立于框架单独使用，而第3种方式需使用<code>JUnit 5</code>中的<code>Mockito</code>插件。</p>
+<p>在<code>JUnit 5</code>中有3种不同的方式使用<code>Mockito</code>，前2种方式可独立于框架单独使用，而第3种方式需使用<code>JUnit 5</code>中的<code>Mockito</code>扩展。</p>
 <p>Mock对象可通过一下方式创建和初始化:</p>
 <ul>
 <li>通过调用<code>Mockito.mock()</code>手工创建</li>
 <li>添加<code>@Mock</code>注解并通过调用<code>MockitoAnnotations.openMocks()</code>方法来初始化</li>
-<li>添加<code>@Mock</code>注解并在测试中使用<code>MockitoExtension</code>插件</li>
+<li>添加<code>@Mock</code>注解并在测试中使用<code>MockitoExtension</code>扩展</li>
 </ul>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-mockito"><strong>GitHub</strong></a>中找到。</p>
     </div>
@@ -588,9 +588,9 @@
           <a href="/tags/mockito/">mockito</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/">
+        <a class="prev" href="/post/translate/junit5/junit-5-kotlin/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</span>
+            <span class="prev-text nav-default">JUnit5 整合Kotlin</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/devops/checkout-project-with-submodule-in-kubesphere/">
