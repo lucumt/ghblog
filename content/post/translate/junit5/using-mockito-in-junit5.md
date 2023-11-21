@@ -22,8 +22,8 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
-centerImage: false
-borderImage: true
+centerImage: true
+borderImage: false
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -55,7 +55,7 @@ highchartsDiagrams:
 
 ![JUnit 5 Mockito](/blog_img/translate/junit5/using-mockito-in-junit5/junit-5-mockito.webp "JUnit 5 Mockito") 
 
-在本教程中将学习在`JUnit 5`中如何使用`Mockito`框架，我们将以独立的方式学习测试框架，之后学习如何在`JUnit 5`中使用`Mockito`插件。
+在本教程中将学习在`JUnit 5`中如何使用`Mockito`框架，我们将以独立的方式学习测试框架，之后学习如何在`JUnit 5`中使用`Mockito`扩展。
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
@@ -216,11 +216,11 @@ public class MockitoInjectMocksTests {
 
 {{% /admonition %}}
 
-# JUnit5 Mockito插件
+# JUnit5 Mockito扩展
 
-`JUnit 5`中同样有一个`Mockito`插件让实例化更简单。
+`JUnit 5`中同样有一个`Mockito`扩展让实例化更简单。
 
-要使用该插件，首先需要添加对应的依赖。
+要使用该扩展，首先需要添加对应的依赖。
 
 ```groovy
 dependencies {
@@ -228,7 +228,7 @@ dependencies {
 }
 ```
 
-现在可使用该插件并避免对`MockitoAnnotations.openMocks()`的方法调用：
+现在可使用该扩展并避免对`MockitoAnnotations.openMocks()`的方法调用：
 
 ```java
 @ExtendWith(MockitoExtension.class)
@@ -310,11 +310,11 @@ void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
 
 # 总结
 
-在`JUnit 5`中有3种不同的方式使用`Mockito`，前2种方式可独立于框架单独使用，而第3种方式需使用`JUnit 5`中的`Mockito`插件。
+在`JUnit 5`中有3种不同的方式使用`Mockito`，前2种方式可独立于框架单独使用，而第3种方式需使用`JUnit 5`中的`Mockito`扩展。
 
 Mock对象可通过一下方式创建和初始化:
 * 通过调用`Mockito.mock()`手工创建
 * 添加`@Mock`注解并通过调用`MockitoAnnotations.openMocks()`方法来初始化
-* 添加`@Mock`注解并在测试中使用`MockitoExtension`插件
+* 添加`@Mock`注解并在测试中使用`MockitoExtension`扩展
 
 本文的示例代码能在[**GitHub**](https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-mockito)中找到。

@@ -46,11 +46,13 @@ title: JUnit5翻译系列集合
               <small>已经掌握基础知识后</small>
           </td>
           <td>
-	           <a href="/post/translate/junit5/using-mockito-in-junit5/"><b>[译]JUnit 5 中使用Mockito</b></a>
+	           <a href="/post/translate/junit5/using-mockito-in-junit5/"><b>[译]JUnit 5 使用Mockito</b></a>
 		  </td>
         </tr>
         <tr>
-            <td>JUnit 5 with Kotlin for Java developers</td>  
+            <td>
+			  <a href="/post/translate/junit5/junit-5-kotlin/"><b>[译]JUnit 5 整合Kotlin</b></a>
+			</td>  
         </tr>
         <tr>
             <td>Migrating From JUnit 4 to JUnit 5: A Definitive Guide</td>  
