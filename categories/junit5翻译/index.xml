@@ -6,9 +6,18 @@
     <description>Recent content in JUnit5翻译系列集合 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Jun 2023 19:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jun 2023 22:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/junit5%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>JUnit5 整合Kotlin</title>
+      <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-migration/</link>
+      <pubDate>Wed, 21 Jun 2023 22:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-migration/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-migration/&#34;&gt;&lt;strong&gt;Migrating From JUnit 4 to JUnit 5: A Definitive Guide&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit5 整合Kotlin</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</link>
       <pubDate>Wed, 21 Jun 2023 19:21:43 +0800</pubDate>
       

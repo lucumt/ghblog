@@ -26,7 +26,16 @@
     </item>
     
     <item>
-      <title>JUnit5 整合Kotlin</title>
+      <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-migration/</link>
+      <pubDate>Wed, 21 Jun 2023 22:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-migration/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-migration/&#34;&gt;&lt;strong&gt;Migrating From JUnit 4 to JUnit 5: A Definitive Guide&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit5 整合Kotlin</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</link>
       <pubDate>Wed, 21 Jun 2023 19:21:43 +0800</pubDate>
       
