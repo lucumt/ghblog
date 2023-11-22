@@ -55,7 +55,9 @@ title: JUnit5翻译系列集合
 			</td>  
         </tr>
         <tr>
-            <td>Migrating From JUnit 4 to JUnit 5: A Definitive Guide</td>  
+            <td>
+				<a href="/post/translate/junit5/junit-5-migration/"><b>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</b></a>
+			</td>  
         </tr>
         <tr>
           <td rowspan="2">

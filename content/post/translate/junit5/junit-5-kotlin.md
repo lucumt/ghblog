@@ -1,11 +1,11 @@
 ---
-title: "JUnit5 整合Kotlin"
+title: "[译]JUnit5 整合Kotlin"
 date: 2023-06-21T19:21:43+08:00
 lastmod: 2023-06-21T19:21:43+08:00
 draft: false
 keywords: ["junit5"]
 description: "JUnit5 整合Kotlin"
-tags: ["junit5","java","mockito"]
+tags: ["junit5","java"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
