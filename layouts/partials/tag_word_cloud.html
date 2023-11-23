@@ -21,18 +21,38 @@ var randomPlacement = function randomPlacement(point, options) {
   };
 }
 Highcharts.seriesTypes.wordcloud.prototype.placementStrategy.randomHorizontal = randomPlacement;
+
+let data = JSON.parse({{ jsonify $tagCloud -}});
+let max=0,min=-10;
+for(d of data){
+  if(d.weight > max){
+    max = d.weight;
+  }
+  if(d.weight<min){
+    min = d.weight;
+  }
+}
+
+for(d of data){
+  let val = d.weight;
+  d['val'] = val;
+  val = (val-min)/(max-min);
+  d.weight = val;
+}
+
 Highcharts.chart('word_cloud_chart', {
     series: [{
         type: 'wordcloud',
-        data: JSON.parse({{ jsonify $tagCloud -}}),
-        name: '数量',
+        data: data,
 		placementStrategy: 'randomHorizontal',
     }],
     title: {
         text: ''
     },
     tooltip: {
-        headerFormat: '<b>{point.key}</b><br>'
+        formatter: function() {
+           return '<b>' + this.point.name + '</b><br>数量:' + this.point.val;
+        }
     }
 });
 </script>
