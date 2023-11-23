@@ -1,0 +1,38 @@
+{{ $terms := .Data.Terms.ByCount -}}
+{{ $tagCloud := slice -}}
+{{- range $key, $value := $terms -}}
+   	{{ $tagCloud = $tagCloud | append (dict "name" $value.Term "weight" (len $value.Pages)) -}}
+{{ end -}}
+<div id="word_cloud_chart"></div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<script type="text/javascript">
+var getRandomPosition = function getRandomPosition(size) {
+  return Math.round((size * (Math.random() + 0.5)) / 2);
+};
+
+var randomPlacement = function randomPlacement(point, options) {
+  var field = options.field,
+    r = options.rotation;
+  return {
+    x: getRandomPosition(field.width) - (field.width / 2),
+    y: getRandomPosition(field.height) - (field.height / 2),
+    rotation: 0
+  };
+}
+Highcharts.seriesTypes.wordcloud.prototype.placementStrategy.randomHorizontal = randomPlacement;
+Highcharts.chart('word_cloud_chart', {
+    series: [{
+        type: 'wordcloud',
+        data: JSON.parse({{ jsonify $tagCloud -}}),
+        name: '数量',
+		placementStrategy: 'randomHorizontal',
+    }],
+    title: {
+        text: ''
+    },
+    tooltip: {
+        headerFormat: '<b>{point.key}</b><br>'
+    }
+});
+</script>
