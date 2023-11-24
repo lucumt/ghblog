@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
       <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>

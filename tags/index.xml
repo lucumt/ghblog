@@ -6,7 +6,34 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker</title>
+      <link>https://lucumt.info/tags/docker/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kafka</title>
+      <link>https://lucumt.info/tags/kafka/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LDAP</title>
+      <link>https://lucumt.info/tags/ldap/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/ldap/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>nacos</title>
       <link>https://lucumt.info/tags/nacos/</link>
@@ -31,15 +58,6 @@
       <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/spring-cloud/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>https://lucumt.info/tags/docker/</link>
-      <pubDate>Sun, 13 Aug 2023 17:49:14 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/docker/</guid>
       <description></description>
     </item>
     
@@ -148,15 +166,6 @@
       <pubDate>Mon, 17 Apr 2023 14:31:45 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LDAP</title>
-      <link>https://lucumt.info/tags/ldap/</link>
-      <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/ldap/</guid>
       <description></description>
     </item>
     

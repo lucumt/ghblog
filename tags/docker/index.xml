@@ -6,7 +6,16 @@
     <description>Recent content in docker on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Aug 2023 17:49:14 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]4000个点赞并且在不断增加，回忆之旅</title>
       <link>https://lucumt.info/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</link>

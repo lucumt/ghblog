@@ -6,7 +6,16 @@
     <description>Recent content in 容器化 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 24 Mar 2023 15:59:58 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</title>
       <link>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</link>

@@ -6,7 +6,16 @@
     <description>Recent content in 工具使用 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Jul 2023 09:54:01 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
       <link>https://lucumt.info/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>
