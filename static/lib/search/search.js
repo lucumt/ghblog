@@ -24,6 +24,16 @@ if(searchQuery){
   $('#search-results').append("<p>请在上面输入一个词或词组</p>");
 }
 
+function sortResult(a,b){
+	let time1 = new Date(b.item.date).getTime();
+	let time2 = new Date(a.item.date).getTime();
+	return time1 - time2;
+}
+
+function formatDate(date){
+	return date.split('T')[0];
+}
+
 function executeSearch(searchQuery){
   $.getJSON( "/index.json", function( data ) {
     var pages = data;
@@ -31,6 +41,7 @@ function executeSearch(searchQuery){
     var result = fuse.search(searchQuery);
     if(result.length > 0){
 	  $('#search-results-info').html("共检索到" + result.length + "条记录").show();
+	  result.sort(sortResult);
       populateResults(result);
     }else{
       $('#search-results-info').html("没有搜索到结果!").show();
@@ -65,7 +76,7 @@ function populateResults(result){
     //pull template from hugo templarte definition
     var templateDefinition = $('#search-result-template').html();
     //replace values
-    var output = render(templateDefinition,{key:key,title:value.item.title,link:value.item.permalink,tags:value.item.tags,categories:value.item.categories,snippet:snippet});
+    var output = render(templateDefinition,{key:key,title:value.item.title,link:value.item.permalink,tags:value.item.tags,categories:value.item.categories,date:formatDate(value.item.date),snippet:snippet});
     $('#search-results').append(output);
 
     $.each(snippetHighlights,function(snipkey,snipvalue){
