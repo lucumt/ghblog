@@ -6,7 +6,16 @@
     <description>Recent content in Java on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Jul 2023 14:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Jul 2023 22:42:07 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]如何测试私有方法</title>
+      <link>https://lucumt.info/post/translate/junit5/testing-private-methods/</link>
+      <pubDate>Mon, 03 Jul 2023 22:42:07 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/testing-private-methods/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/testing-private-methods/&#34;&gt;&lt;strong&gt;How Do I Test Private Methods?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]Junit 5 预期异常 - 如何检测异常是否抛出</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-expected-exception/</link>
