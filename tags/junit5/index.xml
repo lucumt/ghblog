@@ -6,7 +6,16 @@
     <description>Recent content in junit5 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Jun 2023 22:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit5/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jun 2023 12:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]JUnit5 Maven示例-基于Surefire运行测试</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-maven-example/</link>
+      <pubDate>Fri, 23 Jun 2023 12:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-maven-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-maven-example/&#34;&gt;&lt;strong&gt;JUnit 5 Maven Example: Running Tests with Surefire&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-migration/</link>
@@ -44,7 +53,7 @@
     </item>
     
     <item>
-      <title>[译]JUnit 5 生命周期-注释之前和之后</title>
+      <title>[译]JUnit 5 生命周期 - 注释之前和之后</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</link>
       <pubDate>Fri, 16 Jun 2023 19:21:43 +0800</pubDate>
       
@@ -53,7 +62,7 @@
     </item>
     
     <item>
-      <title>[译]JUnit 5 嵌套测试-将关联的测试分组在一起</title>
+      <title>[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</link>
       <pubDate>Tue, 02 May 2023 13:12:24 +0800</pubDate>
       
@@ -62,7 +71,7 @@
     </item>
     
     <item>
-      <title>[译]JUnit 5 断言-验证测试结果</title>
+      <title>[译]JUnit 5 断言 - 验证测试结果</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-assertions/</link>
       <pubDate>Mon, 01 May 2023 13:37:22 +0800</pubDate>
       
@@ -71,7 +80,7 @@
     </item>
     
     <item>
-      <title>[译]JUnit 5 入门-编写第一段测试代码</title>
+      <title>[译]JUnit 5 入门 - 编写第一段测试代码</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</link>
       <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
       

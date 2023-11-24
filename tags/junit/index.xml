@@ -6,7 +6,88 @@
     <description>Recent content in JUnit on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Mar 2016 16:27:21 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jun 2023 12:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]JUnit5 Maven示例-基于Surefire运行测试</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-maven-example/</link>
+      <pubDate>Fri, 23 Jun 2023 12:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-maven-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-maven-example/&#34;&gt;&lt;strong&gt;JUnit 5 Maven Example: Running Tests with Surefire&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-migration/</link>
+      <pubDate>Wed, 21 Jun 2023 22:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-migration/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-migration/&#34;&gt;&lt;strong&gt;Migrating From JUnit 4 to JUnit 5: A Definitive Guide&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit5 整合Kotlin</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</link>
+      <pubDate>Wed, 21 Jun 2023 19:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-kotlin/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-kotlin//&#34;&gt;&lt;strong&gt;JUnit 5 With Kotlin for Java Developers&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]在JUnit 5中使用Mockito</title>
+      <link>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</link>
+      <pubDate>Mon, 19 Jun 2023 19:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-mockito/&#34;&gt;&lt;strong&gt;Using Mockito With JUnit 5&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit 5 参数化测试实用指南</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-parameterized-tests/</link>
+      <pubDate>Sat, 17 Jun 2023 09:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-parameterized-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-parameterized-tests/&#34;&gt;&lt;strong&gt;A More Practical Guide to JUnit 5 Parameterized Tests&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit 5 生命周期 - 注释之前和之后</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</link>
+      <pubDate>Fri, 16 Jun 2023 19:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-test-lifecycle/&#34;&gt;&lt;strong&gt;JUnit 5 Test Lifecycle: Before and After Annotations&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</link>
+      <pubDate>Tue, 02 May 2023 13:12:24 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-nested-tests/&#34;&gt;&lt;strong&gt;JUnit 5 Nested Tests: Grouping Related Tests Together&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit 5 断言 - 验证测试结果</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-assertions/</link>
+      <pubDate>Mon, 01 May 2023 13:37:22 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-assertions/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-assertions/&#34;&gt;&lt;strong&gt;JUnit 5 Assertions: Verifying Test Results&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译]JUnit 5 入门 - 编写第一段测试代码</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</link>
+      <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-getting-started/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-getting-started&#34;&gt;&lt;strong&gt;Getting Started with JUnit 5: Writing Your First Test&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Spring和JUnit对数据库操作进行单元测试</title>
       <link>https://lucumt.info/post/spring/spring-core/using-junit-in-spring/</link>
