@@ -86,7 +86,7 @@ title: JUnit5翻译系列集合
         </tr>
         <tr>
             <td>
-				<a href="/post/translate/junit5/testing-private-methods/"><b>[译][译]如何测试私有方法</b></a>
+				<a href="/post/translate/junit5/testing-private-methods/"><b>[译]如何测试私有方法</b></a>
 			</td>  
         </tr>      
     </tbody>    
