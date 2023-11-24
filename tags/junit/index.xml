@@ -6,7 +6,16 @@
     <description>Recent content in JUnit on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Jun 2023 14:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jul 2023 14:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/junit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Junit 5 预期异常 - 如何检测异常是否抛出</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-expected-exception/</link>
+      <pubDate>Sun, 02 Jul 2023 14:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-expected-exception/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-expected-exception/&#34;&gt;&lt;strong&gt;JUnit 5 Expected Exception: How to assert an exception is thrown?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[译]JUnit5 Gradle示例 - 基于Gradle运行测试</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-gradle-example/</link>
