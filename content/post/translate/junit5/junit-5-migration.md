@@ -5,7 +5,7 @@ lastmod: 2023-06-21T22:21:43+08:00
 draft: false
 keywords: ["junit5"]
 description: "从JUnit 4 迁移到JUnit 5的简要说明"
-tags: ["junit5","java","mockito"]
+tags: ["junit5","java","mockito","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

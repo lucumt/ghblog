@@ -1,12 +1,12 @@
 ---
-title: "Testing Private Methods"
-date: 2023-11-22T13:42:07+08:00
-lastmod: 2023-11-22T13:42:07+08:00
+title: "[译]如何测试私有方法"
+date: 2023-07-03T22:42:07+08:00
+lastmod: 2023-07-03T22:42:07+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["junit","private"]
+description: "如何测试私有方法"
+tags: ["java","junit"]
+categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

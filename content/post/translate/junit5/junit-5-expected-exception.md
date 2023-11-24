@@ -1,12 +1,12 @@
 ---
-title: "Junit 5 Expected Exception"
-date: 2023-11-22T13:41:47+08:00
-lastmod: 2023-11-22T13:41:47+08:00
+title: "[译]Junit 5 预期异常 - 如何检测异常是否抛出"
+date: 2023-07-02T14:21:43+08:00
+lastmod: 2023-07-02T14:21:43+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["junit","exception"]
+description: "Junit 5 预期异常 - 如何检测异常是否抛出"
+tags: ["java","junit"]
+categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

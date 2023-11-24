@@ -1,12 +1,12 @@
 ---
-title: "[译]JUnit5 Gradle示例-基于Gradle运行测试"
-date: 2023-11-22T13:41:24+08:00
-lastmod: 2023-11-22T13:41:24+08:00
+title: "[译]JUnit5 Gradle示例 - 基于Gradle运行测试"
+date: 2023-06-23T14:21:43+08:00
+lastmod: 2023-06-23T14:21:43+08:00
 draft: true
-keywords: []
-description: ""
-tags: []
-categories: []
+keywords: ["junit5","gradle"]
+description: "JUnit5 Gradle示例 - 基于Gradle运行测试"
+tags: ["junit5","junit","java","gradle"]
+categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.

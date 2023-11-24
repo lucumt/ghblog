@@ -1,11 +1,11 @@
 ---
-title: "[译]JUnit 5 嵌套测试-将关联的测试分组在一起"
+title: "[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起"
 date: 2023-05-02T13:12:24+08:00
 lastmod: 2023-05-02T13:12:24+08:00
 draft: false
 keywords: ["junit5"]
 description: "翻译关于JUnit 5中关联测试的实现与使用"
-tags: ["junit5","java"]
+tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 
 # You can also close(false) or open(true) something for this content.

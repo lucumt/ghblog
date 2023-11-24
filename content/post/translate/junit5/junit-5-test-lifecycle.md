@@ -1,11 +1,11 @@
 ---
-title: "[译]JUnit 5 生命周期-注释之前和之后"
+title: "[译]JUnit 5 生命周期 - 注释之前和之后"
 date: 2023-06-16T19:21:43+08:00
 lastmod: 2023-06-16T19:21:43+08:00
 draft: false
 keywords: ["junit5"]
 description: "翻译关于JUnit5生命周期的博文"
-tags: ["junit5","java"]
+tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

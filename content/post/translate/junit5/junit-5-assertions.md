@@ -1,11 +1,11 @@
 ---
-title: "[译]JUnit 5 断言-验证测试结果"
+title: "[译]JUnit 5 断言 - 验证测试结果"
 date: 2023-05-01T13:37:22+08:00
 lastmod: 2023-05-01T13:37:22+08:00
 draft: false
 keywords: ["junit5","assert"]
 description: "翻译关于JUnit 5中断言方法的使用"
-tags: ["junit5","java"]
+tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

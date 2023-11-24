@@ -1,11 +1,11 @@
 ---
-title: "[译]JUnit 5 入门-编写第一段测试代码"
+title: "[译]JUnit 5 入门 - 编写第一段测试代码"
 date: 2023-05-01T09:51:22+08:00
 lastmod: 2023-05-01T09:51:22+08:00
 draft: false
 keywords: ["junit5"]
 description: "简要介绍如何开始编写基于JUnit5的测试程序"
-tags: ["junit5","java"]
+tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 

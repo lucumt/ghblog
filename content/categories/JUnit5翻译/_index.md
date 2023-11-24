@@ -18,21 +18,21 @@ title: JUnit5翻译系列集合
               <small><code>JUnit5</code>的基本特性</small>
           </td>
           <td>
-              <b><a href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit 5 入门-编写第一段测试代码</a></b>
+              <b><a href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit 5 入门 - 编写第一段测试代码</a></b>
           </td>
         </tr>
         <tr>
             <td>
-                <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言-验证测试结果</b></a>
+                <a href="/post/translate/junit5/junit-5-assertions/"><b>[译]JUnit 5 断言 - 验证测试结果</b></a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/post/translate/junit5/junit-5-nested-tests/"><b>[译]JUnit 5 嵌套测试-将关联的测试分组在一起</b></a>
+                <a href="/post/translate/junit5/junit-5-nested-tests/"><b>[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起</b></a>
             </td>
         </tr>
         <tr>
-            <td><a href="/post/translate/junit5/junit-5-test-lifecycle/"><b>[译]JUnit 5 生命周期-注释之前和之后</b></a></td>
+            <td><a href="/post/translate/junit5/junit-5-test-lifecycle/"><b>[译]JUnit 5 生命周期 - 注释之前和之后</b></a></td>
         </tr>
         <tr>
             <td>
@@ -65,10 +65,14 @@ title: JUnit5翻译系列集合
               <br/>
               <small>运行<code>JUnit5</code>单元测试</small>
           </td>
-          <td>JUnit 5 Maven Example: Running Tests with Surefire</td>
+          <td>
+			<a href="/post/translate/junit5/junit-5-maven-example/"><b>[译]JUnit5 Maven示例 - 基于Surefire运行测试</b></a>
+		  </td>
         </tr>
         <tr>
-            <td>JUnit 5 Gradle Example: Running Tests with Gradle</td>  
+            <td>
+				<a href="/post/translate/junit5/junit-5-gradle-example/"><b>[译]JUnit5 Gradle示例 - 基于Gradle运行测试</b></a>
+			</td>  
         </tr>
         <tr>
           <td rowspan="2">
@@ -76,10 +80,14 @@ title: JUnit5翻译系列集合
               <br/>
               <small>常见问题解答</small>
           </td>
-          <td>How to assert an exception is thrown?</td>
+          <td>
+		  	   <a href="/post/translate/junit5/junit-5-expected-exception/"><b>[译]Junit 5 预期异常 - 如何检测异常是否抛出</b></a>
+		  </td>
         </tr>
         <tr>
-            <td>How do I test private methods?</td>  
+            <td>
+				<a href="/post/translate/junit5/testing-private-methods/"><b>[译][译]如何测试私有方法</b></a>
+			</td>  
         </tr>      
     </tbody>    
   </table>

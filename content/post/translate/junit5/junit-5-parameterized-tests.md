@@ -5,7 +5,7 @@ lastmod: 2023-06-17T9:21:43+08:00
 draft: false
 keywords: ["junit5"]
 description: "翻译关于JUnit5参数化测试实用指南"
-tags: ["junit5","java"]
+tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
 
