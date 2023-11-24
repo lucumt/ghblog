@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/">构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-03-24 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><code>Nacos</code>官方的<code>docker</code>镜像不支持<code>LDAP</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>同时在连接<code>mysql</code>方面在某些版本中会出现<strong>No Datasource Set</strong> 的异常，而其官方的release版本则很很稳定，同时又支持<code>LDAP</code>。目前部门很多项目都是基于<code>docker</code>部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的<code>nacos</code>镜像，在确保性能稳定的同时也能支持<code>ldap</code>登录。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/linux/using-script-to-deploy-microservice-application-in-docker/">利用shell脚本实现将微服务程序以docker容器方式自动部署</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2023-03-16 </span>
@@ -337,27 +358,6 @@ div.mermaid > svg { max-width: 60% !important; }
     </div>
     <div class="read-more">
       <a href="/post/ldap/add-ldap-support-for-yapi/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/using-lambda-to-parse-and-group-data/">利用Java8中的lambda来实现字符串的解析与分组</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-11-15 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的<code>Map</code>与<code>List</code>组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用<code>Java8</code>中引入的<code>lambda</code>表达式后代码变的更简洁、更优雅，故简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/using-lambda-to-parse-and-group-data/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

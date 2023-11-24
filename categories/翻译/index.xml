@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>[译]JUnit5 Gradle示例 - 基于Gradle运行测试</title>
+      <link>https://lucumt.info/post/translate/junit5/junit-5-gradle-example/</link>
+      <pubDate>Tue, 27 Jun 2023 14:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/translate/junit5/junit-5-gradle-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-gradle-example/&#34;&gt;&lt;strong&gt;JUnit 5 Gradle Example&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>[译]JUnit5 Maven示例-基于Surefire运行测试</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-maven-example/</link>
       <pubDate>Fri, 23 Jun 2023 12:21:43 +0800</pubDate>
