@@ -43,8 +43,8 @@
   {{- if .Site.Params.publicCDN.enable -}}
     {{ .Site.Params.publicCDN.flowchartDiagramsJS | safeHTML }}
   {{- else -}}
-    <script src="{{ "lib/flowchartDiagrams/raphael-2.2.7.min.js" | relURL }}" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-    <script src="{{ "lib/flowchartDiagrams/flowchart-1.8.0.min.js" | relURL }}" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script>
+    <script src="{{ "lib/flowchartDiagrams/raphael-2.2.7.min.js" | relURL }}"></script>
+    <script src="{{ "lib/flowchartDiagrams/flowchart-1.8.0.min.js" | relURL }}"></script>
   {{- end -}}
 	<script>
 	/*{{- if .Params.flowchartDiagrams.options -}}
