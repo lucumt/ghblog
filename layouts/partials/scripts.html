@@ -183,12 +183,16 @@
 <!-- only work in production mode -->
 {{- if and (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") (ne (trim .Page.RelPermalink "/") "links") -}}
 
+    <!--AdSense -->
+	{{- if .Site.Params.googleAd -}}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .Site.Params.googleAd }}"
+            crossorigin="anonymous"></script>
+    {{- end -}}
+
 	<!-- Analytics -->
 	{{- if .Site.GoogleAnalytics -}}
 	  {{ template "_internal/google_analytics_async.html" . }}
 	{{- end -}}
-	
-	
 
 	{{- with .Site.Params.baiduAnalytics -}}
 	<script id="baidu_analytics">
