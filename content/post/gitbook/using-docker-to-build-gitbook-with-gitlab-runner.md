@@ -1,11 +1,11 @@
 ---
-title: "基于Docker的GitBook使用经验分享"
+title: "在Docker中构建GitBook并整合GitLab Runner的使用经验分享"
 date: 2023-10-07T10:14:02+08:00
 lastmod: 2023-10-07T10:14:02+08:00
 draft: true
 keywords: ["docker","gitbook"]
-description: "基于Docker的GitBook使用经验分享"
-tags: ["gitbook","docker"]
+description: "简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新"
+tags: ["gitbook","docker","gitlab-runner"]
 categories: ["工具使用","容器化"]
 author: "Rosen Lu"
 
@@ -182,11 +182,11 @@ trigger_build->clone_code(right)->build_page->deploy_page->end
 
 * [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)，`GitBook`中支持新版的[**flowchart.js**](https://flowchart.js.org/)图表，展示效果如下
 
-  ![GitBook中展示Flowchart图表](/blog_img/gitbook/sharing-experience-of-gitbook/gitbook-flowchart-chart-display.png "GitBook中展示Flowchart图表")
+  ![GitBook中展示Flowchart图表](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-flowchart-chart-display.png "GitBook中展示Flowchart图表")
 
 * [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)，`GitBook`中支持新版的[**Mermaid**](https://mermaid.js.org/)图表，展示效果如下
 
-  ![GitBook中展示Mermaid图表](/blog_img/gitbook/sharing-experience-of-gitbook/gitbook-mermaid-chart-display.png "GitBook中展示Mermaid图表")
+  ![GitBook中展示Mermaid图表](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-mermaid-chart-display.png "GitBook中展示Mermaid图表")
 
 # 其它设置
 
