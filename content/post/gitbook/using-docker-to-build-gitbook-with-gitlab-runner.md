@@ -166,13 +166,13 @@ highchartsDiagrams:
 
 **说明**：由于`GitBook`是基于`Nodejs`开发的，而`Nodejs`和`NPM`对版本有强相关的依赖，版本过高或过低都会导致`GitBook`以及相关的插件无法安装，故本次采用了如下**较旧的版本**(采用`Docker`容器化部署不会造成额外的负面影响 )
 
-|                   | 版本                           | 备注 |
-| ----------------- | ------------------------------ | ---- |
-| **GitLab Runner** | `gitlab/gitlab-runner:v15.5.2` |      |
-| **GitBook Cli**   | `gitbook-cli@2.1.2`            |      |
-| **GitBook**       | `3.2.3`                        |      |
-| **Nodejs**        | `v12.22.12`                    |      |
-| **NPM**           | `7.5.2`                        |      |
+|                   | 版本                           | 备注                                                         |
+| ----------------- | ------------------------------ | ------------------------------------------------------------ |
+| **GitLab Runner** | `gitlab/gitlab-runner:v15.5.2` |                                                              |
+| **GitBook Cli**   | `gitbook-cli@2.1.2`            | 若版本不对，会导致依赖问题，请参见[**Gitbook-cli install error TypeError: cb.apply is not a function inside graceful-fs**](https://stackoverflow.com/questions/64211386/gitbook-cli-install-error-typeerror-cb-apply-is-not-a-function-inside-graceful) |
+| **GitBook**       | `3.2.3`                        |                                                              |
+| **Nodejs**        | `v12.22.12`                    |                                                              |
+| **NPM**           | `7.5.2`                        |                                                              |
 
 ## 操作流程
 
@@ -223,17 +223,64 @@ highchartsDiagrams:
 
 ### 自动构建
 
+由于[**自动构建脚本**](#自动构建脚本)中有如下配置，其中构建阶段的值被设置为`build`会导致每次代码发生变更时都执行自动构建
+
+```yaml
+stages:
+  - build
+
+# build阶段执行的操作命令 
+build:
+  stage: build
+```
+
+当我们通过`git push`将代码推送到`GitLab`后，在对应的`GitLab`工程中依次点击`CI/CD`->`Pipelines`，会有类似如下输出，可以看到此时`GitLab Runner`正在执行构建
+
+![GitLab Runner正在执行](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running.png "GitLab Runner正在执行")
+
+点击对应的按钮可查看构建执行日志，类似如下：
+
+![GitLab Runner执行日志结果](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running-log.png "GitLab Runner执行日志结果")
+
+之后可通过`Nginx`对应端口访问相应的`GitBook`页面，可参考[**使用展示**](#使用展示)。
+
 ### 手工构建
+
+除了自动构建之外，也可点击对应的按钮进行手工提交，此种场景一般用于文档代码没有变更而对`GitBook`的样式或插件进行了修改，想提前验证结果，操作步骤如下：
+
+在对应的`GitLab`工程中依次点击`CI/CD`->`Pipelines`，在出现的菜单中点击右上角的`Run pipeline`按钮
+
+![GitLab Runner手工触发](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-run-button.png "GitLab Runner手工触发")
+
+在出现的界面中再次点击`Run pipeline`按钮进行确认，触发手工执行，之后的步骤与自动构建时相同。
+
+![GitLab Runner手工触发确认](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-run-confirm-button.png "GitLab Runner手工触发确认")
 
 # 插件管理
 
+`GitBook`在文档管理领域广受欢迎的一个很重要的原因是其丰富的插件生态，插件可快速集成，也可仿照别人的插件根据自己的需求快速开发新的插件，个人项目中用到的插件如下
+
+
+
 ## 常用插件
 
-## 代码高亮
+| 插件                                                         | 作用                                                         | 备注                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| [**gitbook-plugin-prism-codetab-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox) | 对代码采用[**Prims.js**](https://prismjs.com/)进行高亮，同时可根据需求对代码进行分组 | 需要在`book.js`中通过 `-highlight`的方式屏蔽默认的高亮插件  |
+| [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox) | 支持[**Mermaid**](https://mermaid.js.org/)图表功能           | 实际使用过程中发现部分图表无法展示                          |
+| [**gitbook-plugin-flowchart-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-flowchart-fox) | 用于支持[**flowchart**](https://flowchart.js.org/)图表       | 实际使用过程中发现该插件bug较多，在组件过多时会出现样式混乱 |
+| [**gitbook-plugin-advanced-emoji**](https://github.com/codeclou/gitbook-plugin-advanced-emoji) | 用于展示[**Emoji**](https://getemoji.com/)表情               |                                                             |
+| [**gitbook-plugin-chart#readme**](https://github.com/csbun/gitbook-plugin-chart#readme) | 利用[**C3.js**](http://c3js.org/)或[**Highcharts**](http://www.highcharts.com/)来展示图表 |                                                             |
+|                                                              |                                                              |                                                             |
+|                                                              |                                                              |                                                             |
+|                                                              |                                                              |                                                             |
+|                                                              |                                                              |                                                             |
 
-## 图表插件
 
-已有的插件太老旧，自己fork代码后对它们进行了更新，项目位于[**gitbook-plugin-fox**](https://github.com/gitbook-plugin-fox)，目前包含如下插件：
+
+## 自定义插件
+
+已有的插件太老旧，自己`fork`代码后对它们进行了更新，项目位于[**gitbook-plugin-fox**](https://github.com/gitbook-plugin-fox)，目前包含如下插件：
 
 * [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)，`GitBook`中支持新版的[**flowchart.js**](https://flowchart.js.org/)图表，展示效果如下
 
@@ -250,6 +297,10 @@ highchartsDiagrams:
 ## 自定义样式
 
 # 使用展示
+
+可通过`Nginx`对应端口访问相应的`GitBook`页面，个人项目中的界面类似如下，供参考
+
+![GitBook页面浏览](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-web-page-view.png "GitBook页面浏览")
 
 # 文件&脚本
 
@@ -312,7 +363,7 @@ services:
    container_name: gitbook-nginx
 ```
 
-## 自动构建文件
+## 自动构建脚本
 
 `.gitlab-ci.yml`是`GitLab Runner`构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的`GitLab`仓库，用于每次修改文档时触发自动构建
 
