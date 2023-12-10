@@ -115,7 +115,7 @@ highchartsDiagrams:
   options: ""
 ---
 
-由于`Docsify`采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从`Docsify`迁移到基于`Docker`搭建的`GitBook`，在这其中踩了一些坑，简单记录下。
+由于`Docsify`采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从`Docsify`迁移到基于`Docker`搭建的`GitBook`并结合`GitLab Runner`实现自动更新，在这其中踩了一些坑，简单记录下。
 
 <!--more-->
 
@@ -158,11 +158,72 @@ highchartsDiagrams:
 
 # 环境搭建
 
+##  相关说明
+
 出于简化使用流程与加快构建速度的考虑，将`GitLab Runner`与`GitBook`都放置到同一个容器中。在`GitLab Runner`的`Docker`容器中安装完毕`GitBook`环境后，还需将`GitLab Runner`注册到对应的`GitLab`仓库中，可通过`Shell`脚本将此过程固化下来，整个环境搭建流程如下：
 
 ![GitBook安装流程](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-flow.png "GitBook安装")
 
-## 安装过程
+**说明**：由于`GitBook`是基于`Nodejs`开发的，而`Nodejs`和`NPM`对版本有强相关的依赖，版本过高或过低都会导致`GitBook`以及相关的插件无法安装，故本次采用了如下**较旧的版本**(采用`Docker`容器化部署不会造成额外的负面影响 )
+
+|                   | 版本                           | 备注 |
+| ----------------- | ------------------------------ | ---- |
+| **GitLab Runner** | `gitlab/gitlab-runner:v15.5.2` |      |
+| **GitBook Cli**   | `gitbook-cli@2.1.2`            |      |
+| **GitBook**       | `3.2.3`                        |      |
+| **Nodejs**        | `v12.22.12`                    |      |
+| **NPM**           | `7.5.2`                        |      |
+
+## 操作流程
+
+下述步骤展示了从头开始构建`GitLab Runner`与`GitBook`的过程
+
+1. 在宿主机上执行如下指令安装[**jq**](https://github.com/jqlang/jq)指令，后续会用其来解析`GitLab`中返回的`JSON`数据
+
+   ```bash
+   # 在宿主机上安装jq，用于解析json文件
+   apt install -y jq
+   ```
+
+2. 安装之前请仿照下图将本文最后的[**文件&脚本**](#文件脚本)
+
+   ![GitBook镜像构建前准备](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-build-file-folder.png "GitBook镜像构建前准备")
+
+3. 运行下述指令构建需要的镜像
+
+   ```bash
+   docker build -t gitbook_custom:v1.0
+   ```
+
+   `Dockerfile`在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令
+
+   ```bash
+   docker build -t gitbook_custom:v1.0  --progress string . --no-cache
+   ```
+
+4. 执行下述指令启动`Docker`容器并执行相关的初始化操作
+
+   ```bash
+   docker-compose down && docker-compose up -d && bash gitlab_runner_config_init.sh
+   ```
+
+5. 安装过程中会有类似如下输出:
+
+   ![GitBook安装过程1](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-output-1.png "GitBook安装过程1")
+
+   若最后输出结果类似如下，则表示整个脚本安装过程顺利完成
+
+   ![GitBook安装过程2](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-output-2.png "GitBook安装过程2")
+
+6. 在对应`GitLab`项目中依次点击`Settings`->`CI/CD`->`Runners`，若出现类似如下界面则表示`GitLab Runner`正确安装与配置完毕，接下来即可验证`GitBook`是否能正常工作
+
+   ![GitLab Runner注册结果](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-runner-register-result.png "GitLab Runner注册结果")
+
+## 测试验证
+
+### 自动构建
+
+### 手工构建
 
 # 插件管理
 
@@ -192,434 +253,447 @@ highchartsDiagrams:
 
 # 文件&脚本
 
-* `Dockerfile`文件，用于构建同时包含`GitLab Runner`与`GitBook`的容器
+## Dockerfile脚本
 
-  ```dockerfile
-  FROM gitlab/gitlab-runner:v15.5.2
-  
-  # 更改为公司内部的镜像源
-  RUN rm -rf /etc/apt/sources.list && touch /etc/apt/sources.list
-  
-  RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib' >> /etc/apt/sources.list
-  RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib' >> /etc/apt/sources.list
-  RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib' >> /etc/apt/sources.list
-  RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib' >> /etc/apt/sources.list
-  RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib' >> /etc/apt/sources.list
-  RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib' >> /etc/apt/sources.list
-  
-  # 安装nodejs
-  RUN apt-get update -y
-  
-  RUN apt-get install nodejs npm -y
-  RUN npm cache clean --force
-  RUN npm config set registry https://mirrors.xxx.com/repository/NPM/
-  RUN npm install -g gitbook-cli@2.1.2
-  
-  RUN mkdir -p /usr/local/gitbook/data
-  RUN mkdir -p /usr/local/gitbook/tmp/docs
-  RUN chown -R gitlab-runner:gitlab-runner /usr/local/gitbook/tmp
-  COPY book.js /usr/local/gitbook/tmp/book.js
-  COPY custom.css /usr/local/gitbook/tmp/custom.css
-  COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
-  COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh
-  ```
+用于构建同时包含`GitLab Runner`与`GitBook`的容器
 
-* docker-compose.yml文件，用于启动`GitLab Runner`与`Nginx`容器
+```dockerfile
+FROM gitlab/gitlab-runner:v15.5.2
 
-  ```yaml
-  version: "3"
-  services:
-   gitbook:
-     privileged: true
-     image: gitbook_custom:v1.0
-     volumes:
-       - $PWD/data:/usr/local/gitbook/data:rw
-     restart: always
-     container_name: gitbook-custom
-   nginx:
-     privileged: true
-     image: nginx:1.22
-     ports:
-       - "3000:80"
-     volumes:
-       - $PWD/data:/usr/share/nginx/html
-     restart: always
-     container_name: gitbook-nginx
-  ```
+# 更改为公司内部的镜像源
+RUN rm -rf /etc/apt/sources.list && touch /etc/apt/sources.list
 
-* `.gitlab-ci.yml`文件，只有此文件必须存在于目标文档对应的`GitLab`仓库，用于每次修改文档时触发自动构建
+RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib' >> /etc/apt/sources.list
+RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib' >> /etc/apt/sources.list
+RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib' >> /etc/apt/sources.list
+RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib' >> /etc/apt/sources.list
+RUN echo 'deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib' >> /etc/apt/sources.list
+RUN echo 'deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib' >> /etc/apt/sources.list
 
-  ```yaml
-  variables:
-    # 是否自动生成目录
-    AUTO_SUMMARY: "true"
-  
-  # 定义ci/cd 执行build流程
-  stages:
-    - build
-  
-  # build阶段执行的操作命令 
-  build:
-    stage: build
-    tags:
-      - xxx-doc
-    script:
-      - echo "======== start build ========"
-      - rm -rf /usr/local/gitbook/tmp/docs/*
-      - cp -r * /usr/local/gitbook/tmp/docs/
-      - mkdir -p /usr/local/gitbook/tmp/docs/styles
-      - cd /usr/local/gitbook/tmp
-      - cp custom.css  /usr/local/gitbook/tmp/docs/styles/website.css
-      - bash /usr/local/gitbook/auto_generate_summary.sh $PWD
-      - gitbook build
-      - rm -rf /usr/local/gitbook/data/*
-      - cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/
-      - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico
-  ```
+# 安装nodejs
+RUN apt-get update -y
 
-* `gitlab_runner_config_init.sh`，用于注册`GitLab Runner`同时检测`GitBook`是否存在
+RUN apt-get install nodejs npm -y
+RUN npm cache clean --force
+RUN npm config set registry https://mirrors.xxx.com/repository/NPM/
+RUN npm install -g gitbook-cli@2.1.2
 
-  ```bash
-  #/bin/bash
-  
-  #更新文件权限
-  
-  FOLDER="/usr/local/gitbook/data"
-  docker exec -it gitbook-custom bash -c "chown -R gitlab-runner:gitlab-runner $FOLDER"
-  echo "===================完成$FOLDER数据目录权限修改====================="
-  
-  
-  # 删除gitlab runner
-  GITLAB_URL='http://aeectss.xxx.local:1800/'
-  echo '===================开始删除旧的gitlab runner====================='
-  PRIVATE_TOKEN='5JZxxYzapBB_zfze5c2_'
-  PROJECT_ID=57
-  ids=$(curl --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" "${GITLAB_URL}/api/v4/runners"  |jq -r '.[]|"\(.id)"')
-  for id in $ids; do
-    eval "curl --request DELETE --header 'PRIVATE-TOKEN:${PRIVATE_TOKEN}' '${GITLAB_URL}/api/v4/runners/${id}'"
-    printf "\033[32m=====================删除id为${id}的runner======================\033[0m\n"
-  done
-  
-  
-  # 注册gitlab runner
-  CUR_DATE=$(date "+%Y-%m-%d %H:%M:%S")
-  TOKEN='M9VwuFfu9E42mb5QRx7M'
-  TAG_LIST='xxxxx-doc'
-  DESC='xxxxx文档撰写'
-  echo '===================开始注册gitlab runner====================='
-  sudo docker exec -it gitbook-custom \
-  gitlab-runner register --non-interactive \
-  --url "${GITLAB_URL}"  \
-  --registration-token "${TOKEN}" \
-         --executor "shell" \
-         --tag-list "${TAG_LIST}" \
-  --description "${DESC} -- 添加时间:${CUR_DATE}"
-  
-  
-  # 安装gitbook
-  echo '===================开始检查gitbook====================='
-  check=$(docker exec -it --user gitlab-runner gitbook-custom gitbook ls)
-  
-  if [[ $check == *"no versions installed"* ]]; then
-    echo "gitbook在gitlab-runner用户下没有安装"
-    command="npm config set registry https://mirrors.xxx.com/repository/NPM/"
-    command="${command};gitbook fetch"
-    command="${command};cd /usr/local/gitbook/tmp"
-    command="${command};npm install gitbook-plugin-mermaid-fox"
-    command="${command};gitbook install"
-    #command="${command};cp /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-docker.js /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-dockerfile.js"
-    command="docker exec -it --user gitlab-runner gitbook-custom bash -c '$command'"
-    echo "=========================要执行的命令======================="
-    printf "\033[32m${command}\033[0m\n"
-    echo "============================================================"
-    eval $command
-  else
-    printf "\033[32mGitbook已经安装，相关检查结果如下:\033[0m\n"
-    echo "$check"
-  fi
-  
-  printf "\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n"
-  ```
+RUN mkdir -p /usr/local/gitbook/data
+RUN mkdir -p /usr/local/gitbook/tmp/docs
+RUN chown -R gitlab-runner:gitlab-runner /usr/local/gitbook/tmp
+COPY book.js /usr/local/gitbook/tmp/book.js
+COPY custom.css /usr/local/gitbook/tmp/custom.css
+COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
+COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh
+```
 
-* `auto_generate_summary.sh`，自动生成目录
+## docker启停脚本
 
-  ```bash
-  #!/bin/bash
-  # 先清空文件
-  echo "" >  docs/SUMMARY.md
-  # 子文件夹读取的递归函数
-  dirReader(){
-      # $1 文件绝对路径
-      # $2 章节名称
-      # $3 缩进
-      # 循环处理该文件夹下的文件
-      for item in "${1}"/*
-      do
-          # 判断是否是文件夹且不是图片文件夹
-          if [ -d "$item" ]  &&  ! [[ "${item}" =~ assets$ ]]
-          then
-              # 判断该文件夹是否存在README.md文件
-              if [ ! -f "$item/README.md" ]
-              then 
-                  # 如果没有就创建README.md
-                  echo "" > "$item/README.md"
-              fi
-              # 获取文件名称
-              beginPos=`expr ${#1} + 1`
-              endPos=`expr ${#item} - ${#1}`
-              dirName=${item:$beginPos:$endPos}
-              echo ${item}
-              # 写入目录文件
-              echo "$3+ [$dirName]($2/$dirName/README.md)" >> docs/SUMMARY.md
-              # 递归处理该文件夹
-              dirReader "$item" "$2/$dirName" "$3  "
-          # 判断该文件是否是.md结尾 并且不是README.md
-          elif [ -f "$item" ] && [ "${item##*.}" == 'md' ] 
-          then
-              beginPos=`expr ${#1} + 1`
-              endPos=`expr ${#item} - ${#1} - 4`
-              dirName=${item:$beginPos:$endPos}
-              # 写入目录文件
-              if[ "$dirName" != 'README' ]
-              then
-                  echo ${item}
-                  echo "$3+ [$dirName]($2/$dirName.md)" >> docs/SUMMARY.md
-              fi
-          fi
-      done
-  }
-  # 读取当前路径
-  dirs="${PWD}/docs/"
-  echo "- [主页](README.md)" >  docs/SUMMARY.md
-  # 循环处理该文件夹下的文件dir
-  for dir in docs/*
-  do
-      # 截取掉dir路径名称里的 docs/
-      startPos='5'
-      length=`expr ${#dir} - 5`
-      dir=${dir:$startPos:$length}
-      # 判断是否是文件夹且不是图片文件夹
-      if [ -d "${dirs}/${dir}" ] && ! [[ "${dir}" =~ assets$ ]] && ! [[ "${dir}" =~ styles$ ]] 
-      then 
-          # 判断该文件夹是否存在README.md文件
-          if [ ! -f "$dirs/$dir/README.md" ]
-          then 
-          	echo "" > "$dirs/$dir/README.md"
-          fi
-          # 写入目录文件
-          echo "+ [$dir]($dir/README.md)" >> docs/SUMMARY.md
-          # 处理文件夹内部的文件
-          dirReader "$dirs$dir" "$dir" "  "
-      # 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md
-      elif  [ "${dir##*.}" == 'md' ] && [ "${dir}" != "SUMMARY.md" ] && [ "${dir}" != 'README.md' ]
-      then
-      # 写入目录文件
-      	echo "+ [$dir]($dir)" >> docs/SUMMARY.md
-      fi
-  done
-  ```
+`docker-compose.yml`用于启动`GitLab Runner`与`Nginx`容器
 
-* `custom.css`，自定义样式文件
+```yaml
+version: "3"
+services:
+ gitbook:
+   privileged: true
+   image: gitbook_custom:v1.0
+   volumes:
+     - $PWD/data:/usr/local/gitbook/data:rw
+   restart: always
+   container_name: gitbook-custom
+ nginx:
+   privileged: true
+   image: nginx:1.22
+   ports:
+     - "3000:80"
+   volumes:
+     - $PWD/data:/usr/share/nginx/html
+   restart: always
+   container_name: gitbook-nginx
+```
 
-  ```css
-  .book .book-body .page-wrapper .page-inner {
-    max-width: 1200px !important;
-  }
-  
-  .markdown-section img:not(.emoji) {
-      max-width: 100%;
-      border: 1px dashed #a9a4a4;
-  }
-  
-  table > thead > tr > th {
-     text-align:center !important;
-  }
-  
-  
-  .markdown-section code:not([class^="lang-"]) {
-      padding: 3px 5px;
-      margin: 0;
-      font-size: .85em;
-      color: #c7254e;
-      border-radius: 4px;
-  }
-  
-  small {
-      font-size: 80% !important;
-  }
-  
-  section  {
-      width:100%;
-  }
-  h1 {
-    color: #2674BA;
-  }
-  h2 {
-    color: #0099CC;
-  }
-  h3 {
-    color: #F77A0B;
-  }
-  h4 {
-    color: #662D91;
-  }
-  h5 {
-    color: #444444;
-  }
-  th {
-    background-color: #2674BA;
-    color: white;
-  }
-  ```
+## 自动构建文件
 
-* `book.js`，`GitBook`的配置文件，包含全局配置与各种插件
+`.gitlab-ci.yml`是`GitLab Runner`构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的`GitLab`仓库，用于每次修改文档时触发自动构建
 
-  ```javascript
-  module.exports = {
-      // markdown文档所在路径
-      root: './docs',
-      // 项目标题
-      title: 'xxxxx平台文档',
-      // 版本
-      gitbook: '3.2.3',
-      language: 'zh-hans',
-      // 插件
-      plugins: [
-          '-highlight',
-          'prism-codetab-fox',
-          'advanced-emoji',
-          'mermaid-fox', // 图表
-          'graph',
-          'flowchart-fox',
-          'chart',
-          'popup',
-          'accordion',
-          'katex',
-          '-search', //搜索
-          'search-pro', //中文搜索
-          'hide-element', //元素隐藏
-          '-lunr', //索引
-          'chapter-fold', //导航目录折叠
-          'code', //代码复制按钮
-          'splitter', //侧边栏宽度可调节
-          'expandable-chapters-small', //目录收起
-          'tbfed-pagefooter', //页面添加页脚
-          'ancre-navigation', //页内导航回到顶部
-          '-sharing', 'sharing-plus', //分享链接
-          'theme-comscore', //主题
-          'favicon', //图标
-          'flexible-alerts' // 警告
-      ],
-      // 插件配置
-      pluginsConfig: {
-          'prism': {
-              'css': [
-                  'prismjs/themes/prism-solarizedlight.css'
-              ],
-              "lang": {
-                  "dockerfile": "docker"
-              },
-              "ignore": [
-                  "mermaid",
-                  "eval-js"
-              ]
-          },
-          'hide-element': {
-              'elements': ['.gitbook-link'] //需要隐藏的元素，可以通过浏览网页找到该class
-          },
-          'tbfed-pagefooter': {
-              'copyright': 'Copyright &copy xxx.com 2023-2033',
-              'modify_label': '修订时间：',
-              'modify_format': 'YYYY-MM-DD HH:mm:ss'
-          },
-          'sharing': {
-              'all': []
-          },
-          "chart": {
-              "type": "c3"
-          },
-          "chapter-fold": {},
-          "favicon": {
-              "shortcut": "/favicon.ico",
-              "bookmark": "/favicon.ico"
-          },
-          'flowchart': {
-              "arrow-end": "block",
-              "element-color": "black",
-              "fill": "white",
-              "flowstate": {
-                  "approved": {
-                      "fill": "#58C4A3",
-                      "font-size": 12
-                  },
-                  "current": {
-                      "fill": "#008080",
-                      "font-color": "white",
-                      "font-weight": "bold"
-                  },
-                  "future": {
-                      "fill": "#8A624A"
-                  },
-                  "success": {
-                      "fill": "#0B6623"
-                  },
-                  "invalid": {
-                      "fill": "#6c5696"
-                  },
-                  "past": {
-                      "fill": "#CCCCCC",
-                      "font-size": 12
-                  },
-                  "select": {
-                      "fill": "#E1AD01",
-                      "font-size": 12
-                  },
-                  "rejected": {
-                      "fill": "#C45879",
-                      "font-size": 12
-                  },
-                  "request": {
-                      "fill": "#569656"
-                  },
-                  'yellowgreen': {
-                      "fill": "yellowgreen"
-                  },
-                  'failed': {
-                      "fill": "#800020"
-                  }
-              },
-              "font-color": "black",
-              "font-size": 14,
-              "line-color": "black",
-              "line-length": 50,
-              "line-width": 1.3,
-              "scale": 1,
-              "symbols": {
-                  "end": {
-                      "class": "end-element",
-                      "font-color": "white",
-                      "font-weight": "bold"
-                  },
-                  "start": {
-                      "fill": "#8c2106",
-                      "font-color": "white",
-                      "font-weight": "bold"
-                  }
-              },
-              "text-margin": 10,
-              "width": 1,
-              "x": 0,
-              "y": 0,
-              "yes-text": "是",
-              "no-text": "否"
-          }
-      },
-      variables: {
-          "styles": {
-              "website": "./styles/website.css",
-          }
-      }
-  };
-  ```
+```yaml
+variables:
+  # 是否自动生成目录
+  AUTO_SUMMARY: "true"
 
-  
+# 定义ci/cd 执行build流程
+stages:
+  - build
+
+# build阶段执行的操作命令 
+build:
+  stage: build
+  tags:
+    - xxx-doc
+  script:
+    - echo "======== start build ========"
+    - rm -rf /usr/local/gitbook/tmp/docs/*
+    - cp -r * /usr/local/gitbook/tmp/docs/
+    - mkdir -p /usr/local/gitbook/tmp/docs/styles
+    - cd /usr/local/gitbook/tmp
+    - cp custom.css  /usr/local/gitbook/tmp/docs/styles/website.css
+    - bash /usr/local/gitbook/auto_generate_summary.sh $PWD
+    - gitbook build
+    - rm -rf /usr/local/gitbook/data/*
+    - cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/
+    - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico
+```
+
+## 自动注册脚本
+
+`gitlab_runner_config_init.sh`用于注册`GitLab Runner`同时检测`GitBook`是否存在
+
+```bash
+#/bin/bash
+
+#更新文件权限
+
+FOLDER="/usr/local/gitbook/data"
+docker exec -it gitbook-custom bash -c "chown -R gitlab-runner:gitlab-runner $FOLDER"
+echo "===================完成$FOLDER数据目录权限修改====================="
+
+
+# 删除gitlab runner
+GITLAB_URL='http://aeectss.xxx.local:1800/'
+echo '===================开始删除旧的gitlab runner====================='
+PRIVATE_TOKEN='5JZxxYzapBB_zfze5c2_'
+PROJECT_ID=57
+ids=$(curl --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" "${GITLAB_URL}/api/v4/runners"  |jq -r '.[]|"\(.id)"')
+for id in $ids; do
+  eval "curl --request DELETE --header 'PRIVATE-TOKEN:${PRIVATE_TOKEN}' '${GITLAB_URL}/api/v4/runners/${id}'"
+  printf "\033[32m=====================删除id为${id}的runner======================\033[0m\n"
+done
+
+
+# 注册gitlab runner
+CUR_DATE=$(date "+%Y-%m-%d %H:%M:%S")
+TOKEN='M9VwuFfu9E42mb5QRx7M'
+TAG_LIST='xxxxx-doc'
+DESC='xxxxx文档撰写'
+echo '===================开始注册gitlab runner====================='
+sudo docker exec -it gitbook-custom \
+gitlab-runner register --non-interactive \
+--url "${GITLAB_URL}"  \
+--registration-token "${TOKEN}" \
+       --executor "shell" \
+       --tag-list "${TAG_LIST}" \
+--description "${DESC} -- 添加时间:${CUR_DATE}"
+
+
+# 安装gitbook
+echo '===================开始检查gitbook====================='
+check=$(docker exec -it --user gitlab-runner gitbook-custom gitbook ls)
+
+if [[ $check == *"no versions installed"* ]]; then
+  echo "gitbook在gitlab-runner用户下没有安装"
+  command="npm config set registry https://mirrors.xxx.com/repository/NPM/"
+  command="${command};gitbook fetch"
+  command="${command};cd /usr/local/gitbook/tmp"
+  command="${command};npm install gitbook-plugin-mermaid-fox"
+  command="${command};gitbook install"
+  #command="${command};cp /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-docker.js /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-dockerfile.js"
+  command="docker exec -it --user gitlab-runner gitbook-custom bash -c '$command'"
+  echo "=========================要执行的命令======================="
+  printf "\033[32m${command}\033[0m\n"
+  echo "============================================================"
+  eval $command
+else
+  printf "\033[32mGitbook已经安装，相关检查结果如下:\033[0m\n"
+  echo "$check"
+fi
+
+printf "\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n"
+```
+
+## 自动生成目录
+
+`auto_generate_summary.sh`用于自动生成目录，`GitBook`左侧的目录树依赖于此脚本的生成结果，此文件会在`GitLab Runner`构建阶段执行
+
+```bash
+#!/bin/bash
+# 先清空文件
+echo "" >  docs/SUMMARY.md
+# 子文件夹读取的递归函数
+dirReader(){
+    # $1 文件绝对路径
+    # $2 章节名称
+    # $3 缩进
+    # 循环处理该文件夹下的文件
+    for item in "${1}"/*
+    do
+        # 判断是否是文件夹且不是图片文件夹
+        if [ -d "$item" ]  &&  ! [[ "${item}" =~ assets$ ]]
+        then
+            # 判断该文件夹是否存在README.md文件
+            if [ ! -f "$item/README.md" ]
+            then 
+                # 如果没有就创建README.md
+                echo "" > "$item/README.md"
+            fi
+            # 获取文件名称
+            beginPos=`expr ${#1} + 1`
+            endPos=`expr ${#item} - ${#1}`
+            dirName=${item:$beginPos:$endPos}
+            echo ${item}
+            # 写入目录文件
+            echo "$3+ [$dirName]($2/$dirName/README.md)" >> docs/SUMMARY.md
+            # 递归处理该文件夹
+            dirReader "$item" "$2/$dirName" "$3  "
+        # 判断该文件是否是.md结尾 并且不是README.md
+        elif [ -f "$item" ] && [ "${item##*.}" == 'md' ] 
+        then
+            beginPos=`expr ${#1} + 1`
+            endPos=`expr ${#item} - ${#1} - 4`
+            dirName=${item:$beginPos:$endPos}
+            # 写入目录文件
+            if[ "$dirName" != 'README' ]
+            then
+                echo ${item}
+                echo "$3+ [$dirName]($2/$dirName.md)" >> docs/SUMMARY.md
+            fi
+        fi
+    done
+}
+# 读取当前路径
+dirs="${PWD}/docs/"
+echo "- [主页](README.md)" >  docs/SUMMARY.md
+# 循环处理该文件夹下的文件dir
+for dir in docs/*
+do
+    # 截取掉dir路径名称里的 docs/
+    startPos='5'
+    length=`expr ${#dir} - 5`
+    dir=${dir:$startPos:$length}
+    # 判断是否是文件夹且不是图片文件夹
+    if [ -d "${dirs}/${dir}" ] && ! [[ "${dir}" =~ assets$ ]] && ! [[ "${dir}" =~ styles$ ]] 
+    then 
+        # 判断该文件夹是否存在README.md文件
+        if [ ! -f "$dirs/$dir/README.md" ]
+        then 
+        	echo "" > "$dirs/$dir/README.md"
+        fi
+        # 写入目录文件
+        echo "+ [$dir]($dir/README.md)" >> docs/SUMMARY.md
+        # 处理文件夹内部的文件
+        dirReader "$dirs$dir" "$dir" "  "
+    # 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md
+    elif  [ "${dir##*.}" == 'md' ] && [ "${dir}" != "SUMMARY.md" ] && [ "${dir}" != 'README.md' ]
+    then
+    # 写入目录文件
+    	echo "+ [$dir]($dir)" >> docs/SUMMARY.md
+    fi
+done
+```
+
+## 自定义样式
+
+`custom.css`是自定义样式文件，当对`GitBook`的某些样式不满意时，可用自定义`CSS`文件来覆盖
+
+```css
+.book .book-body .page-wrapper .page-inner {
+  max-width: 1200px !important;
+}
+
+.markdown-section img:not(.emoji) {
+    max-width: 100%;
+    border: 1px dashed #a9a4a4;
+}
+
+table > thead > tr > th {
+   text-align:center !important;
+}
+
+
+.markdown-section code:not([class^="lang-"]) {
+    padding: 3px 5px;
+    margin: 0;
+    font-size: .85em;
+    color: #c7254e;
+    border-radius: 4px;
+}
+
+small {
+    font-size: 80% !important;
+}
+
+section  {
+    width:100%;
+}
+h1 {
+  color: #2674BA;
+}
+h2 {
+  color: #0099CC;
+}
+h3 {
+  color: #F77A0B;
+}
+h4 {
+  color: #662D91;
+}
+h5 {
+  color: #444444;
+}
+th {
+  background-color: #2674BA;
+  color: white;
+}
+```
+
+## GitBook配置文件
+
+`book.js`是`GitBook`的配置文件，包含全局配置与各种插件
+
+```javascript
+module.exports = {
+    // markdown文档所在路径
+    root: './docs',
+    // 项目标题
+    title: 'xxxxx平台文档',
+    // 版本
+    gitbook: '3.2.3',
+    language: 'zh-hans',
+    // 插件
+    plugins: [
+        '-highlight',
+        'prism-codetab-fox',
+        'advanced-emoji',
+        'mermaid-fox', // 图表
+        'graph',
+        'flowchart-fox',
+        'chart',
+        'popup',
+        'accordion',
+        'katex',
+        '-search', //搜索
+        'search-pro', //中文搜索
+        'hide-element', //元素隐藏
+        '-lunr', //索引
+        'chapter-fold', //导航目录折叠
+        'code', //代码复制按钮
+        'splitter', //侧边栏宽度可调节
+        'expandable-chapters-small', //目录收起
+        'tbfed-pagefooter', //页面添加页脚
+        'ancre-navigation', //页内导航回到顶部
+        '-sharing', 'sharing-plus', //分享链接
+        'theme-comscore', //主题
+        'favicon', //图标
+        'flexible-alerts' // 警告
+    ],
+    // 插件配置
+    pluginsConfig: {
+        'prism': {
+            'css': [
+                'prismjs/themes/prism-solarizedlight.css'
+            ],
+            "lang": {
+                "dockerfile": "docker"
+            },
+            "ignore": [
+                "mermaid",
+                "eval-js"
+            ]
+        },
+        'hide-element': {
+            'elements': ['.gitbook-link'] //需要隐藏的元素，可以通过浏览网页找到该class
+        },
+        'tbfed-pagefooter': {
+            'copyright': 'Copyright &copy xxx.com 2023-2033',
+            'modify_label': '修订时间：',
+            'modify_format': 'YYYY-MM-DD HH:mm:ss'
+        },
+        'sharing': {
+            'all': []
+        },
+        "chart": {
+            "type": "c3"
+        },
+        "chapter-fold": {},
+        "favicon": {
+            "shortcut": "/favicon.ico",
+            "bookmark": "/favicon.ico"
+        },
+        'flowchart': {
+            "arrow-end": "block",
+            "element-color": "black",
+            "fill": "white",
+            "flowstate": {
+                "approved": {
+                    "fill": "#58C4A3",
+                    "font-size": 12
+                },
+                "current": {
+                    "fill": "#008080",
+                    "font-color": "white",
+                    "font-weight": "bold"
+                },
+                "future": {
+                    "fill": "#8A624A"
+                },
+                "success": {
+                    "fill": "#0B6623"
+                },
+                "invalid": {
+                    "fill": "#6c5696"
+                },
+                "past": {
+                    "fill": "#CCCCCC",
+                    "font-size": 12
+                },
+                "select": {
+                    "fill": "#E1AD01",
+                    "font-size": 12
+                },
+                "rejected": {
+                    "fill": "#C45879",
+                    "font-size": 12
+                },
+                "request": {
+                    "fill": "#569656"
+                },
+                'yellowgreen': {
+                    "fill": "yellowgreen"
+                },
+                'failed': {
+                    "fill": "#800020"
+                }
+            },
+            "font-color": "black",
+            "font-size": 14,
+            "line-color": "black",
+            "line-length": 50,
+            "line-width": 1.3,
+            "scale": 1,
+            "symbols": {
+                "end": {
+                    "class": "end-element",
+                    "font-color": "white",
+                    "font-weight": "bold"
+                },
+                "start": {
+                    "fill": "#8c2106",
+                    "font-color": "white",
+                    "font-weight": "bold"
+                }
+            },
+            "text-margin": 10,
+            "width": 1,
+            "x": 0,
+            "y": 0,
+            "yes-text": "是",
+            "no-text": "否"
+        }
+    },
+    variables: {
+        "styles": {
+            "website": "./styles/website.css",
+        }
+    }
+};
+```
+
