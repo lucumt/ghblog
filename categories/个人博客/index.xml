@@ -6,7 +6,16 @@
     <description>Recent content in 个人博客 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Apr 2023 16:39:51 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Nov 2023 10:35:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>给Hugo中的Even主题添加搜索功能</title>
+      <link>https://lucumt.info/post/hugo/enable-search-in-even-theme/</link>
+      <pubDate>Thu, 30 Nov 2023 10:35:48 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/hugo/enable-search-in-even-theme/</guid>
+      <description>&lt;p&gt;介绍如何在&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;的&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;主题中添加基于&lt;a href=&#34;https://www.fusejs.io/&#34;&gt;&lt;strong&gt;Fuse.js&lt;/strong&gt;&lt;/a&gt;的搜索功能。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Hugo中开启Highcharts图表支持</title>
       <link>https://lucumt.info/post/hugo/enable-highcharts-in-hugo/</link>

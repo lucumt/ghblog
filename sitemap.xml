@@ -3,7 +3,49 @@
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/hugo/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/hugo/enable-search-in-even-theme/</loc>
+    <lastmod>2023-11-30T10:35:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,27 +66,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/ldap/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2023-11-20T15:37:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -395,20 +416,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/highcharts/</loc>
-    <lastmod>2023-04-03T16:39:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/hugo/</loc>
-    <lastmod>2023-04-03T16:39:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2023-04-03T16:39:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
