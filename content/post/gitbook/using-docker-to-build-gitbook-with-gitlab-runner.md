@@ -2,7 +2,7 @@
 title: "在Docker中构建GitBook并整合GitLab Runner的使用经验分享"
 date: 2023-10-07T10:14:02+08:00
 lastmod: 2023-10-07T10:14:02+08:00
-draft: true
+draft: false
 keywords: ["docker","gitbook"]
 description: "简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新"
 tags: ["gitbook","docker","gitlab-runner"]
@@ -270,13 +270,22 @@ build:
 | [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox) | 支持[**Mermaid**](https://mermaid.js.org/)图表功能           | 实际使用过程中发现部分图表无法展示                          |
 | [**gitbook-plugin-flowchart-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-flowchart-fox) | 用于支持[**flowchart**](https://flowchart.js.org/)图表       | 实际使用过程中发现该插件bug较多，在组件过多时会出现样式混乱 |
 | [**gitbook-plugin-advanced-emoji**](https://github.com/codeclou/gitbook-plugin-advanced-emoji) | 用于展示[**Emoji**](https://getemoji.com/)表情               |                                                             |
-| [**gitbook-plugin-chart#readme**](https://github.com/csbun/gitbook-plugin-chart#readme) | 利用[**C3.js**](http://c3js.org/)或[**Highcharts**](http://www.highcharts.com/)来展示图表 |                                                             |
-|                                                              |                                                              |                                                             |
-|                                                              |                                                              |                                                             |
-|                                                              |                                                              |                                                             |
-|                                                              |                                                              |                                                             |
-
-
+| [**gitbook-plugin-chart**](https://github.com/csbun/gitbook-plugin-chart#readme) | 利用[**C3.js**](http://c3js.org/)或[**Highcharts**](http://www.highcharts.com/)来展示图表 |                                                             |
+| [**gitbook-plugin-popup**](https://github.com/somax/gitbook-plugin-popup) | 在新窗口中打开图片                                           |                                                             |
+| [**gitbook-plugin-accordion**](https://github.com/artalar/gitbook-plugin-accordion/) | 手风琴插件，用于展开或折叠相关内容                           |                                                             |
+| [**plugin-katex**](https://github.com/GitbookIO/plugin-katex) | 支持基于[**KaTeX**](https://katex.org/)的数学公式展示        |                                                             |
+| [**gitbook-plugin-search-pro**](https://github.com/gitbook-plugins/gitbook-plugin-search-pro) | 支持中文搜索的插件                                           | 需要在`book.js`中通过 `-search`的方式屏蔽默认的搜索插件[^1] |
+| [**gitbook-plugin-hide-element**](https://github.com/gonjay/gitbook-plugin-hide-element) | 隐藏特定元素                                                 |                                                             |
+| [**gitbook-plugin-chapter-fold**](https://github.com/ColinCollins/gitbook-plugin-chapter-fold) | 页面上方的导航目录折叠                                       |                                                             |
+| [**gitbook-plugin-code**](https://github.com/davidmogar/gitbook-plugin-code) | 给代码块添加行号与复制按钮                                   |                                                             |
+| [**gitbook-plugin-splitter**](https://github.com/yoshidax/gitbook-plugin-splitter) | 页面左侧的侧边栏可动态调节                                   | 该插件与`xmind`插件一并使用时会导致后者无法正常使用         |
+| [**gitbook-plugin-expandable-chapters-small**](https://github.com/cjdbarlow/gitbook-plugin-expandable-chapters-small) | 页面右侧的目录可展开或收缩                                   |                                                             |
+| [**gitbook-plugin-tbfed-pagefooter**](https://github.com/FastGitORG/gitbook-plugin-tbfed-pagefooter) | 页面显示定制化的页脚信息                                     |                                                             |
+| [**gitbook-plugin-ancre-navigation**](https://github.com/thomas88100/gitbook-plugin-ancre-navigation) | 页内导航回到顶部                                             |                                                             |
+| [**gitbook-plugin-sharing**](https://github.com/GitbookIO/plugin-sharing) | 将特定页面分享到其它平台的按钮插件                           | 需要在`book.js`中通过 `-sharing`的方式屏蔽默认的分享插件    |
+| [**gitbook-plugin-theme-comscore**](https://plugins.gitbook.com/plugin/theme-comscore) | `GitBook`彩色主题                                            |                                                             |
+| [**gitbook-plugin-favicon**](https://github.com/menduo/gitbook-plugin-favicon) | 添加favicon图标                                              |                                                             |
+| [**gitbook-plugin-flexible-alerts**](https://github.com/fzankl/gitbook-plugin-flexible-alerts) | 自定义的提示说明样式                                         |                                                             |
 
 ## 自定义插件
 
@@ -289,12 +298,54 @@ build:
 * [**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)，`GitBook`中支持新版的[**Mermaid**](https://mermaid.js.org/)图表，展示效果如下
 
   ![GitBook中展示Mermaid图表](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-mermaid-chart-display.png "GitBook中展示Mermaid图表")
+  
+* [**gitbook-plugin-prism-codetab-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox)，将[**gitbook-plugin-prism**](https://github.com/gaearon/gitbook-plugin-prism)与[**gitbook-plugin-codetabs**](https://github.com/GitbookIO/plugin-codetabs)这两个插件整合为一个插件，在实现代码高亮的同时还能对代码进行分组，展示效果如下：
+
+  ![GitBook中展示代码分组](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-codetab-fox-display.png "GitBook中展示代码分组")
 
 # 其它设置
 
 ## 中文汉化
 
+`GitBook`中的默认语言为英文，如下图所示，某些提示信息以英文展示，不方便使用
+
+![GitBook默认英文展示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-en-language.png "GitBook默认英文展示")
+
+可通过在`book.js`中添加`language:'zh-hans'`来将默认语言修改为中文，修改后的显示效果如下：
+
+![GitBook切换为中文显示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-set-zh-language.png "GitBook切换为中文显示")
+
+## 自定义目录
+
+如下所示`GitBook`中默认生成的菜单为`Introduction`，不太直观，可根据实际需求动态修改(对于菜单目录的生成可参考[**自动生成目录**](#自动生成目录)实现)
+
+![GitBook默认菜单展示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-menu.png "GitBook默认菜单展示")
+
+将默认目录从
+
+```markdown
+* [Introduction](README.md)
+```
+
+修改为
+
+```markdown
+* [概览](README.md)
+```
+
+之后的展示效果类似如下
+
+![GitBook自定义菜单展示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-custom-menu.png "GitBook自定义菜单展示")
+
 ## 自定义样式
+
+若`GitBook`中的样式不满足我们的需求，可通过添加自定义`CSS`文件进行定制，实际使用中发现该文件必须叫做`website.css`且需位于生成的静态文件目录下才生效。
+
+```json
+"styles": {
+    "website": "./styles/website.css",
+}
+```
 
 # 使用展示
 
@@ -748,3 +799,4 @@ module.exports = {
 };
 ```
 
+[^1]: 可根据实际要求通过`-lunr`来屏蔽对应的索引插件
