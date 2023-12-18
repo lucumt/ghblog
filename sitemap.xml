@@ -72,6 +72,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/gitbook/</loc>
+    <lastmod>2023-10-07T10:14:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/gitlab-runner/</loc>
+    <lastmod>2023-10-07T10:14:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</loc>
+    <lastmod>2023-10-07T10:14:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2023-09-01T10:19:48+08:00</lastmod>
     <changefreq>weekly</changefreq>

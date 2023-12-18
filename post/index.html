@@ -158,7 +158,7 @@
    
     <div class="archive-title">
       <span class="archive-post-counter">
-        共计 92 篇文章
+        共计 93 篇文章
       </span>
     </div>
       <div class="collection-title">
@@ -173,6 +173,18 @@
       <span class="archive-post-title">
         <a href="/post/kafka/integrate-ldap-into-kafka-ui/" class="archive-post-link">
 		  在基于Docker搭建的Kafka UI中整合LDAP
+        </a>
+      </span>
+    </div>
+
+    <div class="archive-post">
+      <span class="archive-post-time">
+        10-07
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/" class="archive-post-link">
+		  在Docker中构建GitBook并整合GitLab Runner的使用经验分享
         </a>
       </span>
     </div>
@@ -754,21 +766,6 @@
 		  Spring中BeanFactory和FactoryBean的区别以及使用场景
         </a>
       </span>
-    </div>
-      <div class="collection-title">
-        <h2 class="archive-year">2021</h2>
-      </div>
-
-    <div class="archive-post">
-      <span class="archive-post-time">
-        06-08
-      </span>
-	  
-      <span class="archive-post-title">
-        <a href="/post/java-core/get-datetime-in-specific-timezone/" class="archive-post-link">
-		  利用JDK8时区常量进行时区相关操作
-        </a>
-      </span>
     </div></section>
 
 <nav class="pagination">
@@ -859,7 +856,7 @@ Highcharts.chart('section_year_chart_1', {
         type: 'column',
 		color:"#16982b",
         yAxis: 1,
-        data: JSON.parse("[11,12,7,6,5,2,19,30]"),
+        data: JSON.parse("[11,12,7,6,5,2,19,31]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -868,7 +865,7 @@ Highcharts.chart('section_year_chart_1', {
         name: '按年累计',
 		color:"#0047AB",
         type: 'spline',
-        data: JSON.parse("[11,23,30,36,41,43,62,92]"),
+        data: JSON.parse("[11,23,30,36,41,43,62,93]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -925,7 +922,7 @@ Highcharts.chart('section_year_chart_2', {
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
-        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":7},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":19},{\"name\":\"2023\",\"y\":30}]")
+        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":7},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":19},{\"name\":\"2023\",\"y\":31}]")
 	}] 
 });
 Highcharts.chart('section_month_chart_1', {
@@ -936,7 +933,7 @@ Highcharts.chart('section_month_chart_1', {
         text: '按月统计'
     },
     xAxis: [{
-        categories: JSON.parse("[\"2016-02\",\"2016-03\",\"2016-05\",\"2016-08\",\"2016-10\",\"2017-02\",\"2017-03\",\"2017-04\",\"2017-08\",\"2017-12\",\"2018-01\",\"2018-12\",\"2019-01\",\"2019-02\",\"2019-07\",\"2019-08\",\"2020-01\",\"2020-02\",\"2020-04\",\"2020-09\",\"2021-04\",\"2021-06\",\"2022-01\",\"2022-02\",\"2022-06\",\"2022-08\",\"2022-09\",\"2022-10\",\"2022-11\",\"2022-12\",\"2023-01\",\"2023-02\",\"2023-03\",\"2023-04\",\"2023-05\",\"2023-06\",\"2023-07\",\"2023-08\",\"2023-09\",\"2023-11\"]"),
+        categories: JSON.parse("[\"2016-02\",\"2016-03\",\"2016-05\",\"2016-08\",\"2016-10\",\"2017-02\",\"2017-03\",\"2017-04\",\"2017-08\",\"2017-12\",\"2018-01\",\"2018-12\",\"2019-01\",\"2019-02\",\"2019-07\",\"2019-08\",\"2020-01\",\"2020-02\",\"2020-04\",\"2020-09\",\"2021-04\",\"2021-06\",\"2022-01\",\"2022-02\",\"2022-06\",\"2022-08\",\"2022-09\",\"2022-10\",\"2022-11\",\"2022-12\",\"2023-01\",\"2023-02\",\"2023-03\",\"2023-04\",\"2023-05\",\"2023-06\",\"2023-07\",\"2023-08\",\"2023-09\",\"2023-10\",\"2023-11\"]"),
 		crosshair: true,
         labels:{
            step: 10
@@ -991,7 +988,7 @@ Highcharts.chart('section_month_chart_1', {
         name: '按月新增',
 		color:"#16982b",
         type: 'column',
-        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,5,1,2,3,2,1,5,4,3,9,3,1,1,1]"),
+        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,5,1,2,3,2,1,5,4,3,9,3,1,1,1,1]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1001,7 +998,7 @@ Highcharts.chart('section_month_chart_1', {
         type: 'spline',
 		color:"#0047AB",
         yAxis: 1,
-        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,30,32,34,35,36,37,38,39,41,42,43,44,45,46,51,56,57,59,62,64,65,70,74,77,86,89,90,91,92]"),
+        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,30,32,34,35,36,37,38,39,41,42,43,44,45,46,51,56,57,59,62,64,65,70,74,77,86,89,90,91,92,93]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1065,7 +1062,7 @@ Highcharts.chart('section_month_chart_2', {
             }
         }]
     },
-    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4],\"name\":4},{\"data\":[1,0,0,0,0,0,0,3],\"name\":5},{\"data\":[0,0,0,0,0,1,1,9],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1],\"name\":8},{\"data\":[0,0,0,0,2,0,5,1],\"name\":9},{\"data\":[1,0,0,0,0,0,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,1],\"name\":11},{\"data\":[0,3,5,0,0,0,3,0],\"name\":12}]")
+    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4],\"name\":4},{\"data\":[1,0,0,0,0,0,0,3],\"name\":5},{\"data\":[0,0,0,0,0,1,1,9],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1],\"name\":8},{\"data\":[0,0,0,0,2,0,5,1],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1],\"name\":10},{\"data\":[0,0,0,0,0,0,2,1],\"name\":11},{\"data\":[0,3,5,0,0,0,3,0],\"name\":12}]")
 });
 </script>
 	</div>
