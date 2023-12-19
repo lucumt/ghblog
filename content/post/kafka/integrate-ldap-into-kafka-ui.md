@@ -6,7 +6,7 @@ draft: false
 keywords: ["docker","kafka","ldap"]
 description: "在基于Docker搭建的Kafka UI中整合LDAP"
 tags: ["docker","kafka","ldap"]
-categories: ["容器化","工具使用"]
+categories: ["容器化","工具使用","消息队列"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
