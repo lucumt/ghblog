@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>Kafka每次都消费最新的数据</title>
+      <link>https://lucumt.info/post/kafka/consume-latest-message-each-time/</link>
+      <pubDate>Thu, 16 Nov 2023 15:42:25 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/kafka/consume-latest-message-each-time/</guid>
+      <description>&lt;p&gt;近期项目中有一个数据展示功能，其数据来源于&lt;a href=&#34;https://kafka.apache.org/&#34;&gt;&lt;strong&gt;Kafka&lt;/strong&gt;&lt;/a&gt;，项目要求&lt;code&gt;Kafka&lt;/code&gt;每次都消费最新的数据，简要记录下其实现方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</title>
       <link>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</link>
       <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>

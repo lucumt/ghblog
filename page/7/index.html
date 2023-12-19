@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/arrays-as-list-convert-result-in-java/">Arrays.asList类型转换结果的坑</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-07-22 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在各种<code>Java</code>编程规范中都强调尽量不用<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-">java.util.Arrays.asList()</a>方法以避免调用此方法生成的<code>List</code>无法进行修改操作，个人近期在使用过程中发现该方法的另外一个坑，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-core/arrays-as-list-convert-result-in-java/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/limit-large-size-data-in-mysql/">在MySQL中对大量数据进行limit offset分页查询的优化</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-02-11 </span>
@@ -336,28 +357,6 @@
     </div>
     <div class="read-more">
       <a href="/post/java-core/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/quartz/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-09 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/quartz/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
