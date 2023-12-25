@@ -6,7 +6,17 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Nov 2023 10:35:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Dec 2023 16:21:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitBook插件中实现从多个不同的文件夹下加载css和js文件</title>
+      <link>https://lucumt.info/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</link>
+      <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</guid>
+      <description>&lt;p&gt;在&lt;a href=&#34;https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/&#34;&gt;&lt;strong&gt;在Docker中构建GitBook并整合GitLab Runner的使用经验分享&lt;/strong&gt;&lt;/a&gt;一文中，自己在&lt;code&gt;Docker&lt;/code&gt;环境下基于&lt;code&gt;GitLab Runner&lt;/code&gt;实现了&lt;code&gt;GitBook&lt;/code&gt;的自动构建，同时基于实际使用需求添加了很多&lt;code&gt;GitBook&lt;/code&gt;插件，在此过程中积累了一些&lt;code&gt;GitBook&lt;/code&gt;插件的开发与使用经验。&lt;/p&gt;
+&lt;p&gt;本文简要介绍自己在&lt;code&gt;GitBook&lt;/code&gt;插件定制化修改过程中如何实现从多个不同的文件夹下加载&lt;code&gt;js&lt;/code&gt;和&lt;code&gt;css&lt;/code&gt;文件的实现过程。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>给Hugo中的Even主题添加搜索功能</title>
       <link>https://lucumt.info/post/hugo/enable-search-in-even-theme/</link>

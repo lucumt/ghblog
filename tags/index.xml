@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Nov 2023 10:35:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Dec 2023 16:21:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gitbook</title>
+      <link>https://lucumt.info/tags/gitbook/</link>
+      <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/gitbook/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>hugo</title>
       <link>https://lucumt.info/tags/hugo/</link>
@@ -40,15 +49,6 @@
       <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/ldap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gitbook</title>
-      <link>https://lucumt.info/tags/gitbook/</link>
-      <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/gitbook/</guid>
       <description></description>
     </item>
     
