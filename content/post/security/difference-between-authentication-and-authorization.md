@@ -1,19 +1,19 @@
 ---
-title: "HTTPS创建连接过程分析"
-date: 2022-08-13T15:28:07+08:00
-lastmod: 2022-08-13T15:28:07+08:00
+title: "Authentication与Authorization的差异对比说明"
+date: 2024-01-16T13:06:31+08:00
+lastmod: 2024-01-16T13:06:31+08:00
 draft: true
 keywords: []
 description: ""
 tags: []
-categories: []
+categories: [“系统安全”]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -22,6 +22,8 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+centerImage: false
+borderImage: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -38,6 +40,13 @@ sequenceDiagrams:
   enable: false
   options: ""
 
+mermaidDiagrams: 
+  enable: false
+  options: ""
+
+highchartsDiagrams: 
+  enable: false
+  options: ""
 ---
 
 <!--more-->
