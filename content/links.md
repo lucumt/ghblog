@@ -74,7 +74,8 @@ sequenceDiagrams:
 
 * 线程生命周期
 
-  ![线程生命周期](/blog_img/links/线程生命周期.jpg "线程生命周期")
+  * ![线程生命周期](/blog_img/links/线程生命周期.jpg "线程生命周期")
+  * ![线程状态切换](/blog_img/links/线程状态切换.png "线程状态切换")
 
 * 云原生技术栈
 
