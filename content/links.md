@@ -59,7 +59,7 @@ sequenceDiagrams:
 | [**小林coding**](https://xiaolincoding.com/)                 | 关于计算机网络、计算机基础等的网站，质量很高💚                | `小林coding`   |
 | [**Xianhuii**](https://www.cnblogs.com/Xianhuii/)            | 关于`Spring`和`MyBatis`框架源码分析的博文，部分文章质量较高  |                |
 | [**努力的小雨**](https://www.cnblogs.com/guoxiaoyu/)         | 关于`Spring`源码和计算机网络的高质量博文💚                    |                |
-| [**苏三说技术**](https://www.cnblogs.com/12lisu)             | 关于`Java`相关的博文，有些质量不错                           |                |
+| [**苏三说技术**](https://www.cnblogs.com/12lisu)             | 关于`Java`相关的博文，有些质量不错，内容短但是有干货         |                |
 | [**JavaBuild**](https://www.cnblogs.com/JavaBuild)           | 关于`Java`基础知识的博文，质量都不错                         | `JavaBuild888` |
 
 # 单个博文
