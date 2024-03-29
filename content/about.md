@@ -40,7 +40,7 @@ sequenceDiagrams:
 
 ---
 
-一个混迹于帝都的程序猿，主要从事`Java`、`Python`和`Golang`相关的开发工作。
+一个混迹于帝都的程序猿，主要从事`Java`、`Python`和`Golang`相关的开发工作，欢迎互相交流!
 
 ## 编程领域
 
