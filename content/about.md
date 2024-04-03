@@ -44,9 +44,9 @@ sequenceDiagrams:
 
 ## 编程领域
 
-* `Java`，主要用它进行web开发
+* `Java`，日常编程主要使用的语言，吃饭的家伙
 * `Python`，主要用它进行网络爬虫开发和web开发
-* `Golang`,个人业余爱好
+* `Golang`,个人业余爱好，希望在此领域长期发展
 * `MySQL`、`MongoDB`
 * `HTML`、`Javascript`、`jQuery`、`CSS`
 
