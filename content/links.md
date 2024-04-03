@@ -70,6 +70,7 @@ sequenceDiagrams:
 * [Oracle官方的JDK各版本特性说明](https://docs.oracle.com/en/java/javase/18/language/java-language-changes.html)
 * [斯坦福大学关于位运算技巧的总结](https://graphics.stanford.edu/~seander/bithacks.html)
 * [Vim快捷键集合](https://linux.cn/article-8144-1.html)
+* [当你问代理机制的时候？指的是Agent,Proxy,Broker还是Delegate呢？](https://cloud.tencent.com/developer/article/1470232)
 
 # 其它
 
