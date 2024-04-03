@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Dec 2023 16:21:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[杂谈]记一次个人GitHub账号的找回过程</title>
+      <link>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</link>
+      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</guid>
+      <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>GitBook插件中实现从多个不同的文件夹下加载css和js文件</title>
       <link>https://lucumt.info/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</link>

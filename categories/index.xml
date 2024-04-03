@@ -6,22 +6,31 @@
     <description>Recent content in Categories on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Dec 2023 16:21:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>工具使用</title>
-      <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
+      <title>编程杂想</title>
+      <link>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</link>
+      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
       
-      <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>个人博客</title>
       <link>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Thu, 30 Nov 2023 10:35:48 +0800</pubDate>
+      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
       
       <guid>https://lucumt.info/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>工具使用</title>
+      <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
       <description></description>
     </item>
     
@@ -157,15 +166,6 @@
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
       
       <guid>https://lucumt.info/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>编程杂想</title>
-      <link>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</link>
-      <pubDate>Sat, 23 Dec 2017 12:07:40 +0800</pubDate>
-      
-      <guid>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</guid>
       <description></description>
     </item>
     

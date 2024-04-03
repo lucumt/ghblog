@@ -152,7 +152,7 @@
 	<div class="toggle-on-content">
 		<div class="terms">
 		  <div class="terms-title">
-			共计 47 个标签
+			共计 48 个标签
 		  </div>
 		  <div class="terms-tags">
 			  <a class="terms-link" href="/tags/java/">
@@ -225,9 +225,19 @@
 				<span class="terms-count">5</span>
 			  </a>
 			
+			  <a class="terms-link" href="/tags/github/">
+				github
+				<span class="terms-count">4</span>
+			  </a>
+			
 			  <a class="terms-link" href="/tags/mybatis/">
 				mybatis
 				<span class="terms-count">4</span>
+			  </a>
+			
+			  <a class="terms-link" href="/tags/git/">
+				git
+				<span class="terms-count">3</span>
 			  </a>
 			
 			  <a class="terms-link" href="/tags/github-pages/">
@@ -247,11 +257,6 @@
 			
 			  <a class="terms-link" href="/tags/bit/">
 				bit
-				<span class="terms-count">2</span>
-			  </a>
-			
-			  <a class="terms-link" href="/tags/git/">
-				git
 				<span class="terms-count">2</span>
 			  </a>
 			
@@ -413,7 +418,7 @@ var randomPlacement = function randomPlacement(point, options) {
 }
 Highcharts.seriesTypes.wordcloud.prototype.placementStrategy.randomHorizontal = randomPlacement;
 
-let data = JSON.parse("[{\"name\":\"java\",\"weight\":43},{\"name\":\"junit\",\"weight\":14},{\"name\":\"docker\",\"weight\":13},{\"name\":\"junit5\",\"weight\":11},{\"name\":\"java-concurrency\",\"weight\":10},{\"name\":\"kubesphere\",\"weight\":9},{\"name\":\"go\",\"weight\":7},{\"name\":\"hugo\",\"weight\":7},{\"name\":\"ldap\",\"weight\":7},{\"name\":\"jenkins\",\"weight\":6},{\"name\":\"kubernetes\",\"weight\":6},{\"name\":\"spring\",\"weight\":6},{\"name\":\"mysql\",\"weight\":5},{\"name\":\"nacos\",\"weight\":5},{\"name\":\"mybatis\",\"weight\":4},{\"name\":\"github-pages\",\"weight\":3},{\"name\":\"linux\",\"weight\":3},{\"name\":\"springmvc\",\"weight\":3},{\"name\":\"bit\",\"weight\":2},{\"name\":\"git\",\"weight\":2},{\"name\":\"gitbook\",\"weight\":2},{\"name\":\"html5\",\"weight\":2},{\"name\":\"javascript\",\"weight\":2},{\"name\":\"kafka\",\"weight\":2},{\"name\":\"mockito\",\"weight\":2},{\"name\":\"python\",\"weight\":2},{\"name\":\"shell\",\"weight\":2},{\"name\":\"birt\",\"weight\":1},{\"name\":\"cmd\",\"weight\":1},{\"name\":\"devops\",\"weight\":1},{\"name\":\"easyui\",\"weight\":1},{\"name\":\"gitlab-runner\",\"weight\":1},{\"name\":\"gradle\",\"weight\":1},{\"name\":\"highcharts\",\"weight\":1},{\"name\":\"https\",\"weight\":1},{\"name\":\"intellij-idea\",\"weight\":1},{\"name\":\"jvm\",\"weight\":1},{\"name\":\"log4j\",\"weight\":1},{\"name\":\"maven\",\"weight\":1},{\"name\":\"mediawiki\",\"weight\":1},{\"name\":\"minio\",\"weight\":1},{\"name\":\"quartz\",\"weight\":1},{\"name\":\"spring-boot\",\"weight\":1},{\"name\":\"spring-cloud\",\"weight\":1},{\"name\":\"spring-security\",\"weight\":1},{\"name\":\"windows\",\"weight\":1},{\"name\":\"xml\",\"weight\":1}]");
+let data = JSON.parse("[{\"name\":\"java\",\"weight\":43},{\"name\":\"junit\",\"weight\":14},{\"name\":\"docker\",\"weight\":13},{\"name\":\"junit5\",\"weight\":11},{\"name\":\"java-concurrency\",\"weight\":10},{\"name\":\"kubesphere\",\"weight\":9},{\"name\":\"go\",\"weight\":7},{\"name\":\"hugo\",\"weight\":7},{\"name\":\"ldap\",\"weight\":7},{\"name\":\"jenkins\",\"weight\":6},{\"name\":\"kubernetes\",\"weight\":6},{\"name\":\"spring\",\"weight\":6},{\"name\":\"mysql\",\"weight\":5},{\"name\":\"nacos\",\"weight\":5},{\"name\":\"github\",\"weight\":4},{\"name\":\"mybatis\",\"weight\":4},{\"name\":\"git\",\"weight\":3},{\"name\":\"github-pages\",\"weight\":3},{\"name\":\"linux\",\"weight\":3},{\"name\":\"springmvc\",\"weight\":3},{\"name\":\"bit\",\"weight\":2},{\"name\":\"gitbook\",\"weight\":2},{\"name\":\"html5\",\"weight\":2},{\"name\":\"javascript\",\"weight\":2},{\"name\":\"kafka\",\"weight\":2},{\"name\":\"mockito\",\"weight\":2},{\"name\":\"python\",\"weight\":2},{\"name\":\"shell\",\"weight\":2},{\"name\":\"birt\",\"weight\":1},{\"name\":\"cmd\",\"weight\":1},{\"name\":\"devops\",\"weight\":1},{\"name\":\"easyui\",\"weight\":1},{\"name\":\"gitlab-runner\",\"weight\":1},{\"name\":\"gradle\",\"weight\":1},{\"name\":\"highcharts\",\"weight\":1},{\"name\":\"https\",\"weight\":1},{\"name\":\"intellij-idea\",\"weight\":1},{\"name\":\"jvm\",\"weight\":1},{\"name\":\"log4j\",\"weight\":1},{\"name\":\"maven\",\"weight\":1},{\"name\":\"mediawiki\",\"weight\":1},{\"name\":\"minio\",\"weight\":1},{\"name\":\"quartz\",\"weight\":1},{\"name\":\"spring-boot\",\"weight\":1},{\"name\":\"spring-cloud\",\"weight\":1},{\"name\":\"spring-security\",\"weight\":1},{\"name\":\"windows\",\"weight\":1},{\"name\":\"xml\",\"weight\":1}]");
 let max=0,min=-10;
 for(d of data){
   if(d.weight > max){

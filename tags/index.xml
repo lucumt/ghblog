@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Dec 2023 16:21:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git</title>
+      <link>https://lucumt.info/tags/git/</link>
+      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>https://lucumt.info/tags/github/</link>
+      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/github/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>gitbook</title>
       <link>https://lucumt.info/tags/gitbook/</link>
@@ -170,15 +188,6 @@
     </item>
     
     <item>
-      <title>git</title>
-      <link>https://lucumt.info/tags/git/</link>
-      <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>jenkins</title>
       <link>https://lucumt.info/tags/jenkins/</link>
       <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
@@ -260,7 +269,7 @@
     </item>
     
     <item>
-      <title>Github Pages</title>
+      <title>github-pages</title>
       <link>https://lucumt.info/tags/github-pages/</link>
       <pubDate>Sat, 03 Sep 2022 18:35:57 +0800</pubDate>
       
