@@ -6,7 +6,16 @@
     <description>Recent content in jenkins on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 17 Jun 2023 14:27:13 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Nov 2023 10:14:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用SSH实现在Jekins中给远程服务器部署项目</title>
+      <link>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</link>
+      <pubDate>Wed, 15 Nov 2023 10:14:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</guid>
+      <description>&lt;p&gt;简要记录如何整合&lt;code&gt;Jenkins&lt;/code&gt;与&lt;code&gt;SSH&lt;/code&gt;免密登录，实现通过&lt;code&gt;Jenkins&lt;/code&gt;流水线部署到不同的服务器环境下，提高开发与测试环境的灵活性。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
       <link>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</link>

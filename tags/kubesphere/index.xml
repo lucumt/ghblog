@@ -6,7 +6,16 @@
     <description>Recent content in kubesphere on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Jul 2023 09:54:01 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Nov 2023 10:14:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用SSH实现在Jekins中给远程服务器部署项目</title>
+      <link>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</link>
+      <pubDate>Wed, 15 Nov 2023 10:14:18 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</guid>
+      <description>&lt;p&gt;简要记录如何整合&lt;code&gt;Jenkins&lt;/code&gt;与&lt;code&gt;SSH&lt;/code&gt;免密登录，实现通过&lt;code&gt;Jenkins&lt;/code&gt;流水线部署到不同的服务器环境下，提高开发与测试环境的灵活性。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
       <link>https://lucumt.info/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>

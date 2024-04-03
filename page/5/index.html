@@ -147,6 +147,28 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/">由于k8s中的错误配置导致无法创建新节点</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-11-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>记录下自己在使用<a href="https://kubesphere.io/">KubeSphere</a>过程中由于<code>YAML</code>中错误的配置导致<code>Kubernetes</code>经常资源紧张而无法创建与部署新节点的问题。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/log4j/show-trace-id-only-if-exists-in-log4j2/">在Log4j2中实现只有在traceId有值时才输出</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-10-13 </span>
@@ -333,27 +355,6 @@
     </div>
     <div class="read-more">
       <a href="/post/devops/share-experiences-for-using-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/">由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-08-04 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>由于公司的<code>docker</code>容器在运行一段时间后日志变得很大，通过<code>shell</code>脚本或者结合<code>docker stop</code>、<code>docker rm</code>和<code>docker run</code>来重新创建实例方式都觉得太麻烦，按照网络上的建议在<code>/etc/docker/daemon.json</code>中进行相关修改后却一直无法启动，同时错误信息一直提示<code>unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)</code>，经过一番排查后终于找到原因，故记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

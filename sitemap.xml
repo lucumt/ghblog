@@ -37,6 +37,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/ssh/</loc>
+    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -149,6 +156,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/jenkins/</loc>
+    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/kubesphere/</loc>
+    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
+    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</loc>
+    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/gitlab-runner/</loc>
     <lastmod>2023-10-07T10:14:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -213,20 +248,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/kubernetes/</loc>
-    <lastmod>2023-07-06T09:54:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/kubesphere/</loc>
-    <lastmod>2023-07-06T09:54:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
     <lastmod>2023-07-06T09:54:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -339,13 +360,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/devops/</loc>
-    <lastmod>2023-06-17T14:27:13+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/jenkins/</loc>
     <lastmod>2023-06-17T14:27:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
