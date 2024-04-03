@@ -5,7 +5,7 @@ lastmod: 2024-04-03T10:12:47+08:00
 draft: false
 keywords: ["github","2FA","ssh","recovery codes"]
 description: "记录自己由于手机格式化导致的GitHub 2FA认证失效而无法登录后恢复GitHub账号的过程"
-tags: ["github","git"]
+tags: ["github","git","ssh"]
 categories: ["个人博客","编程杂想"]
 author: "Rosen Lu"
 
