@@ -5,8 +5,8 @@ lastmod: 2023-07-06T10:56:54+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["devops","grafana"]
+categories: ["工具使用"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
