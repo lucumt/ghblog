@@ -64,7 +64,9 @@ flowchartDiagrams:
               'flowstate': {
                 'pink': {'fill': 'pink'},
                 'peru': {'fill': 'peru'},
-                'cyan': {'fill': 'cyan'}
+                'cyan': {'fill': 'cyan'},
+                'tomato': {'fill': 'tomato'},
+                'darkcyan': {'fill': 'darkcyan'}
                  }
               }"
 
@@ -96,7 +98,7 @@ highchartsDiagrams:
 3. 相关实现方案不是很小众，在有使用问题时能有相关途径寻找解决方案
 4. 软件License许可能允许商用，且软件代码开源以便能进行二次开发
 
-# Foxglove概览
+# 软件概览
 
 经过多方对比以及参考业界其它公司相关的方案后，最终决定采用基于`Foxglove`作为对应的可视化工具替代实现，其具有如下特性：
 
@@ -107,6 +109,7 @@ highchartsDiagrams:
 5. 支持界面自定义布局与调整，可根据实际需求灵活调整不同的`panel`的展示位置以及宽高等信息，当关闭某个`panel`时整个播放界面会自动调整已达到最佳显示效果
 6. 在创建`panel`并关联`server`端相关的`topic`或关闭配置好的`panel`后都会给`server`端发送对应的通知，方便进行`server`端开启或关闭数据推送服务，减少不必要的压力。同时，重复配置的`panel`只会建立一个连接，减少页面端的负载
 7. 软件许可基于[**Mozilla Public License 2.0**](https://www.mozilla.org/en-US/MPL/2.0/)，可用于商业化的产品中[^1]
+8. 支持在线版本和本地版本，在线版本需要付费，本地版本可通过`Docker`安装
 
 `Foxglove`的使用流程如下图所示：
 
@@ -133,15 +136,60 @@ start->create_topic(right)->register_topic->create_panel(right)->config_panel->s
 display_data->close_panel->close_connection(right)->end
 ```
 
+在个人项目使用中`Server`端的数据来源是基于`Kafka`实现的，相关的流程如下
 
+```flow
+start=>start: 开始
+set_server=>inputoutput: 配置服务端 | pink
+create_panel=>operation: 创建面板 | pink
+select_chassis=>inputoutput: 选择底盘号 | tomato
+fetch_data=>subroutine: 拉取kafka数据 | cyan
+send_data=>subroutine: 发送kafka数据 | cyan
+filter_data=>subroutine: 过滤kafka数据 | darkcyan
+render_data=>operation: 展示数据 | peru
+close_browser=>operation: 关闭浏览器 | pink
 
-# 启动UI界面
+start->set_server(right)->create_panel->select_chassis
+select_chassis->fetch_data->filter_data
+filter_data(right)->send_data(right)->render_data
+render_data->select_chassis
+```
+
+# 服务配置
+
+本章节以UI端本地私有化安装为例，说明如何配置`Foxglove`前后端通信的环境。
+
+## 服务端安装
+
+1. 根据`Foxglove`官方网站的[**说明文档**](https://docs.foxglove.dev/docs/visualization/message-schemas/introduction/)以及相关的[**Java Demo**](https://github.com/foxglove-custom/foxglove-websocket-java)编写对应的`server`端项目，暴露`WebSocket`端口，此处假设其端口为8765
+2. 启动`server`端程序，则对应的`WebSocket`访问地址为`http://127.0.0.1:8765`
+
+## 页面端安装
+
+1. 在`Foxglove`对应的[**GitHub地址**](https://github.com/foxglove/studio)上有其UI端的安装说明，主要采用`Docker`安装，相关的指令如下[^3]
+
+   ```bash
+   docker run --rm -p "8080:8080" ghcr.io/foxglove/studio:latest
+   ```
+
+2. 上述指令安装完成之后，在浏览器中输入`http://127.0.0.1:8080`会打开类似如下界面，在`打开数据源`对话框中选择最下面的`打开连接`
+
+   ![foxglove初次打开](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-init-open.png "foxglove初次打开")
+
+3. 在弹出的对话框中添加前面使用的`Websocket`地址，之后点击`open`按钮关闭该对话框
+
+   ![foxglove设置连接](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-set-connection.png "foxglove设置连接")
+
+4. 若连接配置正确，在左侧会出现相关的topic列表，类似如下图所示，至此`Foxglove`前后端通信的环境初步搭建完毕
+
+   ![foxglove正常连接](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-connection-config-result.png "foxglove正常连接")
 
 # topic注册
 
 # 消息发送
 
-# 相关功能说明
+# 功能说明
 
 [^1]: 基于`Mozilla Public License 2.0`协议，若对其源码进行二次开发，也需要遵守同样的协议
 [^2]: 此处的实时依赖于server端发送数据的频率
+[^3]: 在2024年3月份原作者更新了`REAME.md`，在此次更新中将`Docker`安装的指令移除了，不过我们可通过[历史记录](https://github.com/foxglove/studio/pull/7534/files)去查找相关指令
