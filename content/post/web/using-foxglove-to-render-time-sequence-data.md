@@ -155,7 +155,7 @@ filter_data(right)->send_data(right)->render_data
 render_data->select_chassis
 ```
 
-# 服务配置
+# 前后端配置
 
 本章节以UI端本地私有化安装为例，说明如何配置`Foxglove`前后端通信的环境。
 
@@ -184,11 +184,83 @@ render_data->select_chassis
 
    ![foxglove正常连接](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-connection-config-result.png "foxglove正常连接")
 
-# topic注册
+# 服务器端编写
 
-# 消息发送
+由于`Foxglove`官方已经提供了相应的`Docker`镜像可直接运行，除非需要自定义开发插件，通常不涉及到对UI端的操作，我们使用`Foxglove`时更多的工作还是集中在`server`端。
 
-# 功能说明
+本文相关的代码参见[**foxglove-websocket-java**](https://github.com/foxglove-custom/foxglove-websocket-java)。
+
+## topic创建
+
+1. `Foxglove`前后端通信主要基于`WebSocket`实现，本文采用`Netty`提供的`WebSocket`工具类来简化使用，对应的`Maven`版本为
+
+   ```xml
+   <dependency>
+       <groupId>org.yeauty</groupId>
+       <artifactId>netty-websocket-spring-boot-starter</artifactId>
+       <version>0.12.0</version>
+   </dependency>
+   ```
+
+2. 添加一个如下的类用于暴露`WebSocket`端口，此时在程序启动后前后端已具备初步的通信能力
+
+   ```java
+   @Slf4j
+   @ServerEndpoint(port = "8767")
+   public class FoxgloveServer {
+   
+       public static final String EMPTY_CHASSIS_CODE = "NaN";
+   
+       @BeforeHandshake
+       public void handshake(Session session) {
+           log.info("----------session信息" + session.toString());
+           session.setSubprotocols("foxglove.websocket.v1");
+       }
+   
+       @OnOpen
+       public void onOpen(Session session) {
+           log.info("这是一次新的链接 ---》 new connection" + session.hashCode());
+       }
+   
+       @OnClose
+       public void onClose(Session session) throws IOException {
+           // 从对象集合中删除该连接对象
+           log.info("-------one connection closed");
+           session.close();
+       }
+   
+       @OnError
+       public void onError(Session session, Throwable throwable) {
+           throwable.printStackTrace();
+       }
+   
+       @OnMessage
+       public void onMessage(Session session, String message) {
+           JSONObject msg = JSON.parseObject(message);
+           String op = msg.getString("op");
+           log.info("-------------on open msg:\t" + message);
+       }
+   
+       @OnBinary
+       public void onBinary(Session session, byte[] bytes) {
+           // 这里接收到用户指令
+           String data = new String(Arrays.copyOfRange(bytes, 5, bytes.length));
+           JSONObject message = JSON.parseObject(data);
+           log.info("--------binary message:\t" + message);
+       }
+   
+   }
+   ```
+
+3. 测试
+
+4. 测试
+
+5. 测试
+
+## 数据发送
+
+# 相关功能说明
 
 [^1]: 基于`Mozilla Public License 2.0`协议，若对其源码进行二次开发，也需要遵守同样的协议
 [^2]: 此处的实时依赖于server端发送数据的频率
