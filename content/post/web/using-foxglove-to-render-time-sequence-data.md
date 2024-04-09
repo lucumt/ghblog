@@ -85,29 +85,38 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+# 需求背景
 
 在自动驾驶相关的项目中经常会对采集的时序数据进行可视化播放展示，常见展示方式包括`纯文本`、`图片`、`表格`、`图表`、`地图`、`3D`等展示形式，之前团队内部对于这种需求都是前后端配合自己开发相关的UI组件进行展示。但随着要展示数据的增多以及用户需求的多变，采用自行开发的方式已经力不从心，迫切的需要一款能同时支持多路数据以不同方式播放展示的工具来减轻研发压力，提升系统稳定性与可靠性。
 
 在切换为新的可视化工具之前，内部确定了如下几个指标：
 
-1. 能同时支持多路数据播放
-2. 支持纯文本、表格、图表、地图、3D、ROS、图片、视频等形式播放
+1. 能同时支持多路数据播放，可方便的添加与配置
+2. 支持`纯文本`、`表格`、`图表`、`地图`、`3D`、`ROS`、`图片`、`视频`等形式播放
 3. 相关实现方案不是很小众，在有使用问题时能有相关途径寻找解决方案
 4. 软件License许可能允许商用，且软件代码开源以便能进行二次开发
 
+# Foxglove概览
+
 经过多方对比以及参考业界其它公司相关的方案后，最终决定采用基于`Foxglove`作为对应的可视化工具替代实现，其具有如下特性：
 
-1. 支持
-2. 支持
-3. 支持
-4. 支持
+1. 核心是基于`React`实现的浏览器播放，`server`端只需根据规范返回对应格式的数据即可，不限制`server`端的编程语言和实现方式，前后端通信主要基于`WebSocket`实现
+2. 预先定义了几十种数据格式，基于这些数据格式和实际业务需求可组合成多种不同的数据播放源，每个数据播放源都对应为一个`panel`
+3. 支持多种类型的播放形式，除了前述的几种类型，其还支持`滑块`、`服务`，`日志`、`状态图`、`主题图`等十几种样式，且可根据实际需求自行开发第三方的插件并很容易的整合到系统中，在`Foxglove`实际播放时每种播放类型都对应为一个`panel`
+4. 支持多通道播放，可对同一类型的`panel`可基于多个不同的数据源创建多个不同的`panel`来同时播放，也可同时配置多个不同类型的`panel`进行同时播放
+5. 支持界面自定义布局与调整，可根据实际需求灵活调整不同的`panel`的展示位置以及宽高等信息，当关闭某个`panel`时整个播放界面会自动调整已达到最佳显示效果
+6. 在创建`panel`并关联`server`端相关的`topic`或关闭配置好的`panel`后都会给`server`端发送对应的通知，方便进行`server`端开启或关闭数据推送服务，减少不必要的压力。同时，重复配置的`panel`只会建立一个连接，减少页面端的负载
+7. 软件许可基于[**Mozilla Public License 2.0**](https://www.mozilla.org/en-US/MPL/2.0/)，可用于商业化的产品中[^1]
 
 `Foxglove`的使用流程如下图所示：
 
-1. 首先要创建对应的topic,每个topic都代表某种类型的展示数据，除了纯文本这种数据之外，对于地图、3D、图片的展示方式需要根据官方文档设置对应的schema
-2. topic创建完毕后要进行注册，只有注册完毕的topic才能被对应的panel使用
-3. 创建panel
+1. 首先要创建对应的`topic`,每个`topic`都代表某种类型的展示数据，除了纯文本和表格之外，对于地图、3D、图片的展示方式需要根据官方文档设置对应的`schema`
+2. `topic`创建完毕后要进行注册，只有注册完毕的`topic`才能被对应的`panel`使用
+3. 创建`panel`，`panel`是数据展示的基本单位，其中纯文本和表格类型可兼容所有的`topic`，而对于地图、3D、图片类型则需要与特定`schema`的`topic`关联
+4. 创建完`panel`后，需要将其关联到对应的`topic`，并根据实际情况进行针对性的设置，如3D场景下设置显示的物体，地图场景下设置使用的地图源
+5. 启动对应的server端，持续不停的给相关`topic`写入数据
+6. 若一切正常，在`Foxglvoe`前端界面上对应的`panel`中会实时[^2]的展示server端发送来的数据
+7. 若不需要某个`panel`，直接关闭即可，此时`Foxglove`会自动关闭相关的`WebSocket`连接
 
 ```flow
 start=>start: 开始
@@ -115,18 +124,24 @@ end=>end: 结束
 create_topic=>operation: 创建topic | pink
 register_topic=>operation: 注册topic | pink
 create_panel=>operation: 创建panel | cyan
-send_data=>operation: 后端发送数据 | peru
+config_panel=>operation: 配置panel | cyan
+send_data=>operation: server端发送数据 | peru
 display_data=>operation: foxglove展示 | peru
 close_panel=>operation: 关闭panel | cyan
 close_connection=>operation: 断开连接 | cyan
-start->create_topic(right)->register_topic(right)->create_panel->send_data(right)->display_data
-display_data(right)->close_panel->close_connection(right)->end
+start->create_topic(right)->register_topic->create_panel(right)->config_panel->send_data(right)->display_data
+display_data->close_panel->close_connection(right)->end
 ```
 
 
+
+# 启动UI界面
 
 # topic注册
 
 # 消息发送
 
 # 相关功能说明
+
+[^1]: 基于`Mozilla Public License 2.0`协议，若对其源码进行二次开发，也需要遵守同样的协议
+[^2]: 此处的实时依赖于server端发送数据的频率
