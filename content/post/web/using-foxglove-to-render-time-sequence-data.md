@@ -2,7 +2,7 @@
 title: "利用Foxglove以多种方式展示时间连续的数据"
 date: 2023-11-13T14:08:39+08:00
 lastmod: 2023-11-13T14:08:39+08:00
-draft: true
+draft: false
 keywords: ["foxglove","时序数据","自动驾驶"]
 description: "简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据"
 tags: ["web","foxglove"]
@@ -639,8 +639,6 @@ render_data->select_chassis
 7. 在UI端查看，可发现此时能正常播放消息，至此`Foxglove`前后端交互的配置基本搭建完毕，后续就是根据不同的面板类型进行针对性的编码。
 
    ![foxglove正常展示消息](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-display-text-message-success.png "foxglove正常展示消息")
-
-# 相关功能说明
 
 [^1]: 基于`Mozilla Public License 2.0`协议，若对其源码进行二次开发，也需要遵守同样的协议
 [^2]: 此处的实时依赖于server端发送数据的频率
