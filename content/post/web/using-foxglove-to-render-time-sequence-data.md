@@ -202,7 +202,7 @@ render_data->select_chassis
    </dependency>
    ```
 
-2. 添加一个如下的类用于暴露`WebSocket`端口，此时在程序启动后前后端已具备初步的通信能力
+2. 添加一个名为`FoxgloveServer`的类用于暴露`WebSocket`端口，此时在程序启动后前后端已具备初步的通信能力
 
    ```java
    @Slf4j
@@ -252,13 +252,254 @@ render_data->select_chassis
    }
    ```
 
+3. 建立一个名为`TopicInfo`的`topic`类，代码如下
+
+   ```java
+   @Data
+   public class TopicInfo {
+   
+       /**
+        * topic id，在注册时指定其值
+        */
+       private Integer id;
+   
+       /**
+        * topic名称
+        */
+       private String topic;
+   
+       /**
+        * topic编码，如json,protobuf等
+        */
+       private String encoding;
+   
+       /**
+        * topic描述
+        */
+       private String schemaName;
+   
+       /**
+        * topic对应的数据结构，可以是自定义的，也可以是foxglove官方定义好的
+        */
+       private String schema;
+   
+       /**
+        * 对用结构的表示形式，如json时为jsonschema
+        */
+       private String schemaEncoding;
+   
+   }
+   ```
+
+4. 添加一个名为`TopicUtil`的类，用于创建对应的`topic`
+
+   ```java
+   public class TopicUtil {
+   
+       public static List<TopicInfo> createTopics() {
+           String schema;
+   
+           TopicInfo topicChassis = new TopicInfo();
+           topicChassis.setId(0);
+           topicChassis.setTopic("/drive/chassis_code");
+           topicChassis.setEncoding("json");
+           topicChassis.setSchemaName("底盘编码(用于切换播放源)");
+           topicChassis.setSchema("{\"type\": \"object\", \"properties\": {\"chassis_code\": {\"type\": \"string\"}}}");
+           topicChassis.setSchemaEncoding("jsonschema");
+   
+           TopicInfo topicControl = createControlData(1);
+   
+           TopicInfo topic3D = new TopicInfo();
+           topic3D.setId(2);
+           topic3D.setTopic("/drive/3D");
+           topic3D.setEncoding("json");
+           topic3D.setSchemaName("foxglove.SceneUpdate");
+           schema = DataUtil.loadJsonSchema("SceneUpdate.json");
+           topic3D.setSchema(schema);
+           topic3D.setSchemaEncoding("jsonschema");
+   
+           TopicInfo topicGPS = new TopicInfo();
+           topicGPS.setId(3);
+           topicGPS.setTopic("/drive/map");
+           topicGPS.setEncoding("json");
+           topicGPS.setSchemaName("foxglove.LocationFix");
+           schema = DataUtil.loadJsonSchema("LocationFix.json");
+           topicGPS.setSchema(schema);
+           topicGPS.setSchemaEncoding("jsonschema");
+   
+           List<TopicInfo> topicList = new ArrayList<>();
+           topicList.add(topicChassis);
+           topicList.add(topicControl);
+           topicList.add(topic3D);
+           topicList.add(topicGPS);
+           return topicList;
+       }
+   
+       private static TopicInfo createControlData(int index) {
+           TopicInfo topicControl = new TopicInfo();
+           topicControl.setId(index);
+           topicControl.setTopic("/drive/control_data");
+           topicControl.setEncoding("json");
+           topicControl.setSchemaName("控制数据信号");
+           StringBuffer sb = new StringBuffer();
+           sb.append("{\"type\": \"object\", \"properties\":{");
+           sb.append("\"底盘号\": {\"type\": \"string\"},");
+           sb.append("\"终端id\": {\"type\": \"string\"},");
+           sb.append("\"时间\": {\"type\": \"string\"},");
+           sb.append("\"制动系统准备可以释放\": {\"type\": \"string\"},");
+           sb.append("\"角速度(rad/s)\": {\"type\": \"string\"},");
+           sb.append("\"AX(m/s^2)\": {\"type\": \"string\"},");
+           sb.append("\"AY(m/s^2)\": {\"type\": \"string\"},");
+           sb.append("\"总驱动力\": {\"type\": \"string\"}");
+           sb.append("}}");
+           topicControl.setSchema(sb.toString());
+           topicControl.setSchemaEncoding("jsonschema");
+           return topicControl;
+       }
+   
+   }
+   ```
+
+5. 对前述的`FoxgloveServer`类中的`onOpen`方法添加类似如下代码，用于真正的注册相关的`topic`，可注册的`topic`数目可根据实际需求添加任意多个
+
+   ```java
+   @OnOpen
+   public void onOpen(Session session) {
+       log.info("这是一次新的链接 ---》 new connection" + session.hashCode());
+   
+       this.session = session;
+   
+       ServerInfo serverInfo = new ServerInfo();
+       serverInfo.setOp("serverInfo");
+       serverInfo.setName("foxglove data render");
+       serverInfo.setCapabilities(Arrays.asList("clientPublish", "services"));
+       serverInfo.setSupportedEncodings(Arrays.asList("json"));
+   
+       String severInfoString = JSON.toJSONString(serverInfo);
+   
+       session.sendText(severInfoString);
+       Advertise advertise = new Advertise();
+       advertise.setOp("advertise");
+       advertise.setTopicList(TopicUtil.createTopics());
+   
+       session.sendText(JSON.toJSONString(advertise));
+   }
+   ```
+
+6. 若连接配置正确，在UI界面的左侧会出现相关的`topic`列表，如前述步骤所示，至此`topic`的创建与注册完成
+
+## 数据发送
+
+本章节以发送`纯文本`类型的消息为例说明如何在`server`端编写代码实现数据发送
+
+1. `topic`注册完毕后，不能直接使用，需要创建`panel`并选中对应的`topic`，此时UI端会给`server`端通过`WebSocket`协议发送对应的事件消息，需修改`FoxgloveServer`中的`onMessage`方法
+
+   ```java
+   @OnMessage
+   public void onMessage(Session session, String message) {
+       JSONObject msg = JSON.parseObject(message);
+       String op = msg.getString("op");
+       log.info("-------------on open msg:\t" + message);
+       switch (op) {
+           case "subscribe":
+               // 创建连接时会执行此处逻辑
+               this.createThread(msg);
+               break;
+           case "unsubscribe":
+               break;
+       }
+   }
+   
+   private void createThread(JSONObject msg) {
+       List<Subscription> subscribeList = msg.getObject("subscriptions", new TypeReference<List<Subscription>>() {
+       });
+       log.info("============开始创建基于channel的数据发送线程==============" + subscribeList);
+       for (Subscription sub : subscribeList) {
+           Integer channelId = sub.getChannelId();
+           SendDataThread thread = getKafkaSendThread(sub.getId(), channelId, session);
+           String threadName = "thread-" + getTopicName(channelId) + "-" + RandomStringUtils.randomAlphabetic(6).toLowerCase();
+           thread.setName(threadName);
+           thread.setChassisCode(chassisCode == null ? EMPTY_CHASSIS_CODE : chassisCode);
+           thread.start();
+           threadMap.put(channelId, thread);
+       }
+   }
+   ```
+
+   其中`SendDataThread`类是一个继承自`Thread`类，用于封装`Kafka`的数据发送流程，具体的发送逻辑需要再次继承`SendDataThread`类来实现。
+
+2. 在前述`topic`列表中`纯文本`对应的名称为`/drive/chassis_code`，对应的数据结构如下
+
+   ```json
+   {
+       "type": "object",
+       "properties": {
+           "chassis_code": {
+               "type": "string"
+           }
+       }
+   }
+   ```
+
+   则可继承`SendDataThread`编写相应的实现类
+
+   ```java
+   @Slf4j
+   public class SendChassisThread extends SendDataThread {
+       
+       private DataConfig dataConfig;
+   
+       public SendChassisThread(int index, Session session) {
+           super(index, session);
+           this.dataConfig = AppCtxUtil.getBean(DataConfig.class);
+           this.frequency = dataConfig.getChassis().getFrequency();
+       }
+   
+       @Override
+       public void run() {
+           while (running) {
+               try {
+                   ChassisInfo chassis = new ChassisInfo();
+                   chassis.setTimestamp(DateUtil.createTimestamp());
+                   chassis.setChassisCode(RandomStringUtils.random(6).toUpperCase());
+                   JSONObject jsonObject = (JSONObject) JSONObject.toJSON(chassis);
+                   byte[] bytes = jsonObject.toJSONString().getBytes();
+                   this.session.sendBinary(bytes);
+                   log.info("---------------chassis info:\t" + chassis);
+                   sleep(frequency);
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+       }
+   }
+   ```
+
+   对应的`ChassisInfo`类代码如下
+
+   ```java
+   @Data
+   public class ChassisInfo {
+   
+       @JsonProperty("底盘号")
+       private String chassisCode;
+   
+       @JsonProperty("时间戳")
+       private Timestamp timestamp;
+   }
+   ```
+
 3. 测试
 
 4. 测试
 
 5. 测试
 
-## 数据发送
+6. 测试
+
+7. 测试
+
+8. 测试
 
 # 相关功能说明
 
