@@ -188,7 +188,7 @@ render_data->select_chassis
 
 由于`Foxglove`官方已经提供了相应的`Docker`镜像可直接运行，除非需要自定义开发插件，通常不涉及到对UI端的操作，我们使用`Foxglove`时更多的工作还是集中在`server`端。
 
-本文相关的代码参见[**foxglove-websocket-java**](https://github.com/foxglove-custom/foxglove-websocket-java)。
+本文相关的完整代码参见[**foxglove-websocket-java**](https://github.com/foxglove-custom/foxglove-websocket-java)。
 
 ## topic创建
 
