@@ -206,7 +206,7 @@ render_data->select_chassis
 
    ```java
    @Slf4j
-   @ServerEndpoint(port = "8767")
+   @ServerEndpoint(port = "8765")
    public class FoxgloveServer {
    
        public static final String EMPTY_CHASSIS_CODE = "NaN";
@@ -252,11 +252,11 @@ render_data->select_chassis
    }
    ```
 
-3. 建立一个名为`TopicInfo`的`topic`类，代码如下
+3. 建立一个名为`ChannelInfo`的`topic`类，代码如下所示，需要注意的是类名必须为`ChannelInfo`，否则最后生成的`JSON`格式错误会导致`topic`无法注册[^4]
 
    ```java
    @Data
-   public class TopicInfo {
+   public class ChannelInfo {
    
        /**
         * topic id，在注册时指定其值
@@ -287,74 +287,78 @@ render_data->select_chassis
         * 对用结构的表示形式，如json时为jsonschema
         */
        private String schemaEncoding;
-   
    }
    ```
 
-4. 添加一个名为`TopicUtil`的类，用于创建对应的`topic`
+4. 添加一个名为`ChannelUtil`的类，用于创建对应的`topic`
 
    ```java
-   public class TopicUtil {
+   public class ChannelUtil {
    
-       public static List<TopicInfo> createTopics() {
+       public static List<ChannelInfo> createChannels() {
            String schema;
    
-           TopicInfo topicChassis = new TopicInfo();
-           topicChassis.setId(0);
-           topicChassis.setTopic("/drive/chassis_code");
-           topicChassis.setEncoding("json");
-           topicChassis.setSchemaName("底盘编码(用于切换播放源)");
-           topicChassis.setSchema("{\"type\": \"object\", \"properties\": {\"chassis_code\": {\"type\": \"string\"}}}");
-           topicChassis.setSchemaEncoding("jsonschema");
+           ChannelInfo channelChassis = new ChannelInfo();
+           channelChassis.setId(0);
+           channelChassis.setTopic("/drive/chassis_code");
+           channelChassis.setEncoding("json");
+           channelChassis.setSchemaName("底盘编码(用于切换播放源)");
+           channelChassis.setSchema("{\"type\": \"object\", \"properties\": {\"chassis_code\": {\"type\": \"string\"}}}");
+           channelChassis.setSchemaEncoding("jsonschema");
    
-           TopicInfo topicControl = createControlData(1);
+           ChannelInfo channelControl = createControlData(1);
    
-           TopicInfo topic3D = new TopicInfo();
-           topic3D.setId(2);
-           topic3D.setTopic("/drive/3D");
-           topic3D.setEncoding("json");
-           topic3D.setSchemaName("foxglove.SceneUpdate");
+           ChannelInfo channel3D = new ChannelInfo();
+           channel3D.setId(2);
+           channel3D.setTopic("/drive/3D");
+           channel3D.setEncoding("json");
+           channel3D.setSchemaName("foxglove.SceneUpdate");
            schema = DataUtil.loadJsonSchema("SceneUpdate.json");
-           topic3D.setSchema(schema);
-           topic3D.setSchemaEncoding("jsonschema");
+           channel3D.setSchema(schema);
+           channel3D.setSchemaEncoding("jsonschema");
    
-           TopicInfo topicGPS = new TopicInfo();
-           topicGPS.setId(3);
-           topicGPS.setTopic("/drive/map");
-           topicGPS.setEncoding("json");
-           topicGPS.setSchemaName("foxglove.LocationFix");
+           ChannelInfo channelGPS = new ChannelInfo();
+           channelGPS.setId(3);
+           channelGPS.setTopic("/drive/map");
+           channelGPS.setEncoding("json");
+           channelGPS.setSchemaName("foxglove.LocationFix");
            schema = DataUtil.loadJsonSchema("LocationFix.json");
-           topicGPS.setSchema(schema);
-           topicGPS.setSchemaEncoding("jsonschema");
+           channelGPS.setSchema(schema);
+           channelGPS.setSchemaEncoding("jsonschema");
    
-           List<TopicInfo> topicList = new ArrayList<>();
-           topicList.add(topicChassis);
-           topicList.add(topicControl);
-           topicList.add(topic3D);
-           topicList.add(topicGPS);
-           return topicList;
+   
+           List<ChannelInfo> channelList = new ArrayList<>();
+           channelList.add(channelChassis);
+           channelList.add(channelControl);
+           channelList.add(channel3D);
+           channelList.add(channelGPS);
+           return channelList;
        }
    
-       private static TopicInfo createControlData(int index) {
-           TopicInfo topicControl = new TopicInfo();
-           topicControl.setId(index);
-           topicControl.setTopic("/drive/control_data");
-           topicControl.setEncoding("json");
-           topicControl.setSchemaName("控制数据信号");
+       private static ChannelInfo createControlData(int index) {
+           ChannelInfo channelControl = new ChannelInfo();
+           channelControl.setId(index);
+           channelControl.setTopic("/drive/control_data");
+           channelControl.setEncoding("json");
+           channelControl.setSchemaName("控制数据信号");
            StringBuffer sb = new StringBuffer();
            sb.append("{\"type\": \"object\", \"properties\":{");
            sb.append("\"底盘号\": {\"type\": \"string\"},");
            sb.append("\"终端id\": {\"type\": \"string\"},");
            sb.append("\"时间\": {\"type\": \"string\"},");
+           sb.append("\"纬度\": {\"type\": \"string\"},");
+           sb.append("\"经度\": {\"type\": \"string\"},");
+           sb.append("\"海拔\": {\"type\": \"string\"},");
+           sb.append("\"变速箱输出轴转速\": {\"type\": \"string\"},");
            sb.append("\"制动系统准备可以释放\": {\"type\": \"string\"},");
            sb.append("\"角速度(rad/s)\": {\"type\": \"string\"},");
            sb.append("\"AX(m/s^2)\": {\"type\": \"string\"},");
            sb.append("\"AY(m/s^2)\": {\"type\": \"string\"},");
            sb.append("\"总驱动力\": {\"type\": \"string\"}");
            sb.append("}}");
-           topicControl.setSchema(sb.toString());
-           topicControl.setSchemaEncoding("jsonschema");
-           return topicControl;
+           channelControl.setSchema(sb.toString());
+           channelControl.setSchemaEncoding("jsonschema");
+           return channelControl;
        }
    
    }
@@ -380,7 +384,7 @@ render_data->select_chassis
        session.sendText(severInfoString);
        Advertise advertise = new Advertise();
        advertise.setOp("advertise");
-       advertise.setTopicList(TopicUtil.createTopics());
+       advertise.setChannels(ChannelUtil.createChannels());
    
        session.sendText(JSON.toJSONString(advertise));
    }
@@ -461,7 +465,7 @@ render_data->select_chassis
                try {
                    ChassisInfo chassis = new ChassisInfo();
                    chassis.setTimestamp(DateUtil.createTimestamp());
-                   chassis.setChassisCode(RandomStringUtils.random(6).toUpperCase());
+                   chassis.setChassisCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
                    JSONObject jsonObject = (JSONObject) JSONObject.toJSON(chassis);
                    byte[] bytes = jsonObject.toJSONString().getBytes();
                    this.session.sendBinary(bytes);
@@ -489,20 +493,156 @@ render_data->select_chassis
    }
    ```
 
-3. 测试
+3. 启动`server`端程序，在`Foxglove`UI端按照下图所示点击创建按钮，在出现的`panel`列表中选择**原始消息**(英文环境下为**Raw Message**)，用于展示纯文本消息
 
-4. 测试
+   ![foxglove创建面板](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-create-panel.png "foxglove创建面板")
 
-5. 测试
+4. 在出现的纯文本`panel`的顶部选择对应的`topic`，此处为`/drive/chassis_code`，执行到这一步后理论上就能正常播放数据，但在浏览器中查看结果时，会呈现出类似下图所示的效果，文本消息并没有正常展示。
 
-6. 测试
+   ![foxglove不能正常展示消息](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-can-not-display-text-message.png "foxglove不能正常展示消息")
 
-7. 测试
+5. 从上面报错的初步信息可知是UI端在解析二进制文件时出错，与官方Demo的`WebSocket`数据包进行对比，折腾一段时间后其原因是`Foxglove`有自己特定的编码算法，不能直接返回生成的原始消息，需要对其基于`byte`进行编码，之后UI端自行解码。相关的编码代码如下
 
-8. 测试
+   ```java
+   package com.visualization.foxglove.util;
+   
+   import com.alibaba.fastjson.JSON;
+   import com.fasterxml.jackson.databind.ObjectMapper;
+   import org.apache.commons.io.IOUtils;
+   
+   import java.io.IOException;
+   import java.io.InputStream;
+   import java.util.Map;
+   
+   public class DataUtil {
+   
+       public static byte[] getFormattedBytes(byte[] data, int channel) {
+           return getFormattedBytes(data, 0, channel);
+       }
+   
+       public static byte[] getFormattedBytes(byte[] data, long ns, int channel) {
+           byte constantInfo = 1;
+           byte[] constantInfoByte = new byte[]{constantInfo};
+           byte[] dataType = getIntBytes(channel);
+           byte[] nsTime = getLongBytes(ns);
+           byte[] pack1 = byteConcat(constantInfoByte, dataType, nsTime);
+           byte[] pack2 = byteConcat(pack1, data);
+           return pack2;
+       }
+   
+       public static byte[] loadGlbData(String glbFile) {
+           try {
+               ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+               InputStream stream = classLoader.getResourceAsStream("glb/" + glbFile);
+               byte[] bytes = IOUtils.toByteArray(stream);
+               return bytes;
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+           return null;
+       }
+   
+       public static String loadJsonSchema(String schemaFile) {
+           ObjectMapper objectMapper = new ObjectMapper();
+           Map map = null;
+           try {
+               ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+               InputStream stream = classLoader.getResourceAsStream("schema/" + schemaFile);
+               map = objectMapper.readValue(stream, Map.class);
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+           return JSON.toJSONString(map);
+       }
+   
+       public static final long fx = 0xffL;
+   
+       /**
+        * int 转 byte[]
+        * 小端
+        *
+        * @param data
+        * @return
+        */
+       public static byte[] getIntBytes(int data) {
+           int length = 4;
+           byte[] bytes = new byte[length];
+           for (int i = 0; i < length; i++) {
+               bytes[i] = (byte) ((data >> (i * 8)) & fx);
+           }
+           return bytes;
+       }
+   
+       /**
+        * long 转 byte[]
+        * 小端
+        *
+        * @param data
+        * @return
+        */
+       public static byte[] getLongBytes(long data) {
+           int length = 8;
+           byte[] bytes = new byte[length];
+   
+           for (int i = 0; i < length; i++) {
+               bytes[i] = (byte) ((data >> (i * 8)) & fx);
+           }
+           return bytes;
+       }
+   
+       public static byte[] byteConcat(byte[] bt1, byte[] bt2) {
+           byte[] bt4 = new byte[bt1.length + bt2.length];
+           int len = 0;
+           System.arraycopy(bt1, 0, bt4, 0, bt1.length);
+           len += bt1.length;
+           System.arraycopy(bt2, 0, bt4, len, bt2.length);
+           return bt4;
+       }
+   
+       public static byte[] byteConcat(byte[] bt1, byte[] bt2, byte[] bt3) {
+           byte[] bt4 = new byte[bt1.length + bt2.length + bt3.length];
+           int len = 0;
+           System.arraycopy(bt1, 0, bt4, 0, bt1.length);
+           len += bt1.length;
+           System.arraycopy(bt2, 0, bt4, len, bt2.length);
+           len += bt2.length;
+           System.arraycopy(bt3, 0, bt4, len, bt3.length);
+           return bt4;
+       }
+   
+   }
+   ```
+
+6. 将数据发送的代码修改如下，并重新启动`server`端服务
+
+   ```java
+   @Override
+   public void run() {
+       while (running) {
+           try {
+               ChassisInfo chassis = new ChassisInfo();
+               chassis.setTimestamp(DateUtil.createTimestamp());
+               chassis.setChassisCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
+               JSONObject jsonObject = (JSONObject) JSONObject.toJSON(chassis);
+               // 需要调用对应的编码函数
+               byte[] bytes = DataUtil.getFormattedBytes(jsonObject.toJSONString().getBytes(), index);
+               this.session.sendBinary(bytes);
+               log.info("---------------chassis info:\t" + chassis);
+               sleep(frequency);
+           } catch (InterruptedException e) {
+               throw new RuntimeException(e);
+           }
+       }
+   }
+   ```
+
+7. 在UI端查看，可发现此时能正常播放消息，至此`Foxglove`前后端交互的配置基本搭建完毕，后续就是根据不同的面板类型进行针对性的编码。
+
+   ![foxglove正常展示消息](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-display-text-message-success.png "foxglove正常展示消息")
 
 # 相关功能说明
 
 [^1]: 基于`Mozilla Public License 2.0`协议，若对其源码进行二次开发，也需要遵守同样的协议
 [^2]: 此处的实时依赖于server端发送数据的频率
 [^3]: 在2024年3月份原作者更新了`REAME.md`，在此次更新中将`Docker`安装的指令移除了，不过我们可通过[历史记录](https://github.com/foxglove/studio/pull/7534/files)去查找相关指令
+[^4]: 感觉此处`Foxglove`的命名有些混乱，通道被命名为`Topic`，然而在`JSON`格式文件中却要求用`Channel`来替代
