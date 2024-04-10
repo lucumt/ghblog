@@ -184,6 +184,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/foxglove/</loc>
+    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/web/</loc>
+    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</loc>
+    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/gitlab-runner/</loc>
     <lastmod>2023-10-07T10:14:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -752,13 +780,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/javascript/</loc>
-    <lastmod>2022-08-20T20:38:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-08-20T20:38:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

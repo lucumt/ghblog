@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>foxglove on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/foxglove/</link>
+    <description>Recent content in foxglove on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 13 Nov 2023 14:08:39 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/foxglove/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Foxglove以多种方式展示时间连续的数据</title>
+      <link>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</link>
+      <pubDate>Mon, 13 Nov 2023 14:08:39 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</guid>
+      <description>&lt;p&gt;简要介绍在自动驾驶相关项目中利用&lt;a href=&#34;https://foxglove.dev&#34;&gt;&lt;strong&gt;Foxglove&lt;/strong&gt;&lt;/a&gt;可视化工具以多种方式播放采集的&lt;a href=&#34;https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29&#34;&gt;&lt;strong&gt;时序数据&lt;/strong&gt;&lt;/a&gt;的使用经验分享。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
