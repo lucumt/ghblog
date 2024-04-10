@@ -1,7 +1,7 @@
 ---
 title: "Foxglove自定义插件开发说明"
-date: 2023-11-15T14:08:39+08:00
-lastmod: 2023-11-15T14:08:39+08:00
+date: 2023-11-22T14:08:39+08:00
+lastmod: 2023-11-22T14:08:39+08:00
 draft: true
 keywords: ["foxglove","插件开发"]
 description: "Foxglove自定义插件开发说明"
