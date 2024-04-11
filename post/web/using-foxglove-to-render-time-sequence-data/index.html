@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>利用Foxglove以多种方式展示时间连续的数据 - 飞狐的部落格</title>
+  <title>搭建基于Foxglove的时序数据播放环境 - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据" /><meta name="keywords" content="foxglove, 时序数据, 自动驾驶" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何搭建基于Foxglove的时序数据播放环境" /><meta name="keywords" content="foxglove, 时序数据, 自动驾驶" />
 
 
 
@@ -39,20 +39,20 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用Foxglove以多种方式展示时间连续的数据" />
-<meta property="og:description" content="简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据" />
+<meta property="og:title" content="搭建基于Foxglove的时序数据播放环境" />
+<meta property="og:description" content="简要介绍如何搭建基于Foxglove的时序数据播放环境" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-11-13T14:08:39+08:00" />
 <meta property="article:modified_time" content="2023-11-13T14:08:39+08:00" />
 
-<meta itemprop="name" content="利用Foxglove以多种方式展示时间连续的数据">
-<meta itemprop="description" content="简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据"><meta itemprop="datePublished" content="2023-11-13T14:08:39+08:00" />
+<meta itemprop="name" content="搭建基于Foxglove的时序数据播放环境">
+<meta itemprop="description" content="简要介绍如何搭建基于Foxglove的时序数据播放环境"><meta itemprop="datePublished" content="2023-11-13T14:08:39+08:00" />
 <meta itemprop="dateModified" content="2023-11-13T14:08:39+08:00" />
-<meta itemprop="wordCount" content="5655">
+<meta itemprop="wordCount" content="5670">
 <meta itemprop="keywords" content="web,foxglove," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用Foxglove以多种方式展示时间连续的数据"/>
-<meta name="twitter:description" content="简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据"/>
+<meta name="twitter:title" content="搭建基于Foxglove的时序数据播放环境"/>
+<meta name="twitter:description" content="简要介绍如何搭建基于Foxglove的时序数据播放环境"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -150,7 +150,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">利用Foxglove以多种方式展示时间连续的数据</h1>
+      <h1 class="post-title">搭建基于Foxglove的时序数据播放环境</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2023-11-13 </span>
@@ -188,7 +188,7 @@
 	  	
 	
     <div class="post-content image-border">
-	 <p>简要介绍在自动驾驶相关项目中利用<a href="https://foxglove.dev"><strong>Foxglove</strong></a>可视化工具以多种方式播放采集的<a href="https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29"><strong>时序数据</strong></a>的使用经验分享。</p>
+	 <p>简要介绍如何配置<a href="https://foxglove.dev"><strong>Foxglove</strong></a>可视化工具的前后端环境以便实现在项目中以多种方式播放采集的<a href="https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29"><strong>时序数据</strong></a>。</p>
 <h1 id="需求背景">需求背景</h1>
 <p>在自动驾驶相关的项目中经常会对采集的时序数据进行可视化播放展示，常见展示方式包括<code>纯文本</code>、<code>图片</code>、<code>表格</code>、<code>图表</code>、<code>地图</code>、<code>3D</code>等展示形式，之前团队内部对于这种需求都是前后端配合自己开发相关的UI组件进行展示。但随着要展示数据的增多以及用户需求的多变，采用自行开发的方式已经力不从心，迫切的需要一款能同时支持多路数据以不同方式播放展示的工具来减轻研发压力，提升系统稳定性与可靠性。</p>
 <p>在切换为新的可视化工具之前，内部确定了如下几个指标：</p>
@@ -248,7 +248,7 @@ select_chassis->fetch_data->filter_data
 filter_data(right)->send_data(right)->render_data
 render_data->select_chassis
 </div><h1 id="前后端配置">前后端配置</h1>
-<p>本章节以UI端本地私有化安装为例，说明如何配置<code>Foxglove</code>前后端通信的环境。</p>
+<p>本章节以UI端本地私有化安装为例，说明如何配置<code>Foxglove</code>前后端通信的环境，<code>server</code>端采用<code>Java</code>实现。</p>
 <h2 id="服务端安装">服务端安装</h2>
 <ol>
 <li>根据<code>Foxglove</code>官方网站的<a href="https://docs.foxglove.dev/docs/visualization/message-schemas/introduction/"><strong>说明文档</strong></a>以及相关的<a href="https://github.com/foxglove-custom/foxglove-websocket-java"><strong>Java Demo</strong></a>编写对应的<code>server</code>端项目，暴露<code>WebSocket</code>端口，此处假设其端口为8765</li>

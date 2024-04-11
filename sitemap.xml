@@ -156,6 +156,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/foxglove/</loc>
+    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/foxglove-function-instructions/</loc>
+    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/web/</loc>
+    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/jenkins/</loc>
     <lastmod>2023-11-15T10:14:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -179,27 +207,6 @@
   <url>
     <loc>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</loc>
     <lastmod>2023-11-15T10:14:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/foxglove/</loc>
-    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/web/</loc>
-    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2023-11-13T14:08:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
