@@ -1,10 +1,10 @@
 ---
-title: "利用Foxglove以多种方式展示时间连续的数据"
+title: "搭建基于Foxglove的时序数据播放环境"
 date: 2023-11-13T14:08:39+08:00
 lastmod: 2023-11-13T14:08:39+08:00
 draft: false
 keywords: ["foxglove","时序数据","自动驾驶"]
-description: "简要介绍如何利用Foxglove以不同的方式来播放展现连续的时间数据"
+description: "简要介绍如何搭建基于Foxglove的时序数据播放环境"
 tags: ["web","foxglove"]
 categories: ["Web编程"]
 author: "Rosen Lu"
@@ -83,7 +83,7 @@ highchartsDiagrams:
   options: ""
 ---
 
-简要介绍在自动驾驶相关项目中利用[**Foxglove**](https://foxglove.dev)可视化工具以多种方式播放采集的[**时序数据**](https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29)的使用经验分享。
+简要介绍如何配置[**Foxglove**](https://foxglove.dev)可视化工具的前后端环境以便实现在项目中以多种方式播放采集的[**时序数据**](https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29)。
 
 <!--more-->
 
@@ -157,7 +157,7 @@ render_data->select_chassis
 
 # 前后端配置
 
-本章节以UI端本地私有化安装为例，说明如何配置`Foxglove`前后端通信的环境。
+本章节以UI端本地私有化安装为例，说明如何配置`Foxglove`前后端通信的环境，`server`端采用`Java`实现。
 
 ## 服务端安装
 
