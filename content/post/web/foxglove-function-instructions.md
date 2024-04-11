@@ -222,7 +222,9 @@ highchartsDiagrams:
 
 ## 图片/视频
 
-考虑播放的连贯与性能，本次采用`RTSP`协议来播放视频替代图片播放，使用时只要对应`RTSP`视频流有数据即可正常播放，无需任何额外操作。
+截止到本文写作时(2023年11月)，`Foxglove`的官方只支持图片播放，暂不支持视频直接播放，而个人在实际使用中发现按照特定的频率对视频进行抽帧时会有一定的耗时，导致播放时比较卡顿。
+
+考虑播放的连贯与性能，决定采用`RTSP`协议来播放视频替代图片播放，为此个人开发了一款插件[**rtsp-player-extension**](https://github.com/foxglove-custom/rtsp-player-extension)[^3]，使用时需预先在浏览器上安装该插件，然后确保对应`RTSP`视频流有数据即可正常播放。
 
 ![foxglove视频面板](/blog_img/web/foxglove-function-instructions/foxglove_video_panel.png  "foxglove视频面板")
 
@@ -284,7 +286,7 @@ highchartsDiagrams:
 
    ![foxglove发布面板选择主题](/blog_img/web/foxglove-function-instructions/foxglove_publish_panel_select_topic.png  "foxglove发布面板选择主题")
 
-3. 在面板输入区域填入类似如下内容，其中`chassis_code`对应的值为车辆底盘号，之后点击`Publish`[^3]即可更换车辆底盘号
+3. 在面板输入区域填入类似如下内容，其中`chassis_code`对应的值为车辆底盘号，之后点击`Publish`[^4]即可更换车辆底盘号
 
    ```json
    {
@@ -302,4 +304,5 @@ highchartsDiagrams:
 
 [^1]: 若需要关联特定`topic`则表示该类面板对返回的数据格式有特殊要求
 [^2]: 此处主要指的是纯文字文本
-[^3]: 此时会给`server`端发送消息，具体参见[foxglove-websocket-java](https://github.com/foxglove-custom/foxglove-websocket-java/blob/789b9dcd7d5cea16655d128d097ecc076618f767/src/main/java/com/visualization/foxglove/websocket/FoxgloveServer.java#L96)
+[^3]: 具体请参见本人的另一篇博文[Foxglove自定义插件开发说明](/post/web/foxglove-custom-plugin-develop/)
+[^4]: 此时会给`server`端发送消息，具体参见[foxglove-websocket-java](https://github.com/foxglove-custom/foxglove-websocket-java/blob/789b9dcd7d5cea16655d128d097ecc076618f767/src/main/java/com/visualization/foxglove/websocket/FoxgloveServer.java#L96)
