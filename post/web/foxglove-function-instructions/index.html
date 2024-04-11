@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Foxglove基本功能使用说明">
 <meta itemprop="description" content="Foxglove基本功能使用说明"><meta itemprop="datePublished" content="2023-11-15T14:08:39+08:00" />
 <meta itemprop="dateModified" content="2023-11-15T14:08:39+08:00" />
-<meta itemprop="wordCount" content="3412">
+<meta itemprop="wordCount" content="3598">
 <meta itemprop="keywords" content="web,foxglove," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Foxglove基本功能使用说明"/>
 <meta name="twitter:description" content="Foxglove基本功能使用说明"/>
@@ -413,7 +413,8 @@
 </li>
 </ol>
 <h2 id="图片视频">图片/视频</h2>
-<p>考虑播放的连贯与性能，本次采用<code>RTSP</code>协议来播放视频替代图片播放，使用时只要对应<code>RTSP</code>视频流有数据即可正常播放，无需任何额外操作。</p>
+<p>截止到本文写作时(2023年11月)，<code>Foxglove</code>的官方只支持图片播放，暂不支持视频直接播放，而个人在实际使用中发现按照特定的频率对视频进行抽帧时会有一定的耗时，导致播放时比较卡顿。</p>
+<p>考虑播放的连贯与性能，决定采用<code>RTSP</code>协议来播放视频替代图片播放，为此个人开发了一款插件<a href="https://github.com/foxglove-custom/rtsp-player-extension"><strong>rtsp-player-extension</strong></a><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，使用时需预先在浏览器上安装该插件，然后确保对应<code>RTSP</code>视频流有数据即可正常播放。</p>
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove_video_panel.png" alt="foxglove视频面板" title="foxglove视频面板"></p>
 <h1 id="布局操作">布局操作</h1>
 <h2 id="布局调整">布局调整</h2>
@@ -474,7 +475,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove_publish_panel_select_topic.png" alt="foxglove发布面板选择主题" title="foxglove发布面板选择主题"></p>
 </li>
 <li>
-<p>在面板输入区域填入类似如下内容，其中<code>chassis_code</code>对应的值为车辆底盘号，之后点击<code>Publish</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>即可更换车辆底盘号</p>
+<p>在面板输入区域填入类似如下内容，其中<code>chassis_code</code>对应的值为车辆底盘号，之后点击<code>Publish</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>即可更换车辆底盘号</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -507,7 +508,10 @@
 <p>此处主要指的是纯文字文本&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>此时会给<code>server</code>端发送消息，具体参见<a href="https://github.com/foxglove-custom/foxglove-websocket-java/blob/789b9dcd7d5cea16655d128d097ecc076618f767/src/main/java/com/visualization/foxglove/websocket/FoxgloveServer.java#L96">foxglove-websocket-java</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>具体请参见本人的另一篇博文<a href="/post/web/foxglove-custom-plugin-develop/">Foxglove自定义插件开发说明</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>此时会给<code>server</code>端发送消息，具体参见<a href="https://github.com/foxglove-custom/foxglove-websocket-java/blob/789b9dcd7d5cea16655d128d097ecc076618f767/src/main/java/com/visualization/foxglove/websocket/FoxgloveServer.java#L96">foxglove-websocket-java</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
