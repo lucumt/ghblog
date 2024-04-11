@@ -2,7 +2,7 @@
 title: "Foxglove基本功能使用说明"
 date: 2023-11-15T14:08:39+08:00
 lastmod: 2023-11-15T14:08:39+08:00
-draft: true
+draft: false
 keywords: ["foxglove","时序数据","自动驾驶","功能使用"]
 description: "Foxglove基本功能使用说明"
 tags: ["web","foxglove"]
@@ -272,5 +272,34 @@ highchartsDiagrams:
 
 # 动态交互
 
+> 动态交互是指通过在`Foxglove`UI端输入相应的参数给`server`端，`server`端根据相关参数对`WebSocket`中要返回的数据进行动态生成或动态过滤。
+
+本章节以切换车辆底盘号显示不同车辆数据的场景为例，进行说明：
+
+1. 仿照前述步骤中的新建面板，将面板类型选择为`发布`(也可通过面板拆分创建的方式，将新面板的类型修改为`发布`)
+
+   ![foxglove创建发布面板](/blog_img/web/foxglove-function-instructions/foxglove_create_publish_panel.png  "foxglove创建发布面板")
+
+2. 此时左侧的工具栏会报错，在`Topic`部分选择一个合适的`topic`本例中为`drive/chassis_code`后错误会消失
+
+   ![foxglove发布面板选择主题](/blog_img/web/foxglove-function-instructions/foxglove_publish_panel_select_topic.png  "foxglove发布面板选择主题")
+
+3. 在面板输入区域填入类似如下内容，其中`chassis_code`对应的值为车辆底盘号，之后点击`Publish`[^3]即可更换车辆底盘号
+
+   ```json
+   {
+     "chassis_code": "ND000048"
+   }
+   ```
+
+   ![foxglove发布面板输入底盘号](/blog_img/web/foxglove-function-instructions/foxglove_publish_panel_input_chassis.png  "foxglove发布面板输入底盘号")
+
+4. 发布成功之后，各个面板中的数据都会切换为对应底盘号的数据，其呈现的结果都会变化，也可直接在原始消息中查看底盘号是否发生变化。
+
+   ![foxglove检查底盘号变更](/blog_img/web/foxglove-function-instructions/foxglove_check_chassis_publish_result.png  "foxglove检查底盘号变更")
+
+5. 数据正常切换后，可将发布面板删除，避免干扰正常使用。
+
 [^1]: 若需要关联特定`topic`则表示该类面板对返回的数据格式有特殊要求
 [^2]: 此处主要指的是纯文字文本
+[^3]: 此时会给`server`端发送消息，具体参见[foxglove-websocket-java](https://github.com/foxglove-custom/foxglove-websocket-java/blob/789b9dcd7d5cea16655d128d097ecc076618f767/src/main/java/com/visualization/foxglove/websocket/FoxgloveServer.java#L96)
