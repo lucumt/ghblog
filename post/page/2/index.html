@@ -158,12 +158,24 @@
    
     <div class="archive-title">
       <span class="archive-post-counter">
-        共计 100 篇文章
+        共计 101 篇文章
       </span>
     </div>
       <div class="collection-title">
         <h2 class="archive-year">2022</h2>
       </div>
+
+    <div class="archive-post">
+      <span class="archive-post-time">
+        08-20
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/minio/download-minio-folder-as-zip-file/" class="archive-post-link">
+		  将MinIO中的文件夹下载为ZIP文件
+        </a>
+      </span>
+    </div>
 
     <div class="archive-post">
       <span class="archive-post-time">
@@ -769,18 +781,6 @@
 		  Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified
         </a>
       </span>
-    </div>
-
-    <div class="archive-post">
-      <span class="archive-post-time">
-        02-27
-      </span>
-	  
-      <span class="archive-post-title">
-        <a href="/post/hugo/create-website-with-hugo/" class="archive-post-link">
-		  利用Github Pages和基于Go的Hugo搭建个人博客
-        </a>
-      </span>
     </div></section>
 
 <nav class="pagination">
@@ -788,7 +788,10 @@
       <i class="iconfont icon-left"></i>
       <span class="prev-text">上一页</span>
     </a>
-  
+  <a class="next" href="/post/page/3/">
+      <span class="next-text">下一页</span>
+      <i class="iconfont icon-right"></i>
+    </a>
 </nav>
 	</div>
 	
@@ -871,7 +874,7 @@ Highcharts.chart('section_year_chart_1', {
         type: 'column',
 		color:"#16982b",
         yAxis: 1,
-        data: JSON.parse("[11,12,7,6,5,2,19,37,1]"),
+        data: JSON.parse("[11,12,7,6,5,2,19,38,1]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -880,7 +883,7 @@ Highcharts.chart('section_year_chart_1', {
         name: '按年累计',
 		color:"#0047AB",
         type: 'spline',
-        data: JSON.parse("[11,23,30,36,41,43,62,99,100]"),
+        data: JSON.parse("[11,23,30,36,41,43,62,100,101]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -937,7 +940,7 @@ Highcharts.chart('section_year_chart_2', {
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
-        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":7},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":19},{\"name\":\"2023\",\"y\":37},{\"name\":\"2024\",\"y\":1}]")
+        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":7},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":19},{\"name\":\"2023\",\"y\":38},{\"name\":\"2024\",\"y\":1}]")
 	}] 
 });
 Highcharts.chart('section_month_chart_1', {
@@ -1003,7 +1006,7 @@ Highcharts.chart('section_month_chart_1', {
         name: '按月新增',
 		color:"#16982b",
         type: 'column',
-        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,5,1,2,3,2,1,5,4,3,9,3,1,1,1,6,1,1]"),
+        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,5,1,2,3,2,1,5,4,3,9,3,1,1,1,7,1,1]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1013,7 +1016,7 @@ Highcharts.chart('section_month_chart_1', {
         type: 'spline',
 		color:"#0047AB",
         yAxis: 1,
-        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,30,32,34,35,36,37,38,39,41,42,43,44,45,46,51,56,57,59,62,64,65,70,74,77,86,89,90,91,92,98,99,100]"),
+        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,30,32,34,35,36,37,38,39,41,42,43,44,45,46,51,56,57,59,62,64,65,70,74,77,86,89,90,91,92,99,100,101]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1077,7 +1080,7 @@ Highcharts.chart('section_month_chart_2', {
             }
         }]
     },
-    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2,0],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5,0],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,1],\"name\":4},{\"data\":[1,0,0,0,0,0,0,3,0],\"name\":5},{\"data\":[0,0,0,0,0,1,1,9,0],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,5,1,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,6,0],\"name\":11},{\"data\":[0,3,5,0,0,0,3,1,0],\"name\":12}]")
+    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2,0],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5,0],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,1],\"name\":4},{\"data\":[1,0,0,0,0,0,0,3,0],\"name\":5},{\"data\":[0,0,0,0,0,1,1,9,0],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,5,1,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,7,0],\"name\":11},{\"data\":[0,3,5,0,0,0,3,1,0],\"name\":12}]")
 });
 </script>
 	</div>

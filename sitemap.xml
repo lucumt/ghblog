@@ -107,6 +107,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/foxglove/</loc>
+    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</loc>
+    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/web/</loc>
+    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/docker/</loc>
     <lastmod>2023-11-20T15:37:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -156,28 +184,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/foxglove/</loc>
-    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/web/foxglove-function-instructions/</loc>
-    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/web/</loc>
-    <lastmod>2023-11-15T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2023-11-15T14:08:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

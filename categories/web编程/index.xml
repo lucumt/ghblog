@@ -6,7 +6,17 @@
     <description>Recent content in Web编程 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Nov 2023 14:08:39 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Foxglove自定义插件开发说明</title>
+      <link>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</link>
+      <pubDate>Wed, 22 Nov 2023 14:08:39 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://github.com/foxglove/create-foxglove-extension&#34;&gt;&lt;strong&gt;create-foxglove-extension&lt;/strong&gt;&lt;/a&gt;一文简要说明自己如何基于&lt;a href=&#34;https://en.wikipedia.org/wiki/Real-Time_Streaming_Protocol&#34;&gt;&lt;strong&gt;RTSP协议&lt;/strong&gt;&lt;/a&gt;给&lt;code&gt;Foxglove&lt;/code&gt;开发一款插件并应用于实际项目的流程。&lt;/p&gt;
+&lt;p&gt;相关源码参见&lt;a href=&#34;https://github.com/foxglove-custom/rtsp-player-extension&#34;&gt;&lt;strong&gt;rtsp-player-extension&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Foxglove基本功能使用说明</title>
       <link>https://lucumt.info/post/web/foxglove-function-instructions/</link>
