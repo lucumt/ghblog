@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JavaScript on 飞狐的部落格</title>
+    <title>javascript on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/javascript/</link>
-    <description>Recent content in JavaScript on 飞狐的部落格</description>
+    <description>Recent content in javascript on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Feb 2022 20:38:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Sep 2022 09:39:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript学习-reduce函数</title>
+      <link>https://lucumt.info/post/js/using-reduce-function-on-array/</link>
+      <pubDate>Mon, 26 Sep 2022 09:39:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/js/using-reduce-function-on-array/</guid>
+      <description>&lt;p&gt;简要记录下自己对于&lt;code&gt;JavaScript&lt;/code&gt;中&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce&#34;&gt;&lt;strong&gt;reduce()&lt;/strong&gt;&lt;/a&gt;函数的学习小结。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Chrome中将上传的文件夹数据转化为按树结构展示</title>
       <link>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</link>

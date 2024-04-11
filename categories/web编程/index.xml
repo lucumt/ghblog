@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Web编程 on 飞狐的部落格</title>
+    <title>web编程 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
-    <description>Recent content in Web编程 on 飞狐的部落格</description>
+    <description>Recent content in web编程 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
@@ -33,6 +33,15 @@
       
       <guid>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</guid>
       <description>&lt;p&gt;简要介绍如何配置&lt;a href=&#34;https://foxglove.dev&#34;&gt;&lt;strong&gt;Foxglove&lt;/strong&gt;&lt;/a&gt;可视化工具的前后端环境以便实现在项目中以多种方式播放采集的&lt;a href=&#34;https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29&#34;&gt;&lt;strong&gt;时序数据&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>JavaScript学习-reduce函数</title>
+      <link>https://lucumt.info/post/js/using-reduce-function-on-array/</link>
+      <pubDate>Mon, 26 Sep 2022 09:39:47 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/js/using-reduce-function-on-array/</guid>
+      <description>&lt;p&gt;简要记录下自己对于&lt;code&gt;JavaScript&lt;/code&gt;中&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce&#34;&gt;&lt;strong&gt;reduce()&lt;/strong&gt;&lt;/a&gt;函数的学习小结。&lt;/p&gt;</description>
     </item>
     
     <item>
