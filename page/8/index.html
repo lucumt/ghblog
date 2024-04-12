@@ -147,6 +147,69 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/arrays-as-list-convert-result-in-java/">Arrays.asList类型转换结果的坑</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-07-22 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在各种<code>Java</code>编程规范中都强调尽量不用<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-">java.util.Arrays.asList()</a>方法以避免调用此方法生成的<code>List</code>无法进行修改操作，个人近期在使用过程中发现该方法的另外一个坑，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-core/arrays-as-list-convert-result-in-java/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql/limit-large-size-data-in-mysql/">在MySQL中对大量数据进行limit offset分页查询的优化</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-02-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在软件开发中采用<code>LIMIT OFFSET</code>对数据库进行分页是常见操作，但在数据量很大时直接使用<code>LIMIT OFFSET</code>查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql/limit-large-size-data-in-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql/mysql-create-massive-test-data-quickly/">MySQL中快速创建大量测试数据</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-02-08 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在学习<code>MySQL</code>索引和分库分表等知识的过程中，经常会涉及到创建大批量的测试数据，本文简要说明自己常用的几种创建方式以及各自的优劣对比。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql/mysql-create-massive-test-data-quickly/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/difference-and-usage-for-various-select-count/">MySQL中不同SELECT COUNT统计总数时的区别</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-01-25 </span>
@@ -294,70 +357,6 @@
     </div>
     <div class="read-more">
       <a href="/post/java-core/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/default-method-in-abstract-class-and-interface/">在模板类中利用抽象类或接口default方法实现默认方法以简化开发与维护</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-06-02 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在开发大规模的<code>Java</code>项目时，通常会涉及到各种设计模式，本文简要说明当使用<a href="https://zh.wikipedia.org/zh-cn/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95"><strong>模板方法</strong></a>时，如何利用接口default方法或抽象类对具体的子类进行精简，便于开发与维护。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/default-method-in-abstract-class-and-interface/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/quartz/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-09 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/quartz/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/">利用dom4j修改含有回车换行符的XML文件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-04 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>这几天工作中遇到一个利用<a href="https://dom4j.github.io/"><strong>dom4j</strong></a>更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用<code>dom4j(1.6.1)</code>默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

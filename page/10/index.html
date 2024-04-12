@@ -147,6 +147,82 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/multithreading-costs/">3. [译]多线程的成本</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/costs.html"><strong>Java Concurrency / Multithreading Costs</strong></a></p>
+<p>从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/multithreading-costs/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/multithreading-benefits/">2. [译]多线程的优点</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-04-01 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/benefits.html"><strong>Java Concurrency / Multithreading Benefits</strong></a></p>
+<p>尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：</p>
+<ul>
+<li>更好的资源利用</li>
+<li>在某些场景可以简化程序设计</li>
+<li>提高程序响应</li>
+</ul>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/multithreading-benefits/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/">1. [译]Java多线程与并发教程</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-03-30 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自<a href="http://tutorials.jenkov.com/java-concurrency/index.html"><strong>Java Concurrency / Multithreading Tutorial</strong></a></p>
+<p>最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。</p>
+<p>多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
+之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/golang/import-local-package-in-intellij-idea/">在Intellij IDEA中引用Golang本地包</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-03-05 </span>
@@ -322,73 +398,6 @@
     </div>
     <div class="read-more">
       <a href="/post/spring/spring-core/using-junit-in-spring/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring/update-authority-dynamic-using-spring-security/">利用Spring Security动态改变登录用户的权限</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-20 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>来管理我们的web程序时，通常需要在<code>UserDetailsService</code>接口中的<code>loadUserByUsername</code>方法中来初始化权限信息,但<code>UserDetailsService</code>一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用<a href="http://projects.spring.io/spring-security/"><strong>Spring Security</strong></a>提供的API来实现。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/spring/update-authority-dynamic-using-spring-security/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring/spring-mvc/using-mock-test-http-servlet-request/">在Spring中利用Mock对HttpServletRequest进行单元测试</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-19 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h2 id="编写单元测试时的注意事项">编写单元测试时的注意事项</h2>
-<p>根据软件开发过程中的<a href="https://en.wikipedia.org/wiki/Test-driven_development"><strong>TDD</strong></a>理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入<code>HttpServletRequest</code> , <code>ServletContext</code>等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入<code>HttpServletRequest</code>对象，此时对此类方法进行<a href="http://junit.org/"><strong>JUnit</strong></a>单元测试时会较为困难，本文介绍一种在<a href="https://spring.io/"><strong>Spring</strong></a>中通过<a href="http://mockito.org/"><strong>Mock</strong></a>来模拟<code>HttpServletRequest</code>对象进行<a href="http://junit.org/"><strong>JUnit</strong></a>单元测试的方法。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/spring/spring-mvc/using-mock-test-http-servlet-request/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/web/mediawiki-back-to-top/">Mediawiki添加回到顶部的方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-18 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%85%B6%E5%AE%83/"> 其它 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="https://www.mediawiki.org/wiki/MediaWiki"><strong>Mediawiki</strong></a>是<a href="https://www.wikipedia.org/"><strong>维基百科</strong></a>系统所采用的框架，适合于需要快速搭建知识分享的场合。采用<a href="https://www.mediawiki.org/wiki/MediaWiki"><strong>Mediawiki</strong></a>生成的知识共享平台和<a href="https://www.wikipedia.org/"><strong>维基百科</strong></a>的操作与使用类似，都支持采用<a href="https://zh.wikipedia.org/zh-cn/Markdown"><strong>Markdown</strong></a>语法来编辑。在有些时候，某些词条的内容很长，使得浏览器出现了滚动条，如果能仿照微博等网站添加一个<strong>回到顶部</strong>的功能，将会给我们的使用带来很大的便利，本文介绍一种实现方法：</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/web/mediawiki-back-to-top/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

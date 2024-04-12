@@ -6,7 +6,16 @@
     <description>Recent content in python on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 Apr 2023 09:25:53 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 May 2023 10:09:16 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Numpy将npz文件解析为csv文件</title>
+      <link>https://lucumt.info/post/python/using-numpy-to-parse-npzp-into-csv/</link>
+      <pubDate>Tue, 16 May 2023 10:09:16 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/python/using-numpy-to-parse-npzp-into-csv/</guid>
+      <description>&lt;p&gt;记录下如何基于&lt;a href=&#34;https://numpy.org/&#34;&gt;&lt;strong&gt;NumPy&lt;/strong&gt;&lt;/a&gt;将&lt;code&gt;npz&lt;/code&gt;文件解析成多个&lt;code&gt;csv&lt;/code&gt;文件，以自己项目中使用的&lt;code&gt;npz&lt;/code&gt;文件结构为例，其它地方使用时可能会有差异&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在Python程序中使用Nacos</title>
       <link>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</link>

@@ -147,6 +147,71 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/">利用Nacos与KubeSphere创建多套开发与测试环境</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/bit/merge-three-int-number-into-a-long-number/">将3个小int整数合并到1个long中从而缩小数据量</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-08 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%BD%8D%E6%93%8D%E4%BD%9C/"> 位操作 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>近期在工作中遇到由于<code>HTTP</code>返回的内容较多导致系统响应延迟的问题，最终自己结合<a href="https://en.wikipedia.org/wiki/Gzip">gzip</a>、<a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a>、<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C">位运算</a>等将<code>HTTP</code>响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于<code>位运算</code>部分自己是结合业务实际，将3个小型<code>int</code>转化为1个<code>long</code>，将数据量减少三分之一，简单记录下其实现(以<code>Java</code>实现为例)。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/bit/merge-three-int-number-into-a-long-number/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/devops/setting-ldap-for-kubesphere/">Kubesphere集成LDAP踩坑记录</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-04 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          <a href="/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/"> 系统集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>之前在公司内部推广<a href="https://kubesphere.io/">KubeSphere</a>用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>整合其它系统的成熟经验，很自然的想将<code>LDAP</code>集成到<code>KubeSphere</code>中。原以为会很容易，一番折腾下来费了不好功夫(<strong><code>KubeSphere</code>要求使用<code>LDAP</code>时必须设置管理员账号和密码</strong>)，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/devops/setting-ldap-for-kubesphere/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-09-03 </span>
@@ -293,69 +358,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/same-threading/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/web/convert-folder-upload-data-to-tree-node-in-chrome/">在Chrome中将上传的文件夹数据转化为按树结构展示</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-02-20 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中有个模块支持按文件夹选中批量上传，用户希望在真正上传之前能够在浏览器中实时预览选中的文件夹层级结构，本文基于<code>Chrome</code>浏览器为例，简要说明这一实现。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/web/convert-folder-upload-data-to-tree-node-in-chrome/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring/spring-core/difference-between-factorybean-and-beanfactory/">Spring中BeanFactory和FactoryBean的区别以及使用场景</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-01-16 </span>
-      <div class="post-category">
-          <a href="/categories/spring%E7%B3%BB%E5%88%97/"> Spring系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><strong>BeanFactory</strong></a>和<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html"><strong>FactoryBean</strong></a>的区别与使用场景是<a href="https://spring.io/"><strong>Spring</strong></a>面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/spring/spring-core/difference-between-factorybean-and-beanfactory/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/get-datetime-in-specific-timezone/">利用JDK8时区常量进行时区相关操作</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-06-08 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在进行<code>Java</code>编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用<code>JDK</code>内置的时区常量来进行时区相关操作。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/get-datetime-in-specific-timezone/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

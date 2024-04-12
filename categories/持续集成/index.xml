@@ -6,7 +6,16 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Nov 2023 10:14:18 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Jan 2024 10:17:42 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
+      <link>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
+      <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</guid>
+      <description>&lt;p&gt;近期有个项目组有个&lt;code&gt;Vue&lt;/code&gt;项目需要在基于&lt;code&gt;KubeSphere&lt;/code&gt;的&lt;code&gt;Jenkins&lt;/code&gt;流水线中用高版本的&lt;code&gt;nodejs&lt;/code&gt;进行编译，自己一开始尝试通过在流水线中直接升级&lt;code&gt;nodejs&lt;/code&gt;版本，但并未成功，后来参考&lt;code&gt;KubeSphere&lt;/code&gt;论坛上的相关说明才解决该问题，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用SSH实现在Jekins中给远程服务器部署项目</title>
       <link>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</link>

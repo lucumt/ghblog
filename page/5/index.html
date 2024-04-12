@@ -147,6 +147,70 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/">利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-01-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>工作中涉及到<code>Kubernetes</code>相关知识，自己之前一直没有系统性的学习<code>Kubernetes</code>，近期在腾讯云上想安装<code>Kubernetes</code>时一直遇到在执行<code>kubeadm init</code>时<code>6443</code>和<code>10280</code>端口无法访问导致操作失败进而无法顺利安装<code>Kubernetes</code>。一番排查后发现是由于从<code>1.24.0</code>之后<code>Kubernetes</code>默认采用<code>containerd</code>作为运行时容器，其默认镜像为<code>registry.k8s.io</code>，该镜像在国内无法访问导致的，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python/using-global-variable-in-different-module/">在Python的不同模块中使用全局变量</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-01-05 </span>
+      <div class="post-category">
+          <a href="/categories/python%E7%BC%96%E7%A8%8B/"> python编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>简要介绍如何在<code>Python</code>中利用<a href="https://docs.python.org/3/reference/simple_stmts.html#global"><strong>global</strong></a>关键字定义的全局变量在不同模块间共享，避免后续重复犯错。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/python/using-global-variable-in-different-module/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ldap/add-ldap-support-for-grafana/">给Grafana软件集成LDAP实现单点登录</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-12-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          <a href="/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/"> 系统集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><a href="https://grafana.com/">Grafana</a>是一款用Go语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能，本文简要说明如何将基于<code>docker</code>安装的<code>Grafana</code>与<code>LDAP</code>集成实现快捷登录。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/ldap/add-ldap-support-for-grafana/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/ldap/add-ldap-support-for-sonarqube/">给Sonarqube软件集成LDAP实现单点登录</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-12-04 </span>
@@ -291,71 +355,6 @@
     </div>
     <div class="read-more">
       <a href="/post/hugo/share-experience-for-using-hugo-even-theme/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/">利用Nacos与KubeSphere创建多套开发与测试环境</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-15 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bit/merge-three-int-number-into-a-long-number/">将3个小int整数合并到1个long中从而缩小数据量</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-08 </span>
-      <div class="post-category">
-          <a href="/categories/%E4%BD%8D%E6%93%8D%E4%BD%9C/"> 位操作 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>近期在工作中遇到由于<code>HTTP</code>返回的内容较多导致系统响应延迟的问题，最终自己结合<a href="https://en.wikipedia.org/wiki/Gzip">gzip</a>、<a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a>、<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C">位运算</a>等将<code>HTTP</code>响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于<code>位运算</code>部分自己是结合业务实际，将3个小型<code>int</code>转化为1个<code>long</code>，将数据量减少三分之一，简单记录下其实现(以<code>Java</code>实现为例)。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/bit/merge-three-int-number-into-a-long-number/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/setting-ldap-for-kubesphere/">Kubesphere集成LDAP踩坑记录</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-04 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/"> 系统集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>之前在公司内部推广<a href="https://kubesphere.io/">KubeSphere</a>用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>整合其它系统的成熟经验，很自然的想将<code>LDAP</code>集成到<code>KubeSphere</code>中。原以为会很容易，一番折腾下来费了不好功夫(<strong><code>KubeSphere</code>要求使用<code>LDAP</code>时必须设置管理员账号和密码</strong>)，简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/setting-ldap-for-kubesphere/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
+      <link>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
+      <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</guid>
+      <description>&lt;p&gt;近期有个项目组有个&lt;code&gt;Vue&lt;/code&gt;项目需要在基于&lt;code&gt;KubeSphere&lt;/code&gt;的&lt;code&gt;Jenkins&lt;/code&gt;流水线中用高版本的&lt;code&gt;nodejs&lt;/code&gt;进行编译，自己一开始尝试通过在流水线中直接升级&lt;code&gt;nodejs&lt;/code&gt;版本，但并未成功，后来参考&lt;code&gt;KubeSphere&lt;/code&gt;论坛上的相关说明才解决该问题，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>GitBook插件中实现从多个不同的文件夹下加载css和js文件</title>
       <link>https://lucumt.info/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</link>
       <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
@@ -97,6 +106,15 @@
       
       <guid>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</guid>
       <description>&lt;p&gt;由于&lt;code&gt;Docsify&lt;/code&gt;采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从&lt;code&gt;Docsify&lt;/code&gt;迁移到基于&lt;code&gt;Docker&lt;/code&gt;搭建的&lt;code&gt;GitBook&lt;/code&gt;并结合&lt;code&gt;GitLab Runner&lt;/code&gt;实现自动更新，在这其中踩了一些坑，简单记录下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>对Docsify中的代码高亮显示进行增强</title>
+      <link>https://lucumt.info/post/docsify/enchane-code-highlight-in-docsify/</link>
+      <pubDate>Fri, 22 Sep 2023 10:13:56 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docsify/enchane-code-highlight-in-docsify/</guid>
+      <description>&lt;p&gt;记录下如何给&lt;a href=&#34;https://docsify.js.org/&#34;&gt;&lt;strong&gt;docsify&lt;/strong&gt;&lt;/a&gt;添加多语言的代码高亮支持，以及在代码高亮的同时能显示行号，便利使用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -232,6 +250,15 @@
       
       <guid>https://lucumt.info/post/devops/prometheus-k8s-0-pending-in-kubesphere/</guid>
       <description>&lt;p&gt;简要记录下在安装完成&lt;a href=&#34;https://www.kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;后由于缺少&lt;a href=&#34;https://openebs.io/&#34;&gt;OpenEBS&lt;/a&gt;而导致名为&lt;code&gt;prometheus-k8s-0&lt;/code&gt;的pod节点一直处于&lt;code&gt;Pending&lt;/code&gt;状态，进而导致在&lt;code&gt;KubeSphere&lt;/code&gt;集群管理中资源统计部分出现NaN的问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用Numpy将npz文件解析为csv文件</title>
+      <link>https://lucumt.info/post/python/using-numpy-to-parse-npzp-into-csv/</link>
+      <pubDate>Tue, 16 May 2023 10:09:16 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/python/using-numpy-to-parse-npzp-into-csv/</guid>
+      <description>&lt;p&gt;记录下如何基于&lt;a href=&#34;https://numpy.org/&#34;&gt;&lt;strong&gt;NumPy&lt;/strong&gt;&lt;/a&gt;将&lt;code&gt;npz&lt;/code&gt;文件解析成多个&lt;code&gt;csv&lt;/code&gt;文件，以自己项目中使用的&lt;code&gt;npz&lt;/code&gt;文件结构为例，其它地方使用时可能会有差异&lt;/p&gt;</description>
     </item>
     
     <item>

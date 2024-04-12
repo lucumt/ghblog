@@ -72,6 +72,41 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/jenkins/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/kubesphere/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/gitbook/</loc>
     <lastmod>2023-12-10T16:21:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -80,13 +115,6 @@
   
   <url>
     <loc>https://lucumt.info/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</loc>
-    <lastmod>2023-12-10T16:21:12+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2023-12-10T16:21:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -191,27 +219,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/jenkins/</loc>
-    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/kubesphere/</loc>
-    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2023-11-15T10:14:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</loc>
     <lastmod>2023-11-15T10:14:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -235,6 +242,20 @@
   <url>
     <loc>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</loc>
     <lastmod>2023-10-07T10:14:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/docsify/</loc>
+    <lastmod>2023-09-22T10:13:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/docsify/enchane-code-highlight-in-docsify/</loc>
+    <lastmod>2023-09-22T10:13:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -436,6 +457,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/python/</loc>
+    <lastmod>2023-05-16T10:09:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/python/using-numpy-to-parse-npzp-into-csv/</loc>
+    <lastmod>2023-05-16T10:09:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97/</loc>
+    <lastmod>2023-05-16T10:09:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/junit5/junit-5-nested-tests/</loc>
     <lastmod>2023-05-02T13:12:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -480,13 +522,6 @@
   <url>
     <loc>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</loc>
     <lastmod>2023-04-21T10:39:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/python/</loc>
-    <lastmod>2023-04-11T09:25:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
