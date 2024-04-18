@@ -22,7 +22,7 @@
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
-  {{ if .Site.Params.busuanzi.enable -}}
+  {{ if and (.Site.Params.busuanzi.enable) (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
   <div class="busuanzi-footer">
     {{ $spinner := "img/spinner.svg" | relURL -}}
     {{ if and .Site.Params.busuanzi.enable .Site.Params.busuanzi.sitePV -}}

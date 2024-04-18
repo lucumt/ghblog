@@ -56,9 +56,10 @@
 {{- end -}}
 
 <!-- busuanzi -->
-{{- if .Site.Params.busuanzi.enable -}}
+{{- if and (.Site.Params.busuanzi.enable) (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 {{- end -}}
+
 
 <!-- Styles -->
 {{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
