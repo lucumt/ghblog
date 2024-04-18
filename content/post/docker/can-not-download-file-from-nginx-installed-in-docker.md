@@ -5,8 +5,8 @@ lastmod: 2023-03-23T10:46:12+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["docker"]
+categories: ["容器化"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
