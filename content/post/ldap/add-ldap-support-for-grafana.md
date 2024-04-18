@@ -5,7 +5,7 @@ lastmod: 2023-04-21T10:39:47+08:00
 draft: false
 keywords: ["ldap","grafana","docker"]
 description: "简要介绍如何给基于Docker创建的Grafana软件集成LDAP实现单点登录"
-tags: ["ldap","docker"]
+tags: ["ldap","docker","grafana"]
 categories: ["工具使用","系统集成"]
 author: "Rosen Lu"
 
@@ -47,11 +47,11 @@ highchartsDiagrams:
   options: ""
 ---
 
-[Grafana](https://grafana.com/)是一款用Go语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能，本文简要说明如何将基于`docker`安装的`Grafana`与`LDAP`集成实现快捷登录。
+[**Grafana**](https://grafana.com/)是一款用`Go`语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能，本文简要说明如何将基于`docker`安装的`Grafana`与`LDAP`集成实现快捷登录。
 
 <!--more-->
 
-1. 创建一个名为grafana的文件夹，在其下建立一个名为docker-compose.yml的文件，输入如下内容
+1. 创建一个名为grafana的文件夹，在其下建立一个名为`docker-compose.yml`的文件，输入如下内容
 
    ```yaml
    version: "3"

@@ -1,18 +1,18 @@
 ---
 title: "利用Grafana和Prometheus对系统进行监控"
-date: 2023-07-06T10:56:54+08:00
-lastmod: 2023-07-06T10:56:54+08:00
+date: 2022-12-15T10:56:54+08:00
+lastmod: 2022-12-15T10:56:54+08:00
 draft: true
-keywords: []
-description: ""
-tags: ["devops","grafana"]
-categories: ["工具使用"]
+keywords: ["grafana","promethus","系统监控","docker"]
+description: "简要介绍如何基于docker环境利用Grafana和Prometheus对系统进行监控"
+tags: ["devops","grafana","docker"]
+categories: ["工具使用","容器化"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
-toc: true
+toc: false
 autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
@@ -47,4 +47,16 @@ highchartsDiagrams:
   options: ""
 ---
 
+简要介绍如何在`docker`环境下利用[**Grafana**](https://grafana.com/)和[**Prometheus**](https://prometheus.io/)对系统进行监控。
+
 <!--more-->
+
+# 软件安装
+
+在[**给Grafana软件集成LDAP实现单点登录**](/post/ldap/add-ldap-support-for-grafana/)一文中简要说明了如何基于`docker`安装`Grafana`，本节出于简化使用与维护的目的，将`Grafana`与`Prometheus`合并到一个`docker-compose.yml`文件中，相关的文件如下
+
+`docker-compose.yml`文件
+
+
+
+# 系统接入
