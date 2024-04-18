@@ -660,6 +660,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/devops/using-grafana-and-prometheus-to-monitor-systems/</loc>
+    <lastmod>2022-12-15T10:56:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/ldap/add-ldap-support-for-grafana/</loc>
     <lastmod>2023-04-21T10:39:47+08:00</lastmod>
     <changefreq>weekly</changefreq>

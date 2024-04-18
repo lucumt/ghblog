@@ -90,6 +90,15 @@
     </item>
     
     <item>
+      <title>利用Grafana和Prometheus对系统进行监控</title>
+      <link>https://lucumt.info/post/devops/using-grafana-and-prometheus-to-monitor-systems/</link>
+      <pubDate>Thu, 15 Dec 2022 10:56:54 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/using-grafana-and-prometheus-to-monitor-systems/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;docker&lt;/code&gt;环境下利用&lt;a href=&#34;https://grafana.com/&#34;&gt;&lt;strong&gt;Grafana&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://prometheus.io/&#34;&gt;&lt;strong&gt;Prometheus&lt;/strong&gt;&lt;/a&gt;对系统进行监控。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>给Grafana软件集成LDAP实现单点登录</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-grafana/</link>
       <pubDate>Sun, 11 Dec 2022 10:39:47 +0800</pubDate>

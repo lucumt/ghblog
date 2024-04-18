@@ -158,12 +158,24 @@
    
     <div class="archive-title">
       <span class="archive-post-counter">
-        共计 106 篇文章
+        共计 107 篇文章
       </span>
     </div>
       <div class="collection-title">
         <h2 class="archive-year">2016</h2>
       </div>
+
+    <div class="archive-post">
+      <span class="archive-post-time">
+        03-20
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/spring/spring-core/using-junit-in-spring/" class="archive-post-link">
+		  利用Spring和JUnit对数据库操作进行单元测试
+        </a>
+      </span>
+    </div>
 
     <div class="archive-post">
       <span class="archive-post-time">
@@ -325,7 +337,7 @@ Highcharts.chart('section_year_chart_1', {
         type: 'column',
 		color:"#16982b",
         yAxis: 1,
-        data: JSON.parse("[11,12,8,6,5,2,20,40,2]"),
+        data: JSON.parse("[11,12,8,6,5,2,21,40,2]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -334,7 +346,7 @@ Highcharts.chart('section_year_chart_1', {
         name: '按年累计',
 		color:"#0047AB",
         type: 'spline',
-        data: JSON.parse("[11,23,31,37,42,44,64,104,106]"),
+        data: JSON.parse("[11,23,31,37,42,44,65,105,107]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -391,7 +403,7 @@ Highcharts.chart('section_year_chart_2', {
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
-        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":8},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":20},{\"name\":\"2023\",\"y\":40},{\"name\":\"2024\",\"y\":2}]")
+        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":8},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":2},{\"name\":\"2022\",\"y\":21},{\"name\":\"2023\",\"y\":40},{\"name\":\"2024\",\"y\":2}]")
 	}] 
 });
 Highcharts.chart('section_month_chart_1', {
@@ -457,7 +469,7 @@ Highcharts.chart('section_month_chart_1', {
         name: '按月新增',
 		color:"#16982b",
         type: 'column',
-        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,1,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,6,1,2,3,2,1,5,4,4,9,3,1,2,1,7,1,1,1]"),
+        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,1,5,2,2,1,1,1,1,1,2,1,1,1,1,1,5,6,1,2,4,2,1,5,4,4,9,3,1,2,1,7,1,1,1]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -467,7 +479,7 @@ Highcharts.chart('section_month_chart_1', {
         type: 'spline',
 		color:"#0047AB",
         yAxis: 1,
-        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,26,31,33,35,36,37,38,39,40,42,43,44,45,46,47,52,58,59,61,64,66,67,72,76,80,89,92,93,95,96,103,104,105,106]"),
+        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,26,31,33,35,36,37,38,39,40,42,43,44,45,46,47,52,58,59,61,65,67,68,73,77,81,90,93,94,96,97,104,105,106,107]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -531,7 +543,7 @@ Highcharts.chart('section_month_chart_2', {
             }
         }]
     },
-    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2,1],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5,0],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,1],\"name\":4},{\"data\":[1,0,0,0,0,0,0,4,0],\"name\":5},{\"data\":[0,0,1,0,0,1,1,9,0],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,6,2,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,7,0],\"name\":11},{\"data\":[0,3,5,0,0,0,3,1,0],\"name\":12}]")
+    series: JSON.parse("[{\"data\":[0,0,2,2,1,0,1,2,1],\"name\":1},{\"data\":[1,1,0,2,1,0,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,0,0,5,0],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,1],\"name\":4},{\"data\":[1,0,0,0,0,0,0,4,0],\"name\":5},{\"data\":[0,0,1,0,0,1,1,9,0],\"name\":6},{\"data\":[0,0,0,1,0,0,0,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,6,2,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,7,0],\"name\":11},{\"data\":[0,3,5,0,0,0,4,1,0],\"name\":12}]")
 });
 </script>
 	</div>
