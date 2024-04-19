@@ -6,7 +6,16 @@
     <description>Recent content in grafana on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Dec 2022 10:56:54 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Apr 2024 17:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于MySQL的Grafana的柱状中不显示0值</title>
+      <link>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</guid>
+      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Grafana和Prometheus对系统进行监控</title>
       <link>https://lucumt.info/post/devops/using-grafana-and-prometheus-to-monitor-systems/</link>

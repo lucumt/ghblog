@@ -6,7 +6,34 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Apr 2024 17:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>devops</title>
+      <link>https://lucumt.info/tags/devops/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grafana</title>
+      <link>https://lucumt.info/tags/grafana/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/grafana/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://lucumt.info/tags/mysql/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>git</title>
       <link>https://lucumt.info/tags/git/</link>
@@ -224,15 +251,6 @@
     </item>
     
     <item>
-      <title>devops</title>
-      <link>https://lucumt.info/tags/devops/</link>
-      <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>python</title>
       <link>https://lucumt.info/tags/python/</link>
       <pubDate>Tue, 16 May 2023 10:09:16 +0800</pubDate>
@@ -283,15 +301,6 @@
       <pubDate>Fri, 10 Mar 2023 22:48:56 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/cmd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>grafana</title>
-      <link>https://lucumt.info/tags/grafana/</link>
-      <pubDate>Thu, 15 Dec 2022 10:56:54 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/grafana/</guid>
       <description></description>
     </item>
     
@@ -382,15 +391,6 @@
       <pubDate>Tue, 07 Apr 2020 15:21:27 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://lucumt.info/tags/mysql/</link>
-      <pubDate>Thu, 22 Aug 2019 11:32:19 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/mysql/</guid>
       <description></description>
     </item>
     

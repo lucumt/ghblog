@@ -6,7 +6,16 @@
     <description>Recent content in 工具使用 on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Jan 2024 10:17:42 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Apr 2024 17:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于MySQL的Grafana的柱状中不显示0值</title>
+      <link>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</guid>
+      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
       <link>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>

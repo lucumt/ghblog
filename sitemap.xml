@@ -2,14 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</loc>
+    <loc>https://lucumt.info/categories/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/</loc>
+    <loc>https://lucumt.info/tags/devops/</loc>
+    <lastmod>2023-06-17T14:27:13+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/grafana/</loc>
+    <lastmod>2023-04-21T10:39:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/mysql/</loc>
+    <lastmod>2023-04-19T17:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</loc>
+    <lastmod>2023-04-19T17:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,13 +86,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/ssh/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -44,21 +93,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</loc>
-    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -87,13 +122,6 @@
   
   <url>
     <loc>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2024-01-11T10:17:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2024-01-11T10:17:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -422,13 +450,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/devops/</loc>
-    <lastmod>2023-06-17T14:27:13+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</loc>
     <lastmod>2023-06-17T14:27:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -648,13 +669,6 @@
   <url>
     <loc>https://lucumt.info/post/python/using-global-variable-in-different-module/</loc>
     <lastmod>2023-01-05T10:55:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/grafana/</loc>
-    <lastmod>2023-04-21T10:39:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -949,13 +963,6 @@
   <url>
     <loc>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</loc>
     <lastmod>2020-01-08T16:21:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/mysql/</loc>
-    <lastmod>2019-08-22T11:32:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
