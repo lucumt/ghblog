@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mysql on 飞狐的部落格</title>
+    <title>MySQL on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/mysql/</link>
-    <description>Recent content in mysql on 飞狐的部落格</description>
+    <description>Recent content in MySQL on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Oct 2023 20:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>在基于MySQL的Grafana的柱状中不显示空值</title>
-      <link>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</link>
-      <pubDate>Mon, 09 Oct 2023 20:21:43 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</guid>
-      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改&lt;code&gt;sql&lt;/code&gt;的方式来消除柱状图中多余的&lt;code&gt;null&lt;/code&gt;值。&lt;/p&gt;</description>
-    </item>
-    
+    <lastBuildDate>Thu, 22 Aug 2019 11:32:19 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MySQL中由于user表中错误的host配置导入无法登录数据库</title>
       <link>https://lucumt.info/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/</link>

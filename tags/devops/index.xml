@@ -6,16 +6,7 @@
     <description>Recent content in devops on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Oct 2023 20:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/devops/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>在基于MySQL的Grafana的柱状中不显示空值</title>
-      <link>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</link>
-      <pubDate>Mon, 09 Oct 2023 20:21:43 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</guid>
-      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改&lt;code&gt;sql&lt;/code&gt;的方式来消除柱状图中多余的&lt;code&gt;null&lt;/code&gt;值。&lt;/p&gt;</description>
-    </item>
-    
+    <lastBuildDate>Sat, 17 Jun 2023 14:27:13 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
       <link>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</link>
