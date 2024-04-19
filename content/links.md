@@ -61,21 +61,26 @@ sequenceDiagrams:
 | [**努力的小雨**](https://www.cnblogs.com/guoxiaoyu/)         | 关于`Spring`源码和计算机网络的高质量博文💚                    |                |
 | [**苏三说技术**](https://www.cnblogs.com/12lisu)             | 关于`Java`相关的博文，有些质量不错，内容短但是有干货         |                |
 | [**JavaBuild**](https://www.cnblogs.com/JavaBuild)           | 关于`Java`基础知识的博文，质量都不错                         | `JavaBuild888` |
-| [**cjting.me**](https://cjting.me/)                          | 有不少关于网络知识和前端知识的高质量博文💚                    |                |
-| [**Jerry Qu**](https://imququ.com/)                          | 前端大神屈屈的网站，有很多关于前端的高质量博文💚时            |                |
+| [**cjting.me**](https://cjting.me/)                          | 有不少关于网络知识和前端知识的高质量博文💚，几乎每篇文章都很有深度 |                |
+| [**Jerry Qu**](https://imququ.com/)                          | 前端大神屈屈的网站，有很多关于前端的高质量博文💚              |                |
 
 # 单个博文
 
-* [docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
+* [Docker安装Elasticsearch7.6集群并设置密码](https://www.cnblogs.com/woshimrf/p/docker-es7.html)
 * [我试图通过这篇文章，教会你一种阅读源码的方式](https://www.cnblogs.com/thisiswhy/p/17261155.html)
 * [LGTM? 那些迷之缩写](https://farer.org/2017/03/01/code-review-acronyms/)
 * [Oracle官方的JDK各版本特性说明](https://docs.oracle.com/en/java/javase/18/language/java-language-changes.html)
 * [斯坦福大学关于位运算技巧的总结](https://graphics.stanford.edu/~seander/bithacks.html)
 * [Vim快捷键集合](https://linux.cn/article-8144-1.html)
 * [当你问代理机制的时候？指的是Agent,Proxy,Broker还是Delegate呢？](https://cloud.tencent.com/developer/article/1470232)
+* [安全背后: 浏览器是如何校验证书的](https://cjting.me/2021/03/02/how-to-validate-tls-certificate/) 
 
 # 其它
 
+* TCP状态变化图
+
+  ![TCP状态变化图](/blog_img/links/tcp-status-change.png "TCP状态变化图")
+  
 * 线程生命周期
 
   * ![线程生命周期](/blog_img/links/线程生命周期.jpg "线程生命周期")

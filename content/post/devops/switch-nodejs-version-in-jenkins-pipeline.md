@@ -191,7 +191,7 @@ agent {
         inheritFrom 'go base'
         containerTemplate {
             name 'go'
-            image 'node:1.22.2'
+            image 'go:1.22.2'
         }
     }
 }
