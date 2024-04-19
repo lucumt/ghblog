@@ -61,6 +61,8 @@ sequenceDiagrams:
 | [**努力的小雨**](https://www.cnblogs.com/guoxiaoyu/)         | 关于`Spring`源码和计算机网络的高质量博文💚                    |                |
 | [**苏三说技术**](https://www.cnblogs.com/12lisu)             | 关于`Java`相关的博文，有些质量不错，内容短但是有干货         |                |
 | [**JavaBuild**](https://www.cnblogs.com/JavaBuild)           | 关于`Java`基础知识的博文，质量都不错                         | `JavaBuild888` |
+| [**cjting.me**](https://cjting.me/)                          | 有不少关于网络知识和前端知识的高质量博文💚                    |                |
+| [**Jerry Qu**](https://imququ.com/)                          | 前端大神屈屈的网站，有很多关于前端的高质量博文💚时            |                |
 
 # 单个博文
 
