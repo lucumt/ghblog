@@ -6,7 +6,7 @@ draft: true
 keywords: []
 description: ""
 tags: ["docker"]
-categories: []
+categories: ["容器化"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -48,3 +48,13 @@ highchartsDiagrams:
 ---
 
 <!--more-->
+
+参考文章 https://stackoverflow.com/questions/43126022/docker-is-not-creating-new-container-but-recreates-running-one
+
+环境变量相关说明https://docs.docker.com/compose/environment-variables/envvars/
+
+解决方案：
+
+1. 显示指定container_name
+2. 设置不同的service name
+3. 放到不同的文件夹下，确保路径不相同

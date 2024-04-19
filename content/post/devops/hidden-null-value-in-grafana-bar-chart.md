@@ -2,7 +2,7 @@
 title: "在基于MySQL的Grafana的柱状中不显示空值"
 date: 2023-10-09T20:21:43+08:00
 lastmod: 2023-10-09T20:21:43+08:00
-draft: false
+draft: true
 keywords: ["grafana","mysql","deveops","柱状图"]
 description: "简要记录如何在基于MySQL的Grafana的柱状中不显示空值"
 tags: ["devops","grafana","mysql"]
