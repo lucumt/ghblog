@@ -81,6 +81,10 @@ sequenceDiagrams:
 
   ![TCP状态变化图](/blog_img/links/tcp-status-change.png "TCP状态变化图")
   
+* HTTPS连接建立过程
+
+  ![HTTPS连接建立过程](/blog_img/links/https-handshake.jpeg "HTTPS连接建立过程")
+  
 * 线程生命周期
 
   * ![线程生命周期](/blog_img/links/线程生命周期.jpg "线程生命周期")
