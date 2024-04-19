@@ -36,6 +36,15 @@
     </item>
     
     <item>
+      <title>在基于MySQL的Grafana的柱状中不显示空值</title>
+      <link>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</link>
+      <pubDate>Mon, 09 Oct 2023 20:21:43 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</guid>
+      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改&lt;code&gt;sql&lt;/code&gt;的方式来消除柱状图中多余的&lt;code&gt;null&lt;/code&gt;值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</title>
       <link>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</link>
       <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>

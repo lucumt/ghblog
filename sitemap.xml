@@ -233,6 +233,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/devops/</loc>
+    <lastmod>2023-10-09T20:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/grafana/</loc>
+    <lastmod>2023-10-09T20:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/mysql/</loc>
+    <lastmod>2023-10-09T20:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/hidden-null-value-in-grafana-bar-chart/</loc>
+    <lastmod>2023-10-09T20:21:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/gitlab-runner/</loc>
     <lastmod>2023-10-07T10:14:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -417,13 +445,6 @@
   <url>
     <loc>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</loc>
     <lastmod>2023-06-18T19:21:43+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/devops/</loc>
-    <lastmod>2023-06-17T14:27:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -648,13 +669,6 @@
   <url>
     <loc>https://lucumt.info/post/python/using-global-variable-in-different-module/</loc>
     <lastmod>2023-01-05T10:55:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/grafana/</loc>
-    <lastmod>2023-04-21T10:39:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -949,13 +963,6 @@
   <url>
     <loc>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</loc>
     <lastmod>2020-01-08T16:21:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/mysql/</loc>
-    <lastmod>2019-08-22T11:32:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
