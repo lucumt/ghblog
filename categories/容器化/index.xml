@@ -79,5 +79,14 @@
       <description>&lt;p&gt;由于公司的&lt;code&gt;docker&lt;/code&gt;容器在运行一段时间后日志变得很大，通过&lt;code&gt;shell&lt;/code&gt;脚本或者结合&lt;code&gt;docker stop&lt;/code&gt;、&lt;code&gt;docker rm&lt;/code&gt;和&lt;code&gt;docker run&lt;/code&gt;来重新创建实例方式都觉得太麻烦，按照网络上的建议在&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;中进行相关修改后却一直无法启动，同时错误信息一直提示&lt;code&gt;unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)&lt;/code&gt;，经过一番排查后终于找到原因，故记录下。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>多个docker-compose.yml文件启动时容器冲突的原因分析</title>
+      <link>https://lucumt.info/post/docker/multiple-docker-compose-conflict-analysis/</link>
+      <pubDate>Mon, 25 Jul 2022 22:53:33 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/multiple-docker-compose-conflict-analysis/</guid>
+      <description>&lt;p&gt;简要记录下近期在项目中遇到的多个&lt;code&gt;docker-compose.yml&lt;/code&gt;文件容器启动时发生冲突的原因分析。&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
