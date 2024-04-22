@@ -631,6 +631,15 @@ div.mermaid &gt; svg { max-width: 60% !important; }
     </item>
     
     <item>
+      <title>在利用docker安装的nginx中实现静态文件下载</title>
+      <link>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</link>
+      <pubDate>Tue, 23 Mar 2021 10:46:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</guid>
+      <description>&lt;p&gt;简单记录利用&lt;code&gt;nginx&lt;/code&gt;结合&lt;code&gt;docker&lt;/code&gt;实现一个简易的静态文件下载服务器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>一次由wait造成的死锁问题分析</title>
       <link>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/</link>
       <pubDate>Sat, 12 Sep 2020 18:07:27 +0800</pubDate>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/nginx/</link>
+    <description>Recent content in nginx on 飞狐的部落格</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Mar 2021 10:46:12 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在利用docker安装的nginx中实现静态文件下载</title>
+      <link>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</link>
+      <pubDate>Tue, 23 Mar 2021 10:46:12 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</guid>
+      <description>&lt;p&gt;简单记录利用&lt;code&gt;nginx&lt;/code&gt;结合&lt;code&gt;docker&lt;/code&gt;实现一个简易的静态文件下载服务器。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
