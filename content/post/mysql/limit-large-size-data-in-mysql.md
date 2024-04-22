@@ -46,7 +46,7 @@ sequenceDiagrams:
 
 以`system_user`表为例，基于[MySQL中快速创建大量测试数据](../mysql-create-massive-test-data-quickly/)一文中的介绍给其添加1000万的测试数据
 
-```sql
+```mysql
 CREATE TABLE `system_user` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `system_user` (
 
 若**主键连续自增**，则可从业务逻辑的角度先对数据用`WHERE`过滤，然后用`LIMIT`进行分页，类似SQL如下：
 
-```sql
+```mysql
 SELECT * FROM `system_user` WHERE id>=9999990 LIMIT 10;
 ```
 
@@ -101,7 +101,7 @@ SELECT * FROM `system_user` WHERE id>=9999990 LIMIT 10;
 
 将查询sql修改为类似如下
 
-```sql
+```mysql
 SELECT u1.* FROM `system_user` u1
 JOIN 
 (SELECT id FROM `system_user` LIMIT 9999990,10) u2 ON u1.id=u2.id;
@@ -125,7 +125,7 @@ JOIN
 
 此时可通过在数据库表中添加一列`num`并对其创建唯一索引，之后基于`num`进行过滤查询
 
-```sql
+```mysql
 -- 添加索引
 ALTER TABLE `system_user` ADD COLUMN `num` INT NOT NULL DEFAULT 1;
 ALTER TABLE `system_user` ADD UNIQUE INDEX `user_num_index` (`num`);
@@ -137,7 +137,7 @@ CALL add_user_batch(10000000);
 
 改进后的sql如下
 
-```sql
+```mysql
 SELECT u1.* FROM `system_user` u1
 JOIN 
 (SELECT num FROM `system_user` WHERE num>=9999990 LIMIT 10) u2 ON u1.num=u2.num;

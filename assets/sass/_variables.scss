@@ -264,7 +264,10 @@ $code-type-list: (
   language-yml: "YAML",
   language-yaml: "YAML",
   language-toml: "TOML",
-  language-diff: "Diff"
+  language-diff: "Diff",
+  language-nginx: "Nginx",
+  language-mysql: "MySQL",
+  language-dockerfile: "Dockerfile"
 ) !default;
 
 // Color of the code background.

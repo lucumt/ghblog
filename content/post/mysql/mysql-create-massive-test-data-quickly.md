@@ -47,7 +47,7 @@ sequenceDiagrams:
 
 以下述的`system_user`表为例分别说明在不同的方式下如何大批量的创建测试数据。
 
-```sql
+```mysql
 CREATE TABLE `system_user` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -115,7 +115,7 @@ public class TestBatchInsertData {
 
 ## 通过存储过程创建
 
-```sql
+```mysql
 DELIMITER $$
 
 USE `test`$$
@@ -188,7 +188,7 @@ DELIMITER ;
 
 调用过程类似如下:
 
-```sql
+```mysql
 -- 清空原有记录
 TRUNCATE TABLE `system_user`;
 
@@ -207,14 +207,14 @@ SELECT COUNT(*) FROM `system_user`;
 
 1. 通过如下的SQL初始化表中的数据：
 
-   ```sql
+   ```mysql
    INSERT INTO `system_user`(NAME,age,tag) VALUES
    (LEFT(UUID(), 8),FLOOR(1 + RAND() * 60),LEFT(UUID(), 8));
    ```
 
 2. 根据实际需要多次执行下述SQL：
 
-   ```sql
+   ```mysql
    INSERT INTO `system_user`(NAME,age,tag) 
    SELECT LEFT(UUID(), 8),FLOOR(1 + RAND() * 60),LEFT(UUID(), 8) FROM `system_user`;
    ```
@@ -242,7 +242,7 @@ SELECT COUNT(*) FROM `system_user`;
 
 在`MySQL`中`tmp_table_size`为16M，`innodb_buffer_pool_size`的默认值是128M，当执行到一定次数后，会出现类似`The total number of locks exceeds the lock table size`的错误，此时需要根据实际情况调整这两个参数，参考如下：
 
-```sql
+```mysql
 SET GLOBAL tmp_table_size =512*1024*1024; -- 512M
 SET global innodb_buffer_pool_size= 2*1024*1024*1024; -- 2G
 ```

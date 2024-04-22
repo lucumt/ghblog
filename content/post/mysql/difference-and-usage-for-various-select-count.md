@@ -46,7 +46,7 @@ sequenceDiagrams:
 
 本文基于[InnoDB](https://en.wikipedia.org/wiki/InnoDB)和[MyISAM](https://en.wikipedia.org/wiki/MyISAM)这两种常见的`MySQL`引擎，利用名为[add_user_batch](https://github.com/lucumt/myrepository/blob/master/mysql/add_user_batch.sql)的存储过程向`system_user`表中插入1000万数据，对比测试它们的查询结果和响应性能。
 
-```sql
+```mysql
 CREATE TABLE `system_user` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,

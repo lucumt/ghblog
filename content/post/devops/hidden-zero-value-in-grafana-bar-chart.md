@@ -65,7 +65,7 @@ highchartsDiagrams:
 
 原始查询sql：
 
-```sql
+```mysql
 SELECT 
     DATE_FORMAT(t.start_time,'%Y-%m-%d') AS `taskDate`,
     SUM(IF(t.instance_status = 0,1,0)) AS `未知`,
@@ -93,7 +93,7 @@ WHERE t.start_time> DATE_SUB(NOW(), INTERVAL 14 DAY)
 
 改进后的sql:
 
-```sql
+```mysql
 SELECT 
     DATE_FORMAT(t.start_time,'%Y-%m-%d') AS `taskDate`,
     SUM(IF(t.instance_status = 0,1,null)) AS `未知`,
