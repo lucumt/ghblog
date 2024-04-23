@@ -1,7 +1,7 @@
 ---
 title: "Dockerfile中ADD与COPY的使用异同"
-date: 2023-06-26T15:00:05+08:00
-lastmod: 2023-06-26T15:00:05+08:00
+date: 2021-01-16T15:00:05+08:00
+lastmod: 2021-01-16T15:00:05+08:00
 draft: true
 keywords: []
 description: ""

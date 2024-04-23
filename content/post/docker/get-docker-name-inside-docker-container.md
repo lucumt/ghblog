@@ -1,18 +1,18 @@
 ---
 title: "在Docker容器内部获取当前容器实例的名称"
-date: 2024-01-16T13:16:52+08:00
-lastmod: 2024-01-16T13:16:52+08:00
+date: 2021-05-06T13:16:52+08:00
+lastmod: 2021-05-06T13:16:52+08:00
 draft: true
-keywords: []
-description: ""
+keywords: ["docker","容器名称","socket"]
+description: "简要说明如何实现在Docker容器内部获取当前容器的名称"
 tags: ["docker"]
-categories: []
+categories: ["容器化"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
-toc: true
+toc: false
 autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
@@ -49,4 +49,19 @@ highchartsDiagrams:
   options: ""
 ---
 
+介绍如何在`Docker`容器内部获取当前容器名称的方法
+
 <!--more-->
+
+# 背景
+
+某个项目模块采用了分布式部署
+
+# 通过环境变量
+
+# 通过socket通信
+
+
+
+参考地址 https://zhuanlan.zhihu.com/p/486968022
+

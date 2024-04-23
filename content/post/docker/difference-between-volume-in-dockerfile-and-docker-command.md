@@ -1,7 +1,7 @@
 ---
 title: "Dockerfile中的volume和docker run中的volume使用差异"
-date: 2023-06-26T14:59:59+08:00
-lastmod: 2023-06-26T14:59:59+08:00
+date: 2021-03-10T14:59:59+08:00
+lastmod: 2021-03-10T14:59:59+08:00
 draft: true
 keywords: []
 description: ""

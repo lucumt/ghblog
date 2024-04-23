@@ -1,12 +1,12 @@
 ---
 title: "Docker中不同的网络类型对比"
-date: 2023-11-20T15:23:57+08:00
-lastmod: 2023-11-20T15:23:57+08:00
+date: 2021-01-20T15:23:57+08:00
+lastmod: 2021-01-20T15:23:57+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["docker"]
+categories: ["容器化"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
