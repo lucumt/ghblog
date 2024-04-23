@@ -1,7 +1,7 @@
 ---
 title: "在Docker容器内部获取当前容器实例的名称"
-date: 2021-05-06T13:16:52+08:00
-lastmod: 2021-05-06T13:16:52+08:00
+date: 2022-05-06T13:16:52+08:00
+lastmod: 2022-05-06T13:16:52+08:00
 draft: false
 keywords: ["docker","容器名称","socket"]
 description: "简要说明如何实现在Docker容器内部获取当前容器的名称"
@@ -102,7 +102,7 @@ containerName=$(echo $dockerInfo |  awk -F'[:,}]' '{for(i=1;i<=NF;i++){if($i=="\
 echo "This is container $containerName" | tr -d '"/'
 ```
 
-执行结果如下，同样符合预期
+执行结果如下，可看出对于随机生成的容器名也能正常获取。
 
 ![通过socket获取随机生成的容器名](/blog_img/docker/get-docker-name-inside-docker-container/get-random-container-name-via-sockets.png  "通过socket获取随机生成的容器名")
 
