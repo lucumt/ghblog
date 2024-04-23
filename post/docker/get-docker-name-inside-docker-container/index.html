@@ -43,13 +43,13 @@
 <meta property="og:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lucumt.info/post/docker/get-docker-name-inside-docker-container/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-05-06T13:16:52+08:00" />
-<meta property="article:modified_time" content="2021-05-06T13:16:52+08:00" />
+<meta property="article:published_time" content="2022-05-06T13:16:52+08:00" />
+<meta property="article:modified_time" content="2022-05-06T13:16:52+08:00" />
 
 <meta itemprop="name" content="在Docker容器内部获取当前容器实例的名称">
-<meta itemprop="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称"><meta itemprop="datePublished" content="2021-05-06T13:16:52+08:00" />
-<meta itemprop="dateModified" content="2021-05-06T13:16:52+08:00" />
-<meta itemprop="wordCount" content="1265">
+<meta itemprop="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称"><meta itemprop="datePublished" content="2022-05-06T13:16:52+08:00" />
+<meta itemprop="dateModified" content="2022-05-06T13:16:52+08:00" />
+<meta itemprop="wordCount" content="1279">
 <meta itemprop="keywords" content="docker," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在Docker容器内部获取当前容器实例的名称"/>
 <meta name="twitter:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称"/>
@@ -153,7 +153,7 @@
       <h1 class="post-title">在Docker容器内部获取当前容器实例的名称</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-05-06 </span>
+        <span class="post-time"> 2022-05-06 </span>
         <div class="post-category">
             <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
             </div>
@@ -238,7 +238,7 @@
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;This is container </span><span class="nv">$containerName</span><span class="s2">&#34;</span> <span class="p">|</span> tr -d <span class="s1">&#39;&#34;/&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>执行结果如下，同样符合预期</p>
+</div><p>执行结果如下，可看出对于随机生成的容器名也能正常获取。</p>
 <p><img src="/blog_img/docker/get-docker-name-inside-docker-container/get-random-container-name-via-sockets.png" alt="通过socket获取随机生成的容器名" title="通过socket获取随机生成的容器名"></p>
 <p><code>$dockerInfo</code>的格式化输出如下</p>
 <div class="highlight"><div class="chroma">
@@ -760,13 +760,13 @@
           <a href="/tags/docker/">docker</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/java-core/get-datetime-in-specific-timezone/">
+        <a class="prev" href="/post/translate/java-concurrency/same-threading/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">利用JDK8时区常量进行时区相关操作</span>
+            <span class="prev-text nav-default">5.[译]同线程系统</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/mybatis/insert-json-data-in-mybatis/">
-            <span class="next-text nav-default">MyBatis中插入JSON格式数据</span>
+        <a class="next" href="/post/web/convert-folder-upload-data-to-tree-node-in-chrome/">
+            <span class="next-text nav-default">在Chrome中将上传的文件夹数据转化为按树结构展示</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
