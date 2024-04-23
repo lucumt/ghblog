@@ -161,6 +161,15 @@
     </item>
     
     <item>
+      <title>在Docker容器内部获取当前容器实例的名称</title>
+      <link>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</link>
+      <pubDate>Thu, 06 May 2021 13:16:52 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</guid>
+      <description>&lt;p&gt;介绍如何在&lt;code&gt;Docker&lt;/code&gt;容器内部获取当前容器名称的方法，特别感谢&lt;a href=&#34;https://zhuanlan.zhihu.com/p/486968022&#34;&gt;&lt;strong&gt;https://zhuanlan.zhihu.com/p/486968022&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>在利用docker安装的nginx中实现静态文件下载</title>
       <link>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</link>
       <pubDate>Tue, 23 Mar 2021 10:46:12 +0800</pubDate>
