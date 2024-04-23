@@ -1,7 +1,7 @@
 ---
 title: "在Docker容器内部获取当前容器实例的名称"
-date: 2022-05-06T13:16:52+08:00
-lastmod: 2022-05-06T13:16:52+08:00
+date: 2021-05-06T13:16:52+08:00
+lastmod: 2021-05-06T13:16:52+08:00
 draft: false
 keywords: ["docker","容器名称","socket"]
 description: "简要说明如何实现在Docker容器内部获取当前容器的名称"
@@ -49,7 +49,7 @@ highchartsDiagrams:
   options: ""
 ---
 
-介绍如何在`Docker`容器内部获取当前容器名称的方法，特别感谢[**https://zhuanlan.zhihu.com/p/486968022**](https://zhuanlan.zhihu.com/p/486968022)。
+介绍如何在`Docker`容器内部获取当前容器名称的方法，特别感谢[**Get container name inside the docker container**](https://medium.com/disassembly/get-container-name-inside-the-docker-container-1997d36aaecd)。
 
 <!--more-->
 
