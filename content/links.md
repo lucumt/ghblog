@@ -63,6 +63,7 @@ sequenceDiagrams:
 | [**JavaBuild**](https://www.cnblogs.com/JavaBuild)           | 关于`Java`基础知识的博文，质量都不错                         | `JavaBuild888` |
 | [**cjting.me**](https://cjting.me/)                          | 有不少关于网络知识和前端知识的高质量博文💚，几乎每篇文章都很有深度 |                |
 | [**Jerry Qu**](https://imququ.com/)                          | 前端大神屈屈的网站，有很多关于前端的高质量博文💚              |                |
+| [**随机的未知**](https://www.cnblogs.com/nicaicai)           | 部分`Java`和`MySQL`博文的质量较高                            |                |
 
 # 单个博文
 

@@ -1,19 +1,19 @@
 ---
-title: "Dockerfile中ADD与COPY的使用异同"
-date: 2021-01-16T15:00:05+08:00
-lastmod: 2021-01-16T15:00:05+08:00
+title: "[译]Docker和Podman的差异"
+date: 2024-04-26T10:46:34+08:00
+lastmod: 2024-04-26T10:46:34+08:00
 draft: true
-keywords: ["docker","dockerfile","ADD","COPY"]
-description: "简要记录Dockerfile中ADD与COPY的使用异同"
+keywords: []
+description: ""
 tags: ["docker"]
-categories: ["容器化"]
+categories: ["容器化","翻译"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -22,6 +22,8 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+centerImage: false
+borderImage: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -47,8 +49,6 @@ highchartsDiagrams:
   options: ""
 ---
 
-简要说明在使用[**Dockerfile**](https://docs.docker.com/reference/dockerfile/)构建镜像时，[**ADD**](https://docs.docker.com/reference/dockerfile/#add)与[**COPY**](https://docs.docker.com/reference/dockerfile/#copy)指令的使用差异。
+https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion
 
 <!--more-->
-
-https://phoenixnap.com/kb/docker-add-vs-copy
