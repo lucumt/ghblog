@@ -147,6 +147,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/log4j/show-trace-id-only-if-exists-in-log4j2/">在Log4j2中实现只有在traceId有值时才输出</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-10-13 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>记录如何在<a href="https://logging.apache.org/log4j/2.x/"><strong>Log4j2</strong></a>中使用traceId实现<a href="https://blog.51cto.com/u_15501087/5834195"><strong>链路追踪</strong></a>时只有在请求header中有<code>trace-id</code>时才显示前端发送过来的<code>trace-id</code>值。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/log4j/show-trace-id-only-if-exists-in-log4j2/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/js/using-reduce-function-on-array/">JavaScript学习-reduce函数</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-09-26 </span>
@@ -333,27 +354,6 @@
     </div>
     <div class="read-more">
       <a href="/post/devops/share-experiences-for-using-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/">由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-08-04 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>由于公司的<code>docker</code>容器在运行一段时间后日志变得很大，通过<code>shell</code>脚本或者结合<code>docker stop</code>、<code>docker rm</code>和<code>docker run</code>来重新创建实例方式都觉得太麻烦，按照网络上的建议在<code>/etc/docker/daemon.json</code>中进行相关修改后却一直无法启动，同时错误信息一直提示<code>unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)</code>，经过一番排查后终于找到原因，故记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

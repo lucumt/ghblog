@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>github on 飞狐的部落格</title>
+    <title>GitHub on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/github/</link>
-    <description>Recent content in github on 飞狐的部落格</description>
+    <description>Recent content in GitHub on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 May 2024 09:44:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建多个GitHub Pages并且利用GoDaddy分别配置子域名</title>
+      <link>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</link>
+      <pubDate>Mon, 20 May 2024 09:44:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</guid>
+      <description>&lt;p&gt;简要记录如何基于同一个&lt;code&gt;GitHub&lt;/code&gt;账号创建多个&lt;a href=&#34;https://pages.github.com/&#34;&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;&lt;/a&gt;并基于&lt;a href=&#34;https://www.godaddy.com/&#34;&gt;&lt;strong&gt;GoDaddy&lt;/strong&gt;&lt;/a&gt;配置多个子域名。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>[杂谈]记一次个人GitHub账号的找回过程</title>
       <link>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</link>

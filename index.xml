@@ -6,7 +6,16 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Apr 2024 17:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 May 2024 09:44:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建多个GitHub Pages并且利用GoDaddy分别配置子域名</title>
+      <link>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</link>
+      <pubDate>Mon, 20 May 2024 09:44:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</guid>
+      <description>&lt;p&gt;简要记录如何基于同一个&lt;code&gt;GitHub&lt;/code&gt;账号创建多个&lt;a href=&#34;https://pages.github.com/&#34;&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;&lt;/a&gt;并基于&lt;a href=&#34;https://www.godaddy.com/&#34;&gt;&lt;strong&gt;GoDaddy&lt;/strong&gt;&lt;/a&gt;配置多个子域名。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在基于MySQL的Grafana的柱状中不显示0值</title>
       <link>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</link>

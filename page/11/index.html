@@ -147,6 +147,32 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/calculate-total-area-of-two-rectangles/">计算两个平行于坐标轴的矩形相交的面积</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-02-26 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>之前面试时遇到一个算法题:</p>
+<blockquote>
+<p>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</p>
+</blockquote>
+<p>此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/calculate-total-area-of-two-rectangles/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/web/show-video-in-html5-page/">在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-10-30 </span>
@@ -365,43 +391,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mysql/can-not-run-program-mysqldump/">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-03 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<a href="http://docs.oracle.com/javase/6/docs/api/"><strong>Runtime</strong></a>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runtime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="n">mysqlCmd</span> <span class="o">=</span> <span class="s">&#34;mysqldump&#34;</span> <span class="o">+</span> <span class="s">&#34; -u&#34;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">&#34; -p&#34;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> 
-</span></span><span class="line"><span class="cl">           <span class="s">&#34;  -h &#34;</span> <span class="o">+</span> <span class="n">databaseAddress</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span><span class="n">databaseName</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">mysqlCmd</span><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mysql/can-not-run-program-mysqldump/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

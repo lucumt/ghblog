@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Apr 2024 17:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 May 2024 09:44:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub</title>
+      <link>https://lucumt.info/tags/github/</link>
+      <pubDate>Mon, 20 May 2024 09:44:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitHub Pages</title>
+      <link>https://lucumt.info/tags/github-pages/</link>
+      <pubDate>Mon, 20 May 2024 09:44:44 +0800</pubDate>
+      
+      <guid>https://lucumt.info/tags/github-pages/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>devops</title>
       <link>https://lucumt.info/tags/devops/</link>
@@ -40,15 +58,6 @@
       <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>github</title>
-      <link>https://lucumt.info/tags/github/</link>
-      <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/github/</guid>
       <description></description>
     </item>
     
@@ -328,15 +337,6 @@
       <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
       
       <guid>https://lucumt.info/tags/bit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>github-pages</title>
-      <link>https://lucumt.info/tags/github-pages/</link>
-      <pubDate>Sat, 03 Sep 2022 18:35:57 +0800</pubDate>
-      
-      <guid>https://lucumt.info/tags/github-pages/</guid>
       <description></description>
     </item>
     
