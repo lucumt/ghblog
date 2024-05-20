@@ -64,6 +64,7 @@ sequenceDiagrams:
 | [**cjting.me**](https://cjting.me/)                          | 有不少关于网络知识和前端知识的高质量博文💚，几乎每篇文章都很有深度 |                |
 | [**Jerry Qu**](https://imququ.com/)                          | 前端大神屈屈的网站，有很多关于前端的高质量博文💚              |                |
 | [**随机的未知**](https://www.cnblogs.com/nicaicai)           | 部分`Java`和`MySQL`博文的质量较高                            |                |
+| [**面向信仰编程**](https://draveness.me/)                    | 有很多关于`Golang`和计算机基础的高质量博文                   |                |
 
 # 单个博文
 
@@ -75,6 +76,7 @@ sequenceDiagrams:
 * [Vim快捷键集合](https://linux.cn/article-8144-1.html)
 * [当你问代理机制的时候？指的是Agent,Proxy,Broker还是Delegate呢？](https://cloud.tencent.com/developer/article/1470232)
 * [安全背后: 浏览器是如何校验证书的](https://cjting.me/2021/03/02/how-to-validate-tls-certificate/) 
+* [技术文章配图指南](https://draveness.me/sketch-and-sketch/)
 
 # 其它
 
