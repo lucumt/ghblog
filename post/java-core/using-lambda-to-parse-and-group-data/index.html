@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/" />
@@ -40,20 +40,26 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用Java8中的lambda来实现字符串的解析与分组" />
-<meta property="og:description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-11-15T16:20:57+08:00" />
-<meta property="article:modified_time" content="2022-11-15T16:20:57+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用Java8中的lambda来实现字符串的解析与分组">
+  <meta property="og:description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-11-15T16:20:57+08:00">
+    <meta property="article:modified_time" content="2022-11-15T16:20:57+08:00">
+    <meta property="article:tag" content="Java">
 
-<meta itemprop="name" content="利用Java8中的lambda来实现字符串的解析与分组">
-<meta itemprop="description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。"><meta itemprop="datePublished" content="2022-11-15T16:20:57+08:00" />
-<meta itemprop="dateModified" content="2022-11-15T16:20:57+08:00" />
-<meta itemprop="wordCount" content="585">
-<meta itemprop="keywords" content="Java," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用Java8中的lambda来实现字符串的解析与分组"/>
-<meta name="twitter:description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。"/>
+  <meta itemprop="name" content="利用Java8中的lambda来实现字符串的解析与分组">
+  <meta itemprop="description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。">
+  <meta itemprop="datePublished" content="2022-11-15T16:20:57+08:00">
+  <meta itemprop="dateModified" content="2022-11-15T16:20:57+08:00">
+  <meta itemprop="wordCount" content="585">
+  <meta itemprop="keywords" content="Java,Java8,Map,Array,Lambda">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用Java8中的lambda来实现字符串的解析与分组">
+  <meta name="twitter:description" content="在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的Map与List组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用Java8中引入的lambda表达式后代码变的更简洁、更优雅，故简单记录下。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -219,22 +225,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">parseParametersByIterate</span><span class="o">(</span><span class="n">String</span> <span class="n">sensors</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">[]&gt;</span> <span class="n">dataList</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">sensors</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">)).</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;\\$\\$&#34;</span><span class="o">)).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">resultMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">d</span> <span class="o">:</span> <span class="n">dataList</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">resultMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">list</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">1</span><span class="o">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">resultMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">0</span><span class="o">],</span> <span class="n">list</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">1</span><span class="o">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">resultMap</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">parseParametersByIterate</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">sensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">[]&gt;</span><span class="w"> </span><span class="n">dataList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">sensors</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;,&#34;</span><span class="p">)).</span><span class="na">map</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;\\$\\$&#34;</span><span class="p">)).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">resultMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">dataList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resultMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">resultMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resultMap</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="基于lambda实现">基于Lambda实现</h1>
 <p>在<a href="https://stackoverflow.com/questions/74443495/how-to-group-and-map-string-via-lambda">Stack Overflow</a>上咨询后，发现用<code>lambda</code>实现更简洁，只用一行代码就能搞定!</p>
@@ -249,14 +255,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">parseByLambda</span><span class="o">(</span><span class="n">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">resultMap</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;\\$\\$&#34;</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">[</span><span class="n">0</span><span class="o">],</span>
-</span></span><span class="line"><span class="cl">                                       <span class="n">Collectors</span><span class="o">.</span><span class="na">mapping</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">[</span><span class="n">1</span><span class="o">],</span> <span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">())));</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">resultMap</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">parseByLambda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">resultMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;,&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;\\$\\$&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                       </span><span class="n">Collectors</span><span class="p">.</span><span class="na">mapping</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">())));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resultMap</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上述代码的核心是采用Java8中引入的<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html">Collectors</a>类，采用其中的<code>groupingBy</code>和<code>mapping</code>方法实现，而自己用的最多的只是<code>toList</code>和<code>toMap</code>，基本功有待加强！</p>
     </div>
@@ -361,7 +367,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/" />
@@ -39,20 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享" />
-<meta property="og:description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-10-07T10:14:02+08:00" />
-<meta property="article:modified_time" content="2023-10-07T10:14:02+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
+  <meta property="og:description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-10-07T10:14:02+08:00">
+    <meta property="article:modified_time" content="2023-10-07T10:14:02+08:00">
+    <meta property="article:tag" content="Gitbook">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Gitlab-Runner">
 
-<meta itemprop="name" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
-<meta itemprop="description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新"><meta itemprop="datePublished" content="2023-10-07T10:14:02+08:00" />
-<meta itemprop="dateModified" content="2023-10-07T10:14:02+08:00" />
-<meta itemprop="wordCount" content="6438">
-<meta itemprop="keywords" content="gitbook,docker,gitlab-runner," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享"/>
-<meta name="twitter:description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新"/>
+  <meta itemprop="name" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
+  <meta itemprop="description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新">
+  <meta itemprop="datePublished" content="2023-10-07T10:14:02+08:00">
+  <meta itemprop="dateModified" content="2023-10-07T10:14:02+08:00">
+  <meta itemprop="wordCount" content="6438">
+  <meta itemprop="keywords" content="docker,gitbook">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
+  <meta name="twitter:description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -1565,7 +1573,7 @@
     <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js"></script><script>
 	   
 	
-	<!-- below is newly added code -->
+	
 	let flowPageOptions = "{ 'x': 0, 'y': 10, 'width':1, 'yes-text': 'yes', 'no-text': 'no', 'line-width': 1.3, 'line-length': 30, 'text-margin': 10, 'font-size': 15, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'arrow-end': 'block', 'font-weight': 'bold', 'font-color': 'white', 'scale': 0.8, 'symbols': { }, 'flowstate': { 'approved': { 'fill': '#58C4A3', 'font-size': 12 }, 'current': { 'fill': '#008080', 'font-color': 'white', 'font-weight': 'bold' }, 'future': { 'fill': '#8A624A' }, 'success': { 'fill': '#0B6623', 'font-color': 'white', 'font-weight': 'bold' }, 'invalid': { 'fill': '#6c5696' }, 'past': { 'fill': '#CCCCCC', 'font-size': 12 }, 'select': { 'fill': '#E1AD01', 'font-size': 12, 'yes-text': '是', 'no-text': '否' }, 'rejected': { 'fill': '#C45879', 'font-size': 12 }, 'request': { 'fill': '#569656' }, 'yellowgreen':{ 'fill': 'yellowgreen' }, 'failed':{ 'fill': '#800020' }, 'approved': {'fill': 'peru'} } }";
 	let flowSiteOptions = "";
 	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
@@ -1586,7 +1594,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用dom4j修改含有回车换行符的XML文件" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-01-04T11:21:42+08:00" />
-<meta property="article:modified_time" content="2018-01-04T11:21:42+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用dom4j修改含有回车换行符的XML文件">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2018-01-04T11:21:42+08:00">
+    <meta property="article:modified_time" content="2018-01-04T11:21:42+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="XML">
 
-<meta itemprop="name" content="利用dom4j修改含有回车换行符的XML文件">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2018-01-04T11:21:42+08:00" />
-<meta itemprop="dateModified" content="2018-01-04T11:21:42+08:00" />
-<meta itemprop="wordCount" content="1207">
-<meta itemprop="keywords" content="Java,XML," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用dom4j修改含有回车换行符的XML文件"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="利用dom4j修改含有回车换行符的XML文件">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2018-01-04T11:21:42+08:00">
+  <meta itemprop="dateModified" content="2018-01-04T11:21:42+08:00">
+  <meta itemprop="wordCount" content="1207">
+  <meta itemprop="keywords" content="Java,XML">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用dom4j修改含有回车换行符的XML文件">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -204,39 +211,39 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">updateXML</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">SAXReader</span> <span class="n">saxReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SAXReader</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">File</span> <span class="n">oldFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;D:\\test\\old_test.xml&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">File</span> <span class="n">newFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;D:\\test\\new_test.xml&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">Document</span> <span class="n">oldDoc</span> <span class="o">=</span> <span class="n">saxReader</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">oldFile</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">Element</span> <span class="n">oldRoot</span> <span class="o">=</span> <span class="n">oldDoc</span><span class="o">.</span><span class="na">getRootElement</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="n">Element</span> <span class="n">oldEle</span> <span class="o">=</span> <span class="o">(</span><span class="n">Element</span><span class="o">)</span> <span class="n">oldRoot</span><span class="o">.</span><span class="na">selectSingleNode</span><span class="o">(</span><span class="s">&#34;//book[@id=&#39;01001&#39;]/name&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">oldEle</span><span class="o">.</span><span class="na">attributeValue</span><span class="o">(</span><span class="s">&#34;description&#34;</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">		<span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="n">OutputFormat</span><span class="o">.</span><span class="na">createPrettyPrint</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="n">format</span><span class="o">.</span><span class="na">setEncoding</span><span class="o">(</span><span class="s">&#34;UTF-8&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">format</span><span class="o">.</span><span class="na">setNewLineAfterDeclaration</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">		<span class="c1">//写入新文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">XMLWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XMLWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">newFile</span><span class="o">),</span> <span class="n">format</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">oldDoc</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;\n================分隔符==================\n&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">//从新文件中读取数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">Document</span> <span class="n">newDoc</span> <span class="o">=</span> <span class="n">saxReader</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">newFile</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">Element</span> <span class="n">newRoot</span> <span class="o">=</span> <span class="n">newDoc</span><span class="o">.</span><span class="na">getRootElement</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="n">Element</span> <span class="n">newEle</span> <span class="o">=</span> <span class="o">(</span><span class="n">Element</span><span class="o">)</span> <span class="n">newRoot</span><span class="o">.</span><span class="na">selectSingleNode</span><span class="o">(</span><span class="s">&#34;//book[@id=&#39;01001&#39;]/name&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newEle</span><span class="o">.</span><span class="na">attributeValue</span><span class="o">(</span><span class="s">&#34;description&#34;</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">DocumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateXML</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">SAXReader</span><span class="w"> </span><span class="n">saxReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SAXReader</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">File</span><span class="w"> </span><span class="n">oldFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&#34;D:\\test\\old_test.xml&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">File</span><span class="w"> </span><span class="n">newFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&#34;D:\\test\\new_test.xml&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Document</span><span class="w"> </span><span class="n">oldDoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saxReader</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">oldFile</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Element</span><span class="w"> </span><span class="n">oldRoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldDoc</span><span class="p">.</span><span class="na">getRootElement</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Element</span><span class="w"> </span><span class="n">oldEle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Element</span><span class="p">)</span><span class="w"> </span><span class="n">oldRoot</span><span class="p">.</span><span class="na">selectSingleNode</span><span class="p">(</span><span class="s">&#34;//book[@id=&#39;01001&#39;]/name&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">oldEle</span><span class="p">.</span><span class="na">attributeValue</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">OutputFormat</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutputFormat</span><span class="p">.</span><span class="na">createPrettyPrint</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">format</span><span class="p">.</span><span class="na">setEncoding</span><span class="p">(</span><span class="s">&#34;UTF-8&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">format</span><span class="p">.</span><span class="na">setNewLineAfterDeclaration</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">//写入新文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">XMLWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">XMLWriter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileWriter</span><span class="p">(</span><span class="n">newFile</span><span class="p">),</span><span class="w"> </span><span class="n">format</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">oldDoc</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">writer</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">writer</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;\n================分隔符==================\n&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">//从新文件中读取数据</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Document</span><span class="w"> </span><span class="n">newDoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saxReader</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">newFile</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Element</span><span class="w"> </span><span class="n">newRoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newDoc</span><span class="p">.</span><span class="na">getRootElement</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Element</span><span class="w"> </span><span class="n">newEle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Element</span><span class="p">)</span><span class="w"> </span><span class="n">newRoot</span><span class="p">.</span><span class="na">selectSingleNode</span><span class="p">(</span><span class="s">&#34;//book[@id=&#39;01001&#39;]/name&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">newEle</span><span class="p">.</span><span class="na">attributeValue</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">DocumentException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>对应的XML文件类似如下：</p>
 <div class="highlight"><div class="chroma">
@@ -264,7 +271,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>上述代码的逻辑很简单：首先从XML打开一个XML文件，然后输出某个书本的描述信息，将其写入新的XML文件，然后在新XML文件中读取相同的信息。理论上前后两次输出的结果应该一样，但实际运行后发现从新的XML文件中读取出的描述信息换行符都丢失了，前后两次输出的结果不一致！<br>
-<img src="/blog_img/java-core/update-xml-file-has-line-breaks-using-dom4j/dom4j_incorrect_output.png" alt="&amp;ldquo;新旧XML文件的输出格式不同&amp;rdquo;" title="新旧XML文件的输入格式不同"></p>
+<img src="/blog_img/java-core/update-xml-file-has-line-breaks-using-dom4j/dom4j_incorrect_output.png" alt="&ldquo;新旧XML文件的输出格式不同&rdquo;" title="新旧XML文件的输入格式不同"></p>
 <p>对比新旧XML文件后发现，产生此现象的原因是: <strong>dom4j 自作主张的在写入XML文件时将 <em>&amp;#xD;&amp;#xA;</em> 替换为了 <em>\r\n</em> ，而XML文件中标准的回车换行符是用 <em>&amp;#xD;&amp;#xA;</em> 来表示的</strong> ，将它们替换后再次读取的结果很显然不符合要求。</p>
 <p>了解到问题产生的根源后，则其解决思路也很明确： <strong>写入XML文件时，将 <em>\r\n</em> 再次替换为 <em>&amp;#xD;&amp;#xA;</em> 即可</strong>。最开始自己想采用如下的方法来简单替换，运行完毕后发现结果和前面的一致，问题依旧。</p>
 <div class="highlight"><div class="chroma">
@@ -274,10 +281,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">description</span> <span class="o">=</span> <span class="n">oldEle</span><span class="o">.</span><span class="na">attributeValue</span><span class="o">(</span><span class="s">&#34;description&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">,</span><span class="s">&#34;&amp;#xD;&amp;#xA;&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">oldEle</span><span class="o">.</span><span class="na">attributeValue</span><span class="o">(</span><span class="s">&#34;description&#34;</span><span class="o">,</span><span class="n">description</span><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldEle</span><span class="p">.</span><span class="na">attributeValue</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">description</span><span class="p">.</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&#34;\r\n&#34;</span><span class="p">,</span><span class="s">&#34;&amp;#xD;&amp;#xA;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">oldEle</span><span class="p">.</span><span class="na">attributeValue</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">,</span><span class="n">description</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>进一步分析后发现<code>dom4j</code>不仅会在读取XML文件时对<code>&amp;#xD;&amp;#xA;</code>进行转义，而且在写入XML文件时也会对<code>&amp;#xD;&amp;#xA;</code>进行转义，前面的方法只是解决了读取的问题，写入时没有处理，所以问题依旧。</p>
 <p>写入时主要的操作类是<code>OutputFormat</code>和<code>XMLWriter</code>，自己一开始以为可以通过<code>OutputFormat</code>进行响应的设置实现，将代码修改如下，然并卵，问题依旧！</p>
@@ -290,12 +297,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="n">OutputFormat</span><span class="o">.</span><span class="na">createPrettyPrint</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">format</span><span class="o">.</span><span class="na">setNewlines</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">format</span><span class="o">.</span><span class="na">setLineSeparator</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">format</span><span class="o">.</span><span class="na">setEncoding</span><span class="o">(</span><span class="s">&#34;UTF-8&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">format</span><span class="o">.</span><span class="na">setNewLineAfterDeclaration</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">OutputFormat</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutputFormat</span><span class="p">.</span><span class="na">createPrettyPrint</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">format</span><span class="p">.</span><span class="na">setNewlines</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">format</span><span class="p">.</span><span class="na">setLineSeparator</span><span class="p">(</span><span class="s">&#34;\r\n&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">format</span><span class="p">.</span><span class="na">setEncoding</span><span class="p">(</span><span class="s">&#34;UTF-8&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">format</span><span class="p">.</span><span class="na">setNewLineAfterDeclaration</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>OutputFormat</code>不好使，只能从<code>XMLWriter</code>着手，调用<code>writer.setEscapeText(false)</code>方法也不能解决问题，看来只能放出大招，自己定义实现一个 XMLWriter类，将以及转义后的回车换行符又换回去，代码如下：</p>
 <div class="highlight"><div class="chroma">
@@ -318,23 +325,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HRXMLWriter</span> <span class="kd">extends</span> <span class="n">XMLWriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="nf">HRXMLWriter</span><span class="o">(</span><span class="n">Writer</span> <span class="n">wr</span><span class="o">,</span> <span class="n">OutputFormat</span> <span class="n">format</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="kd">super</span><span class="o">(</span><span class="n">wr</span><span class="o">,</span> <span class="n">format</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">protected</span> <span class="n">String</span> <span class="nf">escapeAttributeEntities</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">text</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">escapeAttributeEntities</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">text</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">,</span> <span class="s">&#34;&amp;#xD;&amp;#xA;&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">text</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HRXMLWriter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">XMLWriter</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">HRXMLWriter</span><span class="p">(</span><span class="n">Writer</span><span class="w"> </span><span class="n">wr</span><span class="p">,</span><span class="w"> </span><span class="n">OutputFormat</span><span class="w"> </span><span class="n">format</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">super</span><span class="p">(</span><span class="n">wr</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">escapeAttributeEntities</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">super</span><span class="p">.</span><span class="na">escapeAttributeEntities</span><span class="p">(</span><span class="n">text</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="s">&#34;\r\n&#34;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&#34;\r\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&amp;#xD;&amp;#xA;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">text</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后将写入时的代码修改如下：</p>
 <div class="highlight"><div class="chroma">
@@ -346,15 +353,15 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//採用定义写入类HRXMLWriter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">XMLWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HRXMLWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">newFile</span><span class="o">),</span> <span class="n">format</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">oldDoc</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//採用定义写入类HRXMLWriter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">XMLWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HRXMLWriter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileWriter</span><span class="p">(</span><span class="n">newFile</span><span class="p">),</span><span class="w"> </span><span class="n">format</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">oldDoc</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">writer</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">writer</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行结果如下，问题顺利解决！<br>
-<img src="/blog_img/java-core/update-xml-file-has-line-breaks-using-dom4j/dom4j_correct_output.png" alt="&amp;ldquo;新旧XML文件的输出格式相同&amp;rdquo;" title="新旧XML文件的输入格式相同"></p>
+<img src="/blog_img/java-core/update-xml-file-has-line-breaks-using-dom4j/dom4j_correct_output.png" alt="&ldquo;新旧XML文件的输出格式相同&rdquo;" title="新旧XML文件的输入格式相同"></p>
 <p>坑爹啊！</p>
     </div>
 
@@ -473,7 +480,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

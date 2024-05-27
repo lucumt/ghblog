@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nacos on 飞狐的部落格</title>
+    <title>Nacos on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/nacos/</link>
-    <description>Recent content in nacos on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Nacos on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/nacos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/nacos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
       <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
       <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
       <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
       <link>https://lucumt.info/post/devops/share-kubepshere-using-experience-for-current-company/</link>
       <pubDate>Mon, 17 Apr 2023 14:31:45 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/devops/share-kubepshere-using-experience-for-current-company/</guid>
       <description>&lt;p&gt;我司从2022年6月开始使用&lt;code&gt;KubeSphere&lt;/code&gt;到目前为止快一年时间，简要记录下此过程中的经验积累和问题反馈。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Python程序中使用Nacos</title>
       <link>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</link>
       <pubDate>Tue, 11 Apr 2023 09:25:53 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/nacos/integrate-python-program-to-nacos/</guid>
       <description>&lt;p&gt;简要介绍如何在基于&lt;a href=&#34;https://flask.palletsprojects.com/en/2.3.x/&#34;&gt;&lt;strong&gt;Flask&lt;/strong&gt;&lt;/a&gt;开发的程序中通过&lt;a href=&#34;https://nacos.io/en-us/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;提供的&lt;a href=&#34;https://github.com/nacos-group/nacos-sdk-python&#34;&gt;&lt;strong&gt;nacos-sdk-python&lt;/strong&gt;&lt;/a&gt;实现在&lt;code&gt;Python&lt;/code&gt;程序中整合&lt;code&gt;Nacos&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</title>
       <link>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</link>
       <pubDate>Fri, 24 Mar 2023 15:59:58 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</guid>
       <description>&lt;p&gt;&lt;code&gt;Nacos&lt;/code&gt;官方的&lt;code&gt;docker&lt;/code&gt;镜像不支持&lt;code&gt;LDAP&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;同时在连接&lt;code&gt;mysql&lt;/code&gt;方面在某些版本中会出现&lt;strong&gt;No Datasource Set&lt;/strong&gt; 的异常，而其官方的release版本则很很稳定，同时又支持&lt;code&gt;LDAP&lt;/code&gt;。目前部门很多项目都是基于&lt;code&gt;docker&lt;/code&gt;部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的&lt;code&gt;nacos&lt;/code&gt;镜像，在确保性能稳定的同时也能支持&lt;code&gt;ldap&lt;/code&gt;登录。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Nacos与KubeSphere创建多套开发与测试环境</title>
       <link>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</link>
       <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</guid>
       <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/&#34;&gt;KubeSphere使用心得&lt;/a&gt;给部门搭建了&lt;code&gt;dev&lt;/code&gt;、&lt;code&gt;sit&lt;/code&gt;、&lt;code&gt;test&lt;/code&gt;、&lt;code&gt;prod&lt;/code&gt;这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合&lt;a href=&#34;https://nacos.io/zh-cn/docs/what-is-nacos.html&#34;&gt;Nacos&lt;/a&gt;在&lt;code&gt;KubeSphere&lt;/code&gt;中动态配置多套环境功能，通过修改&lt;code&gt;Nacos&lt;/code&gt;中的&lt;code&gt;JSON&lt;/code&gt;配置文件可很容易的从4套扩展为16套甚至更多。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

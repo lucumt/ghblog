@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/" />
@@ -39,20 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用SpringMVC下载大文件时内存溢出的处理" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-03-20T16:41:29+08:00" />
-<meta property="article:modified_time" content="2016-03-20T16:41:29+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用SpringMVC下载大文件时内存溢出的处理">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-03-20T16:41:29+08:00">
+    <meta property="article:modified_time" content="2016-03-20T16:41:29+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring">
+    <meta property="article:tag" content="SpringMVC">
 
-<meta itemprop="name" content="利用SpringMVC下载大文件时内存溢出的处理">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-03-20T16:41:29+08:00" />
-<meta itemprop="dateModified" content="2016-03-20T16:41:29+08:00" />
-<meta itemprop="wordCount" content="895">
-<meta itemprop="keywords" content="Java,Spring,SpringMVC," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用SpringMVC下载大文件时内存溢出的处理"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="利用SpringMVC下载大文件时内存溢出的处理">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2016-03-20T16:41:29+08:00">
+  <meta itemprop="dateModified" content="2016-03-20T16:41:29+08:00">
+  <meta itemprop="wordCount" content="895">
+  <meta itemprop="keywords" content="Java,SpringMVC">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用SpringMVC下载大文件时内存溢出的处理">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -190,20 +198,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;downloadRequireDocument&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;</span> <span class="nf">downloadRequireDocument</span><span class="o">(</span><span class="n">String</span> <span class="n">fileId</span><span class="o">,</span><span class="n">String</span> <span class="n">fileName</span><span class="o">,</span><span class="n">String</span> <span class="n">fileType</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">     <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">filePath</span><span class="o">=</span><span class="n">fileName</span><span class="o">+</span><span class="n">fileId</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">	<span class="n">HttpHeaders</span> <span class="n">headers</span><span class="o">=</span><span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">headers</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_OCTET_STREAM</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">headers</span><span class="o">.</span><span class="na">setContentDispositionFormData</span><span class="o">(</span><span class="s">&#34;attachment&#34;</span><span class="o">,</span><span class="n">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">fileName</span><span class="o">,</span><span class="s">&#34;UTF-8&#34;</span><span class="o">)+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">	<span class="n">File</span> <span class="n">downloadFile</span><span class="o">=</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getServletContext</span><span class="o">().</span><span class="na">getRealPath</span><span class="o">(</span><span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">)+</span><span class="n">filePath</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="k">new</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;(</span><span class="n">FileUtils</span><span class="o">.</span><span class="na">readFileToByteArray</span><span class="o">(</span><span class="n">downloadFile</span><span class="o">),</span><span class="n">headers</span><span class="o">,</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;downloadRequireDocument&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;</span><span class="w"> </span><span class="nf">downloadRequireDocument</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileId</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">fileType</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="o">=</span><span class="n">fileName</span><span class="o">+</span><span class="n">fileId</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">HttpHeaders</span><span class="w"> </span><span class="n">headers</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">HttpHeaders</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">headers</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_OCTET_STREAM</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">headers</span><span class="p">.</span><span class="na">setContentDispositionFormData</span><span class="p">(</span><span class="s">&#34;attachment&#34;</span><span class="p">,</span><span class="n">URLEncoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s">&#34;UTF-8&#34;</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">File</span><span class="w"> </span><span class="n">downloadFile</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">().</span><span class="na">getServletContext</span><span class="p">().</span><span class="na">getRealPath</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="p">)</span><span class="o">+</span><span class="n">filePath</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;</span><span class="p">(</span><span class="n">FileUtils</span><span class="p">.</span><span class="na">readFileToByteArray</span><span class="p">(</span><span class="n">downloadFile</span><span class="p">),</span><span class="n">headers</span><span class="p">,</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>该段代码在下载小文件时可以正常工作，但是当要下载的文件很大时（如几百M或上G），就会发生如下错误：</p>
 <div class="highlight"><div class="chroma">
@@ -214,11 +222,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">OutOfMemoryError</span><span class="o">:</span> <span class="n">Java</span> <span class="n">heap</span> <span class="n">space</span>
-</span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">commons</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">output</span><span class="o">.</span><span class="na">ByteArrayOutputStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">(</span><span class="n">ByteArrayOutputStream</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">271</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">commons</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOUtils</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">(</span><span class="n">IOUtils</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">219</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">commons</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">FileUtils</span><span class="o">.</span><span class="na">readFileToByteArray</span><span class="o">(</span><span class="n">FileUtils</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">1136</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">OutOfMemoryError</span><span class="p">:</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="n">space</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">at</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">commons</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">output</span><span class="p">.</span><span class="na">ByteArrayOutputStream</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">(</span><span class="n">ByteArrayOutputStream</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">271</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">at</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">commons</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOUtils</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">(</span><span class="n">IOUtils</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">219</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">at</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">commons</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">FileUtils</span><span class="p">.</span><span class="na">readFileToByteArray</span><span class="p">(</span><span class="n">FileUtils</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">1136</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>去网上搜索<code>java.lang.OutOfMemoryError: Java heap space</code> 这个错误时，一般都建议我们在tomcat中添加如下类似设置来提高JVM的配置:<br>
 <code>set JAVA_OPTS=%JAVA_OPTS% -server -Xms800m -Xmx800m -XX:MaxNewSize=256m -XX:MaxPermSize=256m</code></p>
@@ -248,27 +256,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;downloadRequireDocument&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">downloadRequireDocument</span><span class="o">(</span><span class="n">String</span> <span class="n">fileId</span><span class="o">,</span><span class="n">String</span> <span class="n">fileName</span><span class="o">,</span><span class="n">String</span> <span class="n">fileType</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">	<span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">filePath</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getServletContext</span><span class="o">().</span><span class="na">getRealPath</span><span class="o">(</span><span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">)+</span><span class="n">fileName</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">fileName</span> <span class="o">=</span> <span class="n">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">fileName</span><span class="o">.</span><span class="na">trim</span><span class="o">(),</span><span class="s">&#34;UTF-8&#34;</span><span class="o">)+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">response</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">&#34;Content-Disposition&#34;</span><span class="o">,</span><span class="s">&#34;attachment;filename=&#34;</span><span class="o">+</span><span class="n">fileName</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">filePath</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">read</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">2048</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">	<span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="k">while</span><span class="o">((</span><span class="n">read</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">bytes</span><span class="o">))!=-</span><span class="n">1</span><span class="o">){</span><span class="c1">//按字节逐个写入，避免内存占用过高
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">read</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;downloadRequireDocument&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">downloadRequireDocument</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileId</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">fileType</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">().</span><span class="na">getServletContext</span><span class="p">().</span><span class="na">getRealPath</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="p">)</span><span class="o">+</span><span class="n">fileName</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">fileName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URLEncoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">fileName</span><span class="p">.</span><span class="na">trim</span><span class="p">(),</span><span class="s">&#34;UTF-8&#34;</span><span class="p">)</span><span class="o">+</span><span class="s">&#34;.&#34;</span><span class="o">+</span><span class="n">fileType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&#34;Content-Disposition&#34;</span><span class="p">,</span><span class="s">&#34;attachment;filename=&#34;</span><span class="o">+</span><span class="n">fileName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">InputStream</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="o">=</span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">2048</span><span class="o">]</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">OutputStream</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">while</span><span class="p">((</span><span class="n">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">bytes</span><span class="p">))</span><span class="o">!=-</span><span class="n">1</span><span class="p">){</span><span class="c1">//按字节逐个写入，避免内存占用过高</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">os</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">read</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">os</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">os</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">is</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -389,7 +397,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

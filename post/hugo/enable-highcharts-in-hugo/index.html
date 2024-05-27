@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/hugo/enable-highcharts-in-hugo/" />
@@ -39,20 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="在Hugo中开启Highcharts图表支持" />
-<meta property="og:description" content="简要介绍如何在Hugo中开启Highcharts图表支持" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/hugo/enable-highcharts-in-hugo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-04-02T16:39:51+08:00" />
-<meta property="article:modified_time" content="2023-04-03T16:39:51+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/hugo/enable-highcharts-in-hugo/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在Hugo中开启Highcharts图表支持">
+  <meta property="og:description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-04-02T16:39:51+08:00">
+    <meta property="article:modified_time" content="2023-04-03T16:39:51+08:00">
+    <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="Highcharts">
+    <meta property="article:tag" content="Go">
 
-<meta itemprop="name" content="在Hugo中开启Highcharts图表支持">
-<meta itemprop="description" content="简要介绍如何在Hugo中开启Highcharts图表支持"><meta itemprop="datePublished" content="2023-04-02T16:39:51+08:00" />
-<meta itemprop="dateModified" content="2023-04-03T16:39:51+08:00" />
-<meta itemprop="wordCount" content="3909">
-<meta itemprop="keywords" content="hugo,highcharts,go," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在Hugo中开启Highcharts图表支持"/>
-<meta name="twitter:description" content="简要介绍如何在Hugo中开启Highcharts图表支持"/>
+  <meta itemprop="name" content="在Hugo中开启Highcharts图表支持">
+  <meta itemprop="description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
+  <meta itemprop="datePublished" content="2023-04-02T16:39:51+08:00">
+  <meta itemprop="dateModified" content="2023-04-03T16:39:51+08:00">
+  <meta itemprop="wordCount" content="3909">
+  <meta itemprop="keywords" content="hugo,highcharts,go">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在Hugo中开启Highcharts图表支持">
+  <meta name="twitter:description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -396,72 +404,72 @@
 </span><span class="lnt">66
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">​```highcharts
-</span></span><span class="line"><span class="cl"> {
-</span></span><span class="line"><span class="cl">    chart: {
-</span></span><span class="line"><span class="cl">        plotBackgroundColor: null,
-</span></span><span class="line"><span class="cl">        plotBorderWidth: null,
-</span></span><span class="line"><span class="cl">        plotShadow: false,
-</span></span><span class="line"><span class="cl">        type: &#39;pie&#39;
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    title: {
-</span></span><span class="line"><span class="cl">        text: &#39;Browser market shares in May, 2020&#39;,
-</span></span><span class="line"><span class="cl">        align: &#39;left&#39;
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    tooltip: {
-</span></span><span class="line"><span class="cl">        pointFormat: &#39;{series.name}: &lt;b&gt;{point.percentage:.1f}%&lt;/b&gt;&#39;
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    accessibility: {
-</span></span><span class="line"><span class="cl">        point: {
-</span></span><span class="line"><span class="cl">            valueSuffix: &#39;%&#39;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    plotOptions: {
-</span></span><span class="line"><span class="cl">        pie: {
-</span></span><span class="line"><span class="cl">            allowPointSelect: true,
-</span></span><span class="line"><span class="cl">            cursor: &#39;pointer&#39;,
-</span></span><span class="line"><span class="cl">            dataLabels: {
-</span></span><span class="line"><span class="cl">                enabled: true,
-</span></span><span class="line"><span class="cl">                format: &#39;&lt;b&gt;{point.name}&lt;/b&gt;: {point.percentage:.1f} %&#39;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    },
-</span></span><span class="line"><span class="cl">    series: [{
-</span></span><span class="line"><span class="cl">        name: &#39;Brands&#39;,
-</span></span><span class="line"><span class="cl">        colorByPoint: true,
-</span></span><span class="line"><span class="cl">        data: [{
-</span></span><span class="line"><span class="cl">            name: &#39;Chrome&#39;,
-</span></span><span class="line"><span class="cl">            y: 70.67,
-</span></span><span class="line"><span class="cl">            sliced: true,
-</span></span><span class="line"><span class="cl">            selected: true
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;Edge&#39;,
-</span></span><span class="line"><span class="cl">            y: 14.77
-</span></span><span class="line"><span class="cl">        },  {
-</span></span><span class="line"><span class="cl">            name: &#39;Firefox&#39;,
-</span></span><span class="line"><span class="cl">            y: 4.86
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;Safari&#39;,
-</span></span><span class="line"><span class="cl">            y: 2.63
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;Internet Explorer&#39;,
-</span></span><span class="line"><span class="cl">            y: 1.53
-</span></span><span class="line"><span class="cl">        },  {
-</span></span><span class="line"><span class="cl">            name: &#39;Opera&#39;,
-</span></span><span class="line"><span class="cl">            y: 1.40
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;Sogou Explorer&#39;,
-</span></span><span class="line"><span class="cl">            y: 0.84
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;QQ&#39;,
-</span></span><span class="line"><span class="cl">            y: 0.51
-</span></span><span class="line"><span class="cl">        }, {
-</span></span><span class="line"><span class="cl">            name: &#39;Other&#39;,
-</span></span><span class="line"><span class="cl">            y: 2.6
-</span></span><span class="line"><span class="cl">        }]
-</span></span><span class="line"><span class="cl">    }]
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">​```
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">​```</span><span class="n">highcharts</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chart</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plotBackgroundColor</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plotBorderWidth</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">plotShadow</span><span class="p">:</span> <span class="bp">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span><span class="p">:</span> <span class="s1">&#39;pie&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span><span class="p">:</span> <span class="s1">&#39;Browser market shares in May, 2020&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">align</span><span class="p">:</span> <span class="s1">&#39;left&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tooltip</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pointFormat</span><span class="p">:</span> <span class="s1">&#39;{series.name}: &lt;b&gt;{point.percentage:.1f}%&lt;/b&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accessibility</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">point</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">valueSuffix</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plotOptions</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pie</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">allowPointSelect</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cursor</span><span class="p">:</span> <span class="s1">&#39;pointer&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dataLabels</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">enabled</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">format</span><span class="p">:</span> <span class="s1">&#39;&lt;b&gt;{point.name}&lt;/b&gt;: {point.percentage:.1f} %&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">series</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Brands&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">colorByPoint</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">70.67</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sliced</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">selected</span><span class="p">:</span> <span class="bp">true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Edge&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">14.77</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">4.86</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Safari&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">2.63</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Internet Explorer&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">1.53</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Opera&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">1.40</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Sogou Explorer&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">0.84</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;QQ&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">0.51</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;Other&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="p">:</span> <span class="mf">2.6</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">​```</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>让<code>Hugo</code>重新选然后即可展示出类似如下效果</p>
@@ -2841,7 +2849,7 @@ Highcharts.getJSON(
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

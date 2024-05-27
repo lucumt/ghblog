@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/translate/junit5/junit-5-kotlin/" />
@@ -39,20 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="[译]JUnit5 整合Kotlin" />
-<meta property="og:description" content="JUnit5 整合Kotlin" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-kotlin/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-06-21T19:21:43+08:00" />
-<meta property="article:modified_time" content="2023-06-21T19:21:43+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-kotlin/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="[译]JUnit5 整合Kotlin">
+  <meta property="og:description" content="JUnit5 整合Kotlin">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-06-21T19:21:43+08:00">
+    <meta property="article:modified_time" content="2023-06-21T19:21:43+08:00">
+    <meta property="article:tag" content="Junit5">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Junit">
 
-<meta itemprop="name" content="[译]JUnit5 整合Kotlin">
-<meta itemprop="description" content="JUnit5 整合Kotlin"><meta itemprop="datePublished" content="2023-06-21T19:21:43+08:00" />
-<meta itemprop="dateModified" content="2023-06-21T19:21:43+08:00" />
-<meta itemprop="wordCount" content="3180">
-<meta itemprop="keywords" content="junit5,java,junit," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[译]JUnit5 整合Kotlin"/>
-<meta name="twitter:description" content="JUnit5 整合Kotlin"/>
+  <meta itemprop="name" content="[译]JUnit5 整合Kotlin">
+  <meta itemprop="description" content="JUnit5 整合Kotlin">
+  <meta itemprop="datePublished" content="2023-06-21T19:21:43+08:00">
+  <meta itemprop="dateModified" content="2023-06-21T19:21:43+08:00">
+  <meta itemprop="wordCount" content="3180">
+  <meta itemprop="keywords" content="junit5">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[译]JUnit5 整合Kotlin">
+  <meta name="twitter:description" content="JUnit5 整合Kotlin">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -324,21 +332,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">companion</span> <span class="n">object</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nd">@JvmStatic</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fun</span> <span class="nf">squares</span><span class="o">()</span> <span class="o">=</span> <span class="n">listOf</span><span class="o">(</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">1</span><span class="o">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">4</span><span class="o">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">9</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@ParameterizedTest</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#34;Square of {0} should equal {1}&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nd">@MethodSource</span><span class="o">(</span><span class="s">&#34;squares&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">fun</span> <span class="err">`</span><span class="n">Square</span> <span class="n">of</span> <span class="n">a</span> <span class="n">number</span><span class="err">`</span><span class="o">(</span><span class="n">input</span><span class="o">:</span> <span class="n">Int</span><span class="o">,</span> <span class="n">expected</span><span class="o">:</span> <span class="n">Int</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">calculator</span><span class="o">.</span><span class="na">square</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">companion</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JvmStatic</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">fun</span><span class="w"> </span><span class="nf">squares</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Arguments</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Arguments</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">4</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Arguments</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="n">9</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@ParameterizedTest</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Square of {0} should equal {1}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@MethodSource</span><span class="p">(</span><span class="s">&#34;squares&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">fun</span><span class="w"> </span><span class="err">`</span><span class="n">Square</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">number</span><span class="err">`</span><span class="p">(</span><span class="n">input</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">expected</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span><span class="w"> </span><span class="n">calculator</span><span class="p">.</span><span class="na">square</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>若没有添加<code>@JvmStatic</code>注解将会出现如下错误：</p>
 <div class="highlight"><div class="chroma">
@@ -374,13 +382,13 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@TestFactory</span>
 </span></span><span class="line"><span class="cl"><span class="k">fun</span> <span class="nf">`Square of a number`</span><span class="p">()</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 1 should equal 1&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 1 should equal 1&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">assertEquals</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">calculator</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="m">1</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 2 should equal 4&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 2 should equal 4&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">assertEquals</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="n">calculator</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="m">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 3 should equal 9&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of 3 should equal 9&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">assertEquals</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="n">calculator</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="m">3</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
@@ -408,7 +416,7 @@
 </span></span><span class="line"><span class="cl">        <span class="m">2</span> <span class="n">to</span> <span class="m">4</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="m">3</span> <span class="n">to</span> <span class="m">9</span>
 </span></span><span class="line"><span class="cl"><span class="p">).</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span> <span class="o">-&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of </span><span class="si">$input</span><span class="s2"> should equal </span><span class="si">$expected</span><span class="s2">&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">DynamicTest</span><span class="p">.</span><span class="n">dynamicTest</span><span class="p">(</span><span class="s2">&#34;Square of </span><span class="si">$input</span><span class="s2"> should equal </span><span class="si">$expected</span><span class="s2">&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">assertEquals</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">calculator</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -505,9 +513,9 @@
 <pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@JvmStatic</span>
 </span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">squares</span><span class="p">()</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">9</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nc">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nc">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nc">Arguments</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">9</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -537,7 +545,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">platform</span><span class="p">.</span><span class="n">commons</span><span class="p">.</span><span class="n">PreconditionViolationException</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">register</span> <span class="n">extension</span> <span class="n">via</span> <span class="nd">@RegisterExtension</span> <span class="k">field</span> <span class="p">[</span><span class="k">private</span> <span class="n">static</span> <span class="k">final</span> <span class="n">com</span><span class="p">.</span><span class="n">arhohuttunen</span><span class="p">.</span><span class="n">junit5</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">JettyExtension</span> <span class="n">com</span><span class="p">.</span><span class="n">arhohuttunen</span><span class="p">.</span><span class="n">junit5</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">RegisterStaticExtensionTest</span><span class="p">.</span><span class="n">jettyExtension</span><span class="p">]:</span> <span class="k">field</span> <span class="n">must</span> <span class="n">not</span> <span class="n">be</span> <span class="k">private</span><span class="p">.</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="n">org</span><span class="p">.</span><span class="n">junit</span><span class="p">.</span><span class="n">platform</span><span class="p">.</span><span class="n">commons</span><span class="p">.</span><span class="n">PreconditionViolationException</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">register</span> <span class="n">extension</span> <span class="n">via</span> <span class="nd">@RegisterExtension</span> <span class="k">field</span> <span class="p">[</span><span class="k">private</span> <span class="n">static</span> <span class="k">final</span> <span class="n">com</span><span class="p">.</span><span class="n">arhohuttunen</span><span class="p">.</span><span class="n">junit5</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">JettyExtension</span> <span class="n">com</span><span class="p">.</span><span class="n">arhohuttunen</span><span class="p">.</span><span class="n">junit5</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="nc">RegisterStaticExtensionTest</span><span class="p">.</span><span class="n">jettyExtension</span><span class="p">]:</span> <span class="k">field</span> <span class="n">must</span> <span class="n">not</span> <span class="n">be</span> <span class="k">private</span><span class="p">.</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>解决方案为给该属性添加<code>@JvmField</code>注解：</p>
@@ -590,7 +598,7 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@TestInstance</span><span class="p">(</span><span class="n">TestInstance</span><span class="p">.</span><span class="n">Lifecycle</span><span class="p">.</span><span class="n">PER_CLASS</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="nd">@TestInstance</span><span class="p">(</span><span class="nc">TestInstance</span><span class="p">.</span><span class="nc">Lifecycle</span><span class="p">.</span><span class="n">PER_CLASS</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LifecycleTest</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@BeforeAll</span>
 </span></span><span class="line"><span class="cl">    <span class="k">fun</span> <span class="nf">beforeAll</span><span class="p">()</span> <span class="p">{</span>
@@ -628,10 +636,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Tag</span><span class="o">(</span><span class="s">&#34;first&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="nd">@Tag</span><span class="o">(</span><span class="s">&#34;second&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">RepeatableAnnotationTest</span> <span class="o">{}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Tag</span><span class="p">(</span><span class="s">&#34;first&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Tag</span><span class="p">(</span><span class="s">&#34;second&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">RepeatableAnnotationTest</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>然而在<code>Kotlin</code>中我们不能同时有多个<code>@Tag</code>注解，相反必须使用<code>@Tags</code>注解来包装重复的标签。</p>
 <div class="highlight"><div class="chroma">
@@ -782,7 +790,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

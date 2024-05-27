@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/java-core/modify-java-class-file-content-directly/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="在不重新编译的情况下直接修改Java Class文件中的内容" />
-<meta property="og:description" content="在不重新编译的情况下直接修改Java Class文件中的内容" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/java-core/modify-java-class-file-content-directly/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-08-12T18:09:53+08:00" />
-<meta property="article:modified_time" content="2017-08-12T18:09:53+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/java-core/modify-java-class-file-content-directly/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在不重新编译的情况下直接修改Java Class文件中的内容">
+  <meta property="og:description" content="在不重新编译的情况下直接修改Java Class文件中的内容">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-08-12T18:09:53+08:00">
+    <meta property="article:modified_time" content="2017-08-12T18:09:53+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="JVM">
 
-<meta itemprop="name" content="在不重新编译的情况下直接修改Java Class文件中的内容">
-<meta itemprop="description" content="在不重新编译的情况下直接修改Java Class文件中的内容"><meta itemprop="datePublished" content="2017-08-12T18:09:53+08:00" />
-<meta itemprop="dateModified" content="2017-08-12T18:09:53+08:00" />
-<meta itemprop="wordCount" content="2864">
-<meta itemprop="keywords" content="Java,JVM," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在不重新编译的情况下直接修改Java Class文件中的内容"/>
-<meta name="twitter:description" content="在不重新编译的情况下直接修改Java Class文件中的内容"/>
+  <meta itemprop="name" content="在不重新编译的情况下直接修改Java Class文件中的内容">
+  <meta itemprop="description" content="在不重新编译的情况下直接修改Java Class文件中的内容">
+  <meta itemprop="datePublished" content="2017-08-12T18:09:53+08:00">
+  <meta itemprop="dateModified" content="2017-08-12T18:09:53+08:00">
+  <meta itemprop="wordCount" content="2864">
+  <meta itemprop="keywords" content="Java">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在不重新编译的情况下直接修改Java Class文件中的内容">
+  <meta name="twitter:description" content="在不重新编译的情况下直接修改Java Class文件中的内容">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -203,19 +210,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.lucumt</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">language</span> <span class="o">=</span> <span class="s">&#34;Java&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">sayHello</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;=====Hello &#34;</span><span class="o">+</span><span class="n">language</span><span class="o">+</span><span class="s">&#34; World!======&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.lucumt</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Java&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">sayHello</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;=====Hello &#34;</span><span class="o">+</span><span class="n">language</span><span class="o">+</span><span class="s">&#34; World!======&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在cmd命令行中运行该程序的结果如下<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/simple-class-before-modifing-running-result.png" alt="未修改之前的运行结果" title="未修改之前的Java代码运行结果"><br>
@@ -252,20 +259,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.lucumt</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test1</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">Test1</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test1</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">          <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="na">addNumber</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;result is: &#34;</span><span class="o">+</span><span class="n">result</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">addNumber</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span><span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.lucumt</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test1</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Test1</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Test1</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="na">addNumber</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;result is: &#34;</span><span class="o">+</span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">addNumber</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>正常情况下，其输出结果如下<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-method-before-modifing-running-result.png" alt="未修改方法前的运行结果" title="未修改方法前的运行结果"><br>
@@ -323,56 +330,56 @@
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.lucumt.test</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CannotCompileException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CtClass</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CtMethod</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.NotFoundException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UpdateMethod</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">updateMethod</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">updateMethod</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">ClassPool</span> <span class="n">cPool</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPool</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		        <span class="c1">//如果该文件引入了其它类，需要利用类似如下方式声明
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="c1">//cPool.importPackage(&#34;java.util.List&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			
-</span></span><span class="line"><span class="cl">			<span class="c1">//设置class文件的位置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">cPool</span><span class="o">.</span><span class="na">insertClassPath</span><span class="o">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//获取该class对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">CtClass</span> <span class="n">cClass</span> <span class="o">=</span> <span class="n">cPool</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;com.lucumt.Test1&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//获取到对应的方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">CtMethod</span> <span class="n">cMethod</span> <span class="o">=</span> <span class="n">cClass</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">&#34;addNumber&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//更改该方法的内部实现
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="c1">//需要注意的是对于参数的引用要以$开始，不能直接输入参数名称
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">cMethod</span><span class="o">.</span><span class="na">setBody</span><span class="o">(</span><span class="s">&#34;{ return $1*$1*$1+$2*$2*$2; }&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//替换原有的文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">cClass</span><span class="o">.</span><span class="na">writeFile</span><span class="o">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;=======修改方法完=========&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CannotCompileException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.lucumt.test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CannotCompileException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.ClassPool</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtClass</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtMethod</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.NotFoundException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UpdateMethod</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">updateMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMethod</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">ClassPool</span><span class="w"> </span><span class="n">cPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPool</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		        </span><span class="c1">//如果该文件引入了其它类，需要利用类似如下方式声明</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//cPool.importPackage(&#34;java.util.List&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//设置class文件的位置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cPool</span><span class="p">.</span><span class="na">insertClassPath</span><span class="p">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//获取该class对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CtClass</span><span class="w"> </span><span class="n">cClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cPool</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;com.lucumt.Test1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//获取到对应的方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CtMethod</span><span class="w"> </span><span class="n">cMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cClass</span><span class="p">.</span><span class="na">getDeclaredMethod</span><span class="p">(</span><span class="s">&#34;addNumber&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//更改该方法的内部实现</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//需要注意的是对于参数的引用要以$开始，不能直接输入参数名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cMethod</span><span class="p">.</span><span class="na">setBody</span><span class="p">(</span><span class="s">&#34;{ return $1*$1*$1+$2*$2*$2; }&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//替换原有的文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cClass</span><span class="p">.</span><span class="na">writeFile</span><span class="p">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;=======修改方法完=========&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">CannotCompileException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行该代码后重新执行后的结果如下，从图中可以看出运行结果符合预期<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-method-after-modifing-runnning-result.png" alt="修改方法后的运行结果" title="修改方法后的运行结果"></p>
@@ -449,55 +456,55 @@
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.lucumt.test</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CannotCompileException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CtClass</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CtMethod</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.CtNewMethod</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.NotFoundException</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddMethod</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">addMethod</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">addMethod</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">ClassPool</span> <span class="n">cPool</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPool</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			<span class="n">cPool</span><span class="o">.</span><span class="na">insertClassPath</span><span class="o">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			<span class="n">CtClass</span> <span class="n">cClass</span> <span class="o">=</span> <span class="n">cPool</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;com.lucumt.Test1&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="n">CtMethod</span> <span class="n">cMethod</span> <span class="o">=</span> <span class="n">cClass</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">&#34;addNumber&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//增加一个新方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">String</span> <span class="n">methodStr</span> <span class="o">=</span><span class="s">&#34;public void showParameters(int a,int b){&#34;</span> 
-</span></span><span class="line"><span class="cl">					    <span class="o">+</span><span class="s">&#34;  System.out.println(\&#34;First parameter: \&#34;+a);&#34;</span>
-</span></span><span class="line"><span class="cl">					    <span class="o">+</span><span class="s">&#34;  System.out.println(\&#34;Second parameter: \&#34;+b);&#34;</span>
-</span></span><span class="line"><span class="cl">					    <span class="o">+</span><span class="s">&#34;}&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">			<span class="n">CtMethod</span> <span class="n">newMethod</span> <span class="o">=</span> <span class="n">CtNewMethod</span><span class="o">.</span><span class="na">make</span><span class="o">(</span><span class="n">methodStr</span><span class="o">,</span> <span class="n">cClass</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			<span class="n">cClass</span><span class="o">.</span><span class="na">addMethod</span><span class="o">(</span><span class="n">newMethod</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">			<span class="c1">//调用新增的方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">cMethod</span><span class="o">.</span><span class="na">setBody</span><span class="o">(</span><span class="s">&#34;{ showParameters($1,$2);return $1*$1*$1+$2*$2*$2; }&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			<span class="n">cClass</span><span class="o">.</span><span class="na">writeFile</span><span class="o">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CannotCompileException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.lucumt.test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CannotCompileException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.ClassPool</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtClass</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtMethod</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtNewMethod</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javassist.NotFoundException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AddMethod</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">addMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addMethod</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">ClassPool</span><span class="w"> </span><span class="n">cPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPool</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cPool</span><span class="p">.</span><span class="na">insertClassPath</span><span class="p">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CtClass</span><span class="w"> </span><span class="n">cClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cPool</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;com.lucumt.Test1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CtMethod</span><span class="w"> </span><span class="n">cMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cClass</span><span class="p">.</span><span class="na">getDeclaredMethod</span><span class="p">(</span><span class="s">&#34;addNumber&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//增加一个新方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">methodStr</span><span class="w"> </span><span class="o">=</span><span class="s">&#34;public void showParameters(int a,int b){&#34;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">					    </span><span class="o">+</span><span class="s">&#34;  System.out.println(\&#34;First parameter: \&#34;+a);&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					    </span><span class="o">+</span><span class="s">&#34;  System.out.println(\&#34;Second parameter: \&#34;+b);&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					    </span><span class="o">+</span><span class="s">&#34;}&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CtMethod</span><span class="w"> </span><span class="n">newMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CtNewMethod</span><span class="p">.</span><span class="na">make</span><span class="p">(</span><span class="n">methodStr</span><span class="p">,</span><span class="w"> </span><span class="n">cClass</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cClass</span><span class="p">.</span><span class="na">addMethod</span><span class="p">(</span><span class="n">newMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">//调用新增的方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cMethod</span><span class="p">.</span><span class="na">setBody</span><span class="p">(</span><span class="s">&#34;{ showParameters($1,$2);return $1*$1*$1+$2*$2*$2; }&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">cClass</span><span class="p">.</span><span class="na">writeFile</span><span class="p">(</span><span class="s">&#34;D:\\Java\\eclipse\\newworkspace\\test\\bin&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">CannotCompileException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行该代码后重新执行Test1后的结果如下，从图中可以看出运行结果符合预期  <br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-add-method-runnning-result.png" alt="新增方法后的运行结果" title="新增方法后的运行结果"><br>
@@ -621,7 +628,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

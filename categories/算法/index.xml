@@ -4,30 +4,23 @@
     <title>算法 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/%E7%AE%97%E6%B3%95/</link>
     <description>Recent content in 算法 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 26 Feb 2017 19:26:33 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Feb 2017 19:26:33 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>计算两个平行于坐标轴的矩形相交的面积</title>
       <link>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</link>
       <pubDate>Sun, 26 Feb 2017 19:26:33 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</guid>
-      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
+      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>不通过第三方变量来交换两个变量的值</title>
       <link>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</link>
       <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</guid>
       <description>&lt;p&gt;变量交换是编程中经常使用的功能，本文记录几种不通过不添加第三方变量来交换两个变量的实现方式。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

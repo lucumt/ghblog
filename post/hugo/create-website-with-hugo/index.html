@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/hugo/create-website-with-hugo/" />
@@ -39,20 +39,29 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用Github Pages和基于Go的Hugo搭建个人博客" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/hugo/create-website-with-hugo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-02-27T22:23:37+08:00" />
-<meta property="article:modified_time" content="2016-02-27T22:23:37+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/hugo/create-website-with-hugo/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用Github Pages和基于Go的Hugo搭建个人博客">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-02-27T22:23:37+08:00">
+    <meta property="article:modified_time" content="2016-02-27T22:23:37+08:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="Github-Pages">
+    <meta property="article:tag" content="Github">
 
-<meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00" />
-<meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00" />
-<meta itemprop="wordCount" content="2550">
-<meta itemprop="keywords" content="Go,Hugo,github-pages,github," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00">
+  <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00">
+  <meta itemprop="wordCount" content="2550">
+  <meta itemprop="keywords" content="github-pages,github,Go,Hugo">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -317,18 +326,18 @@
 <p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/"><strong>Using a custom domain with GitHub Pages</strong></a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<a href="https://www.godaddy.com/"><strong>GoDaddy</strong></a>上的说明来设置的。</p>
 <ol>
 <li>在<code>public</code>目录下创建一个名为 <code>CNAME</code>的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 <code>http://lucumt.info</code> ，故填入<code>lucumt.info</code><br>
-<img src="/blog_img/hugo/create-website-with-hugo/create-cname-file.png" alt="&amp;ldquo;创建CNAME文件&amp;rdquo;" title="创建CNAME文件并添加域名"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/create-cname-file.png" alt="&ldquo;创建CNAME文件&rdquo;" title="创建CNAME文件并添加域名"></li>
 <li>登陆<code>Godaddy</code>，然后在页面右上角点击自己的用户名，出现如下图所示的页面，选择Manage My Domains<br>
-<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-page.png" alt="&amp;ldquo;选择域名管理界面&amp;rdquo;" title="选择域名管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-page.png" alt="&ldquo;选择域名管理界面&rdquo;" title="选择域名管理界面"></li>
 <li>选择完Manage My Domains之后会出现如下图所示的界面，选择Manage DNS<br>
-<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-dns.png" alt="&amp;ldquo;选择DNS管理界面&amp;rdquo;" title="选择DNS管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-choose-manage-dns.png" alt="&ldquo;选择DNS管理界面&rdquo;" title="选择DNS管理界面"></li>
 <li>选择完Manage DNS之后会出现如下图所示的界面，点击Add按钮会出现下拉框让我们增加A记录<br>
-<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-records-page.png" alt="&amp;ldquo;DNS管理界面&amp;rdquo;" title="DNS管理界面"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-records-page.png" alt="&ldquo;DNS管理界面&rdquo;" title="DNS管理界面"></li>
 <li>在Type部分选择 <strong>A</strong> ，Host部分选择 <strong>@</strong>， Poinst to根据<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<code>GoDaddy</code>中<code>Configuring A records with your DNS provider</code>部分的说明添加 <strong>192.30.252.153</strong> ,点击Save即完成一条A记录的添加<br>
-<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/godaddy-dns-add-a-records.png" alt="&ldquo;增加A记录&rdquo;" title="增加A记录"></li>
 <li>再次点击Add添加，按照步骤5添加第二条A记录，除了Points to设置为 <strong>192.30.252.154</strong> 之外，其它的配置都相同</li>
 <li>在<code>Github</code>项目中点击Settings按钮查看<code>Github Pages</code>区域的设置信息，若出现类似如下图所示的设置信息，则表示我们自定义域名添加成功<br>
-<img src="/blog_img/hugo/create-website-with-hugo/github-pages-configuration-check.png" alt="&amp;ldquo;增加A记录&amp;rdquo;" title="增加A记录"></li>
+<img src="/blog_img/hugo/create-website-with-hugo/github-pages-configuration-check.png" alt="&ldquo;增加A记录&rdquo;" title="增加A记录"></li>
 </ol>
 <p>至此利用<code>GoDaddy</code>来配置自自定义域名的过程完成，输入 <strong><a href="http://lucumt.info">http://lucumt.info</a></strong> 即可访问自己的博客！</p>
 <p>PS:吐槽下让人觉得不爽的几个地方：</p>
@@ -455,7 +464,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

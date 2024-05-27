@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>spring-cloud on 飞狐的部落格</title>
+    <title>Spring-Cloud on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/spring-cloud/</link>
-    <description>Recent content in spring-cloud on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Spring-Cloud on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
       <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
       <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
       <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

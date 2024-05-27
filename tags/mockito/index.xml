@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mockito on 飞狐的部落格</title>
+    <title>Mockito on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/mockito/</link>
-    <description>Recent content in mockito on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Mockito on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 Jun 2023 22:21:43 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/mockito/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jun 2023 22:21:43 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/mockito/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
       <link>https://lucumt.info/post/translate/junit5/junit-5-migration/</link>
       <pubDate>Wed, 21 Jun 2023 22:21:43 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/junit5/junit-5-migration/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-migration/&#34;&gt;&lt;strong&gt;Migrating From JUnit 4 to JUnit 5: A Definitive Guide&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译]在JUnit 5中使用Mockito</title>
       <link>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</link>
       <pubDate>Mon, 19 Jun 2023 19:21:43 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/</guid>
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-mockito/&#34;&gt;&lt;strong&gt;Using Mockito With JUnit 5&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

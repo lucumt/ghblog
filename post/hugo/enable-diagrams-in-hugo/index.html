@@ -26,7 +26,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/" />
@@ -42,29 +42,33 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="在Hugo中开启图表支持" />
-<meta property="og:description" content="说明
+<meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在Hugo中开启图表支持">
+  <meta property="og:description" content="说明
 若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-03-27T09:46:50+08:00">
+    <meta property="article:modified_time" content="2023-03-27T09:46:50+08:00">
+    <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="Go">
 
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-03-27T09:46:50+08:00" />
-<meta property="article:modified_time" content="2023-03-27T09:46:50+08:00" />
-
-<meta itemprop="name" content="在Hugo中开启图表支持">
-<meta itemprop="description" content="说明
+  <meta itemprop="name" content="在Hugo中开启图表支持">
+  <meta itemprop="description" content="说明
 若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"><meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00" />
-<meta itemprop="wordCount" content="5554">
-<meta itemprop="keywords" content="hugo,go," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在Hugo中开启图表支持"/>
-<meta name="twitter:description" content="说明
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
+  <meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00">
+  <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00">
+  <meta itemprop="wordCount" content="5554">
+  <meta itemprop="keywords" content="flowchart,sequence,mermaid,hugo,markdown">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在Hugo中开启图表支持">
+  <meta name="twitter:description" content="说明
 若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。"/>
+简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -1804,7 +1808,7 @@ Bob-->>John: Jolly good!
     <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js"></script><script>
 	   
 	
-	<!-- below is newly added code -->
+	
 	let flowPageOptions = "{ 'x': 0, 'y': 0, 'width':1, 'line-width': 1, 'line-length': 50, 'text-margin': 10, 'font-size': 14, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'yes-text': 'yes', 'no-text': 'no', 'arrow-end': 'block', 'scale': 1, 'symbols': { 'start': { 'font-color': 'red', 'element-color': 'green', 'fill': 'yellow' }, 'end': { 'class': 'end-element', 'element-color': 'green' } }, 'flowstate': { 'aaa': {'fill': 'pink'}, 'approved': {'fill': 'peru'} } }";
 	let flowSiteOptions = "";
 	flowPageOptions = !!flowPageOptions ? flowPageOptions : "{}"
@@ -1859,7 +1863,7 @@ Bob-->>John: Jolly good!
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

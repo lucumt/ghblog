@@ -4,74 +4,58 @@
     <title>系统集成 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</link>
     <description>Recent content in 系统集成 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Apr 2023 11:22:34 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Apr 2023 10:39:47 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>给Gitlab添加LDAP登录认证</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-gitlab/</link>
       <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/ldap/add-ldap-support-for-gitlab/</guid>
       <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;创建&lt;code&gt;Gitlab&lt;/code&gt;并集成&lt;code&gt;ldap&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;且仅允许&lt;code&gt;LDAP&lt;/code&gt;账号登录。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Hugo中开启Highcharts图表支持</title>
       <link>https://lucumt.info/post/hugo/enable-highcharts-in-hugo/</link>
       <pubDate>Sun, 02 Apr 2023 16:39:51 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/hugo/enable-highcharts-in-hugo/</guid>
       <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/hugo/enable-diagrams-in-hugo/&#34;&gt;在Hugo中开启图表支持&lt;/a&gt;一文，简要说明如何在&lt;code&gt;Hugo&lt;/code&gt;中基于&lt;code&gt;Markdown&lt;/code&gt;以优雅的方式集成&lt;a href=&#34;https://www.highcharts.com/&#34;&gt;Highcharts&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Hugo中开启图表支持</title>
       <link>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</link>
       <pubDate>Mon, 27 Mar 2023 09:46:50 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/hugo/enable-diagrams-in-hugo/</guid>
-      <description>&lt;div class=&#34;admonition info&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;
-&lt;p&gt;若页面中图表显示不正常，可能是由于&lt;code&gt;js&lt;/code&gt;文件加载和图表渲染需要时间，请多等待几秒钟！&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;简要介绍在如何在&lt;code&gt;Hugo&lt;/code&gt;博客中基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题开启&lt;a href=&#34;https://flowchart.js.org/&#34;&gt;flowchart&lt;/a&gt;、&lt;a href=&#34;https://bramp.github.io/js-sequence-diagrams/&#34;&gt;sequence&lt;/a&gt;和&lt;a href=&#34;https://mermaid.js.org/&#34;&gt;mermaid&lt;/a&gt;图表的支持。&lt;/p&gt;</description>
+      <description>&lt;div class=&#34;admonition info&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;&#xA;&lt;p&gt;若页面中图表显示不正常，可能是由于&lt;code&gt;js&lt;/code&gt;文件加载和图表渲染需要时间，请多等待几秒钟！&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;简要介绍在如何在&lt;code&gt;Hugo&lt;/code&gt;博客中基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题开启&lt;a href=&#34;https://flowchart.js.org/&#34;&gt;flowchart&lt;/a&gt;、&lt;a href=&#34;https://bramp.github.io/js-sequence-diagrams/&#34;&gt;sequence&lt;/a&gt;和&lt;a href=&#34;https://mermaid.js.org/&#34;&gt;mermaid&lt;/a&gt;图表的支持。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>给Grafana软件集成LDAP实现单点登录</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-grafana/</link>
       <pubDate>Sun, 11 Dec 2022 10:39:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/ldap/add-ldap-support-for-grafana/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://grafana.com/&#34;&gt;&lt;strong&gt;Grafana&lt;/strong&gt;&lt;/a&gt;是一款用&lt;code&gt;Go&lt;/code&gt;语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能，本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;Grafana&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>给Sonarqube软件集成LDAP实现单点登录</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/</link>
       <pubDate>Sun, 04 Dec 2022 11:29:12 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.sonarqube.org/latest/&#34;&gt;SonarQube&lt;/a&gt;是管理代码质量一个开放平台，可以快速的定位代码中潜在的或者明显的错误，本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;SonarQube&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>给Yapi添加LDAP登录认证</title>
       <link>https://lucumt.info/post/ldap/add-ldap-support-for-yapi/</link>
       <pubDate>Thu, 01 Dec 2022 11:23:00 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/ldap/add-ldap-support-for-yapi/</guid>
       <description>&lt;p&gt;&lt;code&gt;YApi&lt;/code&gt; 是&lt;strong&gt;高效&lt;/strong&gt;、&lt;strong&gt;易用&lt;/strong&gt;、&lt;strong&gt;功能强大&lt;/strong&gt;的 api 管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，由去哪儿网开发，本文基于&lt;a href=&#34;https://www.jianshu.com/p/a97d2efb23c5&#34;&gt;为 Yapi 定制 apline 版 Docker 镜像&lt;/a&gt;简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;Yapi&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kubesphere集成LDAP踩坑记录</title>
       <link>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</link>
       <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</guid>
       <description>&lt;p&gt;之前在公司内部推广&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;LDAP&lt;/a&gt;整合其它系统的成熟经验，很自然的想将&lt;code&gt;LDAP&lt;/code&gt;集成到&lt;code&gt;KubeSphere&lt;/code&gt;中。原以为会很容易，一番折腾下来费了不好功夫(&lt;strong&gt;&lt;code&gt;KubeSphere&lt;/code&gt;要求使用&lt;code&gt;LDAP&lt;/code&gt;时必须设置管理员账号和密码&lt;/strong&gt;)，简单记录下。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

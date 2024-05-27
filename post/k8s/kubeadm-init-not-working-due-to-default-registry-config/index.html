@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/" />
@@ -40,20 +40,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败" />
-<meta property="og:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-01-11T11:31:45+08:00" />
-<meta property="article:modified_time" content="2023-01-11T11:31:45+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
+  <meta property="og:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-01-11T11:31:45+08:00">
+    <meta property="article:modified_time" content="2023-01-11T11:31:45+08:00">
+    <meta property="article:tag" content="Kubernetes">
+    <meta property="article:tag" content="Linux">
 
-<meta itemprop="name" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
-<meta itemprop="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。"><meta itemprop="datePublished" content="2023-01-11T11:31:45+08:00" />
-<meta itemprop="dateModified" content="2023-01-11T11:31:45+08:00" />
-<meta itemprop="wordCount" content="1532">
-<meta itemprop="keywords" content="kubernetes,linux," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败"/>
-<meta name="twitter:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。"/>
+  <meta itemprop="name" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
+  <meta itemprop="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
+  <meta itemprop="datePublished" content="2023-01-11T11:31:45+08:00">
+  <meta itemprop="dateModified" content="2023-01-11T11:31:45+08:00">
+  <meta itemprop="wordCount" content="1532">
+  <meta itemprop="keywords" content="Kubernetes,Linux">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
+  <meta name="twitter:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -623,7 +630,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

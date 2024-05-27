@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/" />
@@ -39,20 +39,26 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Arrays.asList类型转换结果的坑" />
-<meta property="og:description" content="Arrays.asList类型转换结果的坑" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-07-22T10:47:12+08:00" />
-<meta property="article:modified_time" content="2022-02-22T10:47:12+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="Arrays.asList类型转换结果的坑">
+  <meta property="og:description" content="Arrays.asList类型转换结果的坑">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-07-22T10:47:12+08:00">
+    <meta property="article:modified_time" content="2022-02-22T10:47:12+08:00">
+    <meta property="article:tag" content="Java">
 
-<meta itemprop="name" content="Arrays.asList类型转换结果的坑">
-<meta itemprop="description" content="Arrays.asList类型转换结果的坑"><meta itemprop="datePublished" content="2019-07-22T10:47:12+08:00" />
-<meta itemprop="dateModified" content="2022-02-22T10:47:12+08:00" />
-<meta itemprop="wordCount" content="931">
-<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Arrays.asList类型转换结果的坑"/>
-<meta name="twitter:description" content="Arrays.asList类型转换结果的坑"/>
+  <meta itemprop="name" content="Arrays.asList类型转换结果的坑">
+  <meta itemprop="description" content="Arrays.asList类型转换结果的坑">
+  <meta itemprop="datePublished" content="2019-07-22T10:47:12+08:00">
+  <meta itemprop="dateModified" content="2022-02-22T10:47:12+08:00">
+  <meta itemprop="wordCount" content="931">
+  <meta itemprop="keywords" content="Arrays.asList,类型转换,封装,原始类型">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Arrays.asList类型转换结果的坑">
+  <meta name="twitter:description" content="Arrays.asList类型转换结果的坑">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -189,11 +195,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkContains</span><span class="o">(</span><span class="kt">int</span> <span class="n">ele</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="o">{</span><span class="n">11</span><span class="o">,</span> <span class="n">12</span><span class="o">,</span> <span class="n">13</span><span class="o">,</span> <span class="n">14</span><span class="o">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">data</span><span class="o">).</span><span class="na">contains</span><span class="o">(</span><span class="n">ele</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkContains</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ele</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">11</span><span class="p">,</span><span class="w"> </span><span class="n">12</span><span class="p">,</span><span class="w"> </span><span class="n">13</span><span class="p">,</span><span class="w"> </span><span class="n">14</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">data</span><span class="p">).</span><span class="na">contains</span><span class="p">(</span><span class="n">ele</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>但实际执行结果和自己预期的不一致，理论上的结果应该为<code>true</code>，而实际返回的结果为<code>false</code></p>
 <p><img src="/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-contains-result-not-as-expected.png" alt="Arrays.asList输出结果不符合预期" title="Arrays.asList输出结果不符合预期"></p>
@@ -218,12 +224,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">checkContains</span><span class="o">(</span><span class="kt">int</span> <span class="n">ele</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Integer</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="o">{</span><span class="n">11</span><span class="o">,</span> <span class="n">12</span><span class="o">,</span> <span class="n">13</span><span class="o">,</span> <span class="n">14</span><span class="o">};</span>
-</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">dataList</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dataList</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">ele</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkContains</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ele</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Integer</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">11</span><span class="p">,</span><span class="w"> </span><span class="n">12</span><span class="p">,</span><span class="w"> </span><span class="n">13</span><span class="p">,</span><span class="w"> </span><span class="n">14</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">data</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dataList</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">ele</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行结果符合预期</p>
 <p><img src="/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-contains-result-as-expected.png" alt="Arrays.asList输出结果符合预期" title="Arrays.asList输出结果符合预期"></p>
@@ -239,9 +245,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span> <span class="n">ints</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span><span class="n">1</span><span class="o">,</span><span class="n">2</span><span class="o">,</span><span class="n">3</span><span class="o">,</span><span class="n">4</span><span class="o">,</span><span class="n">5</span><span class="o">};</span>
-</span></span><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list11</span> <span class="o">=</span><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">ints</span><span class="o">).</span><span class="na">boxed</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span> 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">ints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">,</span><span class="n">5</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list11</span><span class="w"> </span><span class="o">=</span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">ints</span><span class="p">).</span><span class="na">boxed</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -252,9 +258,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span> <span class="n">ints</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span><span class="n">1</span><span class="o">,</span><span class="n">2</span><span class="o">,</span><span class="n">3</span><span class="o">,</span><span class="n">4</span><span class="o">,</span><span class="n">5</span><span class="o">};</span>
-</span></span><span class="line"><span class="cl"><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">ints</span><span class="o">).</span><span class="na">boxed</span><span class="o">().</span><span class="na">toList</span><span class="o">();</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">ints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">,</span><span class="n">5</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">ints</span><span class="p">).</span><span class="na">boxed</span><span class="p">().</span><span class="na">toList</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -376,7 +382,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

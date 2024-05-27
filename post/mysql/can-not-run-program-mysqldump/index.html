@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/mysql/can-not-run-program-mysqldump/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/mysql/can-not-run-program-mysqldump/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-03-03T14:33:43+08:00" />
-<meta property="article:modified_time" content="2016-03-03T14:33:43+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/mysql/can-not-run-program-mysqldump/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-03-03T14:33:43+08:00">
+    <meta property="article:modified_time" content="2016-03-03T14:33:43+08:00">
+    <meta property="article:tag" content="Mysql">
+    <meta property="article:tag" content="Java">
 
-<meta itemprop="name" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-03-03T14:33:43+08:00" />
-<meta itemprop="dateModified" content="2016-03-03T14:33:43+08:00" />
-<meta itemprop="wordCount" content="1607">
-<meta itemprop="keywords" content="MySQL,Java," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2016-03-03T14:33:43+08:00">
+  <meta itemprop="dateModified" content="2016-03-03T14:33:43+08:00">
+  <meta itemprop="wordCount" content="1607">
+  <meta itemprop="keywords" content="MySQL,Java">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -181,11 +188,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runtime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="n">mysqlCmd</span> <span class="o">=</span> <span class="s">&#34;mysqldump&#34;</span> <span class="o">+</span> <span class="s">&#34; -u&#34;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s">&#34; -p&#34;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> 
-</span></span><span class="line"><span class="cl">           <span class="s">&#34;  -h &#34;</span> <span class="o">+</span> <span class="n">databaseAddress</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span><span class="n">databaseName</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">mysqlCmd</span><span class="o">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runtime</span><span class="w"> </span><span class="n">runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Runtime</span><span class="p">.</span><span class="na">getRuntime</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">mysqlCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;mysqldump&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; -u&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; -p&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="s">&#34;  -h &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">databaseAddress</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; &#34;</span><span class="w"> </span><span class="o">+</span><span class="n">databaseName</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Process</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runtime</span><span class="p">.</span><span class="na">exec</span><span class="p">(</span><span class="n">mysqlCmd</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
 <div class="highlight"><div class="chroma">
@@ -197,12 +204,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">IOException</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">run</span> <span class="n">program</span> <span class="s">&#34;mysqldump&#34;</span><span class="o">:</span> <span class="n">CreateProcess</span> <span class="n">error</span><span class="o">=</span><span class="n">2</span><span class="o">,</span> <span class="n">The</span> <span class="n">system</span> <span class="n">cannot</span> <span class="n">find</span> <span class="n">the</span> <span class="n">file</span> <span class="n">specified</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ProcessBuilder</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">ProcessBuilder</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">460</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">593</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">431</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">328</span><span class="o">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span><span class="p">:</span><span class="w"> </span><span class="n">Cannot</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="s">&#34;mysqldump&#34;</span><span class="p">:</span><span class="w"> </span><span class="n">CreateProcess</span><span class="w"> </span><span class="n">error</span><span class="o">=</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">specified</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">at</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">ProcessBuilder</span><span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="n">ProcessBuilder</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">460</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">at</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">Runtime</span><span class="p">.</span><span class="na">exec</span><span class="p">(</span><span class="n">Runtime</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">593</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">at</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">Runtime</span><span class="p">.</span><span class="na">exec</span><span class="p">(</span><span class="n">Runtime</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">431</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">at</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">Runtime</span><span class="p">.</span><span class="na">exec</span><span class="p">(</span><span class="n">Runtime</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">328</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Google之后，在<a href="http://stackoverflow.com/"><strong>Stackoverflow</strong></a>发现两个相关的问题：</p>
 <ul>
@@ -366,7 +373,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

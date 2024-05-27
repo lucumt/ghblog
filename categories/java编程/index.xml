@@ -4,411 +4,275 @@
     <title>Java编程 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in Java编程 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
       <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
       <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
       <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Java中解析和存储包含微秒与纳秒的时间</title>
       <link>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</link>
       <pubDate>Fri, 17 Feb 2023 13:48:05 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</guid>
       <description>&lt;p&gt;在软件开发领域，大部分时间精确到秒或毫秒即可满足日常需求，但在某些对时间要求严格的场景中需要使用微秒、纳秒等更精确的时间值，本文简要记录如何在Java中通过&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html&#34;&gt;LocalDateTime&lt;/a&gt;实现对于微秒、纳秒的精确解析以及转化为&lt;code&gt;long&lt;/code&gt;型时间戳。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Java8中的lambda来实现字符串的解析与分组</title>
       <link>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</link>
       <pubDate>Tue, 15 Nov 2022 16:20:57 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/using-lambda-to-parse-and-group-data/</guid>
       <description>&lt;p&gt;在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的&lt;code&gt;Map&lt;/code&gt;与&lt;code&gt;List&lt;/code&gt;组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用&lt;code&gt;Java8&lt;/code&gt;中引入的&lt;code&gt;lambda&lt;/code&gt;表达式后代码变的更简洁、更优雅，故简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Log4j2中实现只有在traceId有值时才输出</title>
       <link>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</link>
       <pubDate>Thu, 13 Oct 2022 17:47:46 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/log4j/show-trace-id-only-if-exists-in-log4j2/</guid>
       <description>&lt;p&gt;记录如何在&lt;a href=&#34;https://logging.apache.org/log4j/2.x/&#34;&gt;&lt;strong&gt;Log4j2&lt;/strong&gt;&lt;/a&gt;中使用traceId实现&lt;a href=&#34;https://blog.51cto.com/u_15501087/5834195&#34;&gt;&lt;strong&gt;链路追踪&lt;/strong&gt;&lt;/a&gt;时只有在请求header中有&lt;code&gt;trace-id&lt;/code&gt;时才显示前端发送过来的&lt;code&gt;trace-id&lt;/code&gt;值。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>将3个小int整数合并到1个long中从而缩小数据量</title>
       <link>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</link>
       <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</guid>
       <description>&lt;p&gt;近期在工作中遇到由于&lt;code&gt;HTTP&lt;/code&gt;返回的内容较多导致系统响应延迟的问题，最终自己结合&lt;a href=&#34;https://en.wikipedia.org/wiki/Gzip&#34;&gt;gzip&lt;/a&gt;、&lt;a href=&#34;https://developers.google.com/protocol-buffers&#34;&gt;Protocol Buffers&lt;/a&gt;、&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C&#34;&gt;位运算&lt;/a&gt;等将&lt;code&gt;HTTP&lt;/code&gt;响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于&lt;code&gt;位运算&lt;/code&gt;部分自己是结合业务实际，将3个小型&lt;code&gt;int&lt;/code&gt;转化为1个&lt;code&gt;long&lt;/code&gt;，将数据量减少三分之一，简单记录下其实现(以&lt;code&gt;Java&lt;/code&gt;实现为例)。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>将MinIO中的文件夹下载为ZIP文件</title>
       <link>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</link>
       <pubDate>Sat, 20 Aug 2022 20:35:44 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/minio/download-minio-folder-as-zip-file/</guid>
       <description>&lt;p&gt;公司项目采用&lt;a href=&#34;https://min.io/&#34;&gt;&lt;strong&gt;MinIO&lt;/strong&gt;&lt;/a&gt;作为数据存储，最近遇到一个需求是将其中的某个文件夹的数据基于其原有的结构下载为&lt;code&gt;ZIP&lt;/code&gt;文件，网上有很多下载为&lt;code&gt;ZIP&lt;/code&gt;的代码，个人觉得其中好多不够精简，简单记录下自己的实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>5.[译]同线程系统</title>
       <link>https://lucumt.info/post/translate/java-concurrency/same-threading/</link>
       <pubDate>Thu, 16 Jun 2022 12:16:44 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/same-threading/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;
-&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用JDK8时区常量进行时区相关操作</title>
       <link>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</link>
       <pubDate>Tue, 08 Jun 2021 16:01:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</guid>
       <description>&lt;p&gt;在进行&lt;code&gt;Java&lt;/code&gt;编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用&lt;code&gt;JDK&lt;/code&gt;内置的时区常量来进行时区相关操作。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>MyBatis中插入JSON格式数据</title>
       <link>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</link>
       <pubDate>Thu, 15 Apr 2021 09:37:41 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/</guid>
       <description>&lt;p&gt;简单记录下如何在&lt;a href=&#34;https://mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;中插入&lt;a href=&#34;https://www.json.org/json-en.html&#34;&gt;&lt;strong&gt;JSON&lt;/strong&gt;&lt;/a&gt;，以备参考。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>一次由wait造成的死锁问题分析</title>
       <link>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/</link>
       <pubDate>Sat, 12 Sep 2020 18:07:27 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/</guid>
       <description>&lt;p&gt;在&lt;a href=&#34;https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/&#34;&gt;多种方式实现在Java中用线程轮流打印ABC&lt;/a&gt;中自己本想用单个锁通过调用&lt;code&gt;wait()&lt;/code&gt;实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>多种方式实现在Java中用线程轮流打印ABC</title>
       <link>https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/</link>
       <pubDate>Tue, 08 Sep 2020 11:11:06 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/</guid>
       <description>&lt;p&gt;在&lt;code&gt;Java&lt;/code&gt;中采用3个线程不停的轮流打印ABC这3个字符，采用不同的方式实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在MyBatis接口中使用Optional进行非空判断</title>
       <link>https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/</link>
       <pubDate>Thu, 13 Feb 2020 14:40:19 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/</guid>
       <description>&lt;p&gt;在进行&lt;code&gt;Java&lt;/code&gt;开发时，&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html&#34;&gt;&lt;strong&gt;NullPointerException&lt;/strong&gt;&lt;/a&gt;是一个很常见的异常，在&lt;code&gt;Java8&lt;/code&gt;中提供了&lt;a href=&#34;https://www.oracle.com/technical-resources/articles/java/java8-optional.html&#34;&gt;&lt;strong&gt;Optional&lt;/strong&gt;&lt;/a&gt;来避免此问题，而在&lt;a href=&#34;https://blog.mybatis.org/2019/01/mybatis-350-released.html&#34;&gt;&lt;strong&gt;MyBatis 3.5.0&lt;/strong&gt;&lt;/a&gt;中也提供了对&lt;code&gt;Optional&lt;/code&gt;的支持，本文简要叙述如何在&lt;code&gt;MyBatis&lt;/code&gt;中使用&lt;code&gt;Optional&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译]Spring中@Configuration和@Component的对比</title>
-      <link>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</link>
+      <link>https://lucumt.info/post/translate/spring/@configuration-vs-@component-in-spring/</link>
       <pubDate>Wed, 08 Jan 2020 16:21:26 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://lucumt.info/post/translate/spring/@configuration-vs-@component-in-spring/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Arrays.asList类型转换结果的坑</title>
       <link>https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/</link>
       <pubDate>Mon, 22 Jul 2019 10:47:12 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/</guid>
       <description>&lt;p&gt;在各种&lt;code&gt;Java&lt;/code&gt;编程规范中都强调尽量不用&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-&#34;&gt;java.util.Arrays.asList()&lt;/a&gt;方法以避免调用此方法生成的&lt;code&gt;List&lt;/code&gt;无法进行修改操作，个人近期在使用过程中发现该方法的另外一个坑，简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>ClassNotFoundException与NoClassDefFoundError对比</title>
       <link>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</link>
       <pubDate>Wed, 02 Jan 2019 14:18:46 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/ClassNotFoundException.html&#34;&gt;&lt;strong&gt;ClassNotFoundException&lt;/strong&gt;&lt;/a&gt;与&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/lang/NoClassDefFoundError.html&#34;&gt;&lt;strong&gt;NoClassDefFoundError&lt;/strong&gt;&lt;/a&gt;是&lt;code&gt;Java&lt;/code&gt;开发中经常会遇到的异常与错误，本文基于个人工作中遇到的场景以及网上的资料，简要总结它们的差异、出现场景以及规避方案。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译]如何处理InterruptedException</title>
       <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</guid>
-      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。
-但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。&#xA;但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>volatile关键字在Java程序中的使用</title>
       <link>https://lucumt.info/post/java-concurrency/how-to-use-volatile-in-java/</link>
       <pubDate>Sat, 08 Dec 2018 23:49:33 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-concurrency/how-to-use-volatile-in-java/</guid>
       <description>&lt;p&gt;&lt;code&gt;volatile&lt;/code&gt;关键字在Java多线程编程中很常见，由于自己之前学习多线程时一度以为只要需确保线程可见性的代码都需要使用&lt;code&gt;volatile&lt;/code&gt;关键字，后来发现并不是这样的，故简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Java中利用==和equals()进行字符串比较的说明</title>
       <link>https://lucumt.info/post/java-core/java-string-equal-compare/</link>
       <pubDate>Sat, 08 Dec 2018 23:02:10 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/java-string-equal-compare/</guid>
       <description>&lt;p&gt;Java中字符串的比较在面试中很常见，我们都知道比较字符串是否相等要使用&lt;code&gt;equals()&lt;/code&gt;而不是&lt;code&gt;==&lt;/code&gt;。本文首先利用&lt;code&gt;javap&lt;/code&gt;命令从class文件的角度来分析不同字符串比较的结果，然后分析下&lt;code&gt;Tomcat&lt;/code&gt;中如何获取前端输入的字符串参数,并以此说明Java Web开发中该如何正确的进行字符串的比较。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Java中interrupt()、interrupted()、isInterrupted()的区别</title>
       <link>https://lucumt.info/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/</link>
       <pubDate>Mon, 03 Dec 2018 22:57:56 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-concurrency/difference-between-interrupt-interrupted-isinterrupted/</guid>
       <description>&lt;p&gt;最近复习Java多线程相关知识时，发现线程中断的&lt;code&gt;interrupt()&lt;/code&gt;、&lt;code&gt;interrupted()&lt;/code&gt;、&lt;code&gt;isInterrupted()&lt;/code&gt;这3个方法容易让人产生混淆，结合官网的API以及实际代码验证，先简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用126邮箱在阿里云中发送SSL/TSL加密邮件</title>
       <link>https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/</link>
       <pubDate>Mon, 03 Dec 2018 21:54:05 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/</guid>
       <description>&lt;p&gt;由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行&lt;a href=&#34;https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf&#34; title=&#34;25端口解封申请&#34;&gt;&lt;strong&gt;25端口解封申请&lt;/strong&gt;&lt;/a&gt;，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在模板类中利用抽象类或接口default方法实现默认方法以简化开发与维护</title>
       <link>https://lucumt.info/post/java-core/default-method-in-abstract-class-and-interface/</link>
       <pubDate>Sat, 02 Jun 2018 13:27:06 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/default-method-in-abstract-class-and-interface/</guid>
       <description>&lt;p&gt;在开发大规模的&lt;code&gt;Java&lt;/code&gt;项目时，通常会涉及到各种设计模式，本文简要说明当使用&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95&#34;&gt;&lt;strong&gt;模板方法&lt;/strong&gt;&lt;/a&gt;时，如何利用接口default方法或抽象类对具体的子类进行精简，便于开发与维护。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
       <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用dom4j修改含有回车换行符的XML文件</title>
       <link>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</link>
       <pubDate>Thu, 04 Jan 2018 11:21:42 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/update-xml-file-has-line-breaks-using-dom4j/</guid>
       <description>&lt;p&gt;这几天工作中遇到一个利用&lt;a href=&#34;https://dom4j.github.io/&#34;&gt;&lt;strong&gt;dom4j&lt;/strong&gt;&lt;/a&gt;更新XML文件的任务，由于XML文件中部分属性包含有换行符，利用&lt;code&gt;dom4j(1.6.1)&lt;/code&gt;默认的方法更新XML文件后换行符会丢失。 各种Google、StackOverflow折腾好久后终于解决该问题，简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在不同版本的MyBatis中通过Log4j打印实际执行的SQL</title>
       <link>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</link>
       <pubDate>Mon, 18 Dec 2017 18:33:14 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/mybatis/print-sql-in-different-mybatis-version/</guid>
       <description>&lt;p&gt;项目中ORM框架用的是 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;，最近由于业务上的需求将&lt;code&gt;MyBatis&lt;/code&gt;从&lt;strong&gt;3.1.1&lt;/strong&gt;升级到&lt;strong&gt;3.4.5&lt;/strong&gt;，发现升级后通过&lt;a href=&#34;https://logging.apache.org/log4j/1.2/download.html&#34;&gt;&lt;strong&gt;Log4j&lt;/strong&gt;&lt;/a&gt;显示SQL的配置方式发生了变化，由于变化较大，故先记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在不重新编译的情况下直接修改Java Class文件中的内容</title>
       <link>https://lucumt.info/post/java-core/modify-java-class-file-content-directly/</link>
       <pubDate>Sat, 12 Aug 2017 18:09:53 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/java-core/modify-java-class-file-content-directly/</guid>
-      <description>&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;程序实际上执行的是&lt;code&gt;Java&lt;/code&gt;文件编译后的&lt;code&gt;Class&lt;/code&gt;文件，这是任何一个&lt;code&gt;Java&lt;/code&gt;开发人员都了解的基本知识。&lt;/p&gt;
-&lt;p&gt;若&lt;code&gt;Java&lt;/code&gt;程序执行的结果不符合要求，通常的解决方法是先修改&lt;code&gt;Java&lt;/code&gt;文件，重新编译成&lt;code&gt;Class&lt;/code&gt;文件后再次执行。但有时候我们不能直接修改&lt;code&gt;Java&lt;/code&gt;文件（如只有包含&lt;code&gt;class&lt;/code&gt;文件的&lt;code&gt;jar&lt;/code&gt;包），此时我们就只能直接修改&lt;code&gt;Class&lt;/code&gt;文件，本文将展示在基于不同的需求通过可视化工具和&lt;code&gt;Javassist&lt;/code&gt;库来直接对&lt;code&gt;Class&lt;/code&gt;文件进行修改的方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;程序实际上执行的是&lt;code&gt;Java&lt;/code&gt;文件编译后的&lt;code&gt;Class&lt;/code&gt;文件，这是任何一个&lt;code&gt;Java&lt;/code&gt;开发人员都了解的基本知识。&lt;/p&gt;&#xA;&lt;p&gt;若&lt;code&gt;Java&lt;/code&gt;程序执行的结果不符合要求，通常的解决方法是先修改&lt;code&gt;Java&lt;/code&gt;文件，重新编译成&lt;code&gt;Class&lt;/code&gt;文件后再次执行。但有时候我们不能直接修改&lt;code&gt;Java&lt;/code&gt;文件（如只有包含&lt;code&gt;class&lt;/code&gt;文件的&lt;code&gt;jar&lt;/code&gt;包），此时我们就只能直接修改&lt;code&gt;Class&lt;/code&gt;文件，本文将展示在基于不同的需求通过可视化工具和&lt;code&gt;Javassist&lt;/code&gt;库来直接对&lt;code&gt;Class&lt;/code&gt;文件进行修改的方法。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>4. [译]并发的模型</title>
       <link>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;&lt;strong&gt;Java Concurrency / Concurrency Models&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;&lt;strong&gt;Java Concurrency / Concurrency Models&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>3. [译]多线程的成本</title>
       <link>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Costs&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Costs&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2. [译]多线程的优点</title>
       <link>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Benefits&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;更好的资源利用&lt;/li&gt;
-&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;
-&lt;li&gt;提高程序响应&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Benefits&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;更好的资源利用&lt;/li&gt;&#xA;&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;&#xA;&lt;li&gt;提高程序响应&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>1. [译]Java多线程与并发教程</title>
       <link>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Tutorial&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
-&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
-之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Tutorial&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;&#xA;&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。&#xA;之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>计算两个平行于坐标轴的矩形相交的面积</title>
       <link>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</link>
       <pubDate>Sun, 26 Feb 2017 19:26:33 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</guid>
-      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
+      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>不通过第三方变量来交换两个变量的值</title>
       <link>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</link>
       <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</guid>
       <description>&lt;p&gt;变量交换是编程中经常使用的功能，本文记录几种不通过不添加第三方变量来交换两个变量的实现方式。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>mybatis batch insert exception的解决方法</title>
       <link>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</link>
       <pubDate>Mon, 30 May 2016 18:20:37 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/</guid>
-      <description>&lt;p&gt;在利用 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;
-&lt;p&gt;SQL配置文件:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;insert&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;addAuthorityRoleBatch&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;parameterType=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;List&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    INSERT INTO system_authority_role(role_id,authority_id)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      VALUES
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;foreach&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;collection=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;item=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;authRole&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;separator=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        (#{authRole.roleId},#{authRole.authorityId})
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/foreach&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/insert&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
+      <description>&lt;p&gt;在利用 &lt;a href=&#34;http://www.mybatis.org/mybatis-3/&#34;&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;&lt;/a&gt;进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:&lt;/p&gt;&#xA;&lt;p&gt;SQL配置文件:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;insert&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;addAuthorityRoleBatch&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;parameterType=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;List&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    INSERT INTO system_authority_role(role_id,authority_id)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      VALUES&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;foreach&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;collection=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;list&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;item=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;authRole&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;separator=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        (#{authRole.roleId},#{authRole.authorityId})&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/foreach&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/insert&amp;gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>利用SpringMVC下载大文件时内存溢出的处理</title>
       <link>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;&lt;strong&gt;java.io&lt;/strong&gt;&lt;/a&gt;下面的各种IO类自己实现，或者利用 &lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;&lt;strong&gt;Commons IO&lt;/strong&gt;&lt;/a&gt;包中的&lt;code&gt;FileUtils&lt;/code&gt;、 &lt;code&gt;IOUtils&lt;/code&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;来作为项目的MVC实现，所以很自然的采用 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Spring和JUnit对数据库操作进行单元测试</title>
       <link>https://lucumt.info/post/spring/spring-core/using-junit-in-spring/</link>
       <pubDate>Sun, 20 Mar 2016 16:27:21 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-core/using-junit-in-spring/</guid>
       <description>&lt;p&gt;在进行Java程序开发时，我们偶尔会被要求使用&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 &lt;code&gt;覆盖度高&lt;/code&gt;，&lt;code&gt;可重复执行&lt;/code&gt;,&lt;code&gt;单一性&lt;/code&gt;等特点。本文主要关注&lt;code&gt;可重复执行&lt;/code&gt;，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1&#34;&gt;&lt;strong&gt;数据库事务&lt;/strong&gt;&lt;/a&gt;来进行&lt;code&gt;回滚&lt;/code&gt;从而达到重复执行的目的。最原始的方法是利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html&#34;&gt;&lt;strong&gt;java.sql.Connection&lt;/strong&gt;&lt;/a&gt;类的 &lt;code&gt;commit()&lt;/code&gt; 或 &lt;code&gt;rollback()&lt;/code&gt; 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Spring Security动态改变登录用户的权限</title>
       <link>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;来管理我们的web程序时，通常需要在&lt;code&gt;UserDetailsService&lt;/code&gt;接口中的&lt;code&gt;loadUserByUsername&lt;/code&gt;方法中来初始化权限信息,但&lt;code&gt;UserDetailsService&lt;/code&gt;一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;提供的API来实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
       <link>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
-      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
-&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;&#xA;&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译] Java Volatile 关键字详解</title>
       <link>https://lucumt.info/post/translate/java-concurrency/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/translate/java-concurrency/java-volatile-keyword/</guid>
-      <description>&lt;p&gt;本文翻译自 &lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;&lt;strong&gt;Java Volatile Keyword&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为&lt;strong&gt;在主内中存储&lt;/strong&gt;，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
-&lt;p&gt;事实上，从&lt;code&gt;Java5&lt;/code&gt;之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文翻译自 &lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;&lt;strong&gt;Java Volatile Keyword&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为&lt;strong&gt;在主内中存储&lt;/strong&gt;，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;&#xA;&lt;p&gt;事实上，从&lt;code&gt;Java5&lt;/code&gt;之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
       <link>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</guid>
-      <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;&lt;strong&gt;Runtime&lt;/strong&gt;&lt;/a&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runtime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getRuntime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mysqlCmd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;mysqldump&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; -u&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; -p&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;           &lt;span class=&#34;s&#34;&gt;&amp;#34;  -h &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;databaseAddress&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;databaseName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Process&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;process&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runtime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysqlCmd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;但是在客户那里实际使用时，有时候会出现在cmd中&lt;code&gt;MySQL&lt;/code&gt;命令可以正常识别但是程序不能正常执行的情况，报错信息如下:&lt;/p&gt;</description>
+      <description>&lt;p&gt;项目中用到了&lt;code&gt;MySQL&lt;/code&gt;数据库的备份功能，通过调用&lt;code&gt;Java&lt;/code&gt;程序中的&lt;a href=&#34;http://docs.oracle.com/javase/6/docs/api/&#34;&gt;&lt;strong&gt;Runtime&lt;/strong&gt;&lt;/a&gt;来执行&lt;code&gt;mysqldump&lt;/code&gt;命令自动的生成相关的&lt;code&gt;MySQL&lt;/code&gt;数据库文件以供恢复之用。相关的代码如下:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runtime&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getRuntime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysqlCmd&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;mysqldump&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34; -u&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34; -p&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;           &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;  -h &amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;databaseAddress&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;databaseName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runtime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysqlCmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;但是在客户那里实际使用时，有时候会出现在cmd中&lt;code&gt;MySQL&lt;/code&gt;命令可以正常识别但是程序不能正常执行的情况，报错信息如下:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

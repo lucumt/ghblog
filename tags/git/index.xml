@@ -1,41 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on 飞狐的部落格</title>
+    <title>Git on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/git/</link>
-    <description>Recent content in git on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Git on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[杂谈]记一次个人GitHub账号的找回过程</title>
       <link>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</link>
       <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</guid>
       <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
       <link>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</link>
       <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/devops/checkout-project-with-submodule-in-kubesphere/</guid>
       <description>&lt;p&gt;在使用&lt;a href=&#34;https://www.kubesphere.io/zh/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;对公司项目进行持续集成时，有一个项目在&lt;code&gt;Gitlab&lt;/code&gt;中采用了&lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;&lt;strong&gt;Submodules&lt;/strong&gt;&lt;/a&gt;结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Jenkins中根据配置从不同的仓库中Checkout代码</title>
       <link>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</link>
       <pubDate>Fri, 10 Mar 2023 22:48:50 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</guid>
-      <description>&lt;style&gt;
-div.mermaid &gt; svg { max-width: 60% !important; }
-&lt;/style&gt;
-&lt;p&gt;简要介绍如何在&lt;a href=&#34;https://kubesphere.io/zh/&#34;&gt;KubeSphere&lt;/a&gt;中使用&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;基于用户选择的不同&lt;a href=&#34;https://gitlab.com&#34;&gt;GitLab&lt;/a&gt;工程模块利用&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;进行动态的代码下载和编译构建，&lt;strong&gt;将多条流水线缩减为一条，减少&lt;code&gt;Jenkins&lt;/code&gt;流水线的开发与维护成本&lt;/strong&gt;。&lt;/p&gt;</description>
+      <description>&lt;style&gt;&#xA;div.mermaid &gt; svg { max-width: 60% !important; }&#xA;&lt;/style&gt;&#xA;&lt;p&gt;简要介绍如何在&lt;a href=&#34;https://kubesphere.io/zh/&#34;&gt;KubeSphere&lt;/a&gt;中使用&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;基于用户选择的不同&lt;a href=&#34;https://gitlab.com&#34;&gt;GitLab&lt;/a&gt;工程模块利用&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;进行动态的代码下载和编译构建，&lt;strong&gt;将多条流水线缩减为一条，减少&lt;code&gt;Jenkins&lt;/code&gt;流水线的开发与维护成本&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

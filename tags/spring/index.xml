@@ -4,64 +4,51 @@
     <title>Spring on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/spring/</link>
     <description>Recent content in Spring on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Jan 2022 11:00:01 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Jan 2022 11:00:01 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Spring中BeanFactory和FactoryBean的区别以及使用场景</title>
       <link>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</link>
       <pubDate>Sun, 16 Jan 2022 11:00:01 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译]Spring中@Configuration和@Component的对比</title>
-      <link>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</link>
+      <link>https://lucumt.info/post/translate/spring/@configuration-vs-@component-in-spring/</link>
       <pubDate>Wed, 08 Jan 2020 16:21:26 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/spring/configuration-vs-component-in-spring/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://lucumt.info/post/translate/spring/@configuration-vs-@component-in-spring/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
       <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用SpringMVC下载大文件时内存溢出的处理</title>
       <link>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;&lt;strong&gt;java.io&lt;/strong&gt;&lt;/a&gt;下面的各种IO类自己实现，或者利用 &lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;&lt;strong&gt;Commons IO&lt;/strong&gt;&lt;/a&gt;包中的&lt;code&gt;FileUtils&lt;/code&gt;、 &lt;code&gt;IOUtils&lt;/code&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;来作为项目的MVC实现，所以很自然的采用 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Spring Security动态改变登录用户的权限</title>
       <link>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;来管理我们的web程序时，通常需要在&lt;code&gt;UserDetailsService&lt;/code&gt;接口中的&lt;code&gt;loadUserByUsername&lt;/code&gt;方法中来初始化权限信息,但&lt;code&gt;UserDetailsService&lt;/code&gt;一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;提供的API来实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
       <link>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
-      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
-&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;&#xA;&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

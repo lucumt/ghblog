@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/translate/java-concurrency/java-volatile-keyword/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="[译] Java Volatile 关键字详解" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/java-volatile-keyword/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-03-07T18:03:18+08:00" />
-<meta property="article:modified_time" content="2016-03-07T18:03:18+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/java-volatile-keyword/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="[译] Java Volatile 关键字详解">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-03-07T18:03:18+08:00">
+    <meta property="article:modified_time" content="2016-03-07T18:03:18+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Java Concurrency">
 
-<meta itemprop="name" content="[译] Java Volatile 关键字详解">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-03-07T18:03:18+08:00" />
-<meta itemprop="dateModified" content="2016-03-07T18:03:18+08:00" />
-<meta itemprop="wordCount" content="4195">
-<meta itemprop="keywords" content="Java,Java Concurrency," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[译] Java Volatile 关键字详解"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="[译] Java Volatile 关键字详解">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2016-03-07T18:03:18+08:00">
+  <meta itemprop="dateModified" content="2016-03-07T18:03:18+08:00">
+  <meta itemprop="wordCount" content="4195">
+  <meta itemprop="keywords" content="Java">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[译] Java Volatile 关键字详解">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -200,10 +207,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SharedObject</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SharedObject</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>再次假设，只有Thread1会增加counter变量的值，但是Thread1和Thread2都能在任意时刻读取counter变量的值。</p>
 <p>如果couner变量没有声明为<code>volatile</code>将无法保证在何时把CPU缓存中的值写入主内存中。这意味着counter变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：<br>
@@ -217,10 +224,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SharedObject</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SharedObject</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>因此定义一个<code>volatile</code>变量可以保证写变量的操作对于其它线程可见。</p>
 <h2 id="volatile先行发生原则">Volatile先行发生原则</h2>
@@ -243,14 +250,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Thread</span> <span class="n">A</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile</span> <span class="o">=</span> <span class="n">123</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sharedObject</span><span class="o">.</span><span class="na">counter</span>     <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">counter</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Thread</span> <span class="n">B</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">counter</span>     <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">counter</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nonVolatile</span> <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile</span><span class="o">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Thread</span><span class="w"> </span><span class="n">A</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">counter</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Thread</span><span class="w"> </span><span class="n">B</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">counter</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">counter</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nonVolatile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于线程A在写操作<code>volatile</code>变量sharedObject.counter之前写操作非<code>volatile</code>变量sharedObject.nonVolatile，因而当线程A写操作变量sharedObject.counter后,变量sharedObject.nonVolatile和sharedObject.counter都被写入主内存。</p>
 <p>由于线程B以读取<code>volatile</code>变量sharedObject.counter开始，因而变量sharedObject.counter和变量sharedObject.nonVolatile都会被写入线程B所使用的CPU缓存中。当线程B读取sharedObject.nonVolatile变量时，它将能看见被线程A写入的变量。</p>
@@ -281,29 +288,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Exchanger</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Object</span>   <span class="n">object</span>       <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">volatile</span> <span class="n">hasNewObject</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="n">Object</span> <span class="n">newObject</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="o">(</span><span class="n">hasNewObject</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">//等待，不覆盖已经存在的新对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">object</span> <span class="o">=</span> <span class="n">newObject</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hasNewObject</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//volatile写入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">take</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="o">(!</span><span class="n">hasNewObject</span><span class="o">){</span> <span class="c1">//volatile读取
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//等待，不获取旧的对象（或null对象）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">object</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hasNewObject</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">//volatile写入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">obj</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Exchanger</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Object</span><span class="w">   </span><span class="n">object</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">hasNewObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">newObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">hasNewObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//等待，不覆盖已经存在的新对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newObject</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">hasNewObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//volatile写入</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">take</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">hasNewObject</span><span class="p">){</span><span class="w"> </span><span class="c1">//volatile读取</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//等待，不获取旧的对象（或null对象）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">hasNewObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="c1">//volatile写入</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>线程A随时可能会通过调用put()方法增加对象，线程B随时可能会通过调用 take()方法获取对象。只要线程A只调用 put() ，线程B只调用take() ,这个Exchanger就可以通过一个<code>volatile</code>变量正常工作（排除 <code>synchronized</code>代码块的使用）。</p>
 <p>然而，JVM可能会重排序Java指令来优化性能，如果JVM可以通过不改变这些重排序指令的语义来实现此功能。如果JVM调换了put()和 take()中的读和写的指令，会发生什么呢？如果put()真的像下面这样执行会出现什么情况呢？</p>
@@ -316,12 +323,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="o">(</span><span class="n">hasNewObject</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//等待，不覆盖已经存在的新对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">hasNewObject</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//volatile写入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">object</span> <span class="o">=</span> <span class="n">newObject</span><span class="o">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">hasNewObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//等待，不覆盖已经存在的新对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">hasNewObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//volatile写入</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newObject</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>请注意此时对于<code>volatile</code>变量hasNewObject的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。</p>
 <p>但是，对于执行指令重排序可能会损害object变量的可见性。首先，线程B可能会在线程A对object真实的写入一个值到object之前读取到hasNewObject的值为true。其次,现在甚至不能保证什么时候写入object的新值会刷写入主内存（好吧，下次线程A在其它地方写入  <code>volatile</code>变量。。。）</p>
@@ -340,16 +347,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile1</span> <span class="o">=</span> <span class="n">123</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile2</span> <span class="o">=</span> <span class="n">456</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile3</span> <span class="o">=</span> <span class="n">789</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">sharedObject</span><span class="o">.</span><span class="na">volatile</span>     <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//a volatile variable
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">someValue1</span> <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile4</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">someValue2</span> <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile5</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">someValue3</span> <span class="o">=</span> <span class="n">sharedObject</span><span class="o">.</span><span class="na">nonVolatile6</span><span class="o">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">456</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">789</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sharedObject</span><span class="p">.</span><span class="na">volatile</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//a volatile variable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">someValue1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile4</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">someValue2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile5</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">someValue3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sharedObject</span><span class="p">.</span><span class="na">nonVolatile6</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatile</code>写指令（它们都必须在<code>volatile</code>写指令之前执行）。</p>
 <p>同样的，JVM可能会重新排序最后3条指令，只要<code>volatile</code>写指令先行发生于它们，这3条指令都不能被重新排序到<code>volatile</code>指令的前面。</p>
@@ -489,7 +496,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>bit on 飞狐的部落格</title>
+    <title>Bit on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/bit/</link>
-    <description>Recent content in bit on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Bit on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 08 Sep 2022 10:04:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/bit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Sep 2022 10:04:59 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/bit/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>将3个小int整数合并到1个long中从而缩小数据量</title>
       <link>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</link>
       <pubDate>Thu, 08 Sep 2022 10:04:59 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/</guid>
       <description>&lt;p&gt;近期在工作中遇到由于&lt;code&gt;HTTP&lt;/code&gt;返回的内容较多导致系统响应延迟的问题，最终自己结合&lt;a href=&#34;https://en.wikipedia.org/wiki/Gzip&#34;&gt;gzip&lt;/a&gt;、&lt;a href=&#34;https://developers.google.com/protocol-buffers&#34;&gt;Protocol Buffers&lt;/a&gt;、&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C&#34;&gt;位运算&lt;/a&gt;等将&lt;code&gt;HTTP&lt;/code&gt;响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于&lt;code&gt;位运算&lt;/code&gt;部分自己是结合业务实际，将3个小型&lt;code&gt;int&lt;/code&gt;转化为1个&lt;code&gt;long&lt;/code&gt;，将数据量减少三分之一，简单记录下其实现(以&lt;code&gt;Java&lt;/code&gt;实现为例)。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>不通过第三方变量来交换两个变量的值</title>
       <link>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</link>
       <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</guid>
       <description>&lt;p&gt;变量交换是编程中经常使用的功能，本文记录几种不通过不添加第三方变量来交换两个变量的实现方式。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

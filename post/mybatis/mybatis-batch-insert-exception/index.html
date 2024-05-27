@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="mybatis batch insert exception的解决方法" />
-<meta property="og:description" content="Blog of Rosen Lu" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-05-30T18:20:37+08:00" />
-<meta property="article:modified_time" content="2016-05-30T18:20:37+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/mybatis/mybatis-batch-insert-exception/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="mybatis batch insert exception的解决方法">
+  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-05-30T18:20:37+08:00">
+    <meta property="article:modified_time" content="2016-05-30T18:20:37+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Mybatis">
 
-<meta itemprop="name" content="mybatis batch insert exception的解决方法">
-<meta itemprop="description" content="Blog of Rosen Lu"><meta itemprop="datePublished" content="2016-05-30T18:20:37+08:00" />
-<meta itemprop="dateModified" content="2016-05-30T18:20:37+08:00" />
-<meta itemprop="wordCount" content="512">
-<meta itemprop="keywords" content="Java,MyBatis," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="mybatis batch insert exception的解决方法"/>
-<meta name="twitter:description" content="Blog of Rosen Lu"/>
+  <meta itemprop="name" content="mybatis batch insert exception的解决方法">
+  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="datePublished" content="2016-05-30T18:20:37+08:00">
+  <meta itemprop="dateModified" content="2016-05-30T18:20:37+08:00">
+  <meta itemprop="wordCount" content="512">
+  <meta itemprop="keywords" content="Java,MyBatis">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="mybatis batch insert exception的解决方法">
+  <meta name="twitter:description" content="Blog of Rosen Lu">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -208,16 +215,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">adjustRoleAuth</span><span class="o">(</span><span class="n">String</span> <span class="n">roleId</span><span class="o">,</span> <span class="n">String</span> <span class="n">authIdsStr</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">authRoleDao</span><span class="o">.</span><span class="na">deleteAuthorityRoleByRole</span><span class="o">(</span><span class="n">roleId</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">String</span><span class="o">[]</span> <span class="n">authIds</span><span class="o">=</span><span class="n">authIdsStr</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;;&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">List</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span> <span class="n">authRoleList</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;();</span>
-</span></span><span class="line"><span class="cl">		<span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">authId</span><span class="o">:</span><span class="n">authIds</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">			<span class="n">authRoleList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">AuthorityRoleModel</span><span class="o">(</span><span class="n">roleId</span><span class="o">,</span><span class="n">authId</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">		<span class="n">authRoleDao</span><span class="o">.</span><span class="na">addAuthorityRoleBatch</span><span class="o">(</span><span class="n">authRoleList</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">adjustRoleAuth</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">roleId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">authIdsStr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">authRoleDao</span><span class="p">.</span><span class="na">deleteAuthorityRoleByRole</span><span class="p">(</span><span class="n">roleId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">authIds</span><span class="o">=</span><span class="n">authIdsStr</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">authRoleList</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">for</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">authId</span><span class="p">:</span><span class="n">authIds</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">authRoleList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AuthorityRoleModel</span><span class="p">(</span><span class="n">roleId</span><span class="p">,</span><span class="n">authId</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">authRoleDao</span><span class="p">.</span><span class="na">addAuthorityRoleBatch</span><span class="p">(</span><span class="n">authRoleList</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
 <div class="highlight"><div class="chroma">
@@ -228,11 +235,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">###</span> <span class="n">SQL</span><span class="o">:</span> <span class="n">INSERT</span> <span class="n">INTO</span> <span class="nf">system_authority_role</span><span class="o">(</span><span class="n">role_id</span><span class="o">,</span><span class="n">authority_id</span><span class="o">)</span>       <span class="n">VALUES</span>
-</span></span><span class="line"><span class="cl"><span class="err">###</span> <span class="n">Cause</span><span class="o">:</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">jdbc4</span><span class="o">.</span><span class="na">MySQLSyntaxErrorException</span><span class="o">:</span> <span class="n">You</span> <span class="n">have</span> <span class="n">an</span> <span class="n">error</span> <span class="n">in</span> <span class="n">your</span> <span class="n">SQL</span> <span class="n">syntax</span><span class="o">;</span> <span class="n">check</span> <span class="n">the</span> <span class="n">manual</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">your</span> <span class="n">MySQL</span> <span class="n">server</span> <span class="n">version</span> <span class="k">for</span> <span class="n">the</span> <span class="n">right</span> <span class="n">syntax</span> <span class="n">to</span> <span class="n">use</span> <span class="n">near</span> <span class="err">&#39;&#39;</span> <span class="n">at</span> <span class="n">line</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">;</span> <span class="n">bad</span> <span class="n">SQL</span> <span class="n">grammar</span> <span class="o">[];</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">exceptions</span><span class="o">.</span><span class="na">jdbc4</span><span class="o">.</span><span class="na">MySQLSyntaxErrorException</span><span class="o">:</span> <span class="n">You</span> <span class="n">have</span> <span class="n">an</span> <span class="n">error</span> <span class="n">in</span> <span class="n">your</span> <span class="n">SQL</span> <span class="n">syntax</span><span class="o">;</span> <span class="n">check</span> <span class="n">the</span> <span class="n">manual</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">your</span> <span class="n">MySQL</span> <span class="n">server</span> <span class="n">version</span> <span class="k">for</span> <span class="n">the</span> <span class="n">right</span> <span class="n">syntax</span> <span class="n">to</span> <span class="n">use</span> <span class="n">near</span> <span class="err">&#39;&#39;</span> <span class="n">at</span> <span class="n">line</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="n">at</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">SQLErrorCodeSQLExceptionTranslator</span><span class="o">.</span><span class="na">doTranslate</span><span class="o">(</span><span class="n">SQLErrorCodeSQLExceptionTranslator</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">233</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">###</span><span class="w"> </span><span class="n">SQL</span><span class="p">:</span><span class="w"> </span><span class="n">INSERT</span><span class="w"> </span><span class="n">INTO</span><span class="w"> </span><span class="nf">system_authority_role</span><span class="p">(</span><span class="n">role_id</span><span class="p">,</span><span class="n">authority_id</span><span class="p">)</span><span class="w">       </span><span class="n">VALUES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">###</span><span class="w"> </span><span class="n">Cause</span><span class="p">:</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">mysql</span><span class="p">.</span><span class="na">jdbc</span><span class="p">.</span><span class="na">exceptions</span><span class="p">.</span><span class="na">jdbc4</span><span class="p">.</span><span class="na">MySQLSyntaxErrorException</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">SQL</span><span class="w"> </span><span class="n">syntax</span><span class="p">;</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">corresponds</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">;</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="n">SQL</span><span class="w"> </span><span class="n">grammar</span><span class="w"> </span><span class="o">[]</span><span class="p">;</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">mysql</span><span class="p">.</span><span class="na">jdbc</span><span class="p">.</span><span class="na">exceptions</span><span class="p">.</span><span class="na">jdbc4</span><span class="p">.</span><span class="na">MySQLSyntaxErrorException</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">SQL</span><span class="w"> </span><span class="n">syntax</span><span class="p">;</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">corresponds</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">at</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">jdbc</span><span class="p">.</span><span class="na">support</span><span class="p">.</span><span class="na">SQLErrorCodeSQLExceptionTranslator</span><span class="p">.</span><span class="na">doTranslate</span><span class="p">(</span><span class="n">SQLErrorCodeSQLExceptionTranslator</span><span class="p">.</span><span class="na">java</span><span class="p">:</span><span class="n">233</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<strong>该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</strong> 为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：</p>
 <div class="highlight"><div class="chroma">
@@ -250,18 +257,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">adjustRoleAuth</span><span class="o">(</span><span class="n">String</span> <span class="n">roleId</span><span class="o">,</span> <span class="n">String</span> <span class="n">authIdsStr</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">authRoleDao</span><span class="o">.</span><span class="na">deleteAuthorityRoleByRole</span><span class="o">(</span><span class="n">roleId</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">String</span><span class="o">[]</span> <span class="n">authIds</span><span class="o">=</span><span class="n">authIdsStr</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;;&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">List</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span> <span class="n">authRoleList</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;();</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">authId</span><span class="o">:</span><span class="n">authIds</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">		<span class="n">authRoleList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">AuthorityRoleModel</span><span class="o">(</span><span class="n">roleId</span><span class="o">,</span><span class="n">authId</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="o">(</span><span class="n">authRoleList</span><span class="o">.</span><span class="na">size</span><span class="o">()&gt;</span><span class="n">0</span><span class="o">){</span><span class="c1">//只有在List不为空时才进行插入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">authRoleDao</span><span class="o">.</span><span class="na">addAuthorityRoleBatch</span><span class="o">(</span><span class="n">authRoleList</span><span class="o">);</span>		
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">adjustRoleAuth</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">roleId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">authIdsStr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">authRoleDao</span><span class="p">.</span><span class="na">deleteAuthorityRoleByRole</span><span class="p">(</span><span class="n">roleId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">authIds</span><span class="o">=</span><span class="n">authIdsStr</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&#34;;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">authRoleList</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">AuthorityRoleModel</span><span class="o">&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">for</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">authId</span><span class="p">:</span><span class="n">authIds</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">authRoleList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AuthorityRoleModel</span><span class="p">(</span><span class="n">roleId</span><span class="p">,</span><span class="n">authId</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="n">authRoleList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">&gt;</span><span class="n">0</span><span class="p">){</span><span class="c1">//只有在List不为空时才进行插入</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">authRoleDao</span><span class="p">.</span><span class="na">addAuthorityRoleBatch</span><span class="p">(</span><span class="n">authRoleList</span><span class="p">);</span><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -381,7 +388,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

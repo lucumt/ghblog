@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/" />
@@ -39,20 +39,29 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
-<meta property="og:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-03-19T22:43:47+08:00" />
-<meta property="article:modified_time" content="2016-03-19T22:43:47+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+  <meta property="og:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-03-19T22:43:47+08:00">
+    <meta property="article:modified_time" content="2016-03-19T22:43:47+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring">
+    <meta property="article:tag" content="SpringMVC">
+    <meta property="article:tag" content="Junit">
 
-<meta itemprop="name" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
-<meta itemprop="description" content="在Spring中利用Mock对HttpServletRequest进行单元测试"><meta itemprop="datePublished" content="2016-03-19T22:43:47+08:00" />
-<meta itemprop="dateModified" content="2016-03-19T22:43:47+08:00" />
-<meta itemprop="wordCount" content="1187">
-<meta itemprop="keywords" content="Java,Spring,SpringMVC,JUnit," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试"/>
-<meta name="twitter:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试"/>
+  <meta itemprop="name" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+  <meta itemprop="description" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+  <meta itemprop="datePublished" content="2016-03-19T22:43:47+08:00">
+  <meta itemprop="dateModified" content="2016-03-19T22:43:47+08:00">
+  <meta itemprop="wordCount" content="1187">
+  <meta itemprop="keywords" content="Java,Spring,SpringMVC,JUnit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
+  <meta name="twitter:description" content="在Spring中利用Mock对HttpServletRequest进行单元测试">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -196,14 +205,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">userId</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;userId&#34;</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span><span class="c1">//先获取userId对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">queryUserById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span><span class="c1">//然后将获取的userId传入对应方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">User</span> <span class="nf">queryUserById</span><span class="o">(</span><span class="n">String</span> <span class="n">userId</span><span class="o">){</span><span class="c1">//相关该方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">User</span> <span class="n">userModel</span> <span class="o">=</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">userModel</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>  
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span><span class="c1">//先获取userId对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">queryUserById</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="c1">//然后将获取的userId传入对应方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">queryUserById</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">){</span><span class="c1">//相关该方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">User</span><span class="w"> </span><span class="n">userModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userDao</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">userModel</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">  
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>请尽量避免使用第二种方式</p>
 <div class="highlight"><div class="chroma">
@@ -218,15 +227,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">queryUserById</span><span class="o">(</span><span class="n">request</span><span class="o">);</span><span class="c1">//直接传入request对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">User</span> <span class="nf">queryUserById</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">){</span><span class="c1">//相关方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">String</span> <span class="n">userId</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;userId&#34;</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span><span class="c1">//在该方法内部获取userId
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">   <span class="n">User</span> <span class="n">userModel</span> <span class="o">=</span> <span class="n">userDao</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">userModel</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>  
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">queryUserById</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="c1">//直接传入request对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">queryUserById</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">){</span><span class="c1">//相关方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span><span class="c1">//在该方法内部获取userId</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">User</span><span class="w"> </span><span class="n">userModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userDao</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">userModel</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">  
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>若采用第一种方法，我们在进行单元测试时，可以很容易的自己制造一个String字符串来代表userId进行测试，但当采用第二种方法后，在进行单元测试时我们是比较难以模拟一个<code>HttpServletRequest</code>对象，从而影响我们的测试。</p>
 <h2 id="spring和mock在单元测试中的使用">Spring和Mock在单元测试中的使用</h2>
@@ -257,28 +266,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.mock.web.MockHttpServletRequest</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.mock.web.MockServletContext</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringMockTest</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="nd">@Test</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testHttpServletRequest</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">realPath</span> <span class="o">=</span><span class="s">&#34;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MockServletContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MockServletContext</span><span class="o">(</span><span class="n">realPath</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">//获取realPath
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">context</span><span class="o">.</span><span class="na">getRealPath</span><span class="o">(</span><span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">//模拟HttpServletRequest
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MockHttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MockHttpServletRequest</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">//通过HttpServletRequest来获取realPath
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getServletContext</span><span class="o">().</span><span class="na">getRealPath</span><span class="o">(</span><span class="n">File</span><span class="o">.</span><span class="na">separator</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.Test</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.mock.web.MockHttpServletRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.mock.web.MockServletContext</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpringMockTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testHttpServletRequest</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">realPath</span><span class="w"> </span><span class="o">=</span><span class="s">&#34;file:D:\\Java\\apache-tomcat-7.0.23\\webapps\\tmn&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//模拟ServletContext,同时初始化realPath，注意要有file:前缀否则会报错</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">MockServletContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MockServletContext</span><span class="p">(</span><span class="n">realPath</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//获取realPath</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="na">getRealPath</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//模拟HttpServletRequest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">MockHttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MockHttpServletRequest</span><span class="p">(</span><span class="n">context</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//通过HttpServletRequest来获取realPath</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">().</span><span class="na">getServletContext</span><span class="p">().</span><span class="na">getRealPath</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="na">separator</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意:请在上下文路径的字符串前面加上<code>file:</code>前缀，否则程序会报错。如上面的程序，realPath的值应为 <em>file:D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，若去掉<code>file:</code>前缀，改为 <em>D:\Java\apache-tomcat-7.0.23\webapps\tmn</em> ，则程序会报错。</p>
     </div>
@@ -400,7 +409,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

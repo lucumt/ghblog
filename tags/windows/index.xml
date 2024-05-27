@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>windows on 飞狐的部落格</title>
+    <title>Windows on 飞狐的部落格</title>
     <link>https://lucumt.info/tags/windows/</link>
-    <description>Recent content in windows on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Windows on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 07 Apr 2020 15:21:27 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Apr 2020 15:21:27 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>将Windows中的画图工具默认菜单从“文件”切换到“菜单”</title>
       <link>https://lucumt.info/post/other/switch-windows-paint-default-tab-to-home/</link>
       <pubDate>Tue, 07 Apr 2020 15:21:27 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/other/switch-windows-paint-default-tab-to-home/</guid>
       <description>&lt;p&gt;简要介绍如何在&lt;code&gt;Windows&lt;/code&gt;中的画图工具新打开一个画图时将其默认菜单从&lt;code&gt;文件&lt;/code&gt;切换到&lt;code&gt;菜单&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

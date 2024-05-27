@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/translate/java-concurrency/same-threading/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="5.[译]同线程系统" />
-<meta property="og:description" content="本文介绍了将单个线程扩展的方式来实现并发执行" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/same-threading/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-06-16T12:16:44+08:00" />
-<meta property="article:modified_time" content="2022-06-16T12:16:44+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/same-threading/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="5.[译]同线程系统">
+  <meta property="og:description" content="本文介绍了将单个线程扩展的方式来实现并发执行">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-06-16T12:16:44+08:00">
+    <meta property="article:modified_time" content="2022-06-16T12:16:44+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Java Concurrency">
 
-<meta itemprop="name" content="5.[译]同线程系统">
-<meta itemprop="description" content="本文介绍了将单个线程扩展的方式来实现并发执行"><meta itemprop="datePublished" content="2022-06-16T12:16:44+08:00" />
-<meta itemprop="dateModified" content="2022-06-16T12:16:44+08:00" />
-<meta itemprop="wordCount" content="1884">
-<meta itemprop="keywords" content="Java,Java Concurrency," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="5.[译]同线程系统"/>
-<meta name="twitter:description" content="本文介绍了将单个线程扩展的方式来实现并发执行"/>
+  <meta itemprop="name" content="5.[译]同线程系统">
+  <meta itemprop="description" content="本文介绍了将单个线程扩展的方式来实现并发执行">
+  <meta itemprop="datePublished" content="2022-06-16T12:16:44+08:00">
+  <meta itemprop="dateModified" content="2022-06-16T12:16:44+08:00">
+  <meta itemprop="wordCount" content="1920">
+  <meta itemprop="keywords" content="java concurrency">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="5.[译]同线程系统">
+  <meta name="twitter:description" content="本文介绍了将单个线程扩展的方式来实现并发执行">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -198,9 +205,11 @@
 <p>同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。</p>
 <h1 id="单线程和同线程设计视频教程">单线程和同线程设计视频教程</h1>
 <p>如果你更喜欢看视频，我也准备了一个相应的视频<a href="https://www.youtube.com/watch?v=QrYIOs1dA3M&amp;list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4&amp;index=22"><strong>单线程和同线程设计</strong></a>。</p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube-nocookie.com/embed/QrYIOs1dA3M" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
+<pre><code>&lt;div style=&quot;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&quot;&gt;
+  &lt;iframe allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;allowfullscreen&quot; loading=&quot;eager&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; src=&quot;https://www.youtube-nocookie.com/embed/QrYIOs1dA3M?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&quot; style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&quot; title=&quot;YouTube video&quot;
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</code></pre>
 <h1 id="为什么选择单线程系统">为什么选择单线程系统</h1>
 <p>你可能会很好奇为什么今天还有人设计并使用单线程系统，单线程系统之所以受欢迎，是因为它的并发模型比多线程系统简单的多，单线程系统并不同其它线程共享状态(数据/对象)，这使得单线程系统可以更好的利用非并发数据结构、CPU以及CPU缓存。</p>
 <p>不幸的是单线程系统没有重复利用现代CPU的特性，一颗现代CPU通常带有 2, 4, 6, 8或更多的内核，每个内核在功能上都可以当做一个单独的CPU，如下图所示，单线程系统只能利用这些内核中的一个。</p>
@@ -366,7 +375,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

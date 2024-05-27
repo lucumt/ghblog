@@ -4,26 +4,23 @@
     <title>编程杂想 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</link>
     <description>Recent content in 编程杂想 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Apr 2024 10:12:47 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[杂谈]记一次个人GitHub账号的找回过程</title>
       <link>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</link>
       <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</guid>
       <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>从复杂代码中找出Bug的几种方法</title>
       <link>https://lucumt.info/post/other/different-ways-find-bug-in-complex-code/</link>
       <pubDate>Sat, 23 Dec 2017 12:07:40 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/other/different-ways-find-bug-in-complex-code/</guid>
       <description>&lt;p&gt;工作中有时候会遇到某些大段复杂代码出现Bug的情况，不同于一般行数较小或逻辑较简单的代码，对于大段复杂的代码进行分析可能会很耗时，本文介绍几种个人在工作中用到的方法，供大家参考。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

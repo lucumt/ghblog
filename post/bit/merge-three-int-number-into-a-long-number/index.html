@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/" />
@@ -39,20 +39,26 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="将3个小int整数合并到1个long中从而缩小数据量" />
-<meta property="og:description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-09-08T10:04:59+08:00" />
-<meta property="article:modified_time" content="2022-09-08T10:04:59+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/bit/merge-three-int-number-into-a-long-number/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="将3个小int整数合并到1个long中从而缩小数据量">
+  <meta property="og:description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-09-08T10:04:59+08:00">
+    <meta property="article:modified_time" content="2022-09-08T10:04:59+08:00">
+    <meta property="article:tag" content="Bit">
 
-<meta itemprop="name" content="将3个小int整数合并到1个long中从而缩小数据量">
-<meta itemprop="description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量"><meta itemprop="datePublished" content="2022-09-08T10:04:59+08:00" />
-<meta itemprop="dateModified" content="2022-09-08T10:04:59+08:00" />
-<meta itemprop="wordCount" content="2536">
-<meta itemprop="keywords" content="bit," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="将3个小int整数合并到1个long中从而缩小数据量"/>
-<meta name="twitter:description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量"/>
+  <meta itemprop="name" content="将3个小int整数合并到1个long中从而缩小数据量">
+  <meta itemprop="description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量">
+  <meta itemprop="datePublished" content="2022-09-08T10:04:59+08:00">
+  <meta itemprop="dateModified" content="2022-09-08T10:04:59+08:00">
+  <meta itemprop="wordCount" content="2536">
+  <meta itemprop="keywords" content="bit,int,long">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="将3个小int整数合并到1个long中从而缩小数据量">
+  <meta name="twitter:description" content="简要介绍如何将3个小int整数合并到1个long中从而缩小数据量">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -223,9 +229,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">14999</span> <span class="o">=</span> <span class="n">0b100100100111101111</span> <span class="c1">// 占用18bit位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">y</span> <span class="o">=</span> <span class="n">4999</span> <span class="o">=</span> <span class="n">0b1100001101001111</span> <span class="c1">// 占用16bit位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">z</span> <span class="o">=</span> <span class="n">4999</span> <span class="o">=</span> <span class="n">0b1100001101001111</span> <span class="c1">// 占用16bit位   
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">14999</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0b100100100111101111</span><span class="w"> </span><span class="c1">// 占用18bit位</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">4999</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0b1100001101001111</span><span class="w"> </span><span class="c1">// 占用16bit位</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">4999</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0b1100001101001111</span><span class="w"> </span><span class="c1">// 占用16bit位   </span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在不考虑负数的情况下，x、y、z累计占用的bit位数为50，而一个<code>long</code>类型占用8个字节共64bit位，理论分析是可以将3个<code>int</code>合并为1个<code>long</code>型数据。</p>
@@ -299,27 +305,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">bitWrite</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">,</span> <span class="kt">long</span> <span class="n">original</span><span class="o">,</span> <span class="kt">long</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 记录是否为正负数的标识位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">long</span> <span class="n">typeBase</span> <span class="o">=</span> <span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">position</span> <span class="o">*</span> <span class="n">20</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 记录具体的坐标数值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">long</span> <span class="n">valueBase</span> <span class="o">=</span> <span class="n">0x7ffffL</span> <span class="o">&lt;&lt;</span> <span class="o">((</span><span class="n">position</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">20</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 若为负数，则需要将对应标识位记为1，同时将其变为正数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">original</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">target</span> <span class="o">=</span> <span class="n">target</span> <span class="o">|</span> <span class="n">typeBase</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">original</span> <span class="o">=</span> <span class="o">-</span><span class="n">original</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 坐标数与数据值bit位做或操作记录下其值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">original</span> <span class="o">=</span> <span class="n">original</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">position</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">20</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">original</span> <span class="o">=</span> <span class="n">original</span> <span class="o">&amp;</span> <span class="n">valueBase</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 将坐标数写入long型结果中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span> <span class="o">|</span> <span class="n">original</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">target</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">bitWrite</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 记录是否为正负数的标识位</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">typeBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1L</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 记录具体的坐标数值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">valueBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0x7ffffL</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">((</span><span class="n">position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 若为负数，则需要将对应标识位记为1，同时将其变为正数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">original</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">typeBase</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">original</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 坐标数与数据值bit位做或操作记录下其值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">valueBase</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 将坐标数写入long型结果中</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">original</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>坐标数据的读取过程则是写入操作的反向操作，需要将<code>&amp;</code>变为<code>|</code>，将<code>|</code>变为<code>&amp;</code>，同写入操作类似，需要传入之前写入的<code>target</code>变量，以便程序反向识别出相关数据</p>
 <div class="highlight"><div class="chroma">
@@ -344,25 +350,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">bitRead</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">,</span> <span class="kt">long</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">value</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">typeBase</span> <span class="o">=</span> <span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">position</span> <span class="o">*</span> <span class="n">20</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">//识别是否为负数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">boolean</span> <span class="n">isNegative</span> <span class="o">=</span> <span class="o">(</span><span class="n">target</span> <span class="o">&amp;</span> <span class="n">typeBase</span><span class="o">)</span> <span class="o">==</span> <span class="n">typeBase</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 读取具体的数值，此时读取的均为正数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">long</span> <span class="n">valueBase</span> <span class="o">=</span> <span class="n">0x7ffffL</span> <span class="o">&lt;&lt;</span> <span class="o">((</span><span class="n">position</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">20</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="n">target</span> <span class="o">&amp;</span> <span class="n">valueBase</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="o">(</span><span class="n">position</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">20</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 若为负数，则要进行恢复操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">isNegative</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">value</span> <span class="o">=</span> <span class="o">-</span><span class="n">value</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">bitRead</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">typeBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1L</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//识别是否为负数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNegative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">typeBase</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">typeBase</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 读取具体的数值，此时读取的均为正数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">valueBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0x7ffffL</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">((</span><span class="n">position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">valueBase</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">20</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 若为负数，则要进行恢复操作</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isNegative</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">value</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>基于上述方法利用如下代码进行测试</p>
 <div class="highlight"><div class="chroma">
@@ -382,20 +388,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testData</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">14997</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">3349</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="n">2377</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">target</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">target</span> <span class="o">=</span> <span class="n">bitWrite</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">target</span> <span class="o">=</span> <span class="n">bitWrite</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">target</span> <span class="o">=</span> <span class="n">bitWrite</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Long</span><span class="o">.</span><span class="na">toBinaryString</span><span class="o">(</span><span class="n">target</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bitRead</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">target</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bitRead</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">target</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bitRead</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">target</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">14997</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">3349</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">2377</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitWrite</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitWrite</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitWrite</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">toBinaryString</span><span class="p">(</span><span class="n">target</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">bitRead</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">bitRead</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">bitRead</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>测试结果如下，程序输出结果符合预期</p>
 <p><img src="/blog_img/bit/merge-three-int-number-into-a-long-number/bits-merge-test-result.png" alt="测试结果" title="测试结果"></p>
@@ -516,7 +522,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {

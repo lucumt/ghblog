@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/" />
@@ -39,20 +39,26 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件" />
-<meta property="og:description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-12-03T21:54:05+08:00" />
-<meta property="article:modified_time" content="2018-12-03T21:54:05+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/java-core/send-ssl-mail-with-126-in-aliyun/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件">
+  <meta property="og:description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2018-12-03T21:54:05+08:00">
+    <meta property="article:modified_time" content="2018-12-03T21:54:05+08:00">
+    <meta property="article:tag" content="Java">
 
-<meta itemprop="name" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件">
-<meta itemprop="description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁"><meta itemprop="datePublished" content="2018-12-03T21:54:05+08:00" />
-<meta itemprop="dateModified" content="2018-12-03T21:54:05+08:00" />
-<meta itemprop="wordCount" content="1201">
-<meta itemprop="keywords" content="Java," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件"/>
-<meta name="twitter:description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁"/>
+  <meta itemprop="name" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件">
+  <meta itemprop="description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁">
+  <meta itemprop="datePublished" content="2018-12-03T21:54:05+08:00">
+  <meta itemprop="dateModified" content="2018-12-03T21:54:05+08:00">
+  <meta itemprop="wordCount" content="1201">
+  <meta itemprop="keywords" content="25,465,邮件发送">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件">
+  <meta name="twitter:description" content="利用126邮箱在阿里云中发送SSL/TSL加密邮件,突破阿里云对25端口的封锁">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -228,42 +234,42 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSendMail</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kd">final</span> <span class="n">String</span> <span class="n">sendUserName</span> <span class="o">=</span> <span class="s">&#34;***@126.com&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">final</span> <span class="n">String</span> <span class="n">sendUserPassword</span> <span class="o">=</span> <span class="s">&#34;***&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1">// 收件箱
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">String</span> <span class="n">receiveUser</span> <span class="o">=</span> <span class="s">&#34;recevie@mail.com&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="n">Properties</span> <span class="n">props</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.auth&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.host&#34;</span><span class="o">,</span> <span class="s">&#34;smtp.126.com&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.port&#34;</span><span class="o">,</span> <span class="s">&#34;25&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="o">.</span><span class="na">getDefaultInstance</span><span class="o">(</span><span class="n">props</span><span class="o">,</span><span class="k">new</span> <span class="n">Authenticator</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">		<span class="kd">protected</span> <span class="n">PasswordAuthentication</span> <span class="nf">getPasswordAuthentication</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">new</span> <span class="n">PasswordAuthentication</span><span class="o">(</span><span class="n">sendUserName</span><span class="o">,</span> <span class="n">sendUserPassword</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	<span class="o">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MimeMessage</span><span class="o">(</span><span class="n">session</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setFrom</span><span class="o">(</span><span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">sendUserName</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setRecipients</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">RecipientType</span><span class="o">.</span><span class="na">TO</span><span class="o">,</span> <span class="n">InternetAddress</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">receiveUser</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="s">&#34;Test Mail Send&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;Hello World!&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="n">Transport</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Send mail success&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessagingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSendMail</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sendUserName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;***@126.com&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sendUserPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;***&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 收件箱</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">receiveUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;recevie@mail.com&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Properties</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.auth&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;true&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.host&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;smtp.126.com&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.port&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;25&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Session</span><span class="p">.</span><span class="na">getDefaultInstance</span><span class="p">(</span><span class="n">props</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">Authenticator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">protected</span><span class="w"> </span><span class="n">PasswordAuthentication</span><span class="w"> </span><span class="nf">getPasswordAuthentication</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PasswordAuthentication</span><span class="p">(</span><span class="n">sendUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sendUserPassword</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MimeMessage</span><span class="p">(</span><span class="n">session</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setFrom</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InternetAddress</span><span class="p">(</span><span class="n">sendUserName</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setRecipients</span><span class="p">(</span><span class="n">Message</span><span class="p">.</span><span class="na">RecipientType</span><span class="p">.</span><span class="na">TO</span><span class="p">,</span><span class="w"> </span><span class="n">InternetAddress</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">receiveUser</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setSubject</span><span class="p">(</span><span class="s">&#34;Test Mail Send&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Transport</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Send mail success&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MessagingException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>为了使用465端口发送邮件，除了在代码中修改端口之外，还需要将Mail Socket指定为SSL实现，实际使用中我发现通过<code>props.put(&quot;mail.smtp.socketFactory.class&quot;, &quot;javax.net.ssl.SSLSocketFactory&quot;);</code>即可实现，完整的代码如下</p>
 <div class="highlight"><div class="chroma">
@@ -308,45 +314,45 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSendMail</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kd">final</span> <span class="n">String</span> <span class="n">sendUserName</span> <span class="o">=</span> <span class="s">&#34;***@126.com&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">final</span> <span class="n">String</span> <span class="n">sendUserPassword</span> <span class="o">=</span> <span class="s">&#34;***&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1">// 收件箱
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">String</span> <span class="n">receiveUser</span> <span class="o">=</span> <span class="s">&#34;recevie@mail.com&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="n">Properties</span> <span class="n">props</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.auth&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.host&#34;</span><span class="o">,</span> <span class="s">&#34;smtp.126.com&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.port&#34;</span><span class="o">,</span> <span class="s">&#34;465&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">	<span class="c1">//指定使用基于SSL的套接字
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">props</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;mail.smtp.socketFactory.class&#34;</span><span class="o">,</span> <span class="s">&#34;javax.net.ssl.SSLSocketFactory&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="n">Session</span> <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="o">.</span><span class="na">getDefaultInstance</span><span class="o">(</span><span class="n">props</span><span class="o">,</span><span class="k">new</span> <span class="n">Authenticator</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">		<span class="kd">protected</span> <span class="n">PasswordAuthentication</span> <span class="nf">getPasswordAuthentication</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">new</span> <span class="n">PasswordAuthentication</span><span class="o">(</span><span class="n">sendUserName</span><span class="o">,</span> <span class="n">sendUserPassword</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	<span class="o">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MimeMessage</span><span class="o">(</span><span class="n">session</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setFrom</span><span class="o">(</span><span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">sendUserName</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setRecipients</span><span class="o">(</span><span class="n">Message</span><span class="o">.</span><span class="na">RecipientType</span><span class="o">.</span><span class="na">TO</span><span class="o">,</span> <span class="n">InternetAddress</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">receiveUser</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="s">&#34;Test Mail Send&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">message</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;Hello World!&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="n">Transport</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Send mail success&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessagingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSendMail</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sendUserName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;***@126.com&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sendUserPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;***&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 收件箱</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">receiveUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;recevie@mail.com&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Properties</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.auth&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;true&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.host&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;smtp.126.com&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.port&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;465&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//指定使用基于SSL的套接字</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;mail.smtp.socketFactory.class&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;javax.net.ssl.SSLSocketFactory&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Session</span><span class="p">.</span><span class="na">getDefaultInstance</span><span class="p">(</span><span class="n">props</span><span class="p">,</span><span class="k">new</span><span class="w"> </span><span class="n">Authenticator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">protected</span><span class="w"> </span><span class="n">PasswordAuthentication</span><span class="w"> </span><span class="nf">getPasswordAuthentication</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PasswordAuthentication</span><span class="p">(</span><span class="n">sendUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sendUserPassword</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MimeMessage</span><span class="p">(</span><span class="n">session</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setFrom</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InternetAddress</span><span class="p">(</span><span class="n">sendUserName</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setRecipients</span><span class="p">(</span><span class="n">Message</span><span class="p">.</span><span class="na">RecipientType</span><span class="p">.</span><span class="na">TO</span><span class="p">,</span><span class="w"> </span><span class="n">InternetAddress</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">receiveUser</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setSubject</span><span class="p">(</span><span class="s">&#34;Test Mail Send&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">message</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">Transport</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Send mail success&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MessagingException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="其他说明">其他说明</h2>
 <p>Java Mail中关于邮件设置的选项请参见<a href="https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html"><strong>com.sun.mail.smtp</strong></a>,实际使用时我发现只需要添加<code>props.put(&quot;mail.smtp.socketFactory.class&quot;, &quot;javax.net.ssl.SSLSocketFactory&quot;);</code>即可，额外的添加其它一些配置反而可能会导致不能正常使用。</p>
@@ -487,7 +493,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

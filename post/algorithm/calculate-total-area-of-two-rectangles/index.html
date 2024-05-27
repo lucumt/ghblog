@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/" />
@@ -39,20 +39,25 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="计算两个平行于坐标轴的矩形相交的面积" />
-<meta property="og:description" content="检测矩形是否相交，检测矩形面积" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-02-26T19:26:33+08:00" />
-<meta property="article:modified_time" content="2017-02-26T19:26:33+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="计算两个平行于坐标轴的矩形相交的面积">
+  <meta property="og:description" content="检测矩形是否相交，检测矩形面积">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-02-26T19:26:33+08:00">
+    <meta property="article:modified_time" content="2017-02-26T19:26:33+08:00">
 
-<meta itemprop="name" content="计算两个平行于坐标轴的矩形相交的面积">
-<meta itemprop="description" content="检测矩形是否相交，检测矩形面积"><meta itemprop="datePublished" content="2017-02-26T19:26:33+08:00" />
-<meta itemprop="dateModified" content="2017-02-26T19:26:33+08:00" />
-<meta itemprop="wordCount" content="1244">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="计算两个平行于坐标轴的矩形相交的面积"/>
-<meta name="twitter:description" content="检测矩形是否相交，检测矩形面积"/>
+  <meta itemprop="name" content="计算两个平行于坐标轴的矩形相交的面积">
+  <meta itemprop="description" content="检测矩形是否相交，检测矩形面积">
+  <meta itemprop="datePublished" content="2017-02-26T19:26:33+08:00">
+  <meta itemprop="dateModified" content="2017-02-26T19:26:33+08:00">
+  <meta itemprop="wordCount" content="1244">
+  <meta itemprop="keywords" content="算法">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="计算两个平行于坐标轴的矩形相交的面积">
+  <meta name="twitter:description" content="检测矩形是否相交，检测矩形面积">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -207,15 +212,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">calculateIntersectArea</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">p</span><span class="o">,</span><span class="kt">int</span> <span class="n">q</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">leftDownX</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">leftDownY</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">rightUpX</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">rightUpY</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">leftDownX</span> <span class="o">=</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">p</span> <span class="o">?</span> <span class="n">k</span> <span class="o">:</span> <span class="n">p</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">leftDownY</span> <span class="o">=</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">q</span> <span class="o">?</span> <span class="n">l</span> <span class="o">:</span> <span class="n">q</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rightUpX</span> <span class="o">=</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">?</span> <span class="n">m</span> <span class="o">:</span> <span class="n">r</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rightUpY</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="o">?</span> <span class="n">n</span> <span class="o">:</span> <span class="n">s</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">(</span><span class="n">rightUpX</span> <span class="o">-</span> <span class="n">leftDownX</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">rightUpY</span> <span class="o">-</span> <span class="n">leftDownY</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calculateIntersectArea</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">leftDownX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">leftDownY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">rightUpX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">rightUpY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">leftDownX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">leftDownY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">rightUpX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">rightUpY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">rightUpX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">leftDownX</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">rightUpY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">leftDownY</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>寻找出如何计算相交矩形的面积之后，还需要解决一个问题:<strong>上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误</strong>，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：<strong>如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！</strong>，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4种情况：<br>
 <img src="/blog_img/algorithm/calculate-total-area-of-two-rectangles/no_interact_position_compare.png" alt="矩形不相交坐标计算" title="矩形不相交的4种情况"><br>
@@ -238,21 +243,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isIntersect</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">p</span><span class="o">,</span> <span class="kt">int</span> <span class="n">q</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kt">boolean</span> <span class="n">nointersect</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// B在A的上面
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">nointersect</span> <span class="o">=</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="n">n</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// B在A的下面
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">nointersect</span> <span class="o">=</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// B在A的左侧
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">nointersect</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// B在A的右侧
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">nointersect</span> <span class="o">=</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">!</span><span class="n">nointersect</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isIntersect</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">boolean</span><span class="w"> </span><span class="n">nointersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// B在A的上面</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">nointersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// B在A的下面</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">nointersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// B在A的左侧</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">nointersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// B在A的右侧</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">nointersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="n">nointersect</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>利用上述2个判断方法，可以方便准确的计算出两个矩形在相交时的总面积，相应的代码如下:</p>
 <div class="highlight"><div class="chroma">
@@ -276,24 +281,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">p</span><span class="o">,</span> <span class="kt">int</span> <span class="n">q</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">widthA</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="n">k</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">heightA</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">l</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">areaA</span> <span class="o">=</span> <span class="n">widthA</span> <span class="o">*</span> <span class="n">heightA</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">widthB</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">p</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">heightB</span> <span class="o">=</span> <span class="n">s</span> <span class="o">-</span> <span class="n">q</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">areaB</span> <span class="o">=</span> <span class="n">widthB</span> <span class="o">*</span> <span class="n">heightB</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">totalArea</span> <span class="o">=</span> <span class="n">areaA</span> <span class="o">+</span> <span class="n">areaB</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kt">boolean</span> <span class="n">hasIntersect</span> <span class="o">=</span> <span class="n">isIntersect</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">p</span><span class="o">,</span> <span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="o">,</span> <span class="n">s</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">(</span><span class="n">hasIntersect</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">totalArea</span> <span class="o">-=</span> <span class="n">calculateIntersectArea</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">p</span><span class="o">,</span> <span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="o">,</span> <span class="n">s</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="o">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">totalArea</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">widthA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">heightA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">l</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">areaA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">widthA</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">heightA</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">widthB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">heightB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">areaB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">widthB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">heightB</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">totalArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">areaA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">areaB</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kt">boolean</span><span class="w"> </span><span class="n">hasIntersect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isIntersect</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hasIntersect</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">totalArea</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">calculateIntersectArea</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">totalArea</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>分析解决这个问题给我最深的感触是：<strong>有时候若某一类问题用枚举实现很复杂时，尝试去分析其中的规律，找出通用的解决方法</strong>，不仅在算法方面，或许在生活中其它方面也适用吧！</p>
     </div>
@@ -410,7 +415,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

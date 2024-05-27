@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="给Sonarqube软件集成LDAP实现单点登录" />
-<meta property="og:description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-12-04T11:29:12+08:00" />
-<meta property="article:modified_time" content="2023-04-14T11:29:12+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/ldap/add-ldap-support-for-sonarqube/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="给Sonarqube软件集成LDAP实现单点登录">
+  <meta property="og:description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-12-04T11:29:12+08:00">
+    <meta property="article:modified_time" content="2023-04-14T11:29:12+08:00">
+    <meta property="article:tag" content="Ldap">
+    <meta property="article:tag" content="Docker">
 
-<meta itemprop="name" content="给Sonarqube软件集成LDAP实现单点登录">
-<meta itemprop="description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录"><meta itemprop="datePublished" content="2022-12-04T11:29:12+08:00" />
-<meta itemprop="dateModified" content="2023-04-14T11:29:12+08:00" />
-<meta itemprop="wordCount" content="505">
-<meta itemprop="keywords" content="ldap,docker," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="给Sonarqube软件集成LDAP实现单点登录"/>
-<meta name="twitter:description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录"/>
+  <meta itemprop="name" content="给Sonarqube软件集成LDAP实现单点登录">
+  <meta itemprop="description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录">
+  <meta itemprop="datePublished" content="2022-12-04T11:29:12+08:00">
+  <meta itemprop="dateModified" content="2023-04-14T11:29:12+08:00">
+  <meta itemprop="wordCount" content="505">
+  <meta itemprop="keywords" content="ldap,docker,sonarqube">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="给Sonarqube软件集成LDAP实现单点登录">
+  <meta name="twitter:description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -283,17 +290,17 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#LDAP settings
-</span></span><span class="line"><span class="cl">#admin
-</span></span><span class="line"><span class="cl">sonar.security.realm=LDAP
-</span></span><span class="line"><span class="cl">ldap.url=ldap://10.10.xxx.xxx:389
-</span></span><span class="line"><span class="cl">ldap.bindDn=cn=xxx,dc=xxx,dc=com
-</span></span><span class="line"><span class="cl">ldap.bindPassword=xxx
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="c1">#LDAP settings</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#admin</span>
+</span></span><span class="line"><span class="cl"><span class="na">sonar.security.realm</span><span class="o">=</span><span class="s">LDAP</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.url</span><span class="o">=</span><span class="s">ldap://10.10.xxx.xxx:389</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.bindDn</span><span class="o">=</span><span class="s">cn=xxx,dc=xxx,dc=com</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.bindPassword</span><span class="o">=</span><span class="s">xxx</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ldap.user.baseDn=dc=xxx,dc=com
-</span></span><span class="line"><span class="cl">ldap.user.request=(&amp;(objectClass=inetOrgPerson)(uid={login}))
-</span></span><span class="line"><span class="cl">ldap.user.realNameAttribute=displayName
-</span></span><span class="line"><span class="cl">ldap.user.emailAttribute=mail
+</span></span><span class="line"><span class="cl"><span class="na">ldap.user.baseDn</span><span class="o">=</span><span class="s">dc=xxx,dc=com</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.user.request</span><span class="o">=</span><span class="s">(&amp;(objectClass=inetOrgPerson)(uid={login}))</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.user.realNameAttribute</span><span class="o">=</span><span class="s">displayName</span>
+</span></span><span class="line"><span class="cl"><span class="na">ldap.user.emailAttribute</span><span class="o">=</span><span class="s">mail</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -404,7 +411,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

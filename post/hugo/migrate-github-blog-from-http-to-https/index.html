@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/" />
@@ -39,20 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="将基于Github Pages的自定义域名博客迁移到HTTPS" />
-<meta property="og:description" content="将基于Github Pages的自定义域名博客迁移到HTTPS" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-12-24T10:28:03+08:00" />
-<meta property="article:modified_time" content="2017-12-24T10:28:03+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/hugo/migrate-github-blog-from-http-to-https/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
+  <meta property="og:description" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-12-24T10:28:03+08:00">
+    <meta property="article:modified_time" content="2017-12-24T10:28:03+08:00">
+    <meta property="article:tag" content="Github-Pages">
+    <meta property="article:tag" content="Github">
+    <meta property="article:tag" content="HTTPS">
 
-<meta itemprop="name" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
-<meta itemprop="description" content="将基于Github Pages的自定义域名博客迁移到HTTPS"><meta itemprop="datePublished" content="2017-12-24T10:28:03+08:00" />
-<meta itemprop="dateModified" content="2017-12-24T10:28:03+08:00" />
-<meta itemprop="wordCount" content="2399">
-<meta itemprop="keywords" content="github-pages,github,HTTPS," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="将基于Github Pages的自定义域名博客迁移到HTTPS"/>
-<meta name="twitter:description" content="将基于Github Pages的自定义域名博客迁移到HTTPS"/>
+  <meta itemprop="name" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
+  <meta itemprop="description" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
+  <meta itemprop="datePublished" content="2017-12-24T10:28:03+08:00">
+  <meta itemprop="dateModified" content="2017-12-24T10:28:03+08:00">
+  <meta itemprop="wordCount" content="2399">
+  <meta itemprop="keywords" content="github-pages,github,https">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
+  <meta name="twitter:description" content="将基于Github Pages的自定义域名博客迁移到HTTPS">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -184,7 +192,7 @@
 	  	
 	
     <div class="post-content image-border">
-	 <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
+	 <p>越来越多的网站和个人博客都变成 <a href="https://en.wikipedia.org/wiki/HTTPS" title="https://en.wikipedia.org/wiki/HTTPS"><strong>HTTPS</strong></a> ，而自己的博客一直都是用的是 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"><strong>HTTP</strong></a> 协议，作为一个具有强迫症的人，每次用 <a href="https://www.google.cn/chrome/browser/desktop/index.html" title="https://www.google.cn/chrome/browser/desktop/index.html"><strong>Chrome</strong></a> 浏览器打开个人博客时看见浏览器地址栏显示的<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&ldquo;Chrome HTTP标识&rdquo;" title="Chrome HTTP标识"> 都感觉很不舒服。趁着前段时间不太忙，将个人博客从<code>HTTP</code>迁移到了<code>HTTPS</code> ，先记录下。</p>
 <p>一开始我想直接通过在 <strong><a href="https://www.godaddy.com/">GoDaddy</a></strong> 上直接购买<code>HTTPS</code> 服务来实现，去官网查看后发现费用太高，一年大约100美刀，果断弃之。 Google后发现很多人都用<a href="https://www.cloudflare.com/"><strong>Cloudflare</strong></a>通过转发请求来实现<code>HTTPS</code>访问，操作起来也很快，自己便也采用<code>Cloudflare</code>实现， 本文主要是基于<code>Cloudflare</code> 的实现说明。</p>
 <h1 id="操作过程">操作过程</h1>
 <h2 id="给博客添加自定义域名">给博客添加自定义域名</h2>
@@ -192,26 +200,26 @@
 <h2 id="利用cloudflare修改dns服务器">利用Cloudflare修改DNS服务器</h2>
 <ol>
 <li>打开<code>Cloudflare官网</code>注册一个<code>Cloudflare</code> 账户。注册成功之后，点击页面右上角的add site 链接，添加一个网站，在下图输入框中输入自己的域名，点击 Begin Scan 按钮开始扫描。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/add_site_in_cloudflare.png" alt="&amp;ldquo;在Cloudflare中扫描站点&amp;rdquo;" title="在Cloudflare中扫描站点"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/add_site_in_cloudflare.png" alt="&ldquo;在Cloudflare中扫描站点&rdquo;" title="在Cloudflare中扫描站点"></li>
 <li>扫描完毕后点击 Contiue Setup ，在类似如下图所示的界面中选择Free Website，然后点击页面底部的Continue按钮。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_free_website.png" alt="&amp;ldquo;选择Cloudflare免费站点&amp;rdquo;" title="选择Cloudflare免费站点"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_free_website.png" alt="&ldquo;选择Cloudflare免费站点&rdquo;" title="选择Cloudflare免费站点"></li>
 <li>在下图所示的Cloudflare Nameservers说明界面中根据要求来修改自定义域名的DNS服务器。
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_nameservers.png" alt="&amp;ldquo;Cloudflare扫描结果&amp;rdquo;" title="Cloudflare扫描结果"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_nameservers.png" alt="&ldquo;Cloudflare扫描结果&rdquo;" title="Cloudflare扫描结果"></li>
 <li>登录<code>GoDaddy</code>，打开响应域名的Manage DNS界面，将Nameservers从<strong>Default</strong>修改为<strong>Custom</strong> 然后添加前一个步骤中的两个值分别加上并点击保存。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/modify_dns_server_in_godaddy.png" alt="&amp;ldquo;Cloudflare扫描结果&amp;rdquo;" title="Cloudflare扫描结果"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/modify_dns_server_in_godaddy.png" alt="&ldquo;Cloudflare扫描结果&rdquo;" title="Cloudflare扫描结果"></li>
 <li>回到<code>Cloudflare</code>网站，点击Overview按钮，查看域名的状态是否为如下所示的<strong>Active</strong>，若是则表示DNS服务器修改成功，若不是 <strong>Active</strong>请等待几分钟。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_website_actived.png" alt="&amp;ldquo;Cloudflare中配置DNS成功&amp;rdquo;" title="Cloudflare中配置DNS成功"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_website_actived.png" alt="&ldquo;Cloudflare中配置DNS成功&rdquo;" title="Cloudflare中配置DNS成功"></li>
 </ol>
 <h2 id="cloudflare中开启https设置">Cloudflare中开启HTTPS设置</h2>
 <ol>
 <li>在<code>Cloudflare</code>网站上点击顶部的Crypto按钮，将状态修改为<strong>Full</strong>。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_ssl_setting.png" alt="&amp;ldquo;Cloudflare中SSL设置&amp;rdquo;" title="Cloudflare中SSL设置"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_ssl_setting.png" alt="&ldquo;Cloudflare中SSL设置&rdquo;" title="Cloudflare中SSL设置"></li>
 <li>在顶部切换到Page Rules界面，点击Create Page Rule ，添加规则<code>http://lucumt.info/*</code> 并选择Always Use HTTPS来强制该域名下的所有请求都是用<code>HTTPS</code>实现，然后点击Save and Deploy来部署该规则，注意此处的规则是<code>HTTP</code> 而不是<code>HTTPS</code> 。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_page_rule_setting.png" alt="&amp;ldquo;Cloudflare中Page Rule设置&amp;rdquo;" title="Cloudflare中Page Rule设置"><br>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_page_rule_setting.png" alt="&ldquo;Cloudflare中Page Rule设置&rdquo;" title="Cloudflare中Page Rule设置"><br>
 执行完这一步后理论上通过<code>HTTPS</code>可以正常的访问个人博客，但还需对博客源码做一些修改。</li>
 </ol>
 <h2 id="将代码中所有http修改为https">将代码中所有HTTP修改为HTTPS</h2>
-<p>在执行完前面的步骤后，在浏览器中用<code>HTTPS</code>访问个人博客时，可能看到的还是<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&amp;ldquo;Chrome HTTP标识&amp;rdquo;" title="Chrome HTTP标识">而不是自己期望中的小绿锁，同时浏览器控制台可能会出现类似<code>Mixed Content,The page at ...,The request has been blocked,the content must be serverd over HTTPS</code>的错误信息。其原因是由于某些页面中存在混合内容，即部分请求还是以<code>HTTP</code>方式实现的，如加载 <code>JavaScript</code> ,<code>CSS</code> 等，解决方法也很简单，<strong>将所有的HTTP请求都改为HTTPS即可</strong> 。</p>
+<p>在执行完前面的步骤后，在浏览器中用<code>HTTPS</code>访问个人博客时，可能看到的还是<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/http_icon.png" alt="&ldquo;Chrome HTTP标识&rdquo;" title="Chrome HTTP标识">而不是自己期望中的小绿锁，同时浏览器控制台可能会出现类似<code>Mixed Content,The page at ...,The request has been blocked,the content must be serverd over HTTPS</code>的错误信息。其原因是由于某些页面中存在混合内容，即部分请求还是以<code>HTTP</code>方式实现的，如加载 <code>JavaScript</code> ,<code>CSS</code> 等，解决方法也很简单，<strong>将所有的HTTP请求都改为HTTPS即可</strong> 。</p>
 <p>以我个人基于<a href="https://gohugo.io/"><strong>Hugo</strong></a>的博客为例，要进行如下几步操作：</p>
 <ol>
 <li>
@@ -220,21 +228,21 @@
 <li>
 <p>利用 <code>hugo server -D --baseUrl=&quot;https://lucumt.info&quot; --appendPort=false</code> 重新生成基于<code>HTTPS</code>的源文件页面。</p>
 <p>将生成的博客源代码重新上传到 <em>Github</em> 仓库中，经过1分钟左右以<code>HTTPS</code>的方式在浏览器中打开个人博客，期待中的小绿锁入愿出现，世界终于和谐了！<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/open-blog-website-via-https.png" alt="&amp;ldquo;通过HTTPS打开个人博客&amp;rdquo;" title="通过HTTPS打开个人博客"></p>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/open-blog-website-via-https.png" alt="&ldquo;通过HTTPS打开个人博客&rdquo;" title="通过HTTPS打开个人博客"></p>
 </li>
 </ol>
 <h2 id="注意事项">注意事项</h2>
 <p>通过<code>Cloudflare</code>虽然可以快速的将自己的个人博客迁移到<code>HTTPS</code>，但基于以下两个方面的原因，在条件许可的情况下还是应该使用其他方式实现<code>HTTPS</code>:</p>
 <ul>
 <li><code>免费计划下的</code>Cloudflare<code>实际上相当于一个中介，我们的访问请求先被</code>Cloudflare<code>代理实现</code>HTTPS 接收到然后将其转发给原始的服务器（如 <em>Github Pages</em> 服务器）。虽然浏览器与<code>Cloudflare</code>之间的通信是<code>HTTPS</code>加密，但是<code>Cloudflare</code>与实际服务器之间的通信不一定是加密的，存在被挟持和篡改的可能。<code>Cloudflare</code>之前也被爆出过 <a href="https://thehackernews.com/2017/02/cloudflare-vulnerability.html" title="Serious Bug Exposes Sensitive Data From Millions Sites Sitting Behind CloudFlare"><strong>安全漏洞和敏感数据泄露</strong></a>，故商业网站通常不用<code>Cloudflare</code>免费计划，但个人博客出于增加搜索引擎收录和省钱等原因，可以使用<code>Cloudflare</code>免费计划。<br>
-<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_ssl_website.png" alt="&amp;ldquo;Cloudflare代理实现HTTPS&amp;rdquo;" title="Cloudflare代理实现HTTPS"></li>
+<img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/cloudflare_ssl_website.png" alt="&ldquo;Cloudflare代理实现HTTPS&rdquo;" title="Cloudflare代理实现HTTPS"></li>
 <li>由于经过<code>Cloudflare</code>这层代码，访问速度肯定没有直接访问原始服务器那么快，对于响应速度要求高的用户不合适。</li>
 <li>由于众所周知的原因，在天朝<code>Cloudflare</code>访问速度比国内慢，而且指不定哪天就被ban了。</li>
 </ul>
 <h1 id="利用github-page原生https">利用Github Page原生HTTPS</h1>
 <p><code>Github</code>从2018年5月份开始支持自定义域名使用<code>HTTPS</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，具体操作说明请参见<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https"><strong>securing-your-github-pages-site-with-https</strong></a>，通过此种方式可以绕过<code>Cloudflare</code>作为中间层的问题，但是仍然无法解决由于qiang存在导致的访问缓慢的问题。</p>
 <p>由于自己之前采用的是<code>Cloudflare</code>，按照<code>Github</code>的官方文档进行操作时，在进行DNS检查时一开始会提示如下信息</p>
-<p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-failed.png" alt="&amp;ldquo;HTTPS DNS检查失败&amp;rdquo;" title="HTTPS DNS检查失败"></p>
+<p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-failed.png" alt="&ldquo;HTTPS DNS检查失败&rdquo;" title="HTTPS DNS检查失败"></p>
 <p>利用<code>dig</code>命令检查后结果如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -325,7 +333,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据官方人员的反馈等待2-3天后再次检查，发现DNS检查通过!</p>
-<p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-success.png" alt="&amp;ldquo;HTTPS DNS检查通过&amp;rdquo;" title="HTTPS DNS检查通过"></p>
+<p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-success.png" alt="&ldquo;HTTPS DNS检查通过&rdquo;" title="HTTPS DNS检查通过"></p>
 <p>参考:</p>
 <ul>
 <li><a href="https://bakumon.me/blog/p/github-pages-https-ssl.html">https://bakumon.me/blog/p/github-pages-https-ssl.html</a></li>
@@ -460,7 +468,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>

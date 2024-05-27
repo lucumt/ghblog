@@ -1,93 +1,75 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>web编程 on 飞狐的部落格</title>
+    <title>Web编程 on 飞狐的部落格</title>
     <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
-    <description>Recent content in web编程 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Web编程 on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Foxglove自定义插件开发说明</title>
       <link>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</link>
       <pubDate>Wed, 22 Nov 2023 14:08:39 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</guid>
-      <description>&lt;p&gt;基于&lt;a href=&#34;https://github.com/foxglove/create-foxglove-extension&#34;&gt;&lt;strong&gt;create-foxglove-extension&lt;/strong&gt;&lt;/a&gt;一文简要说明自己如何基于&lt;a href=&#34;https://en.wikipedia.org/wiki/Real-Time_Streaming_Protocol&#34;&gt;&lt;strong&gt;RTSP协议&lt;/strong&gt;&lt;/a&gt;给&lt;code&gt;Foxglove&lt;/code&gt;开发一款插件并应用于实际项目的流程。&lt;/p&gt;
-&lt;p&gt;相关源码参见&lt;a href=&#34;https://github.com/foxglove-custom/rtsp-player-extension&#34;&gt;&lt;strong&gt;rtsp-player-extension&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://github.com/foxglove/create-foxglove-extension&#34;&gt;&lt;strong&gt;create-foxglove-extension&lt;/strong&gt;&lt;/a&gt;一文简要说明自己如何基于&lt;a href=&#34;https://en.wikipedia.org/wiki/Real-Time_Streaming_Protocol&#34;&gt;&lt;strong&gt;RTSP协议&lt;/strong&gt;&lt;/a&gt;给&lt;code&gt;Foxglove&lt;/code&gt;开发一款插件并应用于实际项目的流程。&lt;/p&gt;&#xA;&lt;p&gt;相关源码参见&lt;a href=&#34;https://github.com/foxglove-custom/rtsp-player-extension&#34;&gt;&lt;strong&gt;rtsp-player-extension&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Foxglove基本功能使用说明</title>
       <link>https://lucumt.info/post/web/foxglove-function-instructions/</link>
       <pubDate>Wed, 15 Nov 2023 14:08:39 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/foxglove-function-instructions/</guid>
       <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/&#34;&gt;&lt;strong&gt;搭建基于Foxglove的时序数据播放环境&lt;/strong&gt;&lt;/a&gt;一文，结合实际项目的使用情况对&lt;code&gt;Foxglove&lt;/code&gt;的使用功能进行简要的介绍。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>搭建基于Foxglove的时序数据播放环境</title>
       <link>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</link>
       <pubDate>Mon, 13 Nov 2023 14:08:39 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</guid>
       <description>&lt;p&gt;简要介绍如何配置&lt;a href=&#34;https://foxglove.dev&#34;&gt;&lt;strong&gt;Foxglove&lt;/strong&gt;&lt;/a&gt;可视化工具的前后端环境以便实现在项目中以多种方式播放采集的&lt;a href=&#34;https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29&#34;&gt;&lt;strong&gt;时序数据&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>JavaScript学习-reduce函数</title>
       <link>https://lucumt.info/post/js/using-reduce-function-on-array/</link>
       <pubDate>Mon, 26 Sep 2022 09:39:47 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/js/using-reduce-function-on-array/</guid>
       <description>&lt;p&gt;简要记录下自己对于&lt;code&gt;JavaScript&lt;/code&gt;中&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce&#34;&gt;&lt;strong&gt;reduce()&lt;/strong&gt;&lt;/a&gt;函数的学习小结。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Chrome中将上传的文件夹数据转化为按树结构展示</title>
       <link>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</link>
       <pubDate>Sun, 20 Feb 2022 20:38:18 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/convert-folder-upload-data-to-tree-node-in-chrome/</guid>
       <description>&lt;p&gt;项目中有个模块支持按文件夹选中批量上传，用户希望在真正上传之前能够在浏览器中实时预览选中的文件夹层级结构，本文基于&lt;code&gt;Chrome&lt;/code&gt;浏览器为例，简要说明这一实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
       <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>解决EasyUI DataGrid中的行在列冻结时无法对齐的问题</title>
       <link>https://lucumt.info/post/web/easyui-datagrid-row-not-align-when-column-frozen/</link>
       <pubDate>Sun, 06 Aug 2017 00:06:36 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/easyui-datagrid-row-not-align-when-column-frozen/</guid>
       <description>&lt;p&gt;相对于传统的用HTML中TABLE实现的表格，利用&lt;a href=&#34;https://www.jeasyui.com&#34;&gt;&lt;strong&gt;EasyUI&lt;/strong&gt;&lt;/a&gt;中的&lt;a href=&#34;https://www.jeasyui.com/demo/main/index.php?plugin=DataGrid&#34;&gt;&lt;strong&gt;DataGrid&lt;/strong&gt;&lt;/a&gt;实现的表格具有很多优点，如可以对列宽进行拖动调整、列冻结、行冻结、自定义格式化等功能，故而在Web开发中得到了广泛的应用。最近自己在使用DataGrid的列冻结功能时遇到了由于某些单元格中的内容较多导致该行无法对齐的问题，由于当前在EasyUI官网中无法找到该问题的解决方案，自己研究DataGrid的实现原理后，找到了变通的解决方案，故先记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
       <link>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</link>
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</guid>
       <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击</description>
     </item>
-    
     <item>
       <title>在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</title>
       <link>https://lucumt.info/post/web/show-video-in-html5-page/</link>
       <pubDate>Sun, 30 Oct 2016 19:48:17 +0800</pubDate>
-      
       <guid>https://lucumt.info/post/web/show-video-in-html5-page/</guid>
       <description>&lt;p&gt;由于项目需要，最近使用了在&lt;code&gt;html5&lt;/code&gt;中播放视频的功能，期间遇到了几个坑，先简单记录下。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

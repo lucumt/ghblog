@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.100.2 with theme even" />
+<meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
 <link rel="canonical" href="https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/" />
@@ -39,20 +39,27 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="2. [译]多线程的优点" />
-<meta property="og:description" content="本文介绍了多线程的优点" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2017-04-01T13:18:43+08:00" />
-<meta property="article:modified_time" content="2017-04-01T13:18:43+08:00" />
+<meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="2. [译]多线程的优点">
+  <meta property="og:description" content="本文介绍了多线程的优点">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2017-04-01T13:18:43+08:00">
+    <meta property="article:modified_time" content="2017-04-01T13:18:43+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Java Concurrency">
 
-<meta itemprop="name" content="2. [译]多线程的优点">
-<meta itemprop="description" content="本文介绍了多线程的优点"><meta itemprop="datePublished" content="2017-04-01T13:18:43+08:00" />
-<meta itemprop="dateModified" content="2017-04-01T13:18:43+08:00" />
-<meta itemprop="wordCount" content="1325">
-<meta itemprop="keywords" content="Java,Java Concurrency," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="2. [译]多线程的优点"/>
-<meta name="twitter:description" content="本文介绍了多线程的优点"/>
+  <meta itemprop="name" content="2. [译]多线程的优点">
+  <meta itemprop="description" content="本文介绍了多线程的优点">
+  <meta itemprop="datePublished" content="2017-04-01T13:18:43+08:00">
+  <meta itemprop="dateModified" content="2017-04-01T13:18:43+08:00">
+  <meta itemprop="wordCount" content="1325">
+  <meta itemprop="keywords" content="java concurrency">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2. [译]多线程的优点">
+  <meta name="twitter:description" content="本文介绍了多线程的优点">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -201,12 +208,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">5</span> <span class="n">seconds</span> <span class="n">reading</span> <span class="n">file</span> <span class="n">A</span>
-</span></span><span class="line"><span class="cl"><span class="n">2</span> <span class="n">seconds</span> <span class="n">processing</span> <span class="n">file</span> <span class="n">A</span>
-</span></span><span class="line"><span class="cl"><span class="n">5</span> <span class="n">seconds</span> <span class="n">reading</span> <span class="n">file</span> <span class="n">B</span>
-</span></span><span class="line"><span class="cl"><span class="n">2</span> <span class="n">seconds</span> <span class="n">processing</span> <span class="n">file</span> <span class="n">B</span>
-</span></span><span class="line"><span class="cl"><span class="o">-----------------------</span>
-</span></span><span class="line"><span class="cl"><span class="n">14</span> <span class="n">seconds</span> <span class="n">total</span><span class="c1">//串行读取时总共耗时14秒
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">5</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">2</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">5</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">2</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-----------------------</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">14</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">total</span><span class="c1">//串行读取时总共耗时14秒</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>当从磁盘读取文件时CPU的大部分时间都花费在等待从磁盘读取数据，在此期间CPU大部分时间都处于空闲状态。这些空闲时间可以做一些其它的事情，通过改变操作顺序，CPU可以被更好的利用，如下面的列子：</p>
@@ -219,11 +226,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">5</span> <span class="n">seconds</span> <span class="n">reading</span> <span class="n">file</span> <span class="n">A</span>
-</span></span><span class="line"><span class="cl"><span class="n">5</span> <span class="n">seconds</span> <span class="n">reading</span> <span class="n">file</span> <span class="n">B</span> <span class="o">+</span> <span class="n">2</span> <span class="n">seconds</span> <span class="n">processing</span> <span class="n">file</span> <span class="n">A</span>
-</span></span><span class="line"><span class="cl"><span class="n">2</span> <span class="n">seconds</span> <span class="n">processing</span> <span class="n">file</span> <span class="n">B</span>
-</span></span><span class="line"><span class="cl"><span class="o">-----------------------</span>
-</span></span><span class="line"><span class="cl"><span class="n">12</span> <span class="n">seconds</span> <span class="n">total</span><span class="c1">//并行读取时总共耗时12秒
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">5</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">5</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">2</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-----------------------</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">12</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">total</span><span class="c1">//并行读取时总共耗时12秒</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在上面的例子中，CPU先等待读取第一个文件，然后开始读取第二个文件，在读取第二个文件的同时，CPU可以同时处理第一个文件。请记住，当等待从磁盘读取数据时，CPU大部分时间处于空闲状态！</p>
@@ -240,11 +247,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="o">(</span><span class="n">server</span> <span class="n">is</span> <span class="n">active</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">listen</span> <span class="k">for</span> <span class="n">request</span> <span class="c1">//监听请求
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">process</span> <span class="n">request</span><span class="c1">//处理请求
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">active</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="c1">//监听请求</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">process</span><span class="w"> </span><span class="n">request</span><span class="c1">//处理请求</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果某个请求需要花费很长的时间来处理，那么在此期间其它的客户端就不能向此服务器发送请求，只有当服务器处于监听状态时才能够接收请求。</p>
 <p>一种替代方案是让监听线程将接收到的请求发送给worker线程处理，然后立即恢复监听，worker线程对请求进行处理并给客户端发送回复，此种服务器的设计草图如下：</p>
@@ -256,11 +263,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="o">(</span><span class="n">server</span> <span class="n">is</span> <span class="n">active</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">listen</span> <span class="k">for</span> <span class="n">request</span> <span class="c1">//监听请求
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">hand</span> <span class="n">request</span> <span class="n">to</span> <span class="n">worker</span> <span class="n">thread</span><span class="c1">//将接收到的请求发送给worker线程处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">server</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">active</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="c1">//监听请求</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">hand</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">worker</span><span class="w"> </span><span class="n">thread</span><span class="c1">//将接收到的请求发送给worker线程处理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在这种方式下，服务器线程会迅速返回监听，因而更多的客户端可以给服务器发送请求，服务器的响应也得以提高。</p>
 <p>该方法同样适用于桌面应用程序，如果你点击一个按钮来开启一个长任务，而执行该任务的线程是更新窗口、按钮等部件的线程，那么在该任务运行期间，该桌面程序将无法响应其它操作。相反的，可以将该任务移交给一个worker线程，当worker线程处理该任务时，更新窗口的线程处于空闲状态，可以响应其它用户请求，当worker线程执行完任务时通知更新窗口线程，该窗口线程根据执行结果来更新程序。因而利用worker线程设计实现的程序对用户更具有响应性。</p>
@@ -382,7 +389,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.191509a5c8442abdb6eb5020a332fd59bdd83a7e78a2d2241108df9113504292.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
             crossorigin="anonymous"></script>
