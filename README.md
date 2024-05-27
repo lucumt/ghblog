@@ -23,7 +23,7 @@
 
 ## 技术实现
 - 访问地址: **[https://lucumt.info](https://lucumt.info)**
-- 博客引擎: **[Hugo](https://gohugo.io/)**
+- 博客引擎: **[Hugo](https://gohugo.io/)**（`hugo v0.126.1`）
 - 域名托管: **[GoDaddy](https://www.godaddy.com)**
 - 博客托管: **[Github Pages](https://pages.github.com/)**  
 
