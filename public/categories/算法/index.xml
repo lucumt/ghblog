@@ -2,32 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>算法 on 飞狐的部落格</title>
-    <link>https://lucumt.info/categories/%E7%AE%97%E6%B3%95/</link>
+    <link>http://localhost:1313/categories/%E7%AE%97%E6%B3%95/</link>
     <description>Recent content in 算法 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 26 Feb 2017 19:26:33 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Aug 2023 11:18:47 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]二叉树莫里斯遍历</title>
+      <link>http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/</link>
+      <pubDate>Fri, 18 Aug 2023 11:18:47 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.educative.io/answers/what-is-morris-traversal&#34;&gt;&lt;strong&gt;What is Morris traversal&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>对二叉树进行莫里斯遍历</title>
+      <link>http://localhost:1313/post/algorithm/morris-traversal-for-binary-node/</link>
+      <pubDate>Fri, 18 Aug 2023 09:55:19 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/morris-traversal-for-binary-node/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>对多叉树进行序列化和反序列化</title>
+      <link>http://localhost:1313/post/algorithm/serialization-and-deserialization-for-multiple-node-tree/</link>
+      <pubDate>Fri, 26 Jun 2020 21:06:21 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/serialization-and-deserialization-for-multiple-node-tree/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/%E4%BA%8C%E5%8F%89%E6%A0%91&#34;&gt;&lt;strong&gt;二叉树&lt;/strong&gt;&lt;/a&gt;是算法中面试中的高频题，本文介绍一种基于&lt;code&gt;二叉树&lt;/code&gt;的&lt;code&gt;广度优先遍历&lt;/code&gt;来实现将&lt;code&gt;多叉树&lt;/code&gt;解析存储且能根据结果反向解析出&lt;code&gt;多叉树&lt;/code&gt;的实现方案(即序列化和反序列化)。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>将数组中的1全都移动到一起的最小移动次数</title>
+      <link>http://localhost:1313/post/algorithm/find-minimun-count-to-move-one-together/</link>
+      <pubDate>Fri, 05 Jun 2020 23:59:36 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/find-minimun-count-to-move-one-together/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>找到数组中每个元素右边第一个比它大的元素</title>
+      <link>http://localhost:1313/post/algorithm/find-first-right-larger-number-in-element/</link>
+      <pubDate>Fri, 15 May 2020 23:51:23 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/find-first-right-larger-number-in-element/</guid>
+      <description>&lt;p&gt;之前自己在学习算法时接触过&lt;code&gt;单调栈&lt;/code&gt;的概念，但对于其使用一直没有深入研究，最近遇到一道常规面试算法题，利用&lt;code&gt;单调栈&lt;/code&gt;来解决可以取得不错的时间复杂度和空间复杂度，故记录下。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>计算两个平行于坐标轴的矩形相交的面积</title>
-      <link>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</link>
+      <link>http://localhost:1313/post/algorithm/calculate-total-area-of-two-rectangles/</link>
       <pubDate>Sun, 26 Feb 2017 19:26:33 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/algorithm/calculate-total-area-of-two-rectangles/</guid>
-      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/algorithm/calculate-total-area-of-two-rectangles/</guid>
+      <description>&lt;p&gt;之前面试时遇到一个算法题:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>不通过第三方变量来交换两个变量的值</title>
-      <link>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</link>
+      <link>http://localhost:1313/post/algorithm/swap-two-variables-without-temp-variable/</link>
       <pubDate>Fri, 12 Aug 2016 11:03:09 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/algorithm/swap-two-variables-without-temp-variable/</guid>
+      <guid>http://localhost:1313/post/algorithm/swap-two-variables-without-temp-variable/</guid>
       <description>&lt;p&gt;变量交换是编程中经常使用的功能，本文记录几种不通过不添加第三方变量来交换两个变量的实现方式。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

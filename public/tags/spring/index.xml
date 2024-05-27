@@ -2,56 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring on 飞狐的部落格</title>
-    <link>https://lucumt.info/tags/spring/</link>
+    <link>http://localhost:1313/tags/spring/</link>
     <description>Recent content in Spring on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Jan 2022 11:00:01 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Mar 2024 16:56:06 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring中FactoryBean和ObjectFactory的差异对比</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-factory-bean-and-object-factory/</link>
+      <pubDate>Fri, 15 Mar 2024 16:56:06 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-factory-bean-and-object-factory/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring中ApplicationReadyEvent类和ApplicationRunner接口的差异对比</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-application-ready-event-and-application-runner/</link>
+      <pubDate>Thu, 18 Jan 2024 14:04:13 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-application-ready-event-and-application-runner/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring Cloud采用Nacos时外部配置文件不生效的原因分析</title>
+      <link>http://localhost:1313/post/spring/spring-cloud/dynamic-config-not-working-in-nacos/</link>
+      <pubDate>Sat, 25 Jun 2022 17:27:44 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-cloud/dynamic-config-not-working-in-nacos/</guid>
+      <description>&lt;p&gt;最近公司的新项目中采用了基于&lt;code&gt;Spring Cloud&lt;/code&gt;的微服务架构，其中在基于&lt;code&gt;Nacos&lt;/code&gt;进行配置时遇到了配置文件不生效的问题，基于网上自己以及自己对&lt;code&gt;Spring Boot&lt;/code&gt;和&lt;code&gt;Nacos&lt;/code&gt;源码的分析，最后找到了原因，故记录下。&lt;/p&gt;&#xA;&lt;p&gt;主要是要放到到&lt;code&gt;boostrap.yml&lt;/code&gt;文件而不是&lt;code&gt;application.yml&lt;/code&gt;文件中，只有这样才能生效。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ThreadLocal在Spring中的使用场景分析</title>
+      <link>http://localhost:1313/post/spring/spring-core/threadlocal-usage-in-spring/</link>
+      <pubDate>Sat, 25 Jun 2022 17:07:18 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/threadlocal-usage-in-spring/</guid>
+      <description>&lt;p&gt;&lt;code&gt;ThreadLocal&lt;/code&gt;在多线程环境中用于确保变量实现线程间隔离，本文通过源码分析的方式来展示&lt;code&gt;ThreadLocal&lt;/code&gt;在&lt;code&gt;Spring&lt;/code&gt;中的典型使用场景。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SpringMVC请求处理流程</title>
+      <link>http://localhost:1313/post/spring/spring-mvc/spring-mvc-process-request-process-flow/</link>
+      <pubDate>Thu, 16 Jun 2022 13:33:21 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-mvc/spring-mvc-process-request-process-flow/</guid>
+      <description>&lt;p&gt;SpringMVC的请求执行流程一直是面试中的重点，自己虽然从事相关的编程开发很久了，但是一直没能完整记住，故用博客记录下以备不时之需。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Spring中BeanFactory和FactoryBean的区别以及使用场景</title>
-      <link>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</link>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</link>
       <pubDate>Sun, 16 Jan 2022 11:00:01 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</guid>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>Spring中@Autowire、@Ressource和@Component注解的比较</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-autowire-resource-component-in-spring/</link>
+      <pubDate>Sat, 28 Mar 2020 13:15:07 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-autowire-resource-component-in-spring/</guid>
+      <description>&lt;p&gt;总结下&lt;code&gt;Spring&lt;/code&gt;中最常见的3种依赖注入标签&lt;code&gt;@Component&lt;/code&gt;、&lt;code&gt;@Autowire&lt;/code&gt;、&lt;code&gt;@Resource&lt;/code&gt;之间的区别。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring中@Component和@Configuration注解的异同与应用场景</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-component-and-configuration-annotation-in-spring/</link>
+      <pubDate>Wed, 25 Mar 2020 17:04:03 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-component-and-configuration-annotation-in-spring/</guid>
+      <description>&lt;p&gt;&lt;code&gt;@Component&lt;/code&gt;和&lt;code&gt;@Configuration&lt;/code&gt;是在&lt;code&gt;Spring Boot&lt;/code&gt;开发时使用频率很高的两个注解，本文基于网络上的相关资料整理下它们的异同以及应用场景。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]Spring中@Configuration和@Component的对比</title>
+      <link>http://localhost:1313/post/translate/spring/@configuration-vs-@component-in-spring/</link>
+      <pubDate>Wed, 08 Jan 2020 16:21:26 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/spring/@configuration-vs-@component-in-spring/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring中方法嵌套调用导致的事务不生效的解决方案</title>
+      <link>http://localhost:1313/post/spring/spring-core/make-transaction-working-in-spring-nested-method-invoke/</link>
+      <pubDate>Wed, 25 Sep 2019 17:05:32 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/make-transaction-working-in-spring-nested-method-invoke/</guid>
+      <description>&lt;p&gt;结合&lt;code&gt;Spring&lt;/code&gt;相关源码来说明在&lt;code&gt;Spring&lt;/code&gt;中存在方法嵌套调用时被嵌套的方法中事务不生效的原因以及相关的解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>加快Spring Boot的启动速度</title>
+      <link>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</link>
+      <pubDate>Sat, 08 Jun 2019 17:19:54 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</guid>
+      <description>&lt;p&gt;之前面试时被问到过此题，基于网上资料以及个人理解，简单记录下如果根据实际项目需求通过去掉各种无用的配置来缩短&lt;code&gt;Spring Boot&lt;/code&gt;的启动时间。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>在Quartz中动态设置定时任务的执行时间</title>
-      <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
+      <link>http://localhost:1313/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>
+      <guid>http://localhost:1313/post/quartz/update-quartz-scheduler-dynamic/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.quartz-scheduler.org/&#34;&gt;&lt;strong&gt;Quartz&lt;/strong&gt;&lt;/a&gt;是软件开发中常用的任务调度框架，实际中通常结合 &lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt; 一起使用，并在Spring的配置文件中利用&lt;code&gt;0 0 12 ? \* WED&lt;/code&gt;这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用SpringMVC下载大文件时内存溢出的处理</title>
-      <link>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</link>
+      <link>http://localhost:1313/post/spring/spring-mvc/download-big-file-using-springmvc/</link>
       <pubDate>Sun, 20 Mar 2016 16:41:29 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/spring/spring-mvc/download-big-file-using-springmvc/</guid>
+      <guid>http://localhost:1313/post/spring/spring-mvc/download-big-file-using-springmvc/</guid>
       <description>&lt;p&gt;文件的上传和下载是Web系统中的一个很普通的功能，实现的方式也有很多种，如利用 &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html&#34;&gt;&lt;strong&gt;java.io&lt;/strong&gt;&lt;/a&gt;下面的各种IO类自己实现，或者利用 &lt;a href=&#34;https://commons.apache.org/proper/commons-io/&#34;&gt;&lt;strong&gt;Commons IO&lt;/strong&gt;&lt;/a&gt;包中的&lt;code&gt;FileUtils&lt;/code&gt;、 &lt;code&gt;IOUtils&lt;/code&gt; 类中封装好的方法直接调用。由于目前我所开发的系统采用了 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;来作为项目的MVC实现，所以很自然的采用 &lt;a href=&#34;http://docs.spring.io/autorepo/docs/spring/3.2.x/spring-framework-reference/html/mvc.html&#34;&gt;&lt;strong&gt;SpringMVC&lt;/strong&gt;&lt;/a&gt;内置的API进行文件的下载，但在实际使用过程中发现其对大文件的下载支持不太好，现把解决方案记录如下：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>利用Spring Security动态改变登录用户的权限</title>
-      <link>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</link>
+      <link>http://localhost:1313/post/spring/update-authority-dynamic-using-spring-security/</link>
       <pubDate>Sun, 20 Mar 2016 16:05:52 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/spring/update-authority-dynamic-using-spring-security/</guid>
+      <guid>http://localhost:1313/post/spring/update-authority-dynamic-using-spring-security/</guid>
       <description>&lt;p&gt;利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;来管理我们的web程序时，通常需要在&lt;code&gt;UserDetailsService&lt;/code&gt;接口中的&lt;code&gt;loadUserByUsername&lt;/code&gt;方法中来初始化权限信息,但&lt;code&gt;UserDetailsService&lt;/code&gt;一般用于登录验证，这也意味着用户的权限在登录过程中就会被计算出来。通常情况下由于用户的权限很少发生变化，在登录过程中计算出用户权限是合理的，但有些情况下，我们需要在中途来动态的改变用户的权限，此时我们可以利用&lt;a href=&#34;http://projects.spring.io/spring-security/&#34;&gt;&lt;strong&gt;Spring Security&lt;/strong&gt;&lt;/a&gt;提供的API来实现。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>在Spring中利用Mock对HttpServletRequest进行单元测试</title>
-      <link>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
+      <link>http://localhost:1313/post/spring/spring-mvc/using-mock-test-http-servlet-request/</link>
       <pubDate>Sat, 19 Mar 2016 22:43:47 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
-      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;
-&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/spring/spring-mvc/using-mock-test-http-servlet-request/</guid>
+      <description>&lt;h2 id=&#34;编写单元测试时的注意事项&#34;&gt;编写单元测试时的注意事项&lt;/h2&gt;&#xA;&lt;p&gt;根据软件开发过程中的&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;&lt;strong&gt;TDD&lt;/strong&gt;&lt;/a&gt;理论，在我们编写自己的代码时，要尽量使得该代码能够进行单元测试。为了能够使得代码可以进行单元测试，我们在给接口或方法传入参数时要尽量传入简单参数，避免传入&lt;code&gt;HttpServletRequest&lt;/code&gt; , &lt;code&gt;ServletContext&lt;/code&gt;等和web上下文相关的复杂对象。但仍有部分情况下基于代码简洁性和可维护性的考虑，我们需要传入&lt;code&gt;HttpServletRequest&lt;/code&gt;对象，此时对此类方法进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试时会较为困难，本文介绍一种在&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;中通过&lt;a href=&#34;http://mockito.org/&#34;&gt;&lt;strong&gt;Mock&lt;/strong&gt;&lt;/a&gt;来模拟&lt;code&gt;HttpServletRequest&lt;/code&gt;对象进行&lt;a href=&#34;http://junit.org/&#34;&gt;&lt;strong&gt;JUnit&lt;/strong&gt;&lt;/a&gt;单元测试的方法。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

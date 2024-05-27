@@ -2,28 +2,123 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>容器化 on 飞狐的部落格</title>
-    <link>https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</link>
+    <link>http://localhost:1313/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</link>
     <description>Recent content in 容器化 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Aug 2022 18:27:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Apr 2024 10:46:34 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Docker和Podman的差异</title>
+      <link>http://localhost:1313/post/docker/difference-between-docker-and-podman/</link>
+      <pubDate>Fri, 26 Apr 2024 10:46:34 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/difference-between-docker-and-podman/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion&#34;&gt;https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>http://localhost:1313/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      <guid>http://localhost:1313/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</title>
+      <link>http://localhost:1313/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</link>
+      <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>
+      <guid>http://localhost:1313/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</guid>
+      <description>&lt;p&gt;由于&lt;code&gt;Docsify&lt;/code&gt;采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从&lt;code&gt;Docsify&lt;/code&gt;迁移到基于&lt;code&gt;Docker&lt;/code&gt;搭建的&lt;code&gt;GitBook&lt;/code&gt;并结合&lt;code&gt;GitLab Runner&lt;/code&gt;实现自动更新，在这其中踩了一些坑，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</title>
+      <link>http://localhost:1313/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</link>
+      <pubDate>Fri, 24 Mar 2023 15:59:58 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/</guid>
+      <description>&lt;p&gt;&lt;code&gt;Nacos&lt;/code&gt;官方的&lt;code&gt;docker&lt;/code&gt;镜像不支持&lt;code&gt;LDAP&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;同时在连接&lt;code&gt;mysql&lt;/code&gt;方面在某些版本中会出现&lt;strong&gt;No Datasource Set&lt;/strong&gt; 的异常，而其官方的release版本则很很稳定，同时又支持&lt;code&gt;LDAP&lt;/code&gt;。目前部门很多项目都是基于&lt;code&gt;docker&lt;/code&gt;部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的&lt;code&gt;nacos&lt;/code&gt;镜像，在确保性能稳定的同时也能支持&lt;code&gt;ldap&lt;/code&gt;登录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Kubernetes中node的IP地址范围扩容以创建更多的pod</title>
+      <link>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</link>
+      <pubDate>Fri, 10 Mar 2023 22:49:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</guid>
+      <description>&lt;p&gt;由于公司内部越来越多的项目采用&lt;code&gt;KubeSphere&lt;/code&gt;作为&lt;code&gt;DevOps&lt;/code&gt;工具，在使用过程中遇到了IP地址耗尽导致pod无法创建的问题，本文简要记录下对应的解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</title>
+      <link>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</link>
+      <pubDate>Wed, 11 Jan 2023 11:31:45 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</guid>
+      <description>&lt;p&gt;工作中涉及到&lt;code&gt;Kubernetes&lt;/code&gt;相关知识，自己之前一直没有系统性的学习&lt;code&gt;Kubernetes&lt;/code&gt;，近期在腾讯云上想安装&lt;code&gt;Kubernetes&lt;/code&gt;时一直遇到在执行&lt;code&gt;kubeadm init&lt;/code&gt;时&lt;code&gt;6443&lt;/code&gt;和&lt;code&gt;10280&lt;/code&gt;端口无法访问导致操作失败进而无法顺利安装&lt;code&gt;Kubernetes&lt;/code&gt;。一番排查后发现是由于从&lt;code&gt;1.24.0&lt;/code&gt;之后&lt;code&gt;Kubernetes&lt;/code&gt;默认采用&lt;code&gt;containerd&lt;/code&gt;作为运行时容器，其默认镜像为&lt;code&gt;registry.k8s.io&lt;/code&gt;，该镜像在国内无法访问导致的，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用Grafana和Prometheus对系统进行监控</title>
+      <link>http://localhost:1313/post/devops/using-grafana-and-prometheus-to-monitor-systems/</link>
+      <pubDate>Thu, 15 Dec 2022 10:56:54 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/using-grafana-and-prometheus-to-monitor-systems/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;docker&lt;/code&gt;环境下利用&lt;a href=&#34;https://grafana.com/&#34;&gt;&lt;strong&gt;Grafana&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://prometheus.io/&#34;&gt;&lt;strong&gt;Prometheus&lt;/strong&gt;&lt;/a&gt;对系统进行监控。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>由于k8s中的错误配置导致无法创建新节点</title>
+      <link>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</link>
+      <pubDate>Fri, 11 Nov 2022 18:19:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
+      <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>在Kubernetes中配置service-node-port-range不生效的问题</title>
-      <link>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</link>
+      <link>http://localhost:1313/post/k8s/service-node-port-range-config-not-working-in-k8s/</link>
       <pubDate>Mon, 15 Aug 2022 18:27:59 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</guid>
+      <guid>http://localhost:1313/post/k8s/service-node-port-range-config-not-working-in-k8s/</guid>
       <description>&lt;p&gt;近期在公司内部搭建基于&lt;a href=&#34;https://kubesphere.com.cn/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;的持续集成平台时，发现其底层的&lt;a href=&#34;https://kubernetes.io/&#34;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;默认的端口范围为&lt;strong&gt;30000-32767&lt;/strong&gt;而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>Docker中的端口与系统防火墙关系分析</title>
+      <link>http://localhost:1313/post/docker/analysis-docker-port-and-system-firewall/</link>
+      <pubDate>Fri, 05 Aug 2022 09:23:59 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/analysis-docker-port-and-system-firewall/</guid>
+      <description></description>
+    </item>
     <item>
       <title>由于daemon.json中的配置与其它启动项冲突导致docker服务无法启动</title>
-      <link>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
+      <link>http://localhost:1313/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</link>
       <pubDate>Thu, 04 Aug 2022 16:56:18 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</guid>
+      <guid>http://localhost:1313/post/docker/can-not-set-log-driver-and-log-opts-in-docker-daemon-json/</guid>
       <description>&lt;p&gt;由于公司的&lt;code&gt;docker&lt;/code&gt;容器在运行一段时间后日志变得很大，通过&lt;code&gt;shell&lt;/code&gt;脚本或者结合&lt;code&gt;docker stop&lt;/code&gt;、&lt;code&gt;docker rm&lt;/code&gt;和&lt;code&gt;docker run&lt;/code&gt;来重新创建实例方式都觉得太麻烦，按照网络上的建议在&lt;code&gt;/etc/docker/daemon.json&lt;/code&gt;中进行相关修改后却一直无法启动，同时错误信息一直提示&lt;code&gt;unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the config…e: json-file)&lt;/code&gt;，经过一番排查后终于找到原因，故记录下。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>多个docker-compose.yml文件启动时容器冲突的原因分析</title>
+      <link>http://localhost:1313/post/docker/multiple-docker-compose-conflict-analysis/</link>
+      <pubDate>Mon, 25 Jul 2022 22:53:33 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/multiple-docker-compose-conflict-analysis/</guid>
+      <description>&lt;p&gt;简要记录下近期在项目中遇到的多个&lt;code&gt;docker-compose.yml&lt;/code&gt;文件容器启动时发生冲突的原因分析。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Docker容器内部获取当前容器实例的名称</title>
+      <link>http://localhost:1313/post/docker/get-docker-name-inside-docker-container/</link>
+      <pubDate>Thu, 06 May 2021 13:16:52 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/get-docker-name-inside-docker-container/</guid>
+      <description>&lt;p&gt;介绍如何在&lt;code&gt;Docker&lt;/code&gt;容器内部获取当前容器名称的方法，特别感谢&lt;a href=&#34;https://medium.com/disassembly/get-container-name-inside-the-docker-container-1997d36aaecd&#34;&gt;&lt;strong&gt;Get container name inside the docker container&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在利用docker安装的nginx中实现静态文件下载</title>
+      <link>http://localhost:1313/post/docker/download-file-from-nginx-installed-via-docker/</link>
+      <pubDate>Tue, 23 Mar 2021 10:46:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/download-file-from-nginx-installed-via-docker/</guid>
+      <description>&lt;p&gt;简单记录利用&lt;code&gt;nginx&lt;/code&gt;结合&lt;code&gt;docker&lt;/code&gt;实现一个简易的静态文件下载服务器。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Docker中不同的网络类型对比</title>
+      <link>http://localhost:1313/post/docker/different-types-of-docker-network/</link>
+      <pubDate>Wed, 20 Jan 2021 15:23:57 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/different-types-of-docker-network/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dockerfile中ADD与COPY的使用异同</title>
+      <link>http://localhost:1313/post/docker/difference-between-add-and-copy-in-dockerfile-build/</link>
+      <pubDate>Sat, 16 Jan 2021 15:00:05 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/difference-between-add-and-copy-in-dockerfile-build/</guid>
+      <description>&lt;p&gt;简要说明在使用&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/&#34;&gt;&lt;strong&gt;Dockerfile&lt;/strong&gt;&lt;/a&gt;构建镜像时，&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/#add&#34;&gt;&lt;strong&gt;ADD&lt;/strong&gt;&lt;/a&gt;与&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/#copy&#34;&gt;&lt;strong&gt;COPY&lt;/strong&gt;&lt;/a&gt;指令的使用差异。&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

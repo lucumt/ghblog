@@ -1,29 +1,124 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kubesphere on 飞狐的部落格</title>
-    <link>https://lucumt.info/tags/kubesphere/</link>
-    <description>Recent content in kubesphere on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Kubesphere on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/kubesphere/</link>
+    <description>Recent content in Kubesphere on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Sep 2022 09:35:50 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Jan 2024 10:17:42 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
+      <link>http://localhost:1313/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
+      <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/switch-nodejs-version-in-jenkins-pipeline/</guid>
+      <description>&lt;p&gt;近期有个项目组有个&lt;code&gt;Vue&lt;/code&gt;项目需要在基于&lt;code&gt;KubeSphere&lt;/code&gt;的&lt;code&gt;Jenkins&lt;/code&gt;流水线中用高版本的&lt;code&gt;nodejs&lt;/code&gt;进行编译，自己一开始尝试通过在流水线中直接升级&lt;code&gt;nodejs&lt;/code&gt;版本，但并未成功，后来参考&lt;code&gt;KubeSphere&lt;/code&gt;论坛上的相关说明才解决该问题，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用SSH实现在Jekins中给远程服务器部署项目</title>
+      <link>http://localhost:1313/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</link>
+      <pubDate>Wed, 15 Nov 2023 10:14:18 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/</guid>
+      <description>&lt;p&gt;简要记录如何整合&lt;code&gt;Jenkins&lt;/code&gt;与&lt;code&gt;SSH&lt;/code&gt;免密登录，实现通过&lt;code&gt;Jenkins&lt;/code&gt;流水线部署到不同的服务器环境下，提高开发与测试环境的灵活性。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
+      <link>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>
+      <pubDate>Thu, 06 Jul 2023 09:54:01 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</guid>
+      <description>&lt;p&gt;近期在给公司内部安装&lt;code&gt;KubeSphere&lt;/code&gt;新环境和维护原有&lt;code&gt;KubeSphere&lt;/code&gt;环境的过程中，频繁遇到&lt;code&gt;x509: certificate relies on legacy Common Name field, use SANs instead&lt;/code&gt;，此问题会影响正常功能的使用，简要介绍其解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
+      <link>http://localhost:1313/post/devops/checkout-project-with-submodule-in-kubesphere/</link>
+      <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/checkout-project-with-submodule-in-kubesphere/</guid>
+      <description>&lt;p&gt;在使用&lt;a href=&#34;https://www.kubesphere.io/zh/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;对公司项目进行持续集成时，有一个项目在&lt;code&gt;Gitlab&lt;/code&gt;中采用了&lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;&lt;strong&gt;Submodules&lt;/strong&gt;&lt;/a&gt;结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</title>
+      <link>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</link>
+      <pubDate>Tue, 06 Jun 2023 16:17:41 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</guid>
+      <description>&lt;p&gt;简要记录下在安装完成&lt;a href=&#34;https://www.kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;后由于缺少&lt;a href=&#34;https://openebs.io/&#34;&gt;OpenEBS&lt;/a&gt;而导致名为&lt;code&gt;prometheus-k8s-0&lt;/code&gt;的pod节点一直处于&lt;code&gt;Pending&lt;/code&gt;状态，进而导致在&lt;code&gt;KubeSphere&lt;/code&gt;集群管理中资源统计部分出现NaN的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在KubeSphere中编译和部署C&#43;&#43;程序</title>
+      <link>http://localhost:1313/post/devops/compile-and-deploy-cpp-project-in-kubesphere/</link>
+      <pubDate>Mon, 29 May 2023 11:09:40 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/compile-and-deploy-cpp-project-in-kubesphere/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>在Jenkins中读取和修改JSON文件</title>
+      <link>http://localhost:1313/post/devops/reading-and-writing-json-file-in-jenkins/</link>
+      <pubDate>Mon, 29 May 2023 11:08:24 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/reading-and-writing-json-file-in-jenkins/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>KubeSphere通过dockerfile构建镜像时无法识别自定义的镜像仓库</title>
+      <link>http://localhost:1313/post/devops/docker-pull-ignore-registry-mirrors-in-kubesphere-pipeline/</link>
+      <pubDate>Thu, 18 May 2023 10:34:46 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/docker-pull-ignore-registry-mirrors-in-kubesphere-pipeline/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
+      <link>http://localhost:1313/post/devops/share-kubepshere-using-experience-for-current-company/</link>
+      <pubDate>Mon, 17 Apr 2023 14:31:45 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/share-kubepshere-using-experience-for-current-company/</guid>
+      <description>&lt;p&gt;我司从2022年6月开始使用&lt;code&gt;KubeSphere&lt;/code&gt;到目前为止快一年时间，简要记录下此过程中的经验积累和问题反馈。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在KubeSphere中开启Jenkins创建多个从节点支持并发构建</title>
+      <link>http://localhost:1313/post/devops/enable-multiple-jenkins-node-to-build-in-kubesphere/</link>
+      <pubDate>Fri, 14 Apr 2023 11:33:52 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/enable-multiple-jenkins-node-to-build-in-kubesphere/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>给Kubernetes中node的IP地址范围扩容以创建更多的pod</title>
+      <link>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</link>
+      <pubDate>Fri, 10 Mar 2023 22:49:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</guid>
+      <description>&lt;p&gt;由于公司内部越来越多的项目采用&lt;code&gt;KubeSphere&lt;/code&gt;作为&lt;code&gt;DevOps&lt;/code&gt;工具，在使用过程中遇到了IP地址耗尽导致pod无法创建的问题，本文简要记录下对应的解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Jenkins中根据配置从不同的仓库中Checkout代码</title>
+      <link>http://localhost:1313/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</link>
+      <pubDate>Fri, 10 Mar 2023 22:48:50 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/git-checkout-by-dynamic-repository-in-jenkins/</guid>
+      <description>&lt;style&gt;&#xD;&#xA;div.mermaid &gt; svg { max-width: 60% !important; }&#xD;&#xA;&lt;/style&gt;&#xD;&#xA;&lt;p&gt;简要介绍如何在&lt;a href=&#34;https://kubesphere.io/zh/&#34;&gt;KubeSphere&lt;/a&gt;中使用&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;基于用户选择的不同&lt;a href=&#34;https://gitlab.com&#34;&gt;GitLab&lt;/a&gt;工程模块利用&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;进行动态的代码下载和编译构建，&lt;strong&gt;将多条流水线缩减为一条，减少&lt;code&gt;Jenkins&lt;/code&gt;流水线的开发与维护成本&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>由于k8s中的错误配置导致无法创建新节点</title>
+      <link>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</link>
+      <pubDate>Fri, 11 Nov 2022 18:19:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
+      <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用Nacos与KubeSphere创建多套开发与测试环境</title>
+      <link>http://localhost:1313/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</link>
+      <pubDate>Thu, 15 Sep 2022 15:46:24 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;http://localhost:1313/post/devops/share-experiences-for-using-kubesphere/&#34;&gt;KubeSphere使用心得&lt;/a&gt;给部门搭建了&lt;code&gt;dev&lt;/code&gt;、&lt;code&gt;sit&lt;/code&gt;、&lt;code&gt;test&lt;/code&gt;、&lt;code&gt;prod&lt;/code&gt;这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合&lt;a href=&#34;https://nacos.io/zh-cn/docs/what-is-nacos.html&#34;&gt;Nacos&lt;/a&gt;在&lt;code&gt;KubeSphere&lt;/code&gt;中动态配置多套环境功能，通过修改&lt;code&gt;Nacos&lt;/code&gt;中的&lt;code&gt;JSON&lt;/code&gt;配置文件可很容易的从4套扩展为16套甚至更多。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Kubesphere集成LDAP踩坑记录</title>
-      <link>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</link>
+      <link>http://localhost:1313/post/devops/setting-ldap-for-kubesphere/</link>
       <pubDate>Sun, 04 Sep 2022 09:35:50 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</guid>
+      <guid>http://localhost:1313/post/devops/setting-ldap-for-kubesphere/</guid>
       <description>&lt;p&gt;之前在公司内部推广&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;LDAP&lt;/a&gt;整合其它系统的成熟经验，很自然的想将&lt;code&gt;LDAP&lt;/code&gt;集成到&lt;code&gt;KubeSphere&lt;/code&gt;中。原以为会很容易，一番折腾下来费了不好功夫(&lt;strong&gt;&lt;code&gt;KubeSphere&lt;/code&gt;要求使用&lt;code&gt;LDAP&lt;/code&gt;时必须设置管理员账号和密码&lt;/strong&gt;)，简单记录下。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>KubeSphere使用心得</title>
-      <link>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</link>
+      <link>http://localhost:1313/post/devops/share-experiences-for-using-kubesphere/</link>
       <pubDate>Sat, 06 Aug 2022 18:00:08 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</guid>
+      <guid>http://localhost:1313/post/devops/share-experiences-for-using-kubesphere/</guid>
       <description>&lt;p&gt;目前公司的开发方式都是手工编译&amp;amp;部署，十分低效，最近将Web开发相关的项目都基于&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;通过基于&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;的流水线方式实现了自动部署，在此过程中遇到了一些阻塞点，简单记录下它们的解决方案。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

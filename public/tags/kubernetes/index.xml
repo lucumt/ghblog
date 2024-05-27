@@ -1,20 +1,61 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kubernetes on 飞狐的部落格</title>
-    <link>https://lucumt.info/tags/kubernetes/</link>
-    <description>Recent content in kubernetes on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Kubernetes on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on 飞狐的部落格</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Aug 2022 18:27:59 +0800</lastBuildDate><atom:link href="https://lucumt.info/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jul 2023 09:54:01 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
+      <link>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>
+      <pubDate>Thu, 06 Jul 2023 09:54:01 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</guid>
+      <description>&lt;p&gt;近期在给公司内部安装&lt;code&gt;KubeSphere&lt;/code&gt;新环境和维护原有&lt;code&gt;KubeSphere&lt;/code&gt;环境的过程中，频繁遇到&lt;code&gt;x509: certificate relies on legacy Common Name field, use SANs instead&lt;/code&gt;，此问题会影响正常功能的使用，简要介绍其解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</title>
+      <link>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</link>
+      <pubDate>Tue, 06 Jun 2023 16:17:41 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</guid>
+      <description>&lt;p&gt;简要记录下在安装完成&lt;a href=&#34;https://www.kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;后由于缺少&lt;a href=&#34;https://openebs.io/&#34;&gt;OpenEBS&lt;/a&gt;而导致名为&lt;code&gt;prometheus-k8s-0&lt;/code&gt;的pod节点一直处于&lt;code&gt;Pending&lt;/code&gt;状态，进而导致在&lt;code&gt;KubeSphere&lt;/code&gt;集群管理中资源统计部分出现NaN的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>KubeSphere在当前公司提升研发效率的使用实践分享</title>
+      <link>http://localhost:1313/post/devops/share-kubepshere-using-experience-for-current-company/</link>
+      <pubDate>Mon, 17 Apr 2023 14:31:45 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/share-kubepshere-using-experience-for-current-company/</guid>
+      <description>&lt;p&gt;我司从2022年6月开始使用&lt;code&gt;KubeSphere&lt;/code&gt;到目前为止快一年时间，简要记录下此过程中的经验积累和问题反馈。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Kubernetes中node的IP地址范围扩容以创建更多的pod</title>
+      <link>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</link>
+      <pubDate>Fri, 10 Mar 2023 22:49:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/increase-ip-address-range-in-kubernetes/</guid>
+      <description>&lt;p&gt;由于公司内部越来越多的项目采用&lt;code&gt;KubeSphere&lt;/code&gt;作为&lt;code&gt;DevOps&lt;/code&gt;工具，在使用过程中遇到了IP地址耗尽导致pod无法创建的问题，本文简要记录下对应的解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</title>
+      <link>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</link>
+      <pubDate>Wed, 11 Jan 2023 11:31:45 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</guid>
+      <description>&lt;p&gt;工作中涉及到&lt;code&gt;Kubernetes&lt;/code&gt;相关知识，自己之前一直没有系统性的学习&lt;code&gt;Kubernetes&lt;/code&gt;，近期在腾讯云上想安装&lt;code&gt;Kubernetes&lt;/code&gt;时一直遇到在执行&lt;code&gt;kubeadm init&lt;/code&gt;时&lt;code&gt;6443&lt;/code&gt;和&lt;code&gt;10280&lt;/code&gt;端口无法访问导致操作失败进而无法顺利安装&lt;code&gt;Kubernetes&lt;/code&gt;。一番排查后发现是由于从&lt;code&gt;1.24.0&lt;/code&gt;之后&lt;code&gt;Kubernetes&lt;/code&gt;默认采用&lt;code&gt;containerd&lt;/code&gt;作为运行时容器，其默认镜像为&lt;code&gt;registry.k8s.io&lt;/code&gt;，该镜像在国内无法访问导致的，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>由于k8s中的错误配置导致无法创建新节点</title>
+      <link>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</link>
+      <pubDate>Fri, 11 Nov 2022 18:19:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
+      <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>在Kubernetes中配置service-node-port-range不生效的问题</title>
-      <link>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</link>
+      <link>http://localhost:1313/post/k8s/service-node-port-range-config-not-working-in-k8s/</link>
       <pubDate>Mon, 15 Aug 2022 18:27:59 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/k8s/service-node-port-range-config-not-working-in-k8s/</guid>
+      <guid>http://localhost:1313/post/k8s/service-node-port-range-config-not-working-in-k8s/</guid>
       <description>&lt;p&gt;近期在公司内部搭建基于&lt;a href=&#34;https://kubesphere.com.cn/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;的持续集成平台时，发现其底层的&lt;a href=&#34;https://kubernetes.io/&#34;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;默认的端口范围为&lt;strong&gt;30000-32767&lt;/strong&gt;而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -2,90 +2,179 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>翻译 on 飞狐的部落格</title>
-    <link>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</link>
+    <link>http://localhost:1313/categories/%E7%BF%BB%E8%AF%91/</link>
     <description>Recent content in 翻译 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Jun 2022 12:16:44 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Apr 2024 10:46:34 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Docker和Podman的差异</title>
+      <link>http://localhost:1313/post/docker/difference-between-docker-and-podman/</link>
+      <pubDate>Fri, 26 Apr 2024 10:46:34 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/difference-between-docker-and-podman/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion&#34;&gt;https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]二叉树莫里斯遍历</title>
+      <link>http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/</link>
+      <pubDate>Fri, 18 Aug 2023 11:18:47 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.educative.io/answers/what-is-morris-traversal&#34;&gt;&lt;strong&gt;What is Morris traversal&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]我是如何在网络上隐藏自己的身份</title>
+      <link>http://localhost:1313/post/translate/other/starting-a-new-digital-identity/</link>
+      <pubDate>Thu, 17 Aug 2023 19:43:26 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/other/starting-a-new-digital-identity/</guid>
+      <description>&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;&#xD;&#xA;&lt;p&gt;本文翻译自阮一峰老师的&lt;a href=&#34;https://www.ruanyifeng.com/blog/2023/08/weekly-issue-265.html&#34;&gt;&lt;strong&gt;科技爱好者周刊（第 265 期）&lt;/strong&gt;&lt;/a&gt;中介绍的一篇英文文章&lt;a href=&#34;https://k3tan.com/starting-a-new-digital-identity&#34;&gt;&lt;strong&gt;我如何隐藏自己的网络身份&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>[译]4000个点赞并且在不断增加，回忆之旅</title>
+      <link>http://localhost:1313/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</link>
+      <pubDate>Sun, 13 Aug 2023 17:49:14 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</guid>
+      <description>&lt;style&gt;&#xD;&#xA;    .content img {&#xD;&#xA;      margin-left: auto;&#xD;&#xA;      margin-right: auto;&#xD;&#xA;      display: block !important;&#xD;&#xA;    }&#xD;&#xA;&lt;/style&gt;&#xD;&#xA;&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;&#xD;&#xA;&lt;p&gt;在阅读阮一峰老师的&lt;a href=&#34;https://www.ruanyifeng.com/blog/2023/08/weekly-issue-266.html&#34;&gt;&lt;strong&gt;科技爱好者周刊（第 266 期）&lt;/strong&gt;&lt;/a&gt;时，发现其中一篇关于&lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;&lt;strong&gt;Docker Compose&lt;/strong&gt;&lt;/a&gt;的文章&lt;a href=&#34;https://brianchristner.io/4000-stars-and-counting-a-trip-down-memory-lane/&#34;&gt;&lt;strong&gt;4&#39;000 Stars and counting, a trip down memory lane&lt;/strong&gt;&lt;/a&gt;很有意思，基于自己粗浅的英文翻译一下。&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>[译]如何测试私有方法</title>
+      <link>http://localhost:1313/post/translate/junit5/testing-private-methods/</link>
+      <pubDate>Mon, 03 Jul 2023 22:42:07 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/testing-private-methods/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/testing-private-methods/&#34;&gt;&lt;strong&gt;How Do I Test Private Methods?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]Junit 5 预期异常 - 如何检测异常是否抛出</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-expected-exception/</link>
+      <pubDate>Sun, 02 Jul 2023 14:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-expected-exception/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-expected-exception/&#34;&gt;&lt;strong&gt;JUnit 5 Expected Exception: How to assert an exception is thrown?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit5 Gradle示例 - 基于Gradle运行测试</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-gradle-example/</link>
+      <pubDate>Tue, 27 Jun 2023 14:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-gradle-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-gradle-example/&#34;&gt;&lt;strong&gt;JUnit 5 Gradle Example&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit5 Maven示例-基于Surefire运行测试</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-maven-example/</link>
+      <pubDate>Fri, 23 Jun 2023 12:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-maven-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-maven-example/&#34;&gt;&lt;strong&gt;JUnit 5 Maven Example: Running Tests with Surefire&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]从JUnit 4 迁移到JUnit 5 - 权威指南</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-migration/</link>
+      <pubDate>Wed, 21 Jun 2023 22:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-migration/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-migration/&#34;&gt;&lt;strong&gt;Migrating From JUnit 4 to JUnit 5: A Definitive Guide&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit5 整合Kotlin</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-kotlin/</link>
+      <pubDate>Wed, 21 Jun 2023 19:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-kotlin/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-kotlin//&#34;&gt;&lt;strong&gt;JUnit 5 With Kotlin for Java Developers&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]在JUnit 5中使用Mockito</title>
+      <link>http://localhost:1313/post/translate/junit5/using-mockito-in-junit5/</link>
+      <pubDate>Mon, 19 Jun 2023 19:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/using-mockito-in-junit5/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-mockito/&#34;&gt;&lt;strong&gt;Using Mockito With JUnit 5&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit 5 参数化测试实用指南</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-parameterized-tests/</link>
+      <pubDate>Sat, 17 Jun 2023 09:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-parameterized-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-parameterized-tests/&#34;&gt;&lt;strong&gt;A More Practical Guide to JUnit 5 Parameterized Tests&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit 5 生命周期 - 注释之前和之后</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-test-lifecycle/</link>
+      <pubDate>Fri, 16 Jun 2023 19:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-test-lifecycle/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-test-lifecycle/&#34;&gt;&lt;strong&gt;JUnit 5 Test Lifecycle: Before and After Annotations&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-nested-tests/</link>
+      <pubDate>Tue, 02 May 2023 13:12:24 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-nested-tests/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-nested-tests/&#34;&gt;&lt;strong&gt;JUnit 5 Nested Tests: Grouping Related Tests Together&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit 5 断言 - 验证测试结果</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-assertions/</link>
+      <pubDate>Mon, 01 May 2023 13:37:22 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-assertions/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-assertions/&#34;&gt;&lt;strong&gt;JUnit 5 Assertions: Verifying Test Results&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit 5 入门 - 编写第一段测试代码</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-getting-started/</link>
+      <pubDate>Mon, 01 May 2023 09:51:22 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-getting-started/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-getting-started&#34;&gt;&lt;strong&gt;Getting Started with JUnit 5: Writing Your First Test&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>5.[译]同线程系统</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/same-threading/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/same-threading/</link>
       <pubDate>Thu, 16 Jun 2022 12:16:44 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/same-threading/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;
-&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/same-threading/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>[译]Spring中@Configuration和@Component的对比</title>
+      <link>http://localhost:1313/post/translate/spring/@configuration-vs-@component-in-spring/</link>
+      <pubDate>Wed, 08 Jan 2020 16:21:26 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/spring/@configuration-vs-@component-in-spring/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://dimafeng.com/2015/08/29/spring-configuration_vs_component/&#34;&gt;&lt;strong&gt;Spring @Configuration vs @Component&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;http://dimafeng.com/2015/08/16/cglib/&#34;&gt;前一篇文章&lt;/a&gt;中，我说过我们可以使用&lt;code&gt;@Component&lt;/code&gt;作为&lt;code&gt;@Configuration&lt;/code&gt;的一个备用选择，实际上这是来自于&lt;a href=&#34;https://github.com/spring-projects/spring-framework/issues/17430&#34;&gt;Spring team的官方建议&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[译]如何处理InterruptedException</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/dealing-with-interrupted-exception/</link>
       <pubDate>Sat, 15 Dec 2018 11:57:36 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/</guid>
-      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。
-但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/dealing-with-interrupted-exception/</guid>
+      <description>&lt;p&gt;本文翻译自 &lt;strong&gt;&lt;a href=&#34;https://www.ibm.com/developerworks/library/j-jtp05236/&#34;&gt;Dealing with InterruptedException&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了&lt;code&gt;Thread.sleep()&lt;/code&gt;来实现。&#xA;但此时编译器或IDE会立即提示你没有处理非运行时异常 &lt;strong&gt;&lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html&#34;&gt;InterruptedException&lt;/a&gt;&lt;/strong&gt;。那么，什么是&lt;code&gt;InterruptedException&lt;/code&gt;,为什么我们要必须处理它呢？&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>4. [译]并发的模型</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/concurrency-models/</link>
       <pubDate>Sat, 05 Aug 2017 00:10:11 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/concurrency-models/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;&lt;strong&gt;Java Concurrency / Concurrency Models&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/concurrency-models/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/concurrency-models.html&#34;&gt;&lt;strong&gt;Java Concurrency / Concurrency Models&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;并发系统可以使用不同的并发模型来实现，并发模型是指线程在系统中如何写作来完成给定的任务。不同的并发模型以不同的方式拆分任务，线程间以不同的方式协作和通信，本文将深入研究在撰写本文时最流行并发模型(2015年)。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>3. [译]多线程的成本</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/multithreading-costs/</link>
       <pubDate>Sat, 01 Apr 2017 21:57:30 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-costs/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Costs&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/multithreading-costs/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/costs.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Costs&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;从一个单线程程序切换为多线程程序在给我们带来好处的同时也会产生一些额外的成本，不要因为会使用多线程就将一个程序变为多线程实现。在准备使用多线程时，我们应该有一个清楚的认识：使用多线程带来的好处大于其成本，当有不确定时，我们应该尝试度量应用程序的性能和响应性来决定是否采用多线程，而不是靠猜来决定。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2. [译]多线程的优点</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/multithreading-benefits/</link>
       <pubDate>Sat, 01 Apr 2017 13:18:43 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/multithreading-benefits/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Benefits&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;更好的资源利用&lt;/li&gt;
-&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;
-&lt;li&gt;提高程序响应&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/multithreading-benefits/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/benefits.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Benefits&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;尽管多线程给程序实现带来了挑战，但由于多线程的一些优点我们仍然在使用它，其中的一些优点如下：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;更好的资源利用&lt;/li&gt;&#xA;&lt;li&gt;在某些场景可以简化程序设计&lt;/li&gt;&#xA;&lt;li&gt;提高程序响应&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>1. [译]Java多线程与并发教程</title>
-      <link>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</link>
       <pubDate>Thu, 30 Mar 2017 14:49:08 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Tutorial&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;
-&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。
-之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/java-concurrency-multithreading-tutorial/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/index.html&#34;&gt;&lt;strong&gt;Java Concurrency / Multithreading Tutorial&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;最开始一台电脑只有单个CPU，只能一次运行一个任务，之后出现的多任务处理则意味着计算机在同一时间可以处理多个程序（也可以称之为任务或进程），虽然它们并不是真正的并发。由于单个CPU被不同的程序共用，操作系统需要在程序运行过程中不停地切换CPU，在短暂的执行一个程序后就立即切换到下一个程序。&lt;/p&gt;&#xA;&lt;p&gt;多任务处理给软件开发人员提出了新的挑战，程序不能再假定拥有CPU所有的可用时间、内存和其它计算机资源，一个好的程序应该及时释放所有不需要使用的资源，以便其它程序可以使用它们。&#xA;之后出现的多线程则意味着可以在同一个程序里面执行多个线程，每一个执行的线程可以被认为是CPU在执行当前程序，当在同一个程序里面执行多个线程时，看起来像是拥有多个CPU在执行该程序。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>[译] Java Volatile 关键字详解</title>
-      <link>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</link>
+      <link>http://localhost:1313/post/translate/java-concurrency/java-volatile-keyword/</link>
       <pubDate>Mon, 07 Mar 2016 18:03:18 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/java-concurrency/java-volatile-keyword/</guid>
-      <description>&lt;p&gt;本文翻译自 &lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;&lt;strong&gt;Java Volatile Keyword&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为&lt;strong&gt;在主内中存储&lt;/strong&gt;，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;
-&lt;p&gt;事实上，从&lt;code&gt;Java5&lt;/code&gt;之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;</description>
+      <guid>http://localhost:1313/post/translate/java-concurrency/java-volatile-keyword/</guid>
+      <description>&lt;p&gt;本文翻译自 &lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;&lt;strong&gt;Java Volatile Keyword&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为&lt;strong&gt;在主内中存储&lt;/strong&gt;，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;&#xA;&lt;p&gt;事实上，从&lt;code&gt;Java5&lt;/code&gt;之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

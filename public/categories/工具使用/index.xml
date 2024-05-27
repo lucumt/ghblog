@@ -2,28 +2,144 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具使用 on 飞狐的部落格</title>
-    <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
+    <link>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
     <description>Recent content in 工具使用 on 飞狐的部落格</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 07 Apr 2017 10:47:28 +0800</lastBuildDate><atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Jan 2024 10:17:42 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在基于MySQL的Grafana的柱状中不显示0值</title>
+      <link>http://localhost:1313/post/devops/hidden-zero-value-in-grafana-bar-chart/</link>
+      <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/hidden-zero-value-in-grafana-bar-chart/</guid>
+      <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
+      <link>http://localhost:1313/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
+      <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/switch-nodejs-version-in-jenkins-pipeline/</guid>
+      <description>&lt;p&gt;近期有个项目组有个&lt;code&gt;Vue&lt;/code&gt;项目需要在基于&lt;code&gt;KubeSphere&lt;/code&gt;的&lt;code&gt;Jenkins&lt;/code&gt;流水线中用高版本的&lt;code&gt;nodejs&lt;/code&gt;进行编译，自己一开始尝试通过在流水线中直接升级&lt;code&gt;nodejs&lt;/code&gt;版本，但并未成功，后来参考&lt;code&gt;KubeSphere&lt;/code&gt;论坛上的相关说明才解决该问题，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitBook插件中实现从多个不同的文件夹下加载css和js文件</title>
+      <link>http://localhost:1313/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</link>
+      <pubDate>Sun, 10 Dec 2023 16:21:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/</guid>
+      <description>&lt;p&gt;在&lt;a href=&#34;http://localhost:1313/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/&#34;&gt;&lt;strong&gt;在Docker中构建GitBook并整合GitLab Runner的使用经验分享&lt;/strong&gt;&lt;/a&gt;一文中，自己在&lt;code&gt;Docker&lt;/code&gt;环境下基于&lt;code&gt;GitLab Runner&lt;/code&gt;实现了&lt;code&gt;GitBook&lt;/code&gt;的自动构建，同时基于实际使用需求添加了很多&lt;code&gt;GitBook&lt;/code&gt;插件，在此过程中积累了一些&lt;code&gt;GitBook&lt;/code&gt;插件的开发与使用经验。&lt;/p&gt;&#xA;&lt;p&gt;本文简要介绍自己在&lt;code&gt;GitBook&lt;/code&gt;插件定制化修改过程中如何实现从多个不同的文件夹下加载&lt;code&gt;js&lt;/code&gt;和&lt;code&gt;css&lt;/code&gt;文件的实现过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
+      <link>http://localhost:1313/post/kafka/integrate-ldap-into-kafka-ui/</link>
+      <pubDate>Mon, 20 Nov 2023 15:37:31 +0800</pubDate>
+      <guid>http://localhost:1313/post/kafka/integrate-ldap-into-kafka-ui/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;搭建&lt;code&gt;Kafka&lt;/code&gt;服务器以及添加集成了&lt;code&gt;LDAP&lt;/code&gt;的&lt;code&gt;kafka-ui&lt;/code&gt;实现图形化界面的授权访问。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</title>
+      <link>http://localhost:1313/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</link>
+      <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>
+      <guid>http://localhost:1313/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</guid>
+      <description>&lt;p&gt;由于&lt;code&gt;Docsify&lt;/code&gt;采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从&lt;code&gt;Docsify&lt;/code&gt;迁移到基于&lt;code&gt;Docker&lt;/code&gt;搭建的&lt;code&gt;GitBook&lt;/code&gt;并结合&lt;code&gt;GitLab Runner&lt;/code&gt;实现自动更新，在这其中踩了一些坑，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>对Docsify中的代码高亮显示进行增强</title>
+      <link>http://localhost:1313/post/docsify/enchane-code-highlight-in-docsify/</link>
+      <pubDate>Fri, 22 Sep 2023 10:13:56 +0800</pubDate>
+      <guid>http://localhost:1313/post/docsify/enchane-code-highlight-in-docsify/</guid>
+      <description>&lt;p&gt;记录下如何给&lt;a href=&#34;https://docsify.js.org/&#34;&gt;&lt;strong&gt;docsify&lt;/strong&gt;&lt;/a&gt;添加多语言的代码高亮支持，以及在代码高亮的同时能显示行号，便利使用。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Docker中遇到x509: certificate relies on legacy Common Name field, use SANs instead问题的解决</title>
+      <link>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</link>
+      <pubDate>Thu, 06 Jul 2023 09:54:01 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/</guid>
+      <description>&lt;p&gt;近期在给公司内部安装&lt;code&gt;KubeSphere&lt;/code&gt;新环境和维护原有&lt;code&gt;KubeSphere&lt;/code&gt;环境的过程中，频繁遇到&lt;code&gt;x509: certificate relies on legacy Common Name field, use SANs instead&lt;/code&gt;，此问题会影响正常功能的使用，简要介绍其解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在KubeSphere的流水线中下载构建具有子模块的项目</title>
+      <link>http://localhost:1313/post/devops/checkout-project-with-submodule-in-kubesphere/</link>
+      <pubDate>Sat, 17 Jun 2023 14:27:13 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/checkout-project-with-submodule-in-kubesphere/</guid>
+      <description>&lt;p&gt;在使用&lt;a href=&#34;https://www.kubesphere.io/zh/&#34;&gt;&lt;strong&gt;KubeSphere&lt;/strong&gt;&lt;/a&gt;对公司项目进行持续集成时，有一个项目在&lt;code&gt;Gitlab&lt;/code&gt;中采用了&lt;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Submodules&#34;&gt;&lt;strong&gt;Submodules&lt;/strong&gt;&lt;/a&gt;结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</title>
+      <link>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</link>
+      <pubDate>Tue, 06 Jun 2023 16:17:41 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/prometheus-k8s-0-pending-in-kubesphere/</guid>
+      <description>&lt;p&gt;简要记录下在安装完成&lt;a href=&#34;https://www.kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;后由于缺少&lt;a href=&#34;https://openebs.io/&#34;&gt;OpenEBS&lt;/a&gt;而导致名为&lt;code&gt;prometheus-k8s-0&lt;/code&gt;的pod节点一直处于&lt;code&gt;Pending&lt;/code&gt;状态，进而导致在&lt;code&gt;KubeSphere&lt;/code&gt;集群管理中资源统计部分出现NaN的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Jenkins软件集成LDAP实现单点登录</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-jenkins/</link>
+      <pubDate>Fri, 14 Apr 2023 11:29:19 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-jenkins/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>给Gitlab添加LDAP登录认证</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-gitlab/</link>
+      <pubDate>Fri, 14 Apr 2023 11:22:34 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-gitlab/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker&lt;/code&gt;创建&lt;code&gt;Gitlab&lt;/code&gt;并集成&lt;code&gt;ldap&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;且仅允许&lt;code&gt;LDAP&lt;/code&gt;账号登录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给禅道软件集成LDAP实现单点登录</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-zentao/</link>
+      <pubDate>Tue, 20 Dec 2022 10:04:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-zentao/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.zentao.net/&#34;&gt;禅道&lt;/a&gt;是国产的开源项目管理软件,专注研发项目管理,内置需求管理、任务管理、bug管理、缺陷管理、用例管理、计划发布等功能,实现了软件的完整生命周期管理。本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;禅道&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用Grafana和Prometheus对系统进行监控</title>
+      <link>http://localhost:1313/post/devops/using-grafana-and-prometheus-to-monitor-systems/</link>
+      <pubDate>Thu, 15 Dec 2022 10:56:54 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/using-grafana-and-prometheus-to-monitor-systems/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;docker&lt;/code&gt;环境下利用&lt;a href=&#34;https://grafana.com/&#34;&gt;&lt;strong&gt;Grafana&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://prometheus.io/&#34;&gt;&lt;strong&gt;Prometheus&lt;/strong&gt;&lt;/a&gt;对系统进行监控。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Grafana软件集成LDAP实现单点登录</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-grafana/</link>
+      <pubDate>Sun, 11 Dec 2022 10:39:47 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-grafana/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://grafana.com/&#34;&gt;&lt;strong&gt;Grafana&lt;/strong&gt;&lt;/a&gt;是一款用&lt;code&gt;Go&lt;/code&gt;语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能，本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;Grafana&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Sonarqube软件集成LDAP实现单点登录</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-sonarqube/</link>
+      <pubDate>Sun, 04 Dec 2022 11:29:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-sonarqube/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.sonarqube.org/latest/&#34;&gt;SonarQube&lt;/a&gt;是管理代码质量一个开放平台，可以快速的定位代码中潜在的或者明显的错误，本文简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;SonarQube&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成实现快捷登录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给Yapi添加LDAP登录认证</title>
+      <link>http://localhost:1313/post/ldap/add-ldap-support-for-yapi/</link>
+      <pubDate>Thu, 01 Dec 2022 11:23:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/ldap/add-ldap-support-for-yapi/</guid>
+      <description>&lt;p&gt;&lt;code&gt;YApi&lt;/code&gt; 是&lt;strong&gt;高效&lt;/strong&gt;、&lt;strong&gt;易用&lt;/strong&gt;、&lt;strong&gt;功能强大&lt;/strong&gt;的 api 管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，由去哪儿网开发，本文基于&lt;a href=&#34;https://www.jianshu.com/p/a97d2efb23c5&#34;&gt;为 Yapi 定制 apline 版 Docker 镜像&lt;/a&gt;简要说明如何将基于&lt;code&gt;docker&lt;/code&gt;安装的&lt;code&gt;Yapi&lt;/code&gt;与&lt;code&gt;LDAP&lt;/code&gt;集成。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>将Windows中的画图工具默认菜单从“文件”切换到“菜单”</title>
+      <link>http://localhost:1313/post/other/switch-windows-paint-default-tab-to-home/</link>
+      <pubDate>Tue, 07 Apr 2020 15:21:27 +0800</pubDate>
+      <guid>http://localhost:1313/post/other/switch-windows-paint-default-tab-to-home/</guid>
+      <description>&lt;p&gt;简要介绍如何在&lt;code&gt;Windows&lt;/code&gt;中的画图工具新打开一个画图时将其默认菜单从&lt;code&gt;文件&lt;/code&gt;切换到&lt;code&gt;菜单&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>在MyEclipse项目中不能打开birt报表的解决方法</title>
-      <link>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</link>
+      <link>http://localhost:1313/post/web/cannot-open-birt-report-in-myeclipse-project/</link>
       <pubDate>Fri, 07 Apr 2017 10:47:28 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/web/cannot-open-birt-report-in-myeclipse-project/</guid>
+      <guid>http://localhost:1313/post/web/cannot-open-birt-report-in-myeclipse-project/</guid>
       <description>由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击</description>
     </item>
-    
     <item>
       <title>在Intellij IDEA中引用Golang本地包</title>
-      <link>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</link>
+      <link>http://localhost:1313/post/golang/import-local-package-in-intellij-idea/</link>
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
-      
-      <guid>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</guid>
+      <guid>http://localhost:1313/post/golang/import-local-package-in-intellij-idea/</guid>
       <description>&lt;p&gt;在学习&lt;code&gt;Golang&lt;/code&gt;时，自己最开始用的是&lt;code&gt;Eclipse&lt;/code&gt;中的&lt;a href=&#34;https://goclipse.github.io/&#34;&gt;&lt;strong&gt;goclipse&lt;/strong&gt;&lt;/a&gt;插件来进行&lt;code&gt;Golang&lt;/code&gt;编程，但其对&lt;code&gt;Golang&lt;/code&gt;的支持不是太好，如代码格式化、自动导入引用包等都无法直接在&lt;code&gt;Eclipse&lt;/code&gt;中使用，并且其自动提示功能也没有像&lt;code&gt;Java&lt;/code&gt;那么强，于是转用&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;&lt;strong&gt;Intellij IDEA&lt;/strong&gt;&lt;/a&gt;安装&lt;a href=&#34;https://plugins.jetbrains.com/plugin/5047-go&#34;&gt;&lt;strong&gt;Golang插件&lt;/strong&gt;&lt;/a&gt;来替代使用，安装完插件后的&lt;a href=&#34;https://www.jetbrains.com/idea/&#34;&gt;&lt;strong&gt;Intellij IDEA&lt;/strong&gt;&lt;/a&gt;对&lt;code&gt;Golang&lt;/code&gt;的支持在各方面都很令人满意，唯独引入本地包的支持不太好用。经过一阵摸索自己找出了解决方案，先记录下。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
