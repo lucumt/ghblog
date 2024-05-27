@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/web/</link>
+    <description>Recent content in Web on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Foxglove自定义插件开发说明</title>
+      <link>http://localhost:1313/post/web/foxglove-custom-plugin-develop/</link>
+      <pubDate>Wed, 22 Nov 2023 14:08:39 +0800</pubDate>
+      <guid>http://localhost:1313/post/web/foxglove-custom-plugin-develop/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://github.com/foxglove/create-foxglove-extension&#34;&gt;&lt;strong&gt;create-foxglove-extension&lt;/strong&gt;&lt;/a&gt;一文简要说明自己如何基于&lt;a href=&#34;https://en.wikipedia.org/wiki/Real-Time_Streaming_Protocol&#34;&gt;&lt;strong&gt;RTSP协议&lt;/strong&gt;&lt;/a&gt;给&lt;code&gt;Foxglove&lt;/code&gt;开发一款插件并应用于实际项目的流程。&lt;/p&gt;&#xA;&lt;p&gt;相关源码参见&lt;a href=&#34;https://github.com/foxglove-custom/rtsp-player-extension&#34;&gt;&lt;strong&gt;rtsp-player-extension&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Foxglove基本功能使用说明</title>
+      <link>http://localhost:1313/post/web/foxglove-function-instructions/</link>
+      <pubDate>Wed, 15 Nov 2023 14:08:39 +0800</pubDate>
+      <guid>http://localhost:1313/post/web/foxglove-function-instructions/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;http://localhost:1313/post/web/using-foxglove-to-render-time-sequence-data/&#34;&gt;&lt;strong&gt;搭建基于Foxglove的时序数据播放环境&lt;/strong&gt;&lt;/a&gt;一文，结合实际项目的使用情况对&lt;code&gt;Foxglove&lt;/code&gt;的使用功能进行简要的介绍。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>搭建基于Foxglove的时序数据播放环境</title>
+      <link>http://localhost:1313/post/web/using-foxglove-to-render-time-sequence-data/</link>
+      <pubDate>Mon, 13 Nov 2023 14:08:39 +0800</pubDate>
+      <guid>http://localhost:1313/post/web/using-foxglove-to-render-time-sequence-data/</guid>
+      <description>&lt;p&gt;简要介绍如何配置&lt;a href=&#34;https://foxglove.dev&#34;&gt;&lt;strong&gt;Foxglove&lt;/strong&gt;&lt;/a&gt;可视化工具的前后端环境以便实现在项目中以多种方式播放采集的&lt;a href=&#34;https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29&#34;&gt;&lt;strong&gt;时序数据&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

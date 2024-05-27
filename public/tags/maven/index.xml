@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maven on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/maven/</link>
+    <description>Recent content in Maven on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Jul 2023 15:07:08 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Maven编译时遇到java.lang.ClassNotFoundException: org.apache.maven.shared.filtering.MavenFilteringException的问题解决</title>
+      <link>http://localhost:1313/post/maven/class-not-found-exception-when-compile/</link>
+      <pubDate>Wed, 26 Jul 2023 15:07:08 +0800</pubDate>
+      <guid>http://localhost:1313/post/maven/class-not-found-exception-when-compile/</guid>
+      <description>&lt;p&gt;简单记录在利用&lt;code&gt;mvn clean compile&lt;/code&gt;时遇到的&lt;code&gt;java.lang.ClassNotFoundException: org.apache.maven.shared.filtering.MavenFilteringException&lt;/code&gt;导致编译失败的问题解决。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[译]JUnit5 Maven示例-基于Surefire运行测试</title>
+      <link>http://localhost:1313/post/translate/junit5/junit-5-maven-example/</link>
+      <pubDate>Fri, 23 Jun 2023 12:21:43 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/junit5/junit-5-maven-example/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-maven-example/&#34;&gt;&lt;strong&gt;JUnit 5 Maven Example: Running Tests with Surefire&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

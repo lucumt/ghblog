@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 29 May 2023 11:09:40 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在KubeSphere中编译和部署C&#43;&#43;程序</title>
+      <link>http://localhost:1313/post/devops/compile-and-deploy-cpp-project-in-kubesphere/</link>
+      <pubDate>Mon, 29 May 2023 11:09:40 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/compile-and-deploy-cpp-project-in-kubesphere/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>在brpc中上传与接收文件</title>
+      <link>http://localhost:1313/post/c&#43;&#43;/brpc-upload-file/</link>
+      <pubDate>Wed, 17 May 2023 09:57:23 +0800</pubDate>
+      <guid>http://localhost:1313/post/c&#43;&#43;/brpc-upload-file/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>brpc处理json数据</title>
+      <link>http://localhost:1313/post/c&#43;&#43;/brpc-process-json-data/</link>
+      <pubDate>Wed, 17 May 2023 09:57:18 +0800</pubDate>
+      <guid>http://localhost:1313/post/c&#43;&#43;/brpc-process-json-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>brpc快速入门</title>
+      <link>http://localhost:1313/post/c&#43;&#43;/brpc-quick-start/</link>
+      <pubDate>Wed, 17 May 2023 09:57:13 +0800</pubDate>
+      <guid>http://localhost:1313/post/c&#43;&#43;/brpc-quick-start/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>将C&#43;&#43;程序注册到Nacos</title>
+      <link>http://localhost:1313/post/nacos/register-cpp-program-to-nacos/</link>
+      <pubDate>Tue, 16 May 2023 10:08:32 +0800</pubDate>
+      <guid>http://localhost:1313/post/nacos/register-cpp-program-to-nacos/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

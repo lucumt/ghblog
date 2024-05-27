@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring-Cloud on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/spring-cloud/</link>
+    <description>Recent content in Spring-Cloud on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
+      <link>http://localhost:1313/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
+      <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
+      <guid>http://localhost:1313/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
+      <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring Cloud采用Nacos时外部配置文件不生效的原因分析</title>
+      <link>http://localhost:1313/post/spring/spring-cloud/dynamic-config-not-working-in-nacos/</link>
+      <pubDate>Sat, 25 Jun 2022 17:27:44 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-cloud/dynamic-config-not-working-in-nacos/</guid>
+      <description>&lt;p&gt;最近公司的新项目中采用了基于&lt;code&gt;Spring Cloud&lt;/code&gt;的微服务架构，其中在基于&lt;code&gt;Nacos&lt;/code&gt;进行配置时遇到了配置文件不生效的问题，基于网上自己以及自己对&lt;code&gt;Spring Boot&lt;/code&gt;和&lt;code&gt;Nacos&lt;/code&gt;源码的分析，最后找到了原因，故记录下。&lt;/p&gt;&#xA;&lt;p&gt;主要是要放到到&lt;code&gt;boostrap.yml&lt;/code&gt;文件而不是&lt;code&gt;application.yml&lt;/code&gt;文件中，只有这样才能生效。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

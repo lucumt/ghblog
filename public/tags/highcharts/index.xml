@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Highcharts on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/highcharts/</link>
+    <description>Recent content in Highcharts on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 03 Apr 2023 16:39:51 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/highcharts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Hugo中开启Highcharts图表支持</title>
+      <link>http://localhost:1313/post/hugo/enable-highcharts-in-hugo/</link>
+      <pubDate>Sun, 02 Apr 2023 16:39:51 +0800</pubDate>
+      <guid>http://localhost:1313/post/hugo/enable-highcharts-in-hugo/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;http://localhost:1313/post/hugo/enable-diagrams-in-hugo/&#34;&gt;在Hugo中开启图表支持&lt;/a&gt;一文，简要说明如何在&lt;code&gt;Hugo&lt;/code&gt;中基于&lt;code&gt;Markdown&lt;/code&gt;以优雅的方式集成&lt;a href=&#34;https://www.highcharts.com/&#34;&gt;Highcharts&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring-Boot on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/spring-boot/</link>
+    <description>Recent content in Spring-Boot on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
+      <link>http://localhost:1313/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>
+      <pubDate>Fri, 01 Sep 2023 10:19:48 +0800</pubDate>
+      <guid>http://localhost:1313/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</guid>
+      <description>&lt;p&gt;简单记录由于&lt;a href=&#34;https://nacos.io/zh-cn/&#34;&gt;&lt;strong&gt;Nacos&lt;/strong&gt;&lt;/a&gt;导致的&lt;code&gt;Spring Boot&lt;/code&gt;与&lt;code&gt;Spring Cloud&lt;/code&gt;版本不兼容的原因分析过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring中@Autowire、@Ressource和@Component注解的比较</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-autowire-resource-component-in-spring/</link>
+      <pubDate>Sat, 28 Mar 2020 13:15:07 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-autowire-resource-component-in-spring/</guid>
+      <description>&lt;p&gt;总结下&lt;code&gt;Spring&lt;/code&gt;中最常见的3种依赖注入标签&lt;code&gt;@Component&lt;/code&gt;、&lt;code&gt;@Autowire&lt;/code&gt;、&lt;code&gt;@Resource&lt;/code&gt;之间的区别。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring中@Component和@Configuration注解的异同与应用场景</title>
+      <link>http://localhost:1313/post/spring/spring-core/difference-between-component-and-configuration-annotation-in-spring/</link>
+      <pubDate>Wed, 25 Mar 2020 17:04:03 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-core/difference-between-component-and-configuration-annotation-in-spring/</guid>
+      <description>&lt;p&gt;&lt;code&gt;@Component&lt;/code&gt;和&lt;code&gt;@Configuration&lt;/code&gt;是在&lt;code&gt;Spring Boot&lt;/code&gt;开发时使用频率很高的两个注解，本文基于网络上的相关资料整理下它们的异同以及应用场景。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>加快Spring Boot的启动速度</title>
+      <link>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</link>
+      <pubDate>Sat, 08 Jun 2019 17:19:54 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</guid>
+      <description>&lt;p&gt;之前面试时被问到过此题，基于网上资料以及个人理解，简单记录下如果根据实际项目需求通过去掉各种无用的配置来缩短&lt;code&gt;Spring Boot&lt;/code&gt;的启动时间。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

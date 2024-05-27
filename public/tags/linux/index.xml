@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/linux/</link>
+    <description>Recent content in Linux on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 31 May 2023 10:56:21 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Linux三剑客实现日志文件的解析读取</title>
+      <link>http://localhost:1313/post/linux/using-grep-sed-awk-to-read-log-data/</link>
+      <pubDate>Wed, 31 May 2023 10:56:21 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux/using-grep-sed-awk-to-read-log-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>利用shell脚本实现将微服务程序以docker容器方式自动部署</title>
+      <link>http://localhost:1313/post/linux/using-script-to-deploy-microservice-application-in-docker/</link>
+      <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux/using-script-to-deploy-microservice-application-in-docker/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;http://localhost:1313/post/devops/git-checkout-by-dynamic-repository-in-jenkins/&#34;&gt;在Jenkins中根据配置从不同的仓库中Checkout代码&lt;/a&gt;一文，说明如何利用&lt;code&gt;shell&lt;/code&gt;脚本在&lt;code&gt;Linux&lt;/code&gt;系统中实现自动化的部署与升级。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>给基于VMware创建的Ubuntu系统设置固定IP</title>
+      <link>http://localhost:1313/post/linux/set-permanent-ip-address-for-ubuntu-in-vmware/</link>
+      <pubDate>Wed, 01 Mar 2023 10:10:59 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux/set-permanent-ip-address-for-ubuntu-in-vmware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</title>
+      <link>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</link>
+      <pubDate>Wed, 11 Jan 2023 11:31:45 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/</guid>
+      <description>&lt;p&gt;工作中涉及到&lt;code&gt;Kubernetes&lt;/code&gt;相关知识，自己之前一直没有系统性的学习&lt;code&gt;Kubernetes&lt;/code&gt;，近期在腾讯云上想安装&lt;code&gt;Kubernetes&lt;/code&gt;时一直遇到在执行&lt;code&gt;kubeadm init&lt;/code&gt;时&lt;code&gt;6443&lt;/code&gt;和&lt;code&gt;10280&lt;/code&gt;端口无法访问导致操作失败进而无法顺利安装&lt;code&gt;Kubernetes&lt;/code&gt;。一番排查后发现是由于从&lt;code&gt;1.24.0&lt;/code&gt;之后&lt;code&gt;Kubernetes&lt;/code&gt;默认采用&lt;code&gt;containerd&lt;/code&gt;作为运行时容器，其默认镜像为&lt;code&gt;registry.k8s.io&lt;/code&gt;，该镜像在国内无法访问导致的，简单记录下。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>由于k8s中的错误配置导致无法创建新节点</title>
+      <link>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</link>
+      <pubDate>Fri, 11 Nov 2022 18:19:12 +0800</pubDate>
+      <guid>http://localhost:1313/post/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/</guid>
+      <description>&lt;p&gt;记录下自己在使用&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;过程中由于&lt;code&gt;YAML&lt;/code&gt;中错误的配置导致&lt;code&gt;Kubernetes&lt;/code&gt;经常资源紧张而无法创建与部署新节点的问题。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

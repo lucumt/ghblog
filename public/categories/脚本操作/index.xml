@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>脚本操作 on 飞狐的部落格</title>
+    <link>http://localhost:1313/categories/%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
+    <description>Recent content in 脚本操作 on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 31 May 2023 10:56:21 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Linux三剑客实现日志文件的解析读取</title>
+      <link>http://localhost:1313/post/linux/using-grep-sed-awk-to-read-log-data/</link>
+      <pubDate>Wed, 31 May 2023 10:56:21 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux/using-grep-sed-awk-to-read-log-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>利用shell脚本实现将微服务程序以docker容器方式自动部署</title>
+      <link>http://localhost:1313/post/linux/using-script-to-deploy-microservice-application-in-docker/</link>
+      <pubDate>Thu, 16 Mar 2023 11:22:47 +0800</pubDate>
+      <guid>http://localhost:1313/post/linux/using-script-to-deploy-microservice-application-in-docker/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;http://localhost:1313/post/devops/git-checkout-by-dynamic-repository-in-jenkins/&#34;&gt;在Jenkins中根据配置从不同的仓库中Checkout代码&lt;/a&gt;一文，说明如何利用&lt;code&gt;shell&lt;/code&gt;脚本在&lt;code&gt;Linux&lt;/code&gt;系统中实现自动化的部署与升级。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起</title>
+      <link>http://localhost:1313/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/</link>
+      <pubDate>Fri, 10 Mar 2023 22:48:56 +0800</pubDate>
+      <guid>http://localhost:1313/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/</guid>
+      <description>&lt;p&gt;简要介绍在&lt;code&gt;Windows&lt;/code&gt;系统中采用基于&lt;code&gt;CMD&lt;/code&gt;的批处理脚本进行自动化部署时，对通过&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;拼接的指令以更优雅的方式实现，以提高批处理脚本的可读性和可维护性。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

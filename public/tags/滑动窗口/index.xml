@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>滑动窗口 on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
+    <description>Recent content in 滑动窗口 on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 05 Jun 2020 23:59:36 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将数组中的1全都移动到一起的最小移动次数</title>
+      <link>http://localhost:1313/post/algorithm/find-minimun-count-to-move-one-together/</link>
+      <pubDate>Fri, 05 Jun 2020 23:59:36 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/find-minimun-count-to-move-one-together/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
