@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring-Boot on 飞狐的部落格</title>
+    <link>http://localhost:1313/categories/spring-boot/</link>
+    <description>Recent content in Spring-Boot on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 Feb 2023 15:33:25 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringBoot启动流程分析</title>
+      <link>http://localhost:1313/post/spring/spring-boot/lifecycle-of-spring-boot-start-process/</link>
+      <pubDate>Tue, 21 Feb 2023 15:33:25 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/lifecycle-of-spring-boot-start-process/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>在SpringBoot中自己实现一个Starter</title>
+      <link>http://localhost:1313/post/spring/spring-boot/create-a-custom-starter-in-spring-boot/</link>
+      <pubDate>Tue, 21 Feb 2023 15:32:50 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/create-a-custom-starter-in-spring-boot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Swagger3.0无法通过@Profile来动态控制显示原因分析</title>
+      <link>http://localhost:1313/post/spring/spring-boot/swagger-3.0-not-turn-off-by-setting-profile/</link>
+      <pubDate>Thu, 11 Aug 2022 14:19:51 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/swagger-3.0-not-turn-off-by-setting-profile/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jackson Default Property Inclusion Not Working</title>
+      <link>http://localhost:1313/post/spring/spring-boot/jackson-default-property-inclusion-not-working/</link>
+      <pubDate>Mon, 27 Jun 2022 21:29:56 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/jackson-default-property-inclusion-not-working/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Swagger Show Json Parameter When Using Api Param</title>
+      <link>http://localhost:1313/post/spring/spring-boot/swagger-show-json-parameter-when-using-api-param/</link>
+      <pubDate>Mon, 27 Jun 2022 21:28:10 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/swagger-show-json-parameter-when-using-api-param/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>加快Spring Boot的启动速度</title>
+      <link>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</link>
+      <pubDate>Sat, 08 Jun 2019 17:19:54 +0800</pubDate>
+      <guid>http://localhost:1313/post/spring/spring-boot/accelerate-spring-boot-start-up/</guid>
+      <description>&lt;p&gt;之前面试时被问到过此题，基于网上资料以及个人理解，简单记录下如果根据实际项目需求通过去掉各种无用的配置来缩短&lt;code&gt;Spring Boot&lt;/code&gt;的启动时间。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

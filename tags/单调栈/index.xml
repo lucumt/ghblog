@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>单调栈 on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E6%A0%88/</link>
+    <description>Recent content in 单调栈 on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 May 2020 23:51:23 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>找到数组中每个元素右边第一个比它大的元素</title>
+      <link>http://localhost:1313/post/algorithm/find-first-right-larger-number-in-element/</link>
+      <pubDate>Fri, 15 May 2020 23:51:23 +0800</pubDate>
+      <guid>http://localhost:1313/post/algorithm/find-first-right-larger-number-in-element/</guid>
+      <description>&lt;p&gt;之前自己在学习算法时接触过&lt;code&gt;单调栈&lt;/code&gt;的概念，但对于其使用一直没有深入研究，最近遇到一道常规面试算法题，利用&lt;code&gt;单调栈&lt;/code&gt;来解决可以取得不错的时间复杂度和空间复杂度，故记录下。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

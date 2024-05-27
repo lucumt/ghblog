@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>安全 on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in 安全 on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 17 Aug 2023 19:43:26 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]我是如何在网络上隐藏自己的身份</title>
+      <link>http://localhost:1313/post/translate/other/starting-a-new-digital-identity/</link>
+      <pubDate>Thu, 17 Aug 2023 19:43:26 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/other/starting-a-new-digital-identity/</guid>
+      <description>&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;说明&lt;/p&gt;&#xD;&#xA;&lt;p&gt;本文翻译自阮一峰老师的&lt;a href=&#34;https://www.ruanyifeng.com/blog/2023/08/weekly-issue-265.html&#34;&gt;&lt;strong&gt;科技爱好者周刊（第 265 期）&lt;/strong&gt;&lt;/a&gt;中介绍的一篇英文文章&lt;a href=&#34;https://k3tan.com/starting-a-new-digital-identity&#34;&gt;&lt;strong&gt;我如何隐藏自己的网络身份&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>
