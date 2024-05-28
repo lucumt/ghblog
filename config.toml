@@ -57,7 +57,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 	name = "外链"
 	weight = 50
 	identifier = "links"
-	url = "/links/"
+	url = "https://tech.lucumt.info"
 [[menu.main]]
 	name = "关于我"
 	weight = 50
