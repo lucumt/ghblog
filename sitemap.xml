@@ -667,13 +667,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/links/</loc>
-    <lastmod>2023-02-27T18:40:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</loc>
     <lastmod>2023-02-17T13:48:05+08:00</lastmod>
     <changefreq>weekly</changefreq>

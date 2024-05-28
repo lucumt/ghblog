@@ -303,13 +303,6 @@
       <description>一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流! 编程领域 Java，日常编程主要使用的语言，</description>
     </item>
     <item>
-      <title>各种外链</title>
-      <link>https://lucumt.info/links/</link>
-      <pubDate>Mon, 27 Feb 2023 18:40:33 +0800</pubDate>
-      <guid>https://lucumt.info/links/</guid>
-      <description>记录个人觉得有意义的各种博客、公众号页面、视频等。 博客网站 地址 内容 微信公众号 程序员自由之路 主要是JavaEE开发，关于Java框架的文章很多</description>
-    </item>
-    <item>
       <title>在Java中解析和存储包含微秒与纳秒的时间</title>
       <link>https://lucumt.info/post/java-core/parse-and-store-microsecond-nanosecond-in-java/</link>
       <pubDate>Fri, 17 Feb 2023 13:48:05 +0800</pubDate>
