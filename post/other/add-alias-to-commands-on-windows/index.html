@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>飞狐的部落格</title>
+  <title>给Windows中的命令添加别名 - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="飞狐的个人博客" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要说明如何给Windows中的命令添加别名以方便使用" /><meta name="keywords" content="Windows, 命令行, 别名" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
-<link rel="canonical" href="https://lucumt.info/" />
-  <link href="https://lucumt.info/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
-  <link href="https://lucumt.info/index.xml" rel="feed" type="application/rss+xml" title="飞狐的部落格" />
+<link rel="canonical" href="https://lucumt.info/post/other/add-alias-to-commands-on-windows/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,19 +39,26 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:url" content="https://lucumt.info/">
+<meta property="og:url" content="https://lucumt.info/post/other/add-alias-to-commands-on-windows/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="飞狐的部落格">
-  <meta property="og:description" content="飞狐的个人博客">
+  <meta property="og:title" content="给Windows中的命令添加别名">
+  <meta property="og:description" content="简要说明如何给Windows中的命令添加别名以方便使用">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-06-12T13:26:28+08:00">
+    <meta property="article:modified_time" content="2024-06-12T13:26:28+08:00">
+    <meta property="article:tag" content="Windows">
 
-  <meta itemprop="name" content="飞狐的部落格">
-  <meta itemprop="description" content="飞狐的个人博客">
+  <meta itemprop="name" content="给Windows中的命令添加别名">
+  <meta itemprop="description" content="简要说明如何给Windows中的命令添加别名以方便使用">
+  <meta itemprop="datePublished" content="2024-06-12T13:26:28+08:00">
   <meta itemprop="dateModified" content="2024-06-12T13:26:28+08:00">
+  <meta itemprop="wordCount" content="1247">
+  <meta itemprop="keywords" content="Windows,命令行,别名">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="飞狐的部落格">
-  <meta name="twitter:description" content="飞狐的个人博客">
+  <meta name="twitter:title" content="给Windows中的命令添加别名">
+  <meta name="twitter:description" content="简要说明如何给Windows中的命令添加别名以方便使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -148,101 +153,129 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-volatile-keyword/">[译] Java Volatile 关键字详解</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-07 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自 <a href="http://tutorials.jenkov.com/java-concurrency/volatile.html"><strong>Java Volatile Keyword</strong></a></p>
-<p>Java关键字<code>volatile</code>用于将一个Java变量标记为<strong>在主内中存储</strong>，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
-<p>事实上，从<code>Java5</code>之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">给Windows中的命令添加别名</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mysql/can-not-run-program-mysqldump/">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-03 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<a href="http://docs.oracle.com/javase/6/docs/api/"><strong>Runtime</strong></a>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
+      <div class="post-meta">
+        <span class="post-time"> 2024-06-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#实现">实现</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>简要记录如何在<code>Windows</code>操作系统中通过<a href="https://en.wikipedia.org/wiki/Batch_file"><strong>批处理脚本</strong></a>来给复杂的命令添加别名以简化使用。</p>
+<h1 id="背景">背景</h1>
+<p>自己使用<code>Hugo</code>进行博客开发已经有年头了，最近由于需要搭建新的网站<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>需要使用特定的模板，而该模板对<code>Hugo</code>的版本有要求，故对<code>Hugo</code>版本进行了升级，从<code>v0.100</code>升级到<code>v0.126</code>。</p>
+<p>升级之后虽然在搭建新网站时没有问题，但个人发现新版本的<code>Hugo</code>有一个特性让人用起来不太方便：</p>
+<p>通过<code>hugo server -w -D</code>在本地启动<code>Hugo</code>环境时，默认会在本地<code>public</code>文件夹下生成全部的静态文件，从而导致通过<code>Git</code>提交时会提交大量无用的文件，在国内这种网络环境下容易<code>push</code>失败。</p>
+<p>而之前自己使用<code>Hugo</code>时，若要手工生成静态文件需要在参数中显示指定，类似<code>hugo server --renderToDisk</code>，升级后的版本将其作为了默认选项。</p>
+<p>进一步查看资料，发现该特性是在<code>v0.123</code>版本中引入的<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，具体原因参见<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，在该版本之后若想默认不在<code>public</code>目录下生成静态文件则需要在启动时手工添加相关指令，类似<code>hugo server -w -D --renderToMemory</code>。</p>
+<p>尽管<code>Hugo</code>作者这么做肯定是有其原因的，但我习惯了只有在托管到<code>GitHub Pages</code>时才生成静态文件，同时我也是一个懒人，每次使用时都要添加<code>--renderToMemory</code>参数对我来说简直是一种折磨。</p>
+<p>能否仿照<code>Linux</code>中的<a href="https://www.runoob.com/linux/linux-comm-alias.html"><strong>alias</strong></a>指令对前述命令进行封装，从而简化使用呢？</p>
+<h1 id="分析">分析</h1>
+<p>我们知道在<code>Windows</code>的默认附带了很多指令，如<code>mspaint</code>、<code>mstsc</code>、<code>calc</code>等指令，可在运行窗口或<code>cmd</code>中输入这些指令直接使用，其原因为这些指令都位于<code>C:\Windows\System32</code>目录下，而该目录是系统目录，在启动时会进行加载。</p>
+<p>而对于非<code>Windows</code>系统自带指令或软件，在我们安装过程中通常会提示我们是否要将该软件添加到<code>Path</code>环境变量中去，典型的如<code>Python</code>，当选择添加到<code>Path</code>环境变量中后，可重新打开一个<code>cmd</code>窗口，然后输入<code>python</code>指令进行相关的操作。即我们如果想要在<code>cmd</code>中能直接使用某个自定义指令，则该指令必须添加到<code>Path</code>环境变量中去。</p>
+<p>在<code>Linux</code>中有<code>bash</code>、<code>zsh</code>等脚本可用于封装复杂的指令，同样在<code>Windows</code>中可使用<code>batch</code>脚本来封装复杂的指令，最终问题变为如下：</p>
+<p>是否可通过<code>batch</code>脚本封装复杂的<code>Hugo</code>指令，并将该脚本添加到<code>Path</code>环境变量中来实现在<code>cmd</code>中直接使用封装后的指令？</p>
+<h1 id="实现">实现</h1>
+<p>理论分析完毕后，接下来进行实际操作验证：</p>
+<ol>
+<li>
+<p>新建一个名为<code>hugo_server.bat</code>的脚本，内容如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runtime</span><span class="w"> </span><span class="n">runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Runtime</span><span class="p">.</span><span class="na">getRuntime</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">mysqlCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;mysqldump&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; -u&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; -p&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">+</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="s">&#34;  -h &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">databaseAddress</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34; &#34;</span><span class="w"> </span><span class="o">+</span><span class="n">databaseName</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Process</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runtime</span><span class="p">.</span><span class="na">exec</span><span class="p">(</span><span class="n">mysqlCmd</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">@echo off
+</span></span><span class="line"><span class="cl">hugo server -w -D --renderToMemory
+</span></span></code></pre></td></tr></table>
 </div>
-</div><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
+</div></li>
+<li>
+<p>仿照下图，将<code>hugo_server.bat</code>的位置添加到<code>Path</code>环境变量中去</p>
+<p><img src="/blog_img/other/add-alias-to-commands-on-windows/add-batch-script-to-path-enviroment.png" alt="将脚本路径添加到环境变量中去" title="将脚本路径添加到环境变量中去"></p>
+</li>
+<li>
+<p>重新打开一个<code>cmd</code>窗口，输入<code>hugo_server</code>(<code>batch</code>脚本的名称)，显示结果如下，可看出<code>hugo_server</code>别名正常工作，目的达到！</p>
+<p><img src="/blog_img/other/add-alias-to-commands-on-windows/batch-script-works.png" alt="bat脚本别名正常工作" title="bat脚本别名正常工作"></p>
+</li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>参见<a href="/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/">创建多个GitHub Pages并且利用GoDaddy分别配置子域名</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>参见<a href="https://github.com/gohugoio/hugo/issues/11455">Some breaking changes planned for Hugo 0.123.0</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://github.com/gohugoio/hugo/issues/11987">Make the server flag &ndash;renderToDisk into &ndash;renderToMemory</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
     </div>
-    <div class="read-more">
-      <a href="/post/mysql/can-not-run-program-mysqldump/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/create-website-with-hugo/">利用Github Pages和基于Go的Hugo搭建个人博客</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-02-27 </span>
-      <div class="post-category">
-          <a href="/categories/go%E7%BC%96%E7%A8%8B/"> Go编程 </a>
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>一直以来都想拥有一个属于自己的博客，前段时间在学习<code>Go</code> ，于是利用<code>Hugo</code> 和<code>Github Pages</code> 搭建了一个简易的个人博客，先简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/create-website-with-hugo/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/11/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
     
-  </nav>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/windows/">windows</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/">
+            <span class="next-text nav-default">创建多个GitHub Pages并且利用GoDaddy分别配置子域名</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
 
       </div>
     </main>
@@ -254,7 +287,7 @@
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
-  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">

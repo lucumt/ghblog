@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 May 2024 09:44:44 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jun 2024 13:26:28 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>给Windows中的命令添加别名</title>
+      <link>https://lucumt.info/post/other/add-alias-to-commands-on-windows/</link>
+      <pubDate>Wed, 12 Jun 2024 13:26:28 +0800</pubDate>
+      <guid>https://lucumt.info/post/other/add-alias-to-commands-on-windows/</guid>
+      <description>&lt;p&gt;简要记录如何在&lt;code&gt;Windows&lt;/code&gt;操作系统中通过&lt;a href=&#34;https://en.wikipedia.org/wiki/Batch_file&#34;&gt;&lt;strong&gt;批处理脚本&lt;/strong&gt;&lt;/a&gt;来给复杂的命令添加别名以简化使用。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>创建多个GitHub Pages并且利用GoDaddy分别配置子域名</title>
       <link>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</link>
