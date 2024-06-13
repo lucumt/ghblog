@@ -23,6 +23,13 @@
       <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>通过Docker快速安装Pinpoint</title>
+      <link>https://lucumt.info/post/docker/install-pinpiont-via-docker/</link>
+      <pubDate>Wed, 13 Mar 2024 18:10:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/install-pinpiont-via-docker/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker-compose&lt;/code&gt;的方式安装&lt;code&gt;Pinpoint&lt;/code&gt;，以及基于&lt;code&gt;Dockerfile&lt;/code&gt;与&lt;code&gt;Jenkins&lt;/code&gt;流水线将项目添加到&lt;code&gt;Pinpoint&lt;/code&gt;中进行实时监控。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
       <link>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
       <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>

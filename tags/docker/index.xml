@@ -6,8 +6,15 @@
     <description>Recent content in Docker on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Nov 2023 15:37:31 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Mar 2024 18:10:19 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过Docker快速安装Pinpoint</title>
+      <link>https://lucumt.info/post/docker/install-pinpiont-via-docker/</link>
+      <pubDate>Wed, 13 Mar 2024 18:10:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/install-pinpiont-via-docker/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker-compose&lt;/code&gt;的方式安装&lt;code&gt;Pinpoint&lt;/code&gt;，以及基于&lt;code&gt;Dockerfile&lt;/code&gt;与&lt;code&gt;Jenkins&lt;/code&gt;流水线将项目添加到&lt;code&gt;Pinpoint&lt;/code&gt;中进行实时监控。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>在基于Docker搭建的Kafka UI中整合LDAP</title>
       <link>https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/</link>

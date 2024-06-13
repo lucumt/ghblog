@@ -142,6 +142,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/docker/</loc>
+    <lastmod>2024-03-13T18:10:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</loc>
+    <lastmod>2024-03-13T18:10:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/docker/install-pinpiont-via-docker/</loc>
+    <lastmod>2024-03-13T18:10:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/jenkins/</loc>
     <lastmod>2024-01-11T10:17:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -226,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/docker/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/kafka/</loc>
     <lastmod>2023-11-20T15:37:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -241,13 +255,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/ldap/</loc>
-    <lastmod>2023-11-20T15:37:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</loc>
     <lastmod>2023-11-20T15:37:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

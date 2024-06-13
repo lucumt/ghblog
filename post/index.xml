@@ -37,6 +37,13 @@
       <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>通过Docker快速安装Pinpoint</title>
+      <link>https://lucumt.info/post/docker/install-pinpiont-via-docker/</link>
+      <pubDate>Wed, 13 Mar 2024 18:10:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/install-pinpiont-via-docker/</guid>
+      <description>&lt;p&gt;简要记录如何基于&lt;code&gt;docker-compose&lt;/code&gt;的方式安装&lt;code&gt;Pinpoint&lt;/code&gt;，以及基于&lt;code&gt;Dockerfile&lt;/code&gt;与&lt;code&gt;Jenkins&lt;/code&gt;流水线将项目添加到&lt;code&gt;Pinpoint&lt;/code&gt;中进行实时监控。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在基于KubeSphere的Jenkins的流水线中切换nodejs版本</title>
       <link>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</link>
       <pubDate>Thu, 11 Jan 2024 10:17:42 +0800</pubDate>
