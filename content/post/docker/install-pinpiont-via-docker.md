@@ -70,7 +70,7 @@ docker-compose version
 
 # Pinpoint安装与测试
 
-1. 在终端执行下述指令下载`Pinpoint`全家桶并解压改文件
+1. 在终端执行下述指令下载`Pinpoint`全家桶并解压该文件
 
    ```bash
    wget https://github.com/pinpoint-apm/pinpoint-docker/archive/refs/tags/2.2.2.tar.gz
@@ -88,7 +88,7 @@ docker-compose version
    docker-compose up -d zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-agent pinpoint-web pinpoint-collector
    ```
 
-4. 执行下述命令启动
+4. 执行下述命令启动`Pinpoint`全套的服务
 
    ```bash
    bash start.sh
