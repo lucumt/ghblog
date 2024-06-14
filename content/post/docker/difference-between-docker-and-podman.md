@@ -109,7 +109,7 @@ highchartsDiagrams:
 
 
 
-这些工具也可与任何兼容OCI标准的容器引擎协作，如`Docker`，使得很容易**过渡到`Podman`**或者在已安装的`Docker`环境中使用。那`Kubernetes`能否使用`Podman`？当然可以，事实上它们在某些方面是相似的。
+这些工具也可与任何兼容OCI标准的容器引擎协作，如`Docker`，使得很容易 **过渡到`Podman`** 或者在已安装的`Docker`环境中使用。那`Kubernetes`能否使用`Podman`？当然可以，事实上它们在某些方面是相似的。
 
 
 
