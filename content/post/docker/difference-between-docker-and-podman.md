@@ -2,9 +2,9 @@
 title: "[译]Docker和Podman的差异"
 date: 2024-04-26T10:46:34+08:00
 lastmod: 2024-04-26T10:46:34+08:00
-draft: true
-keywords: []
-description: ""
+draft: false
+keywords: ["Docker","Podman","容器化","容器编排","差异"]
+description: "翻译一篇关于Docker和Podman的差异的博文"
 tags: ["docker"]
 categories: ["容器化","翻译"]
 author: "Rosen Lu"
@@ -91,7 +91,7 @@ highchartsDiagrams:
 
 
 
-但这种自给自足也有问题，尽管`Docker`是软件开发各阶段创建和运行容器的强有力工具，但是其它工具与其交互很困难。近年来随着许多解决特定任务的专用工具出现，`Docker`成为许多专业开发人员将一些操作分配给其它平台和工具的起点。
+不过这种自给自足也有问题，尽管`Docker`是软件开发各阶段创建和运行容器的强有力工具，但其它工具与其交互很困难。近年来随着许多解决特定任务的专用工具出现，`Docker`成为许多专业开发人员将一些操作转移到其它平台和工具的分水岭。
 
 # 什么是Podman
 
@@ -113,32 +113,93 @@ highchartsDiagrams:
 
 
 
-`Podman`对容器有一套不同的概念，
+`Podman`对容器有一套不同的概念，正如其名称所暗示的那样，`Podman`可以创建协同工作的容器pods，**类似于`Kubernetes`中的pod功能**。Pods将多个不同的容器组合到一个共同的名称下以单个单元的形式来管理它们。
+
+
+
+这样做的好处是开发人员可以共享资源，在pod内为同一个应用程序使用不同的容器：一个用于前端，一个用于后端，另一个用于数据库。**Pod的定义可以导出为兼容`Kubernetes`的yaml文件**并运行用于`Kubernetes`集群中，使得容器能够更快的投入实际使用。
+
+
+
+**`Podman`的另一个显示特征是其没有守护进程**，守护进程是在后台运行的程序，用于处理没有用户界面的服务、进程和请求。其对容器引擎进行了独特的改进，因为它实际上并不依赖于守护进程，而是将容器和 Pod 作为子进程启动。
+
+
+
+或许你会问 **为啥我要用`Podman`?** 这是由于它作为开发和管理工具具有独特的优势，使其成为在适当的环境下成为可行且有趣的`Docker`替代品，也可作为与`Docker`协同工作的强有力补充，因为它支持与`Docker`兼容的CLI标准接口。
 
 # Podman与Docker的差异对比
 
+根据 Google Trends 的数据，过去五年`Docker`和`Podman`的关注度一直在波动，但`Docker`相对更受欢迎，截止到目前，这两个容器编排工具都获得了用户极大的关注度。
+
+
+
 `Podman`过去五年的搜索趋势
+
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Podman","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Podman&hl=en","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
 
 `Docker`过去五年的搜索趋势
 <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Docker","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Docker&hl=en-US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
 
+`Podman`和`Docker`有许多共同的特性，但也存在一些根本上的区别，这并不意味着一个比另一个好，而是要根据具体项目做出合适的选择。
 
 ## 架构
 
-
+**`Docker`使用守护线程**，一个后台持续运行的程序来创建镜像和容器，`Podman`则使用无守护线程的架构，这意味着它可以在启动容器的用户下运行容器，`Docker`拥有由守护进程管控的客户端-服务器交互逻辑，另外一个则没有。
 
 ## Root权限
 
+`Podman`由于不需要守护进程来管理其活动，同样不需要对容器分配root权限，`Docker`最近在其守护进程配置中添加了无root模式，但`Podman`首先使用了这种方法，并将其推广为一项基本特性，接下来会具体说明。
+
+## 安全
+
+**`Podman`是否比`Docker`更安全**？`Podman`允许容易以非root的方式运行，相对于具有root权限的容器而言无root容器通常更安全。在`Docker`中守护线程拥有root权限，使得其成为攻击者的理想入口。`Podman`中的容器默认情况下没有root权限，从而在root和非root级别添加了一个天然的屏障来提高安全性，同时，它也能同时运行有root权限和无root权限的容器。
+
 ## Systemd
+
+由于没有守护线程，`Podman`需要其它的工具在后台来管理服务和支持容器运行，Systemd可用于为已有容器创建控制单元或创建新容器，Systemd还可以与`Podman`集成，允许它运行默认启用基于Systemd的容器且无需任何修改。
+
+
+
+通过使用Systemd，供应商可以以容器的形式安装、运行和管理他们的应用程序，因为现在大多数应用程序都是以这种方式打包和交付的。
 
 ## 镜像构建
 
+作为一个自给自足的工具，`Docker`可自行构建容器镜像，而`Podman`则需要一个名为`Buildah`工具的协助，这正好表明了`Podman`的一个特点：用于运行容器而不是用于构建容器。
+
 ## Docker Swarm
+
+`Podman`不支持Docker Swarm,由于使用Docker Swarm会产生操作，这会将其排除在使用Docker Swarm特定的项目之外。`Podman`近期添加了Docker Compose的支持，使其与Swarm兼容，从而解决这一限制。`Docker`则很自然的可以与 Swarm良好配合使用。
 
 ## 一体化与模块化
 
+这是这两个工具的另外一个关键差异：`Docker`是一个体式、功能强大且独立的工具，包含各种优点和缺点，可处理整个周期内的所有容器化任务，`Podman` 则采用模块化的方式，对于特定的任务依赖特定的工具来实现。
+
 # 结论
+
+`Podman`和`Docker`都是功能强大的容器编排工具，各有优势和区别，尽管`Docker`已成为近十年的容器行业标准，但`Podman`的创新架构和容器管理方法使其成为开发人员（尤其是在Linux环境中工作的开发人员）的可靠选择。
+
+
+
+不论你选择哪一种，抑或是两者都用，了解它们的差别和共同点有助于对项目做出最佳的决定。
 
 # 常见问题
 
+## Podman能否替代Docker
+
+是的，`Podman`可以在许多场景下替换`Docker`，它提供了与`Docker`类似的容器运行时环境和工具，并且在某种程度上，能提供额外好处，如更高的安全性和灵活性。
+
+## Podman与Docker有何不同
+
+`Podman`相对于`Docker`的一个主要区别是它不需要单独的守护进程，使得其更轻量级和更安全，同样也为非root容器运行提供了更好的支持以提升安全。除此之外，`Podman`可在不需要类似Docker Compose这种工具的支持下原生运行`Kubernetes`中的pods。
+
+
+
+想了解更多吗？可以按照`Docker`+`Kubernetes`去查找。
+
+## Podman是否比Docker更安全
+
+`Podman`有时被认为比`Docker`更安全，这是由于它不需要单独的守护进程来运行容器，从而减少了潜在安全漏洞的攻击面，同时还更好地支持以非root 用户身份运行容器，从而可以提高安全性。
+
+## 哪种更合适：Podman还是Docker
+
+`Podman 和 Docker`哪个更好呢？`Podman`是否比`Docker`更好取决于具体的场景和需求。有时`Podman`可能提供更好的安全性和灵活性，但`Docker`可能更适合某些环境或应用程序。这两个考量点很重要，因为可用于确定哪个最能满足项目的需求。
