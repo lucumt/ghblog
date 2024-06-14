@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Html on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/html/</link>
+    <description>Recent content in Html on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 14 Jun 2024 11:07:55 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Embed Multiple Google Trends Charts Into Single Html Page</title>
+      <link>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</link>
+      <pubDate>Fri, 14 Jun 2024 11:07:55 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;&#xA;  #content {&#xA;     font-family:math;font-size:13pt;margin:1em 0;&#xA;  }&#xA;&#xA;  .post .post-header .post-title,&#xA;  .post .post-content h1{&#xA;     font-family:revert;&#xA;  }&#xA;&lt;/style&gt;&#xA;&lt;p&gt;A brief descripton about how to embed multiple google trends chart into single html page to make them working fine.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

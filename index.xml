@@ -6,8 +6,15 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 12 Jun 2024 13:26:28 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2024 11:07:55 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Embed Multiple Google Trends Charts Into Single Html Page</title>
+      <link>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</link>
+      <pubDate>Fri, 14 Jun 2024 11:07:55 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;&#xA;  #content {&#xA;     font-family:math;font-size:13pt;margin:1em 0;&#xA;  }&#xA;&#xA;  .post .post-header .post-title,&#xA;  .post .post-content h1{&#xA;     font-family:revert;&#xA;  }&#xA;&lt;/style&gt;&#xA;&lt;p&gt;A brief descripton about how to embed multiple google trends chart into single html page to make them working fine.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给Windows中的命令添加别名</title>
       <link>https://lucumt.info/post/other/add-alias-to-commands-on-windows/</link>

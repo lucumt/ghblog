@@ -3,34 +3,55 @@
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2024-06-12T13:26:28+08:00</lastmod>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</loc>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/html/</loc>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-06-12T13:26:28+08:00</lastmod>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2024-06-12T13:26:28+08:00</lastmod>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/windows/</loc>
-    <lastmod>2024-06-12T13:26:28+08:00</lastmod>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/</loc>
+    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/windows/</loc>
     <lastmod>2024-06-12T13:26:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -234,13 +255,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/web/</loc>
-    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2023-11-22T14:08:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

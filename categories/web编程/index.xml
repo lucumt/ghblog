@@ -6,8 +6,15 @@
     <description>Recent content in Web编程 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2024 11:07:55 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Embed Multiple Google Trends Charts Into Single Html Page</title>
+      <link>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</link>
+      <pubDate>Fri, 14 Jun 2024 11:07:55 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;&#xA;  #content {&#xA;     font-family:math;font-size:13pt;margin:1em 0;&#xA;  }&#xA;&#xA;  .post .post-header .post-title,&#xA;  .post .post-content h1{&#xA;     font-family:revert;&#xA;  }&#xA;&lt;/style&gt;&#xA;&lt;p&gt;A brief descripton about how to embed multiple google trends chart into single html page to make them working fine.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Foxglove自定义插件开发说明</title>
       <link>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</link>
