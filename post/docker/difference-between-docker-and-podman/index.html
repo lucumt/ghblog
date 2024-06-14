@@ -54,7 +54,7 @@
   <meta itemprop="description" content="翻译一篇关于Docker和Podman的差异的博文">
   <meta itemprop="datePublished" content="2024-04-26T10:46:34+08:00">
   <meta itemprop="dateModified" content="2024-04-26T10:46:34+08:00">
-  <meta itemprop="wordCount" content="3581">
+  <meta itemprop="wordCount" content="3577">
   <meta itemprop="keywords" content="Docker,Podman,容器化,容器编排,差异">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]Docker和Podman的差异">
@@ -229,7 +229,7 @@
 <li><strong>runc</strong>，<code>Podman</code>和<code>Buildah</code>使用的容器运行和功能构建器</li>
 <li><strong>crun</strong>，运行时可选，为无root权限容器提供更大的灵活性、控制与安全性</li>
 </ul>
-<p>这些工具也可与任何兼容OCI标准的容器引擎协作，如<code>Docker</code>，使得很容易**过渡到<code>Podman</code>**或者在已安装的<code>Docker</code>环境中使用。那<code>Kubernetes</code>能否使用<code>Podman</code>？当然可以，事实上它们在某些方面是相似的。</p>
+<p>这些工具也可与任何兼容OCI标准的容器引擎协作，如<code>Docker</code>，使得很容易 <strong>过渡到<code>Podman</code></strong> 或者在已安装的<code>Docker</code>环境中使用。那<code>Kubernetes</code>能否使用<code>Podman</code>？当然可以，事实上它们在某些方面是相似的。</p>
 <p><code>Podman</code>对容器有一套不同的概念，正如其名称所暗示的那样，<code>Podman</code>可以创建协同工作的容器pods，<strong>类似于<code>Kubernetes</code>中的pod功能</strong>。Pods将多个不同的容器组合到一个共同的名称下以单个单元的形式来管理它们。</p>
 <p>这样做的好处是开发人员可以共享资源，在pod内为同一个应用程序使用不同的容器：一个用于前端，一个用于后端，另一个用于数据库。<strong>Pod的定义可以导出为兼容<code>Kubernetes</code>的yaml文件</strong>并运行用于<code>Kubernetes</code>集群中，使得容器能够更快的投入实际使用。</p>
 <p><strong><code>Podman</code>的另一个显示特征是其没有守护进程</strong>，守护进程是在后台运行的程序，用于处理没有用户界面的服务、进程和请求。其对容器引擎进行了独特的改进，因为它实际上并不依赖于守护进程，而是将容器和 Pod 作为子进程启动。</p>
