@@ -6,8 +6,15 @@
     <description>Recent content in 翻译 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Aug 2023 17:49:14 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2024 10:46:34 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Docker和Podman的差异</title>
+      <link>https://lucumt.info/post/docker/difference-between-docker-and-podman/</link>
+      <pubDate>Fri, 26 Apr 2024 10:46:34 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/difference-between-docker-and-podman/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.imaginarycloud.com/blog/podman-vs-docker/&#34;&gt;&lt;strong&gt;Podman vs Docker: What are the differences?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[译]4000个点赞并且在不断增加，回忆之旅</title>
       <link>https://lucumt.info/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/</link>

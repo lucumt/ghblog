@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>[译]Docker和Podman的差异 - 飞狐的部落格</title>
@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion
-" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译一篇关于Docker和Podman的差异的博文" /><meta name="keywords" content="Docker, Podman, 容器化, 容器编排, 差异" />
 
 
 
@@ -27,23 +26,23 @@
 <meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/docker/difference-between-docker-and-podman/" />
+<link rel="canonical" href="https://lucumt.info/post/docker/difference-between-docker-and-podman/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:url" content="http://localhost:1313/post/docker/difference-between-docker-and-podman/">
+<meta property="og:url" content="https://lucumt.info/post/docker/difference-between-docker-and-podman/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]Docker和Podman的差异">
-  <meta property="og:description" content="https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion">
+  <meta property="og:description" content="翻译一篇关于Docker和Podman的差异的博文">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +51,14 @@
     <meta property="article:tag" content="Docker">
 
   <meta itemprop="name" content="[译]Docker和Podman的差异">
-  <meta itemprop="description" content="https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion">
+  <meta itemprop="description" content="翻译一篇关于Docker和Podman的差异的博文">
   <meta itemprop="datePublished" content="2024-04-26T10:46:34+08:00">
   <meta itemprop="dateModified" content="2024-04-26T10:46:34+08:00">
-  <meta itemprop="wordCount" content="1">
-  <meta itemprop="keywords" content="Docker">
+  <meta itemprop="wordCount" content="3581">
+  <meta itemprop="keywords" content="Docker,Podman,容器化,容器编排,差异">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]Docker和Podman的差异">
-  <meta name="twitter:description" content="https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion">
+  <meta name="twitter:description" content="翻译一篇关于Docker和Podman的差异的博文">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -106,7 +105,7 @@
         <li class="mobile-menu-item">分类</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于我</li>
-      </a><a href="/links/">
+      </a><a href="https://tech.lucumt.info">
         <li class="mobile-menu-item">外链</li>
       </a><a href="/search/">
         <li class="mobile-menu-item">搜索</li>
@@ -141,7 +140,7 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于我</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/links/">外链</a>
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/search/">搜索</a>
       </li>
@@ -165,21 +164,111 @@
             <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
             <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
             </div>
-        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是容器编排">什么是容器编排</a></li>
+    <li><a href="#什么是docker">什么是Docker</a></li>
+    <li><a href="#什么是podman">什么是Podman</a></li>
+    <li><a href="#podman与docker的差异对比">Podman与Docker的差异对比</a>
+      <ul>
+        <li><a href="#架构">架构</a></li>
+        <li><a href="#root权限">Root权限</a></li>
+        <li><a href="#安全">安全</a></li>
+        <li><a href="#systemd">Systemd</a></li>
+        <li><a href="#镜像构建">镜像构建</a></li>
+        <li><a href="#docker-swarm">Docker Swarm</a></li>
+        <li><a href="#一体化与模块化">一体化与模块化</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#常见问题">常见问题</a>
+      <ul>
+        <li><a href="#podman能否替代docker">Podman能否替代Docker</a></li>
+        <li><a href="#podman与docker有何不同">Podman与Docker有何不同</a></li>
+        <li><a href="#podman是否比docker更安全">Podman是否比Docker更安全</a></li>
+        <li><a href="#哪种更合适podman还是docker">哪种更合适：Podman还是Docker</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
 	 
 	  	
 	
-    <div class="post-content image-border">
-	 <p><a href="https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion">https://www.imaginarycloud.com/blog/podman-vs-docker/#conclusion</a></p>
+    <div class="post-content image-center">
+	 <p>本文翻译自<a href="https://www.imaginarycloud.com/blog/podman-vs-docker/"><strong>Podman vs Docker: What are the differences?</strong></a></p>
+<p><img src="/blog_img/docker/difference-between-docker-and-podman/podman-vs-docker.webp" alt="Docker和Podman的差异" title="Docker和Podman的差异"></p>
+<p>容器编排技术是目前最重要的Web开发技术之一，而目前在该领域的许多强有力的框架技术正在争夺主导地位。</p>
+<p><code>Podman</code>是Red Hat公司的一款产品，以类似<code>Kubernetes</code>方式构建、运行和管理容器，其旨在给主流的容器使用人员提供一个可靠的替代。</p>
+<p>接下来我们会比较<code>Podman</code>与近十年事实上的容器标准<code>Docker</code>，因为这两种技术有本质上的区别，但同时也非常适合协同工作。</p>
+<h1 id="什么是容器编排">什么是容器编排</h1>
+<p>容器是包含代码和类库、工具、设置、运行等依赖项的标准软件包，由于它们提供了更快的部署和扩展能力，同时在开发和交付准备阶段能保持一致性，因此业界迅速采用了容器作为容器化架构的核心组件。</p>
+<p>容器是轻量级、安全、可移植的，提供了与任何环境兼容的隔离空间。通过将软件从操作系统分离出来，容器可移植到任何地方(如从Linux到Windows)，同时可避免阻碍其正常运行的缺陷和错误。</p>
+<p>一些最知名的容器编排技术包括<code>Docker</code>、<code>Docker Swarm</code>、<code>Kubernetes</code>和<code>Nomad</code>，我们已经在相关博客中对它们进行了详细的分析和比较。</p>
+<h1 id="什么是docker">什么是Docker</h1>
+<p><strong><code>Docker</code>是标准的容器管理技术</strong>，它在业界具有如此重要的地位，以至于大多数人想到容器时就会想到<code>Docker</code>。</p>
+<p><code>Docker</code>作为容器编排领域的瑞士军刀，包含了许多其它替代品出现之前的强大功能，它已经成长为一个标准的、自给自足的功能，随着容器管理复杂性的提升，能满足所有开发人员的需求。</p>
+<p><code>Docker</code>很快的成为了一个<strong>一体化解决方案</strong>，包含用于特定任务的各种工具，其中一个是<code>Docker Swarm</code>，一个原生的<code>Docker</code>特性用于集群和调度<code>Docker</code>引擎，以及其它的用于创建和管理一大堆容器的工具。</p>
+<p><code>Docker</code>的附带工具可用于处理容器编排领域的所有任务，从负载均衡到网络，使得其成为业界的首先，同时也是成熟的参考技术。</p>
+<p>不过这种自给自足也有问题，尽管<code>Docker</code>是软件开发各阶段创建和运行容器的强有力工具，但其它工具与其交互很困难。近年来随着许多解决特定任务的专用工具出现，<code>Docker</code>成为许多专业开发人员将一些操作转移到其它平台和工具的分水岭。</p>
+<h1 id="什么是podman">什么是Podman</h1>
+<p><strong>那<code>Podman</code>又是什么呢? <code>Podman</code>是一个基于开放容器标准(Open Container Initiative,OCI)设计的用于开发、管理和运行容器和pod的开源，Linux原生的工具。它是Red Hat开发的用户友好的容器编排器，在RedHat 8和Centos 8中作为默认的容器引擎。</strong></p>
+<p><code>Podman</code>是一系列的命令行工具集合，用于以模块化框架的方式处理容器化过程中的各种不同任务，这些集合包括：</p>
+<ul>
+<li><strong>Podman</strong>，pod和容器的镜像管理</li>
+<li><strong>Buildah</strong>，容器构建器</li>
+<li><strong>Skopeo</strong>，容器镜像检查管理器</li>
+<li><strong>runc</strong>，<code>Podman</code>和<code>Buildah</code>使用的容器运行和功能构建器</li>
+<li><strong>crun</strong>，运行时可选，为无root权限容器提供更大的灵活性、控制与安全性</li>
+</ul>
+<p>这些工具也可与任何兼容OCI标准的容器引擎协作，如<code>Docker</code>，使得很容易**过渡到<code>Podman</code>**或者在已安装的<code>Docker</code>环境中使用。那<code>Kubernetes</code>能否使用<code>Podman</code>？当然可以，事实上它们在某些方面是相似的。</p>
+<p><code>Podman</code>对容器有一套不同的概念，正如其名称所暗示的那样，<code>Podman</code>可以创建协同工作的容器pods，<strong>类似于<code>Kubernetes</code>中的pod功能</strong>。Pods将多个不同的容器组合到一个共同的名称下以单个单元的形式来管理它们。</p>
+<p>这样做的好处是开发人员可以共享资源，在pod内为同一个应用程序使用不同的容器：一个用于前端，一个用于后端，另一个用于数据库。<strong>Pod的定义可以导出为兼容<code>Kubernetes</code>的yaml文件</strong>并运行用于<code>Kubernetes</code>集群中，使得容器能够更快的投入实际使用。</p>
+<p><strong><code>Podman</code>的另一个显示特征是其没有守护进程</strong>，守护进程是在后台运行的程序，用于处理没有用户界面的服务、进程和请求。其对容器引擎进行了独特的改进，因为它实际上并不依赖于守护进程，而是将容器和 Pod 作为子进程启动。</p>
+<p>或许你会问 <strong>为啥我要用<code>Podman</code>?</strong> 这是由于它作为开发和管理工具具有独特的优势，使其成为在适当的环境下成为可行且有趣的<code>Docker</code>替代品，也可作为与<code>Docker</code>协同工作的强有力补充，因为它支持与<code>Docker</code>兼容的CLI标准接口。</p>
+<h1 id="podman与docker的差异对比">Podman与Docker的差异对比</h1>
+<p>根据 Google Trends 的数据，过去五年<code>Docker</code>和<code>Podman</code>的关注度一直在波动，但<code>Docker</code>相对更受欢迎，截止到目前，这两个容器编排工具都获得了用户极大的关注度。</p>
+<p><code>Podman</code>过去五年的搜索趋势</p>
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Podman","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Podman&hl=en","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+<p><code>Docker</code>过去五年的搜索趋势</p>
+<script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Docker","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Docker&hl=en-US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+<p><code>Podman</code>和<code>Docker</code>有许多共同的特性，但也存在一些根本上的区别，这并不意味着一个比另一个好，而是要根据具体项目做出合适的选择。</p>
+<h2 id="架构">架构</h2>
+<p><strong><code>Docker</code>使用守护线程</strong>，一个后台持续运行的程序来创建镜像和容器，<code>Podman</code>则使用无守护线程的架构，这意味着它可以在启动容器的用户下运行容器，<code>Docker</code>拥有由守护进程管控的客户端-服务器交互逻辑，另外一个则没有。</p>
+<h2 id="root权限">Root权限</h2>
+<p><code>Podman</code>由于不需要守护进程来管理其活动，同样不需要对容器分配root权限，<code>Docker</code>最近在其守护进程配置中添加了无root模式，但<code>Podman</code>首先使用了这种方法，并将其推广为一项基本特性，接下来会具体说明。</p>
+<h2 id="安全">安全</h2>
+<p><strong><code>Podman</code>是否比<code>Docker</code>更安全</strong>？<code>Podman</code>允许容易以非root的方式运行，相对于具有root权限的容器而言无root容器通常更安全。在<code>Docker</code>中守护线程拥有root权限，使得其成为攻击者的理想入口。<code>Podman</code>中的容器默认情况下没有root权限，从而在root和非root级别添加了一个天然的屏障来提高安全性，同时，它也能同时运行有root权限和无root权限的容器。</p>
+<h2 id="systemd">Systemd</h2>
+<p>由于没有守护线程，<code>Podman</code>需要其它的工具在后台来管理服务和支持容器运行，Systemd可用于为已有容器创建控制单元或创建新容器，Systemd还可以与<code>Podman</code>集成，允许它运行默认启用基于Systemd的容器且无需任何修改。</p>
+<p>通过使用Systemd，供应商可以以容器的形式安装、运行和管理他们的应用程序，因为现在大多数应用程序都是以这种方式打包和交付的。</p>
+<h2 id="镜像构建">镜像构建</h2>
+<p>作为一个自给自足的工具，<code>Docker</code>可自行构建容器镜像，而<code>Podman</code>则需要一个名为<code>Buildah</code>工具的协助，这正好表明了<code>Podman</code>的一个特点：用于运行容器而不是用于构建容器。</p>
+<h2 id="docker-swarm">Docker Swarm</h2>
+<p><code>Podman</code>不支持Docker Swarm,由于使用Docker Swarm会产生操作，这会将其排除在使用Docker Swarm特定的项目之外。<code>Podman</code>近期添加了Docker Compose的支持，使其与Swarm兼容，从而解决这一限制。<code>Docker</code>则很自然的可以与 Swarm良好配合使用。</p>
+<h2 id="一体化与模块化">一体化与模块化</h2>
+<p>这是这两个工具的另外一个关键差异：<code>Docker</code>是一个体式、功能强大且独立的工具，包含各种优点和缺点，可处理整个周期内的所有容器化任务，<code>Podman</code> 则采用模块化的方式，对于特定的任务依赖特定的工具来实现。</p>
+<h1 id="结论">结论</h1>
+<p><code>Podman</code>和<code>Docker</code>都是功能强大的容器编排工具，各有优势和区别，尽管<code>Docker</code>已成为近十年的容器行业标准，但<code>Podman</code>的创新架构和容器管理方法使其成为开发人员（尤其是在Linux环境中工作的开发人员）的可靠选择。</p>
+<p>不论你选择哪一种，抑或是两者都用，了解它们的差别和共同点有助于对项目做出最佳的决定。</p>
+<h1 id="常见问题">常见问题</h1>
+<h2 id="podman能否替代docker">Podman能否替代Docker</h2>
+<p>是的，<code>Podman</code>可以在许多场景下替换<code>Docker</code>，它提供了与<code>Docker</code>类似的容器运行时环境和工具，并且在某种程度上，能提供额外好处，如更高的安全性和灵活性。</p>
+<h2 id="podman与docker有何不同">Podman与Docker有何不同</h2>
+<p><code>Podman</code>相对于<code>Docker</code>的一个主要区别是它不需要单独的守护进程，使得其更轻量级和更安全，同样也为非root容器运行提供了更好的支持以提升安全。除此之外，<code>Podman</code>可在不需要类似Docker Compose这种工具的支持下原生运行<code>Kubernetes</code>中的pods。</p>
+<p>想了解更多吗？可以按照<code>Docker</code>+<code>Kubernetes</code>去查找。</p>
+<h2 id="podman是否比docker更安全">Podman是否比Docker更安全</h2>
+<p><code>Podman</code>有时被认为比<code>Docker</code>更安全，这是由于它不需要单独的守护进程来运行容器，从而减少了潜在安全漏洞的攻击面，同时还更好地支持以非root 用户身份运行容器，从而可以提高安全性。</p>
+<h2 id="哪种更合适podman还是docker">哪种更合适：Podman还是Docker</h2>
+<p><code>Podman 和 Docker</code>哪个更好呢？<code>Podman</code>是否比<code>Docker</code>更好取决于具体的场景和需求。有时<code>Podman</code>可能提供更好的安全性和灵活性，但<code>Docker</code>可能更适合某些环境或应用程序。这两个考量点很重要，因为可用于确定哪个最能满足项目的需求。</p>
     </div>
 
     
@@ -248,7 +337,11 @@
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
-  
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
   <span class="copyright-year">
     &copy; 
@@ -280,7 +373,52 @@
 
 <script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
+            crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
 
 
 <script>

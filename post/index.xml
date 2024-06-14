@@ -30,6 +30,13 @@
       <description>&lt;p&gt;简要记录如何基于同一个&lt;code&gt;GitHub&lt;/code&gt;账号创建多个&lt;a href=&#34;https://pages.github.com/&#34;&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;&lt;/a&gt;并基于&lt;a href=&#34;https://www.godaddy.com/&#34;&gt;&lt;strong&gt;GoDaddy&lt;/strong&gt;&lt;/a&gt;配置多个子域名。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[译]Docker和Podman的差异</title>
+      <link>https://lucumt.info/post/docker/difference-between-docker-and-podman/</link>
+      <pubDate>Fri, 26 Apr 2024 10:46:34 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/difference-between-docker-and-podman/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.imaginarycloud.com/blog/podman-vs-docker/&#34;&gt;&lt;strong&gt;Podman vs Docker: What are the differences?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在基于MySQL的Grafana的柱状中不显示0值</title>
       <link>https://lucumt.info/post/devops/hidden-zero-value-in-grafana-bar-chart/</link>
       <pubDate>Fri, 19 Apr 2024 17:21:43 +0800</pubDate>

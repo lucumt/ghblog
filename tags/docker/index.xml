@@ -6,8 +6,15 @@
     <description>Recent content in Docker on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 13 Mar 2024 18:10:19 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2024 10:46:34 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Docker和Podman的差异</title>
+      <link>https://lucumt.info/post/docker/difference-between-docker-and-podman/</link>
+      <pubDate>Fri, 26 Apr 2024 10:46:34 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/difference-between-docker-and-podman/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.imaginarycloud.com/blog/podman-vs-docker/&#34;&gt;&lt;strong&gt;Podman vs Docker: What are the differences?&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>通过Docker快速安装Pinpoint</title>
       <link>https://lucumt.info/post/docker/install-pinpiont-via-docker/</link>
