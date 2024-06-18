@@ -856,6 +856,11 @@ Highcharts.chart('section_year_chart_1', {
     tooltip: {
         shared: true
     },
+	plotOptions: {
+		column: {
+			stacking: 'normal'
+		}
+	},
 	responsive: {
         rules: [{
             condition: {
@@ -870,7 +875,9 @@ Highcharts.chart('section_year_chart_1', {
             }
         }]
     },
-    series: [{
+    series: [
+	
+	{
         name: '按年新增',
         type: 'column',
 		color:"#16982b",
