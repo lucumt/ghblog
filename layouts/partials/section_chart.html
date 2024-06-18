@@ -1,12 +1,18 @@
 <!-- 按年统计 -->
 {{ $yearAddLineData := slice -}}
+{{ $yearAddDraftLineData := slice -}}
 {{ $yearAddPieData := slice -}}
 {{ $yearTotalData := slice -}}
 {{ $yearTotal := 0 -}}
 {{ $yearData := slice -}}
 {{- range (.Site.RegularPages.GroupByDate "2006" "asc") -}}
-    {{ $yearValue := (len (where .Pages "Section" "post")) -}}
-	{{ $yearAddLineData = $yearAddLineData | append $yearValue -}}
+    {{ $yearFinishValue := (len (where (where .Pages "Section" "post") "Draft" false) ) -}}
+	{{ $yearAddLineData = $yearAddLineData | append $yearFinishValue -}}
+	
+    {{ $yearDraftValue := (len (where (where .Pages "Section" "post") "Draft" true) ) -}}
+	{{ $yearAddDraftLineData = $yearAddDraftLineData | append $yearDraftValue -}}
+	
+	{{ $yearValue := (len (where .Pages "Section" "post")) -}}
     {{ $yearAddPieData = $yearAddPieData | append (dict "name" .Key "y" $yearValue) -}}
 	{{ $yearTotal = add $yearTotal $yearValue -}}
 	{{ $yearTotalData = $yearTotalData | append $yearTotal -}}
@@ -103,6 +109,11 @@ Highcharts.chart('section_year_chart_1', {
     tooltip: {
         shared: true
     },
+	plotOptions: {
+		column: {
+			stacking: 'normal'
+		}
+	},
 	responsive: {
         rules: [{
             condition: {
@@ -117,8 +128,21 @@ Highcharts.chart('section_year_chart_1', {
             }
         }]
     },
-    series: [{
-        name: '按年新增',
+    series: [
+	{{ if not (eq hugo.Environment "production") }}
+       {
+			name: '按年新增(草稿)',
+			type: 'column',
+			color:'#808080',
+			yAxis: 1,
+			data: JSON.parse({{ jsonify $yearAddDraftLineData -}}),
+			tooltip: {
+				valueSuffix: ' 篇'
+			}
+      },
+    {{ end }}
+	{
+        name: {{ if not (eq hugo.Environment "production") }} '按年新增(完成)' {{ else }}'按年新增'{{ end -}},
         type: 'column',
 		color:"#16982b",
         yAxis: 1,
