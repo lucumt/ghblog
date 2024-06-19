@@ -107,6 +107,13 @@
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://www.arhohuttunen.com/junit-5-getting-started&#34;&gt;&lt;strong&gt;Getting Started with JUnit 5: Writing Your First Test&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[译]如何检测一个Hugo站点是开发环境还是生产环境</title>
+      <link>https://lucumt.info/post/hugo/check-if-a-hugo-site-is-in-development-or-production/</link>
+      <pubDate>Sun, 19 Jun 2022 12:09:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/check-if-a-hugo-site-is-in-development-or-production/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://dev.to/tylerlwsmith/check-if-a-hugo-site-is-in-development-or-production-2beb&#34;&gt;&lt;strong&gt;How to check if a Hugo site is in development or production&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>5.[译]同线程系统</title>
       <link>https://lucumt.info/post/translate/java-concurrency/same-threading/</link>
       <pubDate>Thu, 16 Jun 2022 12:16:44 +0800</pubDate>

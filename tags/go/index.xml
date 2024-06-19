@@ -44,6 +44,13 @@
       <description>&lt;p&gt;自己一直特别羡慕&lt;a href=&#34;https://www.cnblogs.com&#34;&gt;&lt;strong&gt;博客园&lt;/strong&gt;&lt;/a&gt;上某些博主的博文样式（如&lt;a href=&#34;https://www.cnblogs.com/wupeixuan/p/13450815.html&#34;&gt;武培轩&lt;/a&gt;,&lt;a href=&#34;https://www.cnblogs.com/javaguide/p/16385150.html&#34;&gt;JavaGuide&lt;/a&gt;)，这些博文样式第一眼看起来就很清爽,让人很有阅读的欲望，而我总感觉自己博客的样式特丑陋。即使不关注内容，只看排版布局和样式，有时候自己写完一篇文章自己都不想去看，何况别人！&lt;/p&gt;&#xA;&lt;p&gt;终于有一天我受不了自己的博客样式，决定对其升级一版，在这个过程中发现个人采用的博客主题&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;功能很强大，基于上没做啥修改就达到了自己想要的效果，特此记录下。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[译]如何检测一个Hugo站点是开发环境还是生产环境</title>
+      <link>https://lucumt.info/post/hugo/check-if-a-hugo-site-is-in-development-or-production/</link>
+      <pubDate>Sun, 19 Jun 2022 12:09:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/check-if-a-hugo-site-is-in-development-or-production/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://dev.to/tylerlwsmith/check-if-a-hugo-site-is-in-development-or-production-2beb&#34;&gt;&lt;strong&gt;How to check if a Hugo site is in development or production&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在Intellij IDEA中引用Golang本地包</title>
       <link>https://lucumt.info/post/golang/import-local-package-in-intellij-idea/</link>
       <pubDate>Sun, 05 Mar 2017 14:04:43 +0800</pubDate>
