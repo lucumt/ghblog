@@ -55,7 +55,7 @@
   <meta itemprop="description" content="本文介绍了将单个线程扩展的方式来实现并发执行">
   <meta itemprop="datePublished" content="2022-06-16T12:16:44+08:00">
   <meta itemprop="dateModified" content="2022-06-16T12:16:44+08:00">
-  <meta itemprop="wordCount" content="1920">
+  <meta itemprop="wordCount" content="1884">
   <meta itemprop="keywords" content="java concurrency">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="5.[译]同线程系统">
@@ -205,11 +205,14 @@
 <p>同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。</p>
 <h1 id="单线程和同线程设计视频教程">单线程和同线程设计视频教程</h1>
 <p>如果你更喜欢看视频，我也准备了一个相应的视频<a href="https://www.youtube.com/watch?v=QrYIOs1dA3M&amp;list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4&amp;index=22"><strong>单线程和同线程设计</strong></a>。</p>
-<pre><code>&lt;div style=&quot;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&quot;&gt;
-  &lt;iframe allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;allowfullscreen&quot; loading=&quot;eager&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; src=&quot;https://www.youtube-nocookie.com/embed/QrYIOs1dA3M?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&quot; style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&quot; title=&quot;YouTube video&quot;
-  &gt;&lt;/iframe&gt;
-&lt;/div&gt;
-</code></pre>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/QrYIOs1dA3M?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
 <h1 id="为什么选择单线程系统">为什么选择单线程系统</h1>
 <p>你可能会很好奇为什么今天还有人设计并使用单线程系统，单线程系统之所以受欢迎，是因为它的并发模型比多线程系统简单的多，单线程系统并不同其它线程共享状态(数据/对象)，这使得单线程系统可以更好的利用非并发数据结构、CPU以及CPU缓存。</p>
 <p>不幸的是单线程系统没有重复利用现代CPU的特性，一颗现代CPU通常带有 2, 4, 6, 8或更多的内核，每个内核在功能上都可以当做一个单独的CPU，如下图所示，单线程系统只能利用这些内核中的一个。</p>
