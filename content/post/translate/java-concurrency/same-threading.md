@@ -23,7 +23,7 @@ mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
 
-# You unlisted posts you might want not want the header or footer to show
+# You unlisted posts you might want not want the header or footer to showS
 hideHeaderAndFooter: false
 
 # You can enable or disable out-of-date content warning for individual post.
@@ -52,7 +52,7 @@ sequenceDiagrams:
 
 如果你更喜欢看视频，我也准备了一个相应的视频[**单线程和同线程设计**](https://www.youtube.com/watch?v=QrYIOs1dA3M&list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4&index=22)。
 
-{{% youtube "QrYIOs1dA3M" %}}
+{{< youtube "QrYIOs1dA3M" >}}
 
 # 为什么选择单线程系统
 
