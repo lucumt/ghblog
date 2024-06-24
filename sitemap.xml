@@ -1010,6 +1010,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/docker/difference-between-add-and-copy-in-dockerfile-build/</loc>
+    <lastmod>2021-01-16T15:00:05+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/</loc>
     <lastmod>2020-09-12T18:07:27+08:00</lastmod>
     <changefreq>weekly</changefreq>

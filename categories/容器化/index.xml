@@ -99,5 +99,12 @@
       <guid>https://lucumt.info/post/docker/download-file-from-nginx-installed-via-docker/</guid>
       <description>&lt;p&gt;简单记录利用&lt;code&gt;nginx&lt;/code&gt;结合&lt;code&gt;docker&lt;/code&gt;实现一个简易的静态文件下载服务器。&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Dockerfile中ADD与COPY的使用异同</title>
+      <link>https://lucumt.info/post/docker/difference-between-add-and-copy-in-dockerfile-build/</link>
+      <pubDate>Sat, 16 Jan 2021 15:00:05 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/difference-between-add-and-copy-in-dockerfile-build/</guid>
+      <description>&lt;p&gt;简要说明在使用&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/&#34;&gt;&lt;strong&gt;Dockerfile&lt;/strong&gt;&lt;/a&gt;构建镜像时，&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/#add&#34;&gt;&lt;strong&gt;ADD&lt;/strong&gt;&lt;/a&gt;与&lt;a href=&#34;https://docs.docker.com/reference/dockerfile/#copy&#34;&gt;&lt;strong&gt;COPY&lt;/strong&gt;&lt;/a&gt;指令的使用差异。&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
