@@ -1031,6 +1031,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/docker/difference-between-run-and-cmd-and-entrypoint-in-dockerfile-build/</loc>
+    <lastmod>2021-02-20T15:00:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/docker/difference-between-add-and-copy-in-dockerfile-build/</loc>
     <lastmod>2021-01-16T15:00:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
