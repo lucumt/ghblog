@@ -57,7 +57,7 @@
   <meta itemprop="description" content="简要介绍基于docker-compose安装Harbor的过程，供后续参考。">
   <meta itemprop="datePublished" content="2021-05-25T10:05:48+08:00">
   <meta itemprop="dateModified" content="2021-05-25T10:05:48+08:00">
-  <meta itemprop="wordCount" content="504">
+  <meta itemprop="wordCount" content="572">
   <meta itemprop="keywords" content="docker,harbor">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="基于Docker创建Harbor镜像仓库系统">
@@ -258,6 +258,31 @@
 <p>使用默认配置的账号密码<code>admin/Harbor12345</code>登录系统，显示如下，至此<code>Harbor</code>安装完毕！</p>
 <p><img src="/blog_img/docker/install-harbor-via-docker/harbor-home-page.png" alt="harbor系统主页" title="harbor系统主页"></p>
 </li>
+<li>
+<p>若要停止或重启<code>Harbor</code>，可在该目录下执行如下指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 停止harbor</span>
+</span></span><span class="line"><span class="cl">docker-compose down
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动harbor</span>
+</span></span><span class="line"><span class="cl">docker-compose up -d
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启harbor</span>
+</span></span><span class="line"><span class="cl">docker-compose restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ol>
     </div>
 
