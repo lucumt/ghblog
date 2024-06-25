@@ -520,6 +520,13 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
+      <link>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</link>
+      <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</guid>
+      <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>利用JDK8时区常量进行时区相关操作</title>
       <link>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</link>
       <pubDate>Tue, 08 Jun 2021 16:01:47 +0800</pubDate>

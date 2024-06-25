@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2024-06-25T10:14:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2024-06-25T10:14:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/</loc>
     <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/</loc>
     <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -956,6 +956,20 @@
   <url>
     <loc>https://lucumt.info/post/spring/spring-core/difference-between-factorybean-and-beanfactory/</loc>
     <lastmod>2022-01-16T11:00:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/harbor/</loc>
+    <lastmod>2021-06-24T20:38:59+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</loc>
+    <lastmod>2021-06-24T20:38:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

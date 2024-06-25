@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Harbor on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/harbor/</link>
+    <description>Recent content in Harbor on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Jun 2021 20:38:59 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/harbor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
+      <link>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</link>
+      <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</guid>
+      <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

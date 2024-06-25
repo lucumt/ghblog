@@ -50,7 +50,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客">
-  <meta itemprop="dateModified" content="2024-06-14T11:07:55+08:00">
+  <meta itemprop="dateModified" content="2024-06-25T10:14:28+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客">
@@ -149,6 +149,50 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis/mybatis-batch-insert-exception/">mybatis batch insert exception的解决方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-30 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在利用 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
+<p>SQL配置文件:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">&#34;addAuthorityRoleBatch&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;List&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    INSERT INTO system_authority_role(role_id,authority_id)
+</span></span><span class="line"><span class="cl">      VALUES
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;foreach</span> <span class="na">collection=</span><span class="s">&#34;list&#34;</span> <span class="na">item=</span><span class="s">&#34;authRole&#34;</span> <span class="na">separator=</span><span class="s">&#34;,&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        (#{authRole.roleId},#{authRole.authorityId})
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/foreach&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/insert&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/post/mybatis/mybatis-batch-insert-exception/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/spring/spring-mvc/download-big-file-using-springmvc/">利用SpringMVC下载大文件时内存溢出的处理</a></h1>

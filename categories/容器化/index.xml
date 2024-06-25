@@ -86,6 +86,13 @@
       <description>&lt;p&gt;简要记录下近期在项目中遇到的多个&lt;code&gt;docker-compose.yml&lt;/code&gt;文件容器启动时发生冲突的原因分析。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
+      <link>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</link>
+      <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</guid>
+      <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在Docker容器内部获取当前容器实例的名称</title>
       <link>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</link>
       <pubDate>Thu, 06 May 2021 13:16:52 +0800</pubDate>

@@ -99,5 +99,12 @@
       <guid>https://lucumt.info/post/devops/share-experiences-for-using-kubesphere/</guid>
       <description>&lt;p&gt;目前公司的开发方式都是手工编译&amp;amp;部署，十分低效，最近将Web开发相关的项目都基于&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;通过基于&lt;a href=&#34;https://www.jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;的流水线方式实现了自动部署，在此过程中遇到了一些阻塞点，简单记录下它们的解决方案。&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
+      <link>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</link>
+      <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</guid>
+      <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
