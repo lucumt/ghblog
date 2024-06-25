@@ -93,6 +93,13 @@
       <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
     </item>
     <item>
+      <title>基于Docker创建Harbor镜像仓库系统</title>
+      <link>https://lucumt.info/post/docker/install-harbor-via-docker/</link>
+      <pubDate>Tue, 25 May 2021 10:05:48 +0800</pubDate>
+      <guid>https://lucumt.info/post/docker/install-harbor-via-docker/</guid>
+      <description>&lt;p&gt;简要介绍基于&lt;code&gt;docker-compose&lt;/code&gt;安装&lt;code&gt;Harbor&lt;/code&gt;的过程，供后续参考。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在Docker容器内部获取当前容器实例的名称</title>
       <link>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</link>
       <pubDate>Thu, 06 May 2021 13:16:52 +0800</pubDate>

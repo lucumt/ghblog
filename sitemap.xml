@@ -982,6 +982,13 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/post/docker/install-harbor-via-docker/</loc>
+    <lastmod>2021-05-25T10:05:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</loc>
     <lastmod>2021-05-06T13:16:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
