@@ -106,3 +106,18 @@ highchartsDiagrams:
 10. 使用默认配置的账号密码`admin/Harbor12345`登录系统，显示如下，至此`Harbor`安装完毕！
 
     ![harbor系统主页](/blog_img/docker/install-harbor-via-docker/harbor-home-page.png "harbor系统主页")
+
+11. 若要停止或重启`Harbor`，可在该目录下执行如下指令
+
+    ```bash
+    # 停止harbor
+    docker-compose down
+    
+    # 启动harbor
+    docker-compose up -d
+    
+    # 重启harbor
+    docker-compose restart
+    ```
+
+    
