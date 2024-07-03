@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Jun 2024 11:07:55 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2024 19:37:01 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KubeSphere中整合LDAP后不生效的原因分析</title>
+      <link>https://lucumt.info/post/devops/ldap-integration-not-working/</link>
+      <pubDate>Wed, 03 Jul 2024 19:37:01 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/ldap-integration-not-working/</guid>
+      <description>&lt;p&gt;在给公司内部搭建的&lt;code&gt;KubeSphere&lt;/code&gt;整合&lt;code&gt;LDAP&lt;/code&gt;时，发现一开始整合后并不能立即使用&lt;code&gt;LDAP&lt;/code&gt;登录，一直提示无效的用户名或密码，经过多次折腾后找到一些规律，简单记录下。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Embed Multiple Google Trends Charts Into Single Html Page</title>
       <link>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</link>

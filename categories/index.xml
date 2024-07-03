@@ -6,13 +6,13 @@
     <description>Recent content in Categories on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Jun 2024 11:07:55 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2024 19:37:01 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Web编程</title>
-      <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
+      <title>持续集成</title>
+      <link>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</guid>
       <description></description>
     </item>
     <item>
@@ -20,6 +20,13 @@
       <link>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web编程</title>
+      <link>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     <item>
@@ -55,13 +62,6 @@
       <link>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://lucumt.info/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>持续集成</title>
-      <link>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</guid>
       <description></description>
     </item>
     <item>
