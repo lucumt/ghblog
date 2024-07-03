@@ -16,6 +16,13 @@
       <description>&lt;p&gt;在&lt;a href=&#34;https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/&#34;&gt;&lt;strong&gt;在Docker中构建GitBook并整合GitLab Runner的使用经验分享&lt;/strong&gt;&lt;/a&gt;一文中，自己在&lt;code&gt;Docker&lt;/code&gt;环境下基于&lt;code&gt;GitLab Runner&lt;/code&gt;实现了&lt;code&gt;GitBook&lt;/code&gt;的自动构建，同时基于实际使用需求添加了很多&lt;code&gt;GitBook&lt;/code&gt;插件，在此过程中积累了一些&lt;code&gt;GitBook&lt;/code&gt;插件的开发与使用经验。&lt;/p&gt;&#xA;&lt;p&gt;本文简要介绍自己在&lt;code&gt;GitBook&lt;/code&gt;插件定制化修改过程中如何实现从多个不同的文件夹下加载&lt;code&gt;js&lt;/code&gt;和&lt;code&gt;css&lt;/code&gt;文件的实现过程。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[非原创]解决Gitbook安装过程中出现的Error: Missing required argument #1错误</title>
+      <link>https://lucumt.info/post/gitbook/gitbook-install-missing-required-argement/</link>
+      <pubDate>Fri, 13 Oct 2023 19:10:56 +0800</pubDate>
+      <guid>https://lucumt.info/post/gitbook/gitbook-install-missing-required-argement/</guid>
+      <description>&lt;p&gt;本文来源于个人在使用&lt;code&gt;GitBook&lt;/code&gt;中遇到的问题，尽管自己通过 &lt;strong&gt;&lt;a href=&#34;https://blog.csdn.net/AntiO2/article/details/125964797&#34;&gt;gitbook出现if (args[ii] == null) throw missingRequiredArg(ii 解决&lt;/a&gt;&lt;/strong&gt; 这篇文章很快的找到了问题的解决方案，但该文章发布在CSDN，而CSDN的使用体验糟糕已是尽人皆知(此处不得不说一声 &lt;strong&gt;CSDN fuck you!&lt;/strong&gt;)。&lt;/p&gt;&#xA;&lt;p&gt;为了给其他使用者提供一个简洁干净的参考，故写此文章。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</title>
       <link>https://lucumt.info/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/</link>
       <pubDate>Sat, 07 Oct 2023 10:14:02 +0800</pubDate>

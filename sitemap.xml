@@ -3,14 +3,14 @@
   
   <url>
     <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-06-25T10:14:28+08:00</lastmod>
+    <lastmod>2024-06-27T20:35:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/</loc>
-    <lastmod>2024-06-25T10:14:28+08:00</lastmod>
+    <lastmod>2024-06-27T20:35:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -326,6 +326,13 @@
   <url>
     <loc>https://lucumt.info/post/web/using-foxglove-to-render-time-sequence-data/</loc>
     <lastmod>2023-11-13T14:08:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/gitbook/gitbook-install-missing-required-argement/</loc>
+    <lastmod>2023-10-13T19:10:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

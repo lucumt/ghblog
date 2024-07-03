@@ -50,7 +50,7 @@
 
   <meta itemprop="name" content="Posts">
   <meta itemprop="description" content="飞狐的个人博客">
-  <meta itemprop="dateModified" content="2024-06-25T10:14:28+08:00">
+  <meta itemprop="dateModified" content="2024-06-27T20:35:45+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Posts">
   <meta name="twitter:description" content="飞狐的个人博客">
@@ -162,7 +162,7 @@
    
     <div class="archive-title">
       <span class="archive-post-counter">
-        共计 121 篇文章
+        共计 122 篇文章
       </span>
     </div>
       <div class="collection-title">
@@ -360,6 +360,18 @@
       <span class="archive-post-title">
         <a href="/post/web/using-foxglove-to-render-time-sequence-data/" class="archive-post-link">
 		  搭建基于Foxglove的时序数据播放环境
+        </a>
+      </span>
+    </div>
+
+    <div class="archive-post">
+      <span class="archive-post-time">
+        10-13
+      </span>
+	  
+      <span class="archive-post-title">
+        <a href="/post/gitbook/gitbook-install-missing-required-argement/" class="archive-post-link">
+		  [非原创]解决Gitbook安装过程中出现的Error: Missing required argument #1错误
         </a>
       </span>
     </div>
@@ -761,18 +773,6 @@
 		  利用Grafana和Prometheus对系统进行监控
         </a>
       </span>
-    </div>
-
-    <div class="archive-post">
-      <span class="archive-post-time">
-        12-11
-      </span>
-	  
-      <span class="archive-post-title">
-        <a href="/post/ldap/add-ldap-support-for-grafana/" class="archive-post-link">
-		  给Grafana软件集成LDAP实现单点登录
-        </a>
-      </span>
     </div></section>
 
 <nav class="pagination">
@@ -870,7 +870,7 @@ Highcharts.chart('section_year_chart_1', {
         type: 'column',
 		color:"#16982b",
         yAxis: 1,
-        data: JSON.parse("[11,12,8,6,5,8,23,40,8]"),
+        data: JSON.parse("[11,12,8,6,5,8,23,41,8]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -879,7 +879,7 @@ Highcharts.chart('section_year_chart_1', {
         name: '按年累计',
 		color:"#0047AB",
         type: 'spline',
-        data: JSON.parse("[11,23,31,37,42,50,73,113,121]"),
+        data: JSON.parse("[11,23,31,37,42,50,73,114,122]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -936,7 +936,7 @@ Highcharts.chart('section_year_chart_2', {
     series:[{
 	    name: '百分比统计',
         colorByPoint: true,
-        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":8},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":8},{\"name\":\"2022\",\"y\":23},{\"name\":\"2023\",\"y\":40},{\"name\":\"2024\",\"y\":8}]")
+        data: JSON.parse("[{\"name\":\"2016\",\"y\":11},{\"name\":\"2017\",\"y\":12},{\"name\":\"2018\",\"y\":8},{\"name\":\"2019\",\"y\":6},{\"name\":\"2020\",\"y\":5},{\"name\":\"2021\",\"y\":8},{\"name\":\"2022\",\"y\":23},{\"name\":\"2023\",\"y\":41},{\"name\":\"2024\",\"y\":8}]")
 	}] 
 });
 Highcharts.chart('section_month_chart_1', {
@@ -1002,7 +1002,7 @@ Highcharts.chart('section_month_chart_1', {
         name: '按月新增',
 		color:"#16982b",
         type: 'column',
-        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,1,5,2,2,1,1,1,1,1,2,1,1,1,1,2,2,1,1,2,1,5,6,1,2,4,2,1,5,4,4,9,3,1,2,1,7,1,1,1,3,1,2]"),
+        data: JSON.parse("[1,7,1,1,1,1,2,3,3,3,2,1,5,2,2,1,1,1,1,1,2,1,1,1,1,2,2,1,1,2,1,5,6,1,2,4,2,1,5,4,4,9,3,1,2,2,7,1,1,1,3,1,2]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1012,7 +1012,7 @@ Highcharts.chart('section_month_chart_1', {
         type: 'spline',
 		color:"#0047AB",
         yAxis: 1,
-        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,26,31,33,35,36,37,38,39,40,42,43,44,45,46,48,50,51,52,54,55,60,66,67,69,73,75,76,81,85,89,98,101,102,104,105,112,113,114,115,118,119,121]"),
+        data: JSON.parse("[1,8,9,10,11,12,14,17,20,23,25,26,31,33,35,36,37,38,39,40,42,43,44,45,46,48,50,51,52,54,55,60,66,67,69,73,75,76,81,85,89,98,101,102,104,106,113,114,115,116,119,120,122]"),
         tooltip: {
             valueSuffix: ' 篇'
         }
@@ -1076,7 +1076,7 @@ Highcharts.chart('section_month_chart_2', {
             }
         }]
     },
-    series: JSON.parse("[{\"data\":[0,0,2,2,1,1,1,2,1],\"name\":1},{\"data\":[1,1,0,2,1,1,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,1,0,5,1],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,3],\"name\":4},{\"data\":[1,0,0,0,0,2,0,4,1],\"name\":5},{\"data\":[0,0,1,0,0,2,2,9,2],\"name\":6},{\"data\":[0,0,0,1,0,0,1,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,6,2,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,1,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,7,0],\"name\":11},{\"data\":[0,3,5,0,0,0,4,1,0],\"name\":12}]")
+    series: JSON.parse("[{\"data\":[0,0,2,2,1,1,1,2,1],\"name\":1},{\"data\":[1,1,0,2,1,1,1,1,0],\"name\":2},{\"data\":[7,2,0,0,0,1,0,5,1],\"name\":3},{\"data\":[0,3,0,0,1,1,0,4,3],\"name\":4},{\"data\":[1,0,0,0,0,2,0,4,1],\"name\":5},{\"data\":[0,0,1,0,0,2,2,9,2],\"name\":6},{\"data\":[0,0,0,1,0,0,1,3,0],\"name\":7},{\"data\":[1,3,0,1,0,0,5,1,0],\"name\":8},{\"data\":[0,0,0,0,2,0,6,2,0],\"name\":9},{\"data\":[1,0,0,0,0,0,1,2,0],\"name\":10},{\"data\":[0,0,0,0,0,0,2,7,0],\"name\":11},{\"data\":[0,3,5,0,0,0,4,1,0],\"name\":12}]")
 });
 </script>
 	</div>
