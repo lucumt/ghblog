@@ -1,19 +1,19 @@
 ---
-title: "Git中Bisect指令的用法"
-date: 2023-05-17T09:50:35+08:00
-lastmod: 2023-05-17T09:50:35+08:00
+title: "Linux脚本中使用if进行判断时[和[[的使用差异"
+date: 2024-07-05T13:40:38+08:00
+lastmod: 2024-07-05T13:40:38+08:00
 draft: true
 keywords: []
 description: ""
-tags: ["git"]
-categories: ["工具使用"]
+tags: ["linux","shell"]
+categories: ["脚本操作"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -22,6 +22,8 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+centerImage: false
+borderImage: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false

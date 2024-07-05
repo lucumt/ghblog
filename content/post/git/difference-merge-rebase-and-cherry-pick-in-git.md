@@ -1,7 +1,7 @@
 ---
-title: "Git中Bisect指令的用法"
-date: 2023-05-17T09:50:35+08:00
-lastmod: 2023-05-17T09:50:35+08:00
+title: "Git中Merge、Rebase和Cherry Pick的使用差异"
+date: 2024-07-05T13:42:28+08:00
+lastmod: 2024-07-05T13:42:28+08:00
 draft: true
 keywords: []
 description: ""
@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -22,6 +22,8 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+centerImage: false
+borderImage: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false

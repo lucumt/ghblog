@@ -592,6 +592,121 @@ do
 done
 ```
 
+### 目录分类显示
+
+![GitBook目录分类显示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-menu-category.png "GitBook目录分类显示")
+
+若需要在生成目录时能自动进行如上图所示的分类展示，则可将上述脚本修改为类似如下
+
+```bash
+#!/bin/bash
+: '
+此脚本用于生成目录时可根据目录类别分成多个子类，要分类的顶层文件夹记录在special_tags数组变量中
+'
+# 先清空文件
+echo "" >  docs/SUMMARY.md
+# 子文件夹读取的递归函数
+dirReader(){
+	# $1 文件绝对路径
+	# $2 章节名称
+	# $3 缩进
+	# 循环处理该文件夹下的文件
+	for item in "${1}"/*
+	do	
+		# 判断是否是文件夹且不是图片文件夹
+		if [ -d "$item" ]  &&  ! [[ "${item}" =~ assets$ ]]
+		then
+			# 判断该文件夹是否存在README.md文件
+			if [ ! -f "$item/README.md" ]
+			then 
+				# 如果没有就创建README.md
+				echo "" > "$item/README.md"
+			fi
+			# 获取文件名称
+			beginPos=`expr ${#1} + 1`
+			endPos=`expr ${#item} - ${#1}`
+			dirName=${item:$beginPos:$endPos}
+			echo ${item}
+			# 写入目录文件
+			echo "$3+ [$dirName]($2/$dirName/README.md)" >> docs/SUMMARY.md
+			# 递归处理该文件夹
+			dirReader "$item" "$2/$dirName" "$3  "
+		# 判断该文件是否是.md结尾 并且不是README.md
+		elif [ -f "$item" ] && [ "${item##*.}" == 'md' ] 
+		then
+			beginPos=`expr ${#1} + 1`
+			endPos=`expr ${#item} - ${#1} - 4`
+			dirName=${item:$beginPos:$endPos}
+			# 写入目录文件
+			if	[ "$dirName" != 'README' ]
+			then
+				echo ${item}
+				echo "$3+ [$dirName]($2/$dirName.md)" >> docs/SUMMARY.md
+			fi
+		fi
+	done
+}
+
+baseReader(){
+    # 需要另外新开一个分类
+	special_tags=("VDE相关" "云授权平台")
+    regex=$(IFS='|'; echo "${special_tags[*]}")
+	special_dirs=()
+
+	# 读取当前路径
+	dirs="${PWD}/docs/"
+	echo "- [主页](README.md)" >  docs/SUMMARY.md
+	# 循环处理该文件夹下的文件dir
+	for dir in docs/*
+	do
+		# 截取掉dir路径名称里的 docs/
+		startPos='5'
+		length=`expr ${#dir} - 5`
+		dir=${dir:$startPos:$length}
+		if echo "$dir" | egrep -iq "$regex"  ; then
+		   special_dirs+=("$dir")
+		else
+		   baseWrite "$dirs" "$dir"
+		fi
+	done
+	
+	# 处理特殊类别的文件
+	if [[ -n "$special_dirs" ]]; then
+	    echo $'\n#\n' >> docs/SUMMARY.md
+	fi
+	for dir in "${special_dirs[@]}"; do
+	    baseWrite "$dirs" "$dir"
+	done 
+	
+}
+
+baseWrite(){
+    dirs=$1
+	dir=$2
+	# 判断是否是文件夹且不是图片文件夹
+	if [ -d "${dirs}/${dir}" ] && ! [[ "${dir}" =~ assets$ ]] && ! [[ "${dir}" =~ styles$ ]] 
+	then 	
+		# 判断该文件夹是否存在README.md文件
+		if [ ! -f "$dirs/$dir/README.md" ]
+		then 
+			echo "" > "$dirs/$dir/README.md"
+		fi
+		
+		# 写入目录文件
+		echo "+ [$dir]($dir/README.md)" >> docs/SUMMARY.md
+		# 处理文件夹内部的文件
+		dirReader "$dirs$dir" "$dir" "  "
+	# 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md
+	elif  [ "${dir##*.}" == 'md' ] && [ "${dir}" != "SUMMARY.md" ] && [ "${dir}" != 'README.md' ]
+	then
+			# 写入目录文件
+			echo "+ [$dir]($dir)" >> docs/SUMMARY.md
+	fi
+}
+
+baseReader
+```
+
 ## 自定义样式
 
 `custom.css`是自定义样式文件，当对`GitBook`的某些样式不满意时，可用自定义`CSS`文件来覆盖
