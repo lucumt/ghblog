@@ -56,7 +56,7 @@
   <meta itemprop="description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新">
   <meta itemprop="datePublished" content="2023-10-07T10:14:02+08:00">
   <meta itemprop="dateModified" content="2023-10-07T10:14:02+08:00">
-  <meta itemprop="wordCount" content="6438">
+  <meta itemprop="wordCount" content="7252">
   <meta itemprop="keywords" content="docker,gitbook">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
@@ -213,7 +213,11 @@
         <li><a href="#docker启停脚本">docker启停脚本</a></li>
         <li><a href="#自动构建脚本">自动构建脚本</a></li>
         <li><a href="#自动注册脚本">自动注册脚本</a></li>
-        <li><a href="#自动生成目录">自动生成目录</a></li>
+        <li><a href="#自动生成目录">自动生成目录</a>
+          <ul>
+            <li><a href="#目录分类显示">目录分类显示</a></li>
+          </ul>
+        </li>
         <li><a href="#自定义样式-1">自定义样式</a></li>
         <li><a href="#gitbook配置文件">GitBook配置文件</a></li>
       </ul>
@@ -1063,6 +1067,227 @@
 </span></span><span class="line"><span class="cl">    	<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">)&#34;</span> &gt;&gt; docs/SUMMARY.md
 </span></span><span class="line"><span class="cl">    <span class="k">fi</span>
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="目录分类显示">目录分类显示</h3>
+<p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-menu-category.png" alt="GitBook目录分类显示" title="GitBook目录分类显示"></p>
+<p>若需要在生成目录时能自动进行如上图所示的分类展示，则可将上述脚本修改为类似如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>: <span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">此脚本用于生成目录时可根据目录类别分成多个子类，要分类的顶层文件夹记录在special_tags数组变量中
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 先清空文件</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt;  docs/SUMMARY.md
+</span></span><span class="line"><span class="cl"><span class="c1"># 子文件夹读取的递归函数</span>
+</span></span><span class="line"><span class="cl">dirReader<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># $1 文件绝对路径</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># $2 章节名称</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># $3 缩进</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># 循环处理该文件夹下的文件</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> item in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>/*
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>	
+</span></span><span class="line"><span class="cl">		<span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span>  <span class="o">&amp;&amp;</span>  ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span>
+</span></span><span class="line"><span class="cl">		<span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="c1"># 判断该文件夹是否存在README.md文件</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">			<span class="k">then</span> 
+</span></span><span class="line"><span class="cl">				<span class="c1"># 如果没有就创建README.md</span>
+</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">			<span class="c1"># 获取文件名称</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">			<span class="c1"># 递归处理该文件夹</span>
+</span></span><span class="line"><span class="cl">			dirReader <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">  &#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 判断该文件是否是.md结尾 并且不是README.md</span>
+</span></span><span class="line"><span class="cl">		<span class="k">elif</span> <span class="o">[</span> -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> - 4<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span>	<span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$dirName</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README&#39;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">			<span class="k">then</span>
+</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">			<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">	<span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">baseReader<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 需要另外新开一个分类</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">special_tags</span><span class="o">=(</span><span class="s2">&#34;VDE相关&#34;</span> <span class="s2">&#34;云授权平台&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">regex</span><span class="o">=</span><span class="k">$(</span><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">special_tags</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">special_dirs</span><span class="o">=()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1"># 读取当前路径</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">dirs</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/docs/&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;- [主页](README.md)&#34;</span> &gt;  docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">	<span class="c1"># 循环处理该文件夹下的文件dir</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> dir in docs/*
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 截取掉dir路径名称里的 docs/</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">startPos</span><span class="o">=</span><span class="s1">&#39;5&#39;</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">length</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">dir</span><span class="si">}</span> - 5<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">dir</span><span class="o">=</span><span class="si">${</span><span class="nv">dir</span><span class="p">:</span><span class="nv">$startPos</span><span class="p">:</span><span class="nv">$length</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span> <span class="p">|</span> egrep -iq <span class="s2">&#34;</span><span class="nv">$regex</span><span class="s2">&#34;</span>  <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">		   <span class="nv">special_dirs</span><span class="o">+=(</span><span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">		   baseWrite <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">	<span class="k">done</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1"># 处理特殊类别的文件</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="nv">$special_dirs</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">	    <span class="nb">echo</span> <span class="s1">$&#39;\n#\n&#39;</span> &gt;&gt; docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> dir in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">special_dirs</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">	    baseWrite <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">done</span> 
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">baseWrite<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">dirs</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">dir</span><span class="o">=</span><span class="nv">$2</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dirs</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ styles$ <span class="o">]]</span> 
+</span></span><span class="line"><span class="cl">	<span class="k">then</span> 	
+</span></span><span class="line"><span class="cl">		<span class="c1"># 判断该文件夹是否存在README.md文件</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">		<span class="k">then</span> 
+</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="c1"># 写入目录文件</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">		<span class="c1"># 处理文件夹内部的文件</span>
+</span></span><span class="line"><span class="cl">		dirReader <span class="s2">&#34;</span><span class="nv">$dirs$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;  &#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md</span>
+</span></span><span class="line"><span class="cl">	<span class="k">elif</span>  <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;SUMMARY.md&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README.md&#39;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">	<span class="k">then</span>
+</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">)&#34;</span> &gt;&gt; docs/SUMMARY.md
+</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">baseReader
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="自定义样式-1">自定义样式</h2>
