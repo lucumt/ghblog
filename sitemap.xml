@@ -65,6 +65,20 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/gitbook/</loc>
+    <lastmod>2024-06-27T20:35:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/</loc>
+    <lastmod>2024-06-27T20:35:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/web/embed-multiple-google-trends-charts-into-single-html-page/</loc>
     <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -235,13 +249,6 @@
   <url>
     <loc>https://lucumt.info/post/devops/switch-nodejs-version-in-jenkins-pipeline/</loc>
     <lastmod>2024-01-11T10:17:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/gitbook/</loc>
-    <lastmod>2023-12-10T16:21:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

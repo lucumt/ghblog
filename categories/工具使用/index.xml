@@ -16,6 +16,13 @@
       <description>&lt;p&gt;在给公司内部搭建的&lt;code&gt;KubeSphere&lt;/code&gt;整合&lt;code&gt;LDAP&lt;/code&gt;时，发现一开始整合后并不能立即使用&lt;code&gt;LDAP&lt;/code&gt;登录，一直提示无效的用户名或密码，经过多次折腾后找到一些规律，简单记录下。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>给GitBook中的SVG图像提供缩放和下载功能</title>
+      <link>https://lucumt.info/post/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/</link>
+      <pubDate>Thu, 27 Jun 2024 20:35:45 +0800</pubDate>
+      <guid>https://lucumt.info/post/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/</guid>
+      <description>&lt;p&gt;简要说明如何给&lt;code&gt;GitBook&lt;/code&gt;中的&lt;code&gt;SVG&lt;/code&gt;图像提供缩放和下载功能，实现可对复杂的&lt;code&gt;SVG&lt;/code&gt;图像进行缩放和下载。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>给Windows中的命令添加别名</title>
       <link>https://lucumt.info/post/other/add-alias-to-commands-on-windows/</link>
       <pubDate>Wed, 12 Jun 2024 13:26:28 +0800</pubDate>
