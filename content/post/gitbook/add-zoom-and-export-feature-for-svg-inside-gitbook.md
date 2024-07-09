@@ -4,7 +4,7 @@ date: 2024-06-27T20:35:45+08:00
 lastmod: 2024-06-27T20:35:45+08:00
 draft: false
 keywords: ["gitbook","svg","缩放","下载"]
-description: "简要介绍如何给GitBook中的SVG图像提供缩放和下载功能"
+description: "简要介绍如何给GitBook中的SVG图像提供缩放和下载功能来解决复杂Mermaid图表无法查看的问题,缩放功能用于在线查看，下载功能用于将在线凸显下载为本地svg文件"
 tags: ["gitbook"]
 categories: ["工具使用"]
 author: "Rosen Lu"
