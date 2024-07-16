@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-1. 创建一个名为sonarqube的文件夹，在其下建立一个名为docker-compose.yml的文件，输入如下内容
+1. 创建一个名为`sonarqube`的文件夹，在其下建立一个名为`docker-compose.yml`的文件，输入如下内容
 
    ```yaml
    version: '3'

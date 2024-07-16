@@ -40,11 +40,11 @@ sequenceDiagrams:
 
 ---
 
-[禅道](https://www.zentao.net/)是国产的开源项目管理软件,专注研发项目管理,内置需求管理、任务管理、bug管理、缺陷管理、用例管理、计划发布等功能,实现了软件的完整生命周期管理。本文简要说明如何将基于`docker`安装的`禅道`与`LDAP`集成实现快捷登录。
+[**禅道**](https://www.zentao.net/)是国产的开源项目管理软件,专注研发项目管理,内置需求管理、任务管理、bug管理、缺陷管理、用例管理、计划发布等功能,实现了软件的完整生命周期管理。本文基于[**开源版禅道集成LDAP实现统一身份认证**](https://www.jianshu.com/p/9981bdb608cb)一文简要说明如何将基于`docker`安装的`禅道`与`LDAP`集成实现快捷登录。
 
 <!--more-->
 
-1. 创建一个名为zentao的文件夹，在其下建立一个名为docker-compose.yml的文件，输入如下内容
+1. 创建一个名为`zentao`的文件夹，在其下建立一个名为`docker-compose.yml`的文件，输入如下内容
 
    ```yaml
    version: '3'
@@ -65,7 +65,7 @@ sequenceDiagrams:
          MYSQL_ROOT_PASSWORD: 123456
    ```
 
-2. 输入`docker-compose up -d`启动容器，等待2-3分钟后利用`docker logs grafana`查看其日志，若日志中出现类似如下信息，则表示`禅道`初步安装成功
+2. 输入`docker-compose up -d`启动容器，等待2-3分钟后利用`docker logs zentao`查看其日志，若日志中出现类似如下信息，则表示`禅道`初步安装成功
 
    ![docker中查看禅道日志](/blog_img/ldap/add-ldap-support-for-zentao/zentao-docker-log-with-error.png "docker中查看禅道日志") 
 
