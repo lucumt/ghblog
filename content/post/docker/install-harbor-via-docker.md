@@ -59,7 +59,7 @@ highchartsDiagrams:
    wget https://github.com/goharbor/harbor/releases/download/v2.1.4/harbor-offline-installer-v2.1.4.tgz
    
    # 解压后会生成名称harbor的目录
-   tar xvfharbor-offline-installer-v2.1.4.tgz
+   tar xvf harbor-offline-installer-v2.1.4.tgz
    ```
 
 2. 进入harbor目录下可发现其有对应的文件
