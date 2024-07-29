@@ -169,7 +169,11 @@ render_data->select_chassis
 1. 在`Foxglove`对应的[**GitHub地址**](https://github.com/foxglove/studio)上有其UI端的安装说明，主要采用`Docker`安装，相关的指令如下[^3]
 
    ```bash
+   # 官方原始的说明
    docker run --rm -p "8080:8080" ghcr.io/foxglove/studio:latest
+   
+   # 个人新保存的镜像
+   docker run --rm -p "8080:8080"  lucumt/foxglove_studio:1.74.1
    ```
 
 2. 上述指令安装完成之后，在浏览器中输入`http://127.0.0.1:8080`会打开类似如下界面，在`打开数据源`对话框中选择最下面的`打开连接`
