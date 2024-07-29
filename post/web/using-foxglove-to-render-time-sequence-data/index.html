@@ -55,7 +55,7 @@
   <meta itemprop="description" content="简要介绍如何搭建基于Foxglove的时序数据播放环境">
   <meta itemprop="datePublished" content="2023-11-13T14:08:39+08:00">
   <meta itemprop="dateModified" content="2023-11-13T14:08:39+08:00">
-  <meta itemprop="wordCount" content="5670">
+  <meta itemprop="wordCount" content="5697">
   <meta itemprop="keywords" content="foxglove,时序数据,自动驾驶">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="搭建基于Foxglove的时序数据播放环境">
@@ -268,9 +268,17 @@ render_data->select_chassis
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -p <span class="s2">&#34;8080:8080&#34;</span> ghcr.io/foxglove/studio:latest
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 官方原始的说明</span>
+</span></span><span class="line"><span class="cl">docker run --rm -p <span class="s2">&#34;8080:8080&#34;</span> ghcr.io/foxglove/studio:latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 个人新保存的镜像</span>
+</span></span><span class="line"><span class="cl">docker run --rm -p <span class="s2">&#34;8080:8080&#34;</span>  lucumt/foxglove_studio:1.74.1
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
