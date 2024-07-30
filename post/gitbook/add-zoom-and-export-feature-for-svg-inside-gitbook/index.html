@@ -407,8 +407,7 @@ function downloadData(id,ele) {
 	source = source.replace(/(\w&#43;)?:?xlink=/g, &#39;xmlns:xlink=&#39;); // Fix root xlink without namespace
 	source = source.replace(/ns\d&#43;:href/g, &#39;xlink:href&#39;); // Safari NS namespace fix.
 
-
-	if (!source.match(/^&lt;svg[^&gt;]&#43;xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/)) {
+    if (!source.match(/^&lt;svg[^&gt;]&#43;xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/)) {
 		source = source.replace(/^&lt;svg/, &#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&#39;);
 	}
 	if (!source.match(/^&lt;svg[^&gt;]&#43;&#34;http\:\/\/www\.w3\.org\/1999\/xlink&#34;/)) {
