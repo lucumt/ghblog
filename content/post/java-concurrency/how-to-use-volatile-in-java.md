@@ -163,7 +163,7 @@ public class ProducerConsumerTest {
 `volatile`关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了`volatile`禁止重排序的功能，详细说明请参见[Java并发编程的艺术](https://item.jd.com/11740734.html)P67中的 **双重检查锁定与延迟初始化** 。
 
 代码清单3: 利用双重检查实现线程安全的单例模式
-```
+```java
 public class Singleton {
 
 	private static volatile Singleton instance = null;
