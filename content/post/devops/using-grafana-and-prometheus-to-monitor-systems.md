@@ -156,7 +156,7 @@ root@lucumt:~/grafana# docker-compose up -d
 
 2. 执行`vi /etc/systemd/system/node_exporter.service`并输入下述内容
 
-   ```bash
+   ```toml
    [Unit]
    Description=cicd_exporter
    After=network.target

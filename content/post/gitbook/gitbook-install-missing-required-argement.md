@@ -63,7 +63,7 @@ highchartsDiagrams:
 
 通过`gitbook install` 进行相关插件的安装，终端出现类似如下错误导致安装过程失败
 
-```bash
+```powershell
 D:\code\gitbook-doc>gitbook install
 info: installing 24 plugins using npm@3.9.2
 info:

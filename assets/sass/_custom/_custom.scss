@@ -54,6 +54,10 @@ figcaption {
     font-size: 13px;
 }
 
+.line-numbers .line-numbers-rows{
+    border-right: 0px !important;
+}
+
 .copy-code {
   position: absolute;
   right: 0;
@@ -66,5 +70,5 @@ figcaption {
   cursor: pointer;
   user-select: none;
   margin-right: 22px;
-  margin-top: 4px;
+  margin-top: 2px;
 }

@@ -70,7 +70,6 @@ public class MinioServiceImpl implements IMinioService {
     @Autowired
     private MinioClient mClient;
 
-
     @Override
     public InputStream downloadFile(String fileName, String bucket) {
         GetObjectArgs getArgs = GetObjectArgs.builder().bucket(bucket).object(fileName).build();

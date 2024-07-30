@@ -159,7 +159,7 @@ Why? 因为`Nacos`中的一个jar包引入了错误的`spring-cloud-commons`依�
 
 启动该程序后控制台提示如下错误，程序启动失败！
 
-```bash
+```powershell
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
 2023-09-01 21:02:30.144 ERROR 20760 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
 

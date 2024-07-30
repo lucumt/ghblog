@@ -249,18 +249,6 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     startLevel = 1
   [markup.goldmark.renderer]
     unsafe = true
-  [markup.highlight]
-    anchorLineNos = false
-    codeFences = true
-    guessSyntax = true
-    hl_Lines = ""
-    lineAnchors = ""
-    lineNoStart =1
-    lineNos = true
-    lineNumbersInTable = true
-    noClasses = true
-    style = "monokai"
-    tabWidth = 4
 
 # 将下面这段配置取消注释可以使 hugo 生成 .md 文件
 # Uncomment these options to make hugo output .md files.

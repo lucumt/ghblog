@@ -85,7 +85,7 @@ highchartsDiagrams:
 
 1. 新建一个名为`hugo_server.bat`的脚本，内容如下
 
-   ```bash
+   ```powershell
    @echo off
    hugo server -w -D --renderToMemory
    ```

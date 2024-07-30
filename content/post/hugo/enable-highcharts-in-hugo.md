@@ -115,7 +115,7 @@ highchartsDiagrams:
 
 4. 在对应的`markdown`页面头部开启`highcharts`的展示，可根据实际情况添加自定义配置
 
-   ```json
+   ```javascript
    highchartsDiagrams: 
      enable: true
      options: "
@@ -126,12 +126,12 @@ highchartsDiagrams:
               }
           }
        }
-      "
+   "
    ```
 
 5. 仿照如下的代码，将`Highcharts`的代码块以`JavaScript`对象的形式加入特定`Markdown`代码标签中，注意 **`JavaScript`代码中不要加入任何注释，否则会导致程序解析出错!**
 
-   ```
+   ```javascript
    ​```highcharts
     {
        chart: {

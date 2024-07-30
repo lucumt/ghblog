@@ -1,8 +1,3 @@
-<!-- highlight.js -->
-{{- if .Site.Params.highlightInClient -}}
-  <script src="{{ "lib/highlight/highlight.pack.js?v=20171001" | relURL }}"></script>
-{{- end -}}
-
 <!-- core -->
 {{- if .Site.Params.publicCDN.enable }}
   {{ .Site.Params.publicCDN.jquery | safeHTML }}
@@ -237,41 +232,56 @@
 <!-- copy to clipboard -->
 {{- if .Site.Params.enableCopyCode -}}
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    //button.innerHTML = "&#x2714;";
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
+{{ end }}
+
+
+{{ if .Store.Get "hasCodeBlock" }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-st608h+ZqzliahyzEpETxzU0f7z7a9acN6AFvYmHvpFhmcFuKT8a22TT5TpKpjDa3pt3Wv7Z3SdQBCBdDPhyWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-/kVH1uXuObC0iYgxxCKY41JdWOkKOxorFVmip+YVifKsJ4Au/87EisD1wty7vxN2kAhnWh6Yc8o/dSAXj6Oz7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/show-language/prism-show-language.min.js" integrity="sha512-3W0oV/Hgpx0zjwyJC+XcOlqzfVakj8hRPvP5G8kPIhg3Alaq7wYscSD0hcV44P9ViuqTJYcWKbnkWCfKkNTA7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{ end }}

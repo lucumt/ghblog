@@ -30,7 +30,7 @@ table {
 }
 
 ::selection {
-  background: $theme-color;
+  background: $theme-color !important;
   color: #fff; 
 }
 
