@@ -291,8 +291,7 @@ function downloadSvg() {
   	source = source.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
   	source = source.replace(/ns\d+:href/g, 'xlink:href'); // Safari NS namespace fix.
   
-  
-  	if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+      if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
   		source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
   	}
   	if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
