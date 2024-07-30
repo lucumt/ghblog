@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -55,7 +55,7 @@
   <meta itemprop="description" content="简要介绍如何基于docker给Sonarqube软件集成LDAP实现单点登录">
   <meta itemprop="datePublished" content="2022-12-04T11:29:12+08:00">
   <meta itemprop="dateModified" content="2023-04-14T11:29:12+08:00">
-  <meta itemprop="wordCount" content="505">
+  <meta itemprop="wordCount" content="454">
   <meta itemprop="keywords" content="ldap,docker,sonarqube">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="给Sonarqube软件集成LDAP实现单点登录">
@@ -69,6 +69,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -178,93 +185,50 @@
 <ol>
 <li>
 <p>创建一个名为<code>sonarqube</code>的文件夹，在其下建立一个名为<code>docker-compose.yml</code>的文件，输入如下内容</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">postgres</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">postgres:14.4</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">postgres</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">5432</span><span class="p">:</span><span class="m">5432</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$PWD/postgres/postgres-data:/var/lib/postgresql/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l">sonar</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">sonar123</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l">sonar</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">sonar-network</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sonar</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">sonarqube:8.9-community</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sonar</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">postgres</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$PWD/sonarqube/extensions:/opt/sonarqube/extensions</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$PWD/sonarqube/logs:/opt/sonarqube/logs</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$PWD/sonarqube/data:/opt/sonarqube/data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$PWD/sonarqube/conf:/opt/sonarqube/conf</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">9990</span><span class="p">:</span><span class="m">9000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SONARQUBE_JDBC_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">sonar</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SONARQUBE_JDBC_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">sonar123</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SONARQUBE_JDBC_URL</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:postgresql://postgres:5432/sonar</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">sonar-network</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sonar-network</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-yaml ">
+<code>version: &#39;3&#39;
+services:
+  postgres:
+    image: postgres:14.4
+    restart: always
+    privileged: true
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - $PWD/postgres/postgres-data:/var/lib/postgresql/data
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar123
+      POSTGRES_DB: sonar
+    networks:
+      - sonar-network
+  sonar:
+    image: sonarqube:8.9-community
+    restart: always
+    container_name: sonar
+    depends_on:
+      - postgres
+    volumes:
+      - $PWD/sonarqube/extensions:/opt/sonarqube/extensions
+      - $PWD/sonarqube/logs:/opt/sonarqube/logs
+      - $PWD/sonarqube/data:/opt/sonarqube/data
+      - $PWD/sonarqube/conf:/opt/sonarqube/conf
+    ports:
+      - 9990:9000
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: sonar123
+      SONARQUBE_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
+    networks:
+      - sonar-network
+networks:
+  sonar-network:
+    driver: bridge</code>
+</pre>
+</li>
 <li>
 <p>输入<code>docker-compose up -d</code>启动容器，等待2-3分钟后利用<code>docker logs sonar</code>查看其日志，若日志中出现类似如下信息，则表示<code>SonarQube</code>初步安装成功</p>
 <p><img src="/blog_img/ldap/add-ldap-support-for-sonarqube/docker-start-sonarqube-success.png" alt="sonarqube启动成功" title="sonarqube启动成功"></p>
@@ -275,35 +239,21 @@
 </li>
 <li>
 <p>在<code>$PWD/sonarqube/conf</code>目录下建立一个名为<code>sonar.properties</code>的文件，写入类似如下内容</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="c1">#LDAP settings</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#admin</span>
-</span></span><span class="line"><span class="cl"><span class="na">sonar.security.realm</span><span class="o">=</span><span class="s">LDAP</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.url</span><span class="o">=</span><span class="s">ldap://10.10.xxx.xxx:389</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.bindDn</span><span class="o">=</span><span class="s">cn=xxx,dc=xxx,dc=com</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.bindPassword</span><span class="o">=</span><span class="s">xxx</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">ldap.user.baseDn</span><span class="o">=</span><span class="s">dc=xxx,dc=com</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.user.request</span><span class="o">=</span><span class="s">(&amp;(objectClass=inetOrgPerson)(uid={login}))</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.user.realNameAttribute</span><span class="o">=</span><span class="s">displayName</span>
-</span></span><span class="line"><span class="cl"><span class="na">ldap.user.emailAttribute</span><span class="o">=</span><span class="s">mail</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-properties ">
+<code>#LDAP settings
+#admin
+sonar.security.realm=LDAP
+ldap.url=ldap://10.10.xxx.xxx:389
+ldap.bindDn=cn=xxx,dc=xxx,dc=com
+ldap.bindPassword=xxx
+
+ldap.user.baseDn=dc=xxx,dc=com
+ldap.user.request=(&amp;(objectClass=inetOrgPerson)(uid={login}))
+ldap.user.realNameAttribute=displayName
+ldap.user.emailAttribute=mail</code>
+</pre>
+</li>
 <li>
 <p>输入<code>docker-compose restart</code>重启之后即可采用<code>LDAP</code>账户登录！</p>
 </li>
@@ -462,44 +412,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -54,7 +54,7 @@
   <meta itemprop="description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
   <meta itemprop="datePublished" content="2021-02-20T15:00:08+08:00">
   <meta itemprop="dateModified" content="2021-02-20T15:00:08+08:00">
-  <meta itemprop="wordCount" content="2841">
+  <meta itemprop="wordCount" content="2813">
   <meta itemprop="keywords" content="docker,dockerfile,RUN,CMD,ENTRYPOINT">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
@@ -68,6 +68,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -219,98 +226,59 @@
 <h2 id="shell模式">Shell模式</h2>
 <p><code>&lt;instruction&gt; &lt;command&gt;</code></p>
 <p>示例:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">RUN</span> apt-get install python3<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="nb">echo</span> <span class="s2">&#34;Hello world&#34;</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="nb">echo</span> <span class="s2">&#34;Hello world&#34;</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>shell模式</code>执行指令时，会在后台调用<code>/bin/sh -c &lt;command&gt;</code>并进行正常的shell处理，以下述<code>Dockerfile</code>中的代码片段为例</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">ENV</span> name John Dow<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="nb">echo</span> <span class="s2">&#34;Hello, </span><span class="nv">$name</span><span class="s2">&#34;</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Hello, John Dow
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>可以看出在输出结果中变量name已经被其实际值替换了。</p>
+
+<pre class="line-numbers language-dockerfile ">
+<code>RUN apt-get install python3
+CMD echo &#34;Hello world&#34;
+ENTRYPOINT echo &#34;Hello world&#34;</code>
+</pre>
+<p>当以<code>shell模式</code>执行指令时，会在后台调用<code>/bin/sh -c &lt;command&gt;</code>并进行正常的shell处理，以下述<code>Dockerfile</code>中的代码片段为例</p>
+
+<pre class="line-numbers language-dockerfile ">
+<code>ENV name John Dow
+ENTRYPOINT echo &#34;Hello, $name&#34;</code>
+</pre>
+<p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
+
+<pre class="language-bash ">
+<code>Hello, John Dow</code>
+</pre>
+<p>可以看出在输出结果中变量name已经被其实际值替换了。</p>
 <h2 id="exec模式">Exec模式</h2>
 <p>此模式是<code>CMD</code>和<code>ENTRYPOINT</code>指令说明中推荐的模式。</p>
 <p><code>&lt;instruction&gt; [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;, ...]</code></p>
 <p>示例:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">RUN</span> <span class="o">[</span><span class="s2">&#34;apt-get&#34;</span>, <span class="s2">&#34;install&#34;</span>, <span class="s2">&#34;python3&#34;</span><span class="o">]</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/bin/echo&#34;</span><span class="p">,</span> <span class="s2">&#34;Hello world&#34;</span><span class="p">]</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/echo&#34;</span><span class="p">,</span> <span class="s2">&#34;Hello world&#34;</span><span class="p">]</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当指令以<code>exec模式</code>执行时，其会直接调用可执行文件，同时shell处理不会生效，以下述<code>Dockerfile</code>中的代码片段为例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">ENV</span> name John Dow<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/echo&#34;</span><span class="p">,</span> <span class="s2">&#34;Hello, $name&#34;</span><span class="p">]</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello, $name
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>可看出输出结果中的name变量并没有被解析替换。</p>
+
+<pre class="line-numbers language-dockerfile ">
+<code>RUN [&#34;apt-get&#34;, &#34;install&#34;, &#34;python3&#34;]
+CMD [&#34;/bin/echo&#34;, &#34;Hello world&#34;]
+ENTRYPOINT [&#34;/bin/echo&#34;, &#34;Hello world&#34;]</code>
+</pre>
+<p>当指令以<code>exec模式</code>执行时，其会直接调用可执行文件，同时shell处理不会生效，以下述<code>Dockerfile</code>中的代码片段为例：</p>
+
+<pre class="line-numbers language-dockerfile ">
+<code>ENV name John Dow
+ENTRYPOINT [&#34;/bin/echo&#34;, &#34;Hello, $name&#34;]</code>
+</pre>
+<p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
+
+<pre class="language- ">
+<code>Hello, $name</code>
+</pre>
+<p>可看出输出结果中的name变量并没有被解析替换。</p>
 <h2 id="运行bash脚本">运行bash脚本</h2>
 <p>如果需要运行<code>bash</code>脚本(或其它的shell脚本)，可通过在<code>exec模式</code>中使用<code>/bin/bash</code>来将其设置为可运行，在这种方式下，常规的shell处理会生效，以下述<code>Dockerfile</code>中的代码片段为例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">ENV</span> name John Dow<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span> <span class="s2">&#34;-c&#34;</span><span class="p">,</span> <span class="s2">&#34;echo Hello, $name&#34;</span><span class="p">]</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Hello, John Dow
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="run指令">RUN指令</h1>
+
+<pre class="line-numbers language-dockerfile ">
+<code>ENV name John Dow
+ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</code>
+</pre>
+<p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
+
+<pre class="language-bash ">
+<code>Hello, John Dow</code>
+</pre>
+<h1 id="run指令">RUN指令</h1>
 <p><code>RUN</code>指令允许我们在已有的镜像中安装所需的程序和软件包，它在当前镜像的顶层执行相关指令并通过提交执行结果的方式创建一个新的镜像封层，通常可在一个<code>Dockerfile</code>中看见多个<code>RUN</code>指令。</p>
 <p><code>RUN</code>指令有2种使用方式:</p>
 <ul>
@@ -319,25 +287,16 @@
 </ul>
 <p>(这两种模式在前面已有详细的说明)</p>
 <p><code>RUN</code>指令一个典型的使用场景为安装多个版本控制软件包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  bzr <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  cvs <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  git <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  mercurial <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  subversion
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>需要注意的是<code>apt-get update</code>和<code>apt-get install</code>是在一条指令中执行，这样操作是为了确保安装最新的软件包。如果<code>apt-get install</code>是在单独的指令中执行，则其会复用<code>apt-get update</code>生成的镜像层，而该镜像层可能会在很久之前就被创建<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+
+<pre class="line-numbers language-bash ">
+<code>RUN apt-get update &amp;&amp; apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion</code>
+</pre>
+<p>需要注意的是<code>apt-get update</code>和<code>apt-get install</code>是在一条指令中执行，这样操作是为了确保安装最新的软件包。如果<code>apt-get install</code>是在单独的指令中执行，则其会复用<code>apt-get update</code>生成的镜像层，而该镜像层可能会在很久之前就被创建<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
 <h1 id="cmd指令">CMD指令</h1>
 <p><code>CMD</code>指令允许我们设置一个默认的命令，当我们在运行容器时没有显示指定要运行的命令，默认命令将会执行，若<code>Docker</code>容器运行时指定了命令，则其将会被忽略。如果一个<code>Dockerfile</code>中有多个<code>CMD</code>指令，除了最后一个之外的其余<code>CMD</code>指令都会被忽略。</p>
 <p><code>CMD</code>指令有3种使用方式：</p>
@@ -348,33 +307,21 @@
 </ul>
 <p>再次说明，前面已对第1种和第3种方式进行了解释，第2种方式则是在<code>exec模式</code>下和<code>ENTRYPOINT</code>组合使用，如果容器在没有命令行参数的情况下运行，它会设置将在<code>ENTRYPOINT</code>指令之后附加的默认参数。具体请查看<code>ENTRYPOINT</code>相关的说明。</p>
 <p>我们以下述<code>Dockerfile</code>中的代码片段为例，来看下<code>CMD</code>指令是如何运行的</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">CMD</span> <span class="nb">echo</span> <span class="s2">&#34;Hello world&#34;</span> <span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Hello world
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>但若运行容器时有附带的命令，如<code>docker run -it &lt;image&gt; /bin/bash</code>，此时<code>CMD</code>指令会被忽略，默认的<code>bash</code>会执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@7de4bed89922:/#
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="entrypoint指令">ENTRYPOINT指令</h1>
+
+<pre class="language-dockerfile ">
+<code>CMD echo &#34;Hello world&#34; </code>
+</pre>
+<p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
+
+<pre class="language-bash ">
+<code>Hello world</code>
+</pre>
+<p>但若运行容器时有附带的命令，如<code>docker run -it &lt;image&gt; /bin/bash</code>，此时<code>CMD</code>指令会被忽略，默认的<code>bash</code>会执行</p>
+
+<pre class="language-bash ">
+<code>root@7de4bed89922:/#</code>
+</pre>
+<h1 id="entrypoint指令">ENTRYPOINT指令</h1>
 <p><code>ENTRYPOINT</code>用于将容器设置为通过可执行文件来运行，由于它也能通过设置附带参数的命令，其看起来和<code>CMD</code>指令很相似，不同之处为<code>ENTRYPOINT</code>命令和参数在<code>Docker</code>容器以带参数的命令运行时不会被忽略。(虽然有办法来让<code>Docker</code>容器忽略<code>ENTRYPOINT</code>命令和参数，但一般我们不会这么做)</p>
 <p><code>ENTRYPOINT</code>指令有2种使用方式:</p>
 <ul>
@@ -384,35 +331,22 @@
 <p>当使用<code>ENTRYPOINT</code>模式时需要非常小心，这是由于不同方式的行为差异很大。</p>
 <h2 id="exec模式-1">Exec模式</h2>
 <p><code>ENTRYPOINT</code>指令中的<code>Exec模式</code>允许我们设置命令和参数，然后使用任一形式的<code>CMD</code>模式来设置有可能有可能发生变化的附带参数。<code>ENTRYPOINT</code>指令中的参数会一直被用到，而<code>CMD</code>中的相关参数则可在<code>Docker</code>容器运行覆盖，以下述<code>Dockerfile</code>中的代码片段为例</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/bin/echo&#34;</span><span class="p">,</span> <span class="s2">&#34;Hello&#34;</span><span class="p">]</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;world&#34;</span><span class="p">]</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，输出如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Hello world
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>但当<code>Docker</code>容器以<code>docker run -it &lt;image&gt; John</code>的形式运行时，输出如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Hello John
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="shell模式-1">Shell模式</h2>
+
+<pre class="line-numbers language-dockerfile ">
+<code>ENTRYPOINT [&#34;/bin/echo&#34;, &#34;Hello&#34;]
+CMD [&#34;world&#34;]</code>
+</pre>
+<p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，输出如下</p>
+
+<pre class="language-bash ">
+<code>Hello world</code>
+</pre>
+<p>但当<code>Docker</code>容器以<code>docker run -it &lt;image&gt; John</code>的形式运行时，输出如下</p>
+
+<pre class="language-bash ">
+<code>Hello John</code>
+</pre>
+<h2 id="shell模式-1">Shell模式</h2>
 <p><code>ENTRYPOINT</code>指令中的<code>shell模式</code>会忽略任何<code>CMD</code>或<code>Docker</code>容器运行时附带的参数。</p>
 <h1 id="总结">总结</h1>
 <p>使用<code>RUN</code>指令通过在初始镜像的顶层添加分层来创建我们自己的镜像。</p>
@@ -582,44 +516,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

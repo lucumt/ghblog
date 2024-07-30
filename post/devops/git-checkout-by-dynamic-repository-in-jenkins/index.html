@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="在Jenkins中根据配置从不同的仓库中Checkout代码减少流水线数目，简化开发与维护成本">
   <meta itemprop="datePublished" content="2023-03-10T22:48:50+08:00">
   <meta itemprop="dateModified" content="2023-03-10T22:48:50+08:00">
-  <meta itemprop="wordCount" content="1665">
+  <meta itemprop="wordCount" content="1658">
   <meta itemprop="keywords" content="kubesphere,jenkins,git,gitlab">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Jenkins中根据配置从不同的仓库中Checkout代码">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -237,27 +244,17 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 </div>
 <h1 id="解决思路">解决思路</h1>
 <p>由于最初是每个工程项目都有一个单独的<code>Jenkins</code>流水线，故在通过<code>Git</code>下载代码时采用的是类似下图的直接写死<code>Gitlab</code>工程仓库地址的方式，很明显此种方式不满足要求。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">    <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// git仓库地址直接以字符串方式写死
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-account&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;</span><span class="o">,</span> <span class="nl">branch:</span> <span class="s1">&#39;$BRANCH_NAME&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>在网上搜索后发现一篇文章<a href="https://stackoverflow.com/questions/56421553/dynamically-selecting-git-repo-in-jenkins-job">dynamically-selecting-git-repo-in-jenkins-job</a>,其采用<code>parameters</code>实现，将<code>Gitlab</code>仓库的地址存储在一个变量中，然后<code>Git</code>下载时实际计算变量值并进行下载。此方案看起来符合要求，进一步查找后发现<code>parameters</code>本身无法直接修改<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，不满足使用要求。</p>
+
+<pre class="line-numbers language-groovy ">
+<code>stage(&#39;拉取代码&#39;) {
+    agent none
+    steps {
+        // git仓库地址直接以字符串方式写死
+        git(credentialsId: &#39;gitlab-account&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;, branch: &#39;$BRANCH_NAME&#39;, changelog: true, poll: false)
+    }
+}</code>
+</pre>
+<p>在网上搜索后发现一篇文章<a href="https://stackoverflow.com/questions/56421553/dynamically-selecting-git-repo-in-jenkins-job">dynamically-selecting-git-repo-in-jenkins-job</a>,其采用<code>parameters</code>实现，将<code>Gitlab</code>仓库的地址存储在一个变量中，然后<code>Git</code>下载时实际计算变量值并进行下载。此方案看起来符合要求，进一步查找后发现<code>parameters</code>本身无法直接修改<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，不满足使用要求。</p>
 <p>由于先前对代码分支名称的获取可通过<code>$BRANCH_NAME</code>来实现，自己尝试采用类似的方式来验证，最终找到了符合要求的实现方案</p>
 <p><img src="/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-pipeline-dynamic-checkout-code-testing-result.png" alt="采用不同方式尝试在jenkins中实现动态下载" title="采用不同方式尝试在jenkins中实现动态下载"></p>
 <p>下图展示了完整的使用链路，可发现其实现复杂度不是很高</p>
@@ -477,44 +474,56 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

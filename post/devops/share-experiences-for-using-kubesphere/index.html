@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -55,7 +55,7 @@
   <meta itemprop="description" content="KubeSphere使用心得分享">
   <meta itemprop="datePublished" content="2022-08-06T18:00:08+08:00">
   <meta itemprop="dateModified" content="2022-08-06T18:00:08+08:00">
-  <meta itemprop="wordCount" content="2808">
+  <meta itemprop="wordCount" content="2723">
   <meta itemprop="keywords" content="kubesphere,Jenkins,持续集成,持续部署">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="KubeSphere使用心得">
@@ -69,6 +69,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -247,150 +254,82 @@
 </blockquote>
 <h2 id="script中定义参数">script中定义参数</h2>
 <p>在<code>script</code>中输入符合 <code>Groovy</code>语法的代码即可，为了在多个steps之间实现参数共享，需要在定义参数时加上<code>env.</code>前缀<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，类似如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="k">switch</span><span class="o">(</span><span class="n">PRODUCT_PHASE</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s2">&#34;sit&#34;</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">NODE_PORT</span> <span class="o">=</span> <span class="mi">13003</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">DUBBO_PORT</span> <span class="o">=</span> <span class="mi">13903</span>
-</span></span><span class="line"><span class="cl">        <span class="k">break</span>
-</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s2">&#34;test&#34;</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">NODE_PORT</span> <span class="o">=</span> <span class="mi">14003</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">DUBBO_PORT</span> <span class="o">=</span> <span class="mi">14903</span>
-</span></span><span class="line"><span class="cl">        <span class="k">break</span>
-</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s2">&#34;prod&#34;</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">NODE_PORT</span> <span class="o">=</span> <span class="mi">15003</span>
-</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">DUBBO_PORT</span> <span class="o">=</span> <span class="mi">15903</span>
-</span></span><span class="line"><span class="cl">        <span class="k">break</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">env</span><span class="o">.</span><span class="na">DUBBO_IP</span> <span class="o">=</span> <span class="s2">&#34;10.30.5.170&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="script中读取参数">script中读取参数</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">print</span> <span class="n">env</span><span class="o">.</span><span class="na">DUBBO_IP</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="shell中读取参数">shell中读取参数</h2>
+
+<pre class="line-numbers language-groovy ">
+<code>switch(PRODUCT_PHASE) {
+    case &#34;sit&#34;:
+        env.NODE_PORT = 13003
+        env.DUBBO_PORT = 13903
+        break
+    case &#34;test&#34;:
+        env.NODE_PORT = 14003
+        env.DUBBO_PORT = 14903
+        break
+    case &#34;prod&#34;:
+        env.NODE_PORT = 15003
+        env.DUBBO_PORT = 15903
+        break
+}
+env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
+</pre>
+<h2 id="script中读取参数">script中读取参数</h2>
+
+<pre class="language-groovy ">
+<code>print env.DUBBO_IP</code>
+</pre>
+<h2 id="shell中读取参数">shell中读取参数</h2>
 <p>需要采用<code>$参数名</code>(去掉<code>env.</code>前缀)的方式，类似如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker build -f kubesphere/Dockerfile <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-t idp-data:<span class="nv">$BUILD_TAG</span>  <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--build-arg  <span class="nv">PROJECT_VERSION</span><span class="o">=</span><span class="nv">$PROJECT_VERSION</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--build-arg  <span class="nv">NODE_PORT</span><span class="o">=</span><span class="nv">$NODE_PORT</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--build-arg  <span class="nv">DUBBO_PORT</span><span class="o">=</span><span class="nv">$DUBBO_PORT</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--build-arg <span class="nv">PRODUCT_PHASE</span><span class="o">=</span><span class="nv">$PRODUCT_PHASE</span> .
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="yaml文件中读取参数">yaml文件中读取参数</h2>
+
+<pre class="line-numbers language-shell ">
+<code>docker build -f kubesphere/Dockerfile \
+-t idp-data:$BUILD_TAG  \
+--build-arg  PROJECT_VERSION=$PROJECT_VERSION \
+--build-arg  NODE_PORT=$NODE_PORT \
+--build-arg  DUBBO_PORT=$DUBBO_PORT \
+--build-arg PRODUCT_PHASE=$PRODUCT_PHASE .</code>
+</pre>
+<h2 id="yaml文件中读取参数">yaml文件中读取参数</h2>
 <p>在<code>Kubernetes</code>中需要一个yaml文件来配置要生成的pod，其参数的获取也是采用<code>$参数名</code>的方式</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l">$NODE_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l">$NODE_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l">$NODE_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">dubbo</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l">$DUBBO_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l">$DUBBO_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l">$DUBBO_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">lucumt-data-$PRODUCT_PHASE</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="dockerfile中读取参数">Dockerfile中读取参数</h2>
+
+<pre class="line-numbers language-yaml ">
+<code>spec:
+  ports:
+    - name: http
+      port: $NODE_PORT
+      protocol: TCP
+      targetPort: $NODE_PORT
+      nodePort: $NODE_PORT
+    - name: dubbo
+      port: $DUBBO_PORT
+      protocol: TCP
+      targetPort: $DUBBO_PORT
+      nodePort: $DUBBO_PORT
+  selector:
+    app: lucumt-data-$PRODUCT_PHASE
+  sessionAffinity: None
+  type: NodePort</code>
+</pre>
+<h2 id="dockerfile中读取参数">Dockerfile中读取参数</h2>
 <p>当在<code>docker</code>的build阶段传递正确的参数后，在Dockerfile中需要采用<code>${参数名}</code>的方式获取参数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># 基础镜像</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s">  openjdk:8-jdk</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># author</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span>luyunqiang
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># 创建目录</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir -p /home/lucumt<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 指定路径</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /home/lucumt</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> PRODUCT_PHASE<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> NODE_PORT<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> DUBBO_PORT<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">PARAMS</span><span class="o">=</span><span class="s2">&#34;--server.port=</span><span class="si">${</span><span class="nv">NODE_PORT</span><span class="si">}</span><span class="s2"> --spring.application.name=lucumt-data --spring.profiles.active=</span><span class="si">${</span><span class="nv">PRODUCT_PHASE</span><span class="si">}</span><span class="s2"> --dubbo.protocol.port=</span><span class="si">${</span><span class="nv">DUBBO_PORT</span><span class="si">}</span><span class="s2">&#34;</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;Asia/Shanghai&#39;</span> &gt;/etc/timezone<span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="编译与部署">编译与部署</h1>
+
+<pre class="line-numbers language-dockerfile ">
+<code># 基础镜像
+FROM  openjdk:8-jdk
+# author
+LABEL maintainer=luyunqiang
+
+# 创建目录
+RUN mkdir -p /home/lucumt
+# 指定路径
+WORKDIR /home/lucumt
+
+ARG PRODUCT_PHASE
+ARG NODE_PORT
+ARG DUBBO_PORT
+ENV PARAMS=&#34;--server.port=${NODE_PORT} --spring.application.name=lucumt-data --spring.profiles.active=${PRODUCT_PHASE} --dubbo.protocol.port=${DUBBO_PORT}&#34;
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &#39;Asia/Shanghai&#39; &gt;/etc/timezone</code>
+</pre>
+<h1 id="编译与部署">编译与部署</h1>
 <p>由于公司研发环境与互联网隔离，故需要在前后端分别设置可用的镜像才能确保编译正常。</p>
 <h2 id="前端">前端</h2>
 <ul>
@@ -401,118 +340,71 @@
 </li>
 <li>
 <p><code>Nginx</code>默认的端口为80，且其默认的conf文件较为简陋，为了实现<code>nginx</code>的个性化配置，可以自己预先配置好一个conf文件，然后在docker构建时，将其覆盖即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> nginx</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir -p /usr/share/nginx/html/lucumt-web<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> dist /usr/share/nginx/html/lucumt-web<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 采用自己定义的配置文件</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> kubesphere/idp.conf /etc/nginx/conf.d/<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-dockerfile ">
+<code>FROM nginx
+
+RUN mkdir -p /usr/share/nginx/html/lucumt-web
+
+COPY dist /usr/share/nginx/html/lucumt-web
+
+# 采用自己定义的配置文件
+COPY kubesphere/idp.conf /etc/nginx/conf.d/
+
+EXPOSE 8080</code>
+</pre>
+</li>
 </ul>
 <h2 id="后端">后端</h2>
 <ul>
 <li>
 <p>获取<code>Maven</code>版本号：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mvn help:evaluate -Dexpression<span class="o">=</span>project.version -q -DforceStdout
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-shell ">
+<code>mvn help:evaluate -Dexpression=project.version -q -DforceStdout</code>
+</pre>
+</li>
 <li>
 <p>由于在<code>shell</code>中不方便定义全局变量，而<code>Maven</code>的版本号只能在执行相关命令时获取，为了实现版本号的共享，可将两者结合起来，在<code>shell</code>中利用<code>maven</code>命令获取版本号，然后再由<code>Groovy</code>脚本将其赋值为全局环境变量:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">env</span><span class="o">.</span><span class="na">PROJECT_VERSION</span> <span class="o">=</span> <span class="n">sh</span><span class="o">(</span><span class="nl">script:</span> <span class="s1">&#39;mvn help:evaluate -Dexpression=project.version -q -DforceStdout&#39;</span><span class="o">,</span> <span class="nl">returnStdout:</span> <span class="kc">true</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">env</span><span class="o">.</span><span class="na">BUILD_TIME</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">().</span><span class="na">format</span><span class="o">(</span><span class="s2">&#34;yyyyMMdd-HHmmss&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">env</span><span class="o">.</span><span class="na">BUILD_TAG</span> <span class="o">=</span> <span class="n">PROJECT_VERSION</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">BUILD_TIME</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-groovy ">
+<code>env.PROJECT_VERSION = sh(script: &#39;mvn help:evaluate -Dexpression=project.version -q -DforceStdout&#39;, returnStdout: true)
+env.BUILD_TIME = new Date().format(&#34;yyyyMMdd-HHmmss&#34;)
+env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
+</pre>
+</li>
 </ul>
 <h1 id="k8s容器探活">K8S容器探活</h1>
 <p><code>KubeSphere</code>对于容器的启动、就绪和存活的探测依赖于<code>Kubernetes</code>的<a href="https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">相关实现</a>，实际使用中<code>KubeSphere</code>只需要能正常检测到就绪状态即可，现阶段项目中也只基于就绪探测来实现。</p>
 <h2 id="后端-1">后端</h2>
 <p><code>SpringBoot</code>程序可基于<a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready.html">Spring Boot Actuator</a>中提供的<code>actuator/health</code>进行就绪检测，相关配置如下:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system:${BUILD_TAG}&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">lucumt-system/actuator/health</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l">$NODE_PORT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="前端-1">前端</h2>
+
+<pre class="line-numbers language-yaml ">
+<code>containers:
+  - image: &#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system:${BUILD_TAG}&#39;
+    readinessProbe:
+      httpGet:
+        path: lucumt-system/actuator/health
+        port: $NODE_PORT
+      timeoutSeconds: 10
+      failureThreshold: 30
+      periodSeconds: 5</code>
+</pre>
+<h2 id="前端-1">前端</h2>
 <p>由于前端没有单独的接口对外暴露，故可采用在<code>Docker</code>容器中执行linux命令的方式来检测是否就绪，个人采用<code>uname</code>，相关配置如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system-web:${BUILD_TAG}&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">exec</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="l">uname</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="运行效果">运行效果</h1>
+
+<pre class="line-numbers language-yaml ">
+<code>containers:
+  - image: &#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system-web:${BUILD_TAG}&#39;
+    readinessProbe:
+      exec:
+        command:
+          - uname
+      timeoutSeconds: 10
+      failureThreshold: 30
+      periodSeconds: 5</code>
+</pre>
+<h1 id="运行效果">运行效果</h1>
 <p>运行效果如下，可实现动态的指定测试阶段和代码分支：</p>
 <p><img src="/blog_img/devops/share-experiences-for-using-kubesphere/kubesphere-jenkins-pipeline-run-dialog.png" alt="KubeSphere流水线运行效果" title="KubeSphere流水线运行效果"></p>
 <h1 id="参考代码">参考代码</h1>
@@ -702,44 +594,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

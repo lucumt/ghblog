@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="简要记录如何在基于MySQL的Grafana的柱状中不显示0值">
   <meta itemprop="datePublished" content="2024-04-19T17:21:43+08:00">
   <meta itemprop="dateModified" content="2023-04-19T17:21:43+08:00">
-  <meta itemprop="wordCount" content="828">
+  <meta itemprop="wordCount" content="794">
   <meta itemprop="keywords" content="grafana,mysql,deveops,柱状图">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在基于MySQL的Grafana的柱状中不显示0值">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -181,91 +188,51 @@
 <h1 id="解决">解决</h1>
 <p>一开始自己想通过<code>Grafana</code>面板的过滤这些0值，搜索一番后并没有找到基于<code>Grafana</code>的解决方案，给出的答案是通过修改sql来规避此问题<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，对比该答案，还发现自己遇到的问题类似。</p>
 <p>原始查询sql：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">start_time</span><span class="p">,</span><span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="n">taskDate</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">未知</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">等待触发</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">队列中</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">开始执行</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">执行中</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">成功</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">失败</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">终止</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">超时</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">拒绝执行</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">已访问</span><span class="o">`</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_work_flow_instance</span><span class="w"> </span><span class="n">t</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">start_time</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">DATE_SUB</span><span class="p">(</span><span class="nf">NOW</span><span class="p">(),</span><span class="w"> </span><span class="k">INTERVAL</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">DAY</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">taskDate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">taskDate</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>mysql</code>中查询结果：</p>
+
+<pre class="line-numbers language-sql ">
+<code>SELECT 
+    DATE_FORMAT(t.start_time,&#39;%Y-%m-%d&#39;) AS `taskDate`,
+    SUM(IF(t.instance_status = 0,1,0)) AS `未知`,
+    SUM(IF(t.instance_status = 1,1,0)) AS `等待触发`,
+    SUM(IF(t.instance_status = 2,1,0)) AS `队列中`,
+    SUM(IF(t.instance_status = 3,1,0)) AS `开始执行`,
+    SUM(IF(t.instance_status = 4,1,0)) AS `执行中`,
+    SUM(IF(t.instance_status = 5,1,0)) AS `成功`,
+    SUM(IF(t.instance_status = 6,1,0)) AS `失败`,
+    SUM(IF(t.instance_status = 7,1,0)) AS `终止`,
+    SUM(IF(t.instance_status = 8,1,0)) AS `超时`,
+    SUM(IF(t.instance_status = 9,1,0)) AS `拒绝执行`,
+    SUM(IF(t.instance_status = 10,1,0)) AS `已访问`
+    FROM t_work_flow_instance t 
+WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
+  GROUP BY taskDate
+  ORDER BY taskDate</code>
+</pre>
+<p><code>mysql</code>中查询结果：</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/mysql-query-result-1.png" alt="mysql原始查询结果" title="mysql原始查询结果"></p>
 <p><strong>为了解决该问题，需要将<code>IF</code>中的默认值从<code>0</code>修改为<code>null</code>。</strong></p>
 <p>改进后的sql:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">start_time</span><span class="p">,</span><span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="n">taskDate</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">未知</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">等待触发</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">队列中</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">开始执行</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">执行中</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">成功</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">失败</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">终止</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">超时</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">拒绝执行</span><span class="o">`</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="k">IF</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">instance_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="no">null</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="o">`</span><span class="err">已访问</span><span class="o">`</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_work_flow_instance</span><span class="w"> </span><span class="n">t</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">start_time</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">DATE_SUB</span><span class="p">(</span><span class="nf">NOW</span><span class="p">(),</span><span class="w"> </span><span class="k">INTERVAL</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">DAY</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">taskDate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">taskDate</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>mysql</code>中查询结果如下，可看出除了将<code>0</code>值修改为<code>null</code>之外，其余的查询数据是一致的。</p>
+
+<pre class="line-numbers language-sql ">
+<code>SELECT 
+    DATE_FORMAT(t.start_time,&#39;%Y-%m-%d&#39;) AS `taskDate`,
+    SUM(IF(t.instance_status = 0,1,null)) AS `未知`,
+    SUM(IF(t.instance_status = 1,1,null)) AS `等待触发`,
+    SUM(IF(t.instance_status = 2,1,null)) AS `队列中`,
+    SUM(IF(t.instance_status = 3,1,null)) AS `开始执行`,
+    SUM(IF(t.instance_status = 4,1,null)) AS `执行中`,
+    SUM(IF(t.instance_status = 5,1,null)) AS `成功`,
+    SUM(IF(t.instance_status = 6,1,null)) AS `失败`,
+    SUM(IF(t.instance_status = 7,1,null)) AS `终止`,
+    SUM(IF(t.instance_status = 8,1,null)) AS `超时`,
+    SUM(IF(t.instance_status = 9,1,null)) AS `拒绝执行`,
+    SUM(IF(t.instance_status = 10,1,null)) AS `已访问`
+    FROM t_work_flow_instance t 
+WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
+  GROUP BY taskDate
+  ORDER BY taskDate</code>
+</pre>
+<p><code>mysql</code>中查询结果如下，可看出除了将<code>0</code>值修改为<code>null</code>之外，其余的查询数据是一致的。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/mysql-query-result-2.png" alt="mysql改进后的查询结果" title="mysql改进后的查询结果"></p>
 <p>在<code>Grafana</code>中查看显示效果类似如下，可发现0值已经消失，问题初步解决。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-without-zero-values.png" alt="柱状图不显示0值" title="柱状图不显示0值"></p>
@@ -439,44 +406,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

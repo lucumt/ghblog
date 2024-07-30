@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -55,7 +55,7 @@
   <meta itemprop="description" content="简要说明如何实现在基于KubeSphere的Jenkins的流水线中切换nodejs版本，以便实现更强的扩展性与通用性">
   <meta itemprop="datePublished" content="2024-01-11T10:17:42+08:00">
   <meta itemprop="dateModified" content="2024-01-11T10:17:42+08:00">
-  <meta itemprop="wordCount" content="1653">
+  <meta itemprop="wordCount" content="1601">
   <meta itemprop="keywords" content="kubesphere,jenkins,nodejs,pipeline,版本切换">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在基于KubeSphere的Jenkins的流水线中切换nodejs版本">
@@ -69,6 +69,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -177,44 +184,27 @@
 	 <p>近期有个项目组有个<code>Vue</code>项目需要在基于<code>KubeSphere</code>的<code>Jenkins</code>流水线中用高版本的<code>nodejs</code>进行编译，自己一开始尝试通过在流水线中直接升级<code>nodejs</code>版本，但并未成功，后来参考<code>KubeSphere</code>论坛上的相关说明才解决该问题，简单记录下。</p>
 <h1 id="问题尝试">问题&amp;尝试</h1>
 <p>项目中使用的<code>KubeSphere</code>版本为<code>v3.3.1</code>，基于<code>nodejs</code>环境对某个 <code>Vue3</code>项目进行编译打包时，<code>KubeSphere</code>提示构建过程出错。Google搜索一番过后，大部分都说要升级<code>nodejs</code>版本，自己当前的版本为<code>v10.16.3</code>，确实有些低，于是尝试用如下指令升级版本</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf node_modules package-lock.json yarn.lock
-</span></span><span class="line"><span class="cl">npm cache clean --force
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">npm config <span class="nb">set</span> registry https://mirrors.xxx.com/repository/NPM/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">npm install node@16.16.0
-</span></span><span class="line"><span class="cl">npm install
-</span></span><span class="line"><span class="cl">node -v
-</span></span><span class="line"><span class="cl">npm run build:qiankun
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>重新执行后依旧报错，同时<code>node -v</code>输出的结果依然是<code>v10.16.3</code>，版本不是预期的升级后版本。</p>
+
+<pre class="line-numbers language-bash ">
+<code>rm -rf node_modules package-lock.json yarn.lock
+npm cache clean --force
+
+npm config set registry https://mirrors.xxx.com/repository/NPM/
+
+npm install node@16.16.0
+npm install
+node -v
+npm run build:qiankun</code>
+</pre>
+<p>重新执行后依旧报错，同时<code>node -v</code>输出的结果依然是<code>v10.16.3</code>，版本不是预期的升级后版本。</p>
 <p>为啥<code>npm install node@16.16.0</code>这条指令执行正常，而<code>node -v</code>输出的仍然为旧版本呢？</p>
 <p>在构建之前添加如下两条指令进行分析</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$PWD</span>/node_modules/node/bin/node -v
-</span></span><span class="line"><span class="cl">node config list
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>输出结果如下</p>
+
+<pre class="line-numbers language-bash ">
+<code>$PWD/node_modules/node/bin/node -v
+node config list</code>
+</pre>
+<p>输出结果如下</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/npm-debug-output.png" alt="npm调试输出" title="npm调试输出"></p>
 <p>可以看出<code>npm install node@16.16.0</code>只是升级当前工程的<code>nodejs</code>版本，但是全局的版本还是旧的而编译时使用的是全局版本，导致问题出现。</p>
 <p>将该指令变为<code>npm install node@16.16.0 -g</code>再次执行，结果提示权限不足</p>
@@ -231,69 +221,39 @@
 <p>由于自己采用的是<code>KubeSphere</code>来集成<code>Jenkins</code>，其他人是否遇到了类似问题？通过相关关键词搜索后发现一篇文章<a href="https://ask.kubesphere.io/forum/d/6859-kubesphere311devopsnodejs"><strong>kubesphere3.1.1，devops工程如何升级node.js</strong></a>，其遇到的问题和我自己的很类似。</p>
 <p>根据该问题中的回复，需要对<code>Jenkins</code>流水线文件头部的配置进行修改</p>
 <p>原始配置如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">agent</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">label</span> <span class="s1">&#39;nodejs&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>修改为</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">agent</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">kubernetes</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">inheritFrom</span> <span class="s1">&#39;nodejs base&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">containerTemplate</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">name</span> <span class="s1">&#39;nodejs&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">image</span> <span class="s1">&#39;node:16.16.0&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>同时将前端构建指令修改如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf node_modules package-lock.json yarn.lock
-</span></span><span class="line"><span class="cl">npm cache clean --force
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">npm config <span class="nb">set</span> registry https://mirrors.xxx.com/repository/NPM/
-</span></span><span class="line"><span class="cl">npm install
-</span></span><span class="line"><span class="cl">node -v
-</span></span><span class="line"><span class="cl">npm run build:qiankun
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>再次执行相关构建，输出类似如下，可以看出<code>nodejs</code>版本已经修改为我们希望的版本，且能正常编译通过</p>
+
+<pre class="line-numbers language-groovy ">
+<code>agent {
+    node {
+        label &#39;nodejs&#39;
+    }
+}</code>
+</pre>
+<p>修改为</p>
+
+<pre class="line-numbers language-groovy ">
+<code>agent {
+    kubernetes {
+        inheritFrom &#39;nodejs base&#39;
+        containerTemplate {
+            name &#39;nodejs&#39;
+            image &#39;node:16.16.0&#39;
+        }
+    }
+}</code>
+</pre>
+<p>同时将前端构建指令修改如下</p>
+
+<pre class="line-numbers language-bash ">
+<code>rm -rf node_modules package-lock.json yarn.lock
+npm cache clean --force
+
+npm config set registry https://mirrors.xxx.com/repository/NPM/
+npm install
+node -v
+npm run build:qiankun</code>
+</pre>
+<p>再次执行相关构建，输出类似如下，可以看出<code>nodejs</code>版本已经修改为我们希望的版本，且能正常编译通过</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/node-version-upgraded.png" alt="node版本升级" title="node版本升级"></p>
 <p>基于上述方式修改后，初次执行时可能会出现类似如下错误，出错的原因是相关镜像还没下载下来，多执行几次即可。</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/kubernetes-agent-not-working.png" alt="kubernetes执行报错" title="kubernetes执行报错"></p>
@@ -302,61 +262,35 @@
 <p>继续在该问题下寻找答案，发现<code>KubeSphere</code>官方的技术支持人员有给出答案</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/kubesphere-support-reply.png" alt="kubesphere技术支持人员回复" title="kubesphere技术支持人员回复"></p>
 <p>将<code>docker</code>构建阶段的容器从<code>nodejs</code>修改为<code>base</code>即可，重新执行流水线可正常执行<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，至此问题解决完毕。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">stage<span class="o">(</span><span class="s1">&#39;镜像构建&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    agent none
-</span></span><span class="line"><span class="cl">        steps <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            container<span class="o">(</span><span class="s1">&#39;base&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            sh <span class="s1">&#39;&#39;&#39;echo $NODE_PORT
-</span></span></span><span class="line"><span class="cl"><span class="s1">            cat cicd/Dockerfile
-</span></span></span><span class="line"><span class="cl"><span class="s1">            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t orienlink-evaluator-web:$BUILD_TAG .&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="后记">后记</h1>
+
+<pre class="line-numbers language-bash ">
+<code>stage(&#39;镜像构建&#39;) {
+    agent none
+        steps {
+            container(&#39;base&#39;) {
+            sh &#39;&#39;&#39;echo $NODE_PORT
+            cat cicd/Dockerfile
+            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t orienlink-evaluator-web:$BUILD_TAG .&#39;&#39;&#39;
+            }
+        }
+    }
+}</code>
+</pre>
+<h1 id="后记">后记</h1>
 <p>虽然此文以<code>nodejs</code>举例，但对于其它的语言也可适用，假设使用的是<code>Golang</code>，对应的<code>Jenkins</code>流水线文件头部可修改如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">agent</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">kubernetes</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">inheritFrom</span> <span class="s1">&#39;go base&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">containerTemplate</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">name</span> <span class="s1">&#39;go&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">image</span> <span class="s1">&#39;go:1.22.2&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>通过上述方式可实现基于流水线级别的版本变更与隔离，使用起来更加方便。</p>
+
+<pre class="line-numbers language-groovy ">
+<code>agent {
+    kubernetes {
+        inheritFrom &#39;go base&#39;
+        containerTemplate {
+            name &#39;go&#39;
+            image &#39;go:1.22.2&#39;
+        }
+    }
+}</code>
+</pre>
+<p>通过上述方式可实现基于流水线级别的版本变更与隔离，使用起来更加方便。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -519,44 +453,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

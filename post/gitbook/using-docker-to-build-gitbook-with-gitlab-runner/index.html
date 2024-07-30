@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="简要介绍如何通过Docker创建GitBook并通过GitLab Runner实现GitBook文档内容的自动更新">
   <meta itemprop="datePublished" content="2023-10-07T10:14:02+08:00">
   <meta itemprop="dateModified" content="2023-10-07T10:14:02+08:00">
-  <meta itemprop="wordCount" content="7252">
+  <meta itemprop="wordCount" content="6735">
   <meta itemprop="keywords" content="docker,gitbook">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Docker中构建GitBook并整合GitLab Runner的使用经验分享">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -359,52 +366,35 @@
 <ol>
 <li>
 <p>在宿主机上执行如下指令安装<a href="https://github.com/jqlang/jq"><strong>jq</strong></a>指令，后续会用其来解析<code>GitLab</code>中返回的<code>JSON</code>数据</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 在宿主机上安装jq，用于解析json文件</span>
-</span></span><span class="line"><span class="cl">apt install -y jq
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code># 在宿主机上安装jq，用于解析json文件
+apt install -y jq</code>
+</pre>
+</li>
 <li>
 <p>安装之前请仿照下图将本文最后的<a href="#%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC"><strong>文件&amp;脚本</strong></a></p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-build-file-folder.png" alt="GitBook镜像构建前准备" title="GitBook镜像构建前准备"></p>
 </li>
 <li>
 <p>运行下述指令构建需要的镜像</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t gitbook_custom:v1.0
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>Dockerfile</code>在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t gitbook_custom:v1.0  --progress string . --no-cache
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-bash ">
+<code>docker build -t gitbook_custom:v1.0</code>
+</pre>
+<p><code>Dockerfile</code>在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令</p>
+
+<pre class="language-bash ">
+<code>docker build -t gitbook_custom:v1.0  --progress string . --no-cache</code>
+</pre>
+</li>
 <li>
 <p>执行下述指令启动<code>Docker</code>容器并执行相关的初始化操作</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker-compose down <span class="o">&amp;&amp;</span> docker-compose up -d <span class="o">&amp;&amp;</span> bash gitlab_runner_config_init.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-bash ">
+<code>docker-compose down &amp;&amp; docker-compose up -d &amp;&amp; bash gitlab_runner_config_init.sh</code>
+</pre>
+</li>
 <li>
 <p>安装过程中会有类似如下输出:</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-output-1.png" alt="GitBook安装过程1" title="GitBook安装过程1"></p>
@@ -419,25 +409,16 @@
 <h2 id="测试验证">测试验证</h2>
 <h3 id="自动构建">自动构建</h3>
 <p>由于<a href="#%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><strong>自动构建脚本</strong></a>中有如下配置，其中构建阶段的值被设置为<code>build</code>会导致每次代码发生变更时都执行自动构建</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">stages</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># build阶段执行的操作命令 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>当我们通过<code>git push</code>将代码推送到<code>GitLab</code>后，在对应的<code>GitLab</code>工程中依次点击<code>CI/CD</code>-&gt;<code>Pipelines</code>，会有类似如下输出，可以看到此时<code>GitLab Runner</code>正在执行构建</p>
+
+<pre class="line-numbers language-yaml ">
+<code>stages:
+  - build
+
+# build阶段执行的操作命令 
+build:
+  stage: build</code>
+</pre>
+<p>当我们通过<code>git push</code>将代码推送到<code>GitLab</code>后，在对应的<code>GitLab</code>工程中依次点击<code>CI/CD</code>-&gt;<code>Pipelines</code>，会有类似如下输出，可以看到此时<code>GitLab Runner</code>正在执行构建</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running.png" alt="GitLab Runner正在执行" title="GitLab Runner正在执行"></p>
 <p>点击对应的按钮可查看构建执行日志，类似如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running-log.png" alt="GitLab Runner执行日志结果" title="GitLab Runner执行日志结果"></p>
@@ -588,1111 +569,572 @@
 <p>如下所示<code>GitBook</code>中默认生成的菜单为<code>Introduction</code>，不太直观，可根据实际需求动态修改(对于菜单目录的生成可参考<a href="#%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95"><strong>自动生成目录</strong></a>实现)</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-menu.png" alt="GitBook默认菜单展示" title="GitBook默认菜单展示"></p>
 <p>将默认目录从</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="k">*</span> [<span class="nt">Introduction</span>](<span class="na">README.md</span>)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>修改为</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="k">*</span> [<span class="nt">概览</span>](<span class="na">README.md</span>)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>之后的展示效果类似如下</p>
+
+<pre class="language-markdown ">
+<code>* [Introduction](README.md)</code>
+</pre>
+<p>修改为</p>
+
+<pre class="language-markdown ">
+<code>* [概览](README.md)</code>
+</pre>
+<p>之后的展示效果类似如下</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-custom-menu.png" alt="GitBook自定义菜单展示" title="GitBook自定义菜单展示"></p>
 <h2 id="自定义样式">自定义样式</h2>
 <p>若<code>GitBook</code>中的样式不满足我们的需求，可通过添加自定义<code>CSS</code>文件进行定制，实际使用中发现该文件必须叫做<code>website.css</code>且需位于生成的静态文件目录下才生效。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;styles&#34;</span><span class="err">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;website&#34;</span><span class="p">:</span> <span class="s2">&#34;./styles/website.css&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="使用展示">使用展示</h1>
+
+<pre class="line-numbers language-json ">
+<code>&#34;styles&#34;: {
+    &#34;website&#34;: &#34;./styles/website.css&#34;,
+}</code>
+</pre>
+<h1 id="使用展示">使用展示</h1>
 <p>可通过<code>Nginx</code>对应端口访问相应的<code>GitBook</code>页面，个人项目中的界面类似如下，供参考</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-web-page-view.png" alt="GitBook页面浏览" title="GitBook页面浏览"></p>
 <h1 id="文件脚本">文件&amp;脚本</h1>
 <h2 id="dockerfile脚本">Dockerfile脚本</h2>
 <p>用于构建同时包含<code>GitLab Runner</code>与<code>GitBook</code>的容器</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> gitlab/gitlab-runner:v15.5.2</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 更改为公司内部的镜像源</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> rm -rf /etc/apt/sources.list <span class="o">&amp;&amp;</span> touch /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s1">&#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib&#39;</span> &gt;&gt; /etc/apt/sources.list<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 安装nodejs</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update -y<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install nodejs npm -y<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> npm cache clean --force<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> npm config <span class="nb">set</span> registry https://mirrors.xxx.com/repository/NPM/<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> npm install -g gitbook-cli@2.1.2<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir -p /usr/local/gitbook/data<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir -p /usr/local/gitbook/tmp/docs<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> chown -R gitlab-runner:gitlab-runner /usr/local/gitbook/tmp<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> book.js /usr/local/gitbook/tmp/book.js<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> custom.css /usr/local/gitbook/tmp/custom.css<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> favicon.ico /usr/local/gitbook/tmp/favicon.ico<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh<span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="docker启停脚本">docker启停脚本</h2>
+
+<pre class="line-numbers language-dockerfile ">
+<code>FROM gitlab/gitlab-runner:v15.5.2
+
+# 更改为公司内部的镜像源
+RUN rm -rf /etc/apt/sources.list &amp;&amp; touch /etc/apt/sources.list
+
+RUN echo &#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+RUN echo &#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+RUN echo &#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+RUN echo &#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-updates main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+RUN echo &#39;deb [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+RUN echo &#39;deb-src [trusted=yes] https://mirrors.xxx.com/repository/Debian/ bullseye-backports main non-free contrib&#39; &gt;&gt; /etc/apt/sources.list
+
+# 安装nodejs
+RUN apt-get update -y
+
+RUN apt-get install nodejs npm -y
+RUN npm cache clean --force
+RUN npm config set registry https://mirrors.xxx.com/repository/NPM/
+RUN npm install -g gitbook-cli@2.1.2
+
+RUN mkdir -p /usr/local/gitbook/data
+RUN mkdir -p /usr/local/gitbook/tmp/docs
+RUN chown -R gitlab-runner:gitlab-runner /usr/local/gitbook/tmp
+COPY book.js /usr/local/gitbook/tmp/book.js
+COPY custom.css /usr/local/gitbook/tmp/custom.css
+COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
+COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh</code>
+</pre>
+<h2 id="docker启停脚本">docker启停脚本</h2>
 <p><code>docker-compose.yml</code>用于启动<code>GitLab Runner</code>与<code>Nginx</code>容器</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">gitbook</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitbook_custom:v1.0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="l">$PWD/data:/usr/local/gitbook/data:rw</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">gitbook-custom</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.22</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="s2">&#34;3000:80&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span>- <span class="l">$PWD/data:/usr/share/nginx/html</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">gitbook-nginx</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自动构建脚本">自动构建脚本</h2>
+
+<pre class="line-numbers language-yaml ">
+<code>version: &#34;3&#34;
+services:
+ gitbook:
+   privileged: true
+   image: gitbook_custom:v1.0
+   volumes:
+     - $PWD/data:/usr/local/gitbook/data:rw
+   restart: always
+   container_name: gitbook-custom
+ nginx:
+   privileged: true
+   image: nginx:1.22
+   ports:
+     - &#34;3000:80&#34;
+   volumes:
+     - $PWD/data:/usr/share/nginx/html
+   restart: always
+   container_name: gitbook-nginx</code>
+</pre>
+<h2 id="自动构建脚本">自动构建脚本</h2>
 <p><code>.gitlab-ci.yml</code>是<code>GitLab Runner</code>构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的<code>GitLab</code>仓库，用于每次修改文档时触发自动构建</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">variables</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 是否自动生成目录</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">AUTO_SUMMARY</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 定义ci/cd 执行build流程</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># build阶段执行的操作命令 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">xxx-doc</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;======== start build ========&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">rm -rf /usr/local/gitbook/tmp/docs/*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cp -r * /usr/local/gitbook/tmp/docs/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">mkdir -p /usr/local/gitbook/tmp/docs/styles</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cd /usr/local/gitbook/tmp</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cp custom.css  /usr/local/gitbook/tmp/docs/styles/website.css</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">bash /usr/local/gitbook/auto_generate_summary.sh $PWD</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">gitbook build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">rm -rf /usr/local/gitbook/data/*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自动注册脚本">自动注册脚本</h2>
+
+<pre class="line-numbers language-yaml ">
+<code>variables:
+  # 是否自动生成目录
+  AUTO_SUMMARY: &#34;true&#34;
+
+# 定义ci/cd 执行build流程
+stages:
+  - build
+
+# build阶段执行的操作命令 
+build:
+  stage: build
+  tags:
+    - xxx-doc
+  script:
+    - echo &#34;======== start build ========&#34;
+    - rm -rf /usr/local/gitbook/tmp/docs/*
+    - cp -r * /usr/local/gitbook/tmp/docs/
+    - mkdir -p /usr/local/gitbook/tmp/docs/styles
+    - cd /usr/local/gitbook/tmp
+    - cp custom.css  /usr/local/gitbook/tmp/docs/styles/website.css
+    - bash /usr/local/gitbook/auto_generate_summary.sh $PWD
+    - gitbook build
+    - rm -rf /usr/local/gitbook/data/*
+    - cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/
+    - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico</code>
+</pre>
+<h2 id="自动注册脚本">自动注册脚本</h2>
 <p><code>gitlab_runner_config_init.sh</code>用于注册<code>GitLab Runner</code>同时检测<code>GitBook</code>是否存在</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#/bin/bash</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#更新文件权限</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">FOLDER</span><span class="o">=</span><span class="s2">&#34;/usr/local/gitbook/data&#34;</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it gitbook-custom bash -c <span class="s2">&#34;chown -R gitlab-runner:gitlab-runner </span><span class="nv">$FOLDER</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===================完成</span><span class="nv">$FOLDER数据目录权限修改</span><span class="s2">=====================&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 删除gitlab runner</span>
-</span></span><span class="line"><span class="cl"><span class="nv">GITLAB_URL</span><span class="o">=</span><span class="s1">&#39;http://aeectss.xxx.local:1800/&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;===================开始删除旧的gitlab runner=====================&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">PRIVATE_TOKEN</span><span class="o">=</span><span class="s1">&#39;5JZxxYzapBB_zfze5c2_&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">PROJECT_ID</span><span class="o">=</span><span class="m">57</span>
-</span></span><span class="line"><span class="cl"><span class="nv">ids</span><span class="o">=</span><span class="k">$(</span>curl --header <span class="s2">&#34;PRIVATE-TOKEN:</span><span class="si">${</span><span class="nv">PRIVATE_TOKEN</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">GITLAB_URL</span><span class="si">}</span><span class="s2">/api/v4/runners&#34;</span>  <span class="p">|</span>jq -r <span class="s1">&#39;.[]|&#34;\(.id)&#34;&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> id in <span class="nv">$ids</span><span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">eval</span> <span class="s2">&#34;curl --request DELETE --header &#39;PRIVATE-TOKEN:</span><span class="si">${</span><span class="nv">PRIVATE_TOKEN</span><span class="si">}</span><span class="s2">&#39; &#39;</span><span class="si">${</span><span class="nv">GITLAB_URL</span><span class="si">}</span><span class="s2">/api/v4/runners/</span><span class="si">${</span><span class="nv">id</span><span class="si">}</span><span class="s2">&#39;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;\033[32m=====================删除id为</span><span class="si">${</span><span class="nv">id</span><span class="si">}</span><span class="s2">的runner======================\033[0m\n&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 注册gitlab runner</span>
-</span></span><span class="line"><span class="cl"><span class="nv">CUR_DATE</span><span class="o">=</span><span class="k">$(</span>date <span class="s2">&#34;+%Y-%m-%d %H:%M:%S&#34;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">TOKEN</span><span class="o">=</span><span class="s1">&#39;M9VwuFfu9E42mb5QRx7M&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">TAG_LIST</span><span class="o">=</span><span class="s1">&#39;xxxxx-doc&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">DESC</span><span class="o">=</span><span class="s1">&#39;xxxxx文档撰写&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;===================开始注册gitlab runner=====================&#39;</span>
-</span></span><span class="line"><span class="cl">sudo docker <span class="nb">exec</span> -it gitbook-custom <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>gitlab-runner register --non-interactive <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--url <span class="s2">&#34;</span><span class="si">${</span><span class="nv">GITLAB_URL</span><span class="si">}</span><span class="s2">&#34;</span>  <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--registration-token <span class="s2">&#34;</span><span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>       --executor <span class="s2">&#34;shell&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>       --tag-list <span class="s2">&#34;</span><span class="si">${</span><span class="nv">TAG_LIST</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--description <span class="s2">&#34;</span><span class="si">${</span><span class="nv">DESC</span><span class="si">}</span><span class="s2"> -- 添加时间:</span><span class="si">${</span><span class="nv">CUR_DATE</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装gitbook</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;===================开始检查gitbook=====================&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">check</span><span class="o">=</span><span class="k">$(</span>docker <span class="nb">exec</span> -it --user gitlab-runner gitbook-custom gitbook ls<span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="nv">$check</span> <span class="o">==</span> *<span class="s2">&#34;no versions installed&#34;</span>* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;gitbook在gitlab-runner用户下没有安装&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;npm config set registry https://mirrors.xxx.com/repository/NPM/&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="s2">;gitbook fetch&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="s2">;cd /usr/local/gitbook/tmp&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="s2">;npm install gitbook-plugin-mermaid-fox&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="s2">;gitbook install&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#command=&#34;${command};cp /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-docker.js /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-dockerfile.js&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;docker exec -it --user gitlab-runner gitbook-custom bash -c &#39;</span><span class="nv">$command</span><span class="s2">&#39;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;=========================要执行的命令=======================&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;\033[32m</span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="s2">\033[0m\n&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;============================================================&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">eval</span> <span class="nv">$command</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;\033[32mGitbook已经安装，相关检查结果如下:\033[0m\n&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$check</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自动生成目录">自动生成目录</h2>
+
+<pre class="line-numbers language-bash ">
+<code>#/bin/bash
+
+#更新文件权限
+
+FOLDER=&#34;/usr/local/gitbook/data&#34;
+docker exec -it gitbook-custom bash -c &#34;chown -R gitlab-runner:gitlab-runner $FOLDER&#34;
+echo &#34;===================完成$FOLDER数据目录权限修改=====================&#34;
+
+
+# 删除gitlab runner
+GITLAB_URL=&#39;http://aeectss.xxx.local:1800/&#39;
+echo &#39;===================开始删除旧的gitlab runner=====================&#39;
+PRIVATE_TOKEN=&#39;5JZxxYzapBB_zfze5c2_&#39;
+PROJECT_ID=57
+ids=$(curl --header &#34;PRIVATE-TOKEN:${PRIVATE_TOKEN}&#34; &#34;${GITLAB_URL}/api/v4/runners&#34;  |jq -r &#39;.[]|&#34;\(.id)&#34;&#39;)
+for id in $ids; do
+  eval &#34;curl --request DELETE --header &#39;PRIVATE-TOKEN:${PRIVATE_TOKEN}&#39; &#39;${GITLAB_URL}/api/v4/runners/${id}&#39;&#34;
+  printf &#34;\033[32m=====================删除id为${id}的runner======================\033[0m\n&#34;
+done
+
+
+# 注册gitlab runner
+CUR_DATE=$(date &#34;&#43;%Y-%m-%d %H:%M:%S&#34;)
+TOKEN=&#39;M9VwuFfu9E42mb5QRx7M&#39;
+TAG_LIST=&#39;xxxxx-doc&#39;
+DESC=&#39;xxxxx文档撰写&#39;
+echo &#39;===================开始注册gitlab runner=====================&#39;
+sudo docker exec -it gitbook-custom \
+gitlab-runner register --non-interactive \
+--url &#34;${GITLAB_URL}&#34;  \
+--registration-token &#34;${TOKEN}&#34; \
+       --executor &#34;shell&#34; \
+       --tag-list &#34;${TAG_LIST}&#34; \
+--description &#34;${DESC} -- 添加时间:${CUR_DATE}&#34;
+
+
+# 安装gitbook
+echo &#39;===================开始检查gitbook=====================&#39;
+check=$(docker exec -it --user gitlab-runner gitbook-custom gitbook ls)
+
+if [[ $check == *&#34;no versions installed&#34;* ]]; then
+  echo &#34;gitbook在gitlab-runner用户下没有安装&#34;
+  command=&#34;npm config set registry https://mirrors.xxx.com/repository/NPM/&#34;
+  command=&#34;${command};gitbook fetch&#34;
+  command=&#34;${command};cd /usr/local/gitbook/tmp&#34;
+  command=&#34;${command};npm install gitbook-plugin-mermaid-fox&#34;
+  command=&#34;${command};gitbook install&#34;
+  #command=&#34;${command};cp /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-docker.js /usr/local/gitbook/tmp/node_modules/prismjs/components/prism-dockerfile.js&#34;
+  command=&#34;docker exec -it --user gitlab-runner gitbook-custom bash -c &#39;$command&#39;&#34;
+  echo &#34;=========================要执行的命令=======================&#34;
+  printf &#34;\033[32m${command}\033[0m\n&#34;
+  echo &#34;============================================================&#34;
+  eval $command
+else
+  printf &#34;\033[32mGitbook已经安装，相关检查结果如下:\033[0m\n&#34;
+  echo &#34;$check&#34;
+fi
+
+printf &#34;\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n&#34;</code>
+</pre>
+<h2 id="自动生成目录">自动生成目录</h2>
 <p><code>auto_generate_summary.sh</code>用于自动生成目录，<code>GitBook</code>左侧的目录树依赖于此脚本的生成结果，此文件会在<code>GitLab Runner</code>构建阶段执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># 先清空文件</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt;  docs/SUMMARY.md
-</span></span><span class="line"><span class="cl"><span class="c1"># 子文件夹读取的递归函数</span>
-</span></span><span class="line"><span class="cl">dirReader<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># $1 文件绝对路径</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># $2 章节名称</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># $3 缩进</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 循环处理该文件夹下的文件</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> item in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>/*
-</span></span><span class="line"><span class="cl">    <span class="k">do</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span>  <span class="o">&amp;&amp;</span>  ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">then</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 判断该文件夹是否存在README.md文件</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">            <span class="k">then</span> 
-</span></span><span class="line"><span class="cl">                <span class="c1"># 如果没有就创建README.md</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 获取文件名称</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">            <span class="c1"># 递归处理该文件夹</span>
-</span></span><span class="line"><span class="cl">            dirReader <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">  &#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 判断该文件是否是.md结尾 并且不是README.md</span>
-</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">then</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> - 4<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$dirName</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README&#39;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">            <span class="k">then</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">            <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">    <span class="k">done</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 读取当前路径</span>
-</span></span><span class="line"><span class="cl"><span class="nv">dirs</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/docs/&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;- [主页](README.md)&#34;</span> &gt;  docs/SUMMARY.md
-</span></span><span class="line"><span class="cl"><span class="c1"># 循环处理该文件夹下的文件dir</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> dir in docs/*
-</span></span><span class="line"><span class="cl"><span class="k">do</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 截取掉dir路径名称里的 docs/</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">startPos</span><span class="o">=</span><span class="s1">&#39;5&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">length</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">dir</span><span class="si">}</span> - 5<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">dir</span><span class="o">=</span><span class="si">${</span><span class="nv">dir</span><span class="p">:</span><span class="nv">$startPos</span><span class="p">:</span><span class="nv">$length</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dirs</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ styles$ <span class="o">]]</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">then</span> 
-</span></span><span class="line"><span class="cl">        <span class="c1"># 判断该文件夹是否存在README.md文件</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">then</span> 
-</span></span><span class="line"><span class="cl">        	<span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">        <span class="c1"># 处理文件夹内部的文件</span>
-</span></span><span class="line"><span class="cl">        dirReader <span class="s2">&#34;</span><span class="nv">$dirs$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;  &#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span>  <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;SUMMARY.md&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README.md&#39;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">    	<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="k">done</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="目录分类显示">目录分类显示</h3>
+
+<pre class="line-numbers language-bash ">
+<code>#!/bin/bash
+# 先清空文件
+echo &#34;&#34; &gt;  docs/SUMMARY.md
+# 子文件夹读取的递归函数
+dirReader(){
+    # $1 文件绝对路径
+    # $2 章节名称
+    # $3 缩进
+    # 循环处理该文件夹下的文件
+    for item in &#34;${1}&#34;/*
+    do
+        # 判断是否是文件夹且不是图片文件夹
+        if [ -d &#34;$item&#34; ]  &amp;&amp;  ! [[ &#34;${item}&#34; =~ assets$ ]]
+        then
+            # 判断该文件夹是否存在README.md文件
+            if [ ! -f &#34;$item/README.md&#34; ]
+            then 
+                # 如果没有就创建README.md
+                echo &#34;&#34; &gt; &#34;$item/README.md&#34;
+            fi
+            # 获取文件名称
+            beginPos=`expr ${#1} &#43; 1`
+            endPos=`expr ${#item} - ${#1}`
+            dirName=${item:$beginPos:$endPos}
+            echo ${item}
+            # 写入目录文件
+            echo &#34;$3&#43; [$dirName]($2/$dirName/README.md)&#34; &gt;&gt; docs/SUMMARY.md
+            # 递归处理该文件夹
+            dirReader &#34;$item&#34; &#34;$2/$dirName&#34; &#34;$3  &#34;
+        # 判断该文件是否是.md结尾 并且不是README.md
+        elif [ -f &#34;$item&#34; ] &amp;&amp; [ &#34;${item##*.}&#34; == &#39;md&#39; ] 
+        then
+            beginPos=`expr ${#1} &#43; 1`
+            endPos=`expr ${#item} - ${#1} - 4`
+            dirName=${item:$beginPos:$endPos}
+            # 写入目录文件
+            if[ &#34;$dirName&#34; != &#39;README&#39; ]
+            then
+                echo ${item}
+                echo &#34;$3&#43; [$dirName]($2/$dirName.md)&#34; &gt;&gt; docs/SUMMARY.md
+            fi
+        fi
+    done
+}
+# 读取当前路径
+dirs=&#34;${PWD}/docs/&#34;
+echo &#34;- [主页](README.md)&#34; &gt;  docs/SUMMARY.md
+# 循环处理该文件夹下的文件dir
+for dir in docs/*
+do
+    # 截取掉dir路径名称里的 docs/
+    startPos=&#39;5&#39;
+    length=`expr ${#dir} - 5`
+    dir=${dir:$startPos:$length}
+    # 判断是否是文件夹且不是图片文件夹
+    if [ -d &#34;${dirs}/${dir}&#34; ] &amp;&amp; ! [[ &#34;${dir}&#34; =~ assets$ ]] &amp;&amp; ! [[ &#34;${dir}&#34; =~ styles$ ]] 
+    then 
+        # 判断该文件夹是否存在README.md文件
+        if [ ! -f &#34;$dirs/$dir/README.md&#34; ]
+        then 
+        	echo &#34;&#34; &gt; &#34;$dirs/$dir/README.md&#34;
+        fi
+        # 写入目录文件
+        echo &#34;&#43; [$dir]($dir/README.md)&#34; &gt;&gt; docs/SUMMARY.md
+        # 处理文件夹内部的文件
+        dirReader &#34;$dirs$dir&#34; &#34;$dir&#34; &#34;  &#34;
+    # 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md
+    elif  [ &#34;${dir##*.}&#34; == &#39;md&#39; ] &amp;&amp; [ &#34;${dir}&#34; != &#34;SUMMARY.md&#34; ] &amp;&amp; [ &#34;${dir}&#34; != &#39;README.md&#39; ]
+    then
+    # 写入目录文件
+    	echo &#34;&#43; [$dir]($dir)&#34; &gt;&gt; docs/SUMMARY.md
+    fi
+done</code>
+</pre>
+<h3 id="目录分类显示">目录分类显示</h3>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-menu-category.png" alt="GitBook目录分类显示" title="GitBook目录分类显示"></p>
 <p>若需要在生成目录时能自动进行如上图所示的分类展示，则可将上述脚本修改为类似如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>: <span class="s1">&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">此脚本用于生成目录时可根据目录类别分成多个子类，要分类的顶层文件夹记录在special_tags数组变量中
-</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 先清空文件</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt;  docs/SUMMARY.md
-</span></span><span class="line"><span class="cl"><span class="c1"># 子文件夹读取的递归函数</span>
-</span></span><span class="line"><span class="cl">dirReader<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># $1 文件绝对路径</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># $2 章节名称</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># $3 缩进</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 循环处理该文件夹下的文件</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> item in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>/*
-</span></span><span class="line"><span class="cl">	<span class="k">do</span>	
-</span></span><span class="line"><span class="cl">		<span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span>  <span class="o">&amp;&amp;</span>  ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span>
-</span></span><span class="line"><span class="cl">		<span class="k">then</span>
-</span></span><span class="line"><span class="cl">			<span class="c1"># 判断该文件夹是否存在README.md文件</span>
-</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">			<span class="k">then</span> 
-</span></span><span class="line"><span class="cl">				<span class="c1"># 如果没有就创建README.md</span>
-</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">/README.md&#34;</span>
-</span></span><span class="line"><span class="cl">			<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">			<span class="c1"># 获取文件名称</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">			<span class="c1"># 递归处理该文件夹</span>
-</span></span><span class="line"><span class="cl">			dirReader <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">  &#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="c1"># 判断该文件是否是.md结尾 并且不是README.md</span>
-</span></span><span class="line"><span class="cl">		<span class="k">elif</span> <span class="o">[</span> -f <span class="s2">&#34;</span><span class="nv">$item</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">item</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> 
-</span></span><span class="line"><span class="cl">		<span class="k">then</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">beginPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> + 1<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">endPos</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">item</span><span class="si">}</span> - <span class="si">${#</span><span class="nv">1</span><span class="si">}</span> - 4<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">			<span class="nv">dirName</span><span class="o">=</span><span class="si">${</span><span class="nv">item</span><span class="p">:</span><span class="nv">$beginPos</span><span class="p">:</span><span class="nv">$endPos</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">			<span class="k">if</span>	<span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$dirName</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README&#39;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">			<span class="k">then</span>
-</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="si">${</span><span class="nv">item</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">				<span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">+ [</span><span class="nv">$dirName</span><span class="s2">](</span><span class="nv">$2</span><span class="s2">/</span><span class="nv">$dirName</span><span class="s2">.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">			<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">	<span class="k">done</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">baseReader<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 需要另外新开一个分类</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">special_tags</span><span class="o">=(</span><span class="s2">&#34;VDE相关&#34;</span> <span class="s2">&#34;云授权平台&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">regex</span><span class="o">=</span><span class="k">$(</span><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">special_tags</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">special_dirs</span><span class="o">=()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 读取当前路径</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">dirs</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/docs/&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;- [主页](README.md)&#34;</span> &gt;  docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">	<span class="c1"># 循环处理该文件夹下的文件dir</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> dir in docs/*
-</span></span><span class="line"><span class="cl">	<span class="k">do</span>
-</span></span><span class="line"><span class="cl">		<span class="c1"># 截取掉dir路径名称里的 docs/</span>
-</span></span><span class="line"><span class="cl">		<span class="nv">startPos</span><span class="o">=</span><span class="s1">&#39;5&#39;</span>
-</span></span><span class="line"><span class="cl">		<span class="nv">length</span><span class="o">=</span><span class="sb">`</span>expr <span class="si">${#</span><span class="nv">dir</span><span class="si">}</span> - 5<span class="sb">`</span>
-</span></span><span class="line"><span class="cl">		<span class="nv">dir</span><span class="o">=</span><span class="si">${</span><span class="nv">dir</span><span class="p">:</span><span class="nv">$startPos</span><span class="p">:</span><span class="nv">$length</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span> <span class="p">|</span> egrep -iq <span class="s2">&#34;</span><span class="nv">$regex</span><span class="s2">&#34;</span>  <span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">		   <span class="nv">special_dirs</span><span class="o">+=(</span><span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">else</span>
-</span></span><span class="line"><span class="cl">		   baseWrite <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">	<span class="k">done</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="c1"># 处理特殊类别的文件</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="nv">$special_dirs</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">	    <span class="nb">echo</span> <span class="s1">$&#39;\n#\n&#39;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> dir in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">special_dirs</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">	    baseWrite <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">done</span> 
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">baseWrite<span class="o">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">dirs</span><span class="o">=</span><span class="nv">$1</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">dir</span><span class="o">=</span><span class="nv">$2</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 判断是否是文件夹且不是图片文件夹</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dirs</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ assets$ <span class="o">]]</span> <span class="o">&amp;&amp;</span> ! <span class="o">[[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">=</span>~ styles$ <span class="o">]]</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">then</span> 	
-</span></span><span class="line"><span class="cl">		<span class="c1"># 判断该文件夹是否存在README.md文件</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">		<span class="k">then</span> 
-</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;</span><span class="nv">$dirs</span><span class="s2">/</span><span class="nv">$dir</span><span class="s2">/README.md&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">fi</span>
-</span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">		<span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">/README.md)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">		<span class="c1"># 处理文件夹内部的文件</span>
-</span></span><span class="line"><span class="cl">		dirReader <span class="s2">&#34;</span><span class="nv">$dirs$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$dir</span><span class="s2">&#34;</span> <span class="s2">&#34;  &#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md</span>
-</span></span><span class="line"><span class="cl">	<span class="k">elif</span>  <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;md&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;SUMMARY.md&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dir</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s1">&#39;README.md&#39;</span> <span class="o">]</span>
-</span></span><span class="line"><span class="cl">	<span class="k">then</span>
-</span></span><span class="line"><span class="cl">			<span class="c1"># 写入目录文件</span>
-</span></span><span class="line"><span class="cl">			<span class="nb">echo</span> <span class="s2">&#34;+ [</span><span class="nv">$dir</span><span class="s2">](</span><span class="nv">$dir</span><span class="s2">)&#34;</span> &gt;&gt; docs/SUMMARY.md
-</span></span><span class="line"><span class="cl">	<span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">baseReader
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自定义样式-1">自定义样式</h2>
+
+<pre class="line-numbers language-bash ">
+<code>#!/bin/bash
+: &#39;
+此脚本用于生成目录时可根据目录类别分成多个子类，要分类的顶层文件夹记录在special_tags数组变量中
+&#39;
+# 先清空文件
+echo &#34;&#34; &gt;  docs/SUMMARY.md
+# 子文件夹读取的递归函数
+dirReader(){
+	# $1 文件绝对路径
+	# $2 章节名称
+	# $3 缩进
+	# 循环处理该文件夹下的文件
+	for item in &#34;${1}&#34;/*
+	do	
+		# 判断是否是文件夹且不是图片文件夹
+		if [ -d &#34;$item&#34; ]  &amp;&amp;  ! [[ &#34;${item}&#34; =~ assets$ ]]
+		then
+			# 判断该文件夹是否存在README.md文件
+			if [ ! -f &#34;$item/README.md&#34; ]
+			then 
+				# 如果没有就创建README.md
+				echo &#34;&#34; &gt; &#34;$item/README.md&#34;
+			fi
+			# 获取文件名称
+			beginPos=`expr ${#1} &#43; 1`
+			endPos=`expr ${#item} - ${#1}`
+			dirName=${item:$beginPos:$endPos}
+			echo ${item}
+			# 写入目录文件
+			echo &#34;$3&#43; [$dirName]($2/$dirName/README.md)&#34; &gt;&gt; docs/SUMMARY.md
+			# 递归处理该文件夹
+			dirReader &#34;$item&#34; &#34;$2/$dirName&#34; &#34;$3  &#34;
+		# 判断该文件是否是.md结尾 并且不是README.md
+		elif [ -f &#34;$item&#34; ] &amp;&amp; [ &#34;${item##*.}&#34; == &#39;md&#39; ] 
+		then
+			beginPos=`expr ${#1} &#43; 1`
+			endPos=`expr ${#item} - ${#1} - 4`
+			dirName=${item:$beginPos:$endPos}
+			# 写入目录文件
+			if	[ &#34;$dirName&#34; != &#39;README&#39; ]
+			then
+				echo ${item}
+				echo &#34;$3&#43; [$dirName]($2/$dirName.md)&#34; &gt;&gt; docs/SUMMARY.md
+			fi
+		fi
+	done
+}
+
+baseReader(){
+    # 需要另外新开一个分类
+	special_tags=(&#34;VDE相关&#34; &#34;云授权平台&#34;)
+    regex=$(IFS=&#39;|&#39;; echo &#34;${special_tags[*]}&#34;)
+	special_dirs=()
+
+	# 读取当前路径
+	dirs=&#34;${PWD}/docs/&#34;
+	echo &#34;- [主页](README.md)&#34; &gt;  docs/SUMMARY.md
+	# 循环处理该文件夹下的文件dir
+	for dir in docs/*
+	do
+		# 截取掉dir路径名称里的 docs/
+		startPos=&#39;5&#39;
+		length=`expr ${#dir} - 5`
+		dir=${dir:$startPos:$length}
+		if echo &#34;$dir&#34; | egrep -iq &#34;$regex&#34;  ; then
+		   special_dirs&#43;=(&#34;$dir&#34;)
+		else
+		   baseWrite &#34;$dirs&#34; &#34;$dir&#34;
+		fi
+	done
+	
+	# 处理特殊类别的文件
+	if [[ -n &#34;$special_dirs&#34; ]]; then
+	    echo $&#39;\n#\n&#39; &gt;&gt; docs/SUMMARY.md
+	fi
+	for dir in &#34;${special_dirs[@]}&#34;; do
+	    baseWrite &#34;$dirs&#34; &#34;$dir&#34;
+	done 
+	
+}
+
+baseWrite(){
+    dirs=$1
+	dir=$2
+	# 判断是否是文件夹且不是图片文件夹
+	if [ -d &#34;${dirs}/${dir}&#34; ] &amp;&amp; ! [[ &#34;${dir}&#34; =~ assets$ ]] &amp;&amp; ! [[ &#34;${dir}&#34; =~ styles$ ]] 
+	then 	
+		# 判断该文件夹是否存在README.md文件
+		if [ ! -f &#34;$dirs/$dir/README.md&#34; ]
+		then 
+			echo &#34;&#34; &gt; &#34;$dirs/$dir/README.md&#34;
+		fi
+		
+		# 写入目录文件
+		echo &#34;&#43; [$dir]($dir/README.md)&#34; &gt;&gt; docs/SUMMARY.md
+		# 处理文件夹内部的文件
+		dirReader &#34;$dirs$dir&#34; &#34;$dir&#34; &#34;  &#34;
+	# 判断该文件是否是.md结尾 并且不是SUMMARY.md 和 README.md
+	elif  [ &#34;${dir##*.}&#34; == &#39;md&#39; ] &amp;&amp; [ &#34;${dir}&#34; != &#34;SUMMARY.md&#34; ] &amp;&amp; [ &#34;${dir}&#34; != &#39;README.md&#39; ]
+	then
+			# 写入目录文件
+			echo &#34;&#43; [$dir]($dir)&#34; &gt;&gt; docs/SUMMARY.md
+	fi
+}
+
+baseReader</code>
+</pre>
+<h2 id="自定义样式-1">自定义样式</h2>
 <p><code>custom.css</code>是自定义样式文件，当对<code>GitBook</code>的某些样式不满意时，可用自定义<code>CSS</code>文件来覆盖</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="p">.</span><span class="nc">book</span> <span class="p">.</span><span class="nc">book-body</span> <span class="p">.</span><span class="nc">page-wrapper</span> <span class="p">.</span><span class="nc">page-inner</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">1200</span><span class="kt">px</span> <span class="cp">!important</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">markdown-section</span> <span class="nt">img</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">.</span><span class="nc">emoji</span><span class="o">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">max-width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">dashed</span> <span class="mh">#a9a4a4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">table</span> <span class="o">&gt;</span> <span class="nt">thead</span> <span class="o">&gt;</span> <span class="nt">tr</span> <span class="o">&gt;</span> <span class="nt">th</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="k">text-align</span><span class="p">:</span><span class="kc">center</span> <span class="cp">!important</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">markdown-section</span> <span class="nt">code</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">class</span><span class="o">^=</span><span class="s2">&#34;lang-&#34;</span><span class="o">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">padding</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mf">.85</span><span class="kt">em</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#c7254e</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">small</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">80</span><span class="kt">%</span> <span class="cp">!important</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nt">section</span>  <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">width</span><span class="p">:</span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h1</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#2674BA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h2</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#0099CC</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h3</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#F77A0B</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h4</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#662D91</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h5</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#444444</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">th</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#2674BA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="gitbook配置文件">GitBook配置文件</h2>
+
+<pre class="line-numbers language-css ">
+<code>.book .book-body .page-wrapper .page-inner {
+  max-width: 1200px !important;
+}
+
+.markdown-section img:not(.emoji) {
+    max-width: 100%;
+    border: 1px dashed #a9a4a4;
+}
+
+table &gt; thead &gt; tr &gt; th {
+   text-align:center !important;
+}
+
+
+.markdown-section code:not([class^=&#34;lang-&#34;]) {
+    padding: 3px 5px;
+    margin: 0;
+    font-size: .85em;
+    color: #c7254e;
+    border-radius: 4px;
+}
+
+small {
+    font-size: 80% !important;
+}
+
+section  {
+    width:100%;
+}
+h1 {
+  color: #2674BA;
+}
+h2 {
+  color: #0099CC;
+}
+h3 {
+  color: #F77A0B;
+}
+h4 {
+  color: #662D91;
+}
+h5 {
+  color: #444444;
+}
+th {
+  background-color: #2674BA;
+  color: white;
+}</code>
+</pre>
+<h2 id="gitbook配置文件">GitBook配置文件</h2>
 <p><code>book.js</code>是<code>GitBook</code>的配置文件，包含全局配置与各种插件</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// markdown文档所在路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;./docs&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 项目标题
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;xxxxx平台文档&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 版本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">gitbook</span><span class="o">:</span> <span class="s1">&#39;3.2.3&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">language</span><span class="o">:</span> <span class="s1">&#39;zh-hans&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 插件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;-highlight&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;prism-codetab-fox&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;advanced-emoji&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;mermaid-fox&#39;</span><span class="p">,</span> <span class="c1">// 图表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;graph&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;flowchart-fox&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;chart&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;popup&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;accordion&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;katex&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;-search&#39;</span><span class="p">,</span> <span class="c1">//搜索
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;search-pro&#39;</span><span class="p">,</span> <span class="c1">//中文搜索
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;hide-element&#39;</span><span class="p">,</span> <span class="c1">//元素隐藏
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;-lunr&#39;</span><span class="p">,</span> <span class="c1">//索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;chapter-fold&#39;</span><span class="p">,</span> <span class="c1">//导航目录折叠
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="c1">//代码复制按钮
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;splitter&#39;</span><span class="p">,</span> <span class="c1">//侧边栏宽度可调节
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;expandable-chapters-small&#39;</span><span class="p">,</span> <span class="c1">//目录收起
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;tbfed-pagefooter&#39;</span><span class="p">,</span> <span class="c1">//页面添加页脚
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;ancre-navigation&#39;</span><span class="p">,</span> <span class="c1">//页内导航回到顶部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;-sharing&#39;</span><span class="p">,</span> <span class="s1">&#39;sharing-plus&#39;</span><span class="p">,</span> <span class="c1">//分享链接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;theme-comscore&#39;</span><span class="p">,</span> <span class="c1">//主题
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;favicon&#39;</span><span class="p">,</span> <span class="c1">//图标
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;flexible-alerts&#39;</span> <span class="c1">// 警告
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 插件配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">pluginsConfig</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;prism&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;css&#39;</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">                <span class="s1">&#39;prismjs/themes/prism-solarizedlight.css&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">],</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;lang&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;dockerfile&#34;</span><span class="o">:</span> <span class="s2">&#34;docker&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">},</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ignore&#34;</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;mermaid&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;eval-js&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;hide-element&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;elements&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.gitbook-link&#39;</span><span class="p">]</span> <span class="c1">//需要隐藏的元素，可以通过浏览网页找到该class
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;tbfed-pagefooter&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;copyright&#39;</span><span class="o">:</span> <span class="s1">&#39;Copyright &amp;copy xxx.com 2023-2033&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;modify_label&#39;</span><span class="o">:</span> <span class="s1">&#39;修订时间：&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;modify_format&#39;</span><span class="o">:</span> <span class="s1">&#39;YYYY-MM-DD HH:mm:ss&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;sharing&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s1">&#39;all&#39;</span><span class="o">:</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;chart&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;type&#34;</span><span class="o">:</span> <span class="s2">&#34;c3&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;chapter-fold&#34;</span><span class="o">:</span> <span class="p">{},</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;favicon&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;shortcut&#34;</span><span class="o">:</span> <span class="s2">&#34;/favicon.ico&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;bookmark&#34;</span><span class="o">:</span> <span class="s2">&#34;/favicon.ico&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;flowchart&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;arrow-end&#34;</span><span class="o">:</span> <span class="s2">&#34;block&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;element-color&#34;</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;white&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;flowstate&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;approved&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#58C4A3&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-size&#34;</span><span class="o">:</span> <span class="mi">12</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;current&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#008080&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-color&#34;</span><span class="o">:</span> <span class="s2">&#34;white&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-weight&#34;</span><span class="o">:</span> <span class="s2">&#34;bold&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;future&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#8A624A&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;success&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#0B6623&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;invalid&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#6c5696&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;past&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#CCCCCC&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-size&#34;</span><span class="o">:</span> <span class="mi">12</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;select&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#E1AD01&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-size&#34;</span><span class="o">:</span> <span class="mi">12</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;rejected&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#C45879&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-size&#34;</span><span class="o">:</span> <span class="mi">12</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;request&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#569656&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s1">&#39;yellowgreen&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;yellowgreen&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s1">&#39;failed&#39;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#800020&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">},</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;font-color&#34;</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;font-size&#34;</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;line-color&#34;</span><span class="o">:</span> <span class="s2">&#34;black&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;line-length&#34;</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;line-width&#34;</span><span class="o">:</span> <span class="mf">1.3</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;scale&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;symbols&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;end&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;class&#34;</span><span class="o">:</span> <span class="s2">&#34;end-element&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-color&#34;</span><span class="o">:</span> <span class="s2">&#34;white&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-weight&#34;</span><span class="o">:</span> <span class="s2">&#34;bold&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">},</span>
-</span></span><span class="line"><span class="cl">                <span class="s2">&#34;start&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;fill&#34;</span><span class="o">:</span> <span class="s2">&#34;#8c2106&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-color&#34;</span><span class="o">:</span> <span class="s2">&#34;white&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;font-weight&#34;</span><span class="o">:</span> <span class="s2">&#34;bold&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">},</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;text-margin&#34;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;width&#34;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;x&#34;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;y&#34;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;yes-text&#34;</span><span class="o">:</span> <span class="s2">&#34;是&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;no-text&#34;</span><span class="o">:</span> <span class="s2">&#34;否&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">variables</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;styles&#34;</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="s2">&#34;website&#34;</span><span class="o">:</span> <span class="s2">&#34;./styles/website.css&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="footnotes" role="doc-endnotes">
+
+<pre class="line-numbers language-javascript ">
+<code>module.exports = {
+    // markdown文档所在路径
+    root: &#39;./docs&#39;,
+    // 项目标题
+    title: &#39;xxxxx平台文档&#39;,
+    // 版本
+    gitbook: &#39;3.2.3&#39;,
+    language: &#39;zh-hans&#39;,
+    // 插件
+    plugins: [
+        &#39;-highlight&#39;,
+        &#39;prism-codetab-fox&#39;,
+        &#39;advanced-emoji&#39;,
+        &#39;mermaid-fox&#39;, // 图表
+        &#39;graph&#39;,
+        &#39;flowchart-fox&#39;,
+        &#39;chart&#39;,
+        &#39;popup&#39;,
+        &#39;accordion&#39;,
+        &#39;katex&#39;,
+        &#39;-search&#39;, //搜索
+        &#39;search-pro&#39;, //中文搜索
+        &#39;hide-element&#39;, //元素隐藏
+        &#39;-lunr&#39;, //索引
+        &#39;chapter-fold&#39;, //导航目录折叠
+        &#39;code&#39;, //代码复制按钮
+        &#39;splitter&#39;, //侧边栏宽度可调节
+        &#39;expandable-chapters-small&#39;, //目录收起
+        &#39;tbfed-pagefooter&#39;, //页面添加页脚
+        &#39;ancre-navigation&#39;, //页内导航回到顶部
+        &#39;-sharing&#39;, &#39;sharing-plus&#39;, //分享链接
+        &#39;theme-comscore&#39;, //主题
+        &#39;favicon&#39;, //图标
+        &#39;flexible-alerts&#39; // 警告
+    ],
+    // 插件配置
+    pluginsConfig: {
+        &#39;prism&#39;: {
+            &#39;css&#39;: [
+                &#39;prismjs/themes/prism-solarizedlight.css&#39;
+            ],
+            &#34;lang&#34;: {
+                &#34;dockerfile&#34;: &#34;docker&#34;
+            },
+            &#34;ignore&#34;: [
+                &#34;mermaid&#34;,
+                &#34;eval-js&#34;
+            ]
+        },
+        &#39;hide-element&#39;: {
+            &#39;elements&#39;: [&#39;.gitbook-link&#39;] //需要隐藏的元素，可以通过浏览网页找到该class
+        },
+        &#39;tbfed-pagefooter&#39;: {
+            &#39;copyright&#39;: &#39;Copyright &amp;copy xxx.com 2023-2033&#39;,
+            &#39;modify_label&#39;: &#39;修订时间：&#39;,
+            &#39;modify_format&#39;: &#39;YYYY-MM-DD HH:mm:ss&#39;
+        },
+        &#39;sharing&#39;: {
+            &#39;all&#39;: []
+        },
+        &#34;chart&#34;: {
+            &#34;type&#34;: &#34;c3&#34;
+        },
+        &#34;chapter-fold&#34;: {},
+        &#34;favicon&#34;: {
+            &#34;shortcut&#34;: &#34;/favicon.ico&#34;,
+            &#34;bookmark&#34;: &#34;/favicon.ico&#34;
+        },
+        &#39;flowchart&#39;: {
+            &#34;arrow-end&#34;: &#34;block&#34;,
+            &#34;element-color&#34;: &#34;black&#34;,
+            &#34;fill&#34;: &#34;white&#34;,
+            &#34;flowstate&#34;: {
+                &#34;approved&#34;: {
+                    &#34;fill&#34;: &#34;#58C4A3&#34;,
+                    &#34;font-size&#34;: 12
+                },
+                &#34;current&#34;: {
+                    &#34;fill&#34;: &#34;#008080&#34;,
+                    &#34;font-color&#34;: &#34;white&#34;,
+                    &#34;font-weight&#34;: &#34;bold&#34;
+                },
+                &#34;future&#34;: {
+                    &#34;fill&#34;: &#34;#8A624A&#34;
+                },
+                &#34;success&#34;: {
+                    &#34;fill&#34;: &#34;#0B6623&#34;
+                },
+                &#34;invalid&#34;: {
+                    &#34;fill&#34;: &#34;#6c5696&#34;
+                },
+                &#34;past&#34;: {
+                    &#34;fill&#34;: &#34;#CCCCCC&#34;,
+                    &#34;font-size&#34;: 12
+                },
+                &#34;select&#34;: {
+                    &#34;fill&#34;: &#34;#E1AD01&#34;,
+                    &#34;font-size&#34;: 12
+                },
+                &#34;rejected&#34;: {
+                    &#34;fill&#34;: &#34;#C45879&#34;,
+                    &#34;font-size&#34;: 12
+                },
+                &#34;request&#34;: {
+                    &#34;fill&#34;: &#34;#569656&#34;
+                },
+                &#39;yellowgreen&#39;: {
+                    &#34;fill&#34;: &#34;yellowgreen&#34;
+                },
+                &#39;failed&#39;: {
+                    &#34;fill&#34;: &#34;#800020&#34;
+                }
+            },
+            &#34;font-color&#34;: &#34;black&#34;,
+            &#34;font-size&#34;: 14,
+            &#34;line-color&#34;: &#34;black&#34;,
+            &#34;line-length&#34;: 50,
+            &#34;line-width&#34;: 1.3,
+            &#34;scale&#34;: 1,
+            &#34;symbols&#34;: {
+                &#34;end&#34;: {
+                    &#34;class&#34;: &#34;end-element&#34;,
+                    &#34;font-color&#34;: &#34;white&#34;,
+                    &#34;font-weight&#34;: &#34;bold&#34;
+                },
+                &#34;start&#34;: {
+                    &#34;fill&#34;: &#34;#8c2106&#34;,
+                    &#34;font-color&#34;: &#34;white&#34;,
+                    &#34;font-weight&#34;: &#34;bold&#34;
+                }
+            },
+            &#34;text-margin&#34;: 10,
+            &#34;width&#34;: 1,
+            &#34;x&#34;: 0,
+            &#34;y&#34;: 0,
+            &#34;yes-text&#34;: &#34;是&#34;,
+            &#34;no-text&#34;: &#34;否&#34;
+        }
+    },
+    variables: {
+        &#34;styles&#34;: {
+            &#34;website&#34;: &#34;./styles/website.css&#34;,
+        }
+    }
+};</code>
+</pre>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
@@ -1870,44 +1312,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -57,7 +57,7 @@
   <meta itemprop="description" content="记录如何在KubeSphere的流水线中下载构建具有子模块的项目">
   <meta itemprop="datePublished" content="2023-06-17T14:27:13+08:00">
   <meta itemprop="dateModified" content="2023-06-17T14:27:13+08:00">
-  <meta itemprop="wordCount" content="1488">
+  <meta itemprop="wordCount" content="1436">
   <meta itemprop="keywords" content="devops,jenkins,git,kubesphere,submodule,子模块">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在KubeSphere的流水线中下载构建具有子模块的项目">
@@ -71,6 +71,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -196,49 +203,30 @@
 <p>在没有子模块时，自己是直接通过<code>KubeSphere</code>的图形界面操作，类似下图，只需根据实际情况填入必要的参数保存即可。</p>
 <p><img src="/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-git-checkout-config.png" alt="利用KubeSphere图形界面配置Git下载" title="利用KubeSphere图形界面配置Git下载"></p>
 <p>之后<code>KubeSphere</code>会自动生成对应的<code>Jenkins</code>代码：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">    <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-account&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nl">branch:</span> <span class="s1">&#39;$BRANCH_NAME&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>可以看到生成的代码是通过调用<code>Jekins</code>中的<code>git</code>方法封装实现的，而不是原始的<code>git clone xxx</code>。</p>
+
+<pre class="line-numbers language-groovy ">
+<code>stage(&#39;拉取代码&#39;) {
+    agent none
+    steps {
+        git(credentialsId: &#39;gitlab-account&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;,
+            branch: &#39;$BRANCH_NAME&#39;, changelog: true, poll: false)
+    }
+}</code>
+</pre>
+<p>可以看到生成的代码是通过调用<code>Jekins</code>中的<code>git</code>方法封装实现的，而不是原始的<code>git clone xxx</code>。</p>
 <h1 id="有子模块时">有子模块时</h1>
 <p>前述pipeline代码在没有submodules时能正常工作，但遇到有submodules的工程时，无法将其对应的子模块下载下来导致在后续的代码编译阶段出错。</p>
 <p>最开始自己参考的是<a href="https://stackoverflow.com/questions/3796927/how-do-i-git-clone-a-repo-including-its-submodules"><strong>How do I git clone a repo, including its submodules</strong></a>中<code>--recurse-submodules</code>标识，想直接通过<code>git</code>命令直接下载，类似代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">    <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;git clone --recurse-submodules -j8 http://gitlab.xxx.com/lucumt-group/system.git	&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>实际运行后很快发现问题：由于<code>Gitlab</code>需要授权访问导致请求被拒绝！可之前的为啥好使？因为之前的是通过<code>git</code>函数基于token的方式访问的，但直接在命令行中通过<code>git</code>命令访问的话，又没法使用token，而每次<code>git clone</code>时手工输入用户密码又很不方便，怎么办？</p>
+
+<pre class="line-numbers language-groovy ">
+<code>stage(&#39;拉取代码&#39;) {
+    agent none
+    steps {
+        sh &#39;&#39;&#39;git clone --recurse-submodules -j8 http://gitlab.xxx.com/lucumt-group/system.git	&#39;&#39;&#39;
+    }
+}</code>
+</pre>
+<p>实际运行后很快发现问题：由于<code>Gitlab</code>需要授权访问导致请求被拒绝！可之前的为啥好使？因为之前的是通过<code>git</code>函数基于token的方式访问的，但直接在命令行中通过<code>git</code>命令访问的话，又没法使用token，而每次<code>git clone</code>时手工输入用户密码又很不方便，怎么办？</p>
 <p>对<code>KubeSphere</code>和<code>Jenkins</code>进行深入研究，并结合实际使用流程后，确定了如下考量点：</p>
 <ol>
 <li>出于简化的考虑，<code>Gitlab</code>的用户名和密码不能每次都输入，故只能用原来的token方式</li>
@@ -248,61 +236,34 @@
 <p>接下来基于2和3分别说明对应的实现。</p>
 <h2 id="分批下载">分批下载</h2>
 <p>既然没有submodules时直接下载没问题，那将子模块也当成一个独立的<code>Gitlab</code>工程(事实就是这样)再次复用之前的代码去下载，之后将其移动到对应的位置不就行了吗？有问题没，完全没有问题！相关代码实现如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">    <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dir</span><span class="o">(</span><span class="s1">&#39;system&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;$BRANCH_NAME&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">dir</span><span class="o">(</span><span class="s1">&#39;module1&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/module_1.git&#39;</span><span class="o">,</span> 
-</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;$MODULE_BRANCH_1&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">dir</span><span class="o">(</span><span class="s1">&#39;module2&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/module_2.git&#39;</span><span class="o">,</span> 
-</span></span><span class="line"><span class="cl">                <span class="nl">branch:</span> <span class="s1">&#39;$MODULE_BRANCH_2&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;rm -rf system/module_1 system/module_2
-</span></span></span><span class="line"><span class="cl"><span class="s1">			mv module1 system/
-</span></span></span><span class="line"><span class="cl"><span class="s1">			mv module2 system/
-</span></span></span><span class="line"><span class="cl"><span class="s1">			&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此种方式实现起来很简单，但存在以下缺陷：</p>
+
+<pre class="line-numbers language-groovy ">
+<code>stage(&#39;拉取代码&#39;) {
+    agent none
+    steps {
+        dir(&#39;system&#39;) {
+            git(credentialsId: &#39;gitlab-token&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;,
+                branch: &#39;$BRANCH_NAME&#39;, changelog: true, poll: false)
+        }
+
+        dir(&#39;module1&#39;) {
+            git(credentialsId: &#39;gitlab-token&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/module_1.git&#39;, 
+                branch: &#39;$MODULE_BRANCH_1&#39;, changelog: true, poll: false)
+        }
+
+        dir(&#39;module2&#39;) {
+            git(credentialsId: &#39;gitlab-token&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/module_2.git&#39;, 
+                branch: &#39;$MODULE_BRANCH_2&#39;, changelog: true, poll: false)
+        }
+
+        sh &#39;&#39;&#39;rm -rf system/module_1 system/module_2
+			mv module1 system/
+			mv module2 system/
+			&#39;&#39;&#39;
+    }
+}</code>
+</pre>
+<p>此种方式实现起来很简单，但存在以下缺陷：</p>
 <ol>
 <li>每个子工程都需要单独的配置与单独下载，工作量增加</li>
 <li>每个子工程的分支需要手工指定，无法进行原生关联，增加了复杂度</li>
@@ -310,43 +271,25 @@
 </ol>
 <h2 id="递归下载">递归下载</h2>
 <p>基于<code>Jenkins</code>中的<a href="https://www.jenkins.io/doc/pipeline/steps/params/gitscm/"><strong>GitSCM</strong></a>，通过此种方式可以在下载主工程时将其附带的子模块功能一并下载下来，同时还能确保子模块的分支也是正确的，不需要显示指定，相对于前一种方式更简洁，最终代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">    <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">checkout</span><span class="o">([</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;GitSCM&#39;</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                  <span class="nl">branches:</span> <span class="o">[[</span><span class="nl">name:</span> <span class="s1">&#39;$BRANCH_NAME&#39;</span><span class="o">]],</span>
-</span></span><span class="line"><span class="cl">                  <span class="nl">doGenerateSubmoduleConfigurations:</span> <span class="kc">false</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                  <span class="nl">extensions:</span> <span class="o">[[</span><span class="n">$class</span><span class="o">:</span> <span class="s1">&#39;SubmoduleOption&#39;</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                <span class="nl">disableSubmodules:</span> <span class="kc">false</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                <span class="nl">parentCredentials:</span> <span class="kc">true</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                <span class="nl">recursiveSubmodules:</span> <span class="kc">true</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                <span class="nl">reference:</span> <span class="s1">&#39;&#39;</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                <span class="nl">trackingSubmodules:</span> <span class="kc">false</span><span class="o">]],</span> 
-</span></span><span class="line"><span class="cl">                  <span class="nl">userRemoteConfigs:</span> <span class="o">[[</span><span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;</span><span class="o">,</span><span class="nl">credentialsId:</span><span class="s1">&#39;gitlab-token&#39;</span><span class="o">]]])</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>在上述代码中重点是通过<code>recursiveSubmodules</code>来递归下载子模块，通过<code>parentCredentials</code>来使用父模块下载时使用的token。</p>
+
+<pre class="line-numbers language-groovy ">
+<code>stage(&#39;拉取代码&#39;) {
+    agent none
+    steps {
+        checkout([$class: &#39;GitSCM&#39;,
+                  branches: [[name: &#39;$BRANCH_NAME&#39;]],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [[$class: &#39;SubmoduleOption&#39;,
+                                disableSubmodules: false,
+                                parentCredentials: true,
+                                recursiveSubmodules: true,
+                                reference: &#39;&#39;,
+                                trackingSubmodules: false]], 
+                  userRemoteConfigs: [[url: &#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;,credentialsId:&#39;gitlab-token&#39;]]])
+    }
+}</code>
+</pre>
+<p>在上述代码中重点是通过<code>recursiveSubmodules</code>来递归下载子模块，通过<code>parentCredentials</code>来使用父模块下载时使用的token。</p>
 <p>需要注意的是截止本文写作时<code>KubeSphere v3.3.1</code>不支持此种方式的图形化编辑，当采用图形化编辑时会出现雷系如下界面，没有正确的展示出实际配置的代码，此时若再次保存，会导致之前的配置丢失，故在此种方式下不能使用图形化方式对其进行二次修改。</p>
 <p><img src="/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-gitscm-checkout-config.png" alt="GitSCM在KubeSphere图形化编辑时的界面" title="GitSCM在KubeSphere图形化编辑时的界面"></p>
     </div>
@@ -505,44 +448,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="简要介绍自己在使用kubesphere过程中由于错误的配置导致cpu资源紧张无法创建新节点的问题">
   <meta itemprop="datePublished" content="2022-11-11T18:19:12+08:00">
   <meta itemprop="dateModified" content="2022-11-11T18:19:12+08:00">
-  <meta itemprop="wordCount" content="1227">
+  <meta itemprop="wordCount" content="1209">
   <meta itemprop="keywords" content="kubernetes,kubesphere">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="由于k8s中的错误配置导致无法创建新节点">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -190,21 +197,14 @@
 <p><img src="/blog_img/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/kubectl-describe-node.png" alt="查看k8s节点信息" title="查看k8s节点信息"></p>
 <p>在上图中可发现相关节点汇总后的CPU和内存占用的百分比非常大，其中CPU在Requests部分占比为84%，由于Linux系统自身运行和运行<code>Kubesphere</code>与<code>Kubernetes</code>都需要占用一定的CPU资源，从而导致当<code>Kubersphere</code>中部署的项目超过一定数量时，Linux系统无法给<code>Kubernetes</code>分配足够的CPU资源导致部署失败。至此，问题的表面原因找出来了。</p>
 <p>进一步分析上面的问题，自己觉得很好奇的是为啥Requests部分占用的资源，自己在对应的<code>YAML</code>文件中压根就没指定Requests相关的参数，检查代码发现Limits配置的值比较大</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">500m</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2000Mi</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>同时基于<code>kubectl describe node</code>发现相关节点的Requests和Limits的值都相同，猜测是否<code>Kubernetes</code>默认将Ruquests的值设置为与Limits的值相同。</p>
+
+<pre class="line-numbers language-yaml ">
+<code>resources: 
+  limits: 
+    cpu: 500m
+    memory: 2000Mi</code>
+</pre>
+<p>同时基于<code>kubectl describe node</code>发现相关节点的Requests和Limits的值都相同，猜测是否<code>Kubernetes</code>默认将Ruquests的值设置为与Limits的值相同。</p>
 <p><img src="/blog_img/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/kubectl-nodes-requests-and-limits.png" alt="k8s节点limits和requests相同" title="k8s节点limits和requests相同"></p>
 <p>在<a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">Kubernetes</a>官网发现如下说明</p>
 <blockquote>
@@ -212,41 +212,24 @@
 </blockquote>
 <p>上述文字说明当我们在<code>YAML</code>文件中只设置了Limits但是没有指定Requests，则<code>Kubernetes</code>会将Request的值默认设置为与<code>Limits</code>相同，从而导致CPU和内存资源占用都很高，至此问题根源找到！</p>
 <p>解决的方式也很简单，要么移除掉Limits，让<code>Kubernetes</code>根据Linux系统资源和节点状况给我们动态的分配节点，或者同时指定Requests和Limits即可。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 屏蔽此部分代码</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#resources: </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#  limits: </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#    cpu: 500m</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#    memory: 2000Mi </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 或者显示配置request和limits</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">limits</span><span class="p">:</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">500m</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2000Mi</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">requests</span><span class="p">:</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l">20m</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">64Mi</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>经验教训： 需要对自己项目中的代码要有更深入的理解，尤其是配置文件，要做到理解每一行的作用，不能简单的复制别人的代码。</p>
+
+<pre class="line-numbers language-yaml ">
+<code># 屏蔽此部分代码
+#resources: 
+#  limits: 
+#    cpu: 500m
+#    memory: 2000Mi 
+
+# 或者显示配置request和limits
+resources: 
+  limits: 
+    cpu: 500m
+    memory: 2000Mi
+  requests: 
+    cpu: 20m
+    memory: 64Mi</code>
+</pre>
+<p>经验教训： 需要对自己项目中的代码要有更深入的理解，尤其是配置文件，要做到理解每一行的作用，不能简单的复制别人的代码。</p>
 <hr>
 <p>参考文档：</p>
 <ul>
@@ -412,44 +395,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

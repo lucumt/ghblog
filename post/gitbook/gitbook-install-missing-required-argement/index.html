@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -54,7 +54,7 @@
   <meta itemprop="description" content="基于CSDN博文，记录解决Gitbook安装过程中出现的Error: Missing required argument #1">
   <meta itemprop="datePublished" content="2023-10-13T19:10:56+08:00">
   <meta itemprop="dateModified" content="2023-10-13T19:10:56+08:00">
-  <meta itemprop="wordCount" content="502">
+  <meta itemprop="wordCount" content="475">
   <meta itemprop="keywords" content="gitbook install,gitbook plugin,npm">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[非原创]解决Gitbook安装过程中出现的Error: Missing required argument #1错误">
@@ -68,6 +68,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -190,78 +197,45 @@
 <p>通过<code>gitbook install</code> 进行相关插件的安装。</p>
 <h1 id="问题描述">问题描述</h1>
 <p>通过<code>gitbook install</code> 进行相关插件的安装，终端出现类似如下错误导致安装过程失败</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">D:<span class="se">\c</span>ode<span class="se">\g</span>itbook-doc&gt;gitbook install
-</span></span><span class="line"><span class="cl">info: installing <span class="m">24</span> plugins using npm@3.9.2
-</span></span><span class="line"><span class="cl">info:
-</span></span><span class="line"><span class="cl">info: installing plugin <span class="s2">&#34;mermaid-fox&#34;</span>
-</span></span><span class="line"><span class="cl">info: install plugin <span class="s2">&#34;mermaid-fox&#34;</span> <span class="o">(</span>*<span class="o">)</span> from NPM with version 0.0.3
-</span></span><span class="line"><span class="cl">fetchMetadata -&gt; network  <span class="se">\ </span><span class="p">|</span><span class="c1">##################-----------------------------------------------------------------------|</span>
-</span></span><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\n</span>ode_modules<span class="se">\a</span>proba<span class="se">\i</span>ndex.js:25
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span>args<span class="o">[</span>ii<span class="o">]</span> <span class="o">==</span> null<span class="o">)</span> throw missingRequiredArg<span class="o">(</span>ii<span class="o">)</span>
-</span></span><span class="line"><span class="cl">                          ^
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Error: Missing required argument <span class="c1">#1</span>
-</span></span><span class="line"><span class="cl">    at andLogAndFinish <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:31:3<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at fetchPackageMetadata <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:51:22<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at resolveWithNewModule <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\i</span>nstall<span class="se">\d</span>eps.js:490:12<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\i</span>nstall<span class="se">\d</span>eps.js:491:7
-</span></span><span class="line"><span class="cl">    at C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\n</span>ode_modules<span class="se">\i</span>ferr<span class="se">\i</span>ndex.js:13:50
-</span></span><span class="line"><span class="cl">    at C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:37:12
-</span></span><span class="line"><span class="cl">    at addRequestedAndFinish <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:67:5<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at returnAndAddMetadata <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:121:7<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at pickVersionFromRegistryDocument <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\l</span>ib<span class="se">\f</span>etch-package-metadata.js:138:20<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    at C:<span class="se">\U</span>sers<span class="se">\y</span>unqiang.lu<span class="se">\.</span>gitbook<span class="se">\v</span>ersions<span class="se">\3</span>.2.3<span class="se">\n</span>ode_modules<span class="se">\n</span>pm<span class="se">\n</span>ode_modules<span class="se">\i</span>ferr<span class="se">\i</span>ndex.js:13:50 <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  code: <span class="s1">&#39;EMISSINGARG&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="原因分析">原因分析</h1>
+
+<pre class="line-numbers language-powershell ">
+<code>D:\code\gitbook-doc&gt;gitbook install
+info: installing 24 plugins using npm@3.9.2
+info:
+info: installing plugin &#34;mermaid-fox&#34;
+info: install plugin &#34;mermaid-fox&#34; (*) from NPM with version 0.0.3
+fetchMetadata -&gt; network  \ |##################-----------------------------------------------------------------------|
+C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\node_modules\aproba\index.js:25
+    if (args[ii] == null) throw missingRequiredArg(ii)
+                          ^
+
+Error: Missing required argument #1
+    at andLogAndFinish (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:31:3)
+    at fetchPackageMetadata (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:51:22)
+    at resolveWithNewModule (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\install\deps.js:490:12)
+    at C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\install\deps.js:491:7
+    at C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\node_modules\iferr\index.js:13:50
+    at C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:37:12
+    at addRequestedAndFinish (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:67:5)
+    at returnAndAddMetadata (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:121:7)
+    at pickVersionFromRegistryDocument (C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\lib\fetch-package-metadata.js:138:20)
+    at C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\node_modules\iferr\index.js:13:50 {
+  code: &#39;EMISSINGARG&#39;
+}</code>
+</pre>
+<h1 id="原因分析">原因分析</h1>
 <p>原作者不知道，本人也不知道，期待有大神能给出具体原因分析。</p>
 <h1 id="解决方案">解决方案</h1>
 <p>需要用<code>npm</code>先手工安装对应的插件，之后再执行<code>gitbook install</code>就不会出错。</p>
 <p>以本文为例，出错的插件为<code>gitbook-plugin-mermaid-fox</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，则按照下述方式执行即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 必须先执行该指令</span>
-</span></span><span class="line"><span class="cl">npm install gitbook-plugin-mermaid-fox
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">gitbook install
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="footnotes" role="doc-endnotes">
+
+<pre class="line-numbers language-bash ">
+<code># 必须先执行该指令
+npm install gitbook-plugin-mermaid-fox
+
+gitbook install</code>
+</pre>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
@@ -422,44 +396,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

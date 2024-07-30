@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="YApi 是高效、易用、功能强大的 api 管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务1，由去哪儿网开发，本文基于为 Yapi 定制 apline 版 Docker 镜像简要说明如何将基于docker安装的Yapi与LDAP集成。">
   <meta itemprop="datePublished" content="2022-12-01T11:23:00+08:00">
   <meta itemprop="dateModified" content="2023-04-14T11:23:00+08:00">
-  <meta itemprop="wordCount" content="586">
+  <meta itemprop="wordCount" content="532">
   <meta itemprop="keywords" content="yapi,ldap,docker">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="给Yapi添加LDAP登录认证">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -179,110 +186,64 @@
 <ol>
 <li>
 <p>利用<code>docker</code>创建<a href="https://www.mongodb.com/">MongoDB</a>数据库</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--name mongo-yapi <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v <span class="nv">$PWD</span>/mongo-data:/data/db <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MONGO_INITDB_ROOT_USERNAME</span><span class="o">=</span>anoyi <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-e <span class="nv">MONGO_INITDB_ROOT_PASSWORD</span><span class="o">=</span>anoyi.com <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>mongo
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code>docker run -d \
+--name mongo-yapi \
+-v $PWD/mongo-data:/data/db \
+-e MONGO_INITDB_ROOT_USERNAME=anoyi \
+-e MONGO_INITDB_ROOT_PASSWORD=anoyi.com \
+mongo</code>
+</pre>
+</li>
 <li>
 <p>在当前目录下创建一个<code>config.json</code>文件，内容如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="s2">&#34;3000&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;adminAccount&#34;</span><span class="p">:</span> <span class="s2">&#34;admin@anoyi.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;timeout&#34;</span><span class="p">:</span><span class="mi">120000</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;db&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;servername&#34;</span><span class="p">:</span> <span class="s2">&#34;mongo&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;DATABASE&#34;</span><span class="p">:</span> <span class="s2">&#34;yapi&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;user&#34;</span><span class="p">:</span> <span class="s2">&#34;anoyi&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pass&#34;</span><span class="p">:</span> <span class="s2">&#34;anoyi.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;authSource&#34;</span><span class="p">:</span> <span class="s2">&#34;admin&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-json ">
+<code>{
+  &#34;port&#34;: &#34;3000&#34;,
+  &#34;adminAccount&#34;: &#34;admin@anoyi.com&#34;,
+  &#34;timeout&#34;:120000,
+  &#34;db&#34;: {
+    &#34;servername&#34;: &#34;mongo&#34;,
+    &#34;DATABASE&#34;: &#34;yapi&#34;,
+    &#34;port&#34;: 27017,
+    &#34;user&#34;: &#34;anoyi&#34;,
+    &#34;pass&#34;: &#34;anoyi.com&#34;,
+    &#34;authSource&#34;: &#34;admin&#34;
+  }
+}</code>
+</pre>
+</li>
 <li>
 <p>执行下述命令初始化 YAPI 数据库索引及管理员账号</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -it --rm <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--link mongo-yapi:mongo <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--entrypoint npm <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--workdir /yapi/vendors <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v <span class="nv">$PWD</span>/config.json:/yapi/config.json <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>anoyi/yapi <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>run install-server
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>若执行成功会出现下述界面</p>
+
+<pre class="line-numbers language-bash ">
+<code>docker run -it --rm \
+--link mongo-yapi:mongo \
+--entrypoint npm \
+--workdir /yapi/vendors \
+-v $PWD/config.json:/yapi/config.json \
+anoyi/yapi \
+run install-server</code>
+</pre>
+<p>若执行成功会出现下述界面</p>
 <p><img src="/blog_img/ldap/add-ldap-support-for-yapi/docker-init-yapi-db-and-index.png" alt="yapi初始化成功" title="yapi初始化成功"></p>
 </li>
 <li>
 <p>执行下述命令启动<code>yapi</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--name yapi <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--link mongo-yapi:mongo <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--workdir /yapi/vendors <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-p 3000:3000 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v <span class="nv">$PWD</span>/config.json:/yapi/config.json <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>anoyi/yapi <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>server/app.js
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行完毕后用<code>docker logs yapi</code>查看日志，若出现如下日志则表示启动成功</p>
+
+<pre class="line-numbers language-bash ">
+<code>docker run -d \
+--name yapi \
+--link mongo-yapi:mongo \
+--workdir /yapi/vendors \
+-p 3000:3000 \
+-v $PWD/config.json:/yapi/config.json \
+anoyi/yapi \
+server/app.js</code>
+</pre>
+<p>执行完毕后用<code>docker logs yapi</code>查看日志，若出现如下日志则表示启动成功</p>
 <p><img src="/blog_img/ldap/add-ldap-support-for-yapi/docker-start-success-log.png" alt="yapi启动成功" title="yapi启动成功"></p>
 </li>
 <li>
@@ -295,53 +256,30 @@
 </li>
 <li>
 <p>在<code>config.json</code>中添加<code>LDAP</code>相关的配置，之后输入<code>docker restart yapi &amp;&amp; docker logs yapi</code>重启并观察日志</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="s2">&#34;3000&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;adminAccount&#34;</span><span class="p">:</span> <span class="s2">&#34;admin@anoyi.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;timeout&#34;</span><span class="p">:</span><span class="mi">120000</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;db&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;servername&#34;</span><span class="p">:</span> <span class="s2">&#34;mongo&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;DATABASE&#34;</span><span class="p">:</span> <span class="s2">&#34;yapi&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;user&#34;</span><span class="p">:</span> <span class="s2">&#34;anoyi&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pass&#34;</span><span class="p">:</span> <span class="s2">&#34;anoyi.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;authSource&#34;</span><span class="p">:</span> <span class="s2">&#34;admin&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;ldapLogin&#34;</span><span class="p">:{</span>
-</span></span><span class="line"><span class="cl">     <span class="nt">&#34;enable&#34;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="nt">&#34;server&#34;</span><span class="p">:</span> <span class="s2">&#34;ldap://10.10.xx.xxx:389&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="nt">&#34;searchDn&#34;</span><span class="p">:</span> <span class="s2">&#34;dc=xxx,dc=com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="nt">&#34;searchStandard&#34;</span><span class="p">:</span><span class="s2">&#34;uid&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="nt">&#34;usernameKey&#34;</span><span class="p">:</span><span class="s2">&#34;uid&#34;</span>
-</span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-json ">
+<code>{
+  &#34;port&#34;: &#34;3000&#34;,
+  &#34;adminAccount&#34;: &#34;admin@anoyi.com&#34;,
+  &#34;timeout&#34;:120000,
+  &#34;db&#34;: {
+    &#34;servername&#34;: &#34;mongo&#34;,
+    &#34;DATABASE&#34;: &#34;yapi&#34;,
+    &#34;port&#34;: 27017,
+    &#34;user&#34;: &#34;anoyi&#34;,
+    &#34;pass&#34;: &#34;anoyi.com&#34;,
+    &#34;authSource&#34;: &#34;admin&#34;
+  },
+  &#34;ldapLogin&#34;:{
+     &#34;enable&#34;:true,
+     &#34;server&#34;: &#34;ldap://10.10.xx.xxx:389&#34;,
+     &#34;searchDn&#34;: &#34;dc=xxx,dc=com&#34;,
+     &#34;searchStandard&#34;:&#34;uid&#34;,
+     &#34;usernameKey&#34;:&#34;uid&#34;
+   }
+}</code>
+</pre>
+</li>
 <li>
 <p>重新打开<code>yapi</code>，其登录页中会出现类似如下的<code>LDAP</code>选项，至此，操作完成！</p>
 <p><img src="/blog_img/ldap/add-ldap-support-for-yapi/yapi-ldap-login-page.png" alt="yapi支持ldap登录" title="yapi支持ldap登录"></p>
@@ -509,44 +447,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

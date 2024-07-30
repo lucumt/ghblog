@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -58,7 +58,7 @@
 这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了Thread.sleep()来实现。 但此时编译器或IDE会立即提示你没有处理非运行时异常 InterruptedException。那么，什么是InterruptedException,为什么我们要必须处理它呢？">
   <meta itemprop="datePublished" content="2018-12-15T11:57:36+08:00">
   <meta itemprop="dateModified" content="2018-12-15T11:57:36+08:00">
-  <meta itemprop="wordCount" content="4733">
+  <meta itemprop="wordCount" content="4617">
   <meta itemprop="keywords" content="Java多线程">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]如何处理InterruptedException">
@@ -73,6 +73,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -225,293 +232,159 @@
 <h2 id="处理interruptedexception">处理InterruptedException</h2>
 <p>如果抛出<code>InterruptedException</code>异常意味着该方法是一个阻塞方法，那么调用一个阻塞方法意味着调用方法也是阻塞方法，我们应该有一个处理<code>InterruptedException</code>异常的策略。通过最简单的策略是直接抛出<code>InterruptedException</code>，如代码清单1中puskTask()和getTask()方法所示,这样做即可使方法响应中断，并且通常只需要在throws字句中添加<code>InterruptedException</code>。</p>
 <p>代码清单1： 通过向调用者传递<code>InterruptedException</code>来避免捕获</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TaskQueue</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_TASKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1000</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedBlockingQueue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="p">(</span><span class="n">MAX_TASKS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">putTask</span><span class="p">(</span><span class="n">Task</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">r</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">getTask</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>有时在传播异常之前需要进行一些清理，在这种情况下，你可以捕获<code>InterruptedException</code>，执行清理然后重新抛出异常。代码清单2，一种用于匹配在线游戏服务中玩家的机制展示了这种技术。<code>matchPlayers()</code>方法等待两个玩家到达后就开始一个新的游戏，如果在一个玩家到达后但在第二个玩家到达之前被中断，它会在重新抛出<code>InterruptedException</code>异常之前将该玩家放回队列，这样玩家的请求就不会丢失。</p>
+
+<pre class="line-numbers language-java ">
+<code>public class TaskQueue {
+    private static final int MAX_TASKS = 1000;
+ 
+    private BlockingQueue&lt;Task&gt; queue 
+            = new LinkedBlockingQueue&lt;Task&gt;(MAX_TASKS);
+ 
+    public void putTask(Task r) throws InterruptedException { 
+        queue.put(r);
+    }
+ 
+    public Task getTask() throws InterruptedException { 
+        return queue.take();
+    }
+}</code>
+</pre>
+<p>有时在传播异常之前需要进行一些清理，在这种情况下，你可以捕获<code>InterruptedException</code>，执行清理然后重新抛出异常。代码清单2，一种用于匹配在线游戏服务中玩家的机制展示了这种技术。<code>matchPlayers()</code>方法等待两个玩家到达后就开始一个新的游戏，如果在一个玩家到达后但在第二个玩家到达之前被中断，它会在重新抛出<code>InterruptedException</code>异常之前将该玩家放回队列，这样玩家的请求就不会丢失。</p>
 <p>代码清单2: 在重新抛出<code>InterruptedException</code>之前基于任务进行特定清理</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PlayerMatcher</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PlayerSource</span><span class="w"> </span><span class="n">players</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">PlayerMatcher</span><span class="p">(</span><span class="n">PlayerSource</span><span class="w"> </span><span class="n">players</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">players</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players</span><span class="p">;</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">matchPlayers</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Player</span><span class="w"> </span><span class="n">playerOne</span><span class="p">,</span><span class="w"> </span><span class="n">playerTwo</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">playerOne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">playerTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="c1">// 等两个玩家到达后开始一个新的游戏</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">playerOne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players</span><span class="p">.</span><span class="na">waitForPlayer</span><span class="p">();</span><span class="w"> </span><span class="c1">// 可能抛出InterruptedException</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">playerTwo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">players</span><span class="p">.</span><span class="na">waitForPlayer</span><span class="p">();</span><span class="w"> </span><span class="c1">// 可能抛出InterruptedException</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">startNewGame</span><span class="p">(</span><span class="n">playerOne</span><span class="p">,</span><span class="w"> </span><span class="n">playerTwo</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="c1">//如果一个玩家达到后线程被中断，将这个玩家放回队列</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">playerOne</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">players</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">playerOne</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="c1">//重新抛出异常</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="不要吞没中断">不要吞没中断</h3>
+
+<pre class="line-numbers language-java ">
+<code>public class PlayerMatcher {
+    private PlayerSource players;
+ 
+    public PlayerMatcher(PlayerSource players) { 
+        this.players = players; 
+    }
+ 
+    public void matchPlayers() throws InterruptedException { 
+        Player playerOne, playerTwo;
+         try {
+             while (true) {
+                 playerOne = playerTwo = null;
+                 // 等两个玩家到达后开始一个新的游戏
+                 playerOne = players.waitForPlayer(); // 可能抛出InterruptedException
+                 playerTwo = players.waitForPlayer(); // 可能抛出InterruptedException
+                 startNewGame(playerOne, playerTwo);
+             }
+         }
+         catch (InterruptedException e) {  
+             //如果一个玩家达到后线程被中断，将这个玩家放回队列
+             if (playerOne != null)
+                 players.addFirst(playerOne);
+             //重新抛出异常
+             throw e;
+         }
+    }
+}</code>
+</pre>
+<h3 id="不要吞没中断">不要吞没中断</h3>
 <p>有些时候抛出<code>InterruptedException</code>异常并不合适，例如在由<code>Runnable</code>定义的任务中调用一个可中断方法，在这种情形下，你不能抛出<code>InterruptedException</code>，但你也不想做其它任何事情。当阻塞方法检测到中断并抛出<code>InterruptedException</code>时，它会清除中断状态。如果捕获<code>InterruptedException</code>异常但无法重新抛出它，则应保留中断发生时的证据，以便调用堆栈上的代码可以了解中断并在必要时对其进行响应。如代码清单3所示，这个任务是通过调用<code>interrupt()</code>来 <em>重新中断(reinterrupt)</em> 当前线程完成的。每当你捕获<code>InterruptedException</code>并且不重新抛出它时，要在返回之前重新中断当前线程(即清除中断状态)。</p>
 <p>代码清单3: 捕获<code>InterruptedException</code>后恢复中断状态</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class TaskRunner implements Runnable {
-</span></span><span class="line"><span class="cl">    private BlockingQueue&lt;Task&gt; queue;
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    public TaskRunner(BlockingQueue&lt;Task&gt; queue) { 
-</span></span><span class="line"><span class="cl">        this.queue = queue; 
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    public void run() { 
-</span></span><span class="line"><span class="cl">        try {
-</span></span><span class="line"><span class="cl">             while (true) {
-</span></span><span class="line"><span class="cl">                 Task task = queue.take(10, TimeUnit.SECONDS);
-</span></span><span class="line"><span class="cl">                 task.execute();
-</span></span><span class="line"><span class="cl">             }
-</span></span><span class="line"><span class="cl">         }
-</span></span><span class="line"><span class="cl">         catch (InterruptedException e) { 
-</span></span><span class="line"><span class="cl">             //重新设置当前线程的中断状态
-</span></span><span class="line"><span class="cl">             Thread.currentThread().interrupt();
-</span></span><span class="line"><span class="cl">         }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>对于<code>InterruptedException</code>最糟糕的处理是吞没它，在捕获它之后既不重新抛出它也不重新设置当前线程的中断状态。</p>
+
+<pre class="line-numbers language- ">
+<code>public class TaskRunner implements Runnable {
+    private BlockingQueue&lt;Task&gt; queue;
+ 
+    public TaskRunner(BlockingQueue&lt;Task&gt; queue) { 
+        this.queue = queue; 
+    }
+ 
+    public void run() { 
+        try {
+             while (true) {
+                 Task task = queue.take(10, TimeUnit.SECONDS);
+                 task.execute();
+             }
+         }
+         catch (InterruptedException e) { 
+             //重新设置当前线程的中断状态
+             Thread.currentThread().interrupt();
+         }
+    }
+}</code>
+</pre>
+<p>对于<code>InterruptedException</code>最糟糕的处理是吞没它，在捕获它之后既不重新抛出它也不重新设置当前线程的中断状态。</p>
 <p>代码清单4: 吞下中断&ndash;不要这样做</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 不要这么做</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TaskRunner</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TaskRunner</span><span class="p">(</span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">Task</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="n">10</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                 </span><span class="n">task</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">swallowed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="cm">/* 不要这么做 - 相反要恢复线程的中断状态 */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>如果你无法重新抛出<code>InterruptedException</code>，不论你是否计划对中断请求进行响应，你仍然应该重新设置当前线程的中断状态，因为单个中断请求可能有多个接收人。标准线程池(<code>ThreadPoolExecutor</code>)中的工作线程实现了响应中断，因此中断线程池中运行的任务可能会同时影响到取消任务和通知执行线程当前线程池正在关闭。如果该任务吞下中断请求，则工作线程可能不会知道该中断被请求过，这可能会延迟应用程序或关闭服务。</p>
+
+<pre class="line-numbers language-java ">
+<code>// 不要这么做
+public class TaskRunner implements Runnable {
+    private BlockingQueue&lt;Task&gt; queue;
+ 
+    public TaskRunner(BlockingQueue&lt;Task&gt; queue) { 
+        this.queue = queue; 
+    }
+ 
+    public void run() { 
+        try {
+             while (true) {
+                 Task task = queue.take(10, TimeUnit.SECONDS);
+                 task.execute();
+             }
+         }
+         catch (InterruptedException swallowed) { 
+             /* 不要这么做 - 相反要恢复线程的中断状态 */
+         }
+    }
+}</code>
+</pre>
+<p>如果你无法重新抛出<code>InterruptedException</code>，不论你是否计划对中断请求进行响应，你仍然应该重新设置当前线程的中断状态，因为单个中断请求可能有多个接收人。标准线程池(<code>ThreadPoolExecutor</code>)中的工作线程实现了响应中断，因此中断线程池中运行的任务可能会同时影响到取消任务和通知执行线程当前线程池正在关闭。如果该任务吞下中断请求，则工作线程可能不会知道该中断被请求过，这可能会延迟应用程序或关闭服务。</p>
 <h2 id="实现可取消的任务">实现可取消的任务</h2>
 <p>在Java语言规范中没有任何内容可以中断任何特定语义，但在较大程序中，很难保持除了取消操作之外的任何中断语义。依赖于具体的业务活动，用户可以通过GUI或JMS、WebService服务等来请求取消操作。也可以由程序逻辑请求实现，例如，网络爬虫在检测到磁盘空间已满时自动关闭，或者并行算法可能会启动多个线程来搜索解决方案的不同区域并在其中一个找到解决方案后取消其余的。</p>
 <p>一个任务不能仅仅因为它可以取消而意味着它需要立即响应中断请求。对于通过代码循环执行的任务，通常是在每个循环中检查中断状态。根据循环执行的时间长短，在任务代码通知线程中断之前可能需要一些时间(通过调用<code>Thread.isInterrupted()</code>轮询中断中断或调用一个阻塞方法)。如果任务需要更具响应性，则可以更频繁的轮询中断状态。阻塞方法通常在进入该方法时立即轮询中断状态，如果要提高响应性，可以直接抛出<code>InterruptedException</code>异常。</p>
 <p>当你知道一个线程即将结束执行时，吞下一个中断是可接受的。只有当调用可中断方法的类是<code>Thread</code>的一部分而不是<code>Runnable</code>或通用库代码时才会出现此种情形，如代码清单5所示。它创建了一个枚举质数的线程，并且允许线程在中断时退出。这个寻找质数的循环在两个地方检查中断：一个通过轮迅while循环判断条件中的<code>isInterrupted()</code>方法，另一个则是通过调用阻塞的<code>BlockingQueue.put()</code>方法。</p>
 <p>代码清单5: 在知道线程将结束时可以吞下中断</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PrimeProducer</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">PrimeProducer</span><span class="p">(</span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">BigInteger</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">.</span><span class="na">ONE</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">isInterrupted</span><span class="p">())</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">queue</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">nextProbablePrime</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">consumed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="cm">/* 允许线程退出 */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cancel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">interrupt</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="非中断阻塞">非中断阻塞</h3>
+
+<pre class="line-numbers language-java ">
+<code>public class PrimeProducer extends Thread {
+    private final BlockingQueue&lt;BigInteger&gt; queue;
+ 
+    PrimeProducer(BlockingQueue&lt;BigInteger&gt; queue) {
+        this.queue = queue;
+    }
+ 
+    public void run() {
+        try {
+            BigInteger p = BigInteger.ONE;
+            while (!Thread.currentThread().isInterrupted())
+                queue.put(p = p.nextProbablePrime());
+        } catch (InterruptedException consumed) {
+            /* 允许线程退出 */
+        }
+    }
+ 
+    public void cancel() { interrupt(); }
+}</code>
+</pre>
+<h3 id="非中断阻塞">非中断阻塞</h3>
 <p>并非所有的阻塞方法都会抛出<code>InterruptedException</code>。输入流和输出流由于等待I/O操作完成而阻塞，但它们不会抛出<code>InterruptedException</code>异常，并且如果它们被中断，也不会提前返回。但在套接字I/O的情形下，如果一个线程关闭套接字，在其它线程中的阻塞I/O操作将会通过<code>SocketException</code>提早结束。java.nio包中的非阻塞I/O操作也不支持可中断的I/O操作，但可以通过关闭通道或请求唤醒<code>Selector</code>来实现类似的阻塞操作。类似的，尝试获取内部锁(进入一个同步块)不能被中断，但使用<code>ReentrantLock</code>能实现可中断的获取锁。</p>
 <h3 id="非取消任务">非取消任务</h3>
 <p>有些任务只是简单的拒绝被中断从而导致它们无法取消。但即使是不可取消的任务也应该保留中断状态，以防在调用堆栈上的代码想要在不可取消的任务完成后响应中断。代码清单6显示了一个方法等待阻塞队列直到其中某个元素可用，无论它是否被中断。为了安分守己，该方法在完成后会清除最终代码块中的中断状态，以避免剥夺调用者发出的中断请求。由于会导致无限循环而不能在该方法中恢复中断状态。(<code>BlockingQueue.take()</code>可以在调用时立即轮询中断状态，如果发现有中断状态集则立即抛出<code>InterruptedException</code>异常。)</p>
 <p>代码清单6: 非取消的任务在返回之前恢复中断状态</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">getNextTask</span><span class="p">(</span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">interrupted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">interrupted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 虽然发生中断，但是继续尝试</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">interrupted</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">interrupt</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="总结">总结</h2>
+
+<pre class="line-numbers language-java ">
+<code>public Task getNextTask(BlockingQueue&lt;Task&gt; queue) {
+    boolean interrupted = false;
+    try {
+        while (true) {
+            try {
+                return queue.take();
+            } catch (InterruptedException e) {
+                interrupted = true;
+                // 虽然发生中断，但是继续尝试
+            }
+        }
+    } finally {
+        if (interrupted)
+            Thread.currentThread().interrupt();
+    }
+}</code>
+</pre>
+<h2 id="总结">总结</h2>
 <p>你可以使用Java平台提供的协作中断机制来构建灵活的取消策略。线程活动可以决定它们是否可以取消、如何响应中断，如果立即返回会影响应用程序的完整性时，它们可以推迟中断以执行特定于任务的清理活动。即是想完全忽略代码中的中断，也要确保在捕获<code>InterruptedException</code>时恢复中断状态，并且不要重新抛出它以便调用它的代码不会被剥夺对于中断发生的感知。</p>
 <p>&lt;–翻译结束!–&gt;</p>
     </div>
@@ -681,44 +554,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

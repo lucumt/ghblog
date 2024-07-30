@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -56,7 +56,7 @@
   <meta itemprop="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
   <meta itemprop="datePublished" content="2023-01-11T11:31:45+08:00">
   <meta itemprop="dateModified" content="2023-01-11T11:31:45+08:00">
-  <meta itemprop="wordCount" content="1532">
+  <meta itemprop="wordCount" content="1451">
   <meta itemprop="keywords" content="Kubernetes,Linux">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
@@ -70,6 +70,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -203,217 +210,120 @@
 <p>安装过程主要参考<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，相关配置与安装步骤如下：</p>
 <h1 id="系统配置与依赖">系统配置与依赖</h1>
 <h2 id="关闭防火墙">关闭防火墙</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 关闭交换内存</span>
-</span></span><span class="line"><span class="cl">swapoff -a
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#关闭selinux</span>
-</span></span><span class="line"><span class="cl">getenforce
-</span></span><span class="line"><span class="cl">setenforce <span class="m">0</span>
-</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/^SELINUX=enforcing$/SELINUX=disabled/&#39;</span> /etc/selinux/config
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#关闭防火墙</span>
-</span></span><span class="line"><span class="cl">firewall-cmd --state 
-</span></span><span class="line"><span class="cl">systemctl stop firewalld.service 
-</span></span><span class="line"><span class="cl">systemctl disable firewalld.service 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="配置docker参数">配置docker参数</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /etc/docker/
-</span></span><span class="line"><span class="cl">vim /etc/docker/daemon.json
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;storage-driver&#34;</span>: <span class="s2">&#34;overlay2&#34;</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;registry-mirrors&#34;</span>: <span class="o">[</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;https://registry.docker-cn.com&#34;</span>,
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;http://hub-mirror.c.163.com&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">]</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;exec-opts&#34;</span>: <span class="o">[</span><span class="s2">&#34;native.cgroupdriver=systemd&#34;</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="配置内核参数">配置内核参数</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 配置网卡转发,看值是否为1</span>
-</span></span><span class="line"><span class="cl">sysctl -a <span class="p">|</span>grep <span class="s1">&#39;net.ipv4.ip_forward = 1&#39;</span>
-</span></span><span class="line"><span class="cl">sysctl -a <span class="p">|</span>grep <span class="s1">&#39;net.bridge.bridge-nf-call-iptables = 1&#39;</span>
-</span></span><span class="line"><span class="cl">sysctl -a <span class="p">|</span>grep <span class="s1">&#39;net.bridge.bridge-nf-call-ip6tables = 1&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">## 若未配置，需要执行如下</span>
-</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf
-</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.ip_forward=1
-</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-ip6tables=1
-</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-iptables=1
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sysctl -p /etc/sysctl.d/k8s.conf
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="安装docker">安装docker</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#安装相关依赖</span>
-</span></span><span class="line"><span class="cl">yum install -y yum-utils device-mapper-persistent-data lvm2 epel-release
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#添加阿里云docker-ce源</span>
-</span></span><span class="line"><span class="cl">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">yum clean all
-</span></span><span class="line"><span class="cl">yum install -y docker-ce containerd.io
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#设置docker开机自启</span>
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> docker
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#启动docker服务</span>
-</span></span><span class="line"><span class="cl">systemctl start docker
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">#查看docker信息</span>
-</span></span><span class="line"><span class="cl">docker info
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="配置container">配置container</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
-</span></span><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">systemctl restart containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="安装kubernetes">安装Kubernetes</h1>
+
+<pre class="line-numbers language-bash ">
+<code># 关闭交换内存
+swapoff -a
+
+#关闭selinux
+getenforce
+setenforce 0
+sed -i &#39;s/^SELINUX=enforcing$/SELINUX=disabled/&#39; /etc/selinux/config
+
+#关闭防火墙
+firewall-cmd --state 
+systemctl stop firewalld.service 
+systemctl disable firewalld.service </code>
+</pre>
+<h2 id="配置docker参数">配置docker参数</h2>
+
+<pre class="line-numbers language-bash ">
+<code>mkdir /etc/docker/
+vim /etc/docker/daemon.json
+
+{
+  &#34;storage-driver&#34;: &#34;overlay2&#34;,
+  &#34;registry-mirrors&#34;: [
+    &#34;https://registry.docker-cn.com&#34;,
+    &#34;http://hub-mirror.c.163.com&#34;
+  ],
+  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;]
+}</code>
+</pre>
+<h2 id="配置内核参数">配置内核参数</h2>
+
+<pre class="line-numbers language-bash ">
+<code>## 配置网卡转发,看值是否为1
+sysctl -a |grep &#39;net.ipv4.ip_forward = 1&#39;
+sysctl -a |grep &#39;net.bridge.bridge-nf-call-iptables = 1&#39;
+sysctl -a |grep &#39;net.bridge.bridge-nf-call-ip6tables = 1&#39;
+
+## 若未配置，需要执行如下
+cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward=1
+net.bridge.bridge-nf-call-ip6tables=1
+net.bridge.bridge-nf-call-iptables=1
+EOF
+
+sysctl -p /etc/sysctl.d/k8s.conf</code>
+</pre>
+<h2 id="安装docker">安装docker</h2>
+
+<pre class="line-numbers language-bash ">
+<code>#安装相关依赖
+yum install -y yum-utils device-mapper-persistent-data lvm2 epel-release
+
+#添加阿里云docker-ce源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+yum clean all
+yum install -y docker-ce containerd.io
+
+#设置docker开机自启
+systemctl enable docker
+
+#启动docker服务
+systemctl start docker
+
+#查看docker信息
+docker info</code>
+</pre>
+<h2 id="配置container">配置container</h2>
+
+<pre class="line-numbers language-bash ">
+<code>containerd config default &gt; /etc/containerd/config.toml
+systemctl daemon-reload
+systemctl restart containerd</code>
+</pre>
+<h1 id="安装kubernetes">安装Kubernetes</h1>
 <h2 id="添加k8s源">添加k8s源</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
-</span></span></span><span class="line"><span class="cl"><span class="s">[kubernetes]
-</span></span></span><span class="line"><span class="cl"><span class="s">name=Kubernetes
-</span></span></span><span class="line"><span class="cl"><span class="s">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
-</span></span></span><span class="line"><span class="cl"><span class="s">enabled=1
-</span></span></span><span class="line"><span class="cl"><span class="s">gpgcheck=1
-</span></span></span><span class="line"><span class="cl"><span class="s">repo_gpgcheck=1
-</span></span></span><span class="line"><span class="cl"><span class="s">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h2>
+
+<pre class="line-numbers language-bash ">
+<code>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF</code>
+</pre>
+<h2 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h2>
 <ol>
 <li>
 <p>执行下述指令，安装<code>kubelet kubeadm</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum -y install kubectl kubelet kubeadm
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-bash ">
+<code>yum -y install kubectl kubelet kubeadm</code>
+</pre>
+</li>
 <li>
 <p>执行下述指令，修改<code>kubelet</code>配置 <strong>（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt;/etc/sysconfig/kubelet
-</span></span></span><span class="line"><span class="cl"><span class="s">KUBELET_CGROUP_ARGS=&#34;--cgroup-driver=systemd&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code>cat &lt;&lt;EOF &gt;/etc/sysconfig/kubelet
+KUBELET_CGROUP_ARGS=&#34;--cgroup-driver=systemd&#34;
+EOF</code>
+</pre>
+</li>
 <li>
 <p>执行下述执行添加自启动</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> kubelet
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-bash ">
+<code>systemctl enable kubelet</code>
+</pre>
+</li>
 <li>
 <p>前序步骤执行完成后，执行<code>kubectl version</code>输出结果如下，可以看出其无法访问<code>8080</code>端口，结果输出不完整。造成此现象的原因为没有执行<code>kubeadm init</code></p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubectl-version-output-1.png" alt="kubectl version输出结果不完善" title="kubectl version输出结果不完善"></p>
@@ -423,15 +333,11 @@
 <ol>
 <li>
 <p>执行下述命令进行初始化</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm init --v<span class="o">=</span><span class="m">5</span>  --upload-certs --image-repository k8s.m.daocloud.io
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="language-bash ">
+<code>kubeadm init --v=5  --upload-certs --image-repository k8s.m.daocloud.io</code>
+</pre>
+</li>
 <li>
 <p>前述命令的输出如下，可以看出创建过程一直阻塞</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-waiting-to-boot-up-control-plane.png" alt="kubeadm init创建过程阻塞" title="kubeadm init创建过程阻塞"></p>
@@ -445,17 +351,12 @@
 <ol>
 <li>
 <p>由于原始的报错信息没有提供太多有用的信息，故通过下述命令来输出其完整的日志<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl status kubelet -l &gt; logs.txt
-</span></span><span class="line"><span class="cl">cat logs.txt
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code>systemctl status kubelet -l &gt; logs.txt
+cat logs.txt</code>
+</pre>
+</li>
 <li>
 <p>查看logs.txt的内容，输出如下</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-failed-to-plull-image.png" alt="kubeadm init找不到镜像导致部署出错" title="kubeadm init找不到镜像导致部署出错"></p>
@@ -476,38 +377,24 @@
 </li>
 <li>
 <p>依次执行下述命令来重新配置<code>containerd</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/registry.k8s.io/registry.aliyuncs.com\/google_containers/&#39;</span> /etc/containerd/config.toml
-</span></span><span class="line"><span class="cl">systemctl daemon-reload
-</span></span><span class="line"><span class="cl">systemctl restart containerd
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code>sed -i &#39;s/registry.k8s.io/registry.aliyuncs.com\/google_containers/&#39; /etc/containerd/config.toml
+systemctl daemon-reload
+systemctl restart containerd</code>
+</pre>
+</li>
 <li>
 <p>之后重新执行下述命令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 移除之前的旧配置</span>
-</span></span><span class="line"><span class="cl">kubeadm reset -f
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 初始化</span>
-</span></span><span class="line"><span class="cl">kubeadm init --v<span class="o">=</span><span class="m">5</span>  --upload-certs --image-repository k8s.m.daocloud.io
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code># 移除之前的旧配置
+kubeadm reset -f
+
+# 初始化
+kubeadm init --v=5  --upload-certs --image-repository k8s.m.daocloud.io</code>
+</pre>
+</li>
 <li>
 <p>运行上述命令后的输出类似如下，可以看出<code>kubeadm init</code>顺利执行成功，整个过程耗时不超过1分钟，至此问题解决!</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-execute-success.png" alt="kubeadm init执行成功" title="kubeadm init执行成功"></p>
@@ -681,44 +568,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

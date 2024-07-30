@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -54,7 +54,7 @@
   <meta itemprop="description" content="在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起，在实现功能的同时保持脚本代码的格式整洁与可维护性">
   <meta itemprop="datePublished" content="2023-03-10T22:48:56+08:00">
   <meta itemprop="dateModified" content="2023-03-10T22:48:56+08:00">
-  <meta itemprop="wordCount" content="2264">
+  <meta itemprop="wordCount" content="2204">
   <meta itemprop="keywords" content="bat,&amp;&amp;,批处理">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起">
@@ -68,6 +68,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -214,75 +221,43 @@ python_run->end
 <p>由于目标客户的环境为<code>Windows</code>，同项目成员沟通后决定采用<code>CMD</code>批处理脚本来包含上述命令，实际部署或升级时只需要运行该批处理脚本即可。</p>
 <h2 id="面临的问题">面临的问题</h2>
 <p>最开始采用的install.bat批处理脚本类似如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl">conda create -n lyq_test -y
-</span></span><span class="line"><span class="cl">conda activate lyq_test
-</span></span><span class="line"><span class="cl">pip install -r requirements.txt
-</span></span><span class="line"><span class="cl">python hello.py
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>运行结果如下，可发现从<code>conda create -n lyq_test -y</code>之后的指令均没有执行</p>
+
+<pre class="line-numbers language-shell ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+conda create -n lyq_test -y
+conda activate lyq_test
+pip install -r requirements.txt
+python hello.py
+pause</code>
+</pre>
+<p>运行结果如下，可发现从<code>conda create -n lyq_test -y</code>之后的指令均没有执行</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-terminated-after-conda-create.png" alt="在conda create之后终止执行" title="在conda create之后终止执行"></p>
 <p>一开始自己以为是由于<code>Anaconda</code>的创建需要时间，于是参考<code>Stackoverflow</code>中的说明<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>在<code>conda activate</code>之前添加了一条睡眠指令，测试结果和上图一样，问题依旧。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl">conda create -n lyq_test -y
-</span></span><span class="line"><span class="cl">rem 睡眠10秒钟
-</span></span><span class="line"><span class="cl">ping -n <span class="m">10</span> 127.0.0.1 &gt; nul
-</span></span><span class="line"><span class="cl">conda activate lyq_test
-</span></span><span class="line"><span class="cl">pip install -r requirements.txt
-</span></span><span class="line"><span class="cl">python hello.py
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>参考网上的资料和自己尝试后发现将批处理脚本中的命令用<code>&amp;&amp;</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>拼接起来然后一起执行就能达到要求</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl">conda create -n lyq_test -y <span class="o">&amp;&amp;</span> conda activate lyq_test <span class="o">&amp;&amp;</span> pip install -r requirements.txt <span class="o">&amp;&amp;</span> python hello.py
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>运行结果如下，虽然批处理脚本的执行结果符合自己的预期，但此种解决方案带来了一个很严重的副作用</p>
+
+<pre class="line-numbers language-sh ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+conda create -n lyq_test -y
+rem 睡眠10秒钟
+ping -n 10 127.0.0.1 &gt; nul
+conda activate lyq_test
+pip install -r requirements.txt
+python hello.py
+pause</code>
+</pre>
+<p>参考网上的资料和自己尝试后发现将批处理脚本中的命令用<code>&amp;&amp;</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>拼接起来然后一起执行就能达到要求</p>
+
+<pre class="line-numbers language-shell ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+conda create -n lyq_test -y &amp;&amp; conda activate lyq_test &amp;&amp; pip install -r requirements.txt &amp;&amp; python hello.py
+pause</code>
+</pre>
+<p>运行结果如下，虽然批处理脚本的执行结果符合自己的预期，但此种解决方案带来了一个很严重的副作用</p>
 <blockquote>
 <p><strong>通过<code>&amp;&amp;</code>将多条指令拼接在一起的结果是脚本中只有一条超长的指令，会导致批处理脚本的可读性和可维护性都严重降低！</strong></p>
 </blockquote>
@@ -290,107 +265,61 @@ python_run->end
 <h1 id="解决方案">解决方案</h1>
 <p>由于随着项目的进行，install.bat脚本肯定会进行不断地修正与更新，install.bat脚本的可维护性与可读性是必须要解决的问题，但采用<code>&amp;&amp;</code>拼接的方式也不能放弃，只能另想它法。</p>
 <p>继续寻求<code>Stackoverflow</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>的协助<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，将install.bat通过<code>SET</code>来重新赋值的方式进行变量拼接，修改后的代码如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span>conda create -n lyq_test -y 
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span>%command% <span class="o">&amp;&amp;</span> conda activate lyq_test
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span>%command% <span class="o">&amp;&amp;</span> pip install -r requirements.txt
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span>%command% <span class="o">&amp;&amp;</span> python hello.py
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 拼接后的命令如下
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> %command%
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 开始执行拼接后的命令
-</span></span><span class="line"><span class="cl">%command%
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行结果如下，虽然能成功进入<code>Anaconda</code>环境，但是后续的指令都没有执行。</p>
+
+<pre class="line-numbers language-shell ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+set command=conda create -n lyq_test -y 
+set command=%command% &amp;&amp; conda activate lyq_test
+set command=%command% &amp;&amp; pip install -r requirements.txt
+set command=%command% &amp;&amp; python hello.py
+echo 拼接后的命令如下
+echo %command%
+echo 开始执行拼接后的命令
+%command%
+pause</code>
+</pre>
+<p>执行结果如下，虽然能成功进入<code>Anaconda</code>环境，但是后续的指令都没有执行。</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-execute-failed-1.png" alt="批处理脚本中途执行失败" title="批处理脚本中途执行失败"></p>
 <p>看起来似乎是胜利在望，但仔细分析后发现只所以能进入<code>Anaconda</code>环境是由于第1个<code>&amp;&amp;</code>配置生效，导致批处理文件提前执行，而后续的拼接指令没有机会执行<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>，还是没法实现最终目的。</p>
 <p>为了避免提前执行，尝试用双引号将相关指令封装起来，在拼接完成后统一执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="s2">&#34;command=conda create -n lyq_test -y&#34;</span> 
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="s2">&#34;command=%command% &amp;&amp; conda activate lyq_test&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="s2">&#34;command=%command% &amp;&amp; pip install -r requirements.txt&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="s2">&#34;command=%command% &amp;&amp; python hello.py&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 拼接后的命令如下
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> %command%
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 开始执行拼接后的命令
-</span></span><span class="line"><span class="cl">%command%
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行结果如下，虽然最终的执行结果符合预期，但很明显打印出来的拼接数据不是我们想要的，不利于后续分析，同时一些<code>echo</code>打印指令没有执行，此方案存在瑕疵，实际使用中风险很大。</p>
+
+<pre class="line-numbers language-shell ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+set &#34;command=conda create -n lyq_test -y&#34; 
+set &#34;command=%command% &amp;&amp; conda activate lyq_test&#34;
+set &#34;command=%command% &amp;&amp; pip install -r requirements.txt&#34;
+set &#34;command=%command% &amp;&amp; python hello.py&#34;
+echo 拼接后的命令如下
+echo %command%
+echo 开始执行拼接后的命令
+%command%
+pause</code>
+</pre>
+<p>执行结果如下，虽然最终的执行结果符合预期，但很明显打印出来的拼接数据不是我们想要的，不利于后续分析，同时一些<code>echo</code>打印指令没有执行，此方案存在瑕疵，实际使用中风险很大。</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-execute-success-and-echo-wrong-data.png" alt="批处理脚本最终执行成功但无法调试" title="批处理脚本最终执行成功但无法调试"></p>
 <p>经过一段时间的搜索后没有找到自己想要的答案，只能在<code>Stackoverflow</code>上提问希望能获得帮助，最终通过<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>得到了一个较为满意的解决方案。</p>
 <p>该方案主要通过<strong>字符串截取</strong>来实现<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>，修改后的脚本如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">@echo off
-</span></span><span class="line"><span class="cl">title 一键部署与升级脚本
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">===========</span><span class="nv">开始创建conda环境</span><span class="o">==============</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span>conda create -n lyq_test -y
-</span></span><span class="line"><span class="cl">rem 要特别注意第1次拼接时不能加上:~1,-1
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;%command% &amp;&amp; conda activate lyq_test&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;%command:~1,-1% &amp;&amp; pip install -r requirements.txt&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">command</span><span class="o">=</span><span class="s2">&#34;%command:~1,-1% &amp;&amp; python hello.py&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">==========</span><span class="nv">拼接后的命令如下</span><span class="o">===========</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> %command%
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">==========</span><span class="nv">开始执行拼接后的命令</span><span class="o">============</span>
-</span></span><span class="line"><span class="cl">%command:~1,-1%
-</span></span><span class="line"><span class="cl">pause
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>脚本执行结果如下，结果符合预期，在确保脚本能正常执行的前提下也满足了可维护性与可读性，问题解决!</p>
+
+<pre class="line-numbers language-shell ">
+<code>@echo off
+title 一键部署与升级脚本
+echo ===========开始创建conda环境==============
+set command=conda create -n lyq_test -y
+rem 要特别注意第1次拼接时不能加上:~1,-1
+set command=&#34;%command% &amp;&amp; conda activate lyq_test&#34;
+set command=&#34;%command:~1,-1% &amp;&amp; pip install -r requirements.txt&#34;
+set command=&#34;%command:~1,-1% &amp;&amp; python hello.py&#34;
+echo ==========拼接后的命令如下===========
+echo %command%
+echo ==========开始执行拼接后的命令============
+%command:~1,-1%
+pause</code>
+</pre>
+<p>脚本执行结果如下，结果符合预期，在确保脚本能正常执行的前提下也满足了可维护性与可读性，问题解决!</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-extracted-command-executed-sucesss.png" alt="通过字符串截取方式优化脚本" title="通过字符串截取方式优化脚本"></p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -589,44 +518,56 @@ python_run->end
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

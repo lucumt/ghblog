@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -57,7 +57,7 @@
   <meta itemprop="description" content="JUnit5 Maven示例-基于Surefire运行测试">
   <meta itemprop="datePublished" content="2023-06-23T12:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-23T12:21:43+08:00">
-  <meta itemprop="wordCount" content="1045">
+  <meta itemprop="wordCount" content="960">
   <meta itemprop="keywords" content="junit5,maven">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit5 Maven示例-基于Surefire运行测试">
@@ -71,6 +71,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -182,238 +189,129 @@
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
 <h1 id="相关依赖">相关依赖</h1>
 <p>若要能够编写<code>JUnit 5</code>测试需要在<code>pom.xml</code>中添加<code>junit-jupiter</code>作为依赖项：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.junit.jupiter<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>junit-jupiter<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>5.8.0<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependencies&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此外还需添加<code>maven-surefire-plugin</code>以便能运行<code>JUnit 5</code>测试:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;build&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;plugins&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;plugin&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>2.22.2<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/plugin&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/plugins&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/build&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>至此我们已经有了使用<code>Maven</code>编写和运行<code>JUnit 5</code>测试的最基本配置。</p>
+
+<pre class="line-numbers language-xml ">
+<code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;5.8.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code>
+</pre>
+<p>此外还需添加<code>maven-surefire-plugin</code>以便能运行<code>JUnit 5</code>测试:</p>
+
+<pre class="line-numbers language-xml ">
+<code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.22.2&lt;/version&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code>
+</pre>
+<p>至此我们已经有了使用<code>Maven</code>编写和运行<code>JUnit 5</code>测试的最基本配置。</p>
 <h1 id="旧版本配置">旧版本配置</h1>
 <p>从<code>JUnit Jupiter 5.4.0</code>开始，有一个聚合器组件<code>junit-jupiter</code>，它可以传递对<code>junit-jupiter-api</code>、<code>junit-jupiter-params</code>和<code>junit-jupiter-engine</code>的依赖关系，从而简化依赖关系管理。</p>
 <p>为了能够使用旧版本编写<code>JUnit 5</code>测试，需要<code>junit-jupiter-api</code>组件作为依赖项：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;groupId&gt;</span>org.junit.jupiter<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;artifactId&gt;</span>junit-jupiter-api<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;version&gt;</span>5.3.2<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependency&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependencies&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>从<code>Maven Surefire2.22.0</code> 开始，对<code>JUnit Jupiter</code>提供了原生支持，当使用<code>Maven Surefire2.21.0</code>或更早版本时，则必须使用<code>Maven Surefire</code>插件来运行测试：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;build&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;plugins&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;plugin&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>2.21.0<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;groupId&gt;</span>org.junit.platform<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;artifactId&gt;</span>junit-platform-surefire-provider<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/dependency&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/plugin&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/plugins&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/build&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>同样需要在运行时类路径下添加<code>JUnit Jupiter</code>测试引擎，可在<code> maven-surefire-plugin</code>插件中添加相关依赖：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;build&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;plugins&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;plugin&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;version&gt;</span>2.21.0<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;groupId&gt;</span>org.junit.platform<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;artifactId&gt;</span>junit-platform-surefire-provider<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/dependency&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;groupId&gt;</span>org.junit.jupiter<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;artifactId&gt;</span>junit-jupiter-engine<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;version&gt;</span>5.3.2<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/dependency&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/dependencies&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/plugin&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/plugins&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/build&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>至此我们已经有了使用旧版本的<code>Maven Surefire</code>运行<code>JUnit 5</code>测试的基本配置。</p>
+
+<pre class="line-numbers language-xml ">
+<code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;
+        &lt;version&gt;5.3.2&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code>
+</pre>
+<p>从<code>Maven Surefire2.22.0</code> 开始，对<code>JUnit Jupiter</code>提供了原生支持，当使用<code>Maven Surefire2.21.0</code>或更早版本时，则必须使用<code>Maven Surefire</code>插件来运行测试：</p>
+
+<pre class="line-numbers language-xml ">
+<code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.21.0&lt;/version&gt;
+            &lt;dependencies&gt;
+                &lt;dependency&gt;
+                    &lt;groupId&gt;org.junit.platform&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-platform-surefire-provider&lt;/artifactId&gt;
+                    &lt;version&gt;1.3.2&lt;/version&gt;
+                &lt;/dependency&gt;
+            &lt;/dependencies&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code>
+</pre>
+<p>同样需要在运行时类路径下添加<code>JUnit Jupiter</code>测试引擎，可在<code> maven-surefire-plugin</code>插件中添加相关依赖：</p>
+
+<pre class="line-numbers language-xml ">
+<code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.21.0&lt;/version&gt;
+            &lt;dependencies&gt;
+                &lt;dependency&gt;
+                    &lt;groupId&gt;org.junit.platform&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-platform-surefire-provider&lt;/artifactId&gt;
+                    &lt;version&gt;1.3.2&lt;/version&gt;
+                &lt;/dependency&gt;
+                &lt;dependency&gt;
+                    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
+                    &lt;version&gt;5.3.2&lt;/version&gt;
+                &lt;/dependency&gt;
+            &lt;/dependencies&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code>
+</pre>
+<p>至此我们已经有了使用旧版本的<code>Maven Surefire</code>运行<code>JUnit 5</code>测试的基本配置。</p>
 <h1 id="运行测试">运行测试</h1>
 <p><code> maven-surefire-plugin</code>插件默认情况下在<code>src/test/java</code>目录下查找测试用例。</p>
 <p>可通过添加一个空测试来检查我们的配置是否生效。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MavenExampleTest</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">shouldRun</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>在命令行中运行相关测试：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mvn <span class="nb">test</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>我们应该能看到类似如下输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> --- maven-surefire-plugin:2.22.0:test <span class="o">(</span>default-test<span class="o">)</span> @ junit5-maven ---
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> -------------------------------------------------------
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span>  T E S T S
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> -------------------------------------------------------
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Running MavenExampleTest
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in MavenExampleTest
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Results:
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Tests run: 1, Failures: 0, Errors: 0, Skipped: <span class="m">0</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> BUILD SUCCESS
-</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>好了，<code>Maven Surefire</code>现在可正常运行测试。</p>
+
+<pre class="line-numbers language-java ">
+<code>class MavenExampleTest {
+
+    @Test
+    void shouldRun() {
+
+    }
+}</code>
+</pre>
+<p>在命令行中运行相关测试：</p>
+
+<pre class="language-bash ">
+<code>mvn test</code>
+</pre>
+<p>我们应该能看到类似如下输出：</p>
+
+<pre class="line-numbers language-bash ">
+<code>[INFO] --- maven-surefire-plugin:2.22.0:test (default-test) @ junit5-maven ---
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running MavenExampleTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in MavenExampleTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------</code>
+</pre>
+<p>好了，<code>Maven Surefire</code>现在可正常运行测试。</p>
 <h1 id="总结">总结</h1>
 <p>在这篇<code>JUnit 5 Maven</code> 示例中，我们学习了如何添加编写<code>JUnit 5</code>测试所需的依赖项以及如何配置<code>Maven Surefire</code>插件以便能够运行测试。</p>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-maven"><strong>GitHub</strong></a>中找到。</p>
@@ -573,44 +471,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

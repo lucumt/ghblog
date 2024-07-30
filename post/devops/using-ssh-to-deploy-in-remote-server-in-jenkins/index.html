@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -57,7 +57,7 @@
   <meta itemprop="description" content="记录如何整合Jenkins与SSH免密登录，实现通过Jenkins流水线部署到不同的服务器环境下">
   <meta itemprop="datePublished" content="2023-11-15T10:14:18+08:00">
   <meta itemprop="dateModified" content="2023-11-15T10:14:18+08:00">
-  <meta itemprop="wordCount" content="4109">
+  <meta itemprop="wordCount" content="3866">
   <meta itemprop="keywords" content="docker,jenkins,kubesphere,ssh,免密登录">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用SSH实现在Jekins中给远程服务器部署项目">
@@ -71,6 +71,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -281,35 +288,21 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 <h2 id="理论基础">理论基础</h2>
 <p>部署到<code>Docker</code>的理论基础是通过<code>Jenkins</code>所在的宿主机(目前部门内部的<code>Jenkins</code>与<code>KubeSphere</code>都在同一台宿主机上)通过<code>SSH(Secure Shell)</code>在要部署的服务器上执行<code>Docker</code>相关执行，将之前需要手工执行的操作步骤以自动化的方式替代。</p>
 <p>关于<code>SSH</code>远程执行的相关操作说明，详情请参见 <a href="https://www.cnblogs.com/sparkdev/p/6842805.html"><strong>SSH远程执行任务</strong></a> ，常用的指令如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 执行单条指令</span>
-</span></span><span class="line"><span class="cl">ssh nick@xxx.xxx.xxx.xxx <span class="s2">&#34;df -h&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 执行多条指令</span>
-</span></span><span class="line"><span class="cl">ssh nick@xxx.xxx.xxx.xxx <span class="s2">&#34;pwd; cat hello.txt&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 远程执行脚本，不带参数</span>
-</span></span><span class="line"><span class="cl">ssh nick@xxx.xxx.xxx.xxx &lt; test.sh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 远程执行脚本，带参数</span>
-</span></span><span class="line"><span class="cl">ssh nick@xxx.xxx.xxx.xxx <span class="s1">&#39;bash -s&#39;</span> &lt; test.sh helloworld <span class="c1"># helloworld即为传入的参数</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>考虑到基于<code>Docker</code>部署时需要先检测同名的<code>Docker</code>容器是否存在，如存在要将其先该容器停止并删除，之后再创建新的同名容器，这一系列操作直接用指令写很复杂也不便于阅读，用<code>shell</code>脚本替代较为合适。</p>
+
+<pre class="line-numbers language-bash ">
+<code># 执行单条指令
+ssh nick@xxx.xxx.xxx.xxx &#34;df -h&#34;
+
+# 执行多条指令
+ssh nick@xxx.xxx.xxx.xxx &#34;pwd; cat hello.txt&#34;
+
+# 远程执行脚本，不带参数
+ssh nick@xxx.xxx.xxx.xxx &lt; test.sh
+
+# 远程执行脚本，带参数
+ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld即为传入的参数</code>
+</pre>
+<p>考虑到基于<code>Docker</code>部署时需要先检测同名的<code>Docker</code>容器是否存在，如存在要将其先该容器停止并删除，之后再创建新的同名容器，这一系列操作直接用指令写很复杂也不便于阅读，用<code>shell</code>脚本替代较为合适。</p>
 <p>同时考虑到要兼容多个不同的工程和版本，需要传递相关的参数进行区分，故最终采用的方案为<strong>以带参数的放方式执行远程脚本</strong>。</p>
 <p>初略的架构图如下：</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-server-docker.png" alt="通过ssh操作多个服务器" title="通过ssh操作多个服务器"></p>
@@ -356,44 +349,29 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 <ol>
 <li>
 <p>在要执行的服务器上执行下述指令，检测<code>ssh</code>目录是否存在</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls ~/.ssh/ 
-</span></span><span class="line"><span class="cl"><span class="c1"># 如果该目录提示不存在，需要先ssh localhost用root用户登录一下ssh</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-bash ">
+<code>ls ~/.ssh/ 
+# 如果该目录提示不存在，需要先ssh localhost用root用户登录一下ssh</code>
+</pre>
+</li>
 <li>
 <p>以<code>root</code>账户或其它具有权限的账户在终端中执行下述指令来生成秘钥</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 邮箱名称可根据实际情况填写</span>
-</span></span><span class="line"><span class="cl">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;xxx@xxx.com&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行过程中一路按<code>Enter</code>键即可，执行结果类似如下  <img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/linux-ssh-keygen-output.png" alt="Linux中生成ssh相关秘钥" title="Linux中生成ssh相关秘钥"></p>
+
+<pre class="line-numbers language-bash ">
+<code># 邮箱名称可根据实际情况填写
+ssh-keygen -t rsa -b 4096 -C &#34;xxx@xxx.com&#34;</code>
+</pre>
+<p>执行过程中一路按<code>Enter</code>键即可，执行结果类似如下  <img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/linux-ssh-keygen-output.png" alt="Linux中生成ssh相关秘钥" title="Linux中生成ssh相关秘钥"></p>
 </li>
 <li>
 <p>执行下述指令，将公钥写入到<code>authorized_keys</code>文件中(若缺少此步骤会导致<code>Jenkins</code>进行免密登录时一直认证不通过)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ~/.ssh
-</span></span><span class="line"><span class="cl">cat id_rsa.pub &gt;&gt; authorized_keys
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行结果输出类似如下，至此公钥与私钥配置完毕。</p>
+
+<pre class="line-numbers language-bash ">
+<code>cd ~/.ssh
+cat id_rsa.pub &gt;&gt; authorized_keys</code>
+</pre>
+<p>执行结果输出类似如下，至此公钥与私钥配置完毕。</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/write-pub-key-to-authorized-keys.png" alt="将公钥写入授权文件" title="将公钥写入授权文件"></p>
 </li>
 </ol>
@@ -428,23 +406,15 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 </ol>
 <h2 id="流水线配置">流水线配置</h2>
 <p>在<code>Jenkins</code>中添加类似如下的代码并执行测试，若测试正常，则表示<code>Jenkins</code>中基于<code>SSH</code>的远程部署全部配置完成，操作过程全部结束！</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">sshagent</span><span class="o">(</span><span class="nl">credentials:</span> <span class="o">[</span><span class="s1">&#39;10-30-31-24-key&#39;</span><span class="o">])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.24\&#39; ];then 
-</span></span></span><span class="line"><span class="cl"><span class="s1">          ssh -o StrictHostKeyChecking=no root@10.30.31.24  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s1">          fi&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>有如下几点需要注意：</p>
+
+<pre class="line-numbers language-groovy ">
+<code>sshagent(credentials: [&#39;10-30-31-24-key&#39;]) {
+    sh &#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.24\&#39; ];then 
+          ssh -o StrictHostKeyChecking=no root@10.30.31.24  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34;
+          fi&#39;&#39;&#39;
+}</code>
+</pre>
+<p>有如下几点需要注意：</p>
 <ol>
 <li>
 <p><code>ID</code>值为前面在<code>Jenkins</code>中添加凭据时输入的值</p>
@@ -466,89 +436,48 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 </li>
 <li>
 <p>在<code>KubeSphere</code>中建立类似如下流水线</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">pipeline</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">agent</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">label</span> <span class="s1">&#39;maven&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">stages</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;环境设置&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">container</span><span class="o">(</span><span class="s1">&#39;maven&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;TZ=&#34;Asia/Shanghai&#34; date&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;远程执行&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sshagent</span><span class="o">(</span><span class="nl">credentials:</span> <span class="o">[</span><span class="s1">&#39;10-30-31-24-key&#39;</span><span class="o">])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;ssh -o StrictHostKeyChecking=no root@10.30.31.24  &#34;pwd;echo $HOSTNAME;docker ps&#34;&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">environment</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DOCKER_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;harbor-id&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GITHUB_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;gitlab-id&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">KUBECONFIG_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;xxx-kubeconfig&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">REGISTRY</span> <span class="o">=</span> <span class="s1">&#39;xxx.xxx.local:30005&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DOCKERHUB_NAMESPACE</span> <span class="o">=</span> <span class="s1">&#39;xxx-server-library&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GITHUB_ACCOUNT</span> <span class="o">=</span> <span class="s1">&#39;kubesphere&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-groovy ">
+<code>pipeline {
+  agent {
+    node {
+      label &#39;maven&#39;
+    }
+
+  }
+  stages {
+    stage(&#39;环境设置&#39;) {
+      agent none
+      steps {
+        container(&#39;maven&#39;) {
+          sh &#39;TZ=&#34;Asia/Shanghai&#34; date&#39;
+        }
+
+      }
+    }
+
+    stage(&#39;远程执行&#39;) {
+      agent none
+      steps {
+        sshagent(credentials: [&#39;10-30-31-24-key&#39;]) {
+          sh &#39;ssh -o StrictHostKeyChecking=no root@10.30.31.24  &#34;pwd;echo $HOSTNAME;docker ps&#34;&#39;
+        }
+
+      }
+    }
+
+  }
+  environment {
+    DOCKER_CREDENTIAL_ID = &#39;harbor-id&#39;
+    GITHUB_CREDENTIAL_ID = &#39;gitlab-id&#39;
+    KUBECONFIG_CREDENTIAL_ID = &#39;xxx-kubeconfig&#39;
+    REGISTRY = &#39;xxx.xxx.local:30005&#39;
+    DOCKERHUB_NAMESPACE = &#39;xxx-server-library&#39;
+    GITHUB_ACCOUNT = &#39;kubesphere&#39;
+  }
+}</code>
+</pre>
+</li>
 <li>
 <p>执行该流水线，在最后一个步骤的输出如下，可以看出<code>docker ps</code>的执行结果符合预期(至于<code>pwd</code>和<code>echo $HOSTNAME</code>输出结果有差异是由于<code>Jenkins</code>容器本身执行时使用的是特定的账户以及特定的路径导致的)</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-ssh-test-result.png" alt="KubeSphere中ssh测试执行结果" title="KubeSphere中ssh测试执行结果"></p>
@@ -557,386 +486,196 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 <h1 id="参考示例">参考示例</h1>
 <h2 id="远程shell脚本">远程shell脚本</h2>
 <p>注意： <code>shell</code>脚本在我们要通过ssh远程执行的那台<code>执行者</code>的电脑上，而不是位于被执行者的电脑上。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="nv">harbor_url</span><span class="o">=</span><span class="nv">$1</span>
-</span></span><span class="line"><span class="cl"><span class="nv">node_port</span><span class="o">=</span><span class="nv">$2</span>
-</span></span><span class="line"><span class="cl"><span class="nv">build_phase</span><span class="o">=</span><span class="nv">$3</span>
-</span></span><span class="line"><span class="cl"><span class="nv">image_version</span><span class="o">=</span><span class="nv">$4</span>
-</span></span><span class="line"><span class="cl"><span class="nv">clone_name</span><span class="o">=</span><span class="nv">$5</span>
-</span></span><span class="line"><span class="cl"><span class="nv">module_name</span><span class="o">=</span><span class="si">${</span><span class="nv">clone_name</span><span class="si">}</span>-<span class="si">${</span><span class="nv">build_phase</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===========harbor_url: </span><span class="si">${</span><span class="nv">harbor_url</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===========node_port: </span><span class="si">${</span><span class="nv">node_port</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===========build_phase: </span><span class="si">${</span><span class="nv">build_phase</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===========image_version: </span><span class="si">${</span><span class="nv">image_version</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;===========module_name: </span><span class="si">${</span><span class="nv">module_name</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;开始检查并移除旧的容器&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="k">$(</span>docker ps -f <span class="s2">&#34;name=</span><span class="si">${</span><span class="nv">module_name</span><span class="si">}</span>$<span class="s2">&#34;</span> -f <span class="s2">&#34;status=running&#34;</span> -q <span class="k">)</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;停止容器: &#34;</span>
-</span></span><span class="line"><span class="cl">  docker stop <span class="nv">$module_name</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 若容器存在，则删除</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="k">$(</span>docker ps -a -f <span class="s2">&#34;name=</span><span class="si">${</span><span class="nv">module_name</span><span class="si">}</span>$<span class="s2">&#34;</span>  -q <span class="k">)</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;删除容器: &#34;</span>
-</span></span><span class="line"><span class="cl">  docker rm <span class="nv">$module_name</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">docker_command</span><span class="o">=</span><span class="s2">&#34;docker run -d -p </span><span class="si">${</span><span class="nv">node_port</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">node_port</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">docker_command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">docker_command</span><span class="si">}</span><span class="s2"> -e TZ=Asia/Shanghai&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">docker_command</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">docker_command</span><span class="si">}</span><span class="s2"> --name </span><span class="si">${</span><span class="nv">module_name</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">harbor_url</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">image_version</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;要执行的命令为:\n</span><span class="si">${</span><span class="nv">docker_command</span><span class="si">}</span><span class="s2">\n&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">container_id</span><span class="o">=</span><span class="k">$(</span><span class="nb">eval</span> <span class="si">${</span><span class="nv">docker_command</span><span class="si">}</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">result</span><span class="o">=</span><span class="k">$(</span>docker inspect -f <span class="o">{{</span>.State.Running<span class="o">}}</span> <span class="si">${</span><span class="nv">container_id</span><span class="si">}</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$result</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="nb">true</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;\033[32m</span><span class="nv">$module_name对应的容器启动成功</span><span class="s2">,容器id为</span><span class="si">${</span><span class="nv">container_id</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">12</span><span class="si">}</span><span class="s2">\033[0m\n&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">printf</span> <span class="s2">&#34;\033[31m</span><span class="nv">$module_name对应的容器启动失败</span><span class="s2">,容器id为</span><span class="si">${</span><span class="nv">container_id</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">12</span><span class="si">}</span><span class="s2">!\033[0m\n&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="jenkins流水线">Jenkins流水线</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">pipeline</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">agent</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">label</span> <span class="s1">&#39;maven&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">stages</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;拉取代码&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">git</span><span class="o">(</span><span class="nl">credentialsId:</span> <span class="s1">&#39;gitlab-token&#39;</span><span class="o">,</span> <span class="nl">url:</span> <span class="s1">&#39;http://gitlab.xxx.com/xxx-backend/xxx-batch-storage.git&#39;</span><span class="o">,</span> <span class="nl">branch:</span> <span class="s1">&#39;$BRANCH_NAME&#39;</span><span class="o">,</span> <span class="nl">changelog:</span> <span class="kc">true</span><span class="o">,</span> <span class="nl">poll:</span> <span class="kc">false</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;识别系统环境&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">container</span><span class="o">(</span><span class="s1">&#39;maven&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">script</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">def</span> <span class="n">PROJECT_NAME</span><span class="o">=</span><span class="s1">&#39;xxx-batch-storage&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">def</span> <span class="n">BUILD_TYPE</span><span class="o">=</span><span class="n">PRODUCT_PHASE</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">def</span> <span class="n">NACOS_NAMESPACE</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">env</span><span class="o">.</span><span class="na">PROJECT_NAME</span> <span class="o">=</span> <span class="n">PROJECT_NAME</span>
-</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="n">sh</span><span class="o">(</span><span class="nl">script:</span> <span class="s2">&#34;curl -X GET &#39;http://xxx.xxx.local:8858/nacos/v1/console/namespaces&#39;&#34;</span><span class="o">,</span> <span class="nl">returnStdout:</span> <span class="kc">true</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">jsonData</span> <span class="o">=</span> <span class="n">readJSON</span> <span class="nl">text:</span> <span class="n">response</span>
-</span></span><span class="line"><span class="cl">            <span class="n">namespaces</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="na">data</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="o">(</span><span class="n">nm</span> <span class="k">in</span> <span class="n">namespaces</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">              <span class="k">if</span><span class="o">(</span><span class="n">BUILD_TYPE</span><span class="o">==</span><span class="n">nm</span><span class="o">.</span><span class="na">namespaceShowName</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">NACOS_NAMESPACE</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="na">namespace</span>
-</span></span><span class="line"><span class="cl">              <span class="o">}</span>
-</span></span><span class="line"><span class="cl">            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="n">sh</span><span class="o">(</span><span class="nl">script:</span> <span class="s2">&#34;curl -X GET &#39;http://xxx.xxx.local:8858/nacos/v1/cs/configs?dataId=xxx-custom-server-config.json&amp;group=xxx-custom-config&amp;tenant=26e0c3df-a0c7-4fe0-9b59-d04c5ac48481&#39;&#34;</span><span class="o">,</span> <span class="nl">returnStdout:</span> <span class="kc">true</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">jsonData</span> <span class="o">=</span> <span class="n">readJSON</span> <span class="nl">text:</span> <span class="n">response</span>
-</span></span><span class="line"><span class="cl">            <span class="n">configs</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="na">portConfig</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="o">(</span><span class="n">config</span> <span class="k">in</span> <span class="n">configs</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">              <span class="n">project</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">project</span>
-</span></span><span class="line"><span class="cl">              <span class="k">if</span><span class="o">(</span><span class="n">project</span><span class="o">!=</span><span class="n">PROJECT_NAME</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">              <span class="o">}</span>
-</span></span><span class="line"><span class="cl">              <span class="n">ports</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">ports</span>
-</span></span><span class="line"><span class="cl">              <span class="k">for</span><span class="o">(</span><span class="n">port</span> <span class="k">in</span> <span class="n">ports</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="o">(</span><span class="n">port</span><span class="o">.</span><span class="na">env</span><span class="o">!=</span><span class="n">BUILD_TYPE</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">                  <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">                <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                <span class="n">env</span><span class="o">.</span><span class="na">NODE_PORT</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="na">server</span>
-</span></span><span class="line"><span class="cl">              <span class="o">}</span>
-</span></span><span class="line"><span class="cl">            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">yamlFile</span> <span class="o">=</span> <span class="s1">&#39;app/src/main/resources/bootstrap.yml&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span> <span class="o">=</span> <span class="n">readYaml</span> <span class="nl">file:</span> <span class="n">yamlFile</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span><span class="o">.</span><span class="na">server</span><span class="o">.</span><span class="na">port</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="na">NODE_PORT</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">cloud</span><span class="o">.</span><span class="na">nacos</span><span class="o">.</span><span class="na">discovery</span><span class="o">.</span><span class="na">group</span> <span class="o">=</span> <span class="n">BUILD_TYPE</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">cloud</span><span class="o">.</span><span class="na">nacos</span><span class="o">.</span><span class="na">discovery</span><span class="o">.</span><span class="na">namespace</span> <span class="o">=</span> <span class="n">NACOS_NAMESPACE</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">cloud</span><span class="o">.</span><span class="na">nacos</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">namespace</span> <span class="o">=</span> <span class="n">NACOS_NAMESPACE</span>
-</span></span><span class="line"><span class="cl">            <span class="n">yamlData</span><span class="o">.</span><span class="na">custom</span><span class="o">.</span><span class="na">nacos</span><span class="o">.</span><span class="na">ip</span> <span class="o">=</span> <span class="n">TARGET_IP</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// todo
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">sh</span> <span class="s2">&#34;rm $yamlFile&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">writeYaml</span> <span class="nl">file:</span> <span class="n">yamlFile</span><span class="o">,</span> <span class="nl">data:</span> <span class="n">yamlData</span>
-</span></span><span class="line"><span class="cl">          <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;项目编译&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">container</span><span class="o">(</span><span class="s1">&#39;maven&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;ls&#39;</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;mvn clean compile package -Dmaven.test.skip=true -U&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;镜像构建&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">container</span><span class="o">(</span><span class="s1">&#39;maven&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;docker build -f cicd/Dockerfile \\
-</span></span></span><span class="line"><span class="cl"><span class="s1">-t xxx-batch-storage:$BUILD_TAG  \\
-</span></span></span><span class="line"><span class="cl"><span class="s1">--build-arg  PROJECT_VERSION=$PROJECT_VERSION \\
-</span></span></span><span class="line"><span class="cl"><span class="s1">--build-arg  NODE_PORT=$NODE_PORT \\
-</span></span></span><span class="line"><span class="cl"><span class="s1">--build-arg  PROJECT_VERSION=$PROJECT_VERSION \\
-</span></span></span><span class="line"><span class="cl"><span class="s1">.&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;镜像推送&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">container</span><span class="o">(</span><span class="s1">&#39;maven&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">withCredentials</span><span class="o">([</span><span class="n">usernamePassword</span><span class="o">(</span><span class="n">credentialsId</span> <span class="o">:</span> <span class="s1">&#39;harbor-account&#39;</span> <span class="o">,</span><span class="n">passwordVariable</span> <span class="o">:</span> <span class="s1">&#39;DOCKER_PWD_VAR&#39;</span> <span class="o">,</span><span class="n">usernameVariable</span> <span class="o">:</span> <span class="s1">&#39;DOCKER_USER_VAR&#39;</span> <span class="o">,)])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sh</span> <span class="s1">&#39;echo &#34;$DOCKER_PWD_VAR&#34; | docker login $REGISTRY -u &#34;$DOCKER_USER_VAR&#34; --password-stdin&#39;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;docker tag  xxx-batch-storage:$BUILD_TAG $REGISTRY/$DOCKERHUB_NAMESPACE/xxx-batch-storage:$BUILD_TAG
-</span></span></span><span class="line"><span class="cl"><span class="s1">docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/xxx-batch-storage:$BUILD_TAG&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">          <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;ssh部署&#39;</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">agent</span> <span class="n">none</span>
-</span></span><span class="line"><span class="cl">      <span class="n">steps</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sshagent</span><span class="o">(</span><span class="nl">credentials:</span> <span class="o">[</span><span class="s1">&#39;10-30-31-60-key&#39;</span><span class="o">])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.60\&#39; ];then 
-</span></span></span><span class="line"><span class="cl"><span class="s1">            ssh -o StrictHostKeyChecking=no root@10.30.31.60  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34; ${PROJECT_NAME}
-</span></span></span><span class="line"><span class="cl"><span class="s1">            fi&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">sshagent</span><span class="o">(</span><span class="nl">credentials:</span> <span class="o">[</span><span class="s1">&#39;10-30-31-61-key&#39;</span><span class="o">])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">sh</span> <span class="s1">&#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.61\&#39; ];then 
-</span></span></span><span class="line"><span class="cl"><span class="s1">          ssh -o StrictHostKeyChecking=no root@10.30.31.61  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34; ${PROJECT_NAME}
-</span></span></span><span class="line"><span class="cl"><span class="s1">          fi&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">environment</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DOCKER_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;harbor-id&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GITHUB_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;gitlab-id&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">KUBECONFIG_CREDENTIAL_ID</span> <span class="o">=</span> <span class="s1">&#39;xxx-kubeconfig&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">REGISTRY</span> <span class="o">=</span> <span class="s1">&#39;xxx.xxx.local:30005&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">DOCKERHUB_NAMESPACE</span> <span class="o">=</span> <span class="s1">&#39;xxx-server-library&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GITHUB_ACCOUNT</span> <span class="o">=</span> <span class="s1">&#39;kubesphere&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre class="line-numbers language-shell ">
+<code>#!/bin/bash
+
+harbor_url=$1
+node_port=$2
+build_phase=$3
+image_version=$4
+clone_name=$5
+module_name=${clone_name}-${build_phase}
+
+echo &#34;===========harbor_url: ${harbor_url}&#34;
+echo &#34;===========node_port: ${node_port}&#34;
+echo &#34;===========build_phase: ${build_phase}&#34;
+echo &#34;===========image_version: ${image_version}&#34;
+echo &#34;===========module_name: ${module_name}&#34;
+
+
+echo &#34;开始检查并移除旧的容器&#34;
+if [[ -n &#34;$(docker ps -f &#34;name=${module_name}$&#34; -f &#34;status=running&#34; -q )&#34; ]]; then
+  printf &#34;停止容器: &#34;
+  docker stop $module_name
+fi
+
+# 若容器存在，则删除
+if [[ -n &#34;$(docker ps -a -f &#34;name=${module_name}$&#34;  -q )&#34; ]]; then
+  printf &#34;删除容器: &#34;
+  docker rm $module_name
+fi
+
+docker_command=&#34;docker run -d -p ${node_port}:${node_port}&#34;
+docker_command=&#34;${docker_command} -e TZ=Asia/Shanghai&#34;
+docker_command=&#34;${docker_command} --name ${module_name} ${harbor_url}/${image_version}&#34;
+
+
+
+printf &#34;要执行的命令为:\n${docker_command}\n&#34;
+container_id=$(eval ${docker_command})
+
+result=$(docker inspect -f {{.State.Running}} ${container_id})
+if [[ &#34;$result&#34; = true ]]; then
+  printf &#34;\033[32m$module_name对应的容器启动成功,容器id为${container_id:0:12}\033[0m\n&#34;
+else
+  printf &#34;\033[31m$module_name对应的容器启动失败,容器id为${container_id:0:12}!\033[0m\n&#34;
+  exit 1
+fi</code>
+</pre>
+<h2 id="jenkins流水线">Jenkins流水线</h2>
+
+<pre class="line-numbers language-groovy ">
+<code>pipeline {
+  agent {
+    node {
+      label &#39;maven&#39;
+    }
+
+  }
+  stages {
+    stage(&#39;拉取代码&#39;) {
+      agent none
+      steps {
+        git(credentialsId: &#39;gitlab-token&#39;, url: &#39;http://gitlab.xxx.com/xxx-backend/xxx-batch-storage.git&#39;, branch: &#39;$BRANCH_NAME&#39;, changelog: true, poll: false)
+      }
+    }
+
+    stage(&#39;识别系统环境&#39;) {
+      agent none
+      steps {
+        container(&#39;maven&#39;) {
+          script {
+            def PROJECT_NAME=&#39;xxx-batch-storage&#39;
+            def BUILD_TYPE=PRODUCT_PHASE
+            def NACOS_NAMESPACE=&#39;&#39;
+
+            env.PROJECT_NAME = PROJECT_NAME
+            response = sh(script: &#34;curl -X GET &#39;http://xxx.xxx.local:8858/nacos/v1/console/namespaces&#39;&#34;, returnStdout: true)
+            jsonData = readJSON text: response
+            namespaces = jsonData.data
+            for(nm in namespaces){
+              if(BUILD_TYPE==nm.namespaceShowName){
+                NACOS_NAMESPACE = nm.namespace
+              }
+            }
+
+            response = sh(script: &#34;curl -X GET &#39;http://xxx.xxx.local:8858/nacos/v1/cs/configs?dataId=xxx-custom-server-config.json&amp;group=xxx-custom-config&amp;tenant=26e0c3df-a0c7-4fe0-9b59-d04c5ac48481&#39;&#34;, returnStdout: true)
+            jsonData = readJSON text: response
+            configs = jsonData.portConfig
+            for(config in configs){
+              project = config.project
+              if(project!=PROJECT_NAME){
+                continue
+              }
+              ports = config.ports
+              for(port in ports){
+                if(port.env!=BUILD_TYPE){
+                  continue
+                }
+                env.NODE_PORT = port.server
+              }
+            }
+
+            yamlFile = &#39;app/src/main/resources/bootstrap.yml&#39;
+            yamlData = readYaml file: yamlFile
+            yamlData.server.port = env.NODE_PORT
+            yamlData.spring.cloud.nacos.discovery.group = BUILD_TYPE
+            yamlData.spring.cloud.nacos.discovery.namespace = NACOS_NAMESPACE
+            yamlData.spring.cloud.nacos.config.namespace = NACOS_NAMESPACE
+            yamlData.custom.nacos.ip = TARGET_IP
+
+            // todo
+            sh &#34;rm $yamlFile&#34;
+
+            writeYaml file: yamlFile, data: yamlData
+          }
+
+        }
+
+      }
+    }
+
+    stage(&#39;项目编译&#39;) {
+      agent none
+      steps {
+        container(&#39;maven&#39;) {
+          sh &#39;ls&#39;
+          sh &#39;mvn clean compile package -Dmaven.test.skip=true -U&#39;
+        }
+
+      }
+    }
+
+    stage(&#39;镜像构建&#39;) {
+      agent none
+      steps {
+        container(&#39;maven&#39;) {
+          sh &#39;&#39;&#39;docker build -f cicd/Dockerfile \\
+-t xxx-batch-storage:$BUILD_TAG  \\
+--build-arg  PROJECT_VERSION=$PROJECT_VERSION \\
+--build-arg  NODE_PORT=$NODE_PORT \\
+--build-arg  PROJECT_VERSION=$PROJECT_VERSION \\
+.&#39;&#39;&#39;
+        }
+
+      }
+    }
+
+    stage(&#39;镜像推送&#39;) {
+      agent none
+      steps {
+        container(&#39;maven&#39;) {
+          withCredentials([usernamePassword(credentialsId : &#39;harbor-account&#39; ,passwordVariable : &#39;DOCKER_PWD_VAR&#39; ,usernameVariable : &#39;DOCKER_USER_VAR&#39; ,)]) {
+            sh &#39;echo &#34;$DOCKER_PWD_VAR&#34; | docker login $REGISTRY -u &#34;$DOCKER_USER_VAR&#34; --password-stdin&#39;
+            sh &#39;&#39;&#39;docker tag  xxx-batch-storage:$BUILD_TAG $REGISTRY/$DOCKERHUB_NAMESPACE/xxx-batch-storage:$BUILD_TAG
+docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/xxx-batch-storage:$BUILD_TAG&#39;&#39;&#39;
+          }
+
+        }
+
+      }
+    }
+
+    stage(&#39;ssh部署&#39;) {
+      agent none
+      steps {
+        sshagent(credentials: [&#39;10-30-31-60-key&#39;]) {
+          sh &#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.60\&#39; ];then 
+            ssh -o StrictHostKeyChecking=no root@10.30.31.60  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34; ${PROJECT_NAME}
+            fi&#39;&#39;&#39;
+        }
+
+        sshagent(credentials: [&#39;10-30-31-61-key&#39;]) {
+          sh &#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.61\&#39; ];then 
+          ssh -o StrictHostKeyChecking=no root@10.30.31.61  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34; ${PROJECT_NAME}
+          fi&#39;&#39;&#39;
+        }
+
+      }
+    }
+
+  }
+  environment {
+    DOCKER_CREDENTIAL_ID = &#39;harbor-id&#39;
+    GITHUB_CREDENTIAL_ID = &#39;gitlab-id&#39;
+    KUBECONFIG_CREDENTIAL_ID = &#39;xxx-kubeconfig&#39;
+    REGISTRY = &#39;xxx.xxx.local:30005&#39;
+    DOCKERHUB_NAMESPACE = &#39;xxx-server-library&#39;
+    GITHUB_ACCOUNT = &#39;kubesphere&#39;
+  }
+}</code>
+</pre>
     </div>
 
     
@@ -1108,44 +847,56 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>

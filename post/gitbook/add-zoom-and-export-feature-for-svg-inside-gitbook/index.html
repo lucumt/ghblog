@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
+<link href="/sass/main.min.d88aa1e1e620f9fabe25896b0eba802b5dfdfbc62e4caea7aeca2dcab3120083.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -54,7 +54,7 @@
   <meta itemprop="description" content="简要介绍如何给GitBook中的SVG图像提供缩放和下载功能来解决复杂Mermaid图表无法查看的问题,缩放功能用于在线查看，下载功能用于将在线凸显下载为本地svg文件">
   <meta itemprop="datePublished" content="2024-06-27T20:35:45+08:00">
   <meta itemprop="dateModified" content="2024-06-27T20:35:45+08:00">
-  <meta itemprop="wordCount" content="1926">
+  <meta itemprop="wordCount" content="1740">
   <meta itemprop="keywords" content="gitbook,svg,缩放,下载">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="给GitBook中的SVG图像提供缩放和下载功能">
@@ -68,6 +68,13 @@
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 <body>
@@ -209,217 +216,116 @@
 <h2 id="缩放功能">缩放功能</h2>
 <p>在<code>GitHub</code>上对比相关的<code>SVG</code>组件后，最终选定<a href="https://github.com/bumbu/svg-pan-zoom"><strong>svg-pan-zoom</strong></a>作为<code>SVG</code>功能扩展度的实现，正好自己之前改进过一个基于<code>Mermaid</code>的<code>GitBook</code>插件<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>，可将<code>svg-pan-zoom</code>相关的功能整合到该插件中，后续<code>GitBook</code>中升级插件版本即可。</p>
 <p>在<code>svg-pan-zoom</code>的官方文档中可找到该组件的用法，十分简单</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">panZoomTiger</span> <span class="o">=</span> <span class="nx">svgPanZoom</span><span class="p">(</span><span class="s1">&#39;#demo-tiger&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// or
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">svgElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#demo-tiger&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">panZoomTiger</span> <span class="o">=</span> <span class="nx">svgPanZoom</span><span class="p">(</span><span class="nx">svgElement</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>调用<code>svgPanZoom</code>时还可根据实际情况添加各种配置</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">svgPanZoom</span><span class="p">(</span><span class="s1">&#39;#demo-tiger&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">viewportSelector</span><span class="o">:</span> <span class="s1">&#39;.svg-pan-zoom_viewport&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">panEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">controlIconsEnabled</span><span class="o">:</span> <span class="kc">false</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">zoomEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">dblClickZoomEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">mouseWheelZoomEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">preventMouseEventsDefault</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">zoomScaleSensitivity</span><span class="o">:</span> <span class="mf">0.2</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">minZoom</span><span class="o">:</span> <span class="mf">0.5</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">maxZoom</span><span class="o">:</span> <span class="mi">10</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">fit</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">contain</span><span class="o">:</span> <span class="kc">false</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">center</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">refreshRate</span><span class="o">:</span> <span class="s1">&#39;auto&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">beforeZoom</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">onZoom</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">beforePan</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">onPan</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">onUpdatedCTM</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">customEventsHandler</span><span class="o">:</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="p">,</span> <span class="nx">eventsListenerElement</span><span class="o">:</span> <span class="kc">null</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>之后要找到<code>Mermaid</code>渲染图表结束时的回调方法，在其官网上没有找到相关的说明，但通过Google发现在<code>GitHub</code>上有<a href="https://github.com/mermaid-js/mermaid/issues/176">相关说明</a>，核心代码如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;${src}&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">mermaid</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">querySelector</span><span class="o">:</span> <span class="s1">&#39;.mermaid&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">postRenderCallback</span><span class="o">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>很显然可通过在<code>postRenderCallback</code>回调方法中添加我们自己的逻辑，相关的代码如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">mermaid</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">querySelector</span><span class="o">:</span> <span class="s1">&#39;.mermaid&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">postRenderCallback</span><span class="o">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getBBox</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">aHeight</span> <span class="o">=</span> <span class="nx">height</span> <span class="o">&gt;</span> <span class="mi">800</span> <span class="o">?</span> <span class="mi">800</span> <span class="o">:</span> <span class="nx">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">ele</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span><span class="s1">&#39;height: &#39;</span><span class="o">+</span><span class="nx">aHeight</span><span class="o">+</span><span class="s1">&#39;px;overflow:scroll;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">panZoomTiger</span> <span class="o">=</span> <span class="nx">svgPanZoom</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">+</span><span class="nx">id</span><span class="p">,{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">zoomEnabled</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">controlIconsEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">        <span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">panZoomTiger</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">panZoomTiger</span><span class="p">.</span><span class="nx">updateBBox</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>至此<code>SVG</code>缩放功能整合完毕，接下来需要研究下载功能。</p>
+
+<pre class="line-numbers language-javascript ">
+<code>var panZoomTiger = svgPanZoom(&#39;#demo-tiger&#39;);
+// or
+var svgElement = document.querySelector(&#39;#demo-tiger&#39;)
+var panZoomTiger = svgPanZoom(svgElement)</code>
+</pre>
+<p>调用<code>svgPanZoom</code>时还可根据实际情况添加各种配置</p>
+
+<pre class="line-numbers language-javascript ">
+<code>svgPanZoom(&#39;#demo-tiger&#39;, {
+  viewportSelector: &#39;.svg-pan-zoom_viewport&#39;, 
+  panEnabled: true, 
+  controlIconsEnabled: false, 
+  zoomEnabled: true, 
+  dblClickZoomEnabled: true,
+  mouseWheelZoomEnabled: true,
+  preventMouseEventsDefault: true,
+  zoomScaleSensitivity: 0.2,
+  minZoom: 0.5,
+  maxZoom: 10,
+  fit: true,
+  contain: false,
+  center: true,
+  refreshRate: &#39;auto&#39;,
+  beforeZoom: function(){},
+  onZoom: function(){},
+  beforePan: function(){},
+  onPan: function(){},
+  onUpdatedCTM: function(){},
+  customEventsHandler: {},
+  eventsListenerElement: null
+});</code>
+</pre>
+<p>之后要找到<code>Mermaid</code>渲染图表结束时的回调方法，在其官网上没有找到相关的说明，但通过Google发现在<code>GitHub</code>上有<a href="https://github.com/mermaid-js/mermaid/issues/176">相关说明</a>，核心代码如下</p>
+
+<pre class="line-numbers language-javascript ">
+<code>import mermaid from &#39;${src}&#39;;
+mermaid.run({
+    querySelector: &#39;.mermaid&#39;,
+    postRenderCallback: (id) =&gt; {
+        console.log(id);
+    }
+});</code>
+</pre>
+<p>很显然可通过在<code>postRenderCallback</code>回调方法中添加我们自己的逻辑，相关的代码如下</p>
+
+<pre class="line-numbers language-javascript ">
+<code>mermaid.run({
+    querySelector: &#39;.mermaid&#39;,
+    postRenderCallback: (id) =&gt; {
+        let ele = document.getElementById(id);
+        let svg = ele.getBBox();
+        let height = svg.height;
+        let aHeight = height &gt; 800 ? 800 : height;
+        ele.setAttribute(&#39;style&#39;,&#39;height: &#39;&#43;aHeight&#43;&#39;px;overflow:scroll;&#39;);
+        let panZoomTiger = svgPanZoom(&#39;#&#39;&#43;id,{
+            zoomEnabled: true,
+            controlIconsEnabled: true
+        });
+        panZoomTiger.resize();
+        panZoomTiger.updateBBox();
+    }
+});</code>
+</pre>
+<p>至此<code>SVG</code>缩放功能整合完毕，接下来需要研究下载功能。</p>
 <h2 id="下载功能">下载功能</h2>
 <p>由于<code>SVG</code>图像一般都是以源码的方式直接嵌入<code>HTML</code>页面中，故其下载功能较为简单，只需要找到对应的DOM节点，通过<code>JavaScript</code>相关的技术获取到其完整的内容，然后下载到本地即可。</p>
 <p>首先自己基于网络上的<a href="https://stackoverflow.com/questions/54626186/how-to-download-file-with-javascript">相关资料</a>找到如下代码，本地验证下载<code>txt</code>时能正常工作。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">downloadURI</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">link</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">uri</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">link</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>但当用其测试<code>SVG</code>下载时，下载的文件一直为空且浏览器也没提示任何错误，多次搜索发现Chrome出于安全考虑，默认情况下不允许通过<code>JavaScript</code>下载<code>SVG</code>文件，需要做一些特殊处理来规避此限制， 继续查找后找到<a href="https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an">一篇说明</a>，其中给出了如下的解决方案，经本地测试可行。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">downloadSvg</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;svg&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">serializer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLSerializer</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serializeToString</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(\w+)?:?xlink=/g</span><span class="p">,</span> <span class="s1">&#39;xmlns:xlink=&#39;</span><span class="p">);</span> <span class="c1">// Fix root xlink without namespace
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/ns\d+:href/g</span><span class="p">,</span> <span class="s1">&#39;xlink:href&#39;</span><span class="p">);</span> <span class="c1">// Safari NS namespace fix.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">source</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^&lt;svg[^&gt;]+xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^&lt;svg/</span><span class="p">,</span> <span class="s1">&#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">source</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^&lt;svg[^&gt;]+&#34;http\:\/\/www\.w3\.org\/1999\/xlink&#34;/</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^&lt;svg/</span><span class="p">,</span> <span class="s1">&#39;&lt;svg xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">preface</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;\r\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">svgBlob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">preface</span><span class="p">,</span> <span class="nx">source</span><span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;image/svg+xml;charset=utf-8&#34;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">svgUrl</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">svgBlob</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">downloadLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">downloadLink</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">svgUrl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">downloadLink</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">downloadLink</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">downloadLink</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">downloadLink</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的<code>GitBook</code>插件中即可，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>。</p>
+
+<pre class="line-numbers language-javascript ">
+<code>function downloadURI(uri, name) {
+    var link = document.createElement(&#34;a&#34;);
+    link.download = name;
+    link.href = uri;
+    link.click();
+}</code>
+</pre>
+<p>但当用其测试<code>SVG</code>下载时，下载的文件一直为空且浏览器也没提示任何错误，多次搜索发现Chrome出于安全考虑，默认情况下不允许通过<code>JavaScript</code>下载<code>SVG</code>文件，需要做一些特殊处理来规避此限制， 继续查找后找到<a href="https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an">一篇说明</a>，其中给出了如下的解决方案，经本地测试可行。</p>
+
+<pre class="line-numbers language-javascript ">
+<code>function downloadSvg() {
+    var svg = document.getElementById(&#34;svg&#34;);
+    var serializer = new XMLSerializer();
+    var source = serializer.serializeToString(svg);
+    source = source.replace(/(\w&#43;)?:?xlink=/g, &#39;xmlns:xlink=&#39;); // Fix root xlink without namespace
+
+    source = source.replace(/ns\d&#43;:href/g, &#39;xlink:href&#39;); // Safari NS namespace fix.
+
+
+    if (!source.match(/^&lt;svg[^&gt;]&#43;xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/)) {
+        source = source.replace(/^&lt;svg/, &#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&#39;);
+    }
+    if (!source.match(/^&lt;svg[^&gt;]&#43;&#34;http\:\/\/www\.w3\.org\/1999\/xlink&#34;/)) {
+        source = source.replace(/^&lt;svg/, &#39;&lt;svg xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34;&#39;);
+    }
+
+
+    var preface = &#39;&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;\r\n&#39;;
+    var svgBlob = new Blob([preface, source], { type: &#34;image/svg&#43;xml;charset=utf-8&#34; });
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement(&#34;a&#34;);
+    downloadLink.href = svgUrl;
+    downloadLink.download = name;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}</code>
+</pre>
+<p>缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的<code>GitBook</code>插件中即可，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>。</p>
 <h2 id="显示效果">显示效果</h2>
 <p>添加缩放和下载按钮后后默认显示效果如下，其中下载按钮位于右上角，缩放按钮位于右下角</p>
 <p><img src="/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-width-tools.png" alt="Mermaid图表显示相关工具" title="Mermaid图表显示相关工具"></p>
@@ -430,188 +336,99 @@
 <ul>
 <li>
 <p><code>index.js</code>用于文件加载</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">processMermaidBlockList</span><span class="p">(</span><span class="nx">page</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">mermaidRegex</span> <span class="o">=</span> <span class="sr">/^[ \t]*```\s*mermaid[ \t]*$([^`]*(?:`[^`]+)*)```$/igm</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">download</span><span class="o">=</span><span class="s1">&#39;&lt;svg width=&#34;15&#34; height=&#34;15&#34; viewBox=&#34;0 0 8 8&#34; fill=&#34;#707070&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;m3 0v3h-2l3 3 3-3h-2v-3zm-3 7v1h8v-1z&#34;/&gt;&lt;/svg&gt;&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">page</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">mermaidRegex</span><span class="p">,</span> <span class="s1">&#39;&lt;div&gt;&lt;div class=&#34;download&#34; style=&#34;float:right;padding-right:35px;cursor:pointer&#34;&gt;&#39;</span>
-</span></span><span class="line"><span class="cl">                <span class="o">+</span><span class="nx">download</span><span class="o">+</span><span class="s1">&#39;&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;$1&lt;/div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">page</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">website</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">assets</span><span class="o">:</span> <span class="s1">&#39;dist&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">css</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;mermaid/mermaid.css&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">js</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;book/plugin.js&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;book/svg-pan-zoom.js&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">hooks</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;page:before&#39;</span><span class="o">:</span> <span class="nx">processMermaidBlockList</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-javascript ">
+<code>function processMermaidBlockList(page) {
+  const mermaidRegex = /^[ \t]*```\s*mermaid[ \t]*$([^`]*(?:`[^`]&#43;)*)```$/igm;
+  let download=&#39;&lt;svg width=&#34;15&#34; height=&#34;15&#34; viewBox=&#34;0 0 8 8&#34; fill=&#34;#707070&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;m3 0v3h-2l3 3 3-3h-2v-3zm-3 7v1h8v-1z&#34;/&gt;&lt;/svg&gt;&#39;;
+  page.content = page.content.replace(mermaidRegex, &#39;&lt;div&gt;&lt;div class=&#34;download&#34; style=&#34;float:right;padding-right:35px;cursor:pointer&#34;&gt;&#39;
+                &#43;download&#43;&#39;&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;$1&lt;/div&gt;&lt;/div&gt;&#39;);
+  return page;
+}
+
+module.exports = {
+  website: {
+    assets: &#39;dist&#39;,
+    css: [
+      &#39;mermaid/mermaid.css&#39;
+    ],
+    js: [
+      &#39;book/plugin.js&#39;,
+      &#39;book/svg-pan-zoom.js&#39;
+    ]
+  },
+  hooks: {
+    &#39;page:before&#39;: processMermaidBlockList
+  }
+};</code>
+</pre>
+</li>
 <li>
 <p><code>plugin.js</code>核心代码</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">require</span><span class="p">([</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;gitbook&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gitbook</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">gitbook</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;page.change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">mermaid</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">querySelector</span><span class="o">:</span> <span class="s1">&#39;.mermaid&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">postRenderCallback</span><span class="o">:</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		  <span class="kd">let</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  		  <span class="kd">let</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">getBBox</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">		  <span class="kd">let</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		  <span class="kd">let</span> <span class="nx">aHeight</span> <span class="o">=</span> <span class="nx">height</span> <span class="o">&gt;</span> <span class="mi">800</span> <span class="o">?</span> <span class="mi">800</span> <span class="o">:</span> <span class="nx">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		  <span class="nx">ele</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span><span class="s1">&#39;height: &#39;</span><span class="o">+</span><span class="nx">aHeight</span><span class="o">+</span><span class="s1">&#39;px;overflow:scroll;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">		  <span class="kd">let</span> <span class="nx">panZoomTiger</span> <span class="o">=</span> <span class="nx">svgPanZoom</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">+</span><span class="nx">id</span><span class="p">,{</span>
-</span></span><span class="line"><span class="cl">			  <span class="nx">zoomEnabled</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">			  <span class="nx">controlIconsEnabled</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">		  <span class="p">});</span>
-</span></span><span class="line"><span class="cl">		  <span class="nx">panZoomTiger</span><span class="p">.</span><span class="nx">resize</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">		  <span class="nx">panZoomTiger</span><span class="p">.</span><span class="nx">updateBBox</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		  <span class="kd">let</span> <span class="nx">download</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">previousSibling</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		  <span class="nx">download</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			  <span class="nx">downloadData</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">ele</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">		  <span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">downloadData</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="nx">ele</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  	<span class="c1">// remove svg-pan-zoom-controls for the download file
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">svg</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;svg-pan-zoom-controls&#34;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">serializer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLSerializer</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serializeToString</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(\w+)?:?xlink=/g</span><span class="p">,</span> <span class="s1">&#39;xmlns:xlink=&#39;</span><span class="p">);</span> <span class="c1">// Fix root xlink without namespace
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/ns\d+:href/g</span><span class="p">,</span> <span class="s1">&#39;xlink:href&#39;</span><span class="p">);</span> <span class="c1">// Safari NS namespace fix.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">source</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^&lt;svg[^&gt;]+xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^&lt;svg/</span><span class="p">,</span> <span class="s1">&#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">source</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^&lt;svg[^&gt;]+&#34;http\:\/\/www\.w3\.org\/1999\/xlink&#34;/</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">source</span> <span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^&lt;svg/</span><span class="p">,</span> <span class="s1">&#39;&lt;svg xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">preface</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;\r\n&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">svgBlob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="nx">preface</span><span class="p">,</span> <span class="nx">source</span><span class="p">],</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;image/svg+xml;charset=utf-8&#34;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">svgUrl</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">svgBlob</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">downloadLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;.svg&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">downloadLink</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">downloadLink</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">svgUrl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">downloadLink</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">downloadLink</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">downloadLink</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre class="line-numbers language-javascript ">
+<code>require([
+  &#39;gitbook&#39;
+], function (gitbook) {
+  gitbook.events.bind(&#39;page.change&#39;, function () {
+    mermaid.run({
+        querySelector: &#39;.mermaid&#39;,
+        postRenderCallback: (id) =&gt; {
+		  let ele = document.getElementById(id);
+  		  let svg = ele.getBBox();
+		  let height = svg.height;
+		  let aHeight = height &gt; 800 ? 800 : height;
+		  ele.setAttribute(&#39;style&#39;,&#39;height: &#39;&#43;aHeight&#43;&#39;px;overflow:scroll;&#39;);
+		  let panZoomTiger = svgPanZoom(&#39;#&#39;&#43;id,{
+			  zoomEnabled: true,
+			  controlIconsEnabled: true
+		  });
+		  panZoomTiger.resize();
+		  panZoomTiger.updateBBox();
+
+		  let download = ele.parentNode.previousSibling;
+		  download.addEventListener(&#39;click&#39;,e =&gt; {
+			  downloadData(id, ele);
+		  });
+        }
+    });
+  });
+});
+
+function downloadData(id,ele) {
+
+	let svg = ele.cloneNode(true);
+
+  	// remove svg-pan-zoom-controls for the download file
+	svg.getElementById(&#34;svg-pan-zoom-controls&#34;).remove();
+
+	let serializer = new XMLSerializer();
+	let source = serializer.serializeToString(svg);
+	source = source.replace(/(\w&#43;)?:?xlink=/g, &#39;xmlns:xlink=&#39;); // Fix root xlink without namespace
+	source = source.replace(/ns\d&#43;:href/g, &#39;xlink:href&#39;); // Safari NS namespace fix.
+
+
+	if (!source.match(/^&lt;svg[^&gt;]&#43;xmlns=&#34;http\:\/\/www\.w3\.org\/2000\/svg&#34;/)) {
+		source = source.replace(/^&lt;svg/, &#39;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&#39;);
+	}
+	if (!source.match(/^&lt;svg[^&gt;]&#43;&#34;http\:\/\/www\.w3\.org\/1999\/xlink&#34;/)) {
+		source = source.replace(/^&lt;svg/, &#39;&lt;svg xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34;&#39;);
+	}
+
+	let preface = &#39;&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;\r\n&#39;;
+	let svgBlob = new Blob([preface, source], { type: &#34;image/svg&#43;xml;charset=utf-8&#34; });
+	let svgUrl = URL.createObjectURL(svgBlob);
+	let downloadLink = document.createElement(&#34;a&#34;);
+	let name = id &#43; &#39;.svg&#39;;
+
+	downloadLink.download = name;
+	downloadLink.href = svgUrl;
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
+	document.body.removeChild(downloadLink);
+}</code>
+</pre>
+</li>
 </ul>
     </div>
 
@@ -783,44 +600,56 @@
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 </html>
