@@ -341,7 +341,7 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
 <p><code>volatile</code>关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了<code>volatile</code>禁止重排序的功能，详细说明请参见<a href="https://item.jd.com/11740734.html">Java并发编程的艺术</a>P67中的 <strong>双重检查锁定与延迟初始化</strong> 。</p>
 <p>代码清单3: 利用双重检查实现线程安全的单例模式</p>
 
-<pre class="line-numbers language- ">
+<pre class="line-numbers language-java ">
 <code>public class Singleton {
 
 	private static volatile Singleton instance = null;
