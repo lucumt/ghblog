@@ -105,11 +105,12 @@
     },
 	series: JSON.parse({{ jsonify $data }})
 });
+let random = (Math.random() * 10 ) << 0;
 let heatData = JSON.parse({{ jsonify $heatData }});
 heatData = heatData.map(item => {
   return {
     ...item,
-    color: Highcharts.getOptions().colors[item['color']]
+    color: Highcharts.getOptions().colors[(item['color'] + random)%10]
   };
 });
 Highcharts.chart('category_heat_chart', {
