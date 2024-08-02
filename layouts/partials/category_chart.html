@@ -4,6 +4,7 @@
 	{{ $tagCount = merge $tagCount (dict $name .Count) -}}
 {{end}}
 {{ $data := slice -}}
+{{ $heatData := slice -}}
 {{ range $key, $value := $terms -}}
 	 {{ $tags := (slice) }} 
 	 {{ range $k1, $v1 := $value.Pages -}}
@@ -13,15 +14,37 @@
 		  {{ end -}}
 	 {{ end -}}
 	 {{ $subData := slice -}}
+	 {{ $heatCateTotal := 0 -}}
+	 
+	 {{- $cateName := $value.Term -}}
+	 {{- $cateId := print "cate-" print $cateName -}}
+	 {{- $cateColor := math.Rand | mul 10 | math.Floor -}}
+	 
 	 {{ range $kt, $vt := $tags -}}
-		 {{ $subData = $subData | append (dict "name" $vt "value" (index $tagCount $vt)) -}}
+	     {{- $heatTagCount := (int (index $tagCount $vt)) -}}
+		 {{- $heatCateTotal = add $heatCateTotal $heatTagCount -}}
+		 {{- $subData = $subData | append (dict "name" $vt "value" $heatTagCount) -}}
+		 
+		 {{- $tagId := print $cateName print "-" print $vt -}}
+		 {{- $heatTagData := dict "name" $vt "id" $tagId "color" $cateColor "value" $heatTagCount "parent" $cateId -}}
+		 {{- $heatData = $heatData | append $heatTagData -}}
 	 {{ end -}}
-	 {{ $cateData := dict "name" $value.Term "data" $subData -}}
+	 {{- $cateData := dict "name" $cateName "data" $subData -}}
+	 {{- $heatCateData := dict "name" $cateName "id" $cateId "color" $cateColor "value" $heatCateTotal -}}
+	 {{- $heatData = $heatData | append $heatCateData -}}
 	 {{ $data = $data | append $cateData -}}
 {{ end -}}
-<div id="category_bubble_chart"></div>
+<style type="text/css">
+  .chart_style{
+     margin-top:30px;
+	 border:1px dashed #a9a4a4;
+  }
+</style>
+<div id="category_heat_chart" class="chart_style"></div>
+<div id="category_bubble_chart" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/treemap.js"></script>
 <script type="text/javascript">
 	Highcharts.chart('category_bubble_chart', {
     chart: {
@@ -81,5 +104,46 @@
         }
     },
 	series: JSON.parse({{ jsonify $data }})
+});
+let heatData = JSON.parse({{ jsonify $heatData }});
+heatData = heatData.map(item => {
+  return {
+    ...item,
+    color: Highcharts.getOptions().colors[item['color']]
+  };
+});
+Highcharts.chart('category_heat_chart', {
+	series: [{
+		name: '分类',
+		type: 'treemap',
+		layoutAlgorithm: 'squarified',
+		allowDrillToNode: true,
+		animationLimit: 1000,
+		dataLabels: {
+			enabled: false
+		},
+		levels: [{
+			level: 1,
+			dataLabels: {
+				enabled: true
+			},
+			borderWidth: 3,
+			levelIsConstant: false
+		}, {
+			level: 1,
+			dataLabels: {
+				style: {
+					fontSize: '14px'
+				}
+			}
+		}],
+		accessibility: {
+			exposeAsGroupOnly: true
+		},
+		data: heatData
+	}],
+	title:{
+      text:''
+    }
 });
 </script>
