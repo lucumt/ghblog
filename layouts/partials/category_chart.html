@@ -34,12 +34,6 @@
 	 {{- $heatData = $heatData | append $heatCateData -}}
 	 {{ $data = $data | append $cateData -}}
 {{ end -}}
-<style type="text/css">
-  .chart_style{
-     margin-top:30px;
-	 border:1px dashed #a9a4a4;
-  }
-</style>
 <div id="category_heat_chart" class="chart_style"></div>
 <div id="category_bubble_chart" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>

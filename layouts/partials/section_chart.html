@@ -52,13 +52,6 @@
 	{{ end -}}
     {{ $monthYearData = $monthYearData | append (dict "name" . "data" $monthValue) -}}
 {{ end -}}
-
-<style type="text/css">
-  .chart_style{
-     margin-top:30px;
-	 border:1px dashed #a9a4a4;
-  }
-</style>
 <div id="section_year_chart_1" class="chart_style"></div>
 <div id="section_month_chart_1" class="chart_style"></div>
 <div id="section_year_chart_2" class="chart_style"></div>
