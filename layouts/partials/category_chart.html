@@ -46,7 +46,7 @@
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/treemap.js"></script>
 <script type="text/javascript">
-	Highcharts.chart('category_bubble_chart', {
+Highcharts.chart('category_bubble_chart', {
     chart: {
         type: 'packedbubble',
         height: '70%'
@@ -107,9 +107,14 @@
 });
 let random = (Math.random() * 10 ) << 0;
 let heatData = JSON.parse({{ jsonify $heatData }});
+let heatValueData = heatData.map(m => m.value);
+let heatMax = Math.max(...heatValueData);
+let heatMin = Math.min(...heatValueData);
 heatData = heatData.map(item => {
   return {
     ...item,
+	val: item.value,
+	value: (item.value-heatMin)/(heatMax-heatMin),
     color: Highcharts.getOptions().colors[(item['color'] + random)%10]
   };
 });
@@ -145,6 +150,11 @@ Highcharts.chart('category_heat_chart', {
 	}],
 	title:{
       text:''
+    },
+	tooltip: {
+        formatter: function() {
+           return '<b>' + this.point.name + '</b>:' + this.point.val;
+        }
     }
 });
 </script>

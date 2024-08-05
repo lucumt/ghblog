@@ -1,10 +1,10 @@
 +++
 author = "飞狐"
 categories = ["个人博客"]
-tags = ["github-pages","github","HTTPS"]
+tags = ["Github Pages","github","HTTPS"]
 date = "2017-12-24T10:28:03+08:00"
 description = "将基于Github Pages的自定义域名博客迁移到HTTPS"
-keywords = ["github-pages","github","https"]
+keywords = ["Github Pages","github","https"]
 title = "将基于Github Pages的自定义域名博客迁移到HTTPS"
 
 +++

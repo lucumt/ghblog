@@ -2,10 +2,10 @@
 
 author = "飞狐"
 categories = ["Go编程","个人博客"]
-tags=["Go","Hugo","github-pages","github"]
+tags=["Go","Hugo","Github Pages","Github"]
 date = "2016-02-27T22:23:37+08:00"
 description = "Blog of Rosen Lu"
-keywords = ["github-pages","github","Go","Hugo"]
+keywords = ["github pages","github","Go","Hugo"]
 title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 +++
