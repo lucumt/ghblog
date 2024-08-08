@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -204,7 +204,7 @@
 <h1 id="自增主键过滤">自增主键过滤</h1>
 <p>若<strong>主键连续自增</strong>，则可从业务逻辑的角度先对数据用<code>WHERE</code>过滤，然后用<code>LIMIT</code>进行分页，类似SQL如下：</p>
 
-<pre class="language-sql ">
+<pre class="no-line-numbers language-sql ">
 <code>SELECT * FROM `system_user` WHERE id&gt;=9999990 LIMIT 10;</code>
 </pre>
 <p>执行结果如下，可以看出时间明显缩短很多</p>

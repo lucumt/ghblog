@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -240,7 +240,7 @@ ENTRYPOINT echo &#34;Hello, $name&#34;</code>
 </pre>
 <p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>Hello, John Dow</code>
 </pre>
 <p>可以看出在输出结果中变量name已经被其实际值替换了。</p>
@@ -262,7 +262,7 @@ ENTRYPOINT [&#34;/bin/echo&#34;, &#34;Hello, $name&#34;]</code>
 </pre>
 <p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
 
-<pre class="language- ">
+<pre class="no-line-numbers language- ">
 <code>Hello, $name</code>
 </pre>
 <p>可看出输出结果中的name变量并没有被解析替换。</p>
@@ -275,7 +275,7 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
 </pre>
 <p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>Hello, John Dow</code>
 </pre>
 <h1 id="run指令">RUN指令</h1>
@@ -308,17 +308,17 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
 <p>再次说明，前面已对第1种和第3种方式进行了解释，第2种方式则是在<code>exec模式</code>下和<code>ENTRYPOINT</code>组合使用，如果容器在没有命令行参数的情况下运行，它会设置将在<code>ENTRYPOINT</code>指令之后附加的默认参数。具体请查看<code>ENTRYPOINT</code>相关的说明。</p>
 <p>我们以下述<code>Dockerfile</code>中的代码片段为例，来看下<code>CMD</code>指令是如何运行的</p>
 
-<pre class="language-dockerfile ">
+<pre class="no-line-numbers language-dockerfile ">
 <code>CMD echo &#34;Hello world&#34; </code>
 </pre>
 <p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，会有如下输出</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>Hello world</code>
 </pre>
 <p>但若运行容器时有附带的命令，如<code>docker run -it &lt;image&gt; /bin/bash</code>，此时<code>CMD</code>指令会被忽略，默认的<code>bash</code>会执行</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>root@7de4bed89922:/#</code>
 </pre>
 <h1 id="entrypoint指令">ENTRYPOINT指令</h1>
@@ -338,12 +338,12 @@ CMD [&#34;world&#34;]</code>
 </pre>
 <p>当以<code>docker run -it &lt;image&gt;</code>的形式运行容器时，输出如下</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>Hello world</code>
 </pre>
 <p>但当<code>Docker</code>容器以<code>docker run -it &lt;image&gt; John</code>的形式运行时，输出如下</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>Hello John</code>
 </pre>
 <h2 id="shell模式-1">Shell模式</h2>

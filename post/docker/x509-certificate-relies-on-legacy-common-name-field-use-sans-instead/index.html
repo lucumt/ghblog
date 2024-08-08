@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -202,7 +202,7 @@ openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days
 <li>
 <p>在<code>/etc/hosts</code>中将<code>dockerhub.kubekey.local</code>映射到当前服务器IP地址</p>
 
-<pre class="language- ">
+<pre class="no-line-numbers language- ">
 <code>192.168.0.2 dockerhub.kubekey.local</code>
 </pre>
 </li>
@@ -252,7 +252,7 @@ cp certs/domain.crt  /etc/docker/certs.d/dockerhub.kubekey.local/ca.crt</code>
 <li>
 <p>对原有生成证书的步骤改进如下，然后重新执行生成证书</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>openssl req  -addext &#34;subjectAltName = DNS:dockerhub.kubekey.local&#34; -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days 36500 -out certs/domain.crt</code>
 </pre>
 </li>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -57,7 +57,7 @@
   <meta itemprop="description" content="Blog of Rosen Lu">
   <meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00">
   <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00">
-  <meta itemprop="wordCount" content="2542">
+  <meta itemprop="wordCount" content="2539">
   <meta itemprop="keywords" content="github pages,github,Go,Hugo">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客">
@@ -180,7 +180,7 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
     <li><a href="#环境准备">环境准备</a></li>
@@ -262,7 +262,7 @@ go version go1.18.3 windows/amd64</code>
 <li>
 <p>首先在<a href="https://github.com/spf13/hugo/releases"><strong>Hugo下载页</strong></a>根据自己操作系统的类型和位数下载相应的安装包，然后设置对应的<strong>PATH</strong>环境变量即可。我的安装在 D:\program\hugo所以相应的环境变量设置为</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>PATH=&#39;D:\program\hugo&#39;;%PATH%</code>
 </pre>
 </li>
@@ -305,9 +305,28 @@ hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284&#43;extended windows/amd6
 </ol>
 <h3 id="相关命令">相关命令</h3>
 <ol>
-<li>生成绑定到指定域名的页面 <code>hugo server -D --baseUrl=&quot;http://lucumt.info&quot; --appendPort=false</code></li>
-<li>新版本的命令为<code>hugo server --baseUrl=&quot;https://lucumt.info/&quot; --watch=false --appendPort=false --renderToDisk --environment production</code></li>
-<li>将 <code>master</code>的<code>public</code>目录同步到分支 <code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code></li>
+<li>
+<p>生成绑定到指定域名的页面</p>
+
+<pre class="no-line-numbers language-bash ">
+<code>hugo server -D --baseUrl=&#34;http://lucumt.info&#34; --appendPort=false</code>
+</pre>
+</li>
+<li>
+<p>新版本的命令</p>
+
+<pre class="line-numbers language-bash ">
+<code>hugo server --baseUrl=&#34;https://lucumt.info/&#34; --watch=false \
+--appendPort=false --renderToDisk --environment production</code>
+</pre>
+</li>
+<li>
+<p>将 <code>master</code>的<code>public</code>目录同步到分支</p>
+
+<pre class="no-line-numbers language-bash ">
+<code>git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages</code>
+</pre>
+</li>
 </ol>
 <h2 id="利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</h2>
 <p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/"><strong>Using a custom domain with GitHub Pages</strong></a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<a href="https://www.godaddy.com/"><strong>GoDaddy</strong></a>上的说明来设置的。</p>

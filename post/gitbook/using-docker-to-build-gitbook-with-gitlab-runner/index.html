@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -379,19 +379,19 @@ apt install -y jq</code>
 <li>
 <p>运行下述指令构建需要的镜像</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>docker build -t gitbook_custom:v1.0</code>
 </pre>
 <p><code>Dockerfile</code>在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>docker build -t gitbook_custom:v1.0  --progress string . --no-cache</code>
 </pre>
 </li>
 <li>
 <p>执行下述指令启动<code>Docker</code>容器并执行相关的初始化操作</p>
 
-<pre class="language-bash ">
+<pre class="no-line-numbers language-bash ">
 <code>docker-compose down &amp;&amp; docker-compose up -d &amp;&amp; bash gitlab_runner_config_init.sh</code>
 </pre>
 </li>
@@ -570,12 +570,12 @@ build:
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-menu.png" alt="GitBook默认菜单展示" title="GitBook默认菜单展示"></p>
 <p>将默认目录从</p>
 
-<pre class="language-markdown ">
+<pre class="no-line-numbers language-markdown ">
 <code>* [Introduction](README.md)</code>
 </pre>
 <p>修改为</p>
 
-<pre class="language-markdown ">
+<pre class="no-line-numbers language-markdown ">
 <code>* [概览](README.md)</code>
 </pre>
 <p>之后的展示效果类似如下</p>

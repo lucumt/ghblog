@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -294,7 +294,7 @@ fun `Square of a number`(input: Int, expected: Int) {
 </pre>
 <p>若没有添加<code>@JvmStatic</code>注解将会出现如下错误：</p>
 
-<pre class="language-kotlin ">
+<pre class="no-line-numbers language-kotlin ">
 <code>org.junit.platform.commons.JUnitException: Could not find method [squares] in class [com.arhohuttunen.junit5.kotlin.CalculatorParameterizedTest]</code>
 </pre>
 <p>利用此种方式实现参数化测试虽然能正常工作但却没有<code>Java</code>中的方便，另一个需要注意的是每个类中只能有一个伴生对象，因此所有需要提供参数的方法需要组织在一起。</p>
@@ -401,7 +401,7 @@ fun `Square of a number`() = listOf(
 </pre>
 <p>但是，如果我们编写类似的代码并执行，将会看见一个关于属性为私有的错误消息:</p>
 
-<pre class="language-kotlin ">
+<pre class="no-line-numbers language-kotlin ">
 <code>org.junit.platform.commons.PreconditionViolationException: Failed to register extension via @RegisterExtension field [private static final com.arhohuttunen.junit5.kotlin.JettyExtension com.arhohuttunen.junit5.kotlin.RegisterStaticExtensionTest.jettyExtension]: field must not be private.</code>
 </pre>
 <p>解决方案为给该属性添加<code>@JvmField</code>注解：</p>

@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f5b6d45aa2307b7bc0ad200e6ee32e641909ebb1790bf2c876382c8af8fd50d1.css" rel="stylesheet">
+<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -195,12 +195,12 @@
 <h1 id="问题描述">问题描述</h1>
 <p>项目中有类似如下的字符串输入参数</p>
 
-<pre class="language- ">
+<pre class="no-line-numbers language- ">
 <code>010$$fengtai,010$$chaoyang,010$$haidain,027$$wuchang,027$$hongshan,027$$caidan,021$$changnin,021$$xuhui,020$$tianhe</code>
 </pre>
 <p>调用方期望将输入参数转化为如下格式(即首先根据<code>,</code>进行分割，然后在根据<code>$$</code>进行进一步的拆分，最终的结果是按照<code>$$</code>前面的数据为key，<code>$$</code>后面的数据分别放入同一个数组中，最终结果以<code>Map&lt;String, List&lt;String&gt;&gt;</code>的格式返回)。</p>
 
-<pre class="language- ">
+<pre class="no-line-numbers language- ">
 <code>{027=[wuchang, hongshan, caidan], 020=[tianhe], 010=[fengtai, chaoyang, haidain], 021=[changnin, xuhui]}</code>
 </pre>
 <h1 id="传统方式">传统方式</h1>
