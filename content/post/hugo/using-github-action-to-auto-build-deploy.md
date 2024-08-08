@@ -47,27 +47,37 @@ sequenceDiagrams:
 
 自己的个人博客创建于2016年，在这期间自己一直基于如下方式创建并部署更新博客：
 
-1. 利用`hugo`命令创建对应的博客markdown文件
+1.利用`hugo`命令创建对应的博客markdown文件
 
-   `hugo new post/hugo/using-github-action-to-auto-build-deploy.md`
+```bash
+hugo new post/hugo/using-github-action-to-auto-build-deploy.md
+```
 
-2. 利用下述命令开启`hugo`博客的动态监听展示，并进行编写
+2.利用下述命令开启`hugo`博客的动态监听展示，并进行编写
 
-   `hugo server -w -D`
+```bash
+hugo server -w -D
+```
 
-3. 博客内容编写完成后，利用下述命令将其切换到实际部署环境
+3.博客内容编写完成后，利用下述命令将其切换到实际部署环境
 
-   `hugo server --baseUrl="https://lucumt.info/" --watch=false --appendPort=false --renderToDisk --environment production`
+```bash
+hugo server --baseUrl="https://lucumt.info/" --watch=false --appendPort=false --renderToDisk --environment production
+```
 
-4. 执行下述命令提交到`master`分支
+4.执行下述命令提交到`master`分支
 
-   * `git add -A`
-   * `git commit -a -m "xxxx"`
-   * `git push origin master`
+```bash
+git add -A
+git commit -a -m "xxxx"
+git push origin master
+```
 
-5. 利用下述命令将`public`目录中的内容从`master` 分支同步到`gh-pages`分支
+5.利用下述命令将`public`目录中的内容从`master` 分支同步到`gh-pages`分支
 
-   `git subtree push --prefix=public git@github.com:lucumt/ghblog.git gh-pages`
+```bash
+git subtree push --prefix=public git@github.com:lucumt/ghblog.git gh-pages
+```
 
 上述过程中的1,2,4阶段是编写博客的必经阶段，而3,5阶段其实没太多必要，完全可以用工具自动化实现。作为IT从业者，我们需要尽可能的减少不必要的操作。
 
@@ -114,36 +124,37 @@ jobs:
 
 该配置代码已经很完善，个人根据实际情况对其做了如下修改：
 
-1. 在Build阶段，将`hugo`命令改为适合个人环境的`hugo -b "https://lucumt.info/" -e "production"`
-2. 在个人`GitHub`中设置`github_token`
+1.在Build阶段，将`hugo`命令改为适合个人环境的`hugo -b "https://lucumt.info/" -e "production"`
+
+2.在个人`GitHub`中设置`github_token`
 
 其中关于`github_token`的配置可按如下步骤配置：
 
-1. 在个人`GitHub`页面，依次点击`Settings`->`Developer settings`->`Personal access tokens`进入如下页面：
+1.在个人`GitHub`页面，依次点击`Settings`->`Developer settings`->`Personal access tokens`进入如下页面：
 
-   ![设置personal access token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-new-token.png "设置personal access token")  
+![设置personal access token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-new-token.png "设置personal access token")  
 
-2. 点击`Generate new token`出现如下界面，在Note中输入名称，在Select scopes选择`workflow`
+2.点击`Generate new token`出现如下界面，在Note中输入名称，在Select scopes选择`workflow`
 
-   ![设置token信息](/blog_img/hugo/using-github-action-to-auto-build-deploy/set-personal-access-token.png "设置token信息")  
+![设置token信息](/blog_img/hugo/using-github-action-to-auto-build-deploy/set-personal-access-token.png "设置token信息")  
 
-3. 将生成的token复制出来为后续创建`secret`做准备，注意必须及时复制，一旦离开此页面后续就无法查看其值，只能重新创建新token：
+3.将生成的token复制出来为后续创建`secret`做准备，注意必须及时复制，一旦离开此页面后续就无法查看其值，只能重新创建新token：
 
-   ![复制生成的token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-new-token-result.png "复制生成的token")  
+![复制生成的token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-new-token-result.png "复制生成的token")  
 
-4. 进入对应的`GitHub`项目下，依次点击`Settings`->`Secrets`->`Actions`进入添加`Action secrets`的界面，点击`New repository secret`按钮
+4.进入对应的`GitHub`项目下，依次点击`Settings`->`Secrets`->`Actions`进入添加`Action secrets`的界面，点击`New repository secret`按钮
 
-   ![创建action secret token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-action-secrets.png "创建action secret token")  
+![创建action secret token](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-action-secrets.png "创建action secret token")  
 
-5. 在出现的界面中`name`部分输入我们设置的值，`Secret`部分输入步骤3中记录的token值，然后点击`Add secret`按钮
+5.在出现的界面中`name`部分输入我们设置的值，`Secret`部分输入步骤3中记录的token值，然后点击`Add secret`按钮
 
-   ![设置action secret](/blog_img/hugo/using-github-action-to-auto-build-deploy/set-action-secrets.png "设置action secret")  
+![设置action secret](/blog_img/hugo/using-github-action-to-auto-build-deploy/set-action-secrets.png "设置action secret")  
 
-   需要注意的是`name`的值不能以`GITHUB_`开头，否则创建会出错
+需要注意的是`name`的值不能以`GITHUB_`开头，否则创建会出错
 
-   ![设置action secret失败](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-action-secrets-name-violation.png "设置action secret失败")  
+![设置action secret失败](/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-action-secrets-name-violation.png "设置action secret失败")  
 
-6. 在流水线中将`github_token`值设置为步骤5中`secret`的名称，类似`${{ secrets.GH_PAGE_ACTION_TOKEN }}s`，至此`github_token`设置过程完毕。
+6.在流水线中将`github_token`值设置为步骤5中`secret`的名称，类似`${{ secrets.GH_PAGE_ACTION_TOKEN }}s`，至此`github_token`设置过程完毕。
 
 配置后完整的流水线代码如下：
 

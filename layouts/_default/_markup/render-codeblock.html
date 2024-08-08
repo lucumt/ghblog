@@ -3,6 +3,8 @@
 {{- $lineCount := len (split .Inner "\n") -}}
 {{- if gt $lineCount 1 }}
   {{- $classStr = print "line-numbers " print $classStr  }}
+{{- else -}}
+  {{- $classStr = print "no-line-numbers " print $classStr  }}
 {{- end }}
 
 {{- $attributes := .Attributes }}

@@ -7,12 +7,12 @@ date = "2016-02-27T22:23:37+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["github pages","github","Go","Hugo"]
 title = "利用Github Pages和基于Go的Hugo搭建个人博客"
+autoCollapseToc = "false"
 
 +++
 
 一直以来都想拥有一个属于自己的博客，前段时间在学习`Go` ，于是利用`Hugo` 和`Github Pages` 搭建了一个简易的个人博客，先简单记录下。 
 
-[//]:(设置前面的内容为summary)
 <!--more-->
 
 # 环境准备
@@ -111,9 +111,24 @@ title = "利用Github Pages和基于Go的Hugo搭建个人博客"
 
 ### 相关命令
 
-1. 生成绑定到指定域名的页面 `hugo server -D --baseUrl="http://lucumt.info" --appendPort=false` 
-1. 新版本的命令为`hugo server --baseUrl="https://lucumt.info/" --watch=false --appendPort=false --renderToDisk --environment production`
-2. 将 `master`的`public`目录同步到分支 `git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages`
+1. 生成绑定到指定域名的页面
+
+   ```bash
+   hugo server -D --baseUrl="http://lucumt.info" --appendPort=false
+   ```
+
+2. 新版本的命令
+
+   ```bash
+   hugo server --baseUrl="https://lucumt.info/" --watch=false \
+   --appendPort=false --renderToDisk --environment production
+   ```
+
+3. 将 `master`的`public`目录同步到分支 
+
+   ```bash
+   git subtree push --prefix=public git@github.com:fox321/blog.git gh-pages
+   ```
 
 ## 利用GoDaddy配置自定义域名
 
