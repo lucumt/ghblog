@@ -196,7 +196,7 @@ highchartsDiagrams:
 
 地图数据用于默认展示车辆在地图中的移动轨迹，其只能选择特定类型的`topic`，相关配置过程如下：
 
-1. 创建完地图面板后展示效果如下，可以看出其结果空白，这是由于`Foxglove`中的地图默认采用的是`OpenStreetMap`二期在国内访问受限制，需要设置为国内的地图源
+1. 创建完地图面板后展示效果如下，可以看出其结果空白，这是由于`Foxglove`中的地图默认采用的是`OpenStreetMap`而其在国内访问受限制，需要设置为国内的地图源
 
    ![foxglove地图面板不展示](/blog_img/web/foxglove-function-instructions/foxglove_map_panel_not_render.png  "foxglove地图面板不展示")
 
