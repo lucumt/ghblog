@@ -50,7 +50,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2024-07-30T18:31:44+08:00">
+  <meta itemprop="dateModified" content="2024-08-23T13:17:18+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
@@ -152,6 +152,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/">利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-01-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>工作中涉及到<code>Kubernetes</code>相关知识，自己之前一直没有系统性的学习<code>Kubernetes</code>，近期在腾讯云上想安装<code>Kubernetes</code>时一直遇到在执行<code>kubeadm init</code>时<code>6443</code>和<code>10280</code>端口无法访问导致操作失败进而无法顺利安装<code>Kubernetes</code>。一番排查后发现是由于从<code>1.24.0</code>之后<code>Kubernetes</code>默认采用<code>containerd</code>作为运行时容器，其默认镜像为<code>registry.k8s.io</code>，该镜像在国内无法访问导致的，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/python/using-global-variable-in-different-module/">在Python的不同模块中使用全局变量</a></h1>
@@ -342,27 +363,6 @@
     </div>
     <div class="read-more">
       <a href="/post/js/using-reduce-function-on-array/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/share-experience-for-using-hugo-even-theme/">个人Hugo博客关于Even主题的一些使用改进</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-09-18 </span>
-      <div class="post-category">
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>记录下个人<a href="https://gohugo.io/"><strong>Hugo</strong></a>博客使用<a href="https://github.com/olOwOlo/hugo-theme-even"><strong>Even</strong></a>主题时的一些使用心得与个人改进。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/share-experience-for-using-hugo-even-theme/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

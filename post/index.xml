@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jul 2024 19:37:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 23 Aug 2024 13:17:18 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]Git Worktree使用说明</title>
+      <link>https://lucumt.info/post/translate/git/git-worktree/</link>
+      <pubDate>Fri, 23 Aug 2024 13:17:18 +0800</pubDate>
+      <guid>https://lucumt.info/post/translate/git/git-worktree/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://fev.al/posts/git-worktree/&#34;&gt;&lt;strong&gt;Git Worktree&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>KubeSphere中整合LDAP后不生效的原因分析</title>
       <link>https://lucumt.info/post/devops/ldap-integration-not-working/</link>

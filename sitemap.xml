@@ -2,22 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-07-30T18:31:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
-    <lastmod>2024-07-30T18:31:44+08:00</lastmod>
+    <loc>https://lucumt.info/post/translate/git/git-worktree/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2024-07-03T19:37:01+08:00</lastmod>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/git/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,13 +66,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/ldap/</loc>
-    <lastmod>2024-07-03T19:37:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
     <lastmod>2024-07-03T19:37:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -163,13 +184,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2024-04-26T10:46:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/</loc>
     <lastmod>2024-04-26T10:46:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -206,13 +220,6 @@
   
   <url>
     <loc>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</loc>
-    <lastmod>2024-04-03T10:12:47+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/git/</loc>
     <lastmod>2024-04-03T10:12:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
