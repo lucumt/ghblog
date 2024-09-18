@@ -183,7 +183,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要介绍如何在<code>docker</code>环境下利用<a href="https://grafana.com/"><strong>Grafana</strong></a>和<a href="https://prometheus.io/"><strong>Prometheus</strong></a>对系统进行监控。</p>
-<h1 id="软件安装">软件安装</h1>
+<h2 id="软件安装">软件安装</h2>
 <p>在<a href="/post/ldap/add-ldap-support-for-grafana/"><strong>给Grafana软件集成LDAP实现单点登录</strong></a>一文中简要说明了如何基于<code>docker</code>安装<code>Grafana</code>，本节出于简化使用与维护的目的，将<code>Grafana</code>与<code>Prometheus</code>合并到一个<code>docker-compose.yml</code>文件中，相关的文件如下</p>
 <p><code>docker-compose.yml</code>文件</p>
 
@@ -270,7 +270,7 @@ scrape_configs:
 docker-compose.yml  grafana_data  ldap.toml  prometheus.yml  prometheus_data
 root@lucumt:~/grafana# docker-compose up -d</code>
 </pre>
-<h1 id="系统接入">系统接入</h1>
+<h2 id="系统接入">系统接入</h2>
 <p>主要基于<code>node exporter</code>实现，参考 <a href="https://www.cnblogs.com/rainbow-tan/p/16623772.html"><strong>centos7安装node export</strong></a> 一文进行相关操作。</p>
 <ol>
 <li>

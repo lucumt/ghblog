@@ -184,24 +184,22 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#选型说明">选型说明</a></li>
-    <li><a href="#实践过程">实践过程</a>
+    <li>
       <ul>
-        <li><a href="#持续集成">持续集成</a>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#选型说明">选型说明</a></li>
+        <li><a href="#实践过程">实践过程</a>
           <ul>
-            <li><a href="#初始实现">初始实现</a></li>
-            <li><a href="#环境扩容">环境扩容</a></li>
-            <li><a href="#扩展功能">扩展功能</a></li>
+            <li><a href="#持续集成">持续集成</a></li>
+            <li><a href="#外部部署">外部部署</a></li>
+            <li><a href="#使用协助">使用协助</a></li>
           </ul>
         </li>
-        <li><a href="#外部部署">外部部署</a></li>
-        <li><a href="#使用协助">使用协助</a></li>
+        <li><a href="#使用效果">使用效果</a></li>
+        <li><a href="#规划">规划</a></li>
+        <li><a href="#参考文章">参考文章</a></li>
       </ul>
     </li>
-    <li><a href="#使用效果">使用效果</a></li>
-    <li><a href="#规划">规划</a></li>
-    <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav>
   </div>
@@ -211,7 +209,7 @@
 	
     <div class="post-content image-border">
 	 <p>我司从2022年6月开始使用<code>KubeSphere</code>到目前为止快一年时间，简要记录下此过程中的经验积累和问题反馈。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>公司当前有接近3000人的规模，主要业务为汽车配套相关的软硬件开发，其中专门从事软件开发约有800人，这其中<code>Java</code>开发的约占70%，余下的为<code>C/C++</code>嵌入式和<code>C#</code>桌面程序的开发。</p>
 <p>在<code>Java</code>开发部分约80%的都是<code>Java EE</code>开发，由于公司的业务主要是给外部客户提供软硬件产品和咨询服务，在早期公司和部门更关注的是如何将产品销售给更多的客户、获得更多的订单和尽快回款，对软件开发流程这块没有过多的重视，故早期在软件开发部分不是特别规范化。软件开发基于项目主要采用<a href="https://zh.wikipedia.org/zh-hans/%E6%95%8F%E6%8D%B7%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91">敏捷开发</a>或<a href="https://zh.wikipedia.org/wiki/%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B">瀑布模型</a>，而对于软件部署和运维依旧采用的纯手工方式(PS:请不要鄙视我司!)</p>
 <p>随着公司规模的扩大与软件产品线的增多，上述方式逐渐暴露出一些问题：</p>
@@ -223,7 +221,7 @@
 <li>不同客户的定制化功能太多(logo,字体，ip地址，业务逻辑等)，采用手工打包的方式效率低，容易遗漏出错</li>
 </ul>
 <p>在竞争日益激烈的市场环境下，<strong>公司需要把有限的人力资源优先用于业务迭代开发</strong>，解决上述问题变得愈发迫切。</p>
-<h1 id="选型说明">选型说明</h1>
+<h2 id="选型说明">选型说明</h2>
 <p>基于前述原因，部门准备选用网络上开源的系统来尽可能的解决上述痛点，在技术选型时有如下考量点：</p>
 <ul>
 <li>采用尽量少的系统，最好一套系统能解决前述所有问题，避免多个系统维护和整合的成本</li>
@@ -278,11 +276,11 @@
 <p><code>KubeSphere</code>在多个指标上优于<code>Zadig</code>，尤其是<code>KubeSphere</code>的UI界面十分美观比<code>Zadig</code>强很多，故最终选定<code>KubeSphere</code>作为部门内部的持续集成与容器化管理系统！</p>
 <p>至此，部门内部经历了<code>手工操作</code>-&gt;<code>Jenkins</code>-&gt;<code>KubeSphere</code>这3个阶段，各阶段的主要使用点如下：</p>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/different-type-of-deploy-compare.png" alt="不同类型的构建方式比较" title="不同类型的构建方式比较"></p>
-<h1 id="实践过程">实践过程</h1>
+<h2 id="实践过程">实践过程</h2>
 <p><code>KubeSphere</code>在公司内部的整体部署架构如下图所示，其作为最顶层的应用程序直接与使用人员交互，提供主动 /定时触发构建、应用监控等功能，使用人员不必关心底层的<code>Jenkins</code>、<code>Kubernetes</code>等依赖组件，只需要与<code>Gitlab</code>和<code>KubeSphere</code>交互即可。</p>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-integration-architecture.png" alt="kubesphere整合架构图" title="kubesphere整合架构图"></p>
-<h2 id="持续集成">持续集成</h2>
-<h3 id="初始实现">初始实现</h3>
+<h3 id="持续集成">持续集成</h3>
+<h4 id="初始实现">初始实现</h4>
 <p>在最初的尝试阶段只规划了4套环境:<code>dev</code>(开发环境)、<code>sit</code>(调试环境)、<code>test</code>(测试环境)、<code>prod</code>(生产环境)。</p>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-jekins-to-deploy-automatic.png" alt="利用Jenkins进行自动部署" title="利用Jenkins进行自动部署"></p>
 <p>出于简化使用与维护的考虑，计划对每个工程模块只维护一条流水线，通过构建时选择不同的环境参数来实现定制化打包与部署。</p>
@@ -353,7 +351,7 @@
 <p>运行效果类似下图</p>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-run-dialog.png" alt="KubeSphere流水线运行效果" title="KubeSphere流水线运行效果"></p>
 <p>详细内容请参见<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>。</p>
-<h3 id="环境扩容">环境扩容</h3>
+<h4 id="环境扩容">环境扩容</h4>
 <p>基于前述方式搭建的4套环境一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
 <p>结合项目实际情况以及避免后续再次修改<code>KubeSphere</code>流水线，为了实现<strong>灵活的配置多套环境</strong>，制定了如下2个规则：</p>
 <ol>
@@ -457,7 +455,7 @@ writeYaml file: yamlFile, data: yamlData</code>
 </li>
 </ul>
 <p>详细内容请参见<a href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/">利用Nacos与KubeSphere创建多套开发与测试环境</a>。</p>
-<h3 id="扩展功能">扩展功能</h3>
+<h4 id="扩展功能">扩展功能</h4>
 <ul>
 <li>
 <p>在项目构建时添加审核功能，对于<code>test</code>和<code>prod</code>环境必须经过相关人的审核才能进行后续构建流程，避免破坏相关版本的稳定性</p>
@@ -472,14 +470,14 @@ writeYaml file: yamlFile, data: yamlData</code>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-mail-notification.png" alt="项目构建完毕发送邮件通知" title="项目构建完毕发送邮件通知"></p>
 </li>
 </ul>
-<h2 id="外部部署">外部部署</h2>
+<h3 id="外部部署">外部部署</h3>
 <p>部门内部的软件最终都会销售并交付给相关客户，由于客户网络与公司网络不通以及代码保密等要求，无法在客户现场使用原有的<code>Jenkins</code>流水线进行部署交付。基于此部门采取折中方案：<strong>在公司内部通过<code>KubeSphere</code>进行编译打包，导出<code>docker</code>镜像，拷贝到客户处然后基于<code>docker</code>镜像部署运行</strong>,具体请参见如下链接:</p>
 <ul>
 <li><a href="/post/devops/git-checkout-by-dynamic-repository-in-jenkins/">在Jenkins中根据配置从不同的仓库中Checkout代码</a></li>
 <li><a href="/post/linux/using-script-to-deploy-microservice-application-in-docker/">利用shell脚本实现将微服务程序以docker容器方式自动部署</a></li>
 </ul>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/software-deploy-in-customer-environment.png" alt="客户环境部署流程图" title="客户环境部署流程图"></p>
-<h2 id="使用协助">使用协助</h2>
+<h3 id="使用协助">使用协助</h3>
 <p>在使用过程中确实遇到了不少问题，主要通过如下三条途径解决:</p>
 <ul>
 <li>阅读<a href="https://kubesphere.io/zh/docs/v3.3">官方文档</a>，根据文档说明操作</li>
@@ -487,7 +485,7 @@ writeYaml file: yamlFile, data: yamlData</code>
 <li>通过微信群寻求协助</li>
 </ul>
 <p>根据部门使用经验，90%的问题可通过官方文档或用户论坛获得答案。</p>
-<h1 id="使用效果">使用效果</h1>
+<h2 id="使用效果">使用效果</h2>
 <p>部分同事习惯于原始的手工操作或基于<code>docker</code>部署，导致在推广过程中受到了一定的阻力，部门内部基于充分沟通和逐步替换的方式引导相关同事来慢慢适应。经过约一年的时间磨合，大家都认可了拥抱云原生和<code>KubeSphere</code>给我们带来的便利，使用过的同事都说很香!</p>
 <p>对我司而言，有如下几个方面的提升:</p>
 <ul>
@@ -497,7 +495,7 @@ writeYaml file: yamlFile, data: yamlData</code>
 <li>基于<code>KubeSphere</code>的云原生部署结合<code>Nacos</code>可以更快速的分配多套环境，有效的实现了<code>开发</code>、<code>测试</code>、<code>生产</code>环境的隔离，在云仿真相关的业务场景中可基于业务场景更方便的对<code>pod</code>进行监控与调整，前瞻性的业务研发开展更顺利</li>
 </ul>
 <p><img src="/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-kubesphere-to-deploy.png" alt="日常开发中采用KubeSphere进行集成" title="日常开发中采用KubeSphere进行集成"></p>
-<h1 id="规划">规划</h1>
+<h2 id="规划">规划</h2>
 <p>结合公司与部门的实际情况，短期的规划依然是完善基于<code>Jenkins</code>的<code>CI</code>/<code>CD</code>使用来完善打包与部署流程，部门内部在进行全面<code>web</code>化，基于此中长期拥抱云原生。</p>
 <ul>
 <li>接入企业微信，将构建与运行结果随时通知相关人，构建结果与项目监控更实时</li>
@@ -505,7 +503,7 @@ writeYaml file: yamlFile, data: yamlData</code>
 <li>将底层的<code>Kubernetes</code>从单机升级为集群，支持更多<code>pod</code>的部署，支持公司内部需要大量<code>pod</code>并发运行的云仿真项目</li>
 <li>部门内部的<code>web</code>项目全部通过<code>KubeSphere</code>构建部署，完善其使用文档，挖掘<code>KubeSphere</code>在部门业务中新的应用场景(如对设计文档、开发文档、bug修复的定时与强制检查通知等)</li>
 </ul>
-<h1 id="参考文章">参考文章</h1>
+<h2 id="参考文章">参考文章</h2>
 <ul>
 <li><a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a></li>
 <li><a href="/post/devops/setting-ldap-for-kubesphere/">Kubesphere集成LDAP踩坑记录</a></li>

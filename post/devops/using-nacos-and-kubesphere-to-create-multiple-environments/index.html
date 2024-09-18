@@ -181,18 +181,22 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#原实现方式">原实现方式</a></li>
-    <li><a href="#修改后的方式">修改后的方式</a>
+    <li>
       <ul>
-        <li><a href="#安装pipeline-utility-steps插件">安装Pipeline Utility Steps插件</a></li>
-        <li><a href="#json文件设计">JSON文件设计</a></li>
-        <li><a href="#读取namespace">读取namespace</a></li>
-        <li><a href="#读取nacos配置文件">读取Nacos配置文件</a></li>
-        <li><a href="#根据yaml文件">根据YAML文件</a></li>
-        <li><a href="#运行效果">运行效果</a></li>
+        <li><a href="#原实现方式">原实现方式</a></li>
+        <li><a href="#修改后的方式">修改后的方式</a>
+          <ul>
+            <li><a href="#安装pipeline-utility-steps插件">安装Pipeline Utility Steps插件</a></li>
+            <li><a href="#json文件设计">JSON文件设计</a></li>
+            <li><a href="#读取namespace">读取namespace</a></li>
+            <li><a href="#读取nacos配置文件">读取Nacos配置文件</a></li>
+            <li><a href="#根据yaml文件">根据YAML文件</a></li>
+            <li><a href="#运行效果">运行效果</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考代码">参考代码</a></li>
       </ul>
     </li>
-    <li><a href="#参考代码">参考代码</a></li>
   </ul>
 </nav>
   </div>
@@ -202,7 +206,7 @@
 	
     <div class="post-content image-border">
 	 <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
-<h1 id="原实现方式">原实现方式</h1>
+<h2 id="原实现方式">原实现方式</h2>
 <p>最开始自己只准备了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境，由于环境数量不多，对于不同环境的端口配置自己是在代码中直接实现的<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 
 <pre class="line-numbers language-groovy ">
@@ -223,7 +227,7 @@
 </pre>
 <p>此种方式将相关环境相关的配置全都集中到<code>Jenkins</code>流水线中，在最初的使用阶段可减少配置文件数量，能够快速编写流水线，快速交付使用。但随着项目规模与人员的扩大，当需要灵活配置多套环境时，此种方式采用硬编码的方式会显得捉襟见肘。</p>
 <p><img src="/blog_img/devops/using-nacos-and-kubesphere-to-create-multiple-environments/kubesphere-build-without-nacos-config.png" alt="kubesphere原始部署方式" title="kubesphere原始部署方式"></p>
-<h1 id="修改后的方式">修改后的方式</h1>
+<h2 id="修改后的方式">修改后的方式</h2>
 <p>结合项目实际情况以及避免后续再次修改<code>KubeSphere</code>流水线，为了实现<strong>灵活的配置多套环境</strong>，自己制定了如下2个规则：</p>
 <ol>
 <li>端口信息存放到配置文件中，<code>KubeSphere</code>在构建时去流水线读取相关配置</li>
@@ -237,9 +241,9 @@
 <li>利用<code>Groovy</code>代码根据输入输入参数动态的获取<code>Nacos</code>中对应的<code>namespace</code></li>
 <li>由于环境的增多，不可能每套环境都准备一个<code>YAML</code>文件，此时需要动态的读取并更新<code>YAML</code>文件</li>
 </ul>
-<h2 id="安装pipeline-utility-steps插件">安装Pipeline Utility Steps插件</h2>
+<h3 id="安装pipeline-utility-steps插件">安装Pipeline Utility Steps插件</h3>
 <p><code>Jenkins</code>默认不支持<code>JSON</code>、<code>YAML</code>的解析，需要在<code>Jenkins</code>中预先安装<a href="https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/">Pipeline Utility Steps</a>插件，该插件提供了对<code>JSON</code>、<code>YAML</code>、<code>CSV</code>、<code>PROPERTIES</code>等常见文件格式的读取与修改操作。</p>
-<h2 id="json文件设计">JSON文件设计</h2>
+<h3 id="json文件设计">JSON文件设计</h3>
 <p><code>JSON</code>文件设计如下，通过env、server、dubbo等属性记录环境和端口信息，通过project来记录具体的项目名称，由于配置文件中的key都是固定的，后续<code>Groovy</code>解析时会较为方便，在需要扩展环境时只需要更新此<code>JSON</code>文件即可。</p>
 
 <pre class="line-numbers language-json ">
@@ -278,7 +282,7 @@
     ]
 }</code>
 </pre>
-<h2 id="读取namespace">读取namespace</h2>
+<h3 id="读取namespace">读取namespace</h3>
 <p>在<a href="https://nacos.io/zh-cn/docs/open-api.html">Nacos Open Api</a>中可知查询<code>namespace</code>的请求为<code>/nacos/v1/console/namespaces</code>，基于<code>Groovy</code>的读取代码如下：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -291,7 +295,7 @@ for(nm in namespaces){
     }
 }</code>
 </pre>
-<h2 id="读取nacos配置文件">读取Nacos配置文件</h2>
+<h3 id="读取nacos配置文件">读取Nacos配置文件</h3>
 <p>在<a href="https://nacos.io/zh-cn/docs/open-api.html">Nacos Open Api</a>中可知查询配置文件的请求为<code>/nacos/v1/cs/configs</code>，基于<code>Groovy</code>的读取代码如下：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -312,7 +316,7 @@ for(config in configs){
 	}
 }</code>
 </pre>
-<h2 id="根据yaml文件">根据YAML文件</h2>
+<h3 id="根据yaml文件">根据YAML文件</h3>
 <p>由于自己将项目中变化的部分已经单独抽取为了一个<code>YAML</code>文件，故只需要修改此单独配置文件即可，在修改过程中，处于简化考虑，自己先将原有的<code>YAML</code>文件删除，之后重新写入，相关代码如下</p>
 
 <pre class="line-numbers language-groovy ">
@@ -325,10 +329,10 @@ sh &#34;rm $yamlFile&#34;
 
 writeYaml file: yamlFile, data: yamlData</code>
 </pre>
-<h2 id="运行效果">运行效果</h2>
+<h3 id="运行效果">运行效果</h3>
 <p>上述的配置均需要在项目编译之前进行，配置完毕的流水线运行效果如下，程序可正常运行，改造目的实现。</p>
 <p><img src="/blog_img/devops/using-nacos-and-kubesphere-to-create-multiple-environments/kubesphere-build-with-multiplep-environments.png" alt="kubesphere多环境运行" title="kubesphere多环境运行"></p>
-<h1 id="参考代码">参考代码</h1>
+<h2 id="参考代码">参考代码</h2>
 <ul>
 <li><strong>前端Jenkins流水线</strong>，参见<a href="https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-system-web-new.groovy">lucumt-system-web-new.groovy</a></li>
 <li><strong>后端Jenkins流水线</strong>，参见<a href="https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-system-new.groovy">lucumt-system-new.groovy</a></li>

@@ -182,31 +182,30 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#ssh远程执行">SSH远程执行</a>
+    <li>
       <ul>
-        <li><a href="#理论基础">理论基础</a></li>
-        <li><a href="#实际演示">实际演示</a></li>
-        <li><a href="#免密登录">免密登录</a></li>
-      </ul>
-    </li>
-    <li><a href="#jenkins相关配置">Jenkins相关配置</a>
-      <ul>
-        <li><a href="#jenkins插件安装">Jenkins插件安装</a></li>
-        <li><a href="#jenkins配置">Jenkins配置</a>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#ssh远程执行">SSH远程执行</a>
           <ul>
-            <li><a href="#生成公钥与私钥">生成公钥与私钥</a></li>
-            <li><a href="#jenkins配置凭据">Jenkins配置凭据</a></li>
+            <li><a href="#理论基础">理论基础</a></li>
+            <li><a href="#实际演示">实际演示</a></li>
+            <li><a href="#免密登录">免密登录</a></li>
           </ul>
         </li>
-        <li><a href="#流水线配置">流水线配置</a></li>
-        <li><a href="#简单测试验证">简单测试验证</a></li>
-      </ul>
-    </li>
-    <li><a href="#参考示例">参考示例</a>
-      <ul>
-        <li><a href="#远程shell脚本">远程shell脚本</a></li>
-        <li><a href="#jenkins流水线">Jenkins流水线</a></li>
+        <li><a href="#jenkins相关配置">Jenkins相关配置</a>
+          <ul>
+            <li><a href="#jenkins插件安装">Jenkins插件安装</a></li>
+            <li><a href="#jenkins配置">Jenkins配置</a></li>
+            <li><a href="#流水线配置">流水线配置</a></li>
+            <li><a href="#简单测试验证">简单测试验证</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考示例">参考示例</a>
+          <ul>
+            <li><a href="#远程shell脚本">远程shell脚本</a></li>
+            <li><a href="#jenkins流水线">Jenkins流水线</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -218,7 +217,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录如何整合<code>Jenkins</code>与<code>SSH</code>免密登录，实现通过<code>Jenkins</code>流水线部署到不同的服务器环境下，提高开发与测试环境的灵活性。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>在<code>KubeSphere</code>中通过<code>Jenkins</code>流水线部署时，可选择部署到<code>KubeSphere</code>原生支持的<code>Kubernetes</code>中或部署到<code>Docker</code>容器中，从流水线配置的角度而言，除了最后一个阶段<code>部署环境</code>的不同，其它阶段都是类似的。</p>
 <p>部署到<code>Kubernetes</code>:</p>
 <div id="flow_0">start_build=>start: 开始构建
@@ -284,8 +283,8 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 </tbody>
 </table>
 <p>目前大部分项目都是直接部署到<code>Kubernetes</code>而部分项目由于环境以及运维等特殊考量采用的是直接部署到<code>Docker</code>，由于此种方式下配置流水线较为复杂，本文将相关操作过程简单记录下，供后续参考。</p>
-<h1 id="ssh远程执行">SSH远程执行</h1>
-<h2 id="理论基础">理论基础</h2>
+<h2 id="ssh远程执行">SSH远程执行</h2>
+<h3 id="理论基础">理论基础</h3>
 <p>部署到<code>Docker</code>的理论基础是通过<code>Jenkins</code>所在的宿主机(目前部门内部的<code>Jenkins</code>与<code>KubeSphere</code>都在同一台宿主机上)通过<code>SSH(Secure Shell)</code>在要部署的服务器上执行<code>Docker</code>相关执行，将之前需要手工执行的操作步骤以自动化的方式替代。</p>
 <p>关于<code>SSH</code>远程执行的相关操作说明，详情请参见 <a href="https://www.cnblogs.com/sparkdev/p/6842805.html"><strong>SSH远程执行任务</strong></a> ，常用的指令如下</p>
 
@@ -306,7 +305,7 @@ ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld�
 <p>同时考虑到要兼容多个不同的工程和版本，需要传递相关的参数进行区分，故最终采用的方案为<strong>以带参数的放方式执行远程脚本</strong>。</p>
 <p>初略的架构图如下：</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-server-docker.png" alt="通过ssh操作多个服务器" title="通过ssh操作多个服务器"></p>
-<h2 id="实际演示">实际演示</h2>
+<h3 id="实际演示">实际演示</h3>
 <p>假设现在有<code>10.30.31.22</code>和<code>10.30.31.24</code>这两台虚拟机，简单演示下在<code>10.30.31.22</code>中通过<code>ssh</code>远程访问<code>10.30.31.24</code></p>
 <ul>
 <li>
@@ -318,12 +317,12 @@ ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld�
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-shell-script.png" alt="通过ssh执行shell脚本" title="通过ssh执行shell脚本"></p>
 </li>
 </ul>
-<h2 id="免密登录">免密登录</h2>
+<h3 id="免密登录">免密登录</h3>
 <p>从上述运行效果图可看出每次执行<code>ssh</code>指令时都需要对应远程服务器的密码，这是一种交互式的操作，而如果我们通过<code>Jenkins</code>进行操作时，若要每次都输入对应远程服务器的密码，显然是不显示的，故需要进行免密登录的配置。</p>
 <p>如何给<code>ssh</code>设置免费登录，详情参见 <a href="https://www.cnblogs.com/xiaxiaolu/p/10264013.html"><strong>SSH远程免密登录</strong></a>，由于我们实际使用过程中是基于<code>Jenkins</code>调用<code>ssh</code>进行远程登录的，故不需要执行此部操作，只需要在<code>Jenkins</code>中设置免密登录即可。</p>
-<h1 id="jenkins相关配置">Jenkins相关配置</h1>
+<h2 id="jenkins相关配置">Jenkins相关配置</h2>
 <p>此部分操作需要使用<code>Jenkins</code>管理员的登录，其用户名通常为<code>admin</code>。</p>
-<h2 id="jenkins插件安装">Jenkins插件安装</h2>
+<h3 id="jenkins插件安装">Jenkins插件安装</h3>
 <blockquote>
 <p><strong>此过程只需操作一次，之前已经安装完毕，此处记录只作为参考。</strong></p>
 </blockquote>
@@ -341,11 +340,11 @@ ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld�
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/jenkins-installed-plugin-search.png" alt="在jenkins中查看已安装插件" title="在jenkins中查看已安装插件"></p>
 </li>
 </ol>
-<h2 id="jenkins配置">Jenkins配置</h2>
+<h3 id="jenkins配置">Jenkins配置</h3>
 <blockquote>
 <p><strong>每增加一个远程服务器时，都需要仿照下述说明在<code>Jenkins</code>中添加相关的配置。</strong></p>
 </blockquote>
-<h3 id="生成公钥与私钥">生成公钥与私钥</h3>
+<h4 id="生成公钥与私钥">生成公钥与私钥</h4>
 <ol>
 <li>
 <p>在要执行的服务器上执行下述指令，检测<code>ssh</code>目录是否存在</p>
@@ -375,7 +374,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/write-pub-key-to-authorized-keys.png" alt="将公钥写入授权文件" title="将公钥写入授权文件"></p>
 </li>
 </ol>
-<h3 id="jenkins配置凭据">Jenkins配置凭据</h3>
+<h4 id="jenkins配置凭据">Jenkins配置凭据</h4>
 <p>此文参考于<a href="https://www.snycloud.com/archives/jenkinsfile%E4%B8%AD%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8sshagent%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA"><strong>Jenkinsfile 中配置使用 ssh agent 连接远程主机</strong></a>，可在该文章中查看详细的说明。</p>
 <ol>
 <li>
@@ -404,7 +403,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/jenkins-add-credential-result.png" alt="Jenkins添加私钥结果" title="Jenkins添加私钥结果"></p>
 </li>
 </ol>
-<h2 id="流水线配置">流水线配置</h2>
+<h3 id="流水线配置">流水线配置</h3>
 <p>在<code>Jenkins</code>中添加类似如下的代码并执行测试，若测试正常，则表示<code>Jenkins</code>中基于<code>SSH</code>的远程部署全部配置完成，操作过程全部结束！</p>
 
 <pre class="line-numbers language-groovy ">
@@ -427,7 +426,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-run-input-dialog.png" alt="KubeSphere流水线执行界面" title="KubeSphere流水线执行界面"></p>
 </li>
 </ol>
-<h2 id="简单测试验证">简单测试验证</h2>
+<h3 id="简单测试验证">简单测试验证</h3>
 <p>基于前述的说明步骤，在<code>KubeSphere</code>中对<code>10.30.31.24</code>做个简单的测试：</p>
 <ol>
 <li>
@@ -483,8 +482,8 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-ssh-test-result.png" alt="KubeSphere中ssh测试执行结果" title="KubeSphere中ssh测试执行结果"></p>
 </li>
 </ol>
-<h1 id="参考示例">参考示例</h1>
-<h2 id="远程shell脚本">远程shell脚本</h2>
+<h2 id="参考示例">参考示例</h2>
+<h3 id="远程shell脚本">远程shell脚本</h3>
 <p>注意： <code>shell</code>脚本在我们要通过ssh远程执行的那台<code>执行者</code>的电脑上，而不是位于被执行者的电脑上。</p>
 
 <pre class="line-numbers language-shell ">
@@ -533,7 +532,7 @@ else
   exit 1
 fi</code>
 </pre>
-<h2 id="jenkins流水线">Jenkins流水线</h2>
+<h3 id="jenkins流水线">Jenkins流水线</h3>
 
 <pre class="line-numbers language-groovy ">
 <code>pipeline {
