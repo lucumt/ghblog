@@ -65,7 +65,7 @@ A brief descripton about how to embed multiple google trends chart into single h
 
 <!--more-->
 
-# Issue
+## Issue
 
 Sometimes we need to use [Google Trends](https://trends.google.com/trends/) to find the search trends for key words and embed the result into our own html page,we can click `<>` icon on the right top of each chart to get the embed source code that can be integrated into html page:
 
@@ -138,7 +138,7 @@ Let's modify the code and make only one chart left,we will find that **it will w
 
 We can check it at [**live demo with three charts not working**](https://jsfiddle.net/kt82567q/) and [**live demo with one chart working**](https://jsfiddle.net/kt82567q/1/).
 
-# Solution
+## Solution
 
 When the page has three charts,we can check the browser console and will find that there are no error inside it, there must be something wrong with my code!
 

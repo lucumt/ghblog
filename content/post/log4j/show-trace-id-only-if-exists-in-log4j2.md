@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 前置工作
+## 前置工作
 
 完整代码参见[**spring-mybatis-demo**](https://github.com/fox-world/spring-mybatis-demo.git)。
 
@@ -164,7 +164,7 @@ highchartsDiagrams:
 
    ![log4j2关于%X的用法说明](/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-%X-instruction.png "log4j2关于%X的用法说明") 
 
-# 测试&问题
+## 测试&问题
 
 测试代码如下
 
@@ -195,11 +195,9 @@ public class UserController {
 
 ![traceId没有值时也会输出](/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-empty-trace-id-output.png "traceId没有值时也会输出") 
 
-# 解决方案
+## 解决方案
 
 终极目标是实现在有`trace-id`时按照格式输出，没有时则正常输出，很明显要达成此效果需要判断`trace-id`是否为空。
-
-
 
 最开始`Google`和`Stackoverflow`搜索的结果建议使用[**ScriptPatternSelector**](https://logging.apache.org/log4j/2.x/manual/layouts.html#scriptpatternselector)，在官网给出的使用示例如下，看起来有一丢丢复杂，在有多个[**Appenders**](https://logging.apache.org/log4j/2.x/manual/appenders.html)时不适合扩展。
 
@@ -245,11 +243,11 @@ public class UserController {
 
 ![traceId只有在有值时才输出](/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-not-empty-trace-id-output.png "traceId只有在有值时才输出") 
 
-# 服务间调用
+## 服务间调用
 
 在微服务中通常会有多个模块协同工作，各个模块之间也可能会互相调用，在此种情况下也需要将`trace-id`准确的传递与获取，确保单次请求调用链路中的`trace-id`都一样才能体现链路追踪的意义。
 
-## Feign调用
+### Feign调用
 
 当使用`Feign`作为远程调用实现时，需在**被调用方**中添加如下配置代码才能确保`trace-id`被正常传递与获取。
 
