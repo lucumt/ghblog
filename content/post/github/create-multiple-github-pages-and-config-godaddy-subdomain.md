@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 自己当前的博客是采用`GitHub Pages`+`GoDaddy`实现，已经使用了七八年，在此过程中除了感觉`GoDaddy`的域名续费有点小贵之外，没有遇到其它问题。
 
@@ -61,7 +61,7 @@ highchartsDiagrams:
 
 经过一番调研后最终决定采用`GitHub Pages`+`GoDaddy`子域名来托管多个项目供自己与展示使用。
 
-# 多个GitHub Pages
+## 多个GitHub Pages
 
 在`GitHub`的官网中有关于`GitHub Pages`类型和使用限制的详细说明[^1]:
 
@@ -118,7 +118,7 @@ highchartsDiagrams:
 
    可以看出虽然测试正常，但上述访问方式需要将项目名包含进去，不太美观也不便于后续的统计扩展等操作，接下来需要配置`GoDaddy`有针对性的设置子域名。
 
-# 创建与配置子域名
+## 创建与配置子域名
 
 在`GoDaddy`的官网上有关于子域名的相关说明[^2]：
 

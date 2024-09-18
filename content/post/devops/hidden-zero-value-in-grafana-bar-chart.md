@@ -53,13 +53,13 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题
+## 问题
 
 通过`Grafana`基于`MySQL`查询系统监控统计数据时，发现在柱状图中有很多0值，严重影响使用体验。
 
 ![柱状图显示0值](/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-with-zero-values.png  "柱状图显示0值")
 
-# 解决
+## 解决
 
 一开始自己想通过`Grafana`面板的过滤这些0值，搜索一番后并没有找到基于`Grafana`的解决方案，给出的答案是通过修改sql来规避此问题[^1]，对比该答案，还发现自己遇到的问题类似。
 
@@ -121,7 +121,7 @@ WHERE t.start_time> DATE_SUB(NOW(), INTERVAL 14 DAY)
 
 ![柱状图不显示0值](/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-without-zero-values.png  "柱状图不显示0值")
 
-# 后记
+## 后记
 
 虽然前述问题被解决，但当我们用鼠标查询对应的柱状条时，可发现`tooltip`中会显示所有的类别，即使该类别值为0或不存在也会显示，同样很影响使用体验。
 

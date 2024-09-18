@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题背景
+## 问题背景
 
 自己的`GitHub`账号注册了有些年头，之前一直是通过账号密码直接登录即可，但`GitHub`官网[^1]从2023年3月份到2023年末对提交代码的用户逐步开启两阶段认证(`2FA`,全称为`two-factor authentication`)，由于那段时间每次登录时`GitHub`都会强制提示开启`2FA`功能，影响正常的使用，且`2FA`是大趋势，为了减少麻烦自己准备`2FA`功能。
 
@@ -69,7 +69,7 @@ highchartsDiagrams:
 
 此时我的手机已经格式化重刷系统有一段时间了，`Authy`和`GitHub Mobile`随着手机刷机已经消失不见了! 一开始我以为只要把`Authy`在手机上安装好，然后重新获取对应的认证码即可，但事实证明，我大意了！
 
-# Authy尝试
+## Authy尝试
 
 由于国内特殊的网络环境，自己首先确保了手机可以正常科学上网。
 
@@ -81,7 +81,7 @@ highchartsDiagrams:
 
 为了排除是否是自己手机问题，用其他同事的苹果手机安装`Authy`并进行测试，依旧无法获取到认证码！
 
-# GitHub尝试
+## GitHub尝试
 
 通过`Authy`获取验证码这条路暂时无法走通，接下来尝试绕过`Authy`，看看`GitHub`上有没有其它方式。
 
@@ -111,7 +111,7 @@ highchartsDiagrams:
 
    !["GitHub历史token截图"](/blog_img/github/recovery-github-code-when-2fa-not-working/generate-new-token-result.png "GitHub历史token截图") 
 
-# Authy邮件
+## Authy邮件
 
 在`GitHub`上折腾了一圈后还是没能找到有效的解决办法，只能给`Authy` 官方发邮件咨询为啥在手机上无法收到短信或电话，给`Authy`发邮件时，需要在其官网上先注册登录之后才能进行，奇怪的是在其网页版的官网上登录时，同样的手机号能收到验证码，就是用手机APP时死活收不到验证码。
 
@@ -125,7 +125,7 @@ highchartsDiagrams:
 
 !["Authy解释账号无法恢复的原因"](/blog_img/github/recovery-github-code-when-2fa-not-working/authy-reply-for-account-backup.png "Authy解释账号无法恢复的原因") 
 
-# GitHub邮件
+## GitHub邮件
 
 为了登录`GitHub`需要获取`Authy`中的`Authentication code`，而为了获取`Authy`中的`Authentication code`需要登录`GitHub`后重新配置，陷入死循环了！
 
@@ -192,7 +192,7 @@ What a fuck!
 
 看起来通过`GitHub Support`邮件咨询的这条路也走不通，此时我已经做好账号丢失的心理准备了。
 
-# 找回恢复码
+## 找回恢复码
 
 在解除`GitHub`邮箱绑定之前，我有些不死心，于是又给`GitHub Support`回复了如下的邮件，主要内容有2点：
 
@@ -211,7 +211,7 @@ What a fuck!
 
 至此，`GitHub`账号恢复的事情告一段落。
 
-# 总结&教训
+## 总结&教训
 
 1. 遇到事情一定要尝试各种可能的解决方案，不到最后一步，千万不要放弃
 2. 做人做事要仔细认证，不要走马观花，如果一开始设置完`2FA`后就仔细阅读`GitHub`官方发的邮件，及时做好备份，也不会这么折腾

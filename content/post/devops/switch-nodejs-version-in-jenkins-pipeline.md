@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题&尝试
+## 问题&尝试
 
 项目中使用的`KubeSphere`版本为`v3.3.1`，基于`nodejs`环境对某个 `Vue3`项目进行编译打包时，`KubeSphere`提示构建过程出错。Google搜索一番过后，大部分都说要升级`nodejs`版本，自己当前的版本为`v10.16.3`，确实有些低，于是尝试用如下指令升级版本
 
@@ -105,7 +105,7 @@ node config list
 
 既然遇到了这个问题，个人希望一次性解决，最好能在流水线中指定所需的版本，与其它的流水线完全隔离！
 
-# 解决
+## 解决
 
 由于自己采用的是`KubeSphere`来集成`Jenkins`，其他人是否遇到了类似问题？通过相关关键词搜索后发现一篇文章[**kubesphere3.1.1，devops工程如何升级node.js**](https://ask.kubesphere.io/forum/d/6859-kubesphere311devopsnodejs)，其遇到的问题和我自己的很类似。
 
@@ -181,7 +181,7 @@ stage('镜像构建') {
 }
 ```
 
-# 后记
+## 后记
 
 虽然此文以`nodejs`举例，但对于其它的语言也可适用，假设使用的是`Golang`，对应的`Jenkins`流水线文件头部可修改如下
 

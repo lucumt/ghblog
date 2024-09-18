@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 自己使用`Hugo`进行博客开发已经有年头了，最近由于需要搭建新的网站[^1]需要使用特定的模板，而该模板对`Hugo`的版本有要求，故对`Hugo`版本进行了升级，从`v0.100`升级到`v0.126`。
 
@@ -69,7 +69,7 @@ highchartsDiagrams:
 
 能否仿照`Linux`中的[**alias**](https://www.runoob.com/linux/linux-comm-alias.html)指令对前述命令进行封装，从而简化使用呢？
 
-# 分析
+## 分析
 
 我们知道在`Windows`的默认附带了很多指令，如`mspaint`、`mstsc`、`calc`等指令，可在运行窗口或`cmd`中输入这些指令直接使用，其原因为这些指令都位于`C:\Windows\System32`目录下，而该目录是系统目录，在启动时会进行加载。
 
@@ -79,7 +79,7 @@ highchartsDiagrams:
 
 是否可通过`batch`脚本封装复杂的`Hugo`指令，并将该脚本添加到`Path`环境变量中来实现在`cmd`中直接使用封装后的指令？
 
-# 实现
+## 实现
 
 理论分析完毕后，接下来进行实际操作验证：
 
