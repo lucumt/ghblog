@@ -89,7 +89,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题背景
+## 问题背景
 
 `Foxglove`官方虽然支持十几种类型的数据播放格式，但却没有对视频流播放的支持(截至到本文写作时)[^1]，而自动驾驶等相关的汽车研发领域对于视频文件的播放却是一个刚需，且通常需要播放多路视频。
 
@@ -202,7 +202,7 @@ start(right)->connect_rtsp(right)->display_data(right)->end
 
 由于`Foxglove`中尚没有类似的面板可直接使用，若要实现类似功能，只能自己开发相关插件，在此之前还需进行可行性验证。
 
-# 初步验证
+## 初步验证
 
 由于`Foxglove`的播放工作主要是UI端实现的，首先需要验证能否在`HTML`页面中直接播放`RTSP`视频流。
 
@@ -230,7 +230,7 @@ start(right)->connect_rtsp(right)->display_data(right)->end
 
 5. 至此可行性验证完毕，实际开发插件时只需要模仿步骤4即可。
 
-# 插件开发
+## 插件开发
 
 `Foxglove`中开发插件的教程请参见[**create-foxglove-extension**](https://github.com/foxglove/create-foxglove-extension)，本章节以`RTSP`播放为例简要展示开发步骤：
 
@@ -478,7 +478,7 @@ start(right)->connect_rtsp(right)->display_data(right)->end
 
    之后重新执行`npm run package`即可生成一个名为`lucumt.rtsp-player-extension-0.0.1.foxe`的插件产物，至此整个插件开发与构建流程结束，接下来的就是安装与使用。
 
-# 安装&使用
+## 安装&使用
 
 1. 在浏览器打开`Foxglove`播放界面，之后打开前述步骤中生成的插件，将其拖动到浏览器窗口中，类似下图所示
 

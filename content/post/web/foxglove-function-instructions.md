@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 面板操作
+## 面板操作
 
 `Foxglove`中的数据展示是基于面板来实现的，可根据实际使用需求在浏览器窗口添加多个面板，每个面板需要配置对应的topic来展示不同的数据，它们各司其职互不干扰。
 
@@ -72,9 +72,9 @@ highchartsDiagrams:
 
 可在`Foxglove`系统中进行面板的创建、修改、删除、调整、导入、导出等操作，实际使用时需要在`server`端根据`Foxglove`规范提前准备好相关的`topic`。
 
-## 创建面板
+### 创建面板
 
-### 直接创建
+#### 直接创建
 
 1. 在浏览器窗口的左上角点击创建按钮，在出现的菜单中选择对应的类型
 
@@ -86,7 +86,7 @@ highchartsDiagrams:
 
 3. 面板创建完毕后，根据不同的面板类型需要做相关配置操作(见下文)
 
-### 拆分创建
+#### 拆分创建
 
 1. 选中一个已有的面板，在其右上角点击如下图所示的按钮，根据需求选择拆分类型
 
@@ -104,7 +104,7 @@ highchartsDiagrams:
 
    ![foxglove拆分面板修改结果](/blog_img/web/foxglove-function-instructions/foxglove-split-panel-change-result.png "foxglove拆分面板修改结果")
 
-## 修改面板
+### 修改面板
 
 对于已有的面板可修改其配置，如展示颜色、消息来源等，具体步骤如下：
 
@@ -120,7 +120,7 @@ highchartsDiagrams:
 
    ![foxglove面板配置修改](/blog_img/web/foxglove-function-instructions/foxglove-panel-with-settings-update.png  "foxglove面板配置修改")
 
-## 删除面板
+### 删除面板
 
 1. 在要删除的面板右上角点击`设置`按钮，在出现的菜单中点击`删除面板`即可删除该面板
 
@@ -128,7 +128,7 @@ highchartsDiagrams:
 
 2. 面板删除完毕后`Foxglove`会自动调整浏览器中的界面布局，同时`Foxglove`会根据实际情况给`server`发送对应的通知，以决定是否要停止相关的线程。
 
-## 打开工具栏
+### 打开工具栏
 
 除了通过修改面板打开工具栏这种方式外，也可点击浏览器窗口右上角的按钮来打开工具栏，之后再点击对应的面板也能出现设置界面，操作步骤如下：
 
@@ -144,9 +144,9 @@ highchartsDiagrams:
 
    ![foxglove工具栏设置](/blog_img/web/foxglove-function-instructions/foxglove-panel-toolbar.png  "foxglove工具栏设置")
 
-# 面板配置
+## 面板配置
 
-## 文本
+### 文本
 
 文本[^2]在`Foxglove`中对应的类型为`原始消息`(英文环境下为`Raw Message`)，其配置较为简单：
 
@@ -166,7 +166,7 @@ highchartsDiagrams:
 
    ![foxglove原始消息单个属性数据展示](/blog_img/web/foxglove-function-instructions/foxglove-raw-message-single-property-data.png  "foxglove原始消息单个属性数据展示")
 
-## 图表
+### 图表
 
 表格在`Foxglove`中对应的类型为`图表`(英文环境下显示为`Plot`)，其配置过程如下：
 
@@ -192,7 +192,7 @@ highchartsDiagrams:
 
 6. 其它的配置包括设置线条颜色、X轴、Y轴、时间设置等也比较简单与直观，此处不再详述。
 
-## 地图
+### 地图
 
 地图数据用于默认展示车辆在地图中的移动轨迹，其只能选择特定类型的`topic`，相关配置过程如下：
 
@@ -206,7 +206,7 @@ highchartsDiagrams:
 
 3. 可以将`Follow topic`设置为具体的`topic`(本例中为`/drive/map`)，之后地图会随着车辆的移动轨迹动态更新变化。
 
-## 3D
+### 3D
 
 3D面板同地图面板类似，只能使用特定的`topic`(本例中为`/drive/3D`)，其配置过程如下：
 
@@ -220,7 +220,7 @@ highchartsDiagrams:
 
 3. 其余的场景、视图、变换等可根据实际情况进行配置操作。
 
-## 图片/视频
+### 图片/视频
 
 截止到本文写作时(2023年11月)，`Foxglove`的官方只支持图片播放，暂不支持视频直接播放，而个人在实际使用中发现按照特定的频率对视频进行抽帧时会有一定的耗时，导致播放时比较卡顿。
 
@@ -228,15 +228,15 @@ highchartsDiagrams:
 
 ![foxglove视频面板](/blog_img/web/foxglove-function-instructions/foxglove_video_panel.png  "foxglove视频面板")
 
-# 布局操作
+## 布局操作
 
-## 布局调整
+### 布局调整
 
 如下图所示，当有多个面板时，可将鼠标放到面板边框来调整相邻面板的宽度或高度。
 
 ![foxglove面板调整大小](/blog_img/web/foxglove-function-instructions/foxglove-panel-resize.png  "foxglove面板调整大小")
 
-## 导入/导出
+### 导入/导出
 
 > 当要在多个浏览器(电脑)上使用`Foxglove`进行显示时，若基于前述的步骤依次创建面板和导出面板的话，会显得不方便，此时可通过导入导出功能，将一个浏览器中已经配置的面板与布局导出为`json`配置文件，之后通过配置文件在另一个浏览器中快速导入。
 
@@ -256,7 +256,7 @@ highchartsDiagrams:
 
    ![foxglove导入配置文件结果](/blog_img/web/foxglove-function-instructions/foxglove-with-panels.png  "foxglove导入配置文件结果")
 
-## 全屏展示
+### 全屏展示
 
 > `Foxglove`支持单个面板的全屏展示与退出，同时不影响其它面板的正常使用。
 
@@ -272,7 +272,7 @@ highchartsDiagrams:
 
    ![foxglove退出全屏](/blog_img/web/foxglove-function-instructions/foxglove_exit_max_screen.png  "foxglove退出全屏")
 
-# 动态交互
+## 动态交互
 
 > 动态交互是指通过在`Foxglove`UI端输入相应的参数给`server`端，`server`端根据相关参数对`WebSocket`中要返回的数据进行动态生成或动态过滤。
 

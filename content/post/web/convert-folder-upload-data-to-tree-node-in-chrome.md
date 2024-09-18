@@ -59,7 +59,7 @@ sequenceDiagrams:
 
 ![批量上传时的警告](/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/chrome-batch-upload-alert.png "批量上传时的警告") 
 
-# 结构分析
+## 结构分析
 
 在`getfolder`方法中分析`event`变量时，可发现`event.target.files`属性下包含我们所上传的全部文件，将其打印输出的结果如下：
 
@@ -67,7 +67,7 @@ sequenceDiagrams:
 
 进一步观察可发现其中的`webkitRelativePath`中包含文件的完整路径，类似`SpringTest/target/classes/com/lucumt/bean/User.class`，这个路径虽然包含了上传文件的完整路径，但其为一个字符串，无法直接用于展示层级结构，进一步分析`event`变量的其它属性也没有找到有用的信息，看来只能从`webkitRelativePath`着手更改。
 
-# 修改思路
+## 修改思路
 
 为了展示层级结构，首先需要定义一个如下所示的`Node`结构，其中`path`用于存储对应的文件名(不含父路径)，`children`在为文件夹时存储子文件(文件夹)的信息：
 
@@ -80,7 +80,7 @@ function Node(path){
 
 最终的结果都是基于`Node`进行组合处理。
 
-## 逐层处理
+### 逐层处理
 
 ![逐层处理](/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/deal-path-by-layer.png "逐层处理") 
 
@@ -94,7 +94,7 @@ function Node(path){
 6. 将node5节点的路径拆分为`target`(更新node5节点路径)和`SpringTest`(为其创建节点node6)
 7. 节点node6已经是根节点，整个过程完毕，至此从node6基于`children`属性可一直往下招到node1文件节点。
 
-## 处理重复
+### 处理重复
 
 基于上述实现方案时有一个问题待解决，如`SpringTest/target/test-classes/com/lucumt/TestGetBean.class`和`SpringTest/target/classes/com/lucumt/TestApplication.class`在拆分到第2层级时，都会识别到`lucumt`文件夹，若都去创建该文件夹节点数据则会导致重复。
 
@@ -109,7 +109,7 @@ function Node(path){
 
 为了记录当前节点的父节点，可在`JavaScript`中采用`Map`数据结构，其中key为节点的路径，value为Node节点自身。
 
-# 代码实现
+## 代码实现
 
 ```javascript
 function getfolder(event) {
@@ -177,7 +177,7 @@ function getfolder(event) {
 
 ![树结构展示](/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/tree-structure-display.png "树结构展示") 
 
-## Java版本实现
+### Java版本实现
 
 ```java
 public class TestFilePathConvert {

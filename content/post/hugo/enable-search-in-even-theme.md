@@ -55,7 +55,7 @@ highchartsDiagrams:
 
   本文主要参考[**给hugo添加搜索功能**](https://sobaigu.com/hugo-set-featuer-search.html)实现并基于个人需求做了适当的改进，相关操作步骤如下：
 
-# 输出索引文件
+## 输出索引文件
 
 1. 在`config.toml`中添加如下内容，确保可输出`JSON`格式的数据
 
@@ -89,7 +89,7 @@ highchartsDiagrams:
    | `permalink`  | 在搜索结果中打开对应的页面               |
    |    `date`    | 对搜索结果进行排序，新发布的排在前面[^1] |
 
-# 创建索引页面
+## 创建索引页面
 
 1. 在`content`目录下创建一个名为`search.md`的文件，需要添加`layout: "search"`配置来确保其内容是通过模板文件生成，同时在菜单部分添加如下配置，确保搜索功能能展示出来
 
@@ -263,7 +263,7 @@ highchartsDiagrams:
    }
    ```
 
-# 索引功能验证
+## 索引功能验证
 
 1. 在页面右上角的一级菜单中有一个名为`搜索`的链接，点击进入后会展示类似如下界面
 

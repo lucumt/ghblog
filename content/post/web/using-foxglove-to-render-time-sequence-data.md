@@ -87,7 +87,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 需求背景
+## 需求背景
 
 在自动驾驶相关的项目中经常会对采集的时序数据进行可视化播放展示，常见展示方式包括`纯文本`、`图片`、`表格`、`图表`、`地图`、`3D`等展示形式，之前团队内部对于这种需求都是前后端配合自己开发相关的UI组件进行展示。但随着要展示数据的增多以及用户需求的多变，采用自行开发的方式已经力不从心，迫切的需要一款能同时支持多路数据以不同方式播放展示的工具来减轻研发压力，提升系统稳定性与可靠性。
 
@@ -98,7 +98,7 @@ highchartsDiagrams:
 3. 相关实现方案不是很小众，在有使用问题时能有相关途径寻找解决方案
 4. 软件License许可能允许商用，且软件代码开源以便能进行二次开发
 
-# 软件概览
+## 软件概览
 
 经过多方对比以及参考业界其它公司相关的方案后，最终决定采用基于`Foxglove`作为对应的可视化工具替代实现，其具有如下特性：
 
@@ -155,16 +155,16 @@ filter_data(right)->send_data(right)->render_data
 render_data->select_chassis
 ```
 
-# 前后端配置
+## 前后端配置
 
 本章节以UI端本地私有化安装为例，说明如何配置`Foxglove`前后端通信的环境，`server`端采用`Java`实现。
 
-## 服务端安装
+### 服务端安装
 
 1. 根据`Foxglove`官方网站的[**说明文档**](https://docs.foxglove.dev/docs/visualization/message-schemas/introduction/)以及相关的[**Java Demo**](https://github.com/foxglove-custom/foxglove-websocket-java)编写对应的`server`端项目，暴露`WebSocket`端口，此处假设其端口为8765
 2. 启动`server`端程序，则对应的`WebSocket`访问地址为`http://127.0.0.1:8765`
 
-## 页面端安装
+### 页面端安装
 
 1. 在`Foxglove`对应的[**GitHub地址**](https://github.com/foxglove/studio)上有其UI端的安装说明，主要采用`Docker`安装，相关的指令如下[^3]
 
@@ -188,13 +188,13 @@ render_data->select_chassis
 
    ![foxglove正常连接](/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-connection-config-result.png "foxglove正常连接")
 
-# 服务器端编写
+## 服务器端编写
 
 由于`Foxglove`官方已经提供了相应的`Docker`镜像可直接运行，除非需要自定义开发插件，通常不涉及到对UI端的操作，我们使用`Foxglove`时更多的工作还是集中在`server`端。
 
 本文相关的完整代码参见[**foxglove-websocket-java**](https://github.com/foxglove-custom/foxglove-websocket-java)。
 
-## topic创建
+### topic创建
 
 1. `Foxglove`前后端通信主要基于`WebSocket`实现，本文采用`Netty`提供的`WebSocket`工具类来简化使用，对应的`Maven`版本为
 
@@ -396,7 +396,7 @@ render_data->select_chassis
 
 6. 若连接配置正确，在UI界面的左侧会出现相关的`topic`列表，如前述步骤所示，至此`topic`的创建与注册完成
 
-## 数据发送
+### 数据发送
 
 本章节以发送`纯文本`类型的消息为例说明如何在`server`端编写代码实现数据发送
 
