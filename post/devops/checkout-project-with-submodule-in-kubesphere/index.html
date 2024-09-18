@@ -183,11 +183,15 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#没有子模块">没有子模块</a></li>
-    <li><a href="#有子模块时">有子模块时</a>
+    <li>
       <ul>
-        <li><a href="#分批下载">分批下载</a></li>
-        <li><a href="#递归下载">递归下载</a></li>
+        <li><a href="#没有子模块">没有子模块</a></li>
+        <li><a href="#有子模块时">有子模块时</a>
+          <ul>
+            <li><a href="#分批下载">分批下载</a></li>
+            <li><a href="#递归下载">递归下载</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -199,7 +203,7 @@
 	
     <div class="post-content image-border">
 	 <p>在使用<a href="https://www.kubesphere.io/zh/"><strong>KubeSphere</strong></a>对公司项目进行持续集成时，有一个项目在<code>Gitlab</code>中采用了<a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"><strong>Submodules</strong></a>结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。</p>
-<h1 id="没有子模块">没有子模块</h1>
+<h2 id="没有子模块">没有子模块</h2>
 <p>在没有子模块时，自己是直接通过<code>KubeSphere</code>的图形界面操作，类似下图，只需根据实际情况填入必要的参数保存即可。</p>
 <p><img src="/blog_img/devops/checkout-project-with-submodule-in-kubesphere/kubesphere-git-checkout-config.png" alt="利用KubeSphere图形界面配置Git下载" title="利用KubeSphere图形界面配置Git下载"></p>
 <p>之后<code>KubeSphere</code>会自动生成对应的<code>Jenkins</code>代码：</p>
@@ -214,7 +218,7 @@
 }</code>
 </pre>
 <p>可以看到生成的代码是通过调用<code>Jekins</code>中的<code>git</code>方法封装实现的，而不是原始的<code>git clone xxx</code>。</p>
-<h1 id="有子模块时">有子模块时</h1>
+<h2 id="有子模块时">有子模块时</h2>
 <p>前述pipeline代码在没有submodules时能正常工作，但遇到有submodules的工程时，无法将其对应的子模块下载下来导致在后续的代码编译阶段出错。</p>
 <p>最开始自己参考的是<a href="https://stackoverflow.com/questions/3796927/how-do-i-git-clone-a-repo-including-its-submodules"><strong>How do I git clone a repo, including its submodules</strong></a>中<code>--recurse-submodules</code>标识，想直接通过<code>git</code>命令直接下载，类似代码如下：</p>
 
@@ -234,7 +238,7 @@
 <li>去<code>Jenkins</code>官网查看是否有支持下载子模块的插件或函数</li>
 </ol>
 <p>接下来基于2和3分别说明对应的实现。</p>
-<h2 id="分批下载">分批下载</h2>
+<h3 id="分批下载">分批下载</h3>
 <p>既然没有submodules时直接下载没问题，那将子模块也当成一个独立的<code>Gitlab</code>工程(事实就是这样)再次复用之前的代码去下载，之后将其移动到对应的位置不就行了吗？有问题没，完全没有问题！相关代码实现如下：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -269,7 +273,7 @@
 <li>每个子工程的分支需要手工指定，无法进行原生关联，增加了复杂度</li>
 <li>子工程下载完毕后需要通过<code>shell</code>脚本将其移动到对应目录下，才能形成完整的项目结构</li>
 </ol>
-<h2 id="递归下载">递归下载</h2>
+<h3 id="递归下载">递归下载</h3>
 <p>基于<code>Jenkins</code>中的<a href="https://www.jenkins.io/doc/pipeline/steps/params/gitscm/"><strong>GitSCM</strong></a>，通过此种方式可以在下载主工程时将其附带的子模块功能一并下载下来，同时还能确保子模块的分支也是正确的，不需要显示指定，相对于前一种方式更简洁，最终代码如下：</p>
 
 <pre class="line-numbers language-groovy ">

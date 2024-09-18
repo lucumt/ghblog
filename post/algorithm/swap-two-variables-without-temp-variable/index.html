@@ -182,9 +182,13 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#加减法实现">加减法实现</a></li>
-    <li><a href="#乘除法实现">乘除法实现</a></li>
-    <li><a href="#位运算实现">位运算实现</a></li>
+    <li>
+      <ul>
+        <li><a href="#加减法实现">加减法实现</a></li>
+        <li><a href="#乘除法实现">乘除法实现</a></li>
+        <li><a href="#位运算实现">位运算实现</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -205,7 +209,7 @@ System.out.println(a);
 System.out.println(b);</code>
 </pre>
 <p>上述代码实现和理解起来都很容易，除此之外还有其它的实现方式，本文以非0的int变量为例，简单记录下自己了解的相关实现。</p>
-<h1 id="加减法实现">加减法实现</h1>
+<h2 id="加减法实现">加减法实现</h2>
 
 <pre class="line-numbers language-java ">
 <code>int a = 3, b = 4;
@@ -223,7 +227,7 @@ a = a &#43; b - (b = a);
 System.out.println(a);
 System.out.println(b);</code>
 </pre>
-<h1 id="乘除法实现">乘除法实现</h1>
+<h2 id="乘除法实现">乘除法实现</h2>
 
 <pre class="line-numbers language-java ">
 <code>int a = 3, b = 4;
@@ -233,7 +237,7 @@ a = a / b;
 System.out.println(a);
 System.out.println(b);</code>
 </pre>
-<h1 id="位运算实现">位运算实现</h1>
+<h2 id="位运算实现">位运算实现</h2>
 
 <pre class="line-numbers language-java ">
 <code>int a = 3, b = 4;

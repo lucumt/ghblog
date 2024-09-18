@@ -180,14 +180,18 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#分析">分析</a>
+    <li>
       <ul>
-        <li><a href="#存储设计">存储设计</a></li>
-        <li><a href="#移位操作">移位操作</a></li>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#分析">分析</a>
+          <ul>
+            <li><a href="#存储设计">存储设计</a></li>
+            <li><a href="#移位操作">移位操作</a></li>
+          </ul>
+        </li>
+        <li><a href="#实现">实现</a></li>
       </ul>
     </li>
-    <li><a href="#实现">实现</a></li>
   </ul>
 </nav>
   </div>
@@ -197,7 +201,7 @@
 	
     <div class="post-content image-border">
 	 <p>近期在工作中遇到由于<code>HTTP</code>返回的内容较多导致系统响应延迟的问题，最终自己结合<a href="https://en.wikipedia.org/wiki/Gzip">gzip</a>、<a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a>、<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C">位运算</a>等将<code>HTTP</code>响应返回的数据从15M减少到1M从而解决系统无卡顿问题。其中对于<code>位运算</code>部分自己是结合业务实际，将3个小型<code>int</code>转化为1个<code>long</code>，将数据量减少三分之一，简单记录下其实现(以<code>Java</code>实现为例)。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>某个项目模块要将一系列的坐标数据返回给前端页面，坐标数据由x、y、z这3个维度来定义且用<code>float</code>表示，它们的约束条件如下：</p>
 <blockquote>
 <p>$|x|$&lt;150、$|y|$&lt;50、$|z|$&lt;50</p>
@@ -219,7 +223,7 @@
 <li>采用<code>Protocol Buffers</code>在加快解析速度的同时进一步缩小请求响应的数据包体积</li>
 </ol>
 <p>通过上述操作之后，响应速度从原来的4-5s缩短到1s之内，基本上达到优化目的，在后续的总结中发现请求响应慢的主要原因是由于响应头的体积过大造成的，于是继续寻找减少响应体积的办法。</p>
-<h1 id="分析">分析</h1>
+<h2 id="分析">分析</h2>
 <p>在<code>Java</code>中<code>int</code>和<code>float</code>都占用4个字节共32bit位，将上述示例文件中的坐标数据从<code>float</code>转化为<code>int</code>并不会造成响应数据的体积变化，但由于业务的特殊性限制了x、y、z这3个坐标的取值范围(有前述所述的范围限制)，尝试分析它们的占用的最大bit位数：</p>
 
 <pre class="line-numbers language-java ">
@@ -229,14 +233,14 @@ z = 4999 = 0b1100001101001111 // 占用16bit位   </code>
 </pre>
 <p>在不考虑负数的情况下，x、y、z累计占用的bit位数为50，而一个<code>long</code>类型占用8个字节共64bit位，理论分析是可以将3个<code>int</code>合并为1个<code>long</code>型数据。</p>
 <p><img src="/blog_img/bit/merge-three-int-number-into-a-long-number/bits-used-by-int-and-long.png" alt="int和long占用的bit位数" title="int和long占用的bit位数"></p>
-<h2 id="存储设计">存储设计</h2>
+<h3 id="存储设计">存储设计</h3>
 <p>考虑到坐标数据可能有负数,可用1个bit位专门记录对应的坐标数是否为负数，此时加上正负数的标记也总共只占用53个bit位，没有超过单个<code>long</code>型数据的最大bit位数。</p>
 <p>从便于编码的角度对x、y、z在<code>long</code>型中的存储做出如下划分:</p>
 <blockquote>
 <p>每个<code>int</code>占用20个bit位，最前面一个bit位记录正负数(为正数时该bit位为0，为负数时该bit位为1)</p>
 </blockquote>
 <p><img src="/blog_img/bit/merge-three-int-number-into-a-long-number/using-long-to-store-int-data.png" alt="在long中存储int的实现方案" title="在long中存储int的实现方案"></p>
-<h2 id="移位操作">移位操作</h2>
+<h3 id="移位操作">移位操作</h3>
 <p>前述理论分析可能，但在实际操作过程中会遇到如下2个问题：</p>
 <ol>
 <li>如何在对应的正负数标识bit位上写入和读取值</li>
@@ -272,7 +276,7 @@ z = 4999 = 0b1100001101001111 // 占用16bit位   </code>
 <li>正负数的记录位<code>1L &lt;&lt; (position * 20 - 1)</code></li>
 <li>数据值的记录位<code>0x7ffffL &lt;&lt; ((position - 1) * 20)</code></li>
 </ul>
-<h1 id="实现">实现</h1>
+<h2 id="实现">实现</h2>
 <p>基于前述分析过程，坐标数据写入的代码如下，需要注意的是在写入过程中要传递一个类型为<code>long</code>的<code>target</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>变量，通过<code>target</code>变量来记录对应的坐标的具体数据和正负数标识。</p>
 
 <pre class="line-numbers language-java ">

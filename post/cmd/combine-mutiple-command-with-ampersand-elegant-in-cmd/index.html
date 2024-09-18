@@ -179,13 +179,17 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题说明">问题说明</a>
+    <li>
       <ul>
-        <li><a href="#项目背景">项目背景</a></li>
-        <li><a href="#面临的问题">面临的问题</a></li>
+        <li><a href="#问题说明">问题说明</a>
+          <ul>
+            <li><a href="#项目背景">项目背景</a></li>
+            <li><a href="#面临的问题">面临的问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#解决方案">解决方案</a></li>
       </ul>
     </li>
-    <li><a href="#解决方案">解决方案</a></li>
   </ul>
 </nav>
   </div>
@@ -195,8 +199,8 @@
 	
     <div class="post-content image-border">
 	 <p>简要介绍在<code>Windows</code>系统中采用基于<code>CMD</code>的批处理脚本进行自动化部署时，对通过<code>&amp;&amp;</code>拼接的指令以更优雅的方式实现，以提高批处理脚本的可读性和可维护性。</p>
-<h1 id="问题说明">问题说明</h1>
-<h2 id="项目背景">项目背景</h2>
+<h2 id="问题说明">问题说明</h2>
+<h3 id="项目背景">项目背景</h3>
 <p>公司有个基于<code>Python</code>开发的项目近期要交付给客户，为了便于安装和后续升级，之前都是采用<a href="https://pyinstaller.org/">PyInstaller</a>安装成exe可执行文件实现傻瓜式的操作，而这个项目出于避免与客户服务器其它<code>Python</code>环境冲突以及便于后续扩展的考量，在软件部署和升级时采用了<a href="https://www.anaconda.com/">Anaconda</a>进行隔离式部署，其部署流程如下<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <div id="flow_0">start=>start: 开始
 end=>end: 结束
@@ -219,7 +223,7 @@ python_run->end
 </ol>
 <p>这些步骤对于专业的开发人员而言操作起来很快速，但对于相关的使用客户而言，他们不一定具有相关的编程经验，执行上述指令容易出错，便利性有待提高。</p>
 <p>由于目标客户的环境为<code>Windows</code>，同项目成员沟通后决定采用<code>CMD</code>批处理脚本来包含上述命令，实际部署或升级时只需要运行该批处理脚本即可。</p>
-<h2 id="面临的问题">面临的问题</h2>
+<h3 id="面临的问题">面临的问题</h3>
 <p>最开始采用的install.bat批处理脚本类似如下</p>
 
 <pre class="line-numbers language-shell ">
@@ -262,7 +266,7 @@ pause</code>
 <p><strong>通过<code>&amp;&amp;</code>将多条指令拼接在一起的结果是脚本中只有一条超长的指令，会导致批处理脚本的可读性和可维护性都严重降低！</strong></p>
 </blockquote>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-executed-successfully.png" alt="批处理脚本正常执行" title="批处理脚本正常执行"></p>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>由于随着项目的进行，install.bat脚本肯定会进行不断地修正与更新，install.bat脚本的可维护性与可读性是必须要解决的问题，但采用<code>&amp;&amp;</code>拼接的方式也不能放弃，只能另想它法。</p>
 <p>继续寻求<code>Stackoverflow</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>的协助<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，将install.bat通过<code>SET</code>来重新赋值的方式进行变量拼接，修改后的代码如下</p>
 

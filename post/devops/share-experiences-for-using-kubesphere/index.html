@@ -177,33 +177,37 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#流水线设计">流水线设计</a></li>
-    <li><a href="#动态参数">动态参数</a>
+    <li>
       <ul>
-        <li><a href="#script中定义参数">script中定义参数</a></li>
-        <li><a href="#script中读取参数">script中读取参数</a></li>
-        <li><a href="#shell中读取参数">shell中读取参数</a></li>
-        <li><a href="#yaml文件中读取参数">yaml文件中读取参数</a></li>
-        <li><a href="#dockerfile中读取参数">Dockerfile中读取参数</a></li>
+        <li><a href="#流水线设计">流水线设计</a></li>
+        <li><a href="#动态参数">动态参数</a>
+          <ul>
+            <li><a href="#script中定义参数">script中定义参数</a></li>
+            <li><a href="#script中读取参数">script中读取参数</a></li>
+            <li><a href="#shell中读取参数">shell中读取参数</a></li>
+            <li><a href="#yaml文件中读取参数">yaml文件中读取参数</a></li>
+            <li><a href="#dockerfile中读取参数">Dockerfile中读取参数</a></li>
+          </ul>
+        </li>
+        <li><a href="#编译与部署">编译与部署</a>
+          <ul>
+            <li><a href="#前端">前端</a></li>
+            <li><a href="#后端">后端</a></li>
+          </ul>
+        </li>
+        <li><a href="#k8s容器探活">K8S容器探活</a>
+          <ul>
+            <li><a href="#后端-1">后端</a></li>
+            <li><a href="#前端-1">前端</a></li>
+          </ul>
+        </li>
+        <li><a href="#运行效果">运行效果</a></li>
+        <li><a href="#参考代码">参考代码</a></li>
       </ul>
     </li>
-    <li><a href="#编译与部署">编译与部署</a>
-      <ul>
-        <li><a href="#前端">前端</a></li>
-        <li><a href="#后端">后端</a></li>
-      </ul>
-    </li>
-    <li><a href="#k8s容器探活">K8S容器探活</a>
-      <ul>
-        <li><a href="#后端-1">后端</a></li>
-        <li><a href="#前端-1">前端</a></li>
-      </ul>
-    </li>
-    <li><a href="#运行效果">运行效果</a></li>
-    <li><a href="#参考代码">参考代码</a></li>
   </ul>
 </nav>
   </div>
@@ -221,7 +225,7 @@
 <p>提供开箱即用的基于 Jenkins 的 CI/CD，并内置自动化流水线插件，包括 Binary-to-Image (B2I) 和 Source-to-Image (S2I)</p>
 </div>
 <p>从上述描述可知<code>KubeSphere</code>的两大底层支柱为<code>Kubernetes</code>与<code>Jenkins</code>，本文也主要基于这两部分进行记录。</p>
-<h1 id="流水线设计">流水线设计</h1>
+<h2 id="流水线设计">流水线设计</h2>
 <p>基于部门现状以及参考网上资料，将产品部署环境划分为如下4种类型:</p>
 <ul>
 <li><strong>dev</strong>，本地开发阶段</li>
@@ -238,7 +242,7 @@
 <li>一套<code>Jenkins</code>流水线可以根据使用需求灵活的往<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之一进行部署</li>
 <li><code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>对于同一套代码而言是分别部署的，即4套环境互不影响</li>
 </ul>
-<h1 id="动态参数">动态参数</h1>
+<h2 id="动态参数">动态参数</h2>
 <p><img src="/blog_img/devops/share-experiences-for-using-kubesphere/jenkins-build-flow.png" alt="Jenkins构建流程" title="Jenkins构建流程"></p>
 <p>上图展示了<code>Jenkins</code>进行软件构建的主要流程，从中可知若达到上述精简流水线条目的要求，则需要进行<strong>动态参数配置</strong>，基于项目实际情况，整理出如下场景：</p>
 <ol>
@@ -252,7 +256,7 @@
 <blockquote>
 <p><strong>能通过<code>Groovy</code>脚本获取的变量与参数尽量通过<code>Grovvy</code>获取，<code>Shell</code>脚本只负责使用</strong></p>
 </blockquote>
-<h2 id="script中定义参数">script中定义参数</h2>
+<h3 id="script中定义参数">script中定义参数</h3>
 <p>在<code>script</code>中输入符合 <code>Groovy</code>语法的代码即可，为了在多个steps之间实现参数共享，需要在定义参数时加上<code>env.</code>前缀<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，类似如下：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -272,12 +276,12 @@
 }
 env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
 </pre>
-<h2 id="script中读取参数">script中读取参数</h2>
+<h3 id="script中读取参数">script中读取参数</h3>
 
 <pre class="no-line-numbers language-groovy ">
 <code>print env.DUBBO_IP</code>
 </pre>
-<h2 id="shell中读取参数">shell中读取参数</h2>
+<h3 id="shell中读取参数">shell中读取参数</h3>
 <p>需要采用<code>$参数名</code>(去掉<code>env.</code>前缀)的方式，类似如下</p>
 
 <pre class="line-numbers language-shell ">
@@ -288,7 +292,7 @@ env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
 --build-arg  DUBBO_PORT=$DUBBO_PORT \
 --build-arg PRODUCT_PHASE=$PRODUCT_PHASE .</code>
 </pre>
-<h2 id="yaml文件中读取参数">yaml文件中读取参数</h2>
+<h3 id="yaml文件中读取参数">yaml文件中读取参数</h3>
 <p>在<code>Kubernetes</code>中需要一个yaml文件来配置要生成的pod，其参数的获取也是采用<code>$参数名</code>的方式</p>
 
 <pre class="line-numbers language-yaml ">
@@ -309,7 +313,7 @@ env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
   sessionAffinity: None
   type: NodePort</code>
 </pre>
-<h2 id="dockerfile中读取参数">Dockerfile中读取参数</h2>
+<h3 id="dockerfile中读取参数">Dockerfile中读取参数</h3>
 <p>当在<code>docker</code>的build阶段传递正确的参数后，在Dockerfile中需要采用<code>${参数名}</code>的方式获取参数</p>
 
 <pre class="line-numbers language-dockerfile ">
@@ -329,9 +333,9 @@ ARG DUBBO_PORT
 ENV PARAMS=&#34;--server.port=${NODE_PORT} --spring.application.name=lucumt-data --spring.profiles.active=${PRODUCT_PHASE} --dubbo.protocol.port=${DUBBO_PORT}&#34;
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &#39;Asia/Shanghai&#39; &gt;/etc/timezone</code>
 </pre>
-<h1 id="编译与部署">编译与部署</h1>
+<h2 id="编译与部署">编译与部署</h2>
 <p>由于公司研发环境与互联网隔离，故需要在前后端分别设置可用的镜像才能确保编译正常。</p>
-<h2 id="前端">前端</h2>
+<h3 id="前端">前端</h3>
 <ul>
 <li>
 <p><code>Nodejs</code>版本号升级：</p>
@@ -355,7 +359,7 @@ EXPOSE 8080</code>
 </pre>
 </li>
 </ul>
-<h2 id="后端">后端</h2>
+<h3 id="后端">后端</h3>
 <ul>
 <li>
 <p>获取<code>Maven</code>版本号：</p>
@@ -374,9 +378,9 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
 </pre>
 </li>
 </ul>
-<h1 id="k8s容器探活">K8S容器探活</h1>
+<h2 id="k8s容器探活">K8S容器探活</h2>
 <p><code>KubeSphere</code>对于容器的启动、就绪和存活的探测依赖于<code>Kubernetes</code>的<a href="https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">相关实现</a>，实际使用中<code>KubeSphere</code>只需要能正常检测到就绪状态即可，现阶段项目中也只基于就绪探测来实现。</p>
-<h2 id="后端-1">后端</h2>
+<h3 id="后端-1">后端</h3>
 <p><code>SpringBoot</code>程序可基于<a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready.html">Spring Boot Actuator</a>中提供的<code>actuator/health</code>进行就绪检测，相关配置如下:</p>
 
 <pre class="line-numbers language-yaml ">
@@ -390,7 +394,7 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
       failureThreshold: 30
       periodSeconds: 5</code>
 </pre>
-<h2 id="前端-1">前端</h2>
+<h3 id="前端-1">前端</h3>
 <p>由于前端没有单独的接口对外暴露，故可采用在<code>Docker</code>容器中执行linux命令的方式来检测是否就绪，个人采用<code>uname</code>，相关配置如下：</p>
 
 <pre class="line-numbers language-yaml ">
@@ -404,10 +408,10 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
       failureThreshold: 30
       periodSeconds: 5</code>
 </pre>
-<h1 id="运行效果">运行效果</h1>
+<h2 id="运行效果">运行效果</h2>
 <p>运行效果如下，可实现动态的指定测试阶段和代码分支：</p>
 <p><img src="/blog_img/devops/share-experiences-for-using-kubesphere/kubesphere-jenkins-pipeline-run-dialog.png" alt="KubeSphere流水线运行效果" title="KubeSphere流水线运行效果"></p>
-<h1 id="参考代码">参考代码</h1>
+<h2 id="参考代码">参考代码</h2>
 <ul>
 <li>前端部分:
 <ul>

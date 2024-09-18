@@ -181,9 +181,13 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#解决思路">解决思路</a></li>
-    <li><a href="#展示效果">展示效果</a></li>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#解决思路">解决思路</a></li>
+        <li><a href="#展示效果">展示效果</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -196,7 +200,7 @@
 div.mermaid > svg { max-width: 60% !important; }
 </style>
 <p>简要介绍如何在<a href="https://kubesphere.io/zh/">KubeSphere</a>中使用<a href="https://www.jenkins.io/">Jenkins</a>基于用户选择的不同<a href="https://gitlab.com">GitLab</a>工程模块利用<a href="https://git-scm.com/">Git</a>进行动态的代码下载和编译构建，<strong>将多条流水线缩减为一条，减少<code>Jenkins</code>流水线的开发与维护成本</strong>。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>在<a href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/">利用Nacos与KubeSphere创建多套开发与测试环境</a>一文中介绍了部门基于<code>KubeSphere</code>和<code>Nacos</code>来动态的创建多套开发与测试环境，此种方式虽然在公司内部使用起来很灵活，但当需要交付给客户时会存在如下问题导致<code>KubeSphere</code>不适合部署给客户使用:</p>
 <ol>
 <li>客户使用环境的网络无法接入公司网络，无法下载代码</li>
@@ -242,7 +246,7 @@ div.mermaid > svg { max-width: 60% !important; }
     A9 --> |直接运行jar文件| C1
 classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 </div>
-<h1 id="解决思路">解决思路</h1>
+<h2 id="解决思路">解决思路</h2>
 <p>由于最初是每个工程项目都有一个单独的<code>Jenkins</code>流水线，故在通过<code>Git</code>下载代码时采用的是类似下图的直接写死<code>Gitlab</code>工程仓库地址的方式，很明显此种方式不满足要求。</p>
 
 <pre class="line-numbers language-groovy ">
@@ -259,7 +263,7 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 <p><img src="/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-pipeline-dynamic-checkout-code-testing-result.png" alt="采用不同方式尝试在jenkins中实现动态下载" title="采用不同方式尝试在jenkins中实现动态下载"></p>
 <p>下图展示了完整的使用链路，可发现其实现复杂度不是很高</p>
 <p><img src="/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-dynamic-select-git-repository-explanation.png" alt="jenkins动态下载代码图解" title="jenkins动态下载代码图解"></p>
-<h1 id="展示效果">展示效果</h1>
+<h2 id="展示效果">展示效果</h2>
 <p>运行结果如下：</p>
 <p><img src="/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-dynamic-checkout-code-and-build-example.png" alt="采用jenkins动态下载代码并构建的示例" title="采用jenkins动态下载代码并构建的示例"></p>
 <p>相关流水线参考如下：</p>
