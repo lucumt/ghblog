@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified - 飞狐的部落格</title>
+  <title>Windows中由于系统权限不同导致的mysqldump不生效的原因分析 - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="飞狐" /><meta name="description" content="Blog of Rosen Lu" /><meta name="keywords" content="MySQL, Java" />
+<meta name="author" content="飞狐" /><meta name="description" content="记录在Windows中使用MySQL的dump指令时，由于权限不足而出现Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified的问题解决方案" /><meta name="keywords" content="MySQL, Java, MySQL dump, Windows管理员" />
 
 
 
@@ -41,8 +41,8 @@
 
 <meta property="og:url" content="https://lucumt.info/post/mysql/can-not-run-program-mysqldump/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
-  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:title" content="Windows中由于系统权限不同导致的mysqldump不生效的原因分析">
+  <meta property="og:description" content="记录在Windows中使用MySQL的dump指令时，由于权限不足而出现Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified的问题解决方案">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,15 +51,15 @@
     <meta property="article:tag" content="Mysql">
     <meta property="article:tag" content="Java">
 
-  <meta itemprop="name" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
-  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="name" content="Windows中由于系统权限不同导致的mysqldump不生效的原因分析">
+  <meta itemprop="description" content="记录在Windows中使用MySQL的dump指令时，由于权限不足而出现Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified的问题解决方案">
   <meta itemprop="datePublished" content="2016-03-03T14:33:43+08:00">
   <meta itemprop="dateModified" content="2016-03-03T14:33:43+08:00">
   <meta itemprop="wordCount" content="1592">
-  <meta itemprop="keywords" content="MySQL,Java">
+  <meta itemprop="keywords" content="MySQL,Java,MySQL dump,Windows管理员">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified">
-  <meta name="twitter:description" content="Blog of Rosen Lu">
+  <meta name="twitter:title" content="Windows中由于系统权限不同导致的mysqldump不生效的原因分析">
+  <meta name="twitter:description" content="记录在Windows中使用MySQL的dump指令时，由于权限不足而出现Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified的问题解决方案">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -164,7 +164,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</h1>
+      <h1 class="post-title">Windows中由于系统权限不同导致的mysqldump不生效的原因分析</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2016-03-03 </span>

@@ -44,7 +44,7 @@
       <description>&lt;p&gt;在数据库中使用&lt;code&gt;COUNT&lt;/code&gt;函数统计总数是常用操作，本文参考网上资料以及个人实际操作记录下&lt;code&gt;MySQL&lt;/code&gt;中通过&lt;code&gt;COUNT(列名)&lt;/code&gt;、&lt;code&gt;COUNT(常量)&lt;/code&gt;以及&lt;code&gt;COUNT(*)&lt;/code&gt;在&lt;strong&gt;相同查询条件下&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/strong&gt; 的区别以及使用场景。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
+      <title>Windows中由于系统权限不同导致的mysqldump不生效的原因分析</title>
       <link>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       <guid>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</guid>

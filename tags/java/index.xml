@@ -310,7 +310,7 @@
       <description>&lt;p&gt;本文翻译自 &lt;a href=&#34;http://tutorials.jenkov.com/java-concurrency/volatile.html&#34;&gt;&lt;strong&gt;Java Volatile Keyword&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Java关键字&lt;code&gt;volatile&lt;/code&gt;用于将一个Java变量标记为&lt;strong&gt;在主内中存储&lt;/strong&gt;，更准确的解释为：每次读取一个&lt;code&gt;volatile&lt;/code&gt;变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个&lt;code&gt;volatile&lt;/code&gt;变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。&lt;/p&gt;&#xA;&lt;p&gt;事实上，从&lt;code&gt;Java5&lt;/code&gt;之后，&lt;code&gt;volatile&lt;/code&gt;关键字不仅仅可以用来确保&lt;code&gt;volatile&lt;/code&gt;变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified</title>
+      <title>Windows中由于系统权限不同导致的mysqldump不生效的原因分析</title>
       <link>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</link>
       <pubDate>Thu, 03 Mar 2016 14:33:43 +0800</pubDate>
       <guid>https://lucumt.info/post/mysql/can-not-run-program-mysqldump/</guid>
