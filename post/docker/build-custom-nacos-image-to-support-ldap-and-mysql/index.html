@@ -182,19 +182,23 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#构建过程">构建过程</a>
+    <li>
       <ul>
-        <li><a href="#初始构建">初始构建</a></li>
-        <li><a href="#改进版本">改进版本</a></li>
-        <li><a href="#支持ldap">支持LDAP</a></li>
-      </ul>
-    </li>
-    <li><a href="#最终文件">最终文件</a>
-      <ul>
-        <li><a href="#dockerfile">Dockerfile</a></li>
-        <li><a href="#构建方式">构建方式</a></li>
-        <li><a href="#使用方式">使用方式</a></li>
-        <li><a href="#镜像参数说明">镜像参数说明</a></li>
+        <li><a href="#构建过程">构建过程</a>
+          <ul>
+            <li><a href="#初始构建">初始构建</a></li>
+            <li><a href="#改进版本">改进版本</a></li>
+            <li><a href="#支持ldap">支持LDAP</a></li>
+          </ul>
+        </li>
+        <li><a href="#最终文件">最终文件</a>
+          <ul>
+            <li><a href="#dockerfile">Dockerfile</a></li>
+            <li><a href="#构建方式">构建方式</a></li>
+            <li><a href="#使用方式">使用方式</a></li>
+            <li><a href="#镜像参数说明">镜像参数说明</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -206,8 +210,8 @@
 	
     <div class="post-content image-border">
 	 <p><code>Nacos</code>官方的<code>docker</code>镜像不支持<code>LDAP</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>同时在连接<code>mysql</code>方面在某些版本中会出现<strong>No Datasource Set</strong> 的异常，而其官方的release版本则很很稳定，同时又支持<code>LDAP</code>。目前部门很多项目都是基于<code>docker</code>部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的<code>nacos</code>镜像，在确保性能稳定的同时也能支持<code>ldap</code>登录。</p>
-<h1 id="构建过程">构建过程</h1>
-<h2 id="初始构建">初始构建</h2>
+<h2 id="构建过程">构建过程</h2>
+<h3 id="初始构建">初始构建</h3>
 <p>一开始自己基于<a href="https://github.com/alibaba/nacos/releases/tag/2.2.1">Nacos2.2.1</a>下载的tar.gz文件进行构建，主要有如下几个步骤：</p>
 <ol>
 <li>通过<code>FROM</code>拉取<code>openjdk-8</code>基础镜像</li>
@@ -251,7 +255,7 @@ RUN chmod &#43;x /home/nacos/bin/startup.sh
 ENTRYPOINT [&#34;/bin/bash&#34;,&#34;/home/nacos/bin/startup.sh&#34;,&#34;-m&#34;,&#34;standalone&#34;]</code>
 </pre>
 <p>基于上述文件构建的镜像通过<code>docker run</code>指令执行时一直启动不成功，而在<code>Linux</code>终端中通过<code>bash startup.sh -m standlone</code>的方式则可以顺利启动<code>nacos</code>，初次尝试失败!</p>
-<h2 id="改进版本">改进版本</h2>
+<h3 id="改进版本">改进版本</h3>
 <p>对<code>startup.sh</code>进行检查之后，发现其主要是通过如下的<code>nohup</code>指令启动的</p>
 
 <pre class="line-numbers language-ba ">
@@ -316,7 +320,7 @@ RUN chmod &#43;x /home/nacos/bin/docker-startup.sh
 
 ENTRYPOINT [&#34;/bin/bash&#34;,&#34;/home/nacos/bin/docker-startup.sh&#34;,&#34;-m&#34;,&#34;standalone&#34;]</code>
 </pre>
-<h2 id="支持ldap">支持LDAP</h2>
+<h3 id="支持ldap">支持LDAP</h3>
 <p>结合公司的实际情况，在部门内部使用时一般采用<code>LDAP</code>登录，而交付给客户时更多的采用普通账号登录，为此需要2份<code>Dockerfile</code>来构建2个不同的镜像，处于简化维护的考虑，自己决定采用1份<code>Dockerfile</code>文件根据构建参数来动态的生成不同的镜像。</p>
 <p>在网络上搜索后发现可以在<code>Dockerfile</code>中执行类似if else的指令<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，于是在原有的<code>Dockerfile</code>基础上添加如下指令即可动态的支持<code>LDAP</code>登录</p>
 
@@ -333,8 +337,8 @@ RUN if [ $LOGIN_TYPE = &#34;ldap&#34; ];then sed -i &#34;s/\#nacos.core.auth.lda
 RUN if [ $LOGIN_TYPE = &#34;ldap&#34; ];then sed -i &#34;s/\#nacos.core.auth.ldap.filter.prefix=.*/nacos.core.auth.ldap.filter.prefix=\${LDAP_UID}/g&#34; $conf; fi
 RUN if [ $LOGIN_TYPE = &#34;ldap&#34; ];then sed -i &#34;s/\#nacos.core.auth.ldap.case.sensitive=.*/nacos.core.auth.ldap.case.sensitive\${LDAP_CASE_SENSITIVE}/g&#34; $conf; fi</code>
 </pre>
-<h1 id="最终文件">最终文件</h1>
-<h2 id="dockerfile">Dockerfile</h2>
+<h2 id="最终文件">最终文件</h2>
+<h3 id="dockerfile">Dockerfile</h3>
 
 <pre class="line-numbers language-dockerfile ">
 <code>FROM openjdk:8-jdk
@@ -401,7 +405,7 @@ RUN chmod &#43;x /home/nacos/bin/docker-startup.sh
 
 ENTRYPOINT [&#34;/bin/bash&#34;,&#34;/home/nacos/bin/docker-startup.sh&#34;,&#34;-m&#34;,&#34;standalone&#34;]</code>
 </pre>
-<h2 id="构建方式">构建方式</h2>
+<h3 id="构建方式">构建方式</h3>
 <p>在构建时需要将<code>Dockerfile</code>、<code>docker-startup.sh</code>以及对应的<code>nacos</code>压缩文件放到同一个目录下</p>
 <ul>
 <li>
@@ -423,7 +427,7 @@ docker build -t nacos_custom:v1.0 --build-arg LOGIN_TYPE=nacos .</code>
 </pre>
 </li>
 </ul>
-<h2 id="使用方式">使用方式</h2>
+<h3 id="使用方式">使用方式</h3>
 <p>假设存储数据库为<code>mysql</code>采用<a href="https://docs.docker.com/compose/">docker-compose</a>方式登录，相关的<code>docker-compose.yml</code>文件如下:</p>
 <ul>
 <li>
@@ -483,7 +487,7 @@ services:
 </pre>
 </li>
 </ul>
-<h2 id="镜像参数说明">镜像参数说明</h2>
+<h3 id="镜像参数说明">镜像参数说明</h3>
 <table>
 <thead>
 <tr>

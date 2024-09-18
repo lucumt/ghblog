@@ -179,14 +179,18 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#对比">对比</a></li>
-    <li><a href="#验证">验证</a>
+    <li>
       <ul>
-        <li><a href="#add指令">ADD指令</a></li>
-        <li><a href="#copy指令">COPY指令</a></li>
+        <li><a href="#对比">对比</a></li>
+        <li><a href="#验证">验证</a>
+          <ul>
+            <li><a href="#add指令">ADD指令</a></li>
+            <li><a href="#copy指令">COPY指令</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -197,7 +201,7 @@
     <div class="post-content image-border">
 	 <p>简要说明在使用<a href="https://docs.docker.com/reference/dockerfile/"><strong>Dockerfile</strong></a>构建镜像时，<a href="https://docs.docker.com/reference/dockerfile/#add"><strong>ADD</strong></a>与<a href="https://docs.docker.com/reference/dockerfile/#copy"><strong>COPY</strong></a>指令的使用差异。</p>
 <p>近期在使用<code>Docker</code>时，发现部分项目中采用<code>Dockerfile</code>来构建自定义镜像时存在<code>COPY</code>和<code>ADD</code>两条指令混用的情况，为了规范使用，基于网络上的相关资料，简要的对比总结了它们的差异，供后续参考。</p>
-<h1 id="对比">对比</h1>
+<h2 id="对比">对比</h2>
 <p>在<code>Docker</code>官网关于<code>COPY</code>指令的<a href="https://docs.docker.com/reference/dockerfile/#copy">描述</a>如下</p>
 <blockquote>
 <p>The <code>COPY</code> instruction copies new files or directories from <code>&lt;src&gt;</code> and adds them to the filesystem of the container at the path <code>&lt;dest&gt;</code>.</p>
@@ -223,13 +227,13 @@ func dispatchCopy(d dispatchRequest, c *instructions.CopyCommand) error {
 }</code>
 </pre>
 <p>总结下来就是 <strong><code>COPY</code>指令处理不能进行压缩文件和URL文件流的处理之外，其它功能与<code>ADD</code>指令类似。</strong></p>
-<h1 id="验证">验证</h1>
+<h2 id="验证">验证</h2>
 <p>为了便于观察<code>Dockerfile</code>构建过程中的输出，可在构建指令中加入<code>--progress=plain</code>来查看输出的详细信息，类似如下</p>
 
 <pre class="no-line-numbers language-dockerfile ">
 <code>docker build --progress=plain --no-cache -t custom:v1.0 -f Dockerfile .</code>
 </pre>
-<h2 id="add指令">ADD指令</h2>
+<h3 id="add指令">ADD指令</h3>
 <ul>
 <li>
 <p>验证普通的文件拷贝</p>
@@ -274,7 +278,7 @@ RUN ls /home/lucumt</code>
 <p><img src="/blog_img/docker/difference-between-add-and-copy-in-dockerfile-build/add-with-tar-file.png" alt="ADD指令使用tar文件" title="ADD指令使用tar文件"></p>
 </li>
 </ul>
-<h2 id="copy指令">COPY指令</h2>
+<h3 id="copy指令">COPY指令</h3>
 <ul>
 <li>
 <p>验证普通文件</p>
@@ -319,7 +323,7 @@ RUN ls /home/lucumt</code>
 <p><img src="/blog_img/docker/difference-between-add-and-copy-in-dockerfile-build/copy-with-tar-file.png" alt="COPY指令使用压缩文件" title="COPY指令使用压缩文件"></p>
 </li>
 </ul>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>官方推荐的是<strong>在不需要使用<code>ADD</code>指令的高级特性的场景下，优先使用<code>COPY</code>指令，其更直观也不会造成困惑</strong>。</p>
 <p>假设对于一个新手来说，采用类似<code>ADD nginx-1.0.15.tar.gz /home/lucumt</code>进行构建后最后却得到的是一个解压文件，在不熟悉相关指令细节时会让人觉得很奇怪。</p>
 <p>参考链接：</p>
