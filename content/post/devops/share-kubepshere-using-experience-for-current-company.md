@@ -43,7 +43,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 公司当前有接近3000人的规模，主要业务为汽车配套相关的软硬件开发，其中专门从事软件开发约有800人，这其中`Java`开发的约占70%，余下的为`C/C++`嵌入式和`C#`桌面程序的开发。
 
@@ -59,7 +59,7 @@ sequenceDiagrams:
 
 在竞争日益激烈的市场环境下，**公司需要把有限的人力资源优先用于业务迭代开发**，解决上述问题变得愈发迫切。
 
-# 选型说明
+## 选型说明
 
 基于前述原因，部门准备选用网络上开源的系统来尽可能的解决上述痛点，在技术选型时有如下考量点：
 
@@ -91,15 +91,15 @@ sequenceDiagrams:
 
 ![不同类型的构建方式比较](/blog_img/devops/share-kubepshere-using-experience-for-current-company/different-type-of-deploy-compare.png "不同类型的构建方式比较") 
 
-# 实践过程
+## 实践过程
 
 `KubeSphere`在公司内部的整体部署架构如下图所示，其作为最顶层的应用程序直接与使用人员交互，提供主动 /定时触发构建、应用监控等功能，使用人员不必关心底层的`Jenkins`、`Kubernetes`等依赖组件，只需要与`Gitlab`和`KubeSphere`交互即可。
 
 ![kubesphere整合架构图](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-integration-architecture.png "kubesphere整合架构图") 
 
-## 持续集成
+### 持续集成
 
-### 初始实现
+#### 初始实现
 
 在最初的尝试阶段只规划了4套环境:`dev`(开发环境)、`sit`(调试环境)、`test`(测试环境)、`prod`(生产环境)。
 
@@ -172,7 +172,7 @@ sequenceDiagrams:
 
 详细内容请参见[KubeSphere使用心得](/post/devops/share-experiences-for-using-kubesphere/)。
 
-### 环境扩容
+#### 环境扩容
 
 基于前述方式搭建的4套环境一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合[Nacos](https://nacos.io/zh-cn/docs/what-is-nacos.html)在`KubeSphere`中动态配置多套环境功能，通过修改`Nacos`中的`JSON`配置文件可很容易的从4套扩展为16套甚至更多。
 
@@ -277,7 +277,7 @@ sequenceDiagrams:
 
 详细内容请参见[利用Nacos与KubeSphere创建多套开发与测试环境](/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/)。
 
-### 扩展功能
+#### 扩展功能
 
 * 在项目构建时添加审核功能，对于`test`和`prod`环境必须经过相关人的审核才能进行后续构建流程，避免破坏相关版本的稳定性
 
@@ -291,7 +291,7 @@ sequenceDiagrams:
 
   ![项目构建完毕发送邮件通知](/blog_img/devops/share-kubepshere-using-experience-for-current-company/kubesphere-jenkins-pipeline-mail-notification.png "项目构建完毕发送邮件通知") 
 
-## 外部部署
+### 外部部署
 
 部门内部的软件最终都会销售并交付给相关客户，由于客户网络与公司网络不通以及代码保密等要求，无法在客户现场使用原有的`Jenkins`流水线进行部署交付。基于此部门采取折中方案：**在公司内部通过`KubeSphere`进行编译打包，导出`docker`镜像，拷贝到客户处然后基于`docker`镜像部署运行**,具体请参见如下链接:
 
@@ -300,7 +300,7 @@ sequenceDiagrams:
 
 ![客户环境部署流程图](/blog_img/devops/share-kubepshere-using-experience-for-current-company/software-deploy-in-customer-environment.png "客户环境部署流程图") 
 
-## 使用协助
+### 使用协助
 
 在使用过程中确实遇到了不少问题，主要通过如下三条途径解决:
 
@@ -310,7 +310,7 @@ sequenceDiagrams:
 
 根据部门使用经验，90%的问题可通过官方文档或用户论坛获得答案。
 
-# 使用效果
+## 使用效果
 
 部分同事习惯于原始的手工操作或基于`docker`部署，导致在推广过程中受到了一定的阻力，部门内部基于充分沟通和逐步替换的方式引导相关同事来慢慢适应。经过约一年的时间磨合，大家都认可了拥抱云原生和`KubeSphere`给我们带来的便利，使用过的同事都说很香!
 
@@ -323,7 +323,7 @@ sequenceDiagrams:
 
 ![日常开发中采用KubeSphere进行集成](/blog_img/devops/share-kubepshere-using-experience-for-current-company/using-kubesphere-to-deploy.png "日常开发中采用KubeSphere进行集成") 
 
-# 规划
+## 规划
 
 结合公司与部门的实际情况，短期的规划依然是完善基于`Jenkins`的`CI`/`CD`使用来完善打包与部署流程，部门内部在进行全面`web`化，基于此中长期拥抱云原生。
 
@@ -332,7 +332,7 @@ sequenceDiagrams:
 * 将底层的`Kubernetes`从单机升级为集群，支持更多`pod`的部署，支持公司内部需要大量`pod`并发运行的云仿真项目
 * 部门内部的`web`项目全部通过`KubeSphere`构建部署，完善其使用文档，挖掘`KubeSphere`在部门业务中新的应用场景(如对设计文档、开发文档、bug修复的定时与强制检查通知等)
 
-# 参考文章
+## 参考文章
 
 * [KubeSphere使用心得](/post/devops/share-experiences-for-using-kubesphere/)
 * [Kubesphere集成LDAP踩坑记录](/post/devops/setting-ldap-for-kubesphere/)

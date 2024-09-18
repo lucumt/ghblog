@@ -112,7 +112,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 在`KubeSphere`中通过`Jenkins`流水线部署时，可选择部署到`KubeSphere`原生支持的`Kubernetes`中或部署到`Docker`容器中，从流水线配置的角度而言，除了最后一个阶段`部署环境`的不同，其它阶段都是类似的。
 
@@ -156,9 +156,9 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 
 目前大部分项目都是直接部署到`Kubernetes`而部分项目由于环境以及运维等特殊考量采用的是直接部署到`Docker`，由于此种方式下配置流水线较为复杂，本文将相关操作过程简单记录下，供后续参考。
 
-# SSH远程执行
+## SSH远程执行
 
-## 理论基础
+### 理论基础
 
 部署到`Docker`的理论基础是通过`Jenkins`所在的宿主机(目前部门内部的`Jenkins`与`KubeSphere`都在同一台宿主机上)通过`SSH(Secure Shell)`在要部署的服务器上执行`Docker`相关执行，将之前需要手工执行的操作步骤以自动化的方式替代。
 
@@ -186,7 +186,7 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
    ![通过ssh操作多个服务器](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-server-docker.png "通过ssh操作多个服务器")
 
-## 实际演示
+### 实际演示
 
 假设现在有`10.30.31.22`和`10.30.31.24`这两台虚拟机，简单演示下在`10.30.31.22`中通过`ssh`远程访问`10.30.31.24`
 
@@ -198,7 +198,7 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
     ![通过ssh执行shell脚本](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-shell-script.png "通过ssh执行shell脚本")
 
-## 免密登录
+### 免密登录
 
 从上述运行效果图可看出每次执行`ssh`指令时都需要对应远程服务器的密码，这是一种交互式的操作，而如果我们通过`Jenkins`进行操作时，若要每次都输入对应远程服务器的密码，显然是不显示的，故需要进行免密登录的配置。
 
@@ -206,11 +206,11 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
 如何给`ssh`设置免费登录，详情参见 [**SSH远程免密登录**](https://www.cnblogs.com/xiaxiaolu/p/10264013.html)，由于我们实际使用过程中是基于`Jenkins`调用`ssh`进行远程登录的，故不需要执行此部操作，只需要在`Jenkins`中设置免密登录即可。
 
-# Jenkins相关配置
+## Jenkins相关配置
 
 此部分操作需要使用`Jenkins`管理员的登录，其用户名通常为`admin`。
 
-## Jenkins插件安装
+### Jenkins插件安装
 
 > **此过程只需操作一次，之前已经安装完毕，此处记录只作为参考。**
 
@@ -226,11 +226,11 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
    ![在jenkins中查看已安装插件](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/jenkins-installed-plugin-search.png "在jenkins中查看已安装插件")
 
-## Jenkins配置
+### Jenkins配置
 
 > **每增加一个远程服务器时，都需要仿照下述说明在`Jenkins`中添加相关的配置。**
 
-### 生成公钥与私钥
+#### 生成公钥与私钥
 
 1. 在要执行的服务器上执行下述指令，检测`ssh`目录是否存在
 
@@ -259,7 +259,7 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
    ![将公钥写入授权文件](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/write-pub-key-to-authorized-keys.png "将公钥写入授权文件")
 
-### Jenkins配置凭据
+#### Jenkins配置凭据
 
 此文参考于[**Jenkinsfile 中配置使用 ssh agent 连接远程主机**](https://www.snycloud.com/archives/jenkinsfile%E4%B8%AD%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8sshagent%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA)，可在该文章中查看详细的说明。
 
@@ -289,7 +289,7 @@ ssh nick@xxx.xxx.xxx.xxx 'bash -s' < test.sh helloworld # helloworld即为传入
 
    ![Jenkins添加私钥结果](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/jenkins-add-credential-result.png "Jenkins添加私钥结果")
 
-## 流水线配置
+### 流水线配置
 
 在`Jenkins`中添加类似如下的代码并执行测试，若测试正常，则表示`Jenkins`中基于`SSH`的远程部署全部配置完成，操作过程全部结束！
 
@@ -311,7 +311,7 @@ sshagent(credentials: ['10-30-31-24-key']) {
 
    ![KubeSphere流水线执行界面](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-run-input-dialog.png "KubeSphere流水线执行界面")
 
-## 简单测试验证
+### 简单测试验证
 
 基于前述的说明步骤，在`KubeSphere`中对`10.30.31.24`做个简单的测试：
 
@@ -366,9 +366,9 @@ sshagent(credentials: ['10-30-31-24-key']) {
 
    ![KubeSphere中ssh测试执行结果](/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-ssh-test-result.png "KubeSphere中ssh测试执行结果")
 
-# 参考示例
+## 参考示例
 
-## 远程shell脚本
+### 远程shell脚本
 
 注意： `shell`脚本在我们要通过ssh远程执行的那台`执行者`的电脑上，而不是位于被执行者的电脑上。
 
@@ -419,7 +419,7 @@ else
 fi
 ```
 
-## Jenkins流水线
+### Jenkins流水线
 
 ```groovy
 pipeline {

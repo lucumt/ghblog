@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 软件安装
+## 软件安装
 
 在[**给Grafana软件集成LDAP实现单点登录**](/post/ldap/add-ldap-support-for-grafana/)一文中简要说明了如何基于`docker`安装`Grafana`，本节出于简化使用与维护的目的，将`Grafana`与`Prometheus`合并到一个`docker-compose.yml`文件中，相关的文件如下
 
@@ -144,7 +144,7 @@ docker-compose.yml  grafana_data  ldap.toml  prometheus.yml  prometheus_data
 root@lucumt:~/grafana# docker-compose up -d
 ```
 
-# 系统接入
+## 系统接入
 
 主要基于`node exporter`实现，参考 [**centos7安装node export**](https://www.cnblogs.com/rainbow-tan/p/16623772.html) 一文进行相关操作。
 
