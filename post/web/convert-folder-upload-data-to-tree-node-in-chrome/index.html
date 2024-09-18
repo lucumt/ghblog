@@ -180,16 +180,20 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#结构分析">结构分析</a></li>
-    <li><a href="#修改思路">修改思路</a>
+    <li>
       <ul>
-        <li><a href="#逐层处理">逐层处理</a></li>
-        <li><a href="#处理重复">处理重复</a></li>
-      </ul>
-    </li>
-    <li><a href="#代码实现">代码实现</a>
-      <ul>
-        <li><a href="#java版本实现">Java版本实现</a></li>
+        <li><a href="#结构分析">结构分析</a></li>
+        <li><a href="#修改思路">修改思路</a>
+          <ul>
+            <li><a href="#逐层处理">逐层处理</a></li>
+            <li><a href="#处理重复">处理重复</a></li>
+          </ul>
+        </li>
+        <li><a href="#代码实现">代码实现</a>
+          <ul>
+            <li><a href="#java版本实现">Java版本实现</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -212,11 +216,11 @@
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/maven-project-structure.png" alt="项目结构" title="项目结构"></p>
 <p>当基于前述的<code>HTML</code>代码选中上面的工程目录上传时，<code>Chrome</code>浏览器会提示如下警告框，此警告框是浏览器出于安全原因提示<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，可不用理会。</p>
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/chrome-batch-upload-alert.png" alt="批量上传时的警告" title="批量上传时的警告"></p>
-<h1 id="结构分析">结构分析</h1>
+<h2 id="结构分析">结构分析</h2>
 <p>在<code>getfolder</code>方法中分析<code>event</code>变量时，可发现<code>event.target.files</code>属性下包含我们所上传的全部文件，将其打印输出的结果如下：</p>
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/event-target-file-list.png" alt="批量上传的文件列表" title="批量上传的文件列表"></p>
 <p>进一步观察可发现其中的<code>webkitRelativePath</code>中包含文件的完整路径，类似<code>SpringTest/target/classes/com/lucumt/bean/User.class</code>，这个路径虽然包含了上传文件的完整路径，但其为一个字符串，无法直接用于展示层级结构，进一步分析<code>event</code>变量的其它属性也没有找到有用的信息，看来只能从<code>webkitRelativePath</code>着手更改。</p>
-<h1 id="修改思路">修改思路</h1>
+<h2 id="修改思路">修改思路</h2>
 <p>为了展示层级结构，首先需要定义一个如下所示的<code>Node</code>结构，其中<code>path</code>用于存储对应的文件名(不含父路径)，<code>children</code>在为文件夹时存储子文件(文件夹)的信息：</p>
 
 <pre class="line-numbers language-javascript ">
@@ -226,7 +230,7 @@
 }</code>
 </pre>
 <p>最终的结果都是基于<code>Node</code>进行组合处理。</p>
-<h2 id="逐层处理">逐层处理</h2>
+<h3 id="逐层处理">逐层处理</h3>
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/deal-path-by-layer.png" alt="逐层处理" title="逐层处理"></p>
 <p>如上图所示，由于通过<code>JavaScript</code>获取的都是节点的完整路径，从简化实现的角度考虑，系统按照文件夹层级<strong>自底向上</strong>逐级解析，解析到根目录时则停止。在此过程中，获取到的文件路径不断缩小，直至处理到根节点，以<code>SpringTest/target/test-classes/com/lucumt/TestGetBean.class</code>为例，其解析过程说明如下：</p>
 <ol>
@@ -238,7 +242,7 @@
 <li>将node5节点的路径拆分为<code>target</code>(更新node5节点路径)和<code>SpringTest</code>(为其创建节点node6)</li>
 <li>节点node6已经是根节点，整个过程完毕，至此从node6基于<code>children</code>属性可一直往下招到node1文件节点。</li>
 </ol>
-<h2 id="处理重复">处理重复</h2>
+<h3 id="处理重复">处理重复</h3>
 <p>基于上述实现方案时有一个问题待解决，如<code>SpringTest/target/test-classes/com/lucumt/TestGetBean.class</code>和<code>SpringTest/target/classes/com/lucumt/TestApplication.class</code>在拆分到第2层级时，都会识别到<code>lucumt</code>文件夹，若都去创建该文件夹节点数据则会导致重复。</p>
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/node-path-duplicate.png" alt="路径重复" title="路径重复"></p>
 <p>回顾前面的逐层处理实现方案可知，当处理<code>SpringTest/target/classes/com/lucumt/TestApplication.class</code>时，<code>SpringTest/target/test-classes/com/lucumt/TestGetBean.class</code>已经被处理完比，在这一过程中会给我们创建好<code>lucumt</code>目录，在接下来处理<code>SpringTest/target/test-classes/com/lucumt/TestGetBean.class</code>时我们只需要<strong>找到<code>lucumt</code>对应的父节点，然后检查父节点下有没有该目录即可。</strong></p>
@@ -248,7 +252,7 @@
 <li>若当前节点的父节点存在，则需要获取其所有的子节点，并与当前节点进行避免，判断当前节点是否存在，若存在则不需要重复创建</li>
 </ol>
 <p>为了记录当前节点的父节点，可在<code>JavaScript</code>中采用<code>Map</code>数据结构，其中key为节点的路径，value为Node节点自身。</p>
-<h1 id="代码实现">代码实现</h1>
+<h2 id="代码实现">代码实现</h2>
 
 <pre class="line-numbers language-javascript ">
 <code>function getfolder(event) {
@@ -313,7 +317,7 @@
 </pre>
 <p>执行上述代码后在<code>Chrome</code>控制台的输出如下，可见<code>root</code>中已能够正确的输出层级结构，进行到这一步后续在页面上展示就很容易了，此处不再叙述。</p>
 <p><img src="/blog_img/web/convert-folder-upload-data-to-tree-node-in-chrome/tree-structure-display.png" alt="树结构展示" title="树结构展示"></p>
-<h2 id="java版本实现">Java版本实现</h2>
+<h3 id="java版本实现">Java版本实现</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class TestFilePathConvert {

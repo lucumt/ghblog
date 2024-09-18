@@ -180,18 +180,22 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#需求背景">需求背景</a></li>
-    <li><a href="#软件概览">软件概览</a></li>
-    <li><a href="#前后端配置">前后端配置</a>
+    <li>
       <ul>
-        <li><a href="#服务端安装">服务端安装</a></li>
-        <li><a href="#页面端安装">页面端安装</a></li>
-      </ul>
-    </li>
-    <li><a href="#服务器端编写">服务器端编写</a>
-      <ul>
-        <li><a href="#topic创建">topic创建</a></li>
-        <li><a href="#数据发送">数据发送</a></li>
+        <li><a href="#需求背景">需求背景</a></li>
+        <li><a href="#软件概览">软件概览</a></li>
+        <li><a href="#前后端配置">前后端配置</a>
+          <ul>
+            <li><a href="#服务端安装">服务端安装</a></li>
+            <li><a href="#页面端安装">页面端安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#服务器端编写">服务器端编写</a>
+          <ul>
+            <li><a href="#topic创建">topic创建</a></li>
+            <li><a href="#数据发送">数据发送</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -203,7 +207,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要介绍如何配置<a href="https://foxglove.dev"><strong>Foxglove</strong></a>可视化工具的前后端环境以便实现在项目中以多种方式播放采集的<a href="https://xie.infoq.cn/article/9783fa40d25a0a5ddbfd62d29"><strong>时序数据</strong></a>。</p>
-<h1 id="需求背景">需求背景</h1>
+<h2 id="需求背景">需求背景</h2>
 <p>在自动驾驶相关的项目中经常会对采集的时序数据进行可视化播放展示，常见展示方式包括<code>纯文本</code>、<code>图片</code>、<code>表格</code>、<code>图表</code>、<code>地图</code>、<code>3D</code>等展示形式，之前团队内部对于这种需求都是前后端配合自己开发相关的UI组件进行展示。但随着要展示数据的增多以及用户需求的多变，采用自行开发的方式已经力不从心，迫切的需要一款能同时支持多路数据以不同方式播放展示的工具来减轻研发压力，提升系统稳定性与可靠性。</p>
 <p>在切换为新的可视化工具之前，内部确定了如下几个指标：</p>
 <ol>
@@ -212,7 +216,7 @@
 <li>相关实现方案不是很小众，在有使用问题时能有相关途径寻找解决方案</li>
 <li>软件License许可能允许商用，且软件代码开源以便能进行二次开发</li>
 </ol>
-<h1 id="软件概览">软件概览</h1>
+<h2 id="软件概览">软件概览</h2>
 <p>经过多方对比以及参考业界其它公司相关的方案后，最终决定采用基于<code>Foxglove</code>作为对应的可视化工具替代实现，其具有如下特性：</p>
 <ol>
 <li>核心是基于<code>React</code>实现的浏览器播放，<code>server</code>端只需根据规范返回对应格式的数据即可，不限制<code>server</code>端的编程语言和实现方式，前后端通信主要基于<code>WebSocket</code>实现</li>
@@ -261,14 +265,14 @@ start->set_server(right)->create_panel->select_chassis
 select_chassis->fetch_data->filter_data
 filter_data(right)->send_data(right)->render_data
 render_data->select_chassis
-</div><h1 id="前后端配置">前后端配置</h1>
+</div><h2 id="前后端配置">前后端配置</h2>
 <p>本章节以UI端本地私有化安装为例，说明如何配置<code>Foxglove</code>前后端通信的环境，<code>server</code>端采用<code>Java</code>实现。</p>
-<h2 id="服务端安装">服务端安装</h2>
+<h3 id="服务端安装">服务端安装</h3>
 <ol>
 <li>根据<code>Foxglove</code>官方网站的<a href="https://docs.foxglove.dev/docs/visualization/message-schemas/introduction/"><strong>说明文档</strong></a>以及相关的<a href="https://github.com/foxglove-custom/foxglove-websocket-java"><strong>Java Demo</strong></a>编写对应的<code>server</code>端项目，暴露<code>WebSocket</code>端口，此处假设其端口为8765</li>
 <li>启动<code>server</code>端程序，则对应的<code>WebSocket</code>访问地址为<code>http://127.0.0.1:8765</code></li>
 </ol>
-<h2 id="页面端安装">页面端安装</h2>
+<h3 id="页面端安装">页面端安装</h3>
 <ol>
 <li>
 <p>在<code>Foxglove</code>对应的<a href="https://github.com/foxglove/studio"><strong>GitHub地址</strong></a>上有其UI端的安装说明，主要采用<code>Docker</code>安装，相关的指令如下<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
@@ -294,10 +298,10 @@ docker run --rm -p &#34;8080:8080&#34;  lucumt/foxglove_studio:1.74.1</code>
 <p><img src="/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-connection-config-result.png" alt="foxglove正常连接" title="foxglove正常连接"></p>
 </li>
 </ol>
-<h1 id="服务器端编写">服务器端编写</h1>
+<h2 id="服务器端编写">服务器端编写</h2>
 <p>由于<code>Foxglove</code>官方已经提供了相应的<code>Docker</code>镜像可直接运行，除非需要自定义开发插件，通常不涉及到对UI端的操作，我们使用<code>Foxglove</code>时更多的工作还是集中在<code>server</code>端。</p>
 <p>本文相关的完整代码参见<a href="https://github.com/foxglove-custom/foxglove-websocket-java"><strong>foxglove-websocket-java</strong></a>。</p>
-<h2 id="topic创建">topic创建</h2>
+<h3 id="topic创建">topic创建</h3>
 <ol>
 <li>
 <p><code>Foxglove</code>前后端通信主要基于<code>WebSocket</code>实现，本文采用<code>Netty</code>提供的<code>WebSocket</code>工具类来简化使用，对应的<code>Maven</code>版本为</p>
@@ -506,7 +510,7 @@ public void onOpen(Session session) {
 <p>若连接配置正确，在UI界面的左侧会出现相关的<code>topic</code>列表，如前述步骤所示，至此<code>topic</code>的创建与注册完成</p>
 </li>
 </ol>
-<h2 id="数据发送">数据发送</h2>
+<h3 id="数据发送">数据发送</h3>
 <p>本章节以发送<code>纯文本</code>类型的消息为例说明如何在<code>server</code>端编写代码实现数据发送</p>
 <ol>
 <li>

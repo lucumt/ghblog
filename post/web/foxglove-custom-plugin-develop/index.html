@@ -180,10 +180,14 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题背景">问题背景</a></li>
-    <li><a href="#初步验证">初步验证</a></li>
-    <li><a href="#插件开发">插件开发</a></li>
-    <li><a href="#安装使用">安装&amp;使用</a></li>
+    <li>
+      <ul>
+        <li><a href="#问题背景">问题背景</a></li>
+        <li><a href="#初步验证">初步验证</a></li>
+        <li><a href="#插件开发">插件开发</a></li>
+        <li><a href="#安装使用">安装&amp;使用</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -194,7 +198,7 @@
     <div class="post-content image-border">
 	 <p>基于<a href="https://github.com/foxglove/create-foxglove-extension"><strong>create-foxglove-extension</strong></a>一文简要说明自己如何基于<a href="https://en.wikipedia.org/wiki/Real-Time_Streaming_Protocol"><strong>RTSP协议</strong></a>给<code>Foxglove</code>开发一款插件并应用于实际项目的流程。</p>
 <p>相关源码参见<a href="https://github.com/foxglove-custom/rtsp-player-extension"><strong>rtsp-player-extension</strong></a>。</p>
-<h1 id="问题背景">问题背景</h1>
+<h2 id="问题背景">问题背景</h2>
 <p><code>Foxglove</code>官方虽然支持十几种类型的数据播放格式，但却没有对视频流播放的支持(截至到本文写作时)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，而自动驾驶等相关的汽车研发领域对于视频文件的播放却是一个刚需，且通常需要播放多路视频。</p>
 <p>由于<code>Foxglove</code>官方支持图片、压缩图片、压缩帧这几种格式的播放，故一开始自己想的是将视频按照特定的频率抽取成多帧图片，在UI端按照时间顺序连续播放形成类似动画的效果，以间接实现视频播放的目的。</p>
 <p>在个人实际项目中，视频的来源是<code>RTSP</code>，故而最初的处理逻辑如下，需要自己实现的核心逻辑为将视频流抽帧为图片</p>
@@ -288,7 +292,7 @@ connect_rtsp=>operation: 连接RTSP视频流 | pink
 display_data=>operation: UI端展示 | pink
 start(right)->connect_rtsp(right)->display_data(right)->end
 </div><p>由于<code>Foxglove</code>中尚没有类似的面板可直接使用，若要实现类似功能，只能自己开发相关插件，在此之前还需进行可行性验证。</p>
-<h1 id="初步验证">初步验证</h1>
+<h2 id="初步验证">初步验证</h2>
 <p>由于<code>Foxglove</code>的播放工作主要是UI端实现的，首先需要验证能否在<code>HTML</code>页面中直接播放<code>RTSP</code>视频流。</p>
 <ol>
 <li>
@@ -318,7 +322,7 @@ start(right)->connect_rtsp(right)->display_data(right)->end
 <p>至此可行性验证完毕，实际开发插件时只需要模仿步骤4即可。</p>
 </li>
 </ol>
-<h1 id="插件开发">插件开发</h1>
+<h2 id="插件开发">插件开发</h2>
 <p><code>Foxglove</code>中开发插件的教程请参见<a href="https://github.com/foxglove/create-foxglove-extension"><strong>create-foxglove-extension</strong></a>，本章节以<code>RTSP</code>播放为例简要展示开发步骤：</p>
 <ol>
 <li>
@@ -567,7 +571,7 @@ export function activate(extensionContext: ExtensionContext): void {
 <p>之后重新执行<code>npm run package</code>即可生成一个名为<code>lucumt.rtsp-player-extension-0.0.1.foxe</code>的插件产物，至此整个插件开发与构建流程结束，接下来的就是安装与使用。</p>
 </li>
 </ol>
-<h1 id="安装使用">安装&amp;使用</h1>
+<h2 id="安装使用">安装&amp;使用</h2>
 <ol>
 <li>
 <p>在浏览器打开<code>Foxglove</code>播放界面，之后打开前述步骤中生成的插件，将其拖动到浏览器窗口中，类似下图所示</p>

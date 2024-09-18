@@ -180,36 +180,35 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#面板操作">面板操作</a>
+    <li>
       <ul>
-        <li><a href="#创建面板">创建面板</a>
+        <li><a href="#面板操作">面板操作</a>
           <ul>
-            <li><a href="#直接创建">直接创建</a></li>
-            <li><a href="#拆分创建">拆分创建</a></li>
+            <li><a href="#创建面板">创建面板</a></li>
+            <li><a href="#修改面板">修改面板</a></li>
+            <li><a href="#删除面板">删除面板</a></li>
+            <li><a href="#打开工具栏">打开工具栏</a></li>
           </ul>
         </li>
-        <li><a href="#修改面板">修改面板</a></li>
-        <li><a href="#删除面板">删除面板</a></li>
-        <li><a href="#打开工具栏">打开工具栏</a></li>
+        <li><a href="#面板配置">面板配置</a>
+          <ul>
+            <li><a href="#文本">文本</a></li>
+            <li><a href="#图表">图表</a></li>
+            <li><a href="#地图">地图</a></li>
+            <li><a href="#3d">3D</a></li>
+            <li><a href="#图片视频">图片/视频</a></li>
+          </ul>
+        </li>
+        <li><a href="#布局操作">布局操作</a>
+          <ul>
+            <li><a href="#布局调整">布局调整</a></li>
+            <li><a href="#导入导出">导入/导出</a></li>
+            <li><a href="#全屏展示">全屏展示</a></li>
+          </ul>
+        </li>
+        <li><a href="#动态交互">动态交互</a></li>
       </ul>
     </li>
-    <li><a href="#面板配置">面板配置</a>
-      <ul>
-        <li><a href="#文本">文本</a></li>
-        <li><a href="#图表">图表</a></li>
-        <li><a href="#地图">地图</a></li>
-        <li><a href="#3d">3D</a></li>
-        <li><a href="#图片视频">图片/视频</a></li>
-      </ul>
-    </li>
-    <li><a href="#布局操作">布局操作</a>
-      <ul>
-        <li><a href="#布局调整">布局调整</a></li>
-        <li><a href="#导入导出">导入/导出</a></li>
-        <li><a href="#全屏展示">全屏展示</a></li>
-      </ul>
-    </li>
-    <li><a href="#动态交互">动态交互</a></li>
   </ul>
 </nav>
   </div>
@@ -219,7 +218,7 @@
 	
     <div class="post-content image-border">
 	 <p>基于<a href="/post/web/using-foxglove-to-render-time-sequence-data/"><strong>搭建基于Foxglove的时序数据播放环境</strong></a>一文，结合实际项目的使用情况对<code>Foxglove</code>的使用功能进行简要的介绍。</p>
-<h1 id="面板操作">面板操作</h1>
+<h2 id="面板操作">面板操作</h2>
 <p><code>Foxglove</code>中的数据展示是基于面板来实现的，可根据实际使用需求在浏览器窗口添加多个面板，每个面板需要配置对应的topic来展示不同的数据，它们各司其职互不干扰。</p>
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove_panels_display.png" alt="foxglove面板展示" title="foxglove面板展示"></p>
 <p>自己项目中用到的面板主要有如下6种：</p>
@@ -272,8 +271,8 @@
 </tbody>
 </table>
 <p>可在<code>Foxglove</code>系统中进行面板的创建、修改、删除、调整、导入、导出等操作，实际使用时需要在<code>server</code>端根据<code>Foxglove</code>规范提前准备好相关的<code>topic</code>。</p>
-<h2 id="创建面板">创建面板</h2>
-<h3 id="直接创建">直接创建</h3>
+<h3 id="创建面板">创建面板</h3>
+<h4 id="直接创建">直接创建</h4>
 <ol>
 <li>
 <p>在浏览器窗口的左上角点击创建按钮，在出现的菜单中选择对应的类型</p>
@@ -287,7 +286,7 @@
 <p>面板创建完毕后，根据不同的面板类型需要做相关配置操作(见下文)</p>
 </li>
 </ol>
-<h3 id="拆分创建">拆分创建</h3>
+<h4 id="拆分创建">拆分创建</h4>
 <ol>
 <li>
 <p>选中一个已有的面板，在其右上角点击如下图所示的按钮，根据需求选择拆分类型</p>
@@ -306,7 +305,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-split-panel-change-result.png" alt="foxglove拆分面板修改结果" title="foxglove拆分面板修改结果"></p>
 </li>
 </ol>
-<h2 id="修改面板">修改面板</h2>
+<h3 id="修改面板">修改面板</h3>
 <p>对于已有的面板可修改其配置，如展示颜色、消息来源等，具体步骤如下：</p>
 <ol>
 <li>
@@ -322,7 +321,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-panel-with-settings-update.png" alt="foxglove面板配置修改" title="foxglove面板配置修改"></p>
 </li>
 </ol>
-<h2 id="删除面板">删除面板</h2>
+<h3 id="删除面板">删除面板</h3>
 <ol>
 <li>
 <p>在要删除的面板右上角点击<code>设置</code>按钮，在出现的菜单中点击<code>删除面板</code>即可删除该面板</p>
@@ -332,7 +331,7 @@
 <p>面板删除完毕后<code>Foxglove</code>会自动调整浏览器中的界面布局，同时<code>Foxglove</code>会根据实际情况给<code>server</code>发送对应的通知，以决定是否要停止相关的线程。</p>
 </li>
 </ol>
-<h2 id="打开工具栏">打开工具栏</h2>
+<h3 id="打开工具栏">打开工具栏</h3>
 <p>除了通过修改面板打开工具栏这种方式外，也可点击浏览器窗口右上角的按钮来打开工具栏，之后再点击对应的面板也能出现设置界面，操作步骤如下：</p>
 <ol>
 <li>
@@ -348,8 +347,8 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-panel-toolbar.png" alt="foxglove工具栏设置" title="foxglove工具栏设置"></p>
 </li>
 </ol>
-<h1 id="面板配置">面板配置</h1>
-<h2 id="文本">文本</h2>
+<h2 id="面板配置">面板配置</h2>
+<h3 id="文本">文本</h3>
 <p>文本<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>在<code>Foxglove</code>中对应的类型为<code>原始消息</code>(英文环境下为<code>Raw Message</code>)，其配置较为简单：</p>
 <ol>
 <li>
@@ -369,7 +368,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-raw-message-single-property-data.png" alt="foxglove原始消息单个属性数据展示" title="foxglove原始消息单个属性数据展示"></p>
 </li>
 </ol>
-<h2 id="图表">图表</h2>
+<h3 id="图表">图表</h3>
 <p>表格在<code>Foxglove</code>中对应的类型为<code>图表</code>(英文环境下显示为<code>Plot</code>)，其配置过程如下：</p>
 <ol>
 <li>
@@ -396,7 +395,7 @@
 <p>其它的配置包括设置线条颜色、X轴、Y轴、时间设置等也比较简单与直观，此处不再详述。</p>
 </li>
 </ol>
-<h2 id="地图">地图</h2>
+<h3 id="地图">地图</h3>
 <p>地图数据用于默认展示车辆在地图中的移动轨迹，其只能选择特定类型的<code>topic</code>，相关配置过程如下：</p>
 <ol>
 <li>
@@ -411,7 +410,7 @@
 <p>可以将<code>Follow topic</code>设置为具体的<code>topic</code>(本例中为<code>/drive/map</code>)，之后地图会随着车辆的移动轨迹动态更新变化。</p>
 </li>
 </ol>
-<h2 id="3d">3D</h2>
+<h3 id="3d">3D</h3>
 <p>3D面板同地图面板类似，只能使用特定的<code>topic</code>(本例中为<code>/drive/3D</code>)，其配置过程如下：</p>
 <ol>
 <li>
@@ -426,15 +425,15 @@
 <p>其余的场景、视图、变换等可根据实际情况进行配置操作。</p>
 </li>
 </ol>
-<h2 id="图片视频">图片/视频</h2>
+<h3 id="图片视频">图片/视频</h3>
 <p>截止到本文写作时(2023年11月)，<code>Foxglove</code>的官方只支持图片播放，暂不支持视频直接播放，而个人在实际使用中发现按照特定的频率对视频进行抽帧时会有一定的耗时，导致播放时比较卡顿。</p>
 <p>考虑播放的连贯与性能，决定采用<code>RTSP</code>协议来播放视频替代图片播放，为此个人开发了一款插件<a href="https://github.com/foxglove-custom/rtsp-player-extension"><strong>rtsp-player-extension</strong></a><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，使用时需预先在浏览器上安装该插件，然后确保对应<code>RTSP</code>视频流有数据即可正常播放。</p>
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove_video_panel.png" alt="foxglove视频面板" title="foxglove视频面板"></p>
-<h1 id="布局操作">布局操作</h1>
-<h2 id="布局调整">布局调整</h2>
+<h2 id="布局操作">布局操作</h2>
+<h3 id="布局调整">布局调整</h3>
 <p>如下图所示，当有多个面板时，可将鼠标放到面板边框来调整相邻面板的宽度或高度。</p>
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-panel-resize.png" alt="foxglove面板调整大小" title="foxglove面板调整大小"></p>
-<h2 id="导入导出">导入/导出</h2>
+<h3 id="导入导出">导入/导出</h3>
 <blockquote>
 <p>当要在多个浏览器(电脑)上使用<code>Foxglove</code>进行显示时，若基于前述的步骤依次创建面板和导出面板的话，会显得不方便，此时可通过导入导出功能，将一个浏览器中已经配置的面板与布局导出为<code>json</code>配置文件，之后通过配置文件在另一个浏览器中快速导入。</p>
 </blockquote>
@@ -456,7 +455,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove-with-panels.png" alt="foxglove导入配置文件结果" title="foxglove导入配置文件结果"></p>
 </li>
 </ol>
-<h2 id="全屏展示">全屏展示</h2>
+<h3 id="全屏展示">全屏展示</h3>
 <blockquote>
 <p><code>Foxglove</code>支持单个面板的全屏展示与退出，同时不影响其它面板的正常使用。</p>
 </blockquote>
@@ -474,7 +473,7 @@
 <p><img src="/blog_img/web/foxglove-function-instructions/foxglove_exit_max_screen.png" alt="foxglove退出全屏" title="foxglove退出全屏"></p>
 </li>
 </ol>
-<h1 id="动态交互">动态交互</h1>
+<h2 id="动态交互">动态交互</h2>
 <blockquote>
 <p>动态交互是指通过在<code>Foxglove</code>UI端输入相应的参数给<code>server</code>端，<code>server</code>端根据相关参数对<code>WebSocket</code>中要返回的数据进行动态生成或动态过滤。</p>
 </blockquote>
