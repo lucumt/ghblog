@@ -56,7 +56,7 @@ div.mermaid > svg { max-width: 60% !important; }
 
 <!--more-->
 
-# 背景
+## 背景
 
 在[利用Nacos与KubeSphere创建多套开发与测试环境](/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/)一文中介绍了部门基于`KubeSphere`和`Nacos`来动态的创建多套开发与测试环境，此种方式虽然在公司内部使用起来很灵活，但当需要交付给客户时会存在如下问题导致`KubeSphere`不适合部署给客户使用:
 
@@ -119,7 +119,7 @@ flowchart TD
 classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 ```
 
-# 解决思路
+## 解决思路
 
 由于最初是每个工程项目都有一个单独的`Jenkins`流水线，故在通过`Git`下载代码时采用的是类似下图的直接写死`Gitlab`工程仓库地址的方式，很明显此种方式不满足要求。
 
@@ -143,7 +143,7 @@ stage('拉取代码') {
 
 ![jenkins动态下载代码图解](/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-dynamic-select-git-repository-explanation.png "jenkins动态下载代码图解") 
 
-# 展示效果
+## 展示效果
 
 运行结果如下：
 

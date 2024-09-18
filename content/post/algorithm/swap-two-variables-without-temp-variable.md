@@ -56,7 +56,7 @@ System.out.println(b);
 
 上述代码实现和理解起来都很容易，除此之外还有其它的实现方式，本文以非0的int变量为例，简单记录下自己了解的相关实现。
 
-# 加减法实现
+## 加减法实现
 
 ```java
 int a = 3, b = 4;
@@ -76,7 +76,7 @@ System.out.println(a);
 System.out.println(b);
 ```
 
-# 乘除法实现
+## 乘除法实现
 
 ```java
 int a = 3, b = 4;
@@ -87,7 +87,7 @@ System.out.println(a);
 System.out.println(b);
 ```
 
-# 位运算实现
+## 位运算实现
 
 ```java
 int a = 3, b = 4;

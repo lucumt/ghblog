@@ -49,9 +49,9 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题说明
+## 问题说明
 
-## 项目背景
+### 项目背景
 
 公司有个基于`Python`开发的项目近期要交付给客户，为了便于安装和后续升级，之前都是采用[PyInstaller](https://pyinstaller.org/)安装成exe可执行文件实现傻瓜式的操作，而这个项目出于避免与客户服务器其它`Python`环境冲突以及便于后续扩展的考量，在软件部署和升级时采用了[Anaconda](https://www.anaconda.com/)进行隔离式部署，其部署流程如下[^1]
 
@@ -81,7 +81,7 @@ python_run->end
 
 由于目标客户的环境为`Windows`，同项目成员沟通后决定采用`CMD`批处理脚本来包含上述命令，实际部署或升级时只需要运行该批处理脚本即可。
 
-## 面临的问题
+### 面临的问题
 
 最开始采用的install.bat批处理脚本类似如下
 
@@ -131,7 +131,7 @@ pause
 
 ![批处理脚本正常执行](/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-executed-successfully.png "批处理脚本正常执行") 
 
-# 解决方案
+## 解决方案
 
 由于随着项目的进行，install.bat脚本肯定会进行不断地修正与更新，install.bat脚本的可维护性与可读性是必须要解决的问题，但采用`&&`拼接的方式也不能放弃，只能另想它法。
 

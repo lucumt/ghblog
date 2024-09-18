@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -59,7 +59,7 @@ sequenceDiagrams:
 
 从上述描述可知`KubeSphere`的两大底层支柱为`Kubernetes`与`Jenkins`，本文也主要基于这两部分进行记录。
 
-# 流水线设计
+## 流水线设计
 
 基于部门现状以及参考网上资料，将产品部署环境划分为如下4种类型:
 
@@ -80,7 +80,7 @@ sequenceDiagrams:
 * 一套`Jenkins`流水线可以根据使用需求灵活的往`dev`、`sit`、`test`、`prod`这4套环境之一进行部署
 * `dev`、`sit`、`test`、`prod`对于同一套代码而言是分别部署的，即4套环境互不影响
 
-# 动态参数
+## 动态参数
 
 ![Jenkins构建流程](/blog_img/devops/share-experiences-for-using-kubesphere/jenkins-build-flow.png "Jenkins构建流程")  
 
@@ -97,7 +97,7 @@ sequenceDiagrams:
 
 > **能通过`Groovy`脚本获取的变量与参数尽量通过`Grovvy`获取，`Shell`脚本只负责使用**
 
-## script中定义参数
+### script中定义参数
 
 在`script`中输入符合 `Groovy`语法的代码即可，为了在多个steps之间实现参数共享，需要在定义参数时加上`env.`前缀[^2]，类似如下：
 
@@ -119,13 +119,13 @@ switch(PRODUCT_PHASE) {
 env.DUBBO_IP = "10.30.5.170"
 ```
 
-## script中读取参数
+### script中读取参数
 
 ```groovy
 print env.DUBBO_IP
 ```
 
-## shell中读取参数
+### shell中读取参数
 
 需要采用`$参数名`(去掉`env.`前缀)的方式，类似如下 
 
@@ -138,7 +138,7 @@ docker build -f kubesphere/Dockerfile \
 --build-arg PRODUCT_PHASE=$PRODUCT_PHASE .
 ```
 
-## yaml文件中读取参数
+### yaml文件中读取参数
 
 在`Kubernetes`中需要一个yaml文件来配置要生成的pod，其参数的获取也是采用`$参数名`的方式
 
@@ -161,7 +161,7 @@ spec:
   type: NodePort
 ```
 
-## Dockerfile中读取参数
+### Dockerfile中读取参数
 
 当在`docker`的build阶段传递正确的参数后，在Dockerfile中需要采用`${参数名}`的方式获取参数
 
@@ -183,11 +183,11 @@ ENV PARAMS="--server.port=${NODE_PORT} --spring.application.name=lucumt-data --s
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 ```
 
-# 编译与部署
+## 编译与部署
 
 由于公司研发环境与互联网隔离，故需要在前后端分别设置可用的镜像才能确保编译正常。
 
-## 前端
+### 前端
 
 * `Nodejs`版本号升级：
 
@@ -210,7 +210,7 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shang
   EXPOSE 8080
   ```
 
-## 后端
+### 后端
 
 * 获取`Maven`版本号：
 
@@ -226,11 +226,11 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shang
   env.BUILD_TAG = PROJECT_VERSION + "-" + BUILD_TIME
   ```
 
-# K8S容器探活
+## K8S容器探活
 
 `KubeSphere`对于容器的启动、就绪和存活的探测依赖于`Kubernetes`的[相关实现](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)，实际使用中`KubeSphere`只需要能正常检测到就绪状态即可，现阶段项目中也只基于就绪探测来实现。
 
-## 后端
+### 后端
 
 `SpringBoot`程序可基于[Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready.html)中提供的`actuator/health`进行就绪检测，相关配置如下:
 
@@ -246,7 +246,7 @@ containers:
       periodSeconds: 5
 ```
 
-## 前端
+### 前端
 
 由于前端没有单独的接口对外暴露，故可采用在`Docker`容器中执行linux命令的方式来检测是否就绪，个人采用`uname`，相关配置如下：
 
@@ -262,13 +262,13 @@ containers:
       periodSeconds: 5
 ```
 
-# 运行效果
+## 运行效果
 
 运行效果如下，可实现动态的指定测试阶段和代码分支：
 
 ![KubeSphere流水线运行效果](/blog_img/devops/share-experiences-for-using-kubesphere/kubesphere-jenkins-pipeline-run-dialog.png "KubeSphere流水线运行效果")  
 
-# 参考代码
+## 参考代码
 
 * 前端部分:
   * **Dockerfile**，参见[lucumt-common-web.dockerfile](https://github.com/lucumt/myrepository/blob/master/jenkins/lucumt-common-web.Dockerfile "点击跳转到对应的Github链接")
