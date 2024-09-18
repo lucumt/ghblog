@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="飞狐" /><meta name="description" content="Blog of Rosen Lu" /><meta name="keywords" content="Go, Intellij IDEA" />
+<meta name="author" content="飞狐" /><meta name="description" content="简要说明如何在Intellij Idea中通过安装对应插件来引用Golang本地包，以便替换Eclpse中的goclipse实现" /><meta name="keywords" content="Go, Intellij IDEA" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/golang/import-local-package-in-intellij-idea/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Intellij IDEA中引用Golang本地包">
-  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:description" content="简要说明如何在Intellij Idea中通过安装对应插件来引用Golang本地包，以便替换Eclpse中的goclipse实现">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Intellij IDEA">
 
   <meta itemprop="name" content="在Intellij IDEA中引用Golang本地包">
-  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="description" content="简要说明如何在Intellij Idea中通过安装对应插件来引用Golang本地包，以便替换Eclpse中的goclipse实现">
   <meta itemprop="datePublished" content="2017-03-05T14:04:43+08:00">
   <meta itemprop="dateModified" content="2022-06-15T22:08:00+08:00">
   <meta itemprop="wordCount" content="2020">
   <meta itemprop="keywords" content="Go,Intellij IDEA">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Intellij IDEA中引用Golang本地包">
-  <meta name="twitter:description" content="Blog of Rosen Lu">
+  <meta name="twitter:description" content="简要说明如何在Intellij Idea中通过安装对应插件来引用Golang本地包，以便替换Eclpse中的goclipse实现">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,9 +182,9 @@
         <li><a href="#在eclipse中引用golang本地包">在Eclipse中引用Golang本地包</a></li>
         <li><a href="#在intellij-idea中引用golang本地包">在Intellij IDEA中引用Golang本地包</a></li>
         <li><a href="#利用goclipse时无法运行程序的解决方法">利用Goclipse时无法运行程序的解决方法</a></li>
+        <li><a href="#更新">更新</a></li>
       </ul>
     </li>
-    <li><a href="#更新">更新</a></li>
   </ul>
 </nav>
   </div>
@@ -219,7 +219,7 @@
 <h2 id="利用goclipse时无法运行程序的解决方法">利用Goclipse时无法运行程序的解决方法</h2>
 <p>在使用<a href="https://goclipse.github.io/"><strong>goclipse</strong></a>运行 <code>Golang</code>程序时，偶尔会出现程序无法编译和运行的情况，这种情形一般都是src没有被设置成源代码目录造成的，此时可以通过如下图所示的方法，将src目录添加源代码目录。在Eclipse中选中该项目然后点击 <strong>Properties</strong> ，会出现项目属性配置界面，点击 <strong>Go Project Configuration</strong> ，通过 <strong>Add Folder</strong> 可以将src添加到源代码中，之后程序即可正常运行。<br>
 <img src="/blog_img/golang/import-local-page-in-intellij-idea/goclipse_add_source_folder.png" alt="goclipse中添加源程序目录"></p>
-<h1 id="更新">更新</h1>
+<h2 id="更新">更新</h2>
 <p>在本文写作的时(2017年3月份)，<a href="https://www.jetbrains.com/"><strong>jetbrain</strong></a>官方出版了<a href="https://www.jetbrains.com/go/" title="GoLand"><strong>GoLand</strong></a>，建议在条件许可的情况下优先使用<a href="https://www.jetbrains.com/go/" title="GoLand"><strong>GoLand</strong></a></p>
 <p><strong>支持正版，从我做起！</strong></p>
     </div>

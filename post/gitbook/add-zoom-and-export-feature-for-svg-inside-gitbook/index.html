@@ -179,13 +179,17 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#实现">实现</a>
+    <li>
       <ul>
-        <li><a href="#缩放功能">缩放功能</a></li>
-        <li><a href="#下载功能">下载功能</a></li>
-        <li><a href="#显示效果">显示效果</a></li>
-        <li><a href="#相关代码">相关代码</a></li>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#实现">实现</a>
+          <ul>
+            <li><a href="#缩放功能">缩放功能</a></li>
+            <li><a href="#下载功能">下载功能</a></li>
+            <li><a href="#显示效果">显示效果</a></li>
+            <li><a href="#相关代码">相关代码</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -197,7 +201,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要说明如何给<code>GitBook</code>中的<code>SVG</code>图像提供缩放和下载功能，实现可对复杂的<code>SVG</code>图像进行缩放和下载。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>在项目开发流程中个人习惯采用<code>Mermaid</code>中的<a href="https://mermaid.js.org/syntax/sequenceDiagram.html"><strong>Sequence diagrams</strong></a>组件通过画<a href="https://zh.wikipedia.org/zh-cn/%E6%97%B6%E5%BA%8F%E5%9B%BE"><strong>时序图</strong></a>的方式来描述复杂的业务逻辑并将其用<code>GitBook</code>呈现出来便于共享阅读，类似如下</p>
 <div class="mermaid">sequenceDiagram
     par Alice to Bob
@@ -212,8 +216,8 @@
 <p><img src="/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-default.png" alt="复杂时序图的显示" title="复杂时序图的显示">
 由于<code>Mermaid</code>生成的图表都是以<a href="https://zh.wikipedia.org/zh-hk/%E5%8F%AF%E7%B8%AE%E6%94%BE%E5%90%91%E9%87%8F%E5%9C%96%E5%BD%A2"><strong>SVG</strong></a>形式呈现的，而<code>SVG</code>图像的特性是不管放大多少倍都不会失真，如果能通过某种方式将对应的<code>SVG</code>下载下来，之后用浏览器即可进行放大缩小来查看具体的细节，则岂不是能解决此问题？</p>
 <p>更进一步的，如果直接在页面上提供放大缩小功能，就能避免将对应<code>SVG</code>文件下载到本地，使用起来岂不是更方便？而<code>SVG</code>的缩放功能<code>GitHub</code>上有很多已有的实现，理论分析完全可行！</p>
-<h1 id="实现">实现</h1>
-<h2 id="缩放功能">缩放功能</h2>
+<h2 id="实现">实现</h2>
+<h3 id="缩放功能">缩放功能</h3>
 <p>在<code>GitHub</code>上对比相关的<code>SVG</code>组件后，最终选定<a href="https://github.com/bumbu/svg-pan-zoom"><strong>svg-pan-zoom</strong></a>作为<code>SVG</code>功能扩展度的实现，正好自己之前改进过一个基于<code>Mermaid</code>的<code>GitBook</code>插件<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>，可将<code>svg-pan-zoom</code>相关的功能整合到该插件中，后续<code>GitBook</code>中升级插件版本即可。</p>
 <p>在<code>svg-pan-zoom</code>的官方文档中可找到该组件的用法，十分简单</p>
 
@@ -282,7 +286,7 @@ mermaid.run({
 });</code>
 </pre>
 <p>至此<code>SVG</code>缩放功能整合完毕，接下来需要研究下载功能。</p>
-<h2 id="下载功能">下载功能</h2>
+<h3 id="下载功能">下载功能</h3>
 <p>由于<code>SVG</code>图像一般都是以源码的方式直接嵌入<code>HTML</code>页面中，故其下载功能较为简单，只需要找到对应的DOM节点，通过<code>JavaScript</code>相关的技术获取到其完整的内容，然后下载到本地即可。</p>
 <p>首先自己基于网络上的<a href="https://stackoverflow.com/questions/54626186/how-to-download-file-with-javascript">相关资料</a>找到如下代码，本地验证下载<code>txt</code>时能正常工作。</p>
 
@@ -326,12 +330,12 @@ mermaid.run({
 }</code>
 </pre>
 <p>缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的<code>GitBook</code>插件中即可，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>。</p>
-<h2 id="显示效果">显示效果</h2>
+<h3 id="显示效果">显示效果</h3>
 <p>添加缩放和下载按钮后后默认显示效果如下，其中下载按钮位于右上角，缩放按钮位于右下角</p>
 <p><img src="/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-width-tools.png" alt="Mermaid图表显示相关工具" title="Mermaid图表显示相关工具"></p>
 <p>通过图中的按钮或鼠标滚轮放大后的效果如下，可以看出基本满足需求</p>
 <p><img src="/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-zoomed.png" alt="放大后的图表展示" title="放大后的图表展示"></p>
-<h2 id="相关代码">相关代码</h2>
+<h3 id="相关代码">相关代码</h3>
 <p>修改过程中主要涉及到<code>index.js</code>和<code>plguin.js</code>这两个文件，同时需要把<code>svg-pan-zoom.js</code>文件放到相关目录下以方便加载</p>
 <ul>
 <li>

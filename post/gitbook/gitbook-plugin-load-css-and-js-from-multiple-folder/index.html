@@ -181,7 +181,7 @@
     <div class="post-content image-border">
 	 <p>在<a href="/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/"><strong>在Docker中构建GitBook并整合GitLab Runner的使用经验分享</strong></a>一文中，自己在<code>Docker</code>环境下基于<code>GitLab Runner</code>实现了<code>GitBook</code>的自动构建，同时基于实际使用需求添加了很多<code>GitBook</code>插件，在此过程中积累了一些<code>GitBook</code>插件的开发与使用经验。</p>
 <p>本文简要介绍自己在<code>GitBook</code>插件定制化修改过程中如何实现从多个不同的文件夹下加载<code>js</code>和<code>css</code>文件的实现过程。</p>
-<h1 id="问题背景">问题背景</h1>
+<h2 id="问题背景">问题背景</h2>
 <p>由于<code>GitBook</code>官方默认的代码高亮插件<a href="https://github.com/GitbookIO/plugin-highlight"><strong>highlight</strong></a>使用的是<a href="https://highlightjs.org/"><strong>highlightjs</strong></a>，其功能没有<a href="https://prismjs.com/"><strong>prismjs</strong></a>完善，故最初将<code>GitBook</code>的代码高亮采用<code>prismjs</code>实现，对应的插件为<a href="https://github.com/gaearon/gitbook-plugin-prism"><strong>gitbook-plugin-prism</strong></a>，其使用方式也很简单，只需要在<code>book.json</code>中添加如下配置:</p>
 
 <pre class="line-numbers language-json ">
@@ -283,7 +283,7 @@
   };
 }</code>
 </pre>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>既不能同时支持多个<code>assets</code>属性，自己又不想破坏<code>prismjs</code>本身的结构，怎么办？</p>
 <p>一开始自己通过<code>Google</code>和<code>GitHub</code>去查找相关的资料，没有找到自己想要的东西，后来用<code>ChatGPT</code>连续切换了好几次提示词，结果答案都是错的.</p>
 <blockquote>

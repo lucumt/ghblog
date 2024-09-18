@@ -179,10 +179,14 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题场景">问题场景</a></li>
-    <li><a href="#问题描述">问题描述</a></li>
-    <li><a href="#原因分析">原因分析</a></li>
-    <li><a href="#解决方案">解决方案</a></li>
+    <li>
+      <ul>
+        <li><a href="#问题场景">问题场景</a></li>
+        <li><a href="#问题描述">问题描述</a></li>
+        <li><a href="#原因分析">原因分析</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -193,9 +197,9 @@
     <div class="post-content image-border">
 	 <p>本文来源于个人在使用<code>GitBook</code>中遇到的问题，尽管自己通过 <strong><a href="https://blog.csdn.net/AntiO2/article/details/125964797">gitbook出现if (args[ii] == null) throw missingRequiredArg(ii 解决</a></strong> 这篇文章很快的找到了问题的解决方案，但该文章发布在CSDN，而CSDN的使用体验糟糕已是尽人皆知(此处不得不说一声 <strong>CSDN fuck you!</strong>)。</p>
 <p>为了给其他使用者提供一个简洁干净的参考，故写此文章。</p>
-<h1 id="问题场景">问题场景</h1>
+<h2 id="问题场景">问题场景</h2>
 <p>通过<code>gitbook install</code> 进行相关插件的安装。</p>
-<h1 id="问题描述">问题描述</h1>
+<h2 id="问题描述">问题描述</h2>
 <p>通过<code>gitbook install</code> 进行相关插件的安装，终端出现类似如下错误导致安装过程失败</p>
 
 <pre class="line-numbers language-powershell ">
@@ -223,9 +227,9 @@ Error: Missing required argument #1
   code: &#39;EMISSINGARG&#39;
 }</code>
 </pre>
-<h1 id="原因分析">原因分析</h1>
+<h2 id="原因分析">原因分析</h2>
 <p>原作者不知道，本人也不知道，期待有大神能给出具体原因分析。</p>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>需要用<code>npm</code>先手工安装对应的插件，之后再执行<code>gitbook install</code>就不会出错。</p>
 <p>以本文为例，出错的插件为<code>gitbook-plugin-mermaid-fox</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，则按照下述方式执行即可</p>
 

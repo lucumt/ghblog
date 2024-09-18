@@ -182,51 +182,47 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a>
+    <li>
       <ul>
-        <li><a href="#技术选型">技术选型</a></li>
-        <li><a href="#使用流程">使用流程</a></li>
-      </ul>
-    </li>
-    <li><a href="#环境搭建">环境搭建</a>
-      <ul>
-        <li><a href="#相关说明">相关说明</a></li>
-        <li><a href="#操作流程">操作流程</a></li>
-        <li><a href="#测试验证">测试验证</a>
+        <li><a href="#背景">背景</a>
           <ul>
-            <li><a href="#自动构建">自动构建</a></li>
-            <li><a href="#手工构建">手工构建</a></li>
+            <li><a href="#技术选型">技术选型</a></li>
+            <li><a href="#使用流程">使用流程</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#插件管理">插件管理</a>
-      <ul>
-        <li><a href="#常用插件">常用插件</a></li>
-        <li><a href="#自定义插件">自定义插件</a></li>
-      </ul>
-    </li>
-    <li><a href="#其它设置">其它设置</a>
-      <ul>
-        <li><a href="#中文汉化">中文汉化</a></li>
-        <li><a href="#自定义目录">自定义目录</a></li>
-        <li><a href="#自定义样式">自定义样式</a></li>
-      </ul>
-    </li>
-    <li><a href="#使用展示">使用展示</a></li>
-    <li><a href="#文件脚本">文件&amp;脚本</a>
-      <ul>
-        <li><a href="#dockerfile脚本">Dockerfile脚本</a></li>
-        <li><a href="#docker启停脚本">docker启停脚本</a></li>
-        <li><a href="#自动构建脚本">自动构建脚本</a></li>
-        <li><a href="#自动注册脚本">自动注册脚本</a></li>
-        <li><a href="#自动生成目录">自动生成目录</a>
+        <li><a href="#环境搭建">环境搭建</a>
           <ul>
+            <li><a href="#相关说明">相关说明</a></li>
+            <li><a href="#操作流程">操作流程</a></li>
+            <li><a href="#测试验证">测试验证</a></li>
+          </ul>
+        </li>
+        <li><a href="#插件管理">插件管理</a>
+          <ul>
+            <li><a href="#常用插件">常用插件</a></li>
+            <li><a href="#自定义插件">自定义插件</a></li>
+          </ul>
+        </li>
+        <li><a href="#其它设置">其它设置</a>
+          <ul>
+            <li><a href="#中文汉化">中文汉化</a></li>
+            <li><a href="#自定义目录">自定义目录</a></li>
+            <li><a href="#自定义样式">自定义样式</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用展示">使用展示</a></li>
+        <li><a href="#文件脚本">文件&amp;脚本</a>
+          <ul>
+            <li><a href="#dockerfile脚本">Dockerfile脚本</a></li>
+            <li><a href="#docker启停脚本">docker启停脚本</a></li>
+            <li><a href="#自动构建脚本">自动构建脚本</a></li>
+            <li><a href="#自动注册脚本">自动注册脚本</a></li>
+            <li><a href="#自动生成目录">自动生成目录</a></li>
             <li><a href="#目录分类显示">目录分类显示</a></li>
+            <li><a href="#自定义样式-1">自定义样式</a></li>
+            <li><a href="#gitbook配置文件">GitBook配置文件</a></li>
           </ul>
         </li>
-        <li><a href="#自定义样式-1">自定义样式</a></li>
-        <li><a href="#gitbook配置文件">GitBook配置文件</a></li>
       </ul>
     </li>
   </ul>
@@ -238,8 +234,8 @@
 	
     <div class="post-content image-border">
 	 <p>由于<code>Docsify</code>采用单页渲染的方式，在初次打开是特别慢，近期将团队内部的知识库工具从<code>Docsify</code>迁移到基于<code>Docker</code>搭建的<code>GitBook</code>并结合<code>GitLab Runner</code>实现自动更新，在这其中踩了一些坑，简单记录下。</p>
-<h1 id="背景">背景</h1>
-<h2 id="技术选型">技术选型</h2>
+<h2 id="背景">背景</h2>
+<h3 id="技术选型">技术选型</h3>
 <p>由于<code>Docsify</code>采用<a href="https://en.wikipedia.org/wiki/Single-page_application"><strong>SPA</strong></a>模式开发，不会生成静态<code>HTML</code>页面，故随着内容与页面的增多，其初次加载时会花费较多时间进行全局渲染，导致显示很慢，浪费时间等于谋财害命，需要将其替换为其它框架！</p>
 <p>由于知识库的使用群体除了软件开发人员，还有产品设计师、测试工程师等不具备很强代码开发能力的群体，故在替换之前对要采用的新框架确定了如下目标：</p>
 <ul>
@@ -316,12 +312,12 @@
 <li><code>GitLab Runner</code>和<code>Nginx</code>采用<code>Docker</code>进行容器化部署，避免对部署环境的强依赖</li>
 <li>通过<code>Docker</code>在<code>GitLab Runner</code>中安装<code>GitBook</code>环境，使得实际的文档项目与<code>GitBook</code>解耦</li>
 </ol>
-<h2 id="使用流程">使用流程</h2>
+<h3 id="使用流程">使用流程</h3>
 <p>由于文档同代码一样都是采用<code>GitLab</code>管理的，为了实现在文档更新时能够自动化的部署，准备采用<code>GitLab Runner</code>+<code>GitBook</code>+<code>Nginx</code>的方案，整体流程图如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-gitlab-usage-flow.png" alt="GitBook结合GitLab Runner使用流程" title="GitBook结合GitLab Runner使用流程"></p>
 <p>在实际使用时，相关用户只需要在按照常规的流程在本地基于<code>Markdown</code>格式编写文档并提交到<code>GitLab</code>中，之后<code>GitLab Runner</code>会自动化的进行文档构建与文档生成，依赖于宿主物理机的配置和文档数量，整个过程通常不超过5秒钟，之后在浏览器中刷新即可查看生成的<code>HTML</code>静态文件。</p>
-<h1 id="环境搭建">环境搭建</h1>
-<h2 id="相关说明">相关说明</h2>
+<h2 id="环境搭建">环境搭建</h2>
+<h3 id="相关说明">相关说明</h3>
 <p>出于简化使用流程与加快构建速度的考虑，将<code>GitLab Runner</code>与<code>GitBook</code>都放置到同一个容器中。在<code>GitLab Runner</code>的<code>Docker</code>容器中安装完毕<code>GitBook</code>环境后，还需将<code>GitLab Runner</code>注册到对应的<code>GitLab</code>仓库中，可通过<code>Shell</code>脚本将此过程固化下来，整个环境搭建流程如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-flow.png" alt="GitBook安装流程" title="GitBook安装"></p>
 <p><strong>说明</strong>：由于<code>GitBook</code>是基于<code>Nodejs</code>开发的，而<code>Nodejs</code>和<code>NPM</code>对版本有强相关的依赖，版本过高或过低都会导致<code>GitBook</code>以及相关的插件无法安装，故本次采用了如下<strong>较旧的版本</strong>(采用<code>Docker</code>容器化部署不会造成额外的负面影响 )</p>
@@ -361,7 +357,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="操作流程">操作流程</h2>
+<h3 id="操作流程">操作流程</h3>
 <p>下述步骤展示了从头开始构建<code>GitLab Runner</code>与<code>GitBook</code>的过程</p>
 <ol>
 <li>
@@ -406,8 +402,8 @@ apt install -y jq</code>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-runner-register-result.png" alt="GitLab Runner注册结果" title="GitLab Runner注册结果"></p>
 </li>
 </ol>
-<h2 id="测试验证">测试验证</h2>
-<h3 id="自动构建">自动构建</h3>
+<h3 id="测试验证">测试验证</h3>
+<h4 id="自动构建">自动构建</h4>
 <p>由于<a href="#%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><strong>自动构建脚本</strong></a>中有如下配置，其中构建阶段的值被设置为<code>build</code>会导致每次代码发生变更时都执行自动构建</p>
 
 <pre class="line-numbers language-yaml ">
@@ -423,15 +419,15 @@ build:
 <p>点击对应的按钮可查看构建执行日志，类似如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running-log.png" alt="GitLab Runner执行日志结果" title="GitLab Runner执行日志结果"></p>
 <p>之后可通过<code>Nginx</code>对应端口访问相应的<code>GitBook</code>页面，可参考<a href="#%E4%BD%BF%E7%94%A8%E5%B1%95%E7%A4%BA"><strong>使用展示</strong></a>。</p>
-<h3 id="手工构建">手工构建</h3>
+<h4 id="手工构建">手工构建</h4>
 <p>除了自动构建之外，也可点击对应的按钮进行手工提交，此种场景一般用于文档代码没有变更而对<code>GitBook</code>的样式或插件进行了修改，想提前验证结果，操作步骤如下：</p>
 <p>在对应的<code>GitLab</code>工程中依次点击<code>CI/CD</code>-&gt;<code>Pipelines</code>，在出现的菜单中点击右上角的<code>Run pipeline</code>按钮</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-run-button.png" alt="GitLab Runner手工触发" title="GitLab Runner手工触发"></p>
 <p>在出现的界面中再次点击<code>Run pipeline</code>按钮进行确认，触发手工执行，之后的步骤与自动构建时相同。</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-run-confirm-button.png" alt="GitLab Runner手工触发确认" title="GitLab Runner手工触发确认"></p>
-<h1 id="插件管理">插件管理</h1>
+<h2 id="插件管理">插件管理</h2>
 <p><code>GitBook</code>在文档管理领域广受欢迎的一个很重要的原因是其丰富的插件生态，插件可快速集成，也可仿照别人的插件根据自己的需求快速开发新的插件，个人项目中用到的插件如下</p>
-<h2 id="常用插件">常用插件</h2>
+<h3 id="常用插件">常用插件</h3>
 <table>
 <thead>
 <tr>
@@ -543,7 +539,7 @@ build:
 </tr>
 </tbody>
 </table>
-<h2 id="自定义插件">自定义插件</h2>
+<h3 id="自定义插件">自定义插件</h3>
 <p>已有的插件太老旧，自己<code>fork</code>代码后对它们进行了更新，项目位于<a href="https://github.com/gitbook-plugin-fox"><strong>gitbook-plugin-fox</strong></a>，目前包含如下插件：</p>
 <ul>
 <li>
@@ -559,13 +555,13 @@ build:
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-codetab-fox-display.png" alt="GitBook中展示代码分组" title="GitBook中展示代码分组"></p>
 </li>
 </ul>
-<h1 id="其它设置">其它设置</h1>
-<h2 id="中文汉化">中文汉化</h2>
+<h2 id="其它设置">其它设置</h2>
+<h3 id="中文汉化">中文汉化</h3>
 <p><code>GitBook</code>中的默认语言为英文，如下图所示，某些提示信息以英文展示，不方便使用</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-en-language.png" alt="GitBook默认英文展示" title="GitBook默认英文展示"></p>
 <p>可通过在<code>book.js</code>中添加<code>language:'zh-hans'</code>来将默认语言修改为中文，修改后的显示效果如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-set-zh-language.png" alt="GitBook切换为中文显示" title="GitBook切换为中文显示"></p>
-<h2 id="自定义目录">自定义目录</h2>
+<h3 id="自定义目录">自定义目录</h3>
 <p>如下所示<code>GitBook</code>中默认生成的菜单为<code>Introduction</code>，不太直观，可根据实际需求动态修改(对于菜单目录的生成可参考<a href="#%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95"><strong>自动生成目录</strong></a>实现)</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-menu.png" alt="GitBook默认菜单展示" title="GitBook默认菜单展示"></p>
 <p>将默认目录从</p>
@@ -580,7 +576,7 @@ build:
 </pre>
 <p>之后的展示效果类似如下</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-custom-menu.png" alt="GitBook自定义菜单展示" title="GitBook自定义菜单展示"></p>
-<h2 id="自定义样式">自定义样式</h2>
+<h3 id="自定义样式">自定义样式</h3>
 <p>若<code>GitBook</code>中的样式不满足我们的需求，可通过添加自定义<code>CSS</code>文件进行定制，实际使用中发现该文件必须叫做<code>website.css</code>且需位于生成的静态文件目录下才生效。</p>
 
 <pre class="line-numbers language-json ">
@@ -588,11 +584,11 @@ build:
     &#34;website&#34;: &#34;./styles/website.css&#34;,
 }</code>
 </pre>
-<h1 id="使用展示">使用展示</h1>
+<h2 id="使用展示">使用展示</h2>
 <p>可通过<code>Nginx</code>对应端口访问相应的<code>GitBook</code>页面，个人项目中的界面类似如下，供参考</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-web-page-view.png" alt="GitBook页面浏览" title="GitBook页面浏览"></p>
-<h1 id="文件脚本">文件&amp;脚本</h1>
-<h2 id="dockerfile脚本">Dockerfile脚本</h2>
+<h2 id="文件脚本">文件&amp;脚本</h2>
+<h3 id="dockerfile脚本">Dockerfile脚本</h3>
 <p>用于构建同时包含<code>GitLab Runner</code>与<code>GitBook</code>的容器</p>
 
 <pre class="line-numbers language-dockerfile ">
@@ -624,7 +620,7 @@ COPY custom.css /usr/local/gitbook/tmp/custom.css
 COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
 COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh</code>
 </pre>
-<h2 id="docker启停脚本">docker启停脚本</h2>
+<h3 id="docker启停脚本">docker启停脚本</h3>
 <p><code>docker-compose.yml</code>用于启动<code>GitLab Runner</code>与<code>Nginx</code>容器</p>
 
 <pre class="line-numbers language-yaml ">
@@ -647,7 +643,7 @@ services:
    restart: always
    container_name: gitbook-nginx</code>
 </pre>
-<h2 id="自动构建脚本">自动构建脚本</h2>
+<h3 id="自动构建脚本">自动构建脚本</h3>
 <p><code>.gitlab-ci.yml</code>是<code>GitLab Runner</code>构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的<code>GitLab</code>仓库，用于每次修改文档时触发自动构建</p>
 
 <pre class="line-numbers language-yaml ">
@@ -677,7 +673,7 @@ build:
     - cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/
     - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico</code>
 </pre>
-<h2 id="自动注册脚本">自动注册脚本</h2>
+<h3 id="自动注册脚本">自动注册脚本</h3>
 <p><code>gitlab_runner_config_init.sh</code>用于注册<code>GitLab Runner</code>同时检测<code>GitBook</code>是否存在</p>
 
 <pre class="line-numbers language-bash ">
@@ -741,7 +737,7 @@ fi
 
 printf &#34;\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n&#34;</code>
 </pre>
-<h2 id="自动生成目录">自动生成目录</h2>
+<h3 id="自动生成目录">自动生成目录</h3>
 <p><code>auto_generate_summary.sh</code>用于自动生成目录，<code>GitBook</code>左侧的目录树依赖于此脚本的生成结果，此文件会在<code>GitLab Runner</code>构建阶段执行</p>
 
 <pre class="line-numbers language-bash ">
@@ -931,7 +927,7 @@ baseWrite(){
 
 baseReader</code>
 </pre>
-<h2 id="自定义样式-1">自定义样式</h2>
+<h3 id="自定义样式-1">自定义样式</h3>
 <p><code>custom.css</code>是自定义样式文件，当对<code>GitBook</code>的某些样式不满意时，可用自定义<code>CSS</code>文件来覆盖</p>
 
 <pre class="line-numbers language-css ">
@@ -984,7 +980,7 @@ th {
   color: white;
 }</code>
 </pre>
-<h2 id="gitbook配置文件">GitBook配置文件</h2>
+<h3 id="gitbook配置文件">GitBook配置文件</h3>
 <p><code>book.js</code>是<code>GitBook</code>的配置文件，包含全局配置与各种插件</p>
 
 <pre class="line-numbers language-javascript ">
