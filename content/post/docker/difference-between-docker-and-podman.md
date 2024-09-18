@@ -4,7 +4,7 @@ date: 2024-04-26T10:46:34+08:00
 lastmod: 2024-04-26T10:46:34+08:00
 draft: false
 keywords: ["Docker","Podman","容器化","容器编排","差异"]
-description: "翻译一篇关于Docker和Podman的差异的博文"
+description: "翻译一篇关于Docker和Podman的差异的博文,以便技术选型时能提供参考"
 tags: ["docker"]
 categories: ["容器化","翻译"]
 author: "Rosen Lu"

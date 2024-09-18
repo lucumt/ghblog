@@ -5,7 +5,7 @@ categories = ["Java编程"]
 tags = ["Java","JVM"]
 keywords = ["Java"]
 author = "飞狐"
-description = "在不重新编译的情况下直接修改Java Class文件中的内容"
+description = "简要说明如何在不重新编译的情况下直接修改Java Class文件中的内容，以实现对软件代码的快速修改与部署"
 
 +++
 

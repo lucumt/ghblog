@@ -5,7 +5,7 @@ tags = ["Quartz","Spring","SpringMVC"]
 date = "2018-01-09T22:10:30+08:00"
 description = "Blog of Rosen Lu"
 keywords = ["Quartz","Spring","SpringMVC"]
-title = "在Quartz中动态设置定时任务的执行时间"
+title = "在Quartz中动态设置定时任务的执行时间并立即生效，以便更灵活的满足应用程序的使用需求"
 
 +++
 
