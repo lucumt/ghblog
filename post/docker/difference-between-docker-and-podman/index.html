@@ -176,27 +176,31 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#什么是容器编排">什么是容器编排</a></li>
-    <li><a href="#什么是docker">什么是Docker</a></li>
-    <li><a href="#什么是podman">什么是Podman</a></li>
-    <li><a href="#podman与docker的差异对比">Podman与Docker的差异对比</a>
+    <li>
       <ul>
-        <li><a href="#架构">架构</a></li>
-        <li><a href="#root权限">Root权限</a></li>
-        <li><a href="#安全">安全</a></li>
-        <li><a href="#systemd">Systemd</a></li>
-        <li><a href="#镜像构建">镜像构建</a></li>
-        <li><a href="#docker-swarm">Docker Swarm</a></li>
-        <li><a href="#一体化与模块化">一体化与模块化</a></li>
-      </ul>
-    </li>
-    <li><a href="#结论">结论</a></li>
-    <li><a href="#常见问题">常见问题</a>
-      <ul>
-        <li><a href="#podman能否替代docker">Podman能否替代Docker</a></li>
-        <li><a href="#podman与docker有何不同">Podman与Docker有何不同</a></li>
-        <li><a href="#podman是否比docker更安全">Podman是否比Docker更安全</a></li>
-        <li><a href="#哪种更合适podman还是docker">哪种更合适：Podman还是Docker</a></li>
+        <li><a href="#什么是容器编排">什么是容器编排</a></li>
+        <li><a href="#什么是docker">什么是Docker</a></li>
+        <li><a href="#什么是podman">什么是Podman</a></li>
+        <li><a href="#podman与docker的差异对比">Podman与Docker的差异对比</a>
+          <ul>
+            <li><a href="#架构">架构</a></li>
+            <li><a href="#root权限">Root权限</a></li>
+            <li><a href="#安全">安全</a></li>
+            <li><a href="#systemd">Systemd</a></li>
+            <li><a href="#镜像构建">镜像构建</a></li>
+            <li><a href="#docker-swarm">Docker Swarm</a></li>
+            <li><a href="#一体化与模块化">一体化与模块化</a></li>
+          </ul>
+        </li>
+        <li><a href="#结论">结论</a></li>
+        <li><a href="#常见问题">常见问题</a>
+          <ul>
+            <li><a href="#podman能否替代docker">Podman能否替代Docker</a></li>
+            <li><a href="#podman与docker有何不同">Podman与Docker有何不同</a></li>
+            <li><a href="#podman是否比docker更安全">Podman是否比Docker更安全</a></li>
+            <li><a href="#哪种更合适podman还是docker">哪种更合适：Podman还是Docker</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -212,17 +216,17 @@
 <p>容器编排技术是目前最重要的Web开发技术之一，而目前在该领域的许多强有力的框架技术正在争夺主导地位。</p>
 <p><code>Podman</code>是Red Hat公司的一款产品，以类似<code>Kubernetes</code>方式构建、运行和管理容器，其旨在给主流的容器使用人员提供一个可靠的替代。</p>
 <p>接下来我们会比较<code>Podman</code>与近十年事实上的容器标准<code>Docker</code>，因为这两种技术有本质上的区别，但同时也非常适合协同工作。</p>
-<h1 id="什么是容器编排">什么是容器编排</h1>
+<h2 id="什么是容器编排">什么是容器编排</h2>
 <p>容器是包含代码和类库、工具、设置、运行等依赖项的标准软件包，由于它们提供了更快的部署和扩展能力，同时在开发和交付准备阶段能保持一致性，因此业界迅速采用了容器作为容器化架构的核心组件。</p>
 <p>容器是轻量级、安全、可移植的，提供了与任何环境兼容的隔离空间。通过将软件从操作系统分离出来，容器可移植到任何地方(如从Linux到Windows)，同时可避免阻碍其正常运行的缺陷和错误。</p>
 <p>一些最知名的容器编排技术包括<code>Docker</code>、<code>Docker Swarm</code>、<code>Kubernetes</code>和<code>Nomad</code>，我们已经在相关博客中对它们进行了详细的分析和比较。</p>
-<h1 id="什么是docker">什么是Docker</h1>
+<h2 id="什么是docker">什么是Docker</h2>
 <p><strong><code>Docker</code>是标准的容器管理技术</strong>，它在业界具有如此重要的地位，以至于大多数人想到容器时就会想到<code>Docker</code>。</p>
 <p><code>Docker</code>作为容器编排领域的瑞士军刀，包含了许多其它替代品出现之前的强大功能，它已经成长为一个标准的、自给自足的功能，随着容器管理复杂性的提升，能满足所有开发人员的需求。</p>
 <p><code>Docker</code>很快的成为了一个<strong>一体化解决方案</strong>，包含用于特定任务的各种工具，其中一个是<code>Docker Swarm</code>，一个原生的<code>Docker</code>特性用于集群和调度<code>Docker</code>引擎，以及其它的用于创建和管理一大堆容器的工具。</p>
 <p><code>Docker</code>的附带工具可用于处理容器编排领域的所有任务，从负载均衡到网络，使得其成为业界的首先，同时也是成熟的参考技术。</p>
 <p>不过这种自给自足也有问题，尽管<code>Docker</code>是软件开发各阶段创建和运行容器的强有力工具，但其它工具与其交互很困难。近年来随着许多解决特定任务的专用工具出现，<code>Docker</code>成为许多专业开发人员将一些操作转移到其它平台和工具的分水岭。</p>
-<h1 id="什么是podman">什么是Podman</h1>
+<h2 id="什么是podman">什么是Podman</h2>
 <p><strong>那<code>Podman</code>又是什么呢? <code>Podman</code>是一个基于开放容器标准(Open Container Initiative,OCI)设计的用于开发、管理和运行容器和pod的开源，Linux原生的工具。它是Red Hat开发的用户友好的容器编排器，在RedHat 8和Centos 8中作为默认的容器引擎。</strong></p>
 <p><code>Podman</code>是一系列的命令行工具集合，用于以模块化框架的方式处理容器化过程中的各种不同任务，这些集合包括：</p>
 <ul>
@@ -237,40 +241,40 @@
 <p>这样做的好处是开发人员可以共享资源，在pod内为同一个应用程序使用不同的容器：一个用于前端，一个用于后端，另一个用于数据库。<strong>Pod的定义可以导出为兼容<code>Kubernetes</code>的yaml文件</strong>并运行用于<code>Kubernetes</code>集群中，使得容器能够更快的投入实际使用。</p>
 <p><strong><code>Podman</code>的另一个显示特征是其没有守护进程</strong>，守护进程是在后台运行的程序，用于处理没有用户界面的服务、进程和请求。其对容器引擎进行了独特的改进，因为它实际上并不依赖于守护进程，而是将容器和 Pod 作为子进程启动。</p>
 <p>或许你会问 <strong>为啥我要用<code>Podman</code>?</strong> 这是由于它作为开发和管理工具具有独特的优势，使其成为在适当的环境下成为可行且有趣的<code>Docker</code>替代品，也可作为与<code>Docker</code>协同工作的强有力补充，因为它支持与<code>Docker</code>兼容的CLI标准接口。</p>
-<h1 id="podman与docker的差异对比">Podman与Docker的差异对比</h1>
+<h2 id="podman与docker的差异对比">Podman与Docker的差异对比</h2>
 <p>根据 Google Trends 的数据，过去五年<code>Docker</code>和<code>Podman</code>的关注度一直在波动，但<code>Docker</code>相对更受欢迎，截止到目前，这两个容器编排工具都获得了用户极大的关注度。</p>
 <p><code>Podman</code>过去五年的搜索趋势</p>
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Podman","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Podman&hl=en","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
 <p><code>Docker</code>过去五年的搜索趋势</p>
 <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Docker","geo":"","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&q=Docker&hl=en-US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
 <p><code>Podman</code>和<code>Docker</code>有许多共同的特性，但也存在一些根本上的区别，这并不意味着一个比另一个好，而是要根据具体项目做出合适的选择。</p>
-<h2 id="架构">架构</h2>
+<h3 id="架构">架构</h3>
 <p><strong><code>Docker</code>使用守护线程</strong>，一个后台持续运行的程序来创建镜像和容器，<code>Podman</code>则使用无守护线程的架构，这意味着它可以在启动容器的用户下运行容器，<code>Docker</code>拥有由守护进程管控的客户端-服务器交互逻辑，另外一个则没有。</p>
-<h2 id="root权限">Root权限</h2>
+<h3 id="root权限">Root权限</h3>
 <p><code>Podman</code>由于不需要守护进程来管理其活动，同样不需要对容器分配root权限，<code>Docker</code>最近在其守护进程配置中添加了无root模式，但<code>Podman</code>首先使用了这种方法，并将其推广为一项基本特性，接下来会具体说明。</p>
-<h2 id="安全">安全</h2>
+<h3 id="安全">安全</h3>
 <p><strong><code>Podman</code>是否比<code>Docker</code>更安全</strong>？<code>Podman</code>允许容易以非root的方式运行，相对于具有root权限的容器而言无root容器通常更安全。在<code>Docker</code>中守护线程拥有root权限，使得其成为攻击者的理想入口。<code>Podman</code>中的容器默认情况下没有root权限，从而在root和非root级别添加了一个天然的屏障来提高安全性，同时，它也能同时运行有root权限和无root权限的容器。</p>
-<h2 id="systemd">Systemd</h2>
+<h3 id="systemd">Systemd</h3>
 <p>由于没有守护线程，<code>Podman</code>需要其它的工具在后台来管理服务和支持容器运行，Systemd可用于为已有容器创建控制单元或创建新容器，Systemd还可以与<code>Podman</code>集成，允许它运行默认启用基于Systemd的容器且无需任何修改。</p>
 <p>通过使用Systemd，供应商可以以容器的形式安装、运行和管理他们的应用程序，因为现在大多数应用程序都是以这种方式打包和交付的。</p>
-<h2 id="镜像构建">镜像构建</h2>
+<h3 id="镜像构建">镜像构建</h3>
 <p>作为一个自给自足的工具，<code>Docker</code>可自行构建容器镜像，而<code>Podman</code>则需要一个名为<code>Buildah</code>工具的协助，这正好表明了<code>Podman</code>的一个特点：用于运行容器而不是用于构建容器。</p>
-<h2 id="docker-swarm">Docker Swarm</h2>
+<h3 id="docker-swarm">Docker Swarm</h3>
 <p><code>Podman</code>不支持Docker Swarm,由于使用Docker Swarm会产生操作，这会将其排除在使用Docker Swarm特定的项目之外。<code>Podman</code>近期添加了Docker Compose的支持，使其与Swarm兼容，从而解决这一限制。<code>Docker</code>则很自然的可以与 Swarm良好配合使用。</p>
-<h2 id="一体化与模块化">一体化与模块化</h2>
+<h3 id="一体化与模块化">一体化与模块化</h3>
 <p>这是这两个工具的另外一个关键差异：<code>Docker</code>是一个体式、功能强大且独立的工具，包含各种优点和缺点，可处理整个周期内的所有容器化任务，<code>Podman</code> 则采用模块化的方式，对于特定的任务依赖特定的工具来实现。</p>
-<h1 id="结论">结论</h1>
+<h2 id="结论">结论</h2>
 <p><code>Podman</code>和<code>Docker</code>都是功能强大的容器编排工具，各有优势和区别，尽管<code>Docker</code>已成为近十年的容器行业标准，但<code>Podman</code>的创新架构和容器管理方法使其成为开发人员（尤其是在Linux环境中工作的开发人员）的可靠选择。</p>
 <p>不论你选择哪一种，抑或是两者都用，了解它们的差别和共同点有助于对项目做出最佳的决定。</p>
-<h1 id="常见问题">常见问题</h1>
-<h2 id="podman能否替代docker">Podman能否替代Docker</h2>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="podman能否替代docker">Podman能否替代Docker</h3>
 <p>是的，<code>Podman</code>可以在许多场景下替换<code>Docker</code>，它提供了与<code>Docker</code>类似的容器运行时环境和工具，并且在某种程度上，能提供额外好处，如更高的安全性和灵活性。</p>
-<h2 id="podman与docker有何不同">Podman与Docker有何不同</h2>
+<h3 id="podman与docker有何不同">Podman与Docker有何不同</h3>
 <p><code>Podman</code>相对于<code>Docker</code>的一个主要区别是它不需要单独的守护进程，使得其更轻量级和更安全，同样也为非root容器运行提供了更好的支持以提升安全。除此之外，<code>Podman</code>可在不需要类似Docker Compose这种工具的支持下原生运行<code>Kubernetes</code>中的pods。</p>
 <p>想了解更多吗？可以按照<code>Docker</code>+<code>Kubernetes</code>去查找。</p>
-<h2 id="podman是否比docker更安全">Podman是否比Docker更安全</h2>
+<h3 id="podman是否比docker更安全">Podman是否比Docker更安全</h3>
 <p><code>Podman</code>有时被认为比<code>Docker</code>更安全，这是由于它不需要单独的守护进程来运行容器，从而减少了潜在安全漏洞的攻击面，同时还更好地支持以非root 用户身份运行容器，从而可以提高安全性。</p>
-<h2 id="哪种更合适podman还是docker">哪种更合适：Podman还是Docker</h2>
+<h3 id="哪种更合适podman还是docker">哪种更合适：Podman还是Docker</h3>
 <p><code>Podman 和 Docker</code>哪个更好呢？<code>Podman</code>是否比<code>Docker</code>更好取决于具体的场景和需求。有时<code>Podman</code>可能提供更好的安全性和灵活性，但<code>Docker</code>可能更适合某些环境或应用程序。这两个考量点很重要，因为可用于确定哪个最能满足项目的需求。</p>
     </div>
 

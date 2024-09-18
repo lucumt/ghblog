@@ -178,13 +178,17 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题背景">问题背景</a></li>
-    <li><a href="#authy尝试">Authy尝试</a></li>
-    <li><a href="#github尝试">GitHub尝试</a></li>
-    <li><a href="#authy邮件">Authy邮件</a></li>
-    <li><a href="#github邮件">GitHub邮件</a></li>
-    <li><a href="#找回恢复码">找回恢复码</a></li>
-    <li><a href="#总结教训">总结&amp;教训</a></li>
+    <li>
+      <ul>
+        <li><a href="#问题背景">问题背景</a></li>
+        <li><a href="#authy尝试">Authy尝试</a></li>
+        <li><a href="#github尝试">GitHub尝试</a></li>
+        <li><a href="#authy邮件">Authy邮件</a></li>
+        <li><a href="#github邮件">GitHub邮件</a></li>
+        <li><a href="#找回恢复码">找回恢复码</a></li>
+        <li><a href="#总结教训">总结&amp;教训</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -194,20 +198,20 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录下由于自己手机格式化刷机后，<code>GitHub</code>两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过<code>github-recovery-codes.txt</code>恢复自己<code>GitHub</code>账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。</p>
-<h1 id="问题背景">问题背景</h1>
+<h2 id="问题背景">问题背景</h2>
 <p>自己的<code>GitHub</code>账号注册了有些年头，之前一直是通过账号密码直接登录即可，但<code>GitHub</code>官网<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>从2023年3月份到2023年末对提交代码的用户逐步开启两阶段认证(<code>2FA</code>,全称为<code>two-factor authentication</code>)，由于那段时间每次登录时<code>GitHub</code>都会强制提示开启<code>2FA</code>功能，影响正常的使用，且<code>2FA</code>是大趋势，为了减少麻烦自己准备<code>2FA</code>功能。</p>
 <p><code>GitHub</code>官网提供了包括<code>TOTP</code>、<code>SMS</code>、<code>passkey</code>、<code>security key</code>、<code>GitHub Mobile</code>这5种方式来实现<code>2FA</code>，自己一开始想用的是<code>SMS</code>，但实际操作时发现其不支持中国大陆的手机号码(哎，又是一个简中特供)，而<code>GitHub Mobile</code>不能单独使用，只能在配置了其它<code>2FA</code>的前提下使用，可选的范围变小。综合考虑后自己决定采用<a href="https://authy.com/"><strong>Authy</strong></a>作为<code>TOTP</code>实现，按照官网的描述很快就配置完成，且正常的使用了半年多。</p>
 <p>由于<code>Authy</code>是安装在个人手机上，而个人手机用了几年之后频繁提示手机存储空间不足(此处必须吐槽下微信)，严重影响使用，于是自己在春节期间将相关的文件备份后对自己的安卓手机进行了格式化与刷机(但是没有对<code>GitHub</code>与<code>Authy</code>进行备份设置)，以确保手机中有足够的存储空间。</p>
 <p>之后自己通过<code>git</code>依旧能正常的给<code>GitHub</code>提交并推送代码，让我误以为一切正常，知道前段时间自己想登录网页版的<code>GitHub</code>,当我输入完正确的邮箱和密码后，<code>GitHub</code>提示要求输入<code>2FA</code>相关的认证码</p>
 <p><img src="/blog_img/github/recovery-github-code-when-2fa-not-working/github-login-require-2fa.png" alt="&ldquo;GitHub要求输入2FA认证码&rdquo;" title="GitHub要求输入2FA认证码"></p>
 <p>此时我的手机已经格式化重刷系统有一段时间了，<code>Authy</code>和<code>GitHub Mobile</code>随着手机刷机已经消失不见了! 一开始我以为只要把<code>Authy</code>在手机上安装好，然后重新获取对应的认证码即可，但事实证明，我大意了！</p>
-<h1 id="authy尝试">Authy尝试</h1>
+<h2 id="authy尝试">Authy尝试</h2>
 <p>由于国内特殊的网络环境，自己首先确保了手机可以正常科学上网。</p>
 <p>之后便迫不及待的在手机上安装了<code>Authy</code>，不过打开该软件之后，其首先要求我通过短信或电话输入验证码，之后才能登录。</p>
 <p>一开始我尝试通过发短信的方式获取验证码，但一直提示无法识别手机号，开启科学上网也是如此。</p>
 <p>接下来选择给我拨打语音电话，但无论是否开启科学上网，手机一直都无法接听到对应呼叫。</p>
 <p>为了排除是否是自己手机问题，用其他同事的苹果手机安装<code>Authy</code>并进行测试，依旧无法获取到认证码！</p>
-<h1 id="github尝试">GitHub尝试</h1>
+<h2 id="github尝试">GitHub尝试</h2>
 <p>通过<code>Authy</code>获取验证码这条路暂时无法走通，接下来尝试绕过<code>Authy</code>，看看<code>GitHub</code>上有没有其它方式。</p>
 <p>在前述的<code>GitHub</code>登录页面上点击 <strong>Having problems?</strong> 下面的<a href="https://github.com/sessions/two-factor/recovery"><strong>Use a recovery code or begin 2FA account recovery</strong></a>链接，出现如下界面</p>
 <p><img src="/blog_img/github/recovery-github-code-when-2fa-not-working/github-2fa-recovery-page.png" alt="&ldquo;GitHub 2FA恢复页面&rdquo;" title="GitHub 2FA恢复页面"></p>
@@ -229,14 +233,14 @@
 <p><img src="/blog_img/github/recovery-github-code-when-2fa-not-working/generate-new-token-result.png" alt="&ldquo;GitHub历史token截图&rdquo;" title="GitHub历史token截图"></p>
 </li>
 </ol>
-<h1 id="authy邮件">Authy邮件</h1>
+<h2 id="authy邮件">Authy邮件</h2>
 <p>在<code>GitHub</code>上折腾了一圈后还是没能找到有效的解决办法，只能给<code>Authy</code> 官方发邮件咨询为啥在手机上无法收到短信或电话，给<code>Authy</code>发邮件时，需要在其官网上先注册登录之后才能进行，奇怪的是在其网页版的官网上登录时，同样的手机号能收到验证码，就是用手机APP时死活收不到验证码。</p>
 <p>相对于下文要说的<code>GitHub</code>官方的技术支持邮件回复的慢吞吞，<code>Authy</code>官方的技术支持邮件回复还算及时，我发了邮件之后等了2天就有回复了，在我告知必要的信息之后告知我是由于个人的<code>Authy</code>账号被它们的系统判定有异常，给<code>blocked</code>了，才导致自己手机上的<code>Authy</code>一直无法正常登录。</p>
 <p><img src="/blog_img/github/recovery-github-code-when-2fa-not-working/authy-reply-for-account-block.png" alt="&ldquo;Authy解释账号被锁的原因&rdquo;" title="Authy解释账号被锁的原因"></p>
 <p>在收到<code>Authy</code>账号恢复的邮件后，我立马在手机上登录<code>Authy</code>期望能出现自己预想中的<code>Authentication code</code>，然而现实又给了我一次重击，虽然成功登陆了<code>Authy</code>，但是里面空空如也，没有地方可以获取<code>Authentication code</code>！</p>
 <p>可是我自己之前明明在<code>Authy</code>中关联过<code>GitHub</code>相关的认证，最开始配置的时候还用过里面生成的<code>Authentication code</code>，为何现在啥都没有了？无奈之下只好继续给<code>Authy</code>技术支持人员写邮件寻求帮助，而得到的结果却让我更加郁闷，我之前没有在<code>Authy</code>中开启备份功能，所以重新安装<code>Authy</code>后需要重新关联<code>GitHub</code>认证配置！</p>
 <p><img src="/blog_img/github/recovery-github-code-when-2fa-not-working/authy-reply-for-account-backup.png" alt="&ldquo;Authy解释账号无法恢复的原因&rdquo;" title="Authy解释账号无法恢复的原因"></p>
-<h1 id="github邮件">GitHub邮件</h1>
+<h2 id="github邮件">GitHub邮件</h2>
 <p>为了登录<code>GitHub</code>需要获取<code>Authy</code>中的<code>Authentication code</code>，而为了获取<code>Authy</code>中的<code>Authentication code</code>需要登录<code>GitHub</code>后重新配置，陷入死循环了！</p>
 <p>此时的我已经感到一丝紧张，难道我的<code>GitHub</code>账号真的要丢失？</p>
 <p>虽然里面没啥有价值的东西，关注和被关注人也不多，重新创建一个账号后<code>fork</code>迁移也不是很麻烦，但是我的<code>GitHub</code>开启了<code>GitHub Pages</code>并且绑定了个人域名，而个人域名不久前才续费了5年，牵一发而动全身。</p>
@@ -266,7 +270,7 @@
 <li>虽然你提供了<code>Personal access token</code>，但打了马赛克无法使用，需要提供完整的，同时根据已有的截图显示，该<code>token</code>的后缀不正常，就算有完整的，也不能作为恢复凭据。</li>
 </ol>
 <p>看起来通过<code>GitHub Support</code>邮件咨询的这条路也走不通，此时我已经做好账号丢失的心理准备了。</p>
-<h1 id="找回恢复码">找回恢复码</h1>
+<h2 id="找回恢复码">找回恢复码</h2>
 <p>在解除<code>GitHub</code>邮箱绑定之前，我有些不死心，于是又给<code>GitHub Support</code>回复了如下的邮件，主要内容有2点：</p>
 <ol>
 <li>既然你们记录到我已经下载过<code>github-recovery-codes.txt</code>文件，但是我本地并没有找到，请说下具体日期，方便我进一步排查</li>
@@ -278,7 +282,7 @@
 <p>虽然依旧是机械回复，并没有解决我的实际问题，但<code>GitHub Support</code>的支持人员这么肯定我下载过<code>github-recovery-codes.txt</code>文件并且精确到了分钟，那就表示我肯定下载过。</p>
 <p>于是在笔记本上再次全局搜索，无果后，去自己不常用的台式机上搜索，废了九牛二虎之力在回收站里面找到了那个文件，赶紧还原，打开该文件一看，数据都在，然后就是按照<code>GitHub</code>官方的说明基于<code>recovery code</code>进行恢复。</p>
 <p>至此，<code>GitHub</code>账号恢复的事情告一段落。</p>
-<h1 id="总结教训">总结&amp;教训</h1>
+<h2 id="总结教训">总结&amp;教训</h2>
 <ol>
 <li>遇到事情一定要尝试各种可能的解决方案，不到最后一步，千万不要放弃</li>
 <li>做人做事要仔细认证，不要走马观花，如果一开始设置完<code>2FA</code>后就仔细阅读<code>GitHub</code>官方发的邮件，及时做好备份，也不会这么折腾</li>

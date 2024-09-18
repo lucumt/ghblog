@@ -179,9 +179,13 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#分析">分析</a></li>
-    <li><a href="#实现">实现</a></li>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#实现">实现</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -191,7 +195,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录如何在<code>Windows</code>操作系统中通过<a href="https://en.wikipedia.org/wiki/Batch_file"><strong>批处理脚本</strong></a>来给复杂的命令添加别名以简化使用。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>自己使用<code>Hugo</code>进行博客开发已经有年头了，最近由于需要搭建新的网站<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>需要使用特定的模板，而该模板对<code>Hugo</code>的版本有要求，故对<code>Hugo</code>版本进行了升级，从<code>v0.100</code>升级到<code>v0.126</code>。</p>
 <p>升级之后虽然在搭建新网站时没有问题，但个人发现新版本的<code>Hugo</code>有一个特性让人用起来不太方便：</p>
 <p>通过<code>hugo server -w -D</code>在本地启动<code>Hugo</code>环境时，默认会在本地<code>public</code>文件夹下生成全部的静态文件，从而导致通过<code>Git</code>提交时会提交大量无用的文件，在国内这种网络环境下容易<code>push</code>失败。</p>
@@ -199,12 +203,12 @@
 <p>进一步查看资料，发现该特性是在<code>v0.123</code>版本中引入的<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，具体原因参见<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，在该版本之后若想默认不在<code>public</code>目录下生成静态文件则需要在启动时手工添加相关指令，类似<code>hugo server -w -D --renderToMemory</code>。</p>
 <p>尽管<code>Hugo</code>作者这么做肯定是有其原因的，但我习惯了只有在托管到<code>GitHub Pages</code>时才生成静态文件，同时我也是一个懒人，每次使用时都要添加<code>--renderToMemory</code>参数对我来说简直是一种折磨。</p>
 <p>能否仿照<code>Linux</code>中的<a href="https://www.runoob.com/linux/linux-comm-alias.html"><strong>alias</strong></a>指令对前述命令进行封装，从而简化使用呢？</p>
-<h1 id="分析">分析</h1>
+<h2 id="分析">分析</h2>
 <p>我们知道在<code>Windows</code>的默认附带了很多指令，如<code>mspaint</code>、<code>mstsc</code>、<code>calc</code>等指令，可在运行窗口或<code>cmd</code>中输入这些指令直接使用，其原因为这些指令都位于<code>C:\Windows\System32</code>目录下，而该目录是系统目录，在启动时会进行加载。</p>
 <p>而对于非<code>Windows</code>系统自带指令或软件，在我们安装过程中通常会提示我们是否要将该软件添加到<code>Path</code>环境变量中去，典型的如<code>Python</code>，当选择添加到<code>Path</code>环境变量中后，可重新打开一个<code>cmd</code>窗口，然后输入<code>python</code>指令进行相关的操作。即我们如果想要在<code>cmd</code>中能直接使用某个自定义指令，则该指令必须添加到<code>Path</code>环境变量中去。</p>
 <p>在<code>Linux</code>中有<code>bash</code>、<code>zsh</code>等脚本可用于封装复杂的指令，同样在<code>Windows</code>中可使用<code>batch</code>脚本来封装复杂的指令，最终问题变为如下：</p>
 <p>是否可通过<code>batch</code>脚本封装复杂的<code>Hugo</code>指令，并将该脚本添加到<code>Path</code>环境变量中来实现在<code>cmd</code>中直接使用封装后的指令？</p>
-<h1 id="实现">实现</h1>
+<h2 id="实现">实现</h2>
 <p>理论分析完毕后，接下来进行实际操作验证：</p>
 <ol>
 <li>

@@ -182,10 +182,10 @@
 	
     <div class="post-content image-border">
 	 <p>简单记录下自己在使用<code>Grafana</code>过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。</p>
-<h1 id="问题">问题</h1>
+<h2 id="问题">问题</h2>
 <p>通过<code>Grafana</code>基于<code>MySQL</code>查询系统监控统计数据时，发现在柱状图中有很多0值，严重影响使用体验。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-with-zero-values.png" alt="柱状图显示0值" title="柱状图显示0值"></p>
-<h1 id="解决">解决</h1>
+<h2 id="解决">解决</h2>
 <p>一开始自己想通过<code>Grafana</code>面板的过滤这些0值，搜索一番后并没有找到基于<code>Grafana</code>的解决方案，给出的答案是通过修改sql来规避此问题<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，对比该答案，还发现自己遇到的问题类似。</p>
 <p>原始查询sql：</p>
 
@@ -236,7 +236,7 @@ WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/mysql-query-result-2.png" alt="mysql改进后的查询结果" title="mysql改进后的查询结果"></p>
 <p>在<code>Grafana</code>中查看显示效果类似如下，可发现0值已经消失，问题初步解决。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-without-zero-values.png" alt="柱状图不显示0值" title="柱状图不显示0值"></p>
-<h1 id="后记">后记</h1>
+<h2 id="后记">后记</h2>
 <p>虽然前述问题被解决，但当我们用鼠标查询对应的柱状条时，可发现<code>tooltip</code>中会显示所有的类别，即使该类别值为0或不存在也会显示，同样很影响使用体验。</p>
 <p>在网上搜索一番后，发现已经有人在<code>Grafana</code>的<code>GitHub</code>主页上提出了对应的issue<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, 遗憾的是该问题在2015年初被提出，到现在快10年了都没解决，<code>Grafana</code>官方的开发人员明确回复了没有该问题的修复计划，并且不认为其是一个issue，看来只能一直凑合用着！</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-tooltip-with-zero-category.png" alt="柱状图tooltip中显示所有类别" title="柱状图tooltip中显示所有类别"></p>
