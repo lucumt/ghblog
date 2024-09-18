@@ -180,12 +180,16 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#前置工作">前置工作</a></li>
-    <li><a href="#测试问题">测试&amp;问题</a></li>
-    <li><a href="#解决方案">解决方案</a></li>
-    <li><a href="#服务间调用">服务间调用</a>
+    <li>
       <ul>
-        <li><a href="#feign调用">Feign调用</a></li>
+        <li><a href="#前置工作">前置工作</a></li>
+        <li><a href="#测试问题">测试&amp;问题</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+        <li><a href="#服务间调用">服务间调用</a>
+          <ul>
+            <li><a href="#feign调用">Feign调用</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -197,7 +201,7 @@
 	
     <div class="post-content image-border">
 	 <p>记录如何在<a href="https://logging.apache.org/log4j/2.x/"><strong>Log4j2</strong></a>中使用traceId实现<a href="https://blog.51cto.com/u_15501087/5834195"><strong>链路追踪</strong></a>时只有在请求header中有<code>trace-id</code>时才显示前端发送过来的<code>trace-id</code>值。</p>
-<h1 id="前置工作">前置工作</h1>
+<h2 id="前置工作">前置工作</h2>
 <p>完整代码参见<a href="https://github.com/fox-world/spring-mybatis-demo.git"><strong>spring-mybatis-demo</strong></a>。</p>
 <p>假设使用的程序框架为<code>Spring Boot</code>并通过<code>Maven</code>管理依赖，需要预先添加如下代码配置：</p>
 <ol>
@@ -308,7 +312,7 @@ public class TestApplication {
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-%25X-instruction.png" alt="log4j2关于%X的用法说明" title="log4j2关于%X的用法说明"></p>
 </li>
 </ol>
-<h1 id="测试问题">测试&amp;问题</h1>
+<h2 id="测试问题">测试&amp;问题</h2>
 <p>测试代码如下</p>
 
 <pre class="line-numbers language-java ">
@@ -333,7 +337,7 @@ public class UserController {
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/postman-test-interface.png" alt="通过postman发送带header的请求" title="通过postman发送带header的请求"></p>
 <p>在控制台可发现类似如下输出，可发现前面几条系统启动时输出的日志也会按照<code>trace-id</code>格式进行输出，由于此时还没接收到前端发送的请求，故其值为空导致只显示一个<code>TraceId-</code>前缀，<strong>看起来不美观且影响使用</strong>。</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-empty-trace-id-output.png" alt="traceId没有值时也会输出" title="traceId没有值时也会输出"></p>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>终极目标是实现在有<code>trace-id</code>时按照格式输出，没有时则正常输出，很明显要达成此效果需要判断<code>trace-id</code>是否为空。</p>
 <p>最开始<code>Google</code>和<code>Stackoverflow</code>搜索的结果建议使用<a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#scriptpatternselector"><strong>ScriptPatternSelector</strong></a>，在官网给出的使用示例如下，看起来有一丢丢复杂，在有多个<a href="https://logging.apache.org/log4j/2.x/manual/appenders.html"><strong>Appenders</strong></a>时不适合扩展。</p>
 
@@ -366,9 +370,9 @@ public class UserController {
 </pre>
 <p>重新调用<code>Postman</code>的输出结果如下，完美实现功能！</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-not-empty-trace-id-output.png" alt="traceId只有在有值时才输出" title="traceId只有在有值时才输出"></p>
-<h1 id="服务间调用">服务间调用</h1>
+<h2 id="服务间调用">服务间调用</h2>
 <p>在微服务中通常会有多个模块协同工作，各个模块之间也可能会互相调用，在此种情况下也需要将<code>trace-id</code>准确的传递与获取，确保单次请求调用链路中的<code>trace-id</code>都一样才能体现链路追踪的意义。</p>
-<h2 id="feign调用">Feign调用</h2>
+<h3 id="feign调用">Feign调用</h3>
 <p>当使用<code>Feign</code>作为远程调用实现时，需在<strong>被调用方</strong>中添加如下配置代码才能确保<code>trace-id</code>被正常传递与获取。</p>
 
 <pre class="line-numbers language-java ">

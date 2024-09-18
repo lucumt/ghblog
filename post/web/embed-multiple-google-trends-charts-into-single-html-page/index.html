@@ -191,7 +191,7 @@
   }
 </style>
 <p>A brief descripton about how to embed multiple google trends chart into single html page to make them working fine.</p>
-<h1 id="issue">Issue</h1>
+<h2 id="issue">Issue</h2>
 <p>Sometimes we need to use <a href="https://trends.google.com/trends/">Google Trends</a> to find the search trends for key words and embed the result into our own html page,we can click <code>&lt;&gt;</code> icon on the right top of each chart to get the embed source code that can be integrated into html page:</p>
 <p>For example, we can use it to find the search trends for key words: <code>Podman</code>,<code>Docker</code> and <code>Kubernetes</code> in the past 5 years worldwide,below are the screenshots for them:</p>
 <ul>
@@ -252,7 +252,7 @@
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/only-the-first-one-working.png" alt="Only the first chart is working" title="Only the first chart is working"></p>
 <p>Let&rsquo;s modify the code and make only one chart left,we will find that <strong>it will works fine where there are only one chart!</strong></p>
 <p>We can check it at <a href="https://jsfiddle.net/kt82567q/"><strong>live demo with three charts not working</strong></a> and <a href="https://jsfiddle.net/kt82567q/1/"><strong>live demo with one chart working</strong></a>.</p>
-<h1 id="solution">Solution</h1>
+<h2 id="solution">Solution</h2>
 <p>When the page has three charts,we can check the browser console and will find that there are no error inside it, there must be something wrong with my code!</p>
 <p>After search on the Internet I found a solution<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>,the reason is that <strong>we have imported duplicated<code>embed_loader.js</code>,it only needs imported one!</strong></p>
 <p>Change code as below</p>
