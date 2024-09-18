@@ -55,11 +55,11 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题场景
+## 问题场景
 
 通过`gitbook install` 进行相关插件的安装。
 
-# 问题描述
+## 问题描述
 
 通过`gitbook install` 进行相关插件的安装，终端出现类似如下错误导致安装过程失败
 
@@ -89,11 +89,11 @@ Error: Missing required argument #1
 }
 ```
 
-# 原因分析
+## 原因分析
 
 原作者不知道，本人也不知道，期待有大神能给出具体原因分析。
 
-# 解决方案
+## 解决方案
 
 需要用`npm`先手工安装对应的插件，之后再执行`gitbook install`就不会出错。
 

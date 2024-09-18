@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 在项目开发流程中个人习惯采用`Mermaid`中的[**Sequence diagrams**](https://mermaid.js.org/syntax/sequenceDiagram.html)组件通过画[**时序图**](https://zh.wikipedia.org/zh-cn/%E6%97%B6%E5%BA%8F%E5%9B%BE)的方式来描述复杂的业务逻辑并将其用`GitBook`呈现出来便于共享阅读，类似如下
 
@@ -77,9 +77,9 @@ sequenceDiagram
 
 更进一步的，如果直接在页面上提供放大缩小功能，就能避免将对应`SVG`文件下载到本地，使用起来岂不是更方便？而`SVG`的缩放功能`GitHub`上有很多已有的实现，理论分析完全可行！
 
-# 实现
+## 实现
 
-## 缩放功能
+### 缩放功能
 
 在`GitHub`上对比相关的`SVG`组件后，最终选定[**svg-pan-zoom**](https://github.com/bumbu/svg-pan-zoom)作为`SVG`功能扩展度的实现，正好自己之前改进过一个基于`Mermaid`的`GitBook`插件[**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)，可将`svg-pan-zoom`相关的功能整合到该插件中，后续`GitBook`中升级插件版本即可。
 
@@ -155,7 +155,7 @@ mermaid.run({
 
 至此`SVG`缩放功能整合完毕，接下来需要研究下载功能。
 
-## 下载功能
+### 下载功能
 
 由于`SVG`图像一般都是以源码的方式直接嵌入`HTML`页面中，故其下载功能较为简单，只需要找到对应的DOM节点，通过`JavaScript`相关的技术获取到其完整的内容，然后下载到本地即可。
 
@@ -206,7 +206,7 @@ function downloadSvg() {
 
 缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的`GitBook`插件中即可，完整代码参见[**gitbook-plugin-mermaid-fox**](https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox)。
 
-## 显示效果
+### 显示效果
 
 添加缩放和下载按钮后后默认显示效果如下，其中下载按钮位于右上角，缩放按钮位于右下角
 
@@ -216,7 +216,7 @@ function downloadSvg() {
 
 ![放大后的图表展示](/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-zoomed.png "放大后的图表展示")
 
-## 相关代码
+### 相关代码
 
 修改过程中主要涉及到`index.js`和`plguin.js`这两个文件，同时需要把`svg-pan-zoom.js`文件放到相关目录下以方便加载
 

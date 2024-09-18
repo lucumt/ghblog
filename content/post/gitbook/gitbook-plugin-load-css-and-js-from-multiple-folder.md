@@ -55,7 +55,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题背景
+## 问题背景
 
 由于`GitBook`官方默认的代码高亮插件[**highlight**](https://github.com/GitbookIO/plugin-highlight)使用的是[**highlightjs**](https://highlightjs.org/)，其功能没有[**prismjs**](https://prismjs.com/)完善，故最初将`GitBook`的代码高亮采用`prismjs`实现，对应的插件为[**gitbook-plugin-prism**](https://github.com/gaearon/gitbook-plugin-prism)，其使用方式也很简单，只需要在`book.json`中添加如下配置:
 
@@ -153,7 +153,7 @@ function getAssets() {
 }
 ```
 
-# 解决方案
+## 解决方案
 
 既不能同时支持多个`assets`属性，自己又不想破坏`prismjs`本身的结构，怎么办？
 

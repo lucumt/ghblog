@@ -2,6 +2,7 @@
 
 author = "飞狐"
 categories = ["其它"]
+toc = false
 tags = ["Mediawiki"]
 date = "2016-03-18T23:14:59+08:00"
 description = "Blog of Rosen Lu"

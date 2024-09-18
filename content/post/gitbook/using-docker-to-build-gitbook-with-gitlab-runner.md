@@ -119,9 +119,9 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
-## 技术选型
+### 技术选型
 
 由于`Docsify`采用[**SPA**](https://en.wikipedia.org/wiki/Single-page_application)模式开发，不会生成静态`HTML`页面，故随着内容与页面的增多，其初次加载时会花费较多时间进行全局渲染，导致显示很慢，浪费时间等于谋财害命，需要将其替换为其它框架！
 
@@ -148,7 +148,7 @@ highchartsDiagrams:
 1. `GitLab Runner`和`Nginx`采用`Docker`进行容器化部署，避免对部署环境的强依赖
 2. 通过`Docker`在`GitLab Runner`中安装`GitBook`环境，使得实际的文档项目与`GitBook`解耦
 
-## 使用流程
+### 使用流程
 
 由于文档同代码一样都是采用`GitLab`管理的，为了实现在文档更新时能够自动化的部署，准备采用`GitLab Runner`+`GitBook`+`Nginx`的方案，整体流程图如下：
 
@@ -156,9 +156,9 @@ highchartsDiagrams:
 
 在实际使用时，相关用户只需要在按照常规的流程在本地基于`Markdown`格式编写文档并提交到`GitLab`中，之后`GitLab Runner`会自动化的进行文档构建与文档生成，依赖于宿主物理机的配置和文档数量，整个过程通常不超过5秒钟，之后在浏览器中刷新即可查看生成的`HTML`静态文件。
 
-# 环境搭建
+## 环境搭建
 
-##  相关说明
+### 相关说明
 
 出于简化使用流程与加快构建速度的考虑，将`GitLab Runner`与`GitBook`都放置到同一个容器中。在`GitLab Runner`的`Docker`容器中安装完毕`GitBook`环境后，还需将`GitLab Runner`注册到对应的`GitLab`仓库中，可通过`Shell`脚本将此过程固化下来，整个环境搭建流程如下：
 
@@ -174,7 +174,7 @@ highchartsDiagrams:
 | **Nodejs**        | `v12.22.12`                    |                                                              |
 | **NPM**           | `7.5.2`                        |                                                              |
 
-## 操作流程
+### 操作流程
 
 下述步骤展示了从头开始构建`GitLab Runner`与`GitBook`的过程
 
@@ -219,9 +219,9 @@ highchartsDiagrams:
 
    ![GitLab Runner注册结果](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-runner-register-result.png "GitLab Runner注册结果")
 
-## 测试验证
+### 测试验证
 
-### 自动构建
+#### 自动构建
 
 由于[**自动构建脚本**](#自动构建脚本)中有如下配置，其中构建阶段的值被设置为`build`会导致每次代码发生变更时都执行自动构建
 
@@ -244,7 +244,7 @@ build:
 
 之后可通过`Nginx`对应端口访问相应的`GitBook`页面，可参考[**使用展示**](#使用展示)。
 
-### 手工构建
+#### 手工构建
 
 除了自动构建之外，也可点击对应的按钮进行手工提交，此种场景一般用于文档代码没有变更而对`GitBook`的样式或插件进行了修改，想提前验证结果，操作步骤如下：
 
@@ -256,13 +256,11 @@ build:
 
 ![GitLab Runner手工触发确认](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-run-confirm-button.png "GitLab Runner手工触发确认")
 
-# 插件管理
+## 插件管理
 
 `GitBook`在文档管理领域广受欢迎的一个很重要的原因是其丰富的插件生态，插件可快速集成，也可仿照别人的插件根据自己的需求快速开发新的插件，个人项目中用到的插件如下
 
-
-
-## 常用插件
+### 常用插件
 
 | 插件                                                         | 作用                                                         | 备注                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------- |
@@ -287,7 +285,7 @@ build:
 | [**gitbook-plugin-favicon**](https://github.com/menduo/gitbook-plugin-favicon) | 添加favicon图标                                              |                                                             |
 | [**gitbook-plugin-flexible-alerts**](https://github.com/fzankl/gitbook-plugin-flexible-alerts) | 自定义的提示说明样式                                         |                                                             |
 
-## 自定义插件
+### 自定义插件
 
 已有的插件太老旧，自己`fork`代码后对它们进行了更新，项目位于[**gitbook-plugin-fox**](https://github.com/gitbook-plugin-fox)，目前包含如下插件：
 
@@ -303,9 +301,9 @@ build:
 
   ![GitBook中展示代码分组](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-codetab-fox-display.png "GitBook中展示代码分组")
 
-# 其它设置
+## 其它设置
 
-## 中文汉化
+### 中文汉化
 
 `GitBook`中的默认语言为英文，如下图所示，某些提示信息以英文展示，不方便使用
 
@@ -315,7 +313,7 @@ build:
 
 ![GitBook切换为中文显示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-set-zh-language.png "GitBook切换为中文显示")
 
-## 自定义目录
+### 自定义目录
 
 如下所示`GitBook`中默认生成的菜单为`Introduction`，不太直观，可根据实际需求动态修改(对于菜单目录的生成可参考[**自动生成目录**](#自动生成目录)实现)
 
@@ -337,7 +335,7 @@ build:
 
 ![GitBook自定义菜单展示](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-custom-menu.png "GitBook自定义菜单展示")
 
-## 自定义样式
+### 自定义样式
 
 若`GitBook`中的样式不满足我们的需求，可通过添加自定义`CSS`文件进行定制，实际使用中发现该文件必须叫做`website.css`且需位于生成的静态文件目录下才生效。
 
@@ -347,15 +345,15 @@ build:
 }
 ```
 
-# 使用展示
+## 使用展示
 
 可通过`Nginx`对应端口访问相应的`GitBook`页面，个人项目中的界面类似如下，供参考
 
 ![GitBook页面浏览](/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-web-page-view.png "GitBook页面浏览")
 
-# 文件&脚本
+## 文件&脚本
 
-## Dockerfile脚本
+### Dockerfile脚本
 
 用于构建同时包含`GitLab Runner`与`GitBook`的容器
 
@@ -389,7 +387,7 @@ COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
 COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh
 ```
 
-## docker启停脚本
+### docker启停脚本
 
 `docker-compose.yml`用于启动`GitLab Runner`与`Nginx`容器
 
@@ -414,7 +412,7 @@ services:
    container_name: gitbook-nginx
 ```
 
-## 自动构建脚本
+### 自动构建脚本
 
 `.gitlab-ci.yml`是`GitLab Runner`构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的`GitLab`仓库，用于每次修改文档时触发自动构建
 
@@ -446,7 +444,7 @@ build:
     - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico
 ```
 
-## 自动注册脚本
+### 自动注册脚本
 
 `gitlab_runner_config_init.sh`用于注册`GitLab Runner`同时检测`GitBook`是否存在
 
@@ -512,7 +510,7 @@ fi
 printf "\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n"
 ```
 
-## 自动生成目录
+### 自动生成目录
 
 `auto_generate_summary.sh`用于自动生成目录，`GitBook`左侧的目录树依赖于此脚本的生成结果，此文件会在`GitLab Runner`构建阶段执行
 
@@ -707,7 +705,7 @@ baseWrite(){
 baseReader
 ```
 
-## 自定义样式
+### 自定义样式
 
 `custom.css`是自定义样式文件，当对`GitBook`的某些样式不满意时，可用自定义`CSS`文件来覆盖
 
@@ -762,7 +760,7 @@ th {
 }
 ```
 
-## GitBook配置文件
+### GitBook配置文件
 
 `book.js`是`GitBook`的配置文件，包含全局配置与各种插件
 
