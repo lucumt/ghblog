@@ -4,9 +4,9 @@ author = "飞狐"
 categories = ["Java编程","数据库"]
 tags = ["MySQL","Java"]
 date = "2016-03-03T14:33:43+08:00"
-description = "Blog of Rosen Lu"
-keywords = ["MySQL","Java"]
-title = "Cannot run program \"mysqldump\": CreateProcess error=2, The system cannot find the file specified"
+description = "记录在Windows中使用MySQL的dump指令时，由于权限不足而出现Cannot run program \"mysqldump\": CreateProcess error=2, The system cannot find the file specified的问题解决方案"
+keywords = ["MySQL","Java","MySQL dump","Windows管理员"]
+title = "Windows中由于系统权限不同导致的mysqldump不生效的原因分析"
 
 +++
 
