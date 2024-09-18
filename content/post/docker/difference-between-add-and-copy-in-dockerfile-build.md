@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 近期在使用`Docker`时，发现部分项目中采用`Dockerfile`来构建自定义镜像时存在`COPY`和`ADD`两条指令混用的情况，为了规范使用，基于网络上的相关资料，简要的对比总结了它们的差异，供后续参考。
 
-# 对比
+## 对比
 
 在`Docker`官网关于`COPY`指令的[描述](https://docs.docker.com/reference/dockerfile/#copy)如下
 
@@ -84,7 +84,7 @@ func dispatchCopy(d dispatchRequest, c *instructions.CopyCommand) error {
 
 总结下来就是 **`COPY`指令处理不能进行压缩文件和URL文件流的处理之外，其它功能与`ADD`指令类似。**
 
-# 验证
+## 验证
 
 为了便于观察`Dockerfile`构建过程中的输出，可在构建指令中加入`--progress=plain`来查看输出的详细信息，类似如下
 
@@ -92,7 +92,7 @@ func dispatchCopy(d dispatchRequest, c *instructions.CopyCommand) error {
 docker build --progress=plain --no-cache -t custom:v1.0 -f Dockerfile .
 ```
 
-## ADD指令
+### ADD指令
 
 * 验证普通的文件拷贝
 
@@ -142,7 +142,7 @@ docker build --progress=plain --no-cache -t custom:v1.0 -f Dockerfile .
 
   ![ADD指令使用tar文件](/blog_img/docker/difference-between-add-and-copy-in-dockerfile-build/add-with-tar-file.png "ADD指令使用tar文件") 
 
-## COPY指令
+### COPY指令
 
 * 验证普通文件
 
@@ -192,7 +192,7 @@ docker build --progress=plain --no-cache -t custom:v1.0 -f Dockerfile .
 
   ![COPY指令使用压缩文件](/blog_img/docker/difference-between-add-and-copy-in-dockerfile-build/copy-with-tar-file.png "COPY指令使用压缩文件") 
 
-# 总结
+## 总结
 
 官方推荐的是**在不需要使用`ADD`指令的高级特性的场景下，优先使用`COPY`指令，其更直观也不会造成困惑**。
 

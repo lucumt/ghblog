@@ -44,9 +44,9 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 构建过程
+## 构建过程
 
-## 初始构建
+### 初始构建
 
 一开始自己基于[Nacos2.2.1](https://github.com/alibaba/nacos/releases/tag/2.2.1)下载的tar.gz文件进行构建，主要有如下几个步骤：
 
@@ -93,7 +93,7 @@ ENTRYPOINT ["/bin/bash","/home/nacos/bin/startup.sh","-m","standalone"]
 
 基于上述文件构建的镜像通过`docker run`指令执行时一直启动不成功，而在`Linux`终端中通过`bash startup.sh -m standlone`的方式则可以顺利启动`nacos`，初次尝试失败!
 
-## 改进版本
+### 改进版本
 
  对`startup.sh`进行检查之后，发现其主要是通过如下的`nohup`指令启动的
 
@@ -161,7 +161,7 @@ RUN chmod +x /home/nacos/bin/docker-startup.sh
 ENTRYPOINT ["/bin/bash","/home/nacos/bin/docker-startup.sh","-m","standalone"]
 ```
 
-## 支持LDAP
+### 支持LDAP
 
 结合公司的实际情况，在部门内部使用时一般采用`LDAP`登录，而交付给客户时更多的采用普通账号登录，为此需要2份`Dockerfile`来构建2个不同的镜像，处于简化维护的考虑，自己决定采用1份`Dockerfile`文件根据构建参数来动态的生成不同的镜像。
 
@@ -181,9 +181,9 @@ RUN if [ $LOGIN_TYPE = "ldap" ];then sed -i "s/\#nacos.core.auth.ldap.filter.pre
 RUN if [ $LOGIN_TYPE = "ldap" ];then sed -i "s/\#nacos.core.auth.ldap.case.sensitive=.*/nacos.core.auth.ldap.case.sensitive\${LDAP_CASE_SENSITIVE}/g" $conf; fi
 ```
 
-# 最终文件 
+## 最终文件 
 
-## Dockerfile
+### Dockerfile
 
 ```dockerfile
 FROM openjdk:8-jdk
@@ -251,7 +251,7 @@ RUN chmod +x /home/nacos/bin/docker-startup.sh
 ENTRYPOINT ["/bin/bash","/home/nacos/bin/docker-startup.sh","-m","standalone"]
 ```
 
-## 构建方式
+### 构建方式
 
 在构建时需要将`Dockerfile`、`docker-startup.sh`以及对应的`nacos`压缩文件放到同一个目录下
 
@@ -271,7 +271,7 @@ ENTRYPOINT ["/bin/bash","/home/nacos/bin/docker-startup.sh","-m","standalone"]
   docker build -t nacos_custom:v1.0 --build-arg LOGIN_TYPE=ldap .
   ```
 
-## 使用方式
+### 使用方式
 
 假设存储数据库为`mysql`采用[docker-compose](https://docs.docker.com/compose/)方式登录，相关的`docker-compose.yml`文件如下:
 
@@ -329,7 +329,7 @@ ENTRYPOINT ["/bin/bash","/home/nacos/bin/docker-startup.sh","-m","standalone"]
         - $PWD/logs:/home/nacos/logs/
   ```
 
-## 镜像参数说明
+### 镜像参数说明
 
 | 属性                           | 作用                     | 默认值 | 可选值      |
 | ------------------------------ | ------------------------ | ------ | ----------- |

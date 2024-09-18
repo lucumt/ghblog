@@ -43,9 +43,9 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题复现
+## 问题复现
 
-## 系统环境
+### 系统环境
 
 * 操作系统，`uname -a`输出如下：
 
@@ -77,7 +77,7 @@ sequenceDiagrams:
   Default Runtime: docker-runc
   ```
 
-## 操作过程
+### 操作过程
 
 1. 在`/etc/docker/daemon.json`的配置如下:
 
@@ -113,7 +113,7 @@ sequenceDiagrams:
    * `log-driver`配置由于与其它指令冲突了，导致`docker`服务无法启动，后续去`docker`官网查询也确实有此说明[^1]
    * `log-opts`单独在`/etc/docker/daemon.json`也不生效
 
-#  排查与解决
+## 排查与解决
 
 1. 在可正常启动`docker`服务的环境下利用`docker info --format '{{.LoggingDriver}}'命令发现其输出为`journald`，显然之前的`log-driver`配置与其冲突了，从而导致`docker`服务无法启动 
 
