@@ -4,7 +4,7 @@ date: 2023-11-15T14:08:39+08:00
 lastmod: 2023-11-15T14:08:39+08:00
 draft: false
 keywords: ["foxglove","时序数据","自动驾驶","功能使用"]
-description: "Foxglove基本功能使用说明"
+description: "对Foxglove基本功能进行简单的使用说明，让其他初次接触的人可快速上手"
 tags: ["web","foxglove"]
 categories: ["Web编程"]
 author: "Rosen Lu"

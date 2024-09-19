@@ -4,7 +4,7 @@ date: 2023-11-30T10:35:48+08:00
 lastmod: 2023-11-30T10:35:48+08:00
 draft: false
 keywords: ["hugo","search"]
-description: "给Hugo中的Even主题添加搜索功能"
+description: "参考网络文档给Hugo中的Even主题添加搜索功能，以方便检索博客的内容"
 tags: ["hugo"]
 categories: ["个人博客"]
 author: "Rosen Lu"

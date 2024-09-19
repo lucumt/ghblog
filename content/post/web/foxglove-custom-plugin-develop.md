@@ -4,7 +4,7 @@ date: 2023-11-22T14:08:39+08:00
 lastmod: 2023-11-22T14:08:39+08:00
 draft: false
 keywords: ["foxglove","插件开发"]
-description: "Foxglove自定义插件开发说明"
+description: "简要介绍如何给Foxglove进行插件开发，以满足不同的使用需求"
 tags: ["web","foxglove"]
 categories: ["Web编程"]
 author: "Rosen Lu"
