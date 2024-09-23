@@ -4,7 +4,7 @@ date: 2018-12-08T23:49:33+08:00
 lastmod: 2018-12-08T23:49:33+08:00
 draft: false
 keywords: ["volatile","Java Concurrency"]
-description: "Volatile关键字在Java程序中的使用"
+description: "基于自己的理解记录Volatile关键字在Java多线程开发中的使用"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
@@ -14,7 +14,7 @@ author: "Rosen Lu"
 `volatile`关键字在Java多线程编程中很常见，由于自己之前学习多线程时一度以为只要需确保线程可见性的代码都需要使用`volatile`关键字，后来发现并不是这样的，故简单记录下。
 
 <!--more-->
-### 典型使用场景
+## 典型使用场景
 
 下面这段代码创建了两个线程threadA和threadB，threadA中运行display()方法，threadB中运行stop()方法，在threadA启动1秒后启动threadB。
 
@@ -72,7 +72,7 @@ public class VolatileTest {
 
 关于`volatile`如何实现确保变量可见性，网上已经有很多资料，请自行查阅，如[**volatile和lock原理分析**](https://liuzhengyang.github.io/2017/03/28/volatileandlock/)。
 
-### 有独占锁时不需要使用volatile
+## 有独占锁时不需要使用volatile
 
 既然`volatile`变量确保的是在多个线程**同时读取**一个变量时确保内存可见性，如果有多个线程对共享变量进行读写时，由于**排它锁(exclusive lock)** 的存在导致任一时刻只能有一个线程对共享变量进行读写操作，此时是否还需要添加`volatile`关键字呢？答案是否定的，从字面意思可以看出，由于同一时刻只能有一个线程访问变量，所以变量可见性的问题不会存在，故没必要添加`volatile`关键字。
 
@@ -158,7 +158,7 @@ public class ProducerConsumerTest {
 }
 ```
 
-### 利用volatile在单例模式中实现双重检查
+## 利用volatile在单例模式中实现双重检查
 
 `volatile`关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了`volatile`禁止重排序的功能，详细说明请参见[Java并发编程的艺术](https://item.jd.com/11740734.html)P67中的 **双重检查锁定与延迟初始化** 。
 

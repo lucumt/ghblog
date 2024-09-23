@@ -4,7 +4,7 @@ date: 2019-07-22T10:47:12+08:00
 lastmod: 2022-02-22T10:47:12+08:00
 draft: false
 keywords: ["Arrays.asList","类型转换","封装","原始类型"]
-description: "Arrays.asList类型转换结果的坑"
+description: "记录下在java中使用Arrays.asList进行类型转换结果的坑以及解决方案"
 tags: ["java"]
 categories: ["java编程"]
 author: "Rosen Lu"
@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题描述
+## 问题描述
 
 在程序中需要检测某个元素是否在数组中，处于缩短代码篇幅的考虑，自己采用了`Arrays.asList`方法将其转化为`List`然后调用`contains`方法来判断：
 
@@ -59,7 +59,7 @@ public static boolean checkContains(int ele) {
 
 ![Arrays.asList输出结果不符合预期](/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-contains-result-not-as-expected.png "Arrays.asList输出结果不符合预期")  
 
-# 问题分析
+## 问题分析
 
 在Debug模式下查看`Arrays.asList(data)`返回的值，发现其返回的结果不是预期中的`List<Integer>`而是`List<int[]>`，从而导致调用`List.contains()`方法失效!
 
@@ -75,7 +75,7 @@ public static boolean checkContains(int ele) {
 
 上述文字的核心内容为`Arrays.asList`需要获取`Object`类型，而`int`是原生类型，但`int[]`符合要求，因此`Arrays.asList()`方法会将原始的`int`数组视作一个`int[]`对象进行处理，从而导致此结果[^1]。
 
-# 解决方案
+## 解决方案
 
 找到问题原因后修改起来也很容易，按照通常的编程习惯，只需要把数组的定义从`int`修改为`Integer`即可
 
@@ -111,7 +111,7 @@ Update:
   Arrays.stream(ints).boxed().toList();
   ```
 
-# asList不可变原因分析
+## asList不可变原因分析
 
 查看`Arrays.asList`返回结果中的`List`，发现其返回的是内部自己实现的`ArrayList`，但该`ArrayList`没有重写`add`方法。
 

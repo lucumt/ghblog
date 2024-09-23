@@ -45,7 +45,7 @@ sequenceDiagrams:
 
 从`JDK`的API可知2者均为[Object](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html)类的方法，即`Java`中所有的对象都能调用这2个方法，本文基于`JDK`的官方API简要介绍2者的使用以及异同
 
- # wait方法
+## wait方法
 
 在`wait()`方法的官方文档中有如下说明：
 
@@ -55,7 +55,7 @@ sequenceDiagrams:
 >
 > The current thread must own this object's monitor. The thread releases ownership of this monitor and waits until another thread notifies threads waiting on this object's monitor to wake up either through a call to the `notify` method or the `notifyAll` method. The thread then waits until it can re-obtain ownership of the monitor and resumes execution.
 
-# timed wait方法
+## timed wait方法
 
 在`wait(long timeout)`的官方文档中有如下说明：
 
@@ -72,7 +72,7 @@ sequenceDiagrams:
 >
 > The thread T is then removed from the wait set for this object and re-enabled for thread scheduling. It then competes in the usual manner with other threads for the right to synchronize on the object; once it has gained control of the object, all its synchronization claims on the object are restored to the status quo ante - that is, to the situation as of the time that the `wait` method was invoked. Thread T then returns from the invocation of the `wait` method. Thus, on return from the `wait` method, the synchronization state of the object and of thread `T` is exactly as it was when the `wait` method was invoked.
 
-# 总结
+## 总结
 
 **相同点**:
 

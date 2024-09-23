@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景说明
+## 背景说明
 
 假设部门要进行一次团建，主要包含如下3个活动：
 
@@ -211,7 +211,7 @@ public class PersonC extends TeamBuilding {
 
 接下来以抽象类和接口默认方法分别说明如何设计父类以便达成上述目的。
 
-# 抽象类实现
+## 抽象类实现
 
 仿照`Java`多线程编程中的[**AbstractQueuedSynchronizer**](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractQueuedSynchronizer.html)类里面的获取锁与释放锁的实现，在父类中给所有的方法都取消`abstract`修饰符，默认用[**UnsupportedOperationException**](https://docs.oracle.com/javase/8/docs/api/java/lang/UnsupportedOperationException.html)实现全部方法，子类按需`override`即可。
 
@@ -253,7 +253,7 @@ public abstract class TeamBuilding {
 }
 ```
 
-# 接口实现
+## 接口实现
 
 在`JDK8`和以上版本中，也可将抽象类修改为接口，利用[**接口默认方法**](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)实现，相关代码如下：
 

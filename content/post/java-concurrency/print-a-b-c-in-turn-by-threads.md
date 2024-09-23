@@ -4,7 +4,7 @@ date: 2020-09-08T11:11:06+08:00
 lastmod: 2020-09-08T11:11:06+08:00
 draft: false
 keywords: ["java","thread"]
-description: "多种方式实现在Java中用线程轮流打印ABC"
+description: "由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程"]
 author: "Rosen Lu"
@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 原理分析
+## 原理分析
 
 实现思路如下：
 
@@ -54,9 +54,9 @@ sequenceDiagrams:
 
 ![原理图](/blog_img/java-concurrency/print-a-b-c-in-turn-by-threads/threads-print-character-process.png "原理图") 
 
-# 代码实现
+## 代码实现
 
-## 基于wait&notify
+### 基于wait&notify
 
 ```java
 public class ThreadPrint1Test {
@@ -117,7 +117,7 @@ public class ThreadPrint1Test {
 }
 ```
 
-## 基于ReentrantLock&Condition
+### 基于ReentrantLock&Condition
 
 ```java
 public class ThreadPrint2Test {
@@ -179,7 +179,7 @@ public class ThreadPrint2Test {
 }
 ```
 
-## 基于Semaphore
+### 基于Semaphore
 
 ```java
 public class ThreadPrint3Test {
@@ -233,7 +233,7 @@ public class ThreadPrint3Test {
 }
 ```
 
-## 单个锁&volatile变量
+### 单个锁&volatile变量
 
 此种方式不需要唤醒线程，同时便于很方便的修改线程数目。
 

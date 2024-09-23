@@ -4,7 +4,7 @@ date: 2018-12-08T23:02:10+08:00
 lastmod: 2018-12-08T23:02:10+08:00
 draft: false
 keywords: ["Java","==","equals"]
-description: "Java中字符串的比较说明"
+description: "字符串比较是java编程中常见的操作，本文简要记录java中不同的字符串比较以及结果分析"
 tags: ["Java"]
 categories: ["Java编程"]
 author: "Rosen Lu"

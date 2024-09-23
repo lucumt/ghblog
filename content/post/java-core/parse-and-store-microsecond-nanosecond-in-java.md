@@ -43,9 +43,9 @@ sequenceDiagrams:
 
 <!--more-->
 
-# java.util.Date中相关实现
+## java.util.Date中相关实现
 
-## 格式化测试
+### 格式化测试
 
 首先采用采用如下代码验证`java.util.Date`和`java.text.SimpleDateFormat`对于时间戳的支持情况。
 
@@ -111,7 +111,7 @@ public class TestDateConvert1 {
 
 从上图中可以看出时间精确到微秒之后，采用`java.util.Date`和`java.text.SimpleDateFormat`进行输出时前后的结果已经不一致。同时也可以大致猜测，当使用`java.util.Date`时不能用其进行微秒或纳秒等高精度的时间存储展示，但此问题是由`java.util.Date`还是`java.text.SimpleDateFormat`造成的暂不确定。
 
-## 对比数据测试
+### 对比数据测试
 
 为了测试结果的准确性，在[www.timestamp-converter.com](https://www.timestamp-converter.com/)中获取一个可用于验证的时间戳信息如下所示
 
@@ -159,7 +159,7 @@ public static void testDateCreate() {
 
 > **`java.util.Date`和`java.text.SimpleDateFormat`均不支持微秒和纳秒级别的时间精度。**
 
-# LocalDateTime中实现
+## LocalDateTime中实现
 
 由于`JDK8`中引入了`LocalDateTime`，故将最开始的测试代码都修改为使用`java.time.LocalDateTime`和`java.time.format.DateTimeFormatter`进行测试
 
@@ -238,7 +238,7 @@ public class TestDateConvert3 {
 
 > **`java.time.LocalDateTime`支持纳秒级别的时间存储，支持`java.time.format.DateTimeFormatter`支持纳秒级别的时间显示。**
 
-# LocalDateTime与时间戳互转
+## LocalDateTime与时间戳互转
 
 在`java.util.Date`中可以很容易的通过`Date().getTime()`和`new Date(long timestamp)`来分别获取时间戳和基于时间戳构造时间，而在`java.time.LocalDateTime`中要实现类似功能则稍微复杂点。
 
@@ -251,7 +251,7 @@ public class TestDateConvert3 {
 
 有了时间戳之后根据上述公式进行反向操作，分别获取秒与微秒(纳秒)，然后根据这2个数值通过`Instant`构建即可。
 
-## 与微秒互转
+### 与微秒互转
 
 ```java
 public class TestDateConvert4 {
@@ -294,7 +294,7 @@ public class TestDateConvert4 {
 
 ![微秒级别的时间戳转换](/blog_img/java-core/parse-and-store-microsecond-in-java/convert-to-millis-timestamp-test.png "微秒级别的时间戳转换")  
 
-## 与纳秒互转
+### 与纳秒互转
 
 ```java
 public class TestDateConvert5 {
@@ -332,8 +332,6 @@ public class TestDateConvert5 {
 
 }
 ```
-
-
 
 测试结果如下，符合预期
 

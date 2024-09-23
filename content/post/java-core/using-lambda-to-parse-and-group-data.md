@@ -4,7 +4,7 @@ date: 2022-11-15T16:20:57+08:00
 lastmod: 2022-11-15T16:20:57+08:00
 draft: false
 keywords: ["Java","Java8","Map","Array","Lambda"]
-description: ""
+description: "利用Java8中的lambda来实现字符串的解析与分组，供自己后续使用时参考"
 tags: ["Java"]
 categories: ["Java编程"]
 author: "Rosen Lu"
@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题描述
+## 问题描述
 
 项目中有类似如下的字符串输入参数
 
@@ -58,7 +58,7 @@ sequenceDiagrams:
 {027=[wuchang, hongshan, caidan], 020=[tianhe], 010=[fengtai, chaoyang, haidain], 021=[changnin, xuhui]}
 ```
 
-# 传统方式
+## 传统方式
 
 最开始由于需要尽快部署调试，自己才用的是传统的遍历方式，此种方式编码起来很简单，具备简单的`Java`基础即可实现。
 
@@ -80,7 +80,7 @@ public Map<String, List<String>> parseParametersByIterate(String sensors) {
 }
 ```
 
-# 基于Lambda实现
+## 基于Lambda实现
 
 在[Stack Overflow](https://stackoverflow.com/questions/74443495/how-to-group-and-map-string-via-lambda)上咨询后，发现用`lambda`实现更简洁，只用一行代码就能搞定!
 

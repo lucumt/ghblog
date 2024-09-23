@@ -4,7 +4,7 @@ date: 2018-12-03T22:57:56+08:00
 lastmod: 2018-12-03T22:57:56+08:00
 draft: false
 keywords: ["Java多线程"]
-description: "Java中interrupt()、interrupted()、isInterrupted()的区别"
+description: "Java中interrupt()、interrupted()、isInterrupted()的使用区别简要记录"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程","Java多线程"]
 author: "Rosen Lu"
@@ -120,6 +120,7 @@ public class InterruptedTest {
 * **isInterrupted()**,检测调用该方法的线程是否被中断，不清除中断标记
 
 ## 线程中断的使用
+
 在Oracle官网有关于[**interrupt**](https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html)的如下如说明
 
 >An interrupt is an indication to a thread that it should stop what it is doing and do something else. It's up to the programmer to decide exactly how a thread responds to an interrupt, but it is very common for the thread to terminate.
@@ -133,6 +134,7 @@ while (!Thread.currentThread().isInterrupted()) {
 ```
 
 ## 与LockSupport的比较
+
 利用[**LockSupport**](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/LockSupport.html)方法重新修改上述代码，修改后的代码如下:
 
 ```java

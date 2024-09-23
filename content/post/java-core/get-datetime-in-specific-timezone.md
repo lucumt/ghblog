@@ -4,7 +4,7 @@ date: 2021-06-08T16:01:47+08:00
 lastmod: 2021-06-08T16:01:47+08:00
 draft: false
 keywords: ["java","timezone","硬编码"]
-description: "简要介绍如何通过JDK8时区常量进行时区相关操作"
+description: "简要介绍如何通过JDK8时区常量进行时区相关操作，以提高代码可维护性"
 tags: ["java"]
 categories: ["java编程"]
 author: "Rosen Lu"
@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# ZoneId使用
+## ZoneId使用
 
 在涉及到时区的操作时，通常采用类似如下的代码以[**硬编码**](https://zh.wikipedia.org/zh-cn/%E5%AF%AB%E6%AD%BB)方式实现相关功能。
 
@@ -117,7 +117,7 @@ LocalDateTime datetime4 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(ZoneI
 System.out.println(datetime4);
 ```
 
-# ZoneId分析
+## ZoneId分析
 
 由于前述`ZoneId.SHORT_IDS`中的时区都是通过字符串表示的，在上网查询的情况下可通过如下代码获取各个时区与[**UTC偏移量**](https://zh.wikipedia.org/zh-cn/UTC%E5%81%8F%E7%A7%BB%E9%87%8F)的对应关系
 
