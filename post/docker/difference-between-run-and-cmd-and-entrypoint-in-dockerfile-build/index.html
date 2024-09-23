@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较" /><meta name="keywords" content="docker, dockerfile, RUN, CMD, ENTRYPOINT" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较，为Dockerfile的编写提供参考" /><meta name="keywords" content="docker, dockerfile, RUN, CMD, ENTRYPOINT" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/docker/difference-between-run-and-cmd-and-entrypoint-in-dockerfile-build/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
-  <meta property="og:description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
+  <meta property="og:description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较，为Dockerfile的编写提供参考">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Docker">
 
   <meta itemprop="name" content="Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
-  <meta itemprop="description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
+  <meta itemprop="description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较，为Dockerfile的编写提供参考">
   <meta itemprop="datePublished" content="2021-02-20T15:00:08+08:00">
   <meta itemprop="dateModified" content="2021-02-20T15:00:08+08:00">
   <meta itemprop="wordCount" content="2813">
   <meta itemprop="keywords" content="docker,dockerfile,RUN,CMD,ENTRYPOINT">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
-  <meta name="twitter:description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较">
+  <meta name="twitter:description" content="通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较，为Dockerfile的编写提供参考">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,24 +180,28 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#概要说明">概要说明</a></li>
-    <li><a href="#docker镜像与分层">Docker镜像与分层</a></li>
-    <li><a href="#shell和exec模式">Shell和Exec模式</a>
+    <li>
       <ul>
-        <li><a href="#shell模式">Shell模式</a></li>
-        <li><a href="#exec模式">Exec模式</a></li>
-        <li><a href="#运行bash脚本">运行bash脚本</a></li>
+        <li><a href="#概要说明">概要说明</a></li>
+        <li><a href="#docker镜像与分层">Docker镜像与分层</a></li>
+        <li><a href="#shell和exec模式">Shell和Exec模式</a>
+          <ul>
+            <li><a href="#shell模式">Shell模式</a></li>
+            <li><a href="#exec模式">Exec模式</a></li>
+            <li><a href="#运行bash脚本">运行bash脚本</a></li>
+          </ul>
+        </li>
+        <li><a href="#run指令">RUN指令</a></li>
+        <li><a href="#cmd指令">CMD指令</a></li>
+        <li><a href="#entrypoint指令">ENTRYPOINT指令</a>
+          <ul>
+            <li><a href="#exec模式-1">Exec模式</a></li>
+            <li><a href="#shell模式-1">Shell模式</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#run指令">RUN指令</a></li>
-    <li><a href="#cmd指令">CMD指令</a></li>
-    <li><a href="#entrypoint指令">ENTRYPOINT指令</a>
-      <ul>
-        <li><a href="#exec模式-1">Exec模式</a></li>
-        <li><a href="#shell模式-1">Shell模式</a></li>
-      </ul>
-    </li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -211,19 +215,19 @@
 <p>本来自己想专门写一篇关于它们差异的博文，后来在网上发现国外有个作者已经写了类似的文章，同时读了之后有醍醐灌顶之感，故出于对作者的尊重与感谢，决定直接将其翻译成中文！</p>
 <p>&lt;!-正文开始 -&gt;</p>
 <p><code>Docker</code>中的一些指令看起来很相似，它们容易导致初学者的困惑和不恰当的使用，本文将以具体示例来说明<code>CMD</code>、<code>RUN</code>和<code>ENTRYPOINT</code>这3者的差异。</p>
-<h1 id="概要说明">概要说明</h1>
+<h2 id="概要说明">概要说明</h2>
 <ul>
 <li><code>RUN</code>用于在一个镜像层中执行指令并创建一个新的镜像，如通常用来安装软件包</li>
 <li><code>CMD</code>用于设置默认的命令或参数，它们可以在容器运行时通过命令行覆盖</li>
 <li><code>ENTRYPOINT</code>用于将容器设置为通过可执行文件来运行<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
 </ul>
 <p>如果还是不太明白或者想了解更详细的信息，请继续往下阅读。</p>
-<h1 id="docker镜像与分层">Docker镜像与分层</h1>
+<h2 id="docker镜像与分层">Docker镜像与分层</h2>
 <p><code>Docker</code>运行一个容器时实际上是运行容器里面的镜像，这些镜像通常是通过<code>Docker</code>指令构建的，这些指令在已有的镜像层或操作系统发行版的顶层添加新的分层，操作系统发行版是一个初始镜像，所有在其上添加的分层都会创建一个新的镜像。</p>
 <p>最终的<code>Docker</code>镜像就像一个洋葱，里面包含由操作系统发行版以及其上的许多镜像分层，例如可通过基于Ubuntu 14.04发行版安装一系列的deb软件包来构建自己的镜像。</p>
-<h1 id="shell和exec模式">Shell和Exec模式</h1>
+<h2 id="shell和exec模式">Shell和Exec模式</h2>
 <p>这3条指令(<code>RUN</code>、<code>CMD</code>、<code>ENTRYPOINT</code>)都可基于<code>shell模式</code>和<code>exec模式</code>运行，由于这些模式相对于指令更容易让人困惑，我们先熟悉下这些指令。</p>
-<h2 id="shell模式">Shell模式</h2>
+<h3 id="shell模式">Shell模式</h3>
 <p><code>&lt;instruction&gt; &lt;command&gt;</code></p>
 <p>示例:</p>
 
@@ -244,7 +248,7 @@ ENTRYPOINT echo &#34;Hello, $name&#34;</code>
 <code>Hello, John Dow</code>
 </pre>
 <p>可以看出在输出结果中变量name已经被其实际值替换了。</p>
-<h2 id="exec模式">Exec模式</h2>
+<h3 id="exec模式">Exec模式</h3>
 <p>此模式是<code>CMD</code>和<code>ENTRYPOINT</code>指令说明中推荐的模式。</p>
 <p><code>&lt;instruction&gt; [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;, ...]</code></p>
 <p>示例:</p>
@@ -266,7 +270,7 @@ ENTRYPOINT [&#34;/bin/echo&#34;, &#34;Hello, $name&#34;]</code>
 <code>Hello, $name</code>
 </pre>
 <p>可看出输出结果中的name变量并没有被解析替换。</p>
-<h2 id="运行bash脚本">运行bash脚本</h2>
+<h3 id="运行bash脚本">运行bash脚本</h3>
 <p>如果需要运行<code>bash</code>脚本(或其它的shell脚本)，可通过在<code>exec模式</code>中使用<code>/bin/bash</code>来将其设置为可运行，在这种方式下，常规的shell处理会生效，以下述<code>Dockerfile</code>中的代码片段为例：</p>
 
 <pre class="line-numbers language-dockerfile ">
@@ -278,7 +282,7 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
 <pre class="no-line-numbers language-bash ">
 <code>Hello, John Dow</code>
 </pre>
-<h1 id="run指令">RUN指令</h1>
+<h2 id="run指令">RUN指令</h2>
 <p><code>RUN</code>指令允许我们在已有的镜像中安装所需的程序和软件包，它在当前镜像的顶层执行相关指令并通过提交执行结果的方式创建一个新的镜像封层，通常可在一个<code>Dockerfile</code>中看见多个<code>RUN</code>指令。</p>
 <p><code>RUN</code>指令有2种使用方式:</p>
 <ul>
@@ -297,7 +301,7 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
   subversion</code>
 </pre>
 <p>需要注意的是<code>apt-get update</code>和<code>apt-get install</code>是在一条指令中执行，这样操作是为了确保安装最新的软件包。如果<code>apt-get install</code>是在单独的指令中执行，则其会复用<code>apt-get update</code>生成的镜像层，而该镜像层可能会在很久之前就被创建<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
-<h1 id="cmd指令">CMD指令</h1>
+<h2 id="cmd指令">CMD指令</h2>
 <p><code>CMD</code>指令允许我们设置一个默认的命令，当我们在运行容器时没有显示指定要运行的命令，默认命令将会执行，若<code>Docker</code>容器运行时指定了命令，则其将会被忽略。如果一个<code>Dockerfile</code>中有多个<code>CMD</code>指令，除了最后一个之外的其余<code>CMD</code>指令都会被忽略。</p>
 <p><code>CMD</code>指令有3种使用方式：</p>
 <ul>
@@ -321,7 +325,7 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
 <pre class="no-line-numbers language-bash ">
 <code>root@7de4bed89922:/#</code>
 </pre>
-<h1 id="entrypoint指令">ENTRYPOINT指令</h1>
+<h2 id="entrypoint指令">ENTRYPOINT指令</h2>
 <p><code>ENTRYPOINT</code>用于将容器设置为通过可执行文件来运行，由于它也能通过设置附带参数的命令，其看起来和<code>CMD</code>指令很相似，不同之处为<code>ENTRYPOINT</code>命令和参数在<code>Docker</code>容器以带参数的命令运行时不会被忽略。(虽然有办法来让<code>Docker</code>容器忽略<code>ENTRYPOINT</code>命令和参数，但一般我们不会这么做)</p>
 <p><code>ENTRYPOINT</code>指令有2种使用方式:</p>
 <ul>
@@ -329,7 +333,7 @@ ENTRYPOINT [&#34;/bin/bash&#34;, &#34;-c&#34;, &#34;echo Hello, $name&#34;]</cod
 <li><code>ENTRYPOINT command param1 param2</code> (<code>shell模式</code>)</li>
 </ul>
 <p>当使用<code>ENTRYPOINT</code>模式时需要非常小心，这是由于不同方式的行为差异很大。</p>
-<h2 id="exec模式-1">Exec模式</h2>
+<h3 id="exec模式-1">Exec模式</h3>
 <p><code>ENTRYPOINT</code>指令中的<code>Exec模式</code>允许我们设置命令和参数，然后使用任一形式的<code>CMD</code>模式来设置有可能有可能发生变化的附带参数。<code>ENTRYPOINT</code>指令中的参数会一直被用到，而<code>CMD</code>中的相关参数则可在<code>Docker</code>容器运行覆盖，以下述<code>Dockerfile</code>中的代码片段为例</p>
 
 <pre class="line-numbers language-dockerfile ">
@@ -346,9 +350,9 @@ CMD [&#34;world&#34;]</code>
 <pre class="no-line-numbers language-bash ">
 <code>Hello John</code>
 </pre>
-<h2 id="shell模式-1">Shell模式</h2>
+<h3 id="shell模式-1">Shell模式</h3>
 <p><code>ENTRYPOINT</code>指令中的<code>shell模式</code>会忽略任何<code>CMD</code>或<code>Docker</code>容器运行时附带的参数。</p>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>使用<code>RUN</code>指令通过在初始镜像的顶层添加分层来创建我们自己的镜像。</p>
 <p>当构建镜像且需要相关命令始终被执行时，优先使用<code>ENTRYPOINT</code>而非<code>CMD</code>指令，如果有些参数在<code>Docker</code>容器运行期间会被覆盖/改变，可通过额外使用<code>CMD</code>指令来添加默认的参数。</p>
 <p>当需要添加在<code>Docker</code>容器运行期间可被覆盖的默认参数，可使用<code>CMD</code>指令。</p>

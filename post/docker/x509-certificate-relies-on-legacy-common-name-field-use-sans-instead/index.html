@@ -183,7 +183,7 @@
 	
     <div class="post-content image-border">
 	 <p>近期在给公司内部安装<code>KubeSphere</code>新环境和维护原有<code>KubeSphere</code>环境的过程中，频繁遇到<code>x509: certificate relies on legacy Common Name field, use SANs instead</code>，此问题会影响正常功能的使用，简要介绍其解决方案。</p>
-<h1 id="问题描述">问题描述</h1>
+<h2 id="问题描述">问题描述</h2>
 <p>本操作过程基于<a href="https://www.kubesphere.io/zh/docs/v3.3/installing-on-kubernetes/on-prem-kubernetes/install-ks-on-linux-airgapped/">KubeSphere离线安装</a>一文来操作的。</p>
 <ol>
 <li>
@@ -235,7 +235,7 @@ cp certs/domain.crt  /etc/docker/certs.d/dockerhub.kubekey.local/ca.crt</code>
 <p><img src="/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/docker-registry-cert-validate-failed.png" alt="由于证书问题导致本地仓库无法工作" title="由于证书问题导致本地仓库无法工作"></p>
 </li>
 </ol>
-<h1 id="分析与解决">分析与解决</h1>
+<h2 id="分析与解决">分析与解决</h2>
 <ol>
 <li>
 <p>在<a href="https://go.dev/doc/go1.15#commonname">https://go.dev/doc/go1.15#commonname</a>中找到如下一段说明</p>

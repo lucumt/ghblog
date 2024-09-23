@@ -180,7 +180,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录下近期在项目中遇到的多个<code>docker-compose.yml</code>文件容器启动时发生冲突的原因分析。</p>
-<h1 id="问题背景">问题背景</h1>
+<h2 id="问题背景">问题背景</h2>
 <p>出于多方面的考虑，公司的一些项目都逐渐的采用<a href="https://www.docker.com/"><strong>Docker</strong></a>作为部署环境，相对于互联网公司我们的<code>Docker</code>容器数据量没那么多，在容器管理工具的选型上我们采用的是<a href="https://docs.docker.com/compose/"><strong>Docker Compose</strong></a>而非常见的<a href="https://kubernetes.io/"><strong>Kubernetes</strong></a>。</p>
 <p><code>Docker Compose</code>需要我们将相关的<code>Docker</code>指令都写入到<code>yaml</code>文件中，相对于通过纯命令行操作<code>Docker</code>其在可维护性和可阅读性上都有很大的便利，故很快在部门内部推广使用了。</p>
 <p>在此过程中，有同事偶然遇到多个<code>docker-compose.yml</code>文件启动时会冲突的问题，一番分析后虽然最终解决该问题，但由于该问题在多个<code>docker-compose.yml</code>文件时容易产生，简单记录下已被不时之需。</p>
@@ -239,7 +239,7 @@ services:
 </li>
 </ol>
 <p>发生了什么？ 理论上不应该是采用不同的文件可分别正常启动么？！</p>
-<h1 id="原因分析">原因分析</h1>
+<h2 id="原因分析">原因分析</h2>
 <p>一开始自己以为是<code>docker-compose.yml</code>文件的问题，以为有语法问题，反复对这两个文件进行检查后并没有找出啥。</p>
 <p>同时<code>nginx_test_1.yml</code>和<code>nginx_test_2.yml</code>按照下述的指令操作，可正常启动：</p>
 
@@ -273,7 +273,7 @@ services:
      ports:
        - &#34;8081:80&#34;</code>
 </pre>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>在<code>Docker Compose</code>的官网找到关于<code>COMPOSE_PROJECT_NAME</code>的<a href="https://docs.docker.com/compose/environment-variables/envvars/#compose_project_name"><strong>说明</strong></a>如下</p>
 <p><img src="/blog_img/docker/multiple-docker-compose-conflict-analysis/compose_project_name_instruction.png" alt="COMPOSE_PROJECT_NAME配置说明" title="COMPOSE_PROJECT_NAME配置说明"></p>
 <p>上述说明前半部分说明了<code>Docker Compose</code>会将项目名和服务名组合作为容器名称供启动使用，基于该描述前述两个<code>yaml</code>文件理论上的容器名称都为<code>docker_test_nginx-1</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，故而导致启动时冲突。</p>

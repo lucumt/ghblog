@@ -180,9 +180,13 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#docker-compose安装">docker-compose安装</a></li>
-    <li><a href="#pinpoint安装与测试">Pinpoint安装与测试</a></li>
-    <li><a href="#将新系统接入pinpoint">将新系统接入Pinpoint</a></li>
+    <li>
+      <ul>
+        <li><a href="#docker-compose安装">docker-compose安装</a></li>
+        <li><a href="#pinpoint安装与测试">Pinpoint安装与测试</a></li>
+        <li><a href="#将新系统接入pinpoint">将新系统接入Pinpoint</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -192,7 +196,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录如何基于<code>docker-compose</code>的方式安装<code>Pinpoint</code>，以及基于<code>Dockerfile</code>与<code>Jenkins</code>流水线将项目添加到<code>Pinpoint</code>中进行实时监控。</p>
-<h1 id="docker-compose安装">docker-compose安装</h1>
+<h2 id="docker-compose安装">docker-compose安装</h2>
 <p>按照下述指令安装<code>docker-compose</code>:</p>
 
 <pre class="line-numbers language-bash ">
@@ -205,7 +209,7 @@ chmod &#43;x /usr/local/bin/docker-compose
 # 验证是否安装正确
 docker-compose version</code>
 </pre>
-<h1 id="pinpoint安装与测试">Pinpoint安装与测试</h1>
+<h2 id="pinpoint安装与测试">Pinpoint安装与测试</h2>
 <ol>
 <li>
 <p>在终端执行下述指令下载<code>Pinpoint</code>全家桶并解压该文件</p>
@@ -253,7 +257,7 @@ docker-compose down zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-a
 </pre>
 </li>
 </ol>
-<h1 id="将新系统接入pinpoint">将新系统接入Pinpoint</h1>
+<h2 id="将新系统接入pinpoint">将新系统接入Pinpoint</h2>
 <p>目前的接入方案是在通过<code>Jenkins</code>部署时，通过脚本的方式自动替换相关的文件，然后打包部署，流程图如下</p>
 <div class="mermaid">flowchart LR
     start_deploy((开始部署)) --> clone_code[下载代码]

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称" /><meta name="keywords" content="docker, 容器名称, socket" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称,包含基于环境变量的动态实现以及基于Socket通信的动态实现" /><meta name="keywords" content="docker, 容器名称, socket" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/docker/get-docker-name-inside-docker-container/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Docker容器内部获取当前容器实例的名称">
-  <meta property="og:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称">
+  <meta property="og:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称,包含基于环境变量的动态实现以及基于Socket通信的动态实现">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Docker">
 
   <meta itemprop="name" content="在Docker容器内部获取当前容器实例的名称">
-  <meta itemprop="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称">
+  <meta itemprop="description" content="简要说明如何实现在Docker容器内部获取当前容器的名称,包含基于环境变量的动态实现以及基于Socket通信的动态实现">
   <meta itemprop="datePublished" content="2021-05-06T13:16:52+08:00">
   <meta itemprop="dateModified" content="2021-05-06T13:16:52+08:00">
   <meta itemprop="wordCount" content="981">
   <meta itemprop="keywords" content="docker,容器名称,socket">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Docker容器内部获取当前容器实例的名称">
-  <meta name="twitter:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称">
+  <meta name="twitter:description" content="简要说明如何实现在Docker容器内部获取当前容器的名称,包含基于环境变量的动态实现以及基于Socket通信的动态实现">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,11 +180,11 @@
 	
     <div class="post-content image-border">
 	 <p>介绍如何在<code>Docker</code>容器内部获取当前容器名称的方法，特别感谢<a href="https://medium.com/disassembly/get-container-name-inside-the-docker-container-1997d36aaecd"><strong>Get container name inside the docker container</strong></a>。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>某个项目模块采用了分布式部署，对于某个工程模块部署了多个副本，生成了多个<code>Docker</code>容器，在查看系统日志时，需要能够显示出具体是哪个容器执行的。</p>
 <p>虽然采用<code>Docker</code>容器对应的64位或12位的字符串id也可唯一标识，但在阅读时不太直观，用容器名称会更直观。</p>
 <p>如果在容器外，可通过<code>docker inspect --format='{{.Name}}' 容器id</code>指令很容易的获取容器名称，而在容器内部可通过<code>echo $HOSTNAME</code>快速的获取容器id，但对于容器名称的获取却不是很方便。</p>
-<h1 id="通过环境变量">通过环境变量</h1>
+<h2 id="通过环境变量">通过环境变量</h2>
 <p>直接通过<code>-e</code>命令将容器名称传入，然后通过<code>$</code>获取容器名称。</p>
 
 <pre class="line-numbers language-bash ">
@@ -200,7 +200,7 @@ echo $containerName</code>
 </pre>
 <p><img src="/blog_img/docker/get-docker-name-inside-docker-container/get-specified-container-name-via-env.png" alt="通过环境变量获取指定的容器名" title="通过环境变量获取指定的容器名"></p>
 <p>此种方式实现起来比较简单，但最大的问题是容器名称需要提前设置好，不太灵活，当容器名称随机生成时，此种方式就彻底失效了。</p>
-<h1 id="通过socket通信">通过socket通信</h1>
+<h2 id="通过socket通信">通过socket通信</h2>
 
 <pre class="line-numbers language-bash ">
 <code># 容器名称随机生成
