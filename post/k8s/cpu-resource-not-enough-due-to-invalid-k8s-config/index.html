@@ -183,13 +183,13 @@
 	
     <div class="post-content image-border">
 	 <p>记录下自己在使用<a href="https://kubesphere.io/">KubeSphere</a>过程中由于<code>YAML</code>中错误的配置导致<code>Kubernetes</code>经常资源紧张而无法创建与部署新节点的问题。</p>
-<h1 id="问题描述">问题描述</h1>
+<h2 id="问题描述">问题描述</h2>
 <p>部门在使用<code>KubeSphere</code>过程中经常遇到类似如下图所示的由于<code>kubernetes</code>无法调度而导致的无法部署的问题</p>
 <p><img src="/blog_img/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/kubesphere-can-not-deploy-error.png" alt="kubesphere部署失败" title="kubesphere部署失败"></p>
 <p>进一步查看报错节点信息会发现提示CPU资源不足，从而导致无法部署。</p>
 <p><img src="/blog_img/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/kubesphere-insufficient-cpu.png" alt="内存不足导致k8s无法调度" title="内存不足导致k8s无法调度"></p>
 <p>之前自己采取的解决方案是暴力的删除一部分节点来释放CPU资源，但此种方式治标不治本，且随着<code>KubeSphere</code>在部门内部使用的普及，此问题发生的频率越来越高，只能想办法从根源上处理。</p>
-<h1 id="分析与解决">分析与解决</h1>
+<h2 id="分析与解决">分析与解决</h2>
 <p>由于提示的是CPU资源不足，首先检查是否为CPU的问题，采用<code>lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'</code>和<code>free -g</code>分别查看CPU和内存信息，结果如下</p>
 <p><img src="/blog_img/k8s/cpu-resource-not-enough-due-to-invalid-k8s-config/linux-server-cpu-mem-info.png" alt="服务器CPU和内存信息" title="服务器CPU和内存信息"></p>
 <p>从查询结果可知系统的CPU配置和内存配置都很高，而自己在<code>KubeSphere</code>中部署的都是一些普通的Java程序，不可能占用特别多的CPU和内存资源，Linux服务器本身的配置问题排除。</p>

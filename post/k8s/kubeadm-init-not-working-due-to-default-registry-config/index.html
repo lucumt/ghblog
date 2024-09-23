@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。
-" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="记录利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败的解决过程" /><meta name="keywords" content="kubernetes, linux, kubeadm init, registry.k8s.io" />
 
 
 
@@ -43,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/k8s/kubeadm-init-not-working-due-to-default-registry-config/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
-  <meta property="og:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
+  <meta property="og:description" content="记录利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败的解决过程">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +52,14 @@
     <meta property="article:tag" content="Linux">
 
   <meta itemprop="name" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
-  <meta itemprop="description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
+  <meta itemprop="description" content="记录利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败的解决过程">
   <meta itemprop="datePublished" content="2023-01-11T11:31:45+08:00">
   <meta itemprop="dateModified" content="2023-01-11T11:31:45+08:00">
   <meta itemprop="wordCount" content="1451">
-  <meta itemprop="keywords" content="Kubernetes,Linux">
+  <meta itemprop="keywords" content="kubernetes,linux,kubeadm init,registry.k8s.io">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败">
-  <meta name="twitter:description" content="工作中涉及到Kubernetes相关知识，自己之前一直没有系统性的学习Kubernetes，近期在腾讯云上想安装Kubernetes时一直遇到在执行kubeadm init时6443和10280端口无法访问导致操作失败进而无法顺利安装Kubernetes。一番排查后发现是由于从1.24.0之后Kubernetes默认采用containerd作为运行时容器，其默认镜像为registry.k8s.io，该镜像在国内无法访问导致的，简单记录下。">
+  <meta name="twitter:description" content="记录利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败的解决过程">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -181,23 +180,27 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#系统配置与依赖">系统配置与依赖</a>
+    <li>
       <ul>
-        <li><a href="#关闭防火墙">关闭防火墙</a></li>
-        <li><a href="#配置docker参数">配置docker参数</a></li>
-        <li><a href="#配置内核参数">配置内核参数</a></li>
-        <li><a href="#安装docker">安装docker</a></li>
-        <li><a href="#配置container">配置container</a></li>
+        <li><a href="#系统配置与依赖">系统配置与依赖</a>
+          <ul>
+            <li><a href="#关闭防火墙">关闭防火墙</a></li>
+            <li><a href="#配置docker参数">配置docker参数</a></li>
+            <li><a href="#配置内核参数">配置内核参数</a></li>
+            <li><a href="#安装docker">安装docker</a></li>
+            <li><a href="#配置container">配置container</a></li>
+          </ul>
+        </li>
+        <li><a href="#安装kubernetes">安装Kubernetes</a>
+          <ul>
+            <li><a href="#添加k8s源">添加k8s源</a></li>
+            <li><a href="#安装kubelet和kubeadm">安装kubelet和kubeadm</a></li>
+            <li><a href="#执行kubeadm-init">执行kubeadm init</a></li>
+          </ul>
+        </li>
+        <li><a href="#问题分析解决">问题分析&amp;解决</a></li>
       </ul>
     </li>
-    <li><a href="#安装kubernetes">安装Kubernetes</a>
-      <ul>
-        <li><a href="#添加k8s源">添加k8s源</a></li>
-        <li><a href="#安装kubelet和kubeadm">安装kubelet和kubeadm</a></li>
-        <li><a href="#执行kubeadm-init">执行kubeadm init</a></li>
-      </ul>
-    </li>
-    <li><a href="#问题分析解决">问题分析&amp;解决</a></li>
   </ul>
 </nav>
   </div>
@@ -208,8 +211,8 @@
     <div class="post-content image-border">
 	 <p>工作中涉及到<code>Kubernetes</code>相关知识，自己之前一直没有系统性的学习<code>Kubernetes</code>，近期在腾讯云上想安装<code>Kubernetes</code>时一直遇到在执行<code>kubeadm init</code>时<code>6443</code>和<code>10280</code>端口无法访问导致操作失败进而无法顺利安装<code>Kubernetes</code>。一番排查后发现是由于从<code>1.24.0</code>之后<code>Kubernetes</code>默认采用<code>containerd</code>作为运行时容器，其默认镜像为<code>registry.k8s.io</code>，该镜像在国内无法访问导致的，简单记录下。</p>
 <p>安装过程主要参考<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，相关配置与安装步骤如下：</p>
-<h1 id="系统配置与依赖">系统配置与依赖</h1>
-<h2 id="关闭防火墙">关闭防火墙</h2>
+<h2 id="系统配置与依赖">系统配置与依赖</h2>
+<h3 id="关闭防火墙">关闭防火墙</h3>
 
 <pre class="line-numbers language-bash ">
 <code># 关闭交换内存
@@ -225,7 +228,7 @@ firewall-cmd --state
 systemctl stop firewalld.service 
 systemctl disable firewalld.service </code>
 </pre>
-<h2 id="配置docker参数">配置docker参数</h2>
+<h3 id="配置docker参数">配置docker参数</h3>
 
 <pre class="line-numbers language-bash ">
 <code>mkdir /etc/docker/
@@ -240,7 +243,7 @@ vim /etc/docker/daemon.json
   &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;]
 }</code>
 </pre>
-<h2 id="配置内核参数">配置内核参数</h2>
+<h3 id="配置内核参数">配置内核参数</h3>
 
 <pre class="line-numbers language-bash ">
 <code>## 配置网卡转发,看值是否为1
@@ -257,7 +260,7 @@ EOF
 
 sysctl -p /etc/sysctl.d/k8s.conf</code>
 </pre>
-<h2 id="安装docker">安装docker</h2>
+<h3 id="安装docker">安装docker</h3>
 
 <pre class="line-numbers language-bash ">
 <code>#安装相关依赖
@@ -278,15 +281,15 @@ systemctl start docker
 #查看docker信息
 docker info</code>
 </pre>
-<h2 id="配置container">配置container</h2>
+<h3 id="配置container">配置container</h3>
 
 <pre class="line-numbers language-bash ">
 <code>containerd config default &gt; /etc/containerd/config.toml
 systemctl daemon-reload
 systemctl restart containerd</code>
 </pre>
-<h1 id="安装kubernetes">安装Kubernetes</h1>
-<h2 id="添加k8s源">添加k8s源</h2>
+<h2 id="安装kubernetes">安装Kubernetes</h2>
+<h3 id="添加k8s源">添加k8s源</h3>
 
 <pre class="line-numbers language-bash ">
 <code>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
@@ -299,7 +302,7 @@ repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF</code>
 </pre>
-<h2 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h2>
+<h3 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h3>
 <ol>
 <li>
 <p>执行下述指令，安装<code>kubelet kubeadm</code></p>
@@ -329,7 +332,7 @@ EOF</code>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubectl-version-output-1.png" alt="kubectl version输出结果不完善" title="kubectl version输出结果不完善"></p>
 </li>
 </ol>
-<h2 id="执行kubeadm-init">执行kubeadm init</h2>
+<h3 id="执行kubeadm-init">执行kubeadm init</h3>
 <ol>
 <li>
 <p>执行下述命令进行初始化</p>
@@ -347,7 +350,7 @@ EOF</code>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-failed-output-log.png" alt="kubeadm init创建失败" title="kubeadm init创建失败"></p>
 </li>
 </ol>
-<h1 id="问题分析解决">问题分析&amp;解决</h1>
+<h2 id="问题分析解决">问题分析&amp;解决</h2>
 <ol>
 <li>
 <p>由于原始的报错信息没有提供太多有用的信息，故通过下述命令来输出其完整的日志<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>

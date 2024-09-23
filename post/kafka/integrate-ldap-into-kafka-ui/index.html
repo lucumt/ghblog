@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="在基于Docker搭建的Kafka UI中整合LDAP" /><meta name="keywords" content="docker, kafka, ldap" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="在基于Docker搭建的Kafka UI中整合LDAP，供学习参考使用" /><meta name="keywords" content="docker, kafka, ldap" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/kafka/integrate-ldap-into-kafka-ui/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在基于Docker搭建的Kafka UI中整合LDAP">
-  <meta property="og:description" content="在基于Docker搭建的Kafka UI中整合LDAP">
+  <meta property="og:description" content="在基于Docker搭建的Kafka UI中整合LDAP，供学习参考使用">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Ldap">
 
   <meta itemprop="name" content="在基于Docker搭建的Kafka UI中整合LDAP">
-  <meta itemprop="description" content="在基于Docker搭建的Kafka UI中整合LDAP">
+  <meta itemprop="description" content="在基于Docker搭建的Kafka UI中整合LDAP，供学习参考使用">
   <meta itemprop="datePublished" content="2023-11-20T15:37:31+08:00">
   <meta itemprop="dateModified" content="2023-11-20T15:37:31+08:00">
   <meta itemprop="wordCount" content="485">
   <meta itemprop="keywords" content="docker,kafka,ldap">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在基于Docker搭建的Kafka UI中整合LDAP">
-  <meta name="twitter:description" content="在基于Docker搭建的Kafka UI中整合LDAP">
+  <meta name="twitter:description" content="在基于Docker搭建的Kafka UI中整合LDAP，供学习参考使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -184,7 +184,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录如何基于<code>docker</code>搭建<code>Kafka</code>服务器以及添加集成了<code>LDAP</code>的<code>kafka-ui</code>实现图形化界面的授权访问。</p>
-<h1 id="kafka安装">kafka安装</h1>
+<h2 id="kafka安装">kafka安装</h2>
 <p>基于<code>docker-compose</code>的方式安装，脚本如下</p>
 
 <pre class="line-numbers language-yaml ">
@@ -220,7 +220,7 @@ services:
     depends_on: 
       - zookeeper</code>
 </pre>
-<h1 id="kafka-ui的安装">kafka-ui的安装</h1>
+<h2 id="kafka-ui的安装">kafka-ui的安装</h2>
 <p>参考<a href="https://github.com/provectus/kafka-ui"><strong>kafka-ui</strong></a>的说明，基于<code>docker-compose</code>的方式安装，脚本如下</p>
 
 <pre class="line-numbers language-yaml ">
@@ -241,8 +241,8 @@ services:
 <p>之后可通过<code>http://SERVER_IP:9001</code>访问，界面类似如下，</p>
 <p><img src="/blog_img/kafka/integrate-ldap-into-kafka-ui/kafka-ui-without-auth.png" alt="Kafka UI没有添加认证" title="Kafka UI没有添加认证"></p>
 <p>此时同网络下的任何人都能访问，也能通过UI界面对其进行相关修改操作，缺乏权限控制。</p>
-<h1 id="添加登录">添加登录</h1>
-<h2 id="普通登录">普通登录</h2>
+<h2 id="添加登录">添加登录</h2>
+<h3 id="普通登录">普通登录</h3>
 <p>普通登录方式的配置脚本如下，此时其账户信息以硬编码的形式存在</p>
 
 <pre class="line-numbers language-yaml ">
@@ -265,7 +265,7 @@ services:
 </pre>
 <p>对应的登录界面如下:</p>
 <p><img src="/blog_img/kafka/integrate-ldap-into-kafka-ui/kafka-ui-login-panel.png" alt="Kafka UI登录认证" title="Kafka UI登录认证"></p>
-<h2 id="ldap登录">LDAP登录</h2>
+<h3 id="ldap登录">LDAP登录</h3>
 <p><code>LDAP</code>登录方式的配置脚本如下，其登录界面与前述一样</p>
 
 <pre class="line-numbers language-yaml ">
@@ -290,7 +290,7 @@ services:
       - SPRING_LDAP_USER_FILTER_SEARCH_BASE=&#34;dc=xxx,dc=com&#34;
       - SPRING_LDAP_USER_FILTER_SEARCH_FILTER=&#34;(&amp;(uid={0})(objectClass=inetOrgPerson))&#34;</code>
 </pre>
-<h1 id="问题">问题</h1>
+<h2 id="问题">问题</h2>
 <ol>
 <li>缺少退出登录功能</li>
 <li>缺少中文汉化界面</li>

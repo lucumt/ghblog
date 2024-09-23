@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何实现Kafka每次都消费最新的数据" /><meta name="keywords" content="kafka, 最新数据" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何以多种方式实现Kafka每次都消费最新的数据" /><meta name="keywords" content="kafka, 最新数据" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/kafka/consume-latest-message-each-time/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="Kafka每次都消费最新的数据">
-  <meta property="og:description" content="简要介绍如何实现Kafka每次都消费最新的数据">
+  <meta property="og:description" content="简要介绍如何以多种方式实现Kafka每次都消费最新的数据">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Kafka">
 
   <meta itemprop="name" content="Kafka每次都消费最新的数据">
-  <meta itemprop="description" content="简要介绍如何实现Kafka每次都消费最新的数据">
+  <meta itemprop="description" content="简要介绍如何以多种方式实现Kafka每次都消费最新的数据">
   <meta itemprop="datePublished" content="2023-11-16T15:42:25+08:00">
   <meta itemprop="dateModified" content="2023-11-16T15:42:25+08:00">
   <meta itemprop="wordCount" content="552">
   <meta itemprop="keywords" content="kafka,最新数据">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Kafka每次都消费最新的数据">
-  <meta name="twitter:description" content="简要介绍如何实现Kafka每次都消费最新的数据">
+  <meta name="twitter:description" content="简要介绍如何以多种方式实现Kafka每次都消费最新的数据">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,7 +180,7 @@
 	
     <div class="post-content image-border">
 	 <p>近期项目中有一个数据展示功能，其数据来源于<a href="https://kafka.apache.org/"><strong>Kafka</strong></a>，项目要求<code>Kafka</code>每次都消费最新的数据，简要记录下其实现方案。</p>
-<h1 id="固定组实现-不生效">固定组实现-不生效</h1>
+<h2 id="固定组实现-不生效">固定组实现-不生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>同时采用固定group，<strong>此种方式只在第一次读取时有效，后续再次读取时仍然从上次读取的地方开始继续读</strong>，不满足使用要求。</p>
 
 <pre class="line-numbers language-java ">
@@ -199,7 +199,7 @@ KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
 String topic = &#34;raw_message&#34;;
 consumer.subscribe(Arrays.asList(topic));</code>
 </pre>
-<h1 id="动态组实现-生效">动态组实现-生效</h1>
+<h2 id="动态组实现-生效">动态组实现-生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>，同时每次消费时将group的名称动态生成，这样即可确保每次读取的都是最新的消息。</p>
 <p>其缺点是group的数量会不断增加，偏移量___consumer_offsets 多次保存，且没找到有效的删除group的方法，也没办法做到定期清理，会对性能产生影响，通常只作为测试与实现使用。</p>
 
@@ -219,7 +219,7 @@ KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
 String topic = &#34;raw_message&#34;;
 consumer.subscribe(Arrays.asList(topic));</code>
 </pre>
-<h1 id="固定组实现-生效">固定组实现-生效</h1>
+<h2 id="固定组实现-生效">固定组实现-生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>的同时，group名称固定不变 ，给对应Consumer调用<a href="https://kafka.apache.org/0100/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#seekToEnd(java.util.Collection)"><strong>seekToEnd()</strong></a>方法，此种方式不需要动态切换组，推荐使用此方式。</p>
 
 <pre class="line-numbers language-java ">
