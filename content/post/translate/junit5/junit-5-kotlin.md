@@ -4,7 +4,7 @@ date: 2023-06-21T19:21:43+08:00
 lastmod: 2023-06-21T19:21:43+08:00
 draft: false
 keywords: ["junit5"]
-description: "JUnit5 整合Kotlin"
+description: "JUnit5翻译专题，主要是如何在JUnit5中整合Kotlin"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,11 +59,11 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 相关视频
+## 相关视频
 
 如果你喜欢通过视频学习，可以查看`Youtube`中相关的[**学习视频**](https://www.youtube.com/watch?v=94KTm9b00VM)。
 
-# 配置
+## 配置
 
 我们使用`Groovy DSL`将传统的`Gradle`构建脚本编写为`build.gradle`文件。`Gradle Kotlin DSL`对多项改进提供了替代语法，如内容辅助和重构，通过`Kotlin DSL`编写的构建脚本被命名为`build.gradle.kts`。要在`Kotlin`中编写`JUnit 5`测试，首先需要在`build.gradle.kts`中添加`junit-jupiter`坐标并且告知其在测试中使用`JUnit`平台。
 
@@ -77,7 +77,7 @@ tasks.withType<Test> {
 }
 ```
 
-# 基本功能
+## 基本功能
 
 `JUnit 5`中的大部分功能在`Kotlin`中都能像在`Java`中一样正常工作，一切都是开箱即用的。
 
@@ -94,7 +94,7 @@ fun `1 + 2 = 3`() {
 
 利用反引号让代码和测试结果更具有可读性，通常我们不应该使用这样的方法名称吗，但它对此需求实现很方便。
 
-# 惰性评估
+## 惰性评估
 
 `JUnit 5`通过lambda对错误消息提供了惰性评估，利用lambda可避免构建不必要的昂贵错误消息。
 
@@ -111,7 +111,7 @@ fun `1 + 2 = 3`() {
 
 相对于`Java`，此种实现方式让在`Kotlin`中编写断言时的语法更简洁。
 
-# 断言
+## 断言
 
 `JUnit 5`中的任何断言都能在`Kotlin`中正常工作，然而有几种`Kotlin`特定的断言方法更适合该语言，这些断言方法是`org.junit.jupiter.api`包中的顶级函数。
 
@@ -143,7 +143,7 @@ fun `Square of a number should equal the number multiplied by itself`() {
 
 相比较`Java`，此种方式不太冗长同时更具有可读性。
 
-# 参数化测试
+## 参数化测试
 
 在`JUnit 5`中有多种方式编写参数化测试，它们中的大部分可在`Kotlin`中无需修改直接运行。
 
@@ -182,7 +182,7 @@ org.junit.platform.commons.JUnitException: Could not find method [squares] in cl
 
 {{% /admonition %}}
 
-# 动态测试
+## 动态测试
 
 `JUnit 5`引入了一种新的编程模型，允许我们通过`@TestFactory`注解注释的工厂方法在运行时生成动态测试。
 
@@ -222,7 +222,7 @@ fun `Square of a number`() = listOf(
 
 此种方式除了语法略有不同，与我们在参数化测试种的实现很相似。
 
-# 嵌套测试
+## 嵌套测试
 
 `JUnit 5`中的嵌套测试允许我们给测试定义层级结构，同`Java`中类似，我们或许希望下述代码能正常运行：
 
@@ -272,7 +272,7 @@ class NestedTest {
 
 {{% /admonition %}}
 
-# 静态方法和属性
+## 静态方法和属性
 
 我们已经简要介绍了静态方法和`Kotlin`，要让`Kotlin`中的方法看起来像一个`Java`静态方法，我们需要创建一个伴生对象并给对应方法上添加`@JvmStatic`注解。
 
@@ -317,7 +317,7 @@ class RegisterStaticExtensionTest {
 
 添加上该注解后会暴露该`Kotlin`属性作为一个`Java`属性并且`JUnit 5`能够发现它。
 
-# 生命周期方法
+## 生命周期方法
 
 `JUnit 5`中的生命周期方法同样能在`Kotlin`中运行。
 
@@ -358,7 +358,7 @@ class LifecycleTest {
 
 {{% /admonition %}}
 
-# 可重复注解
+## 可重复注解
 
 当前`Kotlin`并不支持重复注解，因此使用多个扩展或标签进行测试比 Java 稍微复杂一些。
 
@@ -390,7 +390,7 @@ class RepeatableAnnotationTest
 class RepeatableAnnotationTest
 ```
 
-# 总结
+## 总结
 
 尽管在某些场景下有些语法与`Java`中的不同，大部分`JUnit 5`的功能特性能在`Kotlin`中完美运行，然而，由于`Kotlin`语言的工作方式，我们通常可以使代码更具可读性。
 

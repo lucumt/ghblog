@@ -4,7 +4,7 @@ date: 2023-06-16T19:21:43+08:00
 lastmod: 2023-06-16T19:21:43+08:00
 draft: false
 keywords: ["junit5"]
-description: "翻译关于JUnit5生命周期的博文"
+description: "JUnit5翻译专题，主要是关于JUnit5生命周期的博文"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,7 +59,7 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 生命周期相关方法
+## 生命周期相关方法
 
 一个生命周期方法是指任何添加了`@BeforeAll`、`@AfterAll`、`@BeforeEach`或`@AfterEach`注解的方法，生命周期方法在实际测试方法之前或之后执行。
 
@@ -69,7 +69,7 @@ highchartsDiagrams:
 
 如果测试类中有10个测试方法，`@BeforeEach` 和`@AfterEach`会执行10次，而`@BeforeAll`和`@AfterAll`只执行一次。 
 
-# 测试生命周期
+## 测试生命周期
 
 默认情况下，`JUnit`在执行测试中的每个测试方法之前都会创建一个新的实例，这有助于我们单独运行各个测试方法并避免意外的副作用。
 
@@ -138,7 +138,7 @@ After the entire test fixture
 
 观察上述输出，可发现`JUnit`会为每个测试方法构造一个测试类，生命周期相关的fixture方法只执行一次，测试相关的生命周期方法会被执行多次。
 
-## 按类实例测试
+### 按类实例测试
 
 也可以让`JUnit`在同一个测试实例中执行所有的测试方法，如果将测试类使用`@TestInstance(Lifecycle.PER_CLASS)`注解，`JUnit`将为每个测试类创建一个测试实例。
 
@@ -191,7 +191,7 @@ Constructor
 
 {{% /admonition %}}
 
-## 更具体的例子
+### 更具体的例子
 
 现在我们知道了生命周期方法如何工作的，进一步探索如何在实践中使用它们是有益的。通常如果有一些计算成本较高的东西，可以在多个测试方法中进行共享。
 
@@ -235,7 +235,7 @@ public class ExpensiveResourceTest {
 }
 ```
 
-# 嵌套测试生命周期
+## 嵌套测试生命周期
 
 生命周期方法同样可以用于嵌套测试，但在默认情况下`@BeforeAll` 和`@AfterAll`注解不会工作，这是由于嵌套类是内部类，而`Java`内部类中不支持静态方法。
 
@@ -315,7 +315,7 @@ After each happy path
 
 {{% /admonition %}}
 
-# 扩展生命周期
+## 扩展生命周期
 
 在使用扩展时，`JUnit`除了调用测试类的生命周期方法之外，还调用对应扩展的生命周期回调方法。
 
@@ -388,7 +388,7 @@ After each from ExtensionOne
 
 {{% /admonition %}}
 
-# 总结
+## 总结
 
 要在每次测试之前和之后执行一段代码，可使用`JUnit5`中的`@BeforeEach`和`@AfterEach`注解，类似的，若要对测试实例中的所有测试执行一次代码，可使用`@BeforeAll`和`@AfterAll`注解。
 

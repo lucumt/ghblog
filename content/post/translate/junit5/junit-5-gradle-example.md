@@ -4,7 +4,7 @@ date: 2023-06-27T14:21:43+08:00
 lastmod: 2023-06-27T14:21:43+08:00
 draft: false
 keywords: ["junit5","gradle"]
-description: "JUnit5 Gradle示例 - 基于Gradle运行测试"
+description: "JUnit5翻译专题，主要是JUnit5 Gradle示例，基于Gradle运行测试"
 tags: ["junit5","junit","java","gradle"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,7 +59,7 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 相关依赖
+## 相关依赖
 
 若要能够编写`JUnit 5`测试需要在`build.gradle`中添加junit-jupiter作为依赖项：
 
@@ -79,7 +79,7 @@ test {
 
 至此我们已经有了使用`Gradle`编写和运行`JUnit 5`测试的最基本配置。
 
-# 旧版本配置
+## 旧版本配置
 
 从`JUnit Jupiter 5.4.0`开始有一个聚合器组件`junit-jupiter`它可以传递对`junit-jupiter-api`、`junit-jupiter-params`和`junit-jupiter-engine`的依赖以简化依赖关系管理,这意味着我们不需要额外的依赖项就能够编写参数化测试。
 
@@ -109,7 +109,7 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 
 至此我们已经有了使用旧版本的`Gradle`运行`JUnit 5`测试的基本配置。
 
-# 运行测试
+## 运行测试
 
 `JUnit Gradle`插件默认情况下在`src/test/java`目录下查找测试用例。
 
@@ -140,7 +140,7 @@ BUILD SUCCESSFUL in 2s
 
 好了，` JUnit Gradle`插件现在可正常运行我们的测试。
 
-# 总结
+## 总结
 
 在这个`JUnit 5 Gradle`教程中，我们学习了如何添加编写`JUnit 5`测试所需的依赖项以及如何配置`JUnit Gradle`插件以便能够运行测试。
 

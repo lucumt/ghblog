@@ -4,7 +4,7 @@ date: 2023-05-01T09:51:22+08:00
 lastmod: 2023-05-01T09:51:22+08:00
 draft: false
 keywords: ["junit5"]
-description: "简要介绍如何开始编写基于JUnit5的测试程序"
+description: "JUnit5翻译专题，简要介绍如何开始编写基于JUnit5的测试程序"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -61,9 +61,7 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-
-
-# 设置
+## 设置
 
 附带的源码示例已经包含基于`Maven`和`Gradle`的配置，但为了方便起见，同时也提供了分步教程指南。
 
@@ -74,7 +72,7 @@ highchartsDiagrams:
 
 {{% /admonition %}}
 
-# 编写第一个测试
+## 编写第一个测试
 
 当我们测试某段代码时，我们希望确保其能够按照预期来运行。在编写自动化测试时基于下述步骤：
 
@@ -127,13 +125,13 @@ class CalculatorTest {
 
 为了能够执行测试，我们需要给测试方法加上`@Test`注解，通过这种方式测试执行器能将该方法识别为一个测试方法。
 
-# 运行测试
+## 运行测试
 
 我们可以有多种方式运行测试代码，当使用IDE工具时可以从IDE工具中直接运行，我们也可以使用像`Maven`或`Gradle`这样的构建工具在命令行中执行测试。
 
 当软件(代码)按照预期执行时，测试结果为`pass`,当出现预期之外的结果时，测试结果为`failed`。
 
-## 在 Intellij IDEA中运行
+### 在 Intellij IDEA中运行
 
 在使用类似Intellij IDEA这类IDE工具时，我们可以直接右键点击测试类并且选择运行`CalculatorTest`，或者我们可以使用快捷键`Ctrl+Shift+F10`(Windows系统)和`Ctrl+Shift+R`(Mac系统)来运行测试。
 
@@ -143,7 +141,7 @@ class CalculatorTest {
 
 ![Run Test In Intellij IDEA](/blog_img/translate/junit5/junit-5-getting-started/junit-5-test-result-in-intellij-idea.webp "Run Test In Intellij IDEA") 
 
-## 在Maven中运行
+### 在Maven中运行
 
 若要使用`Maven`从命令行运行测试，可执行下述命令：
 
@@ -171,7 +169,7 @@ mvn test
 
 
 
-## 在Gradle中运行
+### 在Gradle中运行
 
 若要使用`Gradle`从命令行运行测试，可执行下述命令：
 
@@ -187,6 +185,6 @@ com.arhohuttunen.CalculatorTest > addNumbers() PASSED
 BUILD SUCCESSFUL in 0s
 ```
 
-# 总结
+## 总结
 
 在这个`JUnit 5`入门示例中，我们学习了如何编写和运行简单的`JUnit 5`测试，本文的示例代码能在[**GitHub**](https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-starter)中找到。

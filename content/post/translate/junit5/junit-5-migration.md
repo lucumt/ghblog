@@ -4,7 +4,7 @@ date: 2023-06-21T22:21:43+08:00
 lastmod: 2023-06-21T22:21:43+08:00
 draft: false
 keywords: ["junit5"]
-description: "从JUnit 4 迁移到JUnit 5的简要说明"
+description: "JUnit5翻译专题，主要是从JUnit 4 迁移到JUnit 5的简要说明"
 tags: ["junit5","java","mockito","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,7 +59,7 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 概览
+## 概览
 
 `JUnit 5`不同于之前的版本，它采用模块化设计，这种新架构的关键点是将编写测试、扩展和工具之间的关注点分开。
 
@@ -79,7 +79,7 @@ highchartsDiagrams:
 
 `JUnit 5`给参数化测试提供了更好的支持，在对嵌套测试提供原生支持的同时也增加了一些新功能。
 
-# 关键迁移步骤
+## 关键迁移步骤
 
 `JUnit`在`JUnit Vintage`测试引擎的帮助下提供了渐进的迁移路径，我们可使用`JUnit Vintage`测试引擎在`JUnit 5`中运行`JUnit 4`相关的测试。
 
@@ -98,7 +98,7 @@ highchartsDiagrams:
 
 接下来我们将更深入地研究每个步骤。
 
-# 依赖
+## 依赖
 
 先看看需要做什么才能在新平台上运行现有测试，为了同时运行`JUnit 4`和`JUnit 5`测试，需要如下操作：
 
@@ -143,7 +143,7 @@ dependencies {
 }
 ```
 
-# 注解
+## 注解
 
 注解位于`org.junit.jupiter.api`包中而不是`org.junit`。
 
@@ -163,7 +163,7 @@ dependencies {
 
 但是，`@Test`注解不再具有`expected`和`timeout`属性。
 
-## 异常
+### 异常
 
 我们无法在`@Test`注解中使用`expected`属性。
 
@@ -187,7 +187,7 @@ class JUnit5ExceptionTest {
 }
 ```
 
-## 超时
+### 超时
 
 同样也无法在`@Test`注解中使用`timeout`属性。
 
@@ -209,7 +209,7 @@ class JUnit5TimeoutTest {
 }
 ```
 
-# 测试类和方法
+## 测试类和方法
 
 如前所述，断言和假设被移动到新的类中，同样的，方法参数的顺序在某些场景下所有不同。
 
@@ -231,7 +231,7 @@ class JUnit5TimeoutTest {
 
 接下来我们详细看看测试类和测试方法中的变化。
 
-## 断言
+### 断言
 
 断言方法位于`org.junit.jupiter.api.Assertions`类中，而不是`org.junit.Assert`类中。
 
@@ -281,7 +281,7 @@ class JUnit5HamcrestTest {
 }
 ```
 
-## 假设
+### 假设
 
 假设方法位于`org.junit.jupiter.Assumptions`类中，而不是`org.junit.Assume`类中。
 
@@ -307,7 +307,7 @@ class JUnit5AssumptionTest {
 
 同样需要注意的是，现在不再有`Assume.assumeNotNUll()`和`Assume.assumeNoException()` 。
 
-# 分类
+## 分类
 
 `JUnit 4`中的`@Category`注解在`JUnit 5`中被`@Tag`注解替换，此外我们不再使用标记接口，而是向注解传递字符串参数。
 
@@ -375,11 +375,11 @@ test {
 }
 ```
 
-# Runners
+## Runners
 
 `JUnit 4`中的`@RunWith`注解在`JUnit 5`中不存在，可通过使用`org.junit.jupiter.api.extension`包和`@ExtendWith`注解中的新扩展模型实现相似的功能。
 
-## Spring Runner
+### Spring Runner
 
 `JUnit 4`中使用的一个流行的runner是Spring test runner，在`JUnit 5`中需要将其替换为一个`Spring`扩展。
 
@@ -434,7 +434,7 @@ dependencies {
 }
 ```
 
-## Mockito Runner
+### Mockito Runner
 
 `JUnit 4`中另一个流行的runner是Mockito runner，在使用`JUnit 5`时需要将其替换为`JUnit 5`中的`Mockito`扩展。
 
@@ -493,7 +493,7 @@ class JUnit5MockitoTest {
 }
 ```
 
-# 规则
+## 规则
 
 `JUnit 4`中的`@Rule`和`@ClassRule`注解在`JUnit 5`中不存在，可通过使用`org.junit.jupiter.api.extension`包和`@ExtendWith`注解中的新扩展模型实现相似的功能。
 
@@ -525,7 +525,7 @@ dependencies {
 }
 ```
 
-## 预期异常
+### 预期异常
 
 在`JUnit 4`中使用`@Test(expected = SomeException.class)`注解不允许我们检查异常的详细信息，若需要检查，则要使用`ExpectedException`规则。
 
@@ -550,7 +550,7 @@ class JUnit5ExpectedExceptionTest {
 
 由于我们将所有内容都集中在一起，结果更具有可读性。
 
-## 临时目录
+### 临时目录
 
 在`JUnit 4`中可通过使用`TemporaryFolder`规则来创建和清除一个临时目录，同样的，`JUnit 5`迁移支持允许我们添加`@EnableRuleMigrationSupport`来继续使用该功能。
 
@@ -595,7 +595,7 @@ public void shouldCreateNewFile(@TempDir Path anotherDirectory) {
 }
 ```
 
-## 自定义规则
+### 自定义规则
 
 迁移`JUnit 4`中的规则时需要将其重写为`JUnit 5`中的扩展。
 
@@ -649,7 +649,7 @@ public class PerformanceLoggerExtension
 }
 ```
 
-## 自定义类规则
+### 自定义类规则
 
 类似的，可通过实现`BeforeEachCallback`和`AfterEachCallback`接口来重现引用了`@ClassRule`注解的业务逻辑。
 
@@ -713,7 +713,7 @@ class JUnit5ServerTest {
 }
 ```
 
-# 参数化测试
+## 参数化测试
 
 在`JUnit 4`中编写参数化测试时需要使用`Parameterized` runner，此外，我们需要通过一个添加了`@Parameterized.Parameters`注解的方法来传递参数化数据：
 
@@ -773,7 +773,7 @@ class JUnit5ParameterizedTest {
 
 {{% /admonition %}}
 
-# 总结
+## 总结
 
 从`JUnit 4`迁移到`JUnit 5`需要一些工作，具体取决于现有测试的编写方式。
 

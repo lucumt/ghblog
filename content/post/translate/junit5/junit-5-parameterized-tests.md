@@ -4,7 +4,7 @@ date: 2023-06-17T9:21:43+08:00
 lastmod: 2023-06-17T9:21:43+08:00
 draft: false
 keywords: ["junit5"]
-description: "翻译关于JUnit5参数化测试实用指南"
+description: "JUnit5翻译专题，主要是关于JUnit5参数化测试实用指南"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,17 +59,17 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 相关视频
+## 相关视频
 
 如果你喜欢通过视频学习，可以查看`Youtube`中相关的[**学习视频**](https://www.youtube.com/watch?v=0xSCbTYAiF0)。
 
-# 概览
+## 概览
 
 参数化测试使得可以使用不同的参数多次运行同一个测试方法，通过这种方式我们可以快速的验证不同的场景而无需为它们分别编写测试代码。
 
 可以像编写常规`JUnit 5`测试一样编写`JUnit 5`参数化测试代码，但必须使用`@ParameterizedTest`注释，同时必须为相关测试声明参数源，可通过不同类型的参数来源注解来声明参数源。
 
-# 单参数与@ValueSource
+## 单参数与@ValueSource
 
 最简单的参数源为`@ValueSource`，它使得我们可创建一个包含原始类型(如何`short`、`byte`、`int`、`long`、`float`、`double`、`char`、`boolean`、`String`或`Class`)的数组来使用。
 
@@ -120,7 +120,7 @@ void postRequestWithDifferentProtocols(Protocol protocol) {
 
 执行上述测试后，可发现测试方法基于`Protocol`中的每个枚举值分别执行了一次。
 
-# 空值与@NullSource
+## 空值与@NullSource
 
 `@ValueSource`注解不接收null值。
 
@@ -140,7 +140,7 @@ void nullEmptyAndBlankStrings(String text) {
 
 也可以使用`@NullAndEmptySource`将两者结合起来。
 
-# 多参数与@MethodSource
+## 多参数与@MethodSource
 
 `@ValueSource`和`@EnumSource`注解只有在测试方法只有一个参数时生效，不过我们经常需要使用多个参数。
 
@@ -184,7 +184,7 @@ private static Stream<Arguments> monthNames() {
 }
 ```
 
-# 共享参数与@ArgumentSource
+## 共享参数与@ArgumentSource
 
 也可通过`@MethodSource`注解来引用其它类中的方法，需要使用方法的全限定名来实现。
 
@@ -231,7 +231,7 @@ void externalPalindromeMethodSource(String string) {
 }
 ```
 
-# 多参数与@CsvSource
+## 多参数与@CsvSource
 
 `@CsvSource`注解允许我们使用以逗号分隔的字符串参数，基于该注解能够以相当紧凑的方式给测试方法提供多个参数。
 
@@ -264,7 +264,7 @@ void readTasks(String title, Status status, LocalDate date) {
 }
 ```
 
-## 空CSV参数
+### 空CSV参数
 
 如果`@CsvSource`中有empty值，`JUnit 5`会将其作为`null`值。
 
@@ -296,7 +296,7 @@ void customNullArgument(String title, Status status, LocalDate date) {
 }
 ```
 
-## 将字符串转换为其它类型
+### 将字符串转换为其它类型
 
 为了更好的支持类似`@CsvSource`等注解，`JUnit 5`对原始参数类型、枚举，`java.time`包中的日期和时间类型进行自动转换。
 
@@ -340,7 +340,7 @@ public class Person {
 }
 ```
 
-## 自定义类型转换
+### 自定义类型转换
 
 若要编写自定义参数转换器，则需要实现`ArgumentConverter`接口，之后则可在任何需要自定义转换的参数上使用`@ConvertWith`注解。
 
@@ -401,7 +401,7 @@ void convertWithCustomHexConverter(int decimal, @HexValue int hex) {
 }
 ```
 
-## 将多参数转化为对象
+### 将多参数转化为对象
 
 默认情况下，提供参数化测试的参数对应于单个方法参数，可以使用`ArgumentsAccessor`将这些参数聚合到单个测试方法参数中。
 
@@ -448,7 +448,7 @@ void aggregateArgumentsWithAnnotation(@CsvToTask Task task) {
 
 现在可以在任何需要的地方使用该聚合器注解。
 
-# 自定义测试参数名称
+## 自定义测试参数名称
 
 默认情况下，`JUnit 5`参数化测试的显示名称包括所有参数的调用索引和字符串表示形式，然而，我们可以通过`@ParameterizedTest`注解中的name属性来展示自定义的名称。
 
@@ -481,7 +481,7 @@ monthNames(int, String)
 └─ 3 => number=12, month=December
 ```
 
-# 总结
+## 总结
 
 `JUnit 5`参数化测试允许我们消除重复的测试代码，它使得通过使用不同的参数来多次执行同一个测试方法成为可能。
 

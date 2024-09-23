@@ -4,7 +4,7 @@ date: 2023-06-19T19:21:43+08:00
 lastmod: 2023-06-18T19:21:43+08:00
 draft: false
 keywords: ["junit5"]
-description: "在JUnit 5中使用Mockito"
+description: "JUnit5翻译专题，主要是关于如何在JUnit 5中使用Mockito"
 tags: ["junit5","java","mockito","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -59,11 +59,11 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 相关视频
+## 相关视频
 
 如果你喜欢通过视频学习，可以查看`Youtube`中相关的[**学习视频**](https://www.youtube.com/watch?v=p7_cTAF39A8)。
 
-# 手工初始化
+## 手工初始化
 
 在做其它事情之前，需要添加`Mockito`相关的依赖：
 
@@ -110,7 +110,7 @@ class MockitoManualTest {
 *  代码会变得很冗长
 * 无法检测框架的使用情况以及检测不正常的打桩
 
-# 基于注解初始化
+## 基于注解初始化
 
 `Mockito.mock()`的一种声明式替代方案为给要mock的对象上添加`@Mock`注解，同时需要调用一个特殊方法来初始化被注解的对象。
 
@@ -158,7 +158,7 @@ public class MockitoAnnotationTest {
 
 * 无法检测框架的使用情况以及检测不正常的打桩
 
-# Mock自动注入
+## Mock自动注入
 
 同样可以通过给对应属性添加`@InjectMocks`注解来自动注入mock对象。
 
@@ -216,7 +216,7 @@ public class MockitoInjectMocksTests {
 
 {{% /admonition %}}
 
-# JUnit5 Mockito扩展
+## JUnit5 Mockito扩展
 
 `JUnit 5`中同样有一个`Mockito`扩展让实例化更简单。
 
@@ -308,7 +308,7 @@ void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
 
 * 需要一个额外的依赖`org.mockito:mockito-junit-jupiter`
 
-# 总结
+## 总结
 
 在`JUnit 5`中有3种不同的方式使用`Mockito`，前2种方式可独立于框架单独使用，而第3种方式需使用`JUnit 5`中的`Mockito`扩展。
 

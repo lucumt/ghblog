@@ -4,7 +4,7 @@ date: 2023-05-02T13:12:24+08:00
 lastmod: 2023-05-02T13:12:24+08:00
 draft: false
 keywords: ["junit5"]
-description: "翻译关于JUnit 5中关联测试的实现与使用"
+description: "JUnit5翻译专题，主要是翻译关于JUnit 5中关联测试的实现与使用"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 
@@ -61,7 +61,7 @@ highchartsDiagrams:
 
 如果你喜欢通过视频学习，可以查看`Youtube`中相关的[**学习视频**](https://www.youtube.com/watch?v=TsCew_Oq6uE)
 
-# 无嵌套测试
+## 无嵌套测试
 
 为了给嵌套测试奠定基础，首先看一个没有嵌套的例子，为了简洁起见省略了测试内容，完整的内容在`GitHub`中。
 
@@ -111,7 +111,7 @@ MoneyTest > monies with different currencies are not equal PASSED
 
 此处没有太多的测试方法，所以仍然具有较好的可读性，然而，我们已经能够看出关联的测试方法在输出结果中没有分组在一起。
 
-# 添加嵌套类
+## 添加嵌套类
 
 `JUnit 5`中的嵌套测试为我们提供了一种构建层级结构的实现，可基于逻辑结构组织测试，组织起来的嵌套结构能让我们更好的表述测试方法间的关系。
 
@@ -177,7 +177,7 @@ MoneyTest > equality is based on values > monies with same amounts are equal PAS
 
 该报告看起来已经要好一些，每个嵌套类都可被展开或折叠，可只关注于想要的结果。
 
-# 添加二级嵌套
+## 添加二级嵌套
 
 来看一个更复杂的示例，我们正在测试一个REST controller，我们正在测试用于创建、读取和删除产品的`HTTP` `POST`、`GET`和`DELETE`方法，我们会检查验证各种内容，如请求正文字段和`HTTP`响应状态码。
 
@@ -348,11 +348,11 @@ ProductControllerTest > Creating a product > when fields are missing > do not cr
 
 输出结果受益于嵌套，相关联的结果更容易被找到，如果我们设法创建一个经过深思熟虑的结构，它就像导航结果的面包屑一样便于使用。
 
-# 避免陷阱
+## 避免陷阱
 
 如果使用得当，`JUnit 5`嵌套测试可以成为一个强有力的工具，但是同其它的工具一样，使用嵌套测试也会伴随着一些陷阱。
 
-## 忽略代码异味
+### 忽略代码异味
 
 当我们有编写嵌套测试的冲动时，我们应该问下自己为什么要这样做，如果测试类变得越来越大并且需要进行组织，或许意味着测试类正在做太多的事情。
 
@@ -367,7 +367,7 @@ ProductControllerTest > Creating a product > when fields are missing > do not cr
 
 相对于添加更多的结构来测试，我们应该考虑是否有必要进行重构，添加层级结构也会增加测试的复杂性，应该尽可能的避免添加复杂性。
 
-## 试图消除重复
+### 试图消除重复
 
 许多教程建议我们通过在`@BeforeEach`方法中构造共享对象并将它们定义为类成员变量来消除重复，这个建议的初衷是好的，但在测试代码中消除重复有更多的讲究。
 
@@ -483,7 +483,7 @@ class WhenProductIsFound {
 
 {{% /admonition %}}
 
-# 总结
+## 总结
 
 我们可通过嵌套测试来添加层级结构，可通过创建具有`@Nested`注解的内部类来创建嵌套测试。
 

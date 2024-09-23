@@ -4,7 +4,7 @@ date: 2023-05-01T13:37:22+08:00
 lastmod: 2023-05-01T13:37:22+08:00
 draft: false
 keywords: ["junit5","assert"]
-description: "翻译关于JUnit 5中断言方法的使用"
+description: "JUnit5翻译专题，主要是关于JUnit 5中断言方法的使用"
 tags: ["junit5","java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
@@ -55,7 +55,7 @@ highchartsDiagrams:
 
 ![JUnit 5 Assertions](/blog_img/translate/junit5/junit-5-assertions/junit-5-checklist-with-computer.webp "JUnit 5 Assertions") 
 
-# 概览
+## 概览
 
 在本文中，我们将学习如何通过`JUnit 5`断言来验证测试结果，我们将学习断言的基本方法吗、如何自定义错误消息，以及如何将多个断言作为一个分组运行。
 
@@ -63,7 +63,7 @@ highchartsDiagrams:
 
 本文是[**JUnit 5 教程**](https://www.arhohuttunen.com/junit-5-tutorial/)的一部分。
 
-# 断言
+## 断言
 
 `JUnit 5`断言让测试结果与预期结果的验证变得更容易，只要一个测试中有断言失败，整个测试就会失败。类似的，只有单个测试中所有的断言都通过，测试才能通过。
 
@@ -71,7 +71,7 @@ highchartsDiagrams:
 
 `JUnit 5`中的断言是`org.junit.jupiter.api.Assertions`中的静态方法，下面我们将会详细了解这些方法的使用场景。
 
-## 值比较
+### 值比较
 
 在验证结果时，一个最常见的场景是我们希望预期结果与实际结果相等，`JUnit 5`提供了`assertEquals()`与`assertNotEquals()`方法来对值进行相等性和不等性比较。
 
@@ -95,7 +95,7 @@ Expected :3
 Actual   :2
 ```
 
-## 布尔值
+### 布尔值
 
 通常，当我们希望返回的值为true或者false，可通过`assertEquals()`方法实现，但`JUnit 5`中提供了更简洁的`assertTrue()`与`assertFalse()`方法来实现此功能。
 
@@ -113,7 +113,7 @@ void firstNameStartsWithJ() {
 
 类似的，若要断言返回值不为true，可通过`assertFalse()`实现。
 
-## 空值
+### 空值
 
 有时候我们希望一个对象为空或者非空，要实现此目的，可通过`JUnit 5`中的断言方法`assertNull()`和`assertNotNull()`实现。
 
@@ -145,7 +145,7 @@ org.opentest4j.AssertionFailedError: expected: not <null>
 
 {{% /admonition %}}
 
-## 迭代器
+### 迭代器
 
 有时候我们需要验证一个集合中包含我们期望的元素，例如，我们可能想验证自己的排序算法是否有效。
 
@@ -187,7 +187,7 @@ Actual   :<4>
 
 > **两个迭代器只有在它们全部为空或包含相同的值时才相等。**
 
-## 数组
+### 数组
 
 断言数组与断言迭代器很类似，可通过`JUnit 5`中的`assertArrayEquals()`方法实现:
 
@@ -205,7 +205,7 @@ void arraysEqual() {
 
 > **两个数组只有在都为空或者包含相同的元素时才相等[^1]**
 
-## 值对象
+### 值对象
 
 在断言两个对象是否相等时，我们需要考虑一些事项。
 
@@ -270,7 +270,7 @@ public class Person {
 
 重新运行测试，可发现测试执行通过，重写`equals()`方法后在比较对象是否相等时通过属性比较实现。
 
-## 引用对象
+### 引用对象
 
 有时我们想确保两个对象指向或者不指向同一个实例，例如，要验证某个方法返回的是对象副本而不是相同的对象,`JUnit 5`提供了`assertSame()`和`assertNotSame()`方法来实现此功能：
 
@@ -292,7 +292,7 @@ Expected :not same
 Actual   :<Person{firstName='John', lastName='Doe'}>
 ```
 
-## 异常
+### 异常
 
 要确保程序中的错误处理能正常工作，我们可以验证一段代码在某些条件下是否抛出特定的异常，这可以通过`JUnit 5`中的`assertThrows()`方法来实现：
 
@@ -333,7 +333,7 @@ void divideByZeroThrowsIllegalArgumentException() {
 }
 ```
 
-## 超时
+### 超时
 
 有时候我们想确保程序执行时间不能超过某个限制，此时我们可用`assertTimeout()`或`assertTimeoutPreemptively()`来实现。
 
@@ -385,7 +385,7 @@ org.opentest4j.AssertionFailedError: execution timed out after 50 ms
 
 这里的区别在于执行在超时处停止程序运行。
 
-# 自定义错误信息
+## 自定义错误信息
 
 为`JUnit 5`断言提供自定义错误消息很容易，所有断言方法都有一个可选的错误消息作为最后一个参数：
 
@@ -422,7 +422,7 @@ void addingEmployeesToPersonnel() {
 
 上述例子中的错误消息不是那么复杂，但是，通过使用此种方式`JUnit 5`只会在断言失败时才构造错误消息，我们只需在程序运行失败时耗费相应的计算成本。
 
-# 分组断言
+## 分组断言
 
 在执行测试时，测试程序将在第一次断言失败时终止，而利用`JUnit 5`中的分组断言，我们可以在反馈失败之前运行完所有的断言测试，可以通过使用`assertAll()`方法并提供不同的断言作为该方法的参数来实现此功能。
 
@@ -454,7 +454,7 @@ org.opentest4j.MultipleFailuresError: person (2 failures)
 
 > **单个测试只能有一条原因导致测试失败，我们不应该试图通过在单个测试中验证多个条件来减少测试数量，但在某些场景下，当断言在语义上密切相关时，我们可在单个测试中添加多个断言。**
 
-# 高级匹配
+## 高级匹配
 
 虽然`JUnit 5`中的断言足以满足许多测试场景，但有时我们需要更强的选项。例如验证一个列表是否为特定大小、列表是否包含具有特定属性值的元素、列表是否已排序并包含特定的元素等，我们可以自己编写代码逻辑来实现，但更好的方式是断言库替我们实现。
 
@@ -466,7 +466,7 @@ org.opentest4j.MultipleFailuresError: person (2 failures)
 
 我们不准备在此教程中介绍这些库的详细信息，但我们可以快速看一下这些类库中的一些断言方法是如何使用的。
 
-## Hamcrest
+### Hamcrest
 
 `Hamcrest`是它们中最古老的一个，在下面的例子中我们想验证一个列表是否只包含一个元素，在`JUnit 5`中可通过如下方式实现：
 
@@ -492,7 +492,7 @@ void listHasOneItem() {
 
 阅读此段代码，看起来更流畅，更接近自然语言，但我们可能会争论说第一个例子的可读性足够好，也许我们还没被说服。
 
-## AssertJ
+### AssertJ
 
 接下来，我们快速浏览下`AssertJ`,`Hamcrest`和`AssertJ`最主要的区别是`Hamcrest`依赖于匹配器方法，而在`AssertJ`中我们可以进行链式方法调用。
 
@@ -528,7 +528,7 @@ void listHasPerson() {
 
 很容易发现这种方式可读性更好，同时我们也在测试代码中移除了容易出错的代码逻辑。
 
-## Truth
+### Truth
 
 最后，我们来看下`Truth`,它和`AssertJ`很像，最显著的差异是`Truth`试图提供更简单的API，而`AssertJ`则有一系列更复杂的断言方法。
 
@@ -549,7 +549,7 @@ void listHasItemsInOrder() {
 
 再一次，变得更简洁和更容易阅读。
 
-# 总结
+## 总结
 
 `JUnit 5`中的断言方法让预期结果与实际结果的验证变得更容易：
 

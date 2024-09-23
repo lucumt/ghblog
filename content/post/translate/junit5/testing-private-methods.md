@@ -4,7 +4,7 @@ date: 2023-07-03T22:42:07+08:00
 lastmod: 2023-07-03T22:42:07+08:00
 draft: false
 keywords: ["junit","private"]
-description: "如何测试私有方法"
+description: "JUnit翻译专题，主要是如何在JUnit中测试私有方法"
 tags: ["java","junit"]
 categories: ["翻译","JUnit5翻译"]
 author: "Rosen Lu"
