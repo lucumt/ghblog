@@ -723,7 +723,7 @@
       <description>&lt;p&gt;在开发大规模的&lt;code&gt;Java&lt;/code&gt;项目时，通常会涉及到各种设计模式，本文简要说明当使用&lt;a href=&#34;https://zh.wikipedia.org/zh-cn/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95&#34;&gt;&lt;strong&gt;模板方法&lt;/strong&gt;&lt;/a&gt;时，如何利用接口default方法或抽象类对具体的子类进行精简，便于开发与维护。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>在Quartz中动态设置定时任务的执行时间并立即生效，以便更灵活的满足应用程序的使用需求</title>
+      <title>在Quartz中动态设置定时任务的执行时间并立即生效</title>
       <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
       <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何在MySQL中快速创建大量测试数据" /><meta name="keywords" content="mysql, 大量, 测试数据" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何在MySQL中快速创建大量测试数据以方便进行性能相关的测试与研究" /><meta name="keywords" content="mysql, 大量, 测试数据" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/mysql/mysql-create-massive-test-data-quickly/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="MySQL中快速创建大量测试数据">
-  <meta property="og:description" content="简要介绍如何在MySQL中快速创建大量测试数据">
+  <meta property="og:description" content="简要介绍如何在MySQL中快速创建大量测试数据以方便进行性能相关的测试与研究">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Mysql">
 
   <meta itemprop="name" content="MySQL中快速创建大量测试数据">
-  <meta itemprop="description" content="简要介绍如何在MySQL中快速创建大量测试数据">
+  <meta itemprop="description" content="简要介绍如何在MySQL中快速创建大量测试数据以方便进行性能相关的测试与研究">
   <meta itemprop="datePublished" content="2019-02-08T13:57:45+08:00">
   <meta itemprop="dateModified" content="2019-02-08T13:57:45+08:00">
   <meta itemprop="wordCount" content="2109">
   <meta itemprop="keywords" content="mysql,大量,测试数据">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="MySQL中快速创建大量测试数据">
-  <meta name="twitter:description" content="简要介绍如何在MySQL中快速创建大量测试数据">
+  <meta name="twitter:description" content="简要介绍如何在MySQL中快速创建大量测试数据以方便进行性能相关的测试与研究">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -179,14 +179,18 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#实现方式">实现方式</a>
+    <li>
       <ul>
-        <li><a href="#通过代码程序创建">通过代码程序创建</a></li>
-        <li><a href="#通过存储过程创建">通过存储过程创建</a></li>
-        <li><a href="#通过sql语句创建">通过SQL语句创建</a></li>
+        <li><a href="#实现方式">实现方式</a>
+          <ul>
+            <li><a href="#通过代码程序创建">通过代码程序创建</a></li>
+            <li><a href="#通过存储过程创建">通过存储过程创建</a></li>
+            <li><a href="#通过sql语句创建">通过SQL语句创建</a></li>
+          </ul>
+        </li>
+        <li><a href="#对比总结">对比&amp;总结</a></li>
       </ul>
     </li>
-    <li><a href="#对比总结">对比&amp;总结</a></li>
   </ul>
 </nav>
   </div>
@@ -196,7 +200,7 @@
 	
     <div class="post-content image-border">
 	 <p>在学习<code>MySQL</code>索引和分库分表等知识的过程中，经常会涉及到创建大批量的测试数据，本文简要说明自己常用的几种创建方式以及各自的优劣对比。</p>
-<h1 id="实现方式">实现方式</h1>
+<h2 id="实现方式">实现方式</h2>
 <p>以下述的<code>system_user</code>表为例分别说明在不同的方式下如何大批量的创建测试数据。</p>
 
 <pre class="line-numbers language-sql ">
@@ -208,7 +212,7 @@
 	PRIMARY KEY (`id`)
 ) ENGINE = INNODB CHARSET = utf8;</code>
 </pre>
-<h2 id="通过代码程序创建">通过代码程序创建</h2>
+<h3 id="通过代码程序创建">通过代码程序创建</h3>
 <p>工作中使用的编程语言主要是<code>Java</code>，在之前我不熟悉<code>MySQL</code>存储过程用法的时，主要采用<a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html"><strong>JDBC</strong></a>的方式实现批量创建数据，代码类似如下:</p>
 
 <pre class="line-numbers language-java ">
@@ -261,7 +265,7 @@ public class TestBatchInsertData {
 }</code>
 </pre>
 <p>从上述代码可知，此种实现方式较为简洁，实际的业务代码只有20行左右，对于具有<code>Java</code>开发经验的人来说上手很快，不足之处是需要额外准备相应的执行环境。</p>
-<h2 id="通过存储过程创建">通过存储过程创建</h2>
+<h3 id="通过存储过程创建">通过存储过程创建</h3>
 
 <pre class="line-numbers language-sql ">
 <code>DELIMITER $$
@@ -346,7 +350,7 @@ CALL add_user_batch(1000);
 SELECT COUNT(*) FROM `system_user`;</code>
 </pre>
 <p>可以看出虽然用存储过程也能实现批量提交，但相对于<code>Java</code>实现而言，其代码量更大更为复杂，上手门槛略高。不过其好处也很明显，只要有数据库环境就能执行<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
-<h2 id="通过sql语句创建">通过SQL语句创建</h2>
+<h3 id="通过sql语句创建">通过SQL语句创建</h3>
 <p>此种方式需要通过<a href="https://www.w3schools.com/sql/sql_insert_into_select.asp"><strong>SELECT INSERT INTO</strong></a>来实现，具体步骤如下：</p>
 <ol>
 <li>
@@ -429,7 +433,7 @@ SELECT LEFT(UUID(), 8),FLOOR(1 &#43; RAND() * 60),LEFT(UUID(), 8) FROM `system_u
 SET global innodb_buffer_pool_size= 2*1024*1024*1024; -- 2G</code>
 </pre>
 <p>此种方式虽然需要多次执行SQL语句，但其优点也很明显，只需要将SQL语句稍作修改，就能适用于不同的数据库表。</p>
-<h1 id="对比总结">对比&amp;总结</h1>
+<h2 id="对比总结">对比&amp;总结</h2>
 <p>各种方式的对比如下：</p>
 <table>
 <thead>

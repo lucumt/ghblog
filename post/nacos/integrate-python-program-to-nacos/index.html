@@ -180,17 +180,21 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#注册nacos">注册Nacos</a>
+    <li>
       <ul>
-        <li><a href="#程序启动后监听">程序启动后监听</a></li>
-      </ul>
-    </li>
-    <li><a href="#读取配置">读取配置</a></li>
-    <li><a href="#日志系统启用">日志系统启用</a></li>
-    <li><a href="#调用其它程序">调用其它程序</a>
-      <ul>
-        <li><a href="#获取实例">获取实例</a></li>
-        <li><a href="#调用接口">调用接口</a></li>
+        <li><a href="#注册nacos">注册Nacos</a>
+          <ul>
+            <li><a href="#程序启动后监听">程序启动后监听</a></li>
+          </ul>
+        </li>
+        <li><a href="#读取配置">读取配置</a></li>
+        <li><a href="#日志系统启用">日志系统启用</a></li>
+        <li><a href="#调用其它程序">调用其它程序</a>
+          <ul>
+            <li><a href="#获取实例">获取实例</a></li>
+            <li><a href="#调用接口">调用接口</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -203,7 +207,7 @@
     <div class="post-content image-border">
 	 <p>简要介绍如何在基于<a href="https://flask.palletsprojects.com/en/2.3.x/"><strong>Flask</strong></a>开发的程序中通过<a href="https://nacos.io/en-us/"><strong>Nacos</strong></a>提供的<a href="https://github.com/nacos-group/nacos-sdk-python"><strong>nacos-sdk-python</strong></a>实现在<code>Python</code>程序中整合<code>Nacos</code>。</p>
 <p>完整代码在<a href="https://github.com/fox-world/python-nacos-demo"><strong>python-nacos-demo</strong></a></p>
-<h1 id="注册nacos">注册Nacos</h1>
+<h2 id="注册nacos">注册Nacos</h2>
 <p>官网文档的说明如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-register-instance.png" alt="Nacos注册实例" title="Nacos注册实例"></p>
 <p>从中可看出只有<code>service_name</code>、<code>ip</code>与<code>port</code> 是必填项，而我们在实际使用中经常需要通过group进行区分，上述文档中并没有相关说明，翻看其源码发现<code>add_naming_instance</code>的方法签名如下，其中包含group相关信息，<strong>文档没有与源码保持一致，必须吐槽下<code>Nacos</code>官方！</strong></p>
@@ -225,7 +229,7 @@ client.add_naming_instance(service_name, service_address, port, group_name=group
 NACOS_CLIENT = nacos.NacosClient(server_address, namespace=namespace)
 NACOS_CLIENT.add_naming_instance(service_name, service_address, port, group_name=group_name)</code>
 </pre>
-<h2 id="程序启动后监听">程序启动后监听</h2>
+<h3 id="程序启动后监听">程序启动后监听</h3>
 <p>安装完成后可在<code>Nacos</code>页面的服务菜单中看见对应的实例，但经过十几秒后该实例会显示为如下图所示的不健康状态，之后会自动从<code>Nacos</code>服务列表中移除掉：</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-instance-not-health.png" alt="Nacos实例不健康" title="Nacos实例不健康"></p>
 <p>造成此现象的原因为<code>nacos-sdk-python</code>没有提供自动发送心跳的机制，需要自己实现代码来持续不断地发送心跳请求以维持健康状态，可通过异步线程的方式实现，相关代码如下：</p>
@@ -271,7 +275,7 @@ def send_heartbeat(client, service_name, ip, port, group_name):
         client.send_heartbeat(service_name, ip, port, group_name=group_name)
         time.sleep(5)</code>
 </pre>
-<h1 id="读取配置">读取配置</h1>
+<h2 id="读取配置">读取配置</h2>
 <p>在<code>Java</code>中通过引入<code>spring-cloud-starter-alibaba-nacos-discovery</code>依赖可直接解析相关的配置文件，非常方便，而在<code>Python</code>中相对没这么简洁，其使用方法如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-get-config.png" alt="Nacos读取配置" title="Nacos读取配置"></p>
 <p>使用代码类似如下</p>
@@ -280,7 +284,7 @@ def send_heartbeat(client, service_name, ip, port, group_name):
 <code>config = NACOS_CLIENT.get_config(data_id, group, no_snapshot=True)</code>
 </pre>
 <p>其返回值是一个<a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries"><strong>dictionary</strong></a>对象，获取之后可根据实际情况做进一步处理</p>
-<h1 id="日志系统启用">日志系统启用</h1>
+<h2 id="日志系统启用">日志系统启用</h2>
 <p>在<a href="https://www.alibabacloud.com/help/en/mse/support/how-do-i-obtain-logs-from-a-nacos-client#p-vhz-cfm-2xy"><strong>How do I obtain logs from a Nacos client</strong></a>中有如下信息说明<code>Nacos</code>中的日志与<a href="https://docs.python.org/3/library/logging.html"><strong>logging</strong></a>模块保持一致，只需要通过<code>logging</code>开启日志即可。</p>
 <blockquote>
 <p>A Python Nacos client uses the logging module of Python, which is consistent with the logging module of your application. Logs of a Python Nacos client are displayed in application logs.</p>
@@ -293,7 +297,7 @@ logger.setLevel(logging.INFO)</code>
 </pre>
 <p>开启后显示效果类似如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-log-output.png" alt="Nacos日志输出" title="Nacos日志输出"></p>
-<h1 id="调用其它程序">调用其它程序</h1>
+<h2 id="调用其它程序">调用其它程序</h2>
 <p>在<code>Spring</code>中可通过<a href="https://spring.io/projects/spring-cloud-openfeign"><strong>OpenFeign</strong></a>或<a href="https://dubbo.apache.org/en/index.html"><strong>Dubbo</strong></a>来调用注册到<code>Nacos</code>中的服务接口，由于<code>Python</code>与<code>Java</code>是两套不同的体系，在<code>Python</code>只能通过<a href="https://pypi.org/project/requests/"><strong>Requests</strong></a>模块直接发送对应的<code>HTTP</code>请求实现，类似如下代码：</p>
 
 <pre class="line-numbers language-python ">
@@ -302,7 +306,7 @@ response = requests.get(url).text
 print(response)</code>
 </pre>
 <p>在上述代码中，url地址中的<code>ip</code>和<code>port</code>以硬编码的形式指定，实际使用环境的<code>ip</code>和<code>port</code>会动态变化，显然此种方式使用起来不灵活。结合<code>Nacos</code>本身的特性，可先通过服务名称获取对应的服务实例信息，则其中解析出<code>ip</code>和<code>port</code>，之后发送请求，从而消除动态配置。</p>
-<h2 id="获取实例">获取实例</h2>
+<h3 id="获取实例">获取实例</h3>
 <p>获取实例的方法说明如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-query-instance.png" alt="Nacos查询实例" title="查询实例"></p>
 <p>相关调用代码类似如下:</p>
@@ -314,7 +318,7 @@ instances = NACOS_CLIENT.list_naming_instance(service_name, namespace_id=namespa
 </pre>
 <p>执行后的结果类似如下，可通过在<code>hosts</code>中找到对应的<code>ip</code>和<code>port</code>为调用做准备</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-query-instance-result.png" alt="Nacos查询实例结果" title="Nacos查询实例结果"></p>
-<h2 id="调用接口">调用接口</h2>
+<h3 id="调用接口">调用接口</h3>
 <p>获取到<code>ip</code>和<code>port</code>之后，接下来就是正常的发送<code>HTTP</code>请求，此时已经和<code>Nacos</code>没有关系</p>
 
 <pre class="line-numbers language-python ">

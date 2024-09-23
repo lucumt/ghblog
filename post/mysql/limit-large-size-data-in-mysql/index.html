@@ -201,7 +201,7 @@
 <p><strong>问题根源为<code>MySQL</code>在执行<code>LIMIT OFFSET</code>时会将数据全部加载到内存中然后再进行过滤，实际上执行的是一种假分页！</strong></p>
 </blockquote>
 <p>找到问题的根源后，要提高查询速度只能让<code>MySQL</code>查询时返回的数据尽可能小，接下来根据主键是否连续自增来分别叙述。</p>
-<h1 id="自增主键过滤">自增主键过滤</h1>
+<h2 id="自增主键过滤">自增主键过滤</h2>
 <p>若<strong>主键连续自增</strong>，则可从业务逻辑的角度先对数据用<code>WHERE</code>过滤，然后用<code>LIMIT</code>进行分页，类似SQL如下：</p>
 
 <pre class="no-line-numbers language-sql ">
@@ -217,7 +217,7 @@
 <li><code>WHERE</code>优先于<code>LIMIT</code>执行，数据量相对之前，变得很小</li>
 </ol>
 <p>其中最关键的是第2点，只要查询的数据量变小，查询速度自然会提升。</p>
-<h1 id="覆盖索引过滤">覆盖索引过滤</h1>
+<h2 id="覆盖索引过滤">覆盖索引过滤</h2>
 <p>基于自增主键过滤要求主键必须<strong>主键连续自增</strong>，若主键不连续(如主键采用<code>UUID</code>生成)则上述方案不可行，此时可基于<a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_covering_index">覆盖索引</a>来减少获取和传输的数据量大小。</p>
 <p>将查询sql修改为类似如下</p>
 
@@ -255,7 +255,7 @@ JOIN
 <p><img src="/blog_img/mysql/limit-large-size-data-in-mysql/mysql-unique-index-filter-limit-offset-query.png" alt="利用索引列过滤查询" title="利用索引列过滤查询"></p>
 <p>可以看出其耗时和采用<strong>自增连续主键</strong>时类似。对应的执行计划如下，从图中也能看出要获取的数据量明显变小。</p>
 <p><img src="/blog_img/mysql/limit-large-size-data-in-mysql/mysql-unique-index-filter-limit-offset-query-explain.png" alt="利用索引列过滤查询分析" title="利用索引列过滤查询分析"></p>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>上述两种方案归根到底均为要通过<code>WHERE</code>提前过滤不需要的数据，减少返回的数据量，总结如下：</p>
 <ul>
 <li>若<strong>主键连续且自增</strong>，则通过主键进行过滤</li>

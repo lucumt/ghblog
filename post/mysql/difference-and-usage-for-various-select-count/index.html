@@ -179,13 +179,17 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#结果对比">结果对比</a>
+    <li>
       <ul>
-        <li><a href="#不同事务中的结果">不同事务中的结果</a></li>
+        <li><a href="#结果对比">结果对比</a>
+          <ul>
+            <li><a href="#不同事务中的结果">不同事务中的结果</a></li>
+          </ul>
+        </li>
+        <li><a href="#性能对比">性能对比</a></li>
+        <li><a href="#总结建议">总结&amp;建议</a></li>
       </ul>
     </li>
-    <li><a href="#性能对比">性能对比</a></li>
-    <li><a href="#总结建议">总结&amp;建议</a></li>
   </ul>
 </nav>
   </div>
@@ -207,7 +211,7 @@
 ) ENGINE = INNODB CHARSET = utf8;</code>
 </pre>
 <p>在<code>add_user_batch</code>中，采用循环的方式动态生成数据，每循环100次会将<code>insert</code>批量执行语句插入数据库中并提交，每循环25次其中的<code>tag</code>就会被置为空，故<code>tag</code>值为空的记录总共有400000个。</p>
-<h1 id="结果对比">结果对比</h1>
+<h2 id="结果对比">结果对比</h2>
 <p>在<code>MySQL</code>的官网中对于<a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count">COUNT()</a>函数有如下说明：</p>
 <blockquote>
 <p>Returns a count of the number of non-NULL values of expr in the rows retrieved by a <code>SELECT </code>statement. The result is a <code>BIGINT</code> value.</p>
@@ -226,12 +230,12 @@
 </blockquote>
 <p>采用前面存储过程生成的数据分别用上述4种方式去查询的结果如下，由于tag值为空的记录数为400000个，故COUNT(tag)返回的记录数为9600000，实际查询结果均符合理论预期。</p>
 <p><img src="/blog_img/mysql/difference-and-usage-for-various-select-count/myisam-query-without-filter.png" alt="innodb没有where条件查询" title="innodb没有where条件查询"></p>
-<h2 id="不同事务中的结果">不同事务中的结果</h2>
+<h3 id="不同事务中的结果">不同事务中的结果</h3>
 <p>由于<code>InnoDB</code>引擎支持事务，而在不同事务可能会导致数据库记录不一致，故在<code>MySQL</code>官网中对于<code>InnoDB</code>有如下文字说明，其主要说明的是<code>COUNT()</code>返回的是<strong>当前事务中可见的对应行数</strong> ，即同样的查询SQL在不同的事务中其结果可能不相同<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <blockquote>
 <p><code>InnoDB</code> does not keep an internal count of rows in a table because concurrent transactions might “see” different numbers of rows at the same time. Consequently, <code>SELECT COUNT(*)</code> statements only count rows visible to the current transaction.</p>
 </blockquote>
-<h1 id="性能对比">性能对比</h1>
+<h2 id="性能对比">性能对比</h2>
 <div class="admonition note"><p class="admonition-title">说明</p>
 <p>由于测试环境以及<code>MySQL</code>查询缓存的原因，即使是同一条<code>SQL</code>查询多次查询的时间消耗也不完全相同，故在性能对比这块只做大致时间的对比，不会精确到毫秒级。</p>
 </div>
@@ -263,7 +267,7 @@
 <p><img src="/blog_img/mysql/difference-and-usage-for-various-select-count/myisam-query-first-column-is-null.png" alt="myisam第1列为空查询" title="myisam第1列为空查询"></p>
 </li>
 </ul>
-<h1 id="总结建议">总结&amp;建议</h1>
+<h2 id="总结建议">总结&amp;建议</h2>
 <ul>
 <li>总结:
 <ul>

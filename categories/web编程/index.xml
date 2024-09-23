@@ -51,7 +51,7 @@
       <description>&lt;p&gt;项目中有个模块支持按文件夹选中批量上传，用户希望在真正上传之前能够在浏览器中实时预览选中的文件夹层级结构，本文基于&lt;code&gt;Chrome&lt;/code&gt;浏览器为例，简要说明这一实现。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>在Quartz中动态设置定时任务的执行时间并立即生效，以便更灵活的满足应用程序的使用需求</title>
+      <title>在Quartz中动态设置定时任务的执行时间并立即生效</title>
       <link>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</link>
       <pubDate>Tue, 09 Jan 2018 22:10:30 +0800</pubDate>
       <guid>https://lucumt.info/post/quartz/update-quartz-scheduler-dynamic/</guid>

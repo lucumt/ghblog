@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何在Python中利用global关键字定义的全局变量在不同模块间共享，避免后续重复犯错。
-" /><meta name="keywords" content="python, global" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="记录如何在Python的不同模块中使用相同的全局变量，避免踩坑" /><meta name="keywords" content="python, global" />
 
 
 
@@ -43,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/python/using-global-variable-in-different-module/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Python的不同模块中使用全局变量">
-  <meta property="og:description" content="简要介绍如何在Python中利用global关键字定义的全局变量在不同模块间共享，避免后续重复犯错。">
+  <meta property="og:description" content="记录如何在Python的不同模块中使用相同的全局变量，避免踩坑">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +51,14 @@
     <meta property="article:tag" content="Python">
 
   <meta itemprop="name" content="在Python的不同模块中使用全局变量">
-  <meta itemprop="description" content="简要介绍如何在Python中利用global关键字定义的全局变量在不同模块间共享，避免后续重复犯错。">
+  <meta itemprop="description" content="记录如何在Python的不同模块中使用相同的全局变量，避免踩坑">
   <meta itemprop="datePublished" content="2023-01-05T10:55:48+08:00">
   <meta itemprop="dateModified" content="2023-01-05T10:55:48+08:00">
   <meta itemprop="wordCount" content="385">
   <meta itemprop="keywords" content="python,global">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Python的不同模块中使用全局变量">
-  <meta name="twitter:description" content="简要介绍如何在Python中利用global关键字定义的全局变量在不同模块间共享，避免后续重复犯错。">
+  <meta name="twitter:description" content="记录如何在Python的不同模块中使用相同的全局变量，避免踩坑">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -181,7 +180,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要介绍如何在<code>Python</code>中利用<a href="https://docs.python.org/3/reference/simple_stmts.html#global"><strong>global</strong></a>关键字定义的全局变量在不同模块间共享，避免后续重复犯错。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>它们位于同一个模块下：</p>
 
 <pre class="line-numbers language-bash ">
@@ -208,7 +207,7 @@ if __name__ == &#39;__main__&#39;:
     set_variables()
     # print(MESSAGE)</code>
 </pre>
-<h1 id="不生效用法">不生效用法</h1>
+<h2 id="不生效用法">不生效用法</h2>
 <p>一开始自己想复用<code>import xxx from xxx</code> 这种用法，将<code>main.py</code>修改为如下</p>
 
 <pre class="line-numbers language-python ">
@@ -219,7 +218,7 @@ if __name__ == &#39;__main__&#39;:
     print(MESSAGE)</code>
 </pre>
 <p>结果输出值为<code>None</code>，没有达到预期的结果。</p>
-<h1 id="正确用法">正确用法</h1>
+<h2 id="正确用法">正确用法</h2>
 <p>直接用<code>import xxx</code>实现</p>
 
 <pre class="line-numbers language-python ">
@@ -238,7 +237,7 @@ if __name__ == &#39;__main__&#39;:
     a.set_variables()
     print(a.MESSAGE)</code>
 </pre>
-<h1 id="原因分析">原因分析</h1>
+<h2 id="原因分析">原因分析</h2>
 <p>参见<a href="https://stackoverflow.com/questions/49636945/global-variable-not-changing-between-files-in-python"><strong>Global variable not changing between files in python</strong></a>中的大佬回答如下：</p>
 <blockquote>
 <p>The syntax <code>from globals.py import *</code> makes copies of the variables within <code>globals.py</code> into your local file. To access the variables themselves without making copies, <code>import globals</code> and use the variable directly: <code>globals.filename</code>. You no longer need the <code>global</code> keyword if you access the variable this way.</p>

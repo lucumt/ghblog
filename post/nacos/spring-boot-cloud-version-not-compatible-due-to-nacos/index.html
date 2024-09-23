@@ -181,10 +181,14 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题">问题</a></li>
-    <li><a href="#分析">分析</a></li>
-    <li><a href="#解决">解决</a></li>
-    <li><a href="#反思">反思</a></li>
+    <li>
+      <ul>
+        <li><a href="#问题">问题</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#解决">解决</a></li>
+        <li><a href="#反思">反思</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -196,7 +200,7 @@
 	 <p>简单记录由于<a href="https://nacos.io/zh-cn/"><strong>Nacos</strong></a>导致的<code>Spring Boot</code>与<code>Spring Cloud</code>版本不兼容的原因分析过程。</p>
 <p>在<a href="/post/nacos/integrate-python-program-to-nacos/"><strong>在Python程序中使用Nacos</strong></a>这篇文章中我吐槽了<code>Nacos</code>，今天我还要继续吐槽<code>Nacos</code>！</p>
 <p>Why? 因为<code>Nacos</code>中的一个jar包引入了错误的<code>spring-cloud-commons</code>依赖，导致<code>Spring Boot</code>程序启动时出现版本不兼容问题，启动失败，浪费了我好几个小时的时间(虽然这样显得我很不专业)！</p>
-<h1 id="问题">问题</h1>
+<h2 id="问题">问题</h2>
 <p>自己准备将网关项目加入<code>Nacos</code>的服务管理和配置管理功能，依照官方文档的说明添加了<code>com.alibaba.cloud</code>相关的依赖，<code>pom.xml</code>文件中的完整配置如下</p>
 
 <pre class="line-numbers language-xml ">
@@ -320,7 +324,7 @@ You can find the latest Spring Boot versions here [https://spring.io/projects/sp
 If you want to learn more about the Spring Cloud Release train compatibility, you can visit this page [https://spring.io/projects/spring-cloud#overview] and check the [Release Trains] section.
 If you want to disable this check, just set the property [spring.cloud.compatibility-verifier.enabled=false]</code>
 </pre>
-<h1 id="分析">分析</h1>
+<h2 id="分析">分析</h2>
 <p>根据上述报错提示信息去<a href="https://spring.io/projects/spring-cloud#overview"><strong>https://spring.io/projects/spring-cloud#overview</strong></a>中去查看Release Train:</p>
 <p><img src="/blog_img/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/spring-cloud-release-train.png" alt="Spring Clould Release Train" title="Spring Clould Release Train"></p>
 <p>进一步的查看上图中标红的版本结果如下，可发现<code>Spring Cloud</code>中主要的模块版本都为<code>3.1.x</code>系列。</p>
@@ -360,7 +364,7 @@ If you want to disable this check, just set the property [spring.cloud.compatibi
 <p>可以看出确实是由于<code>spring-cloud-starter-alibaba-nacos-config</code>包引入后导致的。</p>
 <p>在<a href="https://mvnrepository.com/"><strong>Maven中央仓库</strong></a>中查看该版本对应的jar包依赖结果如下，<code>spring-cloud-commons</code>的依赖版本确实是<code>3.0.1</code>，与前述分析结果一致。</p>
 <p><img src="/blog_img/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/spring-cloud-starter-alibaba-nacos-config-dependencies.png" alt="Spring Clould Nacos依赖" title="Spring Clould Nacos依赖"></p>
-<h1 id="解决">解决</h1>
+<h2 id="解决">解决</h2>
 <p>找到问题原因后，解决起来很简单，在<code>pom.xml</code>文件中手工指定<code>spring-cloud-commons</code>的依赖并下载即可：</p>
 
 <pre class="line-numbers language-xml ">
@@ -370,7 +374,7 @@ If you want to disable this check, just set the property [spring.cloud.compatibi
     &lt;version&gt;${spring.cloud.version}&lt;/version&gt;
 &lt;/dependency&gt;</code>
 </pre>
-<h1 id="反思">反思</h1>
+<h2 id="反思">反思</h2>
 <p>虽然此问题的原因和解决方案都不复杂，但我在此问题上浪费了好几个小时感觉很不划算，本着严于律己，宽以待人的原则主要问题还是出在自己身上：没有早点开启<code>DEBUG</code>日志模块，早点打开就能早发现，自己没有形成相关的问题排查方法论。</p>
     </div>
 
