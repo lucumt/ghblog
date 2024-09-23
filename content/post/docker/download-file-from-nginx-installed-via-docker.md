@@ -4,7 +4,7 @@ date: 2021-03-23T10:46:12+08:00
 lastmod: 2021-03-23T10:46:12+08:00
 draft: false
 keywords: ["docker","nginx","静态文件"]
-description: ""
+description: "简要介绍利用docker安装的nginx中实现静态文件下载,实现快速的文件下载功能"
 tags: ["docker","nginx"]
 categories: ["容器化"]
 author: "Rosen Lu"

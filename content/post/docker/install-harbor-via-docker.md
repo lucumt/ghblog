@@ -4,7 +4,7 @@ date: 2021-05-25T10:05:48+08:00
 lastmod: 2021-05-25T10:05:48+08:00
 draft: false
 keywords: ["docker","harbor"]
-description: ""
+description: "以图形化的方式描述如何基于Docker创建Harbor镜像仓库系统，给相关使用人员提供参考"
 tags: ["docker","harbor","devops"]
 categories: ["容器化","持续集成"]
 author: "Rosen Lu"

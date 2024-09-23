@@ -4,7 +4,7 @@ date: 2024-05-20T09:44:44+08:00
 lastmod: 2024-05-20T09:44:44+08:00
 draft: false
 keywords: ["GitHub","Github Pages","GoDaddy"]
-description: ""
+description: "创建多个GitHub Pages并且利用GoDaddy分别配置子域名,实现域名使用价值的最大化同时节省开支"
 tags: ["GitHub","Github Pages"]
 categories: ["个人博客","其它"]
 author: "Rosen Lu"

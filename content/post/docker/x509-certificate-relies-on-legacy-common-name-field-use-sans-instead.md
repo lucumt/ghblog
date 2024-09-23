@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题描述
+## 问题描述
 
 本操作过程基于[KubeSphere离线安装](https://www.kubesphere.io/zh/docs/v3.3/installing-on-kubernetes/on-prem-kubernetes/install-ks-on-linux-airgapped/)一文来操作的。
 
@@ -99,7 +99,7 @@ highchartsDiagrams:
 
    ![由于证书问题导致本地仓库无法工作](/blog_img/docker/x509-certificate-relies-on-legacy-common-name-field-use-sans-instead/docker-registry-cert-validate-failed.png "由于证书问题导致本地仓库无法工作") 
 
-# 分析与解决
+## 分析与解决
 
 1. 在[https://go.dev/doc/go1.15#commonname](https://go.dev/doc/go1.15#commonname)中找到如下一段说明
 

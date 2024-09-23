@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-#  问题背景
+## 问题背景
 
 出于多方面的考虑，公司的一些项目都逐渐的采用[**Docker**](https://www.docker.com/)作为部署环境，相对于互联网公司我们的`Docker`容器数据量没那么多，在容器管理工具的选型上我们采用的是[**Docker Compose**](https://docs.docker.com/compose/)而非常见的[**Kubernetes**](https://kubernetes.io/)。
 
@@ -114,7 +114,7 @@ highchartsDiagrams:
 
 发生了什么？ 理论上不应该是采用不同的文件可分别正常启动么？！
 
-# 原因分析
+## 原因分析
 
 一开始自己以为是`docker-compose.yml`文件的问题，以为有语法问题，反复对这两个文件进行检查后并没有找出啥。
 
@@ -156,7 +156,7 @@ services:
        - "8081:80"
 ```
 
-# 解决方案
+## 解决方案
 
 在`Docker Compose`的官网找到关于`COMPOSE_PROJECT_NAME`的[**说明**](https://docs.docker.com/compose/environment-variables/envvars/#compose_project_name)如下
 

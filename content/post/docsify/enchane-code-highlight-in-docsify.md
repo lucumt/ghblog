@@ -3,8 +3,8 @@ title: "对Docsify中的代码高亮显示进行增强"
 date: 2023-09-22T10:13:56+08:00
 lastmod: 2023-09-22T10:13:56+08:00
 draft: false
-keywords: []
-description: ""
+keywords: ["docsify","行号","代码高亮"]
+description: "简要记录如何对Docsify中的代码高亮显示进行增强，主要包括行间距样式改进以及显示行号的增强"
 tags: ["docsify"]
 categories: ["工具使用"]
 author: "Rosen Lu"
@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 环境准备
+## 环境准备
 
 需要预先安装`nodejs`，之后在终端执行下述命令
 
@@ -73,7 +73,7 @@ docsify serve ./docs
 2. `javascript`代码虽然支持高亮显示，但是没有显示行号
 3. 代码块与真正的代码内容之间的间距过大，占用过多空间也不便于阅读
 
-# 代码高亮
+## 代码高亮
 
 在[**Language highlighting**](https://docsify.js.org/#/language-highlight)中有如下说明
 
@@ -92,7 +92,7 @@ docsify serve ./docs
 
 前述第1个问题解决，余下的2个仍未解决。
 
-# 样式改进
+## 样式改进
 
 在`index.html`中添加如下`css`代码
 
@@ -106,11 +106,11 @@ docsify serve ./docs
 
 ![docsify代码高亮样式改进](/blog_img/docsify/enchane-code-highlight-in-docsify/docsify-code-highlight-style-enchance.png  "docsify代码高亮样式改进")
 
-# 显示行号
+## 显示行号
 
 显示行号是代码高亮的一个刚需功能，不太明白为啥`docsify`的开发者一直没有整合这个功能。
 
-简单搜素下就发现有人已经提过此类问题[**Prismjs supports line numbers and sepcific line highlight **](https://github.com/docsifyjs/docsify/issues/771#issuecomment-655982606)根据该链接的回复对`index.js`做一些修改。
+简单搜素下就发现有人已经提过此类问题 **[Prismjs supports line numbers and sepcific line highlight](https://github.com/docsifyjs/docsify/issues/771#issuecomment-655982606)** 根据该链接的回复对`index.js`做一些修改。
 
 将默认的渲染行为修改如下：
 
@@ -168,15 +168,15 @@ window.$docsify = {
 
 ![docsify代码高亮且有行号](/blog_img/docsify/enchane-code-highlight-in-docsify/docsify-code-highlight-with-line-numbers.png  "docsify代码高亮且有行号")
 
-# 后记
+## 后记
 
-## 框架切换
+### 框架切换
 
 由于`docsify`是将所有的`markdown`文件全部加载并渲染成单个`html`文件，导致其在初次打开时很卡顿，渲染完成后就很流畅。但每次打开浏览器访问`docsify`时都需要花时间进行初次渲染，尤其是随着`markdown`文件越来越多，渲染耗时也越来越多，严重影响体验。
 
 后续处于便于使用以及便于扩展、维护的角度考虑，最终将`docsify`替换为了`GitBook`，详情参见[**GitBook插件中实现从多个不同的文件夹下加载css和js文件**](/post/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/)。
 
-## 参考代码
+### 参考代码
 
 完整的`index.html`代码如下
 

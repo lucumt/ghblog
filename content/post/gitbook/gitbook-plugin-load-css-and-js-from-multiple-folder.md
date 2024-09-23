@@ -4,7 +4,7 @@ date: 2023-12-10T16:21:12+08:00
 lastmod: 2023-12-10T16:21:12+08:00
 draft: false
 keywords: ["gitbook","plugin","插件"]
-description: "GitBook插件中实现从多个不同的文件夹下加载css和js文件"
+description: "GitBook插件中实现从多个不同的文件夹下加载css和js文件,为后续的自定义插件实现提供参考"
 tags: ["gitbook"]
 categories: ["工具使用"]
 author: "Rosen Lu"

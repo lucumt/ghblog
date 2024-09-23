@@ -4,7 +4,7 @@ date: 2021-05-06T13:16:52+08:00
 lastmod: 2021-05-06T13:16:52+08:00
 draft: false
 keywords: ["docker","容器名称","socket"]
-description: "简要说明如何实现在Docker容器内部获取当前容器的名称"
+description: "简要说明如何实现在Docker容器内部获取当前容器的名称,包含基于环境变量的动态实现以及基于Socket通信的动态实现"
 tags: ["docker"]
 categories: ["容器化"]
 author: "Rosen Lu"
@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 某个项目模块采用了分布式部署，对于某个工程模块部署了多个副本，生成了多个`Docker`容器，在查看系统日志时，需要能够显示出具体是哪个容器执行的。
 
@@ -61,7 +61,7 @@ highchartsDiagrams:
 
 如果在容器外，可通过`docker inspect --format='{{.Name}}' 容器id`指令很容易的获取容器名称，而在容器内部可通过`echo $HOSTNAME`快速的获取容器id，但对于容器名称的获取却不是很方便。
 
-# 通过环境变量
+## 通过环境变量
 
 直接通过`-e`命令将容器名称传入，然后通过`$`获取容器名称。
 
@@ -81,7 +81,7 @@ echo $containerName
 
 此种方式实现起来比较简单，但最大的问题是容器名称需要提前设置好，不太灵活，当容器名称随机生成时，此种方式就彻底失效了。
 
-# 通过socket通信
+## 通过socket通信
 
 ```bash
 # 容器名称随机生成

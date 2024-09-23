@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# docker-compose安装
+## docker-compose安装
 
 按照下述指令安装`docker-compose`:
 
@@ -68,7 +68,7 @@ chmod +x /usr/local/bin/docker-compose
 docker-compose version
 ```
 
-# Pinpoint安装与测试
+## Pinpoint安装与测试
 
 1. 在终端执行下述指令下载`Pinpoint`全家桶并解压该文件
 
@@ -113,7 +113,7 @@ docker-compose version
    docker-compose down zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-agent pinpoint-web pinpoint-collector
    ```
 
-# 将新系统接入Pinpoint
+## 将新系统接入Pinpoint
 
 目前的接入方案是在通过`Jenkins`部署时，通过脚本的方式自动替换相关的文件，然后打包部署，流程图如下
 

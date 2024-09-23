@@ -4,7 +4,7 @@ date: 2021-02-20T15:00:08+08:00
 lastmod: 2021-02-20T15:00:08+08:00
 draft: false
 keywords: ["docker","dockerfile","RUN","CMD","ENTRYPOINT"]
-description: "通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较"
+description: "通过示例子简要说明Dockerfile中RUN、CMD与ENTRYPOINT的差异比较，为Dockerfile的编写提供参考"
 tags: ["docker"]
 categories: ["容器化","翻译"]
 author: "Rosen Lu"
@@ -59,7 +59,7 @@ highchartsDiagrams:
 
 `Docker`中的一些指令看起来很相似，它们容易导致初学者的困惑和不恰当的使用，本文将以具体示例来说明`CMD`、`RUN`和`ENTRYPOINT`这3者的差异。
 
-# 概要说明
+## 概要说明
 
 * `RUN`用于在一个镜像层中执行指令并创建一个新的镜像，如通常用来安装软件包
 * `CMD`用于设置默认的命令或参数，它们可以在容器运行时通过命令行覆盖
@@ -67,7 +67,7 @@ highchartsDiagrams:
 
 如果还是不太明白或者想了解更详细的信息，请继续往下阅读。
 
-# Docker镜像与分层
+## Docker镜像与分层
 
 `Docker`运行一个容器时实际上是运行容器里面的镜像，这些镜像通常是通过`Docker`指令构建的，这些指令在已有的镜像层或操作系统发行版的顶层添加新的分层，操作系统发行版是一个初始镜像，所有在其上添加的分层都会创建一个新的镜像。
 
@@ -75,11 +75,11 @@ highchartsDiagrams:
 
 最终的`Docker`镜像就像一个洋葱，里面包含由操作系统发行版以及其上的许多镜像分层，例如可通过基于Ubuntu 14.04发行版安装一系列的deb软件包来构建自己的镜像。
 
-# Shell和Exec模式
+## Shell和Exec模式
 
 这3条指令(`RUN`、`CMD`、`ENTRYPOINT`)都可基于`shell模式`和`exec模式`运行，由于这些模式相对于指令更容易让人困惑，我们先熟悉下这些指令。
 
-## Shell模式
+### Shell模式
 
 `<instruction> <command>`
 
@@ -106,7 +106,7 @@ Hello, John Dow
 
 可以看出在输出结果中变量name已经被其实际值替换了。
 
-## Exec模式
+### Exec模式
 
 此模式是`CMD`和`ENTRYPOINT`指令说明中推荐的模式。
 
@@ -135,7 +135,7 @@ Hello, $name
 
 可看出输出结果中的name变量并没有被解析替换。
 
-## 运行bash脚本
+### 运行bash脚本
 
 如果需要运行`bash`脚本(或其它的shell脚本)，可通过在`exec模式`中使用`/bin/bash`来将其设置为可运行，在这种方式下，常规的shell处理会生效，以下述`Dockerfile`中的代码片段为例：
 
@@ -150,7 +150,7 @@ ENTRYPOINT ["/bin/bash", "-c", "echo Hello, $name"]
 Hello, John Dow
 ```
 
-# RUN指令
+## RUN指令
 
 `RUN`指令允许我们在已有的镜像中安装所需的程序和软件包，它在当前镜像的顶层执行相关指令并通过提交执行结果的方式创建一个新的镜像封层，通常可在一个`Dockerfile`中看见多个`RUN`指令。
 
@@ -178,7 +178,7 @@ RUN apt-get update && apt-get install -y \
 
 需要注意的是`apt-get update`和`apt-get install`是在一条指令中执行，这样操作是为了确保安装最新的软件包。如果`apt-get install`是在单独的指令中执行，则其会复用`apt-get update`生成的镜像层，而该镜像层可能会在很久之前就被创建[^2]。
 
-# CMD指令
+## CMD指令
 
 `CMD`指令允许我们设置一个默认的命令，当我们在运行容器时没有显示指定要运行的命令，默认命令将会执行，若`Docker`容器运行时指定了命令，则其将会被忽略。如果一个`Dockerfile`中有多个`CMD`指令，除了最后一个之外的其余`CMD`指令都会被忽略。
 
@@ -212,7 +212,7 @@ Hello world
 root@7de4bed89922:/#
 ```
 
-# ENTRYPOINT指令
+## ENTRYPOINT指令
 
 `ENTRYPOINT`用于将容器设置为通过可执行文件来运行，由于它也能通过设置附带参数的命令，其看起来和`CMD`指令很相似，不同之处为`ENTRYPOINT`命令和参数在`Docker`容器以带参数的命令运行时不会被忽略。(虽然有办法来让`Docker`容器忽略`ENTRYPOINT`命令和参数，但一般我们不会这么做)
 
@@ -225,7 +225,7 @@ root@7de4bed89922:/#
 
 当使用`ENTRYPOINT`模式时需要非常小心，这是由于不同方式的行为差异很大。
 
-## Exec模式
+### Exec模式
 
 `ENTRYPOINT`指令中的`Exec模式`允许我们设置命令和参数，然后使用任一形式的`CMD`模式来设置有可能有可能发生变化的附带参数。`ENTRYPOINT`指令中的参数会一直被用到，而`CMD`中的相关参数则可在`Docker`容器运行覆盖，以下述`Dockerfile`中的代码片段为例
 
@@ -246,11 +246,11 @@ Hello world
 Hello John
 ```
 
-## Shell模式
+### Shell模式
 
 `ENTRYPOINT`指令中的`shell模式`会忽略任何`CMD`或`Docker`容器运行时附带的参数。
 
-# 总结
+## 总结
 
 使用`RUN`指令通过在初始镜像的顶层添加分层来创建我们自己的镜像。
 
