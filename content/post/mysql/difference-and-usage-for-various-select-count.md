@@ -58,7 +58,7 @@ CREATE TABLE `system_user` (
 
 在`add_user_batch`中，采用循环的方式动态生成数据，每循环100次会将`insert`批量执行语句插入数据库中并提交，每循环25次其中的`tag`就会被置为空，故`tag`值为空的记录总共有400000个。
 
-# 结果对比
+## 结果对比
 
 在`MySQL`的官网中对于[COUNT()](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)函数有如下说明：
 
@@ -83,13 +83,13 @@ CREATE TABLE `system_user` (
 
 ![innodb没有where条件查询](/blog_img/mysql/difference-and-usage-for-various-select-count/myisam-query-without-filter.png "innodb没有where条件查询") 
 
-## 不同事务中的结果
+### 不同事务中的结果
 
 由于`InnoDB`引擎支持事务，而在不同事务可能会导致数据库记录不一致，故在`MySQL`官网中对于`InnoDB`有如下文字说明，其主要说明的是`COUNT()`返回的是**当前事务中可见的对应行数** ，即同样的查询SQL在不同的事务中其结果可能不相同[^3]
 
 > `InnoDB` does not keep an internal count of rows in a table because concurrent transactions might “see” different numbers of rows at the same time. Consequently, `SELECT COUNT(*)` statements only count rows visible to the current transaction.
 
-# 性能对比
+## 性能对比
 
 {{% admonition note "说明" false %}}
 
@@ -130,9 +130,7 @@ CREATE TABLE `system_user` (
 
   ![myisam第1列为空查询](/blog_img/mysql/difference-and-usage-for-various-select-count/myisam-query-first-column-is-null.png "myisam第1列为空查询") 
 
-
-
-# 总结&建议
+## 总结&建议
 
 * 总结:
   * `SELECT COUNT(*)`，查询特定表总行数时

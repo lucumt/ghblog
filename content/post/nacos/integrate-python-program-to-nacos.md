@@ -46,7 +46,7 @@ sequenceDiagrams:
 
 完整代码在[**python-nacos-demo**](https://github.com/fox-world/python-nacos-demo)
 
-# 注册Nacos
+## 注册Nacos
 
 官网文档的说明如下
 
@@ -76,7 +76,7 @@ NACOS_CLIENT = nacos.NacosClient(server_address, namespace=namespace)
 NACOS_CLIENT.add_naming_instance(service_name, service_address, port, group_name=group_name)
 ```
 
-## 程序启动后监听
+### 程序启动后监听
 
 安装完成后可在`Nacos`页面的服务菜单中看见对应的实例，但经过十几秒后该实例会显示为如下图所示的不健康状态，之后会自动从`Nacos`服务列表中移除掉：
 
@@ -126,7 +126,7 @@ def send_heartbeat(client, service_name, ip, port, group_name):
         time.sleep(5)
 ```
 
-# 读取配置
+## 读取配置
 
 在`Java`中通过引入`spring-cloud-starter-alibaba-nacos-discovery`依赖可直接解析相关的配置文件，非常方便，而在`Python`中相对没这么简洁，其使用方法如下
 
@@ -140,7 +140,7 @@ config = NACOS_CLIENT.get_config(data_id, group, no_snapshot=True)
 
 其返回值是一个[**dictionary**](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)对象，获取之后可根据实际情况做进一步处理
 
-# 日志系统启用
+## 日志系统启用
 
 在[**How do I obtain logs from a Nacos client**](https://www.alibabacloud.com/help/en/mse/support/how-do-i-obtain-logs-from-a-nacos-client#p-vhz-cfm-2xy)中有如下信息说明`Nacos`中的日志与[**logging**](https://docs.python.org/3/library/logging.html)模块保持一致，只需要通过`logging`开启日志即可。
 
@@ -157,7 +157,7 @@ logger.setLevel(logging.INFO)
 
 ![Nacos日志输出](/blog_img/nacos/integrate-python-program-to-nacos/nacos-log-output.png "Nacos日志输出") 
 
-# 调用其它程序
+## 调用其它程序
 
 在`Spring`中可通过[**OpenFeign**](https://spring.io/projects/spring-cloud-openfeign)或[**Dubbo**](https://dubbo.apache.org/en/index.html)来调用注册到`Nacos`中的服务接口，由于`Python`与`Java`是两套不同的体系，在`Python`只能通过[**Requests**](https://pypi.org/project/requests/)模块直接发送对应的`HTTP`请求实现，类似如下代码：
 
@@ -169,7 +169,7 @@ print(response)
 
 在上述代码中，url地址中的`ip`和`port`以硬编码的形式指定，实际使用环境的`ip`和`port`会动态变化，显然此种方式使用起来不灵活。结合`Nacos`本身的特性，可先通过服务名称获取对应的服务实例信息，则其中解析出`ip`和`port`，之后发送请求，从而消除动态配置。
 
-## 获取实例
+### 获取实例
 
 获取实例的方法说明如下
 
@@ -187,7 +187,7 @@ instances = NACOS_CLIENT.list_naming_instance(service_name, namespace_id=namespa
 
 ![Nacos查询实例结果](/blog_img/nacos/integrate-python-program-to-nacos/nacos-query-instance-result.png "Nacos查询实例结果") 
 
-## 调用接口
+### 调用接口
 
 获取到`ip`和`port`之后，接下来就是正常的发送`HTTP`请求，此时已经和`Nacos`没有关系
 

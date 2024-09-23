@@ -3,9 +3,9 @@ author = "飞狐"
 categories = ["Web编程","Java编程"]
 tags = ["Quartz","Spring","SpringMVC"]
 date = "2018-01-09T22:10:30+08:00"
-description = "Blog of Rosen Lu"
+description = "在Quartz中动态设置定时任务的执行时间并立即生效，以便更灵活的满足应用程序的使用需求"
 keywords = ["Quartz","Spring","SpringMVC"]
-title = "在Quartz中动态设置定时任务的执行时间并立即生效，以便更灵活的满足应用程序的使用需求"
+title = "在Quartz中动态设置定时任务的执行时间并立即生效"
 
 +++
 
@@ -15,6 +15,7 @@ title = "在Quartz中动态设置定时任务的执行时间并立即生效，�
 为实现动态设置定时任务执行时间的功能，首先需要实现以硬编码的方式设置定时任务执行时间，然后在其基础上修改为可动态设置，本文基于这两分部分逐步介绍如何实现。
 
 ## 硬编码设置定时时间
+
 本文采用 Quartz + [**SpringMVC**](https://spring.io/guides/gs/serving-web-content/) 的实现框架，同时基于 [**Maven**](https://maven.apache.org/)运行，相关配置过程如下：   
 1.首先在pom.xml文件中引入相应的依赖JAR包。  
 
@@ -137,6 +138,7 @@ public class TestJob {
 上述的硬编码设置将 *Quartz* 的执行时间通过硬编码方式写入XML配置文件中，这是最常见的用法，但通过XML配置文件写入定时时间时无法动态的更改其执行时间。
 
 ## 动态设置定时时间
+
 为了便于演示，本文采用Web程序的方式展示相关操作过程。  
 1.增加一个testScheduler.jsp展示操作界面:  
 
@@ -275,6 +277,7 @@ public class JobScheduler implements ServletContextAware {
 上述代码是基于`Quartz2.3.0`来实现的，相关源代码请参见 [**quartz_demo**](https://github.com/lucumt/myrepository/tree/master/java/quartz_demo) ，其核心在于 *resetJob* 方法通过调用 [**CronTriggerImpl**](https://github.com/quartz-scheduler/quartz/blob/master/quartz-core/src/main/java/org/quartz/impl/triggers/CronTriggerImpl.java) 来重新设置定时任务执行时间，需要注意的是要确保定时任务修改前后的`triggerKey`一致，这样才能修改生效，否则应用程序会在执行原有的定时任务时同时以新的时间来执行新的定时任务，即同时执行两个定时任务，达不到预期效果。
 
 ## Quartz1.7.2中的定时任务设置
+
 在旧版的`Quartz(1.7.2)`中`rescheduleJob`的方法参数发生了变化，相应的`Spring`版本也发生了变化，需要用 [**CronTriggerBean**](https://docs.spring.io/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/quartz/CronTriggerBean.html)替换 `CronTriggerImpl`，对应的实现代码可修改为如下：  
 
 ```java
@@ -296,6 +299,7 @@ public void resetJob(String expression){
 其运行结果和前面的一致。
 
 ## 通过Spring获取Trigger导致的重复执行问题
+
 将上述代码中的`CronTriggerBean`初始化从`new*`关键字实现变为通过`Schduler`获取原有的任务后重新更新，修改后的代码如下：
 
 ```java

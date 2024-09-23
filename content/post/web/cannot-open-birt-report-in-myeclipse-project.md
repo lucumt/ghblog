@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Web编程","工具使用"]
 tags = ["Birt"]
 date = "2017-04-07T10:47:28+08:00"
-description = "Blog of Rosen Lu"
+description = "简要记录如何解决MyEclipse项目中不能打开birt报表的解决方法"
 keywords = ["Birt"]
 title = "在MyEclipse项目中不能打开birt报表的解决方法"
 

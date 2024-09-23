@@ -4,7 +4,7 @@ date: 2023-01-05T10:55:48+08:00
 lastmod: 2023-01-05T10:55:48+08:00
 draft: false
 keywords: ["python","global"]
-description: ""
+description: "记录如何在Python的不同模块中使用相同的全局变量，避免踩坑"
 tags: ["python"]
 categories: ["python编程"]
 author: "Rosen Lu"
@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 它们位于同一个模块下：
 
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     # print(MESSAGE)
 ```
 
-# 不生效用法
+## 不生效用法
 
 一开始自己想复用`import xxx from xxx` 这种用法，将`main.py`修改为如下
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
 结果输出值为`None`，没有达到预期的结果。
 
-# 正确用法
+## 正确用法
 
 直接用`import xxx`实现
 
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     print(a.MESSAGE)
 ```
 
-# 原因分析
+## 原因分析
 
 参见[**Global variable not changing between files in python**](https://stackoverflow.com/questions/49636945/global-variable-not-changing-between-files-in-python)中的大佬回答如下：
 

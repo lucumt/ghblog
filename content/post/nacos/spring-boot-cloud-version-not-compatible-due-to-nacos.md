@@ -57,7 +57,7 @@ highchartsDiagrams:
 
 Why? 因为`Nacos`中的一个jar包引入了错误的`spring-cloud-commons`依赖，导致`Spring Boot`程序启动时出现版本不兼容问题，启动失败，浪费了我好几个小时的时间(虽然这样显得我很不专业)！
 
-# 问题
+## 问题
 
 自己准备将网关项目加入`Nacos`的服务管理和配置管理功能，依照官方文档的说明添加了`com.alibaba.cloud`相关的依赖，`pom.xml`文件中的完整配置如下
 
@@ -184,7 +184,7 @@ If you want to learn more about the Spring Cloud Release train compatibility, yo
 If you want to disable this check, just set the property [spring.cloud.compatibility-verifier.enabled=false]
 ```
 
-# 分析
+## 分析
 
 根据上述报错提示信息去[**https://spring.io/projects/spring-cloud#overview**](https://spring.io/projects/spring-cloud#overview)中去查看Release Train:
 
@@ -253,7 +253,7 @@ org.springframework.cloud.configuration.CompatibilityNotMetException: null
 
 ![Spring Clould Nacos依赖](/blog_img/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/spring-cloud-starter-alibaba-nacos-config-dependencies.png "Spring Clould Nacos依赖") 
 
-# 解决
+## 解决
 
 找到问题原因后，解决起来很简单，在`pom.xml`文件中手工指定`spring-cloud-commons`的依赖并下载即可：
 
@@ -265,7 +265,7 @@ org.springframework.cloud.configuration.CompatibilityNotMetException: null
 </dependency>
 ```
 
-# 反思
+## 反思
 
 虽然此问题的原因和解决方案都不复杂，但我在此问题上浪费了好几个小时感觉很不划算，本着严于律己，宽以待人的原则主要问题还是出在自己身上：没有早点开启`DEBUG`日志模块，早点打开就能早发现，自己没有形成相关的问题排查方法论。
 

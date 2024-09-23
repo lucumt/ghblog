@@ -72,7 +72,7 @@ CREATE TABLE `system_user` (
 
 找到问题的根源后，要提高查询速度只能让`MySQL`查询时返回的数据尽可能小，接下来根据主键是否连续自增来分别叙述。
 
-# 自增主键过滤
+## 自增主键过滤
 
 若**主键连续自增**，则可从业务逻辑的角度先对数据用`WHERE`过滤，然后用`LIMIT`进行分页，类似SQL如下：
 
@@ -95,7 +95,7 @@ SELECT * FROM `system_user` WHERE id>=9999990 LIMIT 10;
 
 其中最关键的是第2点，只要查询的数据量变小，查询速度自然会提升。 
 
-# 覆盖索引过滤
+## 覆盖索引过滤
 
 基于自增主键过滤要求主键必须**主键连续自增**，若主键不连续(如主键采用`UUID`生成)则上述方案不可行，此时可基于[覆盖索引](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_covering_index)来减少获取和传输的数据量大小。
 
@@ -151,7 +151,7 @@ JOIN
 
 ![利用索引列过滤查询分析](/blog_img/mysql/limit-large-size-data-in-mysql/mysql-unique-index-filter-limit-offset-query-explain.png "利用索引列过滤查询分析") 
 
-# 总结
+## 总结
 
 上述两种方案归根到底均为要通过`WHERE`提前过滤不需要的数据，减少返回的数据量，总结如下：
 

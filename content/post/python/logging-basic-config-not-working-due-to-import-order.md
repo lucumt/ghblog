@@ -55,7 +55,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 问题
+## 问题
 
 在[**Python程序中使用Nacos**](/post/nacos/integrate-python-program-to-nacos/)这篇文章中整合`Nacos`时由于需要输出日志，中间需要打印日志，`Python`中的日志主要基于`logging`模块，默认情况下 `logging`模块生成的log打印出的日志格式不符合自己需求，于是自己想通过`basicConfig`设置实现自定义格式。
 
@@ -63,5 +63,5 @@ highchartsDiagrams:
 
 相关代码如下：
 
-# 分析 & 解决
+## 分析 & 解决
 

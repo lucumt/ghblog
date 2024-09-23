@@ -4,7 +4,7 @@ date: 2024-06-14T11:07:55+08:00
 lastmod: 2024-06-14T11:07:55+08:00
 draft: false
 keywords: ["Google Trends","Embed","Multiple"]
-description: ""
+description: "A brief description of how to embed multiple Google Trends charts into a single html Page"
 tags: ["html"]
 categories: ["Web编程"]
 author: "Rosen Lu"

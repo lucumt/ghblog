@@ -4,7 +4,7 @@ date: 2023-11-13T14:08:39+08:00
 lastmod: 2023-11-13T14:08:39+08:00
 draft: false
 keywords: ["foxglove","时序数据","自动驾驶"]
-description: "简要介绍如何搭建基于Foxglove的时序数据播放环境"
+description: "简要介绍如何从头开始搭建基于Foxglove的时序数据播放环境"
 tags: ["web","foxglove"]
 categories: ["Web编程"]
 author: "Rosen Lu"

@@ -3,8 +3,8 @@ author = "飞狐"
 categories = ["Web编程"]
 tags = ["html5"]
 date = "2016-10-30T19:48:17+08:00"
-description = "Blog of Rosen Lu"
-keywords = ["html5"]
+description = "简要介绍如何实现在iframe嵌套的html5中播放视频时全屏显示和取消音量调整"
+keywords = ["html5","iframe","视频播放","全屏"]
 title = "在iframe嵌套的html5中播放视频时全屏显示和取消音量调整"
 
 +++
@@ -28,6 +28,7 @@ title = "在iframe嵌套的html5中播放视频时全屏显示和取消音量调
 ![浏览器中正常播放视频](/blog_img/web/show-video-in-html5-page/screen-img-1.png "浏览器中正常播放视频")
 
 ## 在iframe中不能全屏播放视频
+
 项目中好多地方都用`iframe`来嵌套html页面，最开始我是用类似如下代码在被`iframe`包含的页面中嵌入前面的视频播放代码，
 发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索[**stackoverflow**](http://stackoverflow.com/)找到一个类似的问题[**How to make a video fullscreen when it is placed inside an iframe?**](http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe)，阅读后发现只需要将`iframe`修改成`<iframe … allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true">`即可
 
@@ -48,6 +49,7 @@ title = "在iframe嵌套的html5中播放视频时全屏显示和取消音量调
 ![视频无法进行全屏播放](/blog_img/web/show-video-in-html5-page/screen-img-2.png "视频无法进行全屏播放")
 
 ## 隐藏声音调整按钮
+
 有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于`webkit`内核的`Chrome`浏览器访问，通过Google之后在 [**stackoverflow**](http://stackoverflow.com/)找到
 [**Why do no user-agents implement the CSS cursor style for video elements**](http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555)这篇文章，其中列出了播放视频时相关控制按钮的css类：
 

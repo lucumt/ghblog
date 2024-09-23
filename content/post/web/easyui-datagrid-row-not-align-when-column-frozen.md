@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Web编程"]
 tags = ["JavaScript","EasyUI"]
 date = "2017-08-06T00:06:36+08:00"
-description = "Blog of Rosen Lu"
+description = "简要记录解决EasyUI DataGrid中的行在列冻结时无法对齐的问题"
 keywords = ["JavaScript","EasyUI"]
 title = "解决EasyUI DataGrid中的行在列冻结时无法对齐的问题"
 
@@ -14,6 +14,7 @@ title = "解决EasyUI DataGrid中的行在列冻结时无法对齐的问题"
 <!--more-->
 
 ## EasyUI DataGrid正常情况下的列冻结
+
 下图为一个常见的DataGrid使用示例，该图展示了我们在使用EasyUI DataGrid时经常会遇到的一个问题：**由于某个列的长度很长导致表格出现滚动条**  
 !["没有冻结列时正常显示的DataGrid"](/blog_img/web/easyui-datagrid-row-not-align-when-column-frozen/datagrid-no-frozen-column1.png "没有冻结列时正常显示的DataGrid")  
 对应的代码为  
@@ -52,6 +53,7 @@ title = "解决EasyUI DataGrid中的行在列冻结时无法对齐的问题"
 !["冻结列之后的DataGrid显示效果"](/blog_img/web/easyui-datagrid-row-not-align-when-column-frozen/datagrid-frozen-column1.png "冻结列之后的DataGrid显示效果")
 
 ## EasyUI DataGrid非正常情形下的列冻结效果  
+
 大多数情况下这种列冻结都能满足我们的需求，但上述冻结列正常显示有一个前提：**表格中每一行各列的高度一致**，若表格中某些行中存在列高超出DataGrid正常高度的情形(25px)，在进行列冻结时就会出现冻结行和非冻结行无法对齐的问题。
 
 下图为一个列超出正常高度的DataGrid显示效果，从图中可以看出由于描述信息中的文字较多，导致正常的高度都比DataGrid默认的高度要很多，直观的显示就是不同行的高度不一致。    

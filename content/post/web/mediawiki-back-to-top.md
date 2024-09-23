@@ -5,7 +5,7 @@ categories = ["其它"]
 toc = false
 tags = ["Mediawiki"]
 date = "2016-03-18T23:14:59+08:00"
-description = "Blog of Rosen Lu"
+description = "简要记录如何在Mediawiki中添加回到顶部的方法，以方便阅读篇幅太长的内容"
 keywords = ["Mediawiki"]
 title = "Mediawiki添加回到顶部的方法"
 

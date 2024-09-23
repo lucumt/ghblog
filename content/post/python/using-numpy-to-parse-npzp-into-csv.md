@@ -4,7 +4,7 @@ date: 2023-05-16T10:09:16+08:00
 lastmod: 2023-05-16T10:09:16+08:00
 draft: false
 keywords: ["python","numpy","npz","csv"]
-description: "利用Numpy将npz文件解析为csv文件-供参考"
+description: "简要记录在Python编程中如何利用Numpy将npz文件解析为csv文件-供参考"
 tags: ["python"]
 categories: ["数据计算"]
 author: "Rosen Lu"

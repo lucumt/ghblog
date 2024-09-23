@@ -4,7 +4,7 @@ date: 2019-02-08T13:57:45+08:00
 lastmod: 2019-02-08T13:57:45+08:00
 draft: false
 keywords: ["mysql","大量","测试数据"]
-description: "简要介绍如何在MySQL中快速创建大量测试数据"
+description: "简要介绍如何在MySQL中快速创建大量测试数据以方便进行性能相关的测试与研究"
 tags: ["mysql"]
 categories: ["数据库"]
 author: "Rosen Lu"
@@ -43,7 +43,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 实现方式
+## 实现方式
 
 以下述的`system_user`表为例分别说明在不同的方式下如何大批量的创建测试数据。
 
@@ -57,7 +57,7 @@ CREATE TABLE `system_user` (
 ) ENGINE = INNODB CHARSET = utf8;
 ```
 
-## 通过代码程序创建
+### 通过代码程序创建
 
 工作中使用的编程语言主要是`Java`，在之前我不熟悉`MySQL`存储过程用法的时，主要采用[**JDBC**](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html)的方式实现批量创建数据，代码类似如下:
 
@@ -113,7 +113,7 @@ public class TestBatchInsertData {
 
 从上述代码可知，此种实现方式较为简洁，实际的业务代码只有20行左右，对于具有`Java`开发经验的人来说上手很快，不足之处是需要额外准备相应的执行环境。
 
-## 通过存储过程创建
+### 通过存储过程创建
 
 ```sql
 DELIMITER $$
@@ -201,7 +201,7 @@ SELECT COUNT(*) FROM `system_user`;
 
 可以看出虽然用存储过程也能实现批量提交，但相对于`Java`实现而言，其代码量更大更为复杂，上手门槛略高。不过其好处也很明显，只要有数据库环境就能执行[^1]。
 
-## 通过SQL语句创建
+### 通过SQL语句创建
 
 此种方式需要通过[**SELECT INSERT INTO**](https://www.w3schools.com/sql/sql_insert_into_select.asp)来实现，具体步骤如下：
 
@@ -249,7 +249,7 @@ SET global innodb_buffer_pool_size= 2*1024*1024*1024; -- 2G
 
 此种方式虽然需要多次执行SQL语句，但其优点也很明显，只需要将SQL语句稍作修改，就能适用于不同的数据库表。
 
-# 对比&总结
+## 对比&总结
 
 各种方式的对比如下：
 
