@@ -16,9 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="本文翻译自 Dealing with InterruptedException
-这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了Thread.sleep()来实现。 但此时编译器或IDE会立即提示你没有处理非运行时异常 InterruptedException。那么，什么是InterruptedException,为什么我们要必须处理它呢？
-" /><meta name="keywords" content="Java多线程" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译外网的一篇文章，主要是关于在Java多线程编程中如何处理InterruptedException" /><meta name="keywords" content="Java多线程" />
 
 
 
@@ -44,8 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/java-concurrency/dealing-with-interrupted-exception/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]如何处理InterruptedException">
-  <meta property="og:description" content="本文翻译自 Dealing with InterruptedException
-这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了Thread.sleep()来实现。 但此时编译器或IDE会立即提示你没有处理非运行时异常 InterruptedException。那么，什么是InterruptedException,为什么我们要必须处理它呢？">
+  <meta property="og:description" content="翻译外网的一篇文章，主要是关于在Java多线程编程中如何处理InterruptedException">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,16 +51,14 @@
     <meta property="article:tag" content="Java">
 
   <meta itemprop="name" content="[译]如何处理InterruptedException">
-  <meta itemprop="description" content="本文翻译自 Dealing with InterruptedException
-这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了Thread.sleep()来实现。 但此时编译器或IDE会立即提示你没有处理非运行时异常 InterruptedException。那么，什么是InterruptedException,为什么我们要必须处理它呢？">
+  <meta itemprop="description" content="翻译外网的一篇文章，主要是关于在Java多线程编程中如何处理InterruptedException">
   <meta itemprop="datePublished" content="2018-12-15T11:57:36+08:00">
   <meta itemprop="dateModified" content="2018-12-15T11:57:36+08:00">
-  <meta itemprop="wordCount" content="4617">
+  <meta itemprop="wordCount" content="4596">
   <meta itemprop="keywords" content="Java多线程">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]如何处理InterruptedException">
-  <meta name="twitter:description" content="本文翻译自 Dealing with InterruptedException
-这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了Thread.sleep()来实现。 但此时编译器或IDE会立即提示你没有处理非运行时异常 InterruptedException。那么，什么是InterruptedException,为什么我们要必须处理它呢？">
+  <meta name="twitter:description" content="翻译外网的一篇文章，主要是关于在Java多线程编程中如何处理InterruptedException">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,7 +178,7 @@
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
     <li>
@@ -193,7 +188,7 @@
             <li><a href="#线程中断">线程中断</a></li>
           </ul>
         </li>
-        <li><a href="#处理interruptedexception">处理InterruptedException</a>
+        <li><a href="#interruptedexception">InterruptedException</a>
           <ul>
             <li><a href="#不要吞没中断">不要吞没中断</a></li>
           </ul>
@@ -229,7 +224,7 @@
 <p>每个线程都一个与之关联的布尔属性来表示其中断状态。中断状态的初始值为false，当一个线程被其它线程调用<code>Thread.interrupt()</code>方法中断时，会根据实际情况做出响应: 如果该线程正在执行低级别的可中断方法(如<code>Thread.sleep()</code>、<code>Thread.join()</code>或<code>Object.wait()</code>)，则会解除阻塞并抛出<code>InterruptedException</code>异常，否则<code>Thread.interrupt()</code>仅设置线程的中断状态，在该被中断的线程中稍后可通过轮询中断状态来决定是否要停止当前正在执行的任务。中断状态可通过<code>Thread.isInterrupted()</code>来读取，也可通过不规范命名的<code>Thread.interrupted()</code>在单个操作中读取和清除中断状态。</p>
 <p>中断是一种协作机制。当一个线程中断了另外一个线程时，被中断的线程没必要停止正在执行的任务，相反，中断只是礼貌的要求被中断的线程在它方便的时候停止它当前正在执行的任务。有些方法如<code>Thread.sleep()</code>会认真对待这个要求，而其它一些方法则不需要注意中断。不阻塞但需要长时间执行的方法也可通过轮询中断状态来提前返回，你也可以忽略中断求，但这样做可能会影响响应性。</p>
 <p>中断的协作特性的一个好处是它为安全的构建可取消的任务提供了更大的灵活性。实际上我们很少想要立即终止一个任务，如果任务在更新期间被取消，程序数据结构可能会处于不一致的状态。而中断操作允许我们在任务终止之前做其它的一些操作，如清理任何正在运行的任务、恢复不变量、将终端请求通知给其它任务等。</p>
-<h2 id="处理interruptedexception">处理InterruptedException</h2>
+<h2 id="interruptedexception">InterruptedException</h2>
 <p>如果抛出<code>InterruptedException</code>异常意味着该方法是一个阻塞方法，那么调用一个阻塞方法意味着调用方法也是阻塞方法，我们应该有一个处理<code>InterruptedException</code>异常的策略。通过最简单的策略是直接抛出<code>InterruptedException</code>，如代码清单1中puskTask()和getTask()方法所示,这样做即可使方法响应中断，并且通常只需要在throws字句中添加<code>InterruptedException</code>。</p>
 <p>代码清单1： 通过向调用者传递<code>InterruptedException</code>来避免捕获</p>
 
