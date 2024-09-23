@@ -43,7 +43,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题描述
+## 问题描述
 
 部门在使用`KubeSphere`过程中经常遇到类似如下图所示的由于`kubernetes`无法调度而导致的无法部署的问题
 
@@ -55,7 +55,7 @@ sequenceDiagrams:
 
 之前自己采取的解决方案是暴力的删除一部分节点来释放CPU资源，但此种方式治标不治本，且随着`KubeSphere`在部门内部使用的普及，此问题发生的频率越来越高，只能想办法从根源上处理。
 
-# 分析与解决
+## 分析与解决
 
 由于提示的是CPU资源不足，首先检查是否为CPU的问题，采用`lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'`和`free -g`分别查看CPU和内存信息，结果如下
 

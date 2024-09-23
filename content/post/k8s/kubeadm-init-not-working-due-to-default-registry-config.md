@@ -3,8 +3,8 @@ title: "利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初�
 date: 2023-01-11T11:31:45+08:00
 lastmod: 2023-01-11T11:31:45+08:00
 draft: false
-keywords: []
-description: ""
+keywords: ["kubernetes","linux","kubeadm init","registry.k8s.io"]
+description: "记录利用kubeadm init初始化时由于registry.k8s.io/pause:3.6导致初始化失败的解决过程"
 tags: ["kubernetes","linux"]
 categories: ["容器化"]
 author: "Rosen Lu"
@@ -46,9 +46,9 @@ sequenceDiagrams:
 
 安装过程主要参考[^1]，相关配置与安装步骤如下：
 
-# 系统配置与依赖
+## 系统配置与依赖
 
-## 关闭防火墙
+### 关闭防火墙
 
 ```bash
 # 关闭交换内存
@@ -65,7 +65,7 @@ systemctl stop firewalld.service
 systemctl disable firewalld.service 
 ```
 
-## 配置docker参数
+### 配置docker参数
 
 ```bash
 mkdir /etc/docker/
@@ -81,7 +81,7 @@ vim /etc/docker/daemon.json
 }
 ```
 
-## 配置内核参数
+### 配置内核参数
 
 ```bash
 ## 配置网卡转发,看值是否为1
@@ -99,7 +99,7 @@ EOF
 sysctl -p /etc/sysctl.d/k8s.conf
 ```
 
-## 安装docker
+### 安装docker
 
 ```bash
 #安装相关依赖
@@ -121,7 +121,7 @@ systemctl start docker
 docker info
 ```
 
-##  配置container
+### 配置container
 
 ```bash
 containerd config default > /etc/containerd/config.toml
@@ -129,9 +129,9 @@ systemctl daemon-reload
 systemctl restart containerd
 ```
 
-# 安装Kubernetes
+## 安装Kubernetes
 
-## 添加k8s源
+### 添加k8s源
 
 ```bash
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -145,7 +145,7 @@ gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors
 EOF
 ```
 
-## 安装kubelet和kubeadm
+### 安装kubelet和kubeadm
 
 1. 执行下述指令，安装`kubelet kubeadm`
 
@@ -171,7 +171,7 @@ EOF
 
    ![kubectl version输出结果不完善](/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubectl-version-output-1.png "kubectl version输出结果不完善")  
 
-## 执行kubeadm init
+### 执行kubeadm init
 
 1. 执行下述命令进行初始化
 
@@ -187,7 +187,7 @@ EOF
 
    ![kubeadm init创建失败](/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-failed-output-log.png "kubeadm init创建失败")  
 
-# 问题分析&解决
+## 问题分析&解决
 
 1. 由于原始的报错信息没有提供太多有用的信息，故通过下述命令来输出其完整的日志[^2]
 

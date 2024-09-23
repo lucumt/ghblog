@@ -4,7 +4,7 @@ date: 2023-11-16T15:42:25+08:00
 lastmod: 2023-11-16T15:42:25+08:00
 draft: false
 keywords: ["kafka","最新数据"]
-description: "简要介绍如何实现Kafka每次都消费最新的数据"
+description: "简要介绍如何以多种方式实现Kafka每次都消费最新的数据"
 tags: ["kafka"]
 categories: ["消息队列"]
 author: "Rosen Lu"
@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 固定组实现-不生效
+## 固定组实现-不生效
 
 将`auto.offset.reset`设置为`latest`同时采用固定group，**此种方式只在第一次读取时有效，后续再次读取时仍然从上次读取的地方开始继续读**，不满足使用要求。
 
@@ -74,7 +74,7 @@ String topic = "raw_message";
 consumer.subscribe(Arrays.asList(topic));
 ```
 
-# 动态组实现-生效
+## 动态组实现-生效
 
 将`auto.offset.reset`设置为`latest`，同时每次消费时将group的名称动态生成，这样即可确保每次读取的都是最新的消息。
 
@@ -97,7 +97,7 @@ String topic = "raw_message";
 consumer.subscribe(Arrays.asList(topic));
 ```
 
-# 固定组实现-生效
+## 固定组实现-生效
 
 将`auto.offset.reset`设置为`latest`的同时，group名称固定不变 ，给对应Consumer调用[**seekToEnd()**](https://kafka.apache.org/0100/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#seekToEnd(java.util.Collection))方法，此种方式不需要动态切换组，推荐使用此方式。
 

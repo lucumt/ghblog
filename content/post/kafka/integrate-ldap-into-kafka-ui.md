@@ -4,7 +4,7 @@ date: 2023-11-20T15:37:31+08:00
 lastmod: 2023-11-20T15:37:31+08:00
 draft: false
 keywords: ["docker","kafka","ldap"]
-description: "在基于Docker搭建的Kafka UI中整合LDAP"
+description: "在基于Docker搭建的Kafka UI中整合LDAP，供学习参考使用"
 tags: ["docker","kafka","ldap"]
 categories: ["容器化","工具使用","消息队列"]
 author: "Rosen Lu"
@@ -53,7 +53,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# kafka安装
+## kafka安装
 
 基于`docker-compose`的方式安装，脚本如下
 
@@ -91,7 +91,7 @@ services:
       - zookeeper
 ```
 
-# kafka-ui的安装
+## kafka-ui的安装
 
 参考[**kafka-ui**](https://github.com/provectus/kafka-ui)的说明，基于`docker-compose`的方式安装，脚本如下
 
@@ -117,9 +117,9 @@ services:
 
 此时同网络下的任何人都能访问，也能通过UI界面对其进行相关修改操作，缺乏权限控制。
 
-# 添加登录
+## 添加登录
 
-## 普通登录
+### 普通登录
 
 普通登录方式的配置脚本如下，此时其账户信息以硬编码的形式存在
 
@@ -146,7 +146,7 @@ services:
 
 ![Kafka UI登录认证](/blog_img/kafka/integrate-ldap-into-kafka-ui/kafka-ui-login-panel.png "Kafka UI登录认证") 
 
-## LDAP登录
+### LDAP登录
 
 `LDAP`登录方式的配置脚本如下，其登录界面与前述一样
 
@@ -173,7 +173,7 @@ services:
       - SPRING_LDAP_USER_FILTER_SEARCH_FILTER="(&(uid={0})(objectClass=inetOrgPerson))"
 ```
 
-# 问题
+## 问题
 
 1. 缺少退出登录功能
 2. 缺少中文汉化界面

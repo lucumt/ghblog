@@ -43,13 +43,13 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 问题描述
+## 问题描述
 
 查看发现说是ip地址耗尽
 
 ![k8s无可用IP导致无法创建pod](/blog_img/k8s/increase-ip-address-range-in-kubernetes/kubectl-pod-show-no-ip-available.png "k8s由于无可用IP而无法创建pod")   
 
-# 问题排查
+## 问题排查
 
 一开始已以为是pod数量限制导致的，查看`/etc/systemd/system/kubelet.service.d/10-kubeadm.conf`结果如下
 
@@ -71,7 +71,7 @@ sequenceDiagrams:
 
 ![节点cidr查询结果](/blog_img/k8s/increase-ip-address-range-in-kubernetes/node-pod-cidr-output.png "节点cidr查询结果")   
 
-# 解决步骤
+## 解决步骤
 
 
 
