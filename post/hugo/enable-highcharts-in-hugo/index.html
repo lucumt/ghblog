@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何在Hugo中开启Highcharts图表支持" /><meta name="keywords" content="hugo, highcharts, go" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何在Hugo中开启Highcharts图表支持以便支持数据统计分析相关的功能" /><meta name="keywords" content="hugo, highcharts, go" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/enable-highcharts-in-hugo/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Hugo中开启Highcharts图表支持">
-  <meta property="og:description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
+  <meta property="og:description" content="简要介绍如何在Hugo中开启Highcharts图表支持以便支持数据统计分析相关的功能">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="在Hugo中开启Highcharts图表支持">
-  <meta itemprop="description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
+  <meta itemprop="description" content="简要介绍如何在Hugo中开启Highcharts图表支持以便支持数据统计分析相关的功能">
   <meta itemprop="datePublished" content="2023-04-02T16:39:51+08:00">
   <meta itemprop="dateModified" content="2023-04-03T16:39:51+08:00">
   <meta itemprop="wordCount" content="3795">
   <meta itemprop="keywords" content="hugo,highcharts,go">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Hugo中开启Highcharts图表支持">
-  <meta name="twitter:description" content="简要介绍如何在Hugo中开启Highcharts图表支持">
+  <meta name="twitter:description" content="简要介绍如何在Hugo中开启Highcharts图表支持以便支持数据统计分析相关的功能">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,20 +182,24 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#修改过程">修改过程</a></li>
-    <li><a href="#展示效果">展示效果</a>
+    <li>
       <ul>
-        <li><a href="#图1-bubble-chart">图1-Bubble chart</a></li>
-        <li><a href="#图2-basic-column">图2-Basic column</a></li>
-        <li><a href="#图3-basic-line">图3-Basic line</a></li>
-        <li><a href="#图4-3d-donut">图4-3D donut</a></li>
-        <li><a href="#图5-tile-map">图5-Tile map</a></li>
-        <li><a href="#图6-sankey-diagram">图6-Sankey diagram</a></li>
-        <li><a href="#图7-gauge-series">图7-Gauge series</a></li>
-        <li><a href="#图8-arc-diagram">图8-Arc diagram</a></li>
+        <li><a href="#修改过程">修改过程</a></li>
+        <li><a href="#展示效果">展示效果</a>
+          <ul>
+            <li><a href="#图1-bubble-chart">图1-Bubble chart</a></li>
+            <li><a href="#图2-basic-column">图2-Basic column</a></li>
+            <li><a href="#图3-basic-line">图3-Basic line</a></li>
+            <li><a href="#图4-3d-donut">图4-3D donut</a></li>
+            <li><a href="#图5-tile-map">图5-Tile map</a></li>
+            <li><a href="#图6-sankey-diagram">图6-Sankey diagram</a></li>
+            <li><a href="#图7-gauge-series">图7-Gauge series</a></li>
+            <li><a href="#图8-arc-diagram">图8-Arc diagram</a></li>
+          </ul>
+        </li>
+        <li><a href="#特殊图表">特殊图表</a></li>
       </ul>
     </li>
-    <li><a href="#特殊图表">特殊图表</a></li>
   </ul>
 </nav>
   </div>
@@ -205,7 +209,7 @@
 	
     <div class="post-content image-border">
 	 <p>基于<a href="/post/hugo/enable-diagrams-in-hugo/">在Hugo中开启图表支持</a>一文，简要说明如何在<code>Hugo</code>中基于<code>Markdown</code>以优雅的方式集成<a href="https://www.highcharts.com/">Highcharts</a>。</p>
-<h1 id="修改过程">修改过程</h1>
+<h2 id="修改过程">修改过程</h2>
 <ol>
 <li>
 <p>在<code>assets/sass/_custom_custom.scss</code>中添加如下代码</p>
@@ -417,9 +421,9 @@
 }
 </div></li>
 </ol>
-<h1 id="展示效果">展示效果</h1>
+<h2 id="展示效果">展示效果</h2>
 <p>处于篇幅考虑，在展示部分只展示最终效果，原始代码请参见<a href="https://raw.githubusercontent.com/lucumt/ghblog/master/content/post/hugo/enable-highcharts-in-hugo.md">enable-highcharts-in-hugo.md</a></p>
-<h2 id="图1-bubble-chart">图1-Bubble chart</h2>
+<h3 id="图1-bubble-chart">图1-Bubble chart</h3>
 <div id="highcharts_6" class="highcharts">  {
   
       chart: {
@@ -546,7 +550,7 @@
       }]
   
   }
-</div><h2 id="图2-basic-column">图2-Basic column</h2>
+</div><h3 id="图2-basic-column">图2-Basic column</h3>
 <div id="highcharts_7" class="highcharts">{
       chart: {
           type: &#39;column&#39;
@@ -616,7 +620,7 @@
   
       }]
   }
-</div><h2 id="图3-basic-line">图3-Basic line</h2>
+</div><h3 id="图3-basic-line">图3-Basic line</h3>
 <div id="highcharts_8" class="highcharts">  {
   
       title: {
@@ -693,7 +697,7 @@
           }]
       }
   }
-</div><h2 id="图4-3d-donut">图4-3D donut</h2>
+</div><h3 id="图4-3d-donut">图4-3D donut</h3>
 <div id="highcharts_9" class="highcharts"> {
       chart: {
           type: &#39;pie&#39;,
@@ -732,7 +736,7 @@
           ]
       }]
   }
-</div><h2 id="图5-tile-map">图5-Tile map</h2>
+</div><h3 id="图5-tile-map">图5-Tile map</h3>
 <div id="highcharts_10" class="highcharts">  {
       chart: {
           type: &#39;tilemap&#39;,
@@ -1173,7 +1177,7 @@
           }]
       }]
   }
-</div><h2 id="图6-sankey-diagram">图6-Sankey diagram</h2>
+</div><h3 id="图6-sankey-diagram">图6-Sankey diagram</h3>
 <div id="highcharts_11" class="highcharts">{
   
       title: {
@@ -1239,7 +1243,7 @@
       }]
   
   }
-</div><h2 id="图7-gauge-series">图7-Gauge series</h2>
+</div><h3 id="图7-gauge-series">图7-Gauge series</h3>
 <div id="highcharts_12" class="highcharts">{
 
     chart: {
@@ -1330,7 +1334,7 @@
     }]
 
 }
-</div><h2 id="图8-arc-diagram">图8-Arc diagram</h2>
+</div><h3 id="图8-arc-diagram">图8-Arc diagram</h3>
 <div id="highcharts_13" class="highcharts"> {
 
     colors: [&#39;#293462&#39;, &#39;#a64942&#39;, &#39;#fe5f55&#39;, &#39;#fff1c1&#39;, &#39;#5bd1d7&#39;, &#39;#ff502f&#39;, &#39;#004d61&#39;, &#39;#ff8a5c&#39;, &#39;#fff591&#39;, &#39;#f5587b&#39;, &#39;#fad3cf&#39;, &#39;#a696c8&#39;, &#39;#5BE7C4&#39;, &#39;#266A2E&#39;, &#39;#593E1A&#39;],
@@ -1412,7 +1416,7 @@
     }]
 
 }
-</div><h1 id="特殊图表">特殊图表</h1>
+</div><h2 id="特殊图表">特殊图表</h2>
 <p>对于某些复杂的<code>Highcharts</code>图表，可尝试将其转化为一个<code>JavaScript</code>对象以兼容前述的实现方案，保持优雅。若实现难度较大，可将相关的<code>html</code>代码直接嵌入<code>markdown</code>中来实现相关功能，但通过此种方式会导致无法对相关的图表进行动态配置。</p>
 <p>下述为一个示例展示，个人推荐直接嵌入<code>html</code>代码。</p>
 <div id="custom_chart_1" class="highcharts"></div>

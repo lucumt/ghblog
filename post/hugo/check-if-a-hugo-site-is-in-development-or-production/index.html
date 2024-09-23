@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="本文翻译自How to check if a Hugo site is in development or production
-" /><meta name="keywords" content="hugo, go, development, production" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译外网中关于如何检测一个Hugo站点是开发环境还是生产环境的博文" /><meta name="keywords" content="hugo, go, development, production" />
 
 
 
@@ -43,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/check-if-a-hugo-site-is-in-development-or-production/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]如何检测一个Hugo站点是开发环境还是生产环境">
-  <meta property="og:description" content="本文翻译自How to check if a Hugo site is in development or production">
+  <meta property="og:description" content="翻译外网中关于如何检测一个Hugo站点是开发环境还是生产环境的博文">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +52,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="[译]如何检测一个Hugo站点是开发环境还是生产环境">
-  <meta itemprop="description" content="本文翻译自How to check if a Hugo site is in development or production">
+  <meta itemprop="description" content="翻译外网中关于如何检测一个Hugo站点是开发环境还是生产环境的博文">
   <meta itemprop="datePublished" content="2022-06-19T12:09:19+08:00">
   <meta itemprop="dateModified" content="2022-06-19T12:09:19+08:00">
   <meta itemprop="wordCount" content="654">
   <meta itemprop="keywords" content="hugo,go,development,production">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]如何检测一个Hugo站点是开发环境还是生产环境">
-  <meta name="twitter:description" content="本文翻译自How to check if a Hugo site is in development or production">
+  <meta name="twitter:description" content="翻译外网中关于如何检测一个Hugo站点是开发环境还是生产环境的博文">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -184,7 +183,7 @@
     <div class="post-content image-border">
 	 <p>本文翻译自<a href="https://dev.to/tylerlwsmith/check-if-a-hugo-site-is-in-development-or-production-2beb"><strong>How to check if a Hugo site is in development or production</strong></a></p>
 <p>有时我们希望能在使用<code>Hugo</code>的时候基于开发环境或生产环境展示不同的内容，在之前我使用过<code>$.Site.IsServer</code>来检查是否运行于开发服务器，不过其无法实现在开发环境查看生产环境的显示样式。</p>
-<h1 id="检查环境">检查环境</h1>
+<h2 id="检查环境">检查环境</h2>
 <p>实际上<code>Hugo</code>有一系列的方式来区分生产环境和开发环境，不过<a href="https://gohugo.io/functions/hugo/">Hugo文档</a>中关于如何区分它们的说明不太友好。</p>
 <p>下述代码展示了在<code>Hugo</code>中检测环境的两种方式：</p>
 
@@ -193,7 +192,7 @@
 {{ hugo.IsProduction }} returns true or false</code>
 </pre>
 <p>当使用<code>hugo server</code>在本地开发时，默认被设置为<code>development</code>，当使用<code>hugo</code>来构建站点时，默认被设置为<code>production</code>。</p>
-<h1 id="基于环境动态展示">基于环境动态展示</h1>
+<h2 id="基于环境动态展示">基于环境动态展示</h2>
 <p>若想实现根据环境动态展示，可使用下述代码中的几种方法之一：</p>
 
 <pre class="line-numbers language-go ">
@@ -214,7 +213,7 @@
   I would render if the environment were manually set to &#34;test&#34;
 {{ end }}</code>
 </pre>
-<h1 id="手工设置环境变量">手工设置环境变量</h1>
+<h2 id="手工设置环境变量">手工设置环境变量</h2>
 <p>若要在编写博文时将环境设置为<code>production</code>，可使用下述命令启动<code>Hugo</code>服务器：</p>
 
 <pre class="line-numbers language-bash ">

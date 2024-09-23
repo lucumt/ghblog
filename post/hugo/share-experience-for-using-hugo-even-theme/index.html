@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="个人Hugo博客关于Even主题的一些使用改进" /><meta name="keywords" content="hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助" /><meta name="keywords" content="hugo, theme, even" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/share-experience-for-using-hugo-even-theme/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="个人Hugo博客关于Even主题的一些使用改进">
-  <meta property="og:description" content="个人Hugo博客关于Even主题的一些使用改进">
+  <meta property="og:description" content="个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="个人Hugo博客关于Even主题的一些使用改进">
-  <meta itemprop="description" content="个人Hugo博客关于Even主题的一些使用改进">
+  <meta itemprop="description" content="个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助">
   <meta itemprop="datePublished" content="2022-09-18T09:43:19+08:00">
   <meta itemprop="dateModified" content="2022-09-18T09:43:19+08:00">
   <meta itemprop="wordCount" content="2196">
   <meta itemprop="keywords" content="hugo,theme,even">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="个人Hugo博客关于Even主题的一些使用改进">
-  <meta name="twitter:description" content="个人Hugo博客关于Even主题的一些使用改进">
+  <meta name="twitter:description" content="个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,45 +180,49 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#github-actions自动部署">GitHub Actions自动部署</a></li>
-    <li><a href="#改进back-to-top">改进Back to top</a>
+    <li>
       <ul>
-        <li><a href="#背景">背景</a></li>
-        <li><a href="#修改代码">修改代码</a></li>
-        <li><a href="#运行效果">运行效果</a></li>
-        <li><a href="#其它">其它</a></li>
-      </ul>
-    </li>
-    <li><a href="#区分draft与非draft">区分Draft与非Draft</a>
-      <ul>
-        <li><a href="#背景-1">背景</a></li>
-        <li><a href="#修改代码-1">修改代码</a></li>
-        <li><a href="#运行效果-1">运行效果</a></li>
-      </ul>
-    </li>
-    <li><a href="#部署时才添加访问统计">部署时才添加访问统计</a>
-      <ul>
-        <li><a href="#背景-2">背景</a></li>
-        <li><a href="#修改代码-2">修改代码</a></li>
-        <li><a href="#使用方式">使用方式</a></li>
-      </ul>
-    </li>
-    <li><a href="#fork-me-on-github">Fork me on Github</a>
-      <ul>
-        <li><a href="#修改代码-3">修改代码</a></li>
-        <li><a href="#运行效果-2">运行效果</a></li>
-      </ul>
-    </li>
-    <li><a href="#代码块可复制">代码块可复制</a>
-      <ul>
-        <li><a href="#修改代码-4">修改代码</a></li>
-        <li><a href="#运行效果-3">运行效果</a></li>
-      </ul>
-    </li>
-    <li><a href="#添加搜索功能">添加搜索功能</a>
-      <ul>
-        <li><a href="#修改代码-5">修改代码</a></li>
-        <li><a href="#运行效果3">运行效果</a></li>
+        <li><a href="#github-actions自动部署">GitHub Actions自动部署</a></li>
+        <li><a href="#改进back-to-top">改进Back to top</a>
+          <ul>
+            <li><a href="#背景">背景</a></li>
+            <li><a href="#修改代码">修改代码</a></li>
+            <li><a href="#运行效果">运行效果</a></li>
+            <li><a href="#其它">其它</a></li>
+          </ul>
+        </li>
+        <li><a href="#区分draft与非draft">区分Draft与非Draft</a>
+          <ul>
+            <li><a href="#背景-1">背景</a></li>
+            <li><a href="#修改代码-1">修改代码</a></li>
+            <li><a href="#运行效果-1">运行效果</a></li>
+          </ul>
+        </li>
+        <li><a href="#部署时才添加访问统计">部署时才添加访问统计</a>
+          <ul>
+            <li><a href="#背景-2">背景</a></li>
+            <li><a href="#修改代码-2">修改代码</a></li>
+            <li><a href="#使用方式">使用方式</a></li>
+          </ul>
+        </li>
+        <li><a href="#fork-me-on-github">Fork me on Github</a>
+          <ul>
+            <li><a href="#修改代码-3">修改代码</a></li>
+            <li><a href="#运行效果-2">运行效果</a></li>
+          </ul>
+        </li>
+        <li><a href="#代码块可复制">代码块可复制</a>
+          <ul>
+            <li><a href="#修改代码-4">修改代码</a></li>
+            <li><a href="#运行效果-3">运行效果</a></li>
+          </ul>
+        </li>
+        <li><a href="#添加搜索功能">添加搜索功能</a>
+          <ul>
+            <li><a href="#修改代码-5">修改代码</a></li>
+            <li><a href="#运行效果3">运行效果</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -230,13 +234,13 @@
 	
     <div class="post-content image-border">
 	 <p>记录下个人<a href="https://gohugo.io/"><strong>Hugo</strong></a>博客使用<a href="https://github.com/olOwOlo/hugo-theme-even"><strong>Even</strong></a>主题时的一些使用心得与个人改进。</p>
-<h1 id="github-actions自动部署">GitHub Actions自动部署</h1>
+<h2 id="github-actions自动部署">GitHub Actions自动部署</h2>
 <p>参见<a href="/post/hugo/using-github-action-to-auto-build-deploy/">利用GitHub Action实现Hugo博客在GitHub Pages自动部署</a>。</p>
-<h1 id="改进back-to-top">改进Back to top</h1>
-<h2 id="背景">背景</h2>
+<h2 id="改进back-to-top">改进Back to top</h2>
+<h3 id="背景">背景</h3>
 <p>原始的返回顶部按钮太小且背景提示色不明显，查看起来不直观。</p>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/back-to-top-original-display.png" alt="返回顶部按钮原始展示方式" title="返回顶部按钮原始展示方式"></p>
-<h2 id="修改代码">修改代码</h2>
+<h3 id="修改代码">修改代码</h3>
 <p>在<code>assets/sass/_partial/_back-to-top.scss</code>中修改如下配置</p>
 
 <pre class="line-numbers language-scss ">
@@ -266,10 +270,10 @@
   }
 }</code>
 </pre>
-<h2 id="运行效果">运行效果</h2>
+<h3 id="运行效果">运行效果</h3>
 <p>改进后的效果如下所示，不仅按钮变大，而且也能根据不同的主题颜色动态的进行改变。</p>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/back-to-top-button-display-with-theme-color.png" alt="返回顶部按钮改进显示" title="返回顶部按钮改进显示"></p>
-<h2 id="其它">其它</h2>
+<h3 id="其它">其它</h3>
 <p>在<code>assets/sass/_partial/_back-to-top.scss</code>中有如下代码用于控制此按钮只有在非手机浏览器的环境下显示，此方式可用于其它需要在手机浏览器环境禁用的场景。</p>
 
 <pre class="line-numbers language-scss ">
@@ -279,8 +283,8 @@
   }
 }</code>
 </pre>
-<h1 id="区分draft与非draft">区分Draft与非Draft</h1>
-<h2 id="背景-1">背景</h2>
+<h2 id="区分draft与非draft">区分Draft与非Draft</h2>
+<h3 id="背景-1">背景</h3>
 <ul>
 <li>
 <p>有时候会遇到一些典型场景或者灵感突发，想把它们写入博客中，但由于时间限制一时半会又难以完成，可创建对应的<code>markdown</code>文件，将<code>draft</code>设置为<code>true</code>，然后在正常打包时即可排除这些草稿文章，在本地编写时可用类似<code>hugo server -w -D</code>的指令来包含草稿文章。</p>
@@ -290,7 +294,7 @@
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-article-list-do-not-show-draft-status.png" alt="无法区分是否为草稿文章" title="无法区分是否为草稿文章"></p>
 </li>
 </ul>
-<h2 id="修改代码-1">修改代码</h2>
+<h3 id="修改代码-1">修改代码</h3>
 <ul>
 <li>
 <p>测试<code>assets/sass/_partial/_archive.scss</code>添加如下代码</p>
@@ -352,12 +356,12 @@
 </pre>
 </li>
 </ul>
-<h2 id="运行效果-1">运行效果</h2>
+<h3 id="运行效果-1">运行效果</h3>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-article-list-with-draft-status.png" alt="列表中显示文章状态" title="列表中显示文章状态"></p>
-<h1 id="部署时才添加访问统计">部署时才添加访问统计</h1>
-<h2 id="背景-2">背景</h2>
+<h2 id="部署时才添加访问统计">部署时才添加访问统计</h2>
+<h3 id="背景-2">背景</h3>
 <p>在本地编写博客时，需要多次访问未完成的页面，此种页面没必要添加记录到网站访问次数统计中。</p>
-<h2 id="修改代码-2">修改代码</h2>
+<h3 id="修改代码-2">修改代码</h3>
 <p>在<code>layouts/partials/scripts.html</code>中修改如下，在最外层添加<code> if (in (slice (getenv &quot;HUGO_ENV&quot;) hugo.Environment) &quot;production&quot;)</code>来判断环境</p>
 
 <pre class="line-numbers language-html ">
@@ -404,11 +408,11 @@
 
 {{- end -}}</code>
 </pre>
-<h2 id="使用方式">使用方式</h2>
+<h3 id="使用方式">使用方式</h3>
 <p>在项目部署时通过添加<code>-e &quot;production&quot;</code>来指定为生产环境，如<code>hugo -b &quot;https://lucumt.info/&quot; -e &quot;production&quot;</code>。</p>
-<h1 id="fork-me-on-github">Fork me on Github</h1>
+<h2 id="fork-me-on-github">Fork me on Github</h2>
 <p>原始代码来源<a href="https://github.com/olOwOlo/hugo-theme-even/pull/412">https://github.com/olOwOlo/hugo-theme-even/pull/412</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，参考代码见<a href="https://www.cnblogs.com/quanxiaoha/p/10490484.html">如何在博客园添加 Fork me on GitHub 彩带效果</a></p>
-<h2 id="修改代码-3">修改代码</h2>
+<h3 id="修改代码-3">修改代码</h3>
 <ul>
 <li>
 <p><code>config.toml</code>中添加如下配置，若<code>ithubForkURL</code>值为空，则不显示<strong>Fork me on GitHub</strong></p>
@@ -442,11 +446,11 @@
 <p><code>static</code>目录下添加一个名为<code>forkme_right_gray.png</code>的图片，</p>
 </li>
 </ul>
-<h2 id="运行效果-2">运行效果</h2>
+<h3 id="运行效果-2">运行效果</h3>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/forkme-on-github-icon.png" alt="forkme on github效果" title="forkme on github效果"></p>
-<h1 id="代码块可复制">代码块可复制</h1>
+<h2 id="代码块可复制">代码块可复制</h2>
 <p>原始代码来源<a href="https://github.com/olOwOlo/hugo-theme-even/pull/413">https://github.com/olOwOlo/hugo-theme-even/pull/413</a></p>
-<h2 id="修改代码-4">修改代码</h2>
+<h3 id="修改代码-4">修改代码</h3>
 <ul>
 <li>
 <p><code>config.toml</code>中添加如下配置，用于控制是否开启代码复制功能</p>
@@ -517,11 +521,11 @@
 </pre>
 </li>
 </ul>
-<h2 id="运行效果-3">运行效果</h2>
+<h3 id="运行效果-3">运行效果</h3>
 <p>在非手机浏览器中当开启<code>enableCopyCode</code>开关后，在代码左侧会出现如下效果<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <p><img src="/blog_img/hugo/share-experience-for-using-hugo-even-theme/copy-code-button-on-top-right.png" alt="复制代码按钮" title="复制代码按钮"></p>
-<h1 id="添加搜索功能">添加搜索功能</h1>
-<h2 id="修改代码-5">修改代码</h2>
+<h2 id="添加搜索功能">添加搜索功能</h2>
+<h3 id="修改代码-5">修改代码</h3>
 <p>此部分的代码主要参考<a href="https://sobaigu.com/hugo-set-featuer-search.html">给hugo添加搜索功能</a>基于<a href="https://fusejs.io/">fuse</a>实现的，由于基于此博文实现的搜索效果展示比较简陋，故个人做了如下改进:</p>
 <ul>
 <li>
@@ -561,7 +565,7 @@
 </pre>
 </li>
 </ul>
-<h2 id="运行效果3">运行效果<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></h2>
+<h3 id="运行效果3">运行效果<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></h3>
 <ul>
 <li>
 <p>默认的搜索界面</p>

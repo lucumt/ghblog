@@ -16,10 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="说明
-若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。
-" /><meta name="keywords" content="flowchart, sequence, mermaid, hugo, markdown" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能" /><meta name="keywords" content="flowchart, sequence, mermaid, hugo, markdown" />
 
 
 
@@ -45,9 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Hugo中开启图表支持">
-  <meta property="og:description" content="说明
-若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
+  <meta property="og:description" content="简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -57,18 +52,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="在Hugo中开启图表支持">
-  <meta itemprop="description" content="说明
-若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
+  <meta itemprop="description" content="简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能">
   <meta itemprop="datePublished" content="2023-03-27T09:46:50+08:00">
   <meta itemprop="dateModified" content="2023-03-27T09:46:50+08:00">
   <meta itemprop="wordCount" content="5157">
   <meta itemprop="keywords" content="flowchart,sequence,mermaid,hugo,markdown">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Hugo中开启图表支持">
-  <meta name="twitter:description" content="说明
-若页面中图表显示不正常，可能是由于js文件加载和图表渲染需要时间，请多等待几秒钟！
-简要介绍在如何在Hugo博客中基于Even主题开启flowchart、sequence和mermaid图表的支持。">
+  <meta name="twitter:description" content="简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -190,54 +181,58 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#修改说明">修改说明</a></li>
-    <li><a href="#flowchart图表">flowchart图表</a>
+    <li>
       <ul>
-        <li><a href="#修改过程">修改过程</a></li>
-        <li><a href="#自定义样式">自定义样式</a></li>
-        <li><a href="#展示效果">展示效果</a>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#修改说明">修改说明</a></li>
+        <li><a href="#flowchart图表">flowchart图表</a>
           <ul>
-            <li><a href="#图表1">图表1</a></li>
-            <li><a href="#图表2">图表2</a></li>
-            <li><a href="#图表3">图表3</a></li>
+            <li><a href="#修改过程">修改过程</a></li>
+            <li><a href="#自定义样式">自定义样式</a></li>
+            <li><a href="#展示效果">展示效果</a>
+              <ul>
+                <li><a href="#图表1">图表1</a></li>
+                <li><a href="#图表2">图表2</a></li>
+                <li><a href="#图表3">图表3</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#sequence图表">sequence图表</a>
-      <ul>
-        <li><a href="#修改过程-1">修改过程</a></li>
-        <li><a href="#自定义样式-1">自定义样式</a></li>
-        <li><a href="#展示效果-1">展示效果</a>
+        <li><a href="#sequence图表">sequence图表</a>
           <ul>
-            <li><a href="#图表1-1">图表1</a></li>
-            <li><a href="#图表2-1">图表2</a></li>
-            <li><a href="#图表3-1">图表3</a></li>
-            <li><a href="#图表4">图表4</a></li>
-            <li><a href="#图表5">图表5</a></li>
+            <li><a href="#修改过程-1">修改过程</a></li>
+            <li><a href="#自定义样式-1">自定义样式</a></li>
+            <li><a href="#展示效果-1">展示效果</a>
+              <ul>
+                <li><a href="#图表1-1">图表1</a></li>
+                <li><a href="#图表2-1">图表2</a></li>
+                <li><a href="#图表3-1">图表3</a></li>
+                <li><a href="#图表4">图表4</a></li>
+                <li><a href="#图表5">图表5</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#mermaid图表">mermaid图表</a>
-      <ul>
-        <li><a href="#修改过程-2">修改过程</a></li>
-        <li><a href="#自定义样式-2">自定义样式</a></li>
-        <li><a href="#展示效果-2">展示效果</a>
+        <li><a href="#mermaid图表">mermaid图表</a>
           <ul>
-            <li><a href="#图表1-sequence">图表1-Sequence</a></li>
-            <li><a href="#图表2-flow">图表2-Flow</a></li>
-            <li><a href="#图表3-class">图表3-Class</a></li>
-            <li><a href="#图表4-state">图表4-State</a></li>
-            <li><a href="#图表5-er">图表5-ER</a></li>
-            <li><a href="#图表6-gantt">图表6-Gantt</a></li>
-            <li><a href="#图表7-userjourney">图表7-UserJourney</a></li>
-            <li><a href="#图表8-git">图表8-Git</a></li>
-            <li><a href="#图表9-pie">图表9-Pie</a></li>
-            <li><a href="#图表10-mindmap">图表10-Mindmap</a></li>
-            <li><a href="#图表11-timeline">图表11-timeline</a></li>
-            <li><a href="#图表12-graph">图表12-graph</a></li>
+            <li><a href="#修改过程-2">修改过程</a></li>
+            <li><a href="#自定义样式-2">自定义样式</a></li>
+            <li><a href="#展示效果-2">展示效果</a>
+              <ul>
+                <li><a href="#图表1-sequence">图表1-Sequence</a></li>
+                <li><a href="#图表2-flow">图表2-Flow</a></li>
+                <li><a href="#图表3-class">图表3-Class</a></li>
+                <li><a href="#图表4-state">图表4-State</a></li>
+                <li><a href="#图表5-er">图表5-ER</a></li>
+                <li><a href="#图表6-gantt">图表6-Gantt</a></li>
+                <li><a href="#图表7-userjourney">图表7-UserJourney</a></li>
+                <li><a href="#图表8-git">图表8-Git</a></li>
+                <li><a href="#图表9-pie">图表9-Pie</a></li>
+                <li><a href="#图表10-mindmap">图表10-Mindmap</a></li>
+                <li><a href="#图表11-timeline">图表11-timeline</a></li>
+                <li><a href="#图表12-graph">图表12-graph</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -254,12 +249,12 @@
 <p>若页面中图表显示不正常，可能是由于<code>js</code>文件加载和图表渲染需要时间，请多等待几秒钟！</p>
 </div>
 <p>简要介绍在如何在<code>Hugo</code>博客中基于<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a>主题开启<a href="https://flowchart.js.org/">flowchart</a>、<a href="https://bramp.github.io/js-sequence-diagrams/">sequence</a>和<a href="https://mermaid.js.org/">mermaid</a>图表的支持。</p>
-<h1 id="背景">背景</h1>
+<h2 id="背景">背景</h2>
 <p>个人<code>Hugo</code>博客切换为<code>Even</code>已经有好几年了，相关功能也是基于此主题扩展而来，不过<code>Even</code>主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，同时个人发现该主题下<code>layouts/partials/scripts.html</code>对于<code>flowchart</code>和<code>sequence</code>的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！</p>
 <p>PS: <code>Even</code>主题<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>很受欢迎，希望作者早日恢复维护!</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/even-theme-website-not-display-diagram.png" alt="Even主题的作者已经没有维护" title="Even主题的作者已经没有维护"></p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/even-theme-does-not-have-diagram-init-code.png" alt="Even主题无法初始化图表" title="Even主题无法初始化图表"></p>
-<h1 id="修改说明">修改说明</h1>
+<h2 id="修改说明">修改说明</h2>
 <p>由于<code>Hugo</code>支持代码高亮，当图表相关的数据当采用<code>Markdown</code>的codeblock方式写入时，如下图所示默认情况下，其会以代码高亮的方式显示，很明显此种方式不满足要求。</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-code.png" alt="默认情况下按照代码高亮显示" title="默认情况下按照代码高亮显示"></p>
 <p>从上图可知经过高亮处理后的图表代码已经与<code>html</code>标签混杂在一起，为了能正常展示图表数据，必须要有一种方式能够准确的获取原始的图表代码，此时需要借助<code>Hugo</code>的<a href="https://gohugo.io/templates/render-hooks/">Render Hooks</a>功能，其主要功能是<strong>让我们通过自定义的模板来覆盖<code>Hugo</code>默认的功能实现</strong>。如下图所示经过Markup处理后的，会将原始的代码文件基于对应codeblock文件中的代码来展示，在对应的<code>html</code>中包含我们原始的代码块文件，采用<code>JavaScript</code>或<code>jQuery</code>都能快速的获取到对应代码，之后调用对应图表<code>JavaScript</code>库来进行渲染或初始化即可。</p>
@@ -281,8 +276,8 @@
 <p>当我们最终修改完毕后，若页面上没有正常展示相关的图表且浏览器控制台出现如下错误，需要在<code>layouts/partials/scripts.html</code>或<code>config.toml</code>中重新修改相关报错文件的<code>integrity</code>值，或在<code>static/lib</code>下重新下载相关的文件，确保其校验值一致，即可消除错误。</p>
 </div>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/invalid_integrity_check_for_js_and_css.png" alt="加载js和css文件时提示资源完整性校验不通过" title="加载js和css文件时提示资源完整性校验不通过"></p>
-<h1 id="flowchart图表">flowchart图表</h1>
-<h2 id="修改过程">修改过程</h2>
+<h2 id="flowchart图表">flowchart图表</h2>
+<h3 id="修改过程">修改过程</h3>
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-flow.html</code>并添加如下代码</p>
@@ -345,13 +340,13 @@
 </pre>
 </li>
 </ul>
-<h2 id="自定义样式">自定义样式</h2>
+<h3 id="自定义样式">自定义样式</h3>
 <p>不同于<code>sequence</code>,<code>flowchart</code>的使用很灵活，其<a href="https://flowchart.js.org/">官网</a>上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何对其中的<code>flowstate</code>进行配置从而让图表展示不同的样式。</p>
 <p>为了实现自定义样式的展示，需要了解<code>flowchart</code>的语法,下图展示了其主要语法，更具体的可参见<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，实际使用中我们主要通过对<code>flowstate</code>来实现自定义样式显示。</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/flowchart-grammer-explanation.png" alt="flowchart流程图语法展示" title="flowchart流程图语法展示"></p>
 <p>下图展示了一个通过设置不同<code>flowstate</code>来设置流程图不同组件样式的示例。
 <img src="/blog_img/hugo/enable-diagrams-in-hugo/flowchart-flowstate-custom-config.png" alt="flowstate自定义样式设置" title="flowstate自定义样式设置"></p>
-<h2 id="展示效果">展示效果</h2>
+<h3 id="展示效果">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
 
 <pre class="line-numbers language-json ">
@@ -390,7 +385,7 @@
               }
             }&#34;</code>
 </pre>
-<h3 id="图表1">图表1</h3>
+<h4 id="图表1">图表1</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -422,7 +417,7 @@ cond(yes)->io->e
 cond(no)->sub1(right)->op
 </div></li>
 </ul>
-<h3 id="图表2">图表2</h3>
+<h4 id="图表2">图表2</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -456,7 +451,7 @@ cond(yes,right)->out->e
 cond(no)->sub
 </div></li>
 </ul>
-<h3 id="图表3">图表3</h3>
+<h4 id="图表3">图表3</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -499,8 +494,8 @@ c2(yes)->io->e
 c2(no)->op2->e
 </div></li>
 </ul>
-<h1 id="sequence图表">sequence图表</h1>
-<h2 id="修改过程-1">修改过程</h2>
+<h2 id="sequence图表">sequence图表</h2>
+<h3 id="修改过程-1">修改过程</h3>
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-sequence.html</code>并添加如下代码</p>
@@ -564,7 +559,7 @@ c2(no)->op2->e
 </pre>
 </li>
 </ul>
-<h2 id="自定义样式-1">自定义样式</h2>
+<h3 id="自定义样式-1">自定义样式</h3>
 <p>在<code>sequence</code>的<a href="https://bramp.github.io/js-sequence-diagrams/">官方网站</a>上对于该图表的初始化只提供的<code>theme</code>这一个属性而且其值也只有simple和hand两个选项，对于字体，背景色等没有像<code>flowchart</code>那么丰富的支持。</p>
 <p>经过多次尝试后发现支持<code>theme</code>、<code>fonts-size</code>和<code>font-family</code>这3个属性配置，显然不能满足使用要求。</p>
 <p>一开始自己以为是自己没找到地方，翻遍其<a href="https://github.com/bramp/js-sequence-diagrams">GitHub项目</a>后在<a href="https://github.com/bramp/js-sequence-diagrams/blob/master/dist/sequence-diagram.js">sequence-diagram.js</a>上找到了如下说明，<strong>作者自己承认实现不够完善，但此项目已经至少3年没有维护！</strong></p>
@@ -572,7 +567,7 @@ c2(no)->op2->e
 <p>What，于是乎我只能自己fork源码自己修改了，修改好的代码参见<a href="https://github.com/lucumt/js-sequence-diagrams/blob/master/src/sequence-diagram.js">sequence-diagram.js</a>,在使用时用此文件或者压缩后的替换原有的，然后修改<code>integrity</code>即可。</p>
 <p><code>sequence</code>图表是基于<a href="https://www.w3schools.com/graphics/svg_intro.asp">SVG</a>实现，故而自己的修改也是从<code>SVG</code>着手，由于时间关系自己只修改了<a href="https://www.w3schools.com/graphics/svg_line.asp">SVG Line</a>和<a href="https://www.w3schools.com/graphics/svg_rect.asp">SVG Rectangle</a>两个组件，修改后的使用效果如下：</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/sequence-custom-config.png" alt="sequence图表动态配置" title="sequence图表动态配置"></p>
-<h2 id="展示效果-1">展示效果</h2>
+<h3 id="展示效果-1">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
 
 <pre class="line-numbers language-json ">
@@ -598,7 +593,7 @@ c2(no)->op2->e
                 }
             }&#34;</code>
 </pre>
-<h3 id="图表1-1">图表1</h3>
+<h4 id="图表1-1">图表1</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -622,7 +617,7 @@ C->>D: Open arrow
 D-->>A: Dashed open arrow
 </div></li>
 </ul>
-<h3 id="图表2-1">图表2</h3>
+<h4 id="图表2-1">图表2</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -646,7 +641,7 @@ Note over A: Note over A
 Note over A,B: Note over both A and B
 </div></li>
 </ul>
-<h3 id="图表3-1">图表3</h3>
+<h4 id="图表3-1">图表3</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -668,7 +663,7 @@ participant A
 Note right of A: By listing the participants\n you can change their order
 </div></li>
 </ul>
-<h3 id="图表4">图表4</h3>
+<h4 id="图表4">图表4</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -690,7 +685,7 @@ China-->Andrew: How are you?
 Andrew->>China: I am good thanks!
 </div></li>
 </ul>
-<h3 id="图表5">图表5</h3>
+<h4 id="图表5">图表5</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -716,9 +711,9 @@ Module-->>App: Yay!
 App->>System: Stop
 </div></li>
 </ul>
-<h1 id="mermaid图表">mermaid图表</h1>
+<h2 id="mermaid图表">mermaid图表</h2>
 <p><a href="https://mermaid.js.org/">mermaid</a>是一个功能强大的<code>Markdown</code>图表显示控件，其本身的功能已经包含前述的<code>flowchart</code>和<code>sequence</code>，但由于<code>Even</code>主题的作者默认并没有加上此图表的支持，同时<code>Hugo</code>的官网有专门的配置说明<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，故本次一并加上。</p>
-<h2 id="修改过程-2">修改过程</h2>
+<h3 id="修改过程-2">修改过程</h3>
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-mermaid.html</code>并添加如下代码</p>
@@ -769,10 +764,10 @@ App->>System: Stop
 </pre>
 </li>
 </ul>
-<h2 id="自定义样式-2">自定义样式</h2>
+<h3 id="自定义样式-2">自定义样式</h3>
 <p><code>mermaid</code>图表的自定义配置主要基于themes来实现，在其<a href="https://mermaid.js.org/config/theming.html">官网文档</a>上有很详细的说明，下图为一个简单的示例</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/mermaid-custom-config.png" alt="mermaid图表动态配置" title="mermaid图表动态配置"></p>
-<h2 id="展示效果-2">展示效果</h2>
+<h3 id="展示效果-2">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
 
 <pre class="line-numbers language-json ">
@@ -782,7 +777,7 @@ App->>System: Stop
      &#39;theme&#39;:&#39;forest&#39;
   }&#34;</code>
 </pre>
-<h3 id="图表1-sequence">图表1-Sequence</h3>
+<h4 id="图表1-sequence">图表1-Sequence</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -815,7 +810,7 @@ Bob-->>John: Jolly good!
 </div>
 </li>
 </ul>
-<h3 id="图表2-flow">图表2-Flow</h3>
+<h4 id="图表2-flow">图表2-Flow</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -842,7 +837,7 @@ flowchart TD
 </div>
 </li>
 </ul>
-<h3 id="图表3-class">图表3-Class</h3>
+<h4 id="图表3-class">图表3-Class</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -899,7 +894,7 @@ classDiagram
 </div>
 </li>
 </ul>
-<h3 id="图表4-state">图表4-State</h3>
+<h4 id="图表4-state">图表4-State</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -928,7 +923,7 @@ stateDiagram-v2
 </div>
 </li>
 </ul>
-<h3 id="图表5-er">图表5-ER</h3>
+<h4 id="图表5-er">图表5-ER</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -961,7 +956,7 @@ erDiagram
 </div>
 </li>
 </ul>
-<h3 id="图表6-gantt">图表6-Gantt</h3>
+<h4 id="图表6-gantt">图表6-Gantt</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -992,7 +987,7 @@ gantt
 </div>
 </li>
 </ul>
-<h3 id="图表7-userjourney">图表7-UserJourney</h3>
+<h4 id="图表7-userjourney">图表7-UserJourney</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -1025,7 +1020,7 @@ journey
 </div>
 </li>
 </ul>
-<h3 id="图表8-git">图表8-Git</h3>
+<h4 id="图表8-git">图表8-Git</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -1062,7 +1057,7 @@ gitGraph
 </div>
 </li>
 </ul>
-<h3 id="图表9-pie">图表9-Pie</h3>
+<h4 id="图表9-pie">图表9-Pie</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -1085,7 +1080,7 @@ pie title Pets adopted by volunteers
 </div>
 </li>
 </ul>
-<h3 id="图表10-mindmap">图表10-Mindmap</h3>
+<h4 id="图表10-mindmap">图表10-Mindmap</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -1134,7 +1129,7 @@ mindmap
 </div>
 </li>
 </ul>
-<h3 id="图表11-timeline">图表11-timeline</h3>
+<h4 id="图表11-timeline">图表11-timeline</h4>
 <ul>
 <li>
 <p>原始代码</p>
@@ -1161,7 +1156,7 @@ mindmap
 </div>
 </li>
 </ul>
-<h3 id="图表12-graph">图表12-graph</h3>
+<h4 id="图表12-graph">图表12-graph</h4>
 <ul>
 <li>
 <p>原始代码</p>

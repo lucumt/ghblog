@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="基于hugo中的Even主题来动态的修改博客样式" /><meta name="keywords" content="hugo" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要记录自己基于hugo中的Even主题对自己的博客显示样式进行修改，同时支持动态切换皮肤" /><meta name="keywords" content="hugo" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/change-hugo-style-in-even-theme/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Hugo生成的博客中动态的修改样式">
-  <meta property="og:description" content="基于hugo中的Even主题来动态的修改博客样式">
+  <meta property="og:description" content="简要记录自己基于hugo中的Even主题对自己的博客显示样式进行修改，同时支持动态切换皮肤">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="在Hugo生成的博客中动态的修改样式">
-  <meta itemprop="description" content="基于hugo中的Even主题来动态的修改博客样式">
+  <meta itemprop="description" content="简要记录自己基于hugo中的Even主题对自己的博客显示样式进行修改，同时支持动态切换皮肤">
   <meta itemprop="datePublished" content="2022-08-01T17:04:09+08:00">
   <meta itemprop="dateModified" content="2022-08-01T17:04:09+08:00">
   <meta itemprop="wordCount" content="1493">
   <meta itemprop="keywords" content="hugo">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Hugo生成的博客中动态的修改样式">
-  <meta name="twitter:description" content="基于hugo中的Even主题来动态的修改博客样式">
+  <meta name="twitter:description" content="简要记录自己基于hugo中的Even主题对自己的博客显示样式进行修改，同时支持动态切换皮肤">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,23 +180,27 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#风格对比">风格对比</a></li>
-    <li><a href="#源码分析">源码分析</a></li>
-    <li><a href="#样式修改">样式修改</a>
+    <li>
       <ul>
-        <li><a href="#结果展示">结果展示</a>
+        <li><a href="#风格对比">风格对比</a></li>
+        <li><a href="#源码分析">源码分析</a></li>
+        <li><a href="#样式修改">样式修改</a>
           <ul>
-            <li><a href="#default样式">Default样式</a></li>
-            <li><a href="#mint-green样式">Mint Green样式</a></li>
-            <li><a href="#cobalt-blue样式">Cobalt Blue样式</a></li>
-            <li><a href="#hot-pink样式">Hot Pink样式</a></li>
-            <li><a href="#dark-violet样式">Dark Violet样式</a></li>
+            <li><a href="#结果展示">结果展示</a>
+              <ul>
+                <li><a href="#default样式">Default样式</a></li>
+                <li><a href="#mint-green样式">Mint Green样式</a></li>
+                <li><a href="#cobalt-blue样式">Cobalt Blue样式</a></li>
+                <li><a href="#hot-pink样式">Hot Pink样式</a></li>
+                <li><a href="#dark-violet样式">Dark Violet样式</a></li>
+              </ul>
+            </li>
+            <li><a href="#扩展">扩展</a></li>
           </ul>
         </li>
-        <li><a href="#扩展">扩展</a></li>
+        <li><a href="#致谢">致谢</a></li>
       </ul>
     </li>
-    <li><a href="#致谢">致谢</a></li>
   </ul>
 </nav>
   </div>
@@ -207,7 +211,7 @@
     <div class="post-content image-border">
 	 <p>自己一直特别羡慕<a href="https://www.cnblogs.com"><strong>博客园</strong></a>上某些博主的博文样式（如<a href="https://www.cnblogs.com/wupeixuan/p/13450815.html">武培轩</a>,<a href="https://www.cnblogs.com/javaguide/p/16385150.html">JavaGuide</a>)，这些博文样式第一眼看起来就很清爽,让人很有阅读的欲望，而我总感觉自己博客的样式特丑陋。即使不关注内容，只看排版布局和样式，有时候自己写完一篇文章自己都不想去看，何况别人！</p>
 <p>终于有一天我受不了自己的博客样式，决定对其升级一版，在这个过程中发现个人采用的博客主题<a href="https://github.com/olOwOlo/hugo-theme-even"><strong>Even</strong></a>功能很强大，基于上没做啥修改就达到了自己想要的效果，特此记录下。</p>
-<h1 id="风格对比">风格对比</h1>
+<h2 id="风格对比">风格对比</h2>
 <p>个人博客基于<a href="https://go.dev/"><strong>Golang</strong></a>语言开发的<a href="https://gohugo.io/"><strong>Hugo</strong></a>最开始是采用<a href="https://github.com/tmaiaroto/hugo-redlounge/"><strong>hugo-redlounge</strong></a>主题来实现的，经过一段时间的使用之后感觉<code>hugo-redlounge</code>主题功能不丰富且左侧会固定占用一部分宽度来展示个人信息，而这部分其实并无太大意义，故后来将其切换为如今的<code>Even</code>样式。</p>
 <ul>
 <li>
@@ -224,7 +228,7 @@
 </li>
 </ul>
 <p>切换后虽然相对于与<code>hugo-redlounge</code>主题当前博客的功能和界面美观性有一定提升，但是和博客园中的博文样式比起来直观感觉还是有一定差距，尤其是在包含代码段时淡黄色的背景看起来略微不舒服(如上图)。</p>
-<h1 id="源码分析">源码分析</h1>
+<h2 id="源码分析">源码分析</h2>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-code-style-css-code.png" alt="Even主题中的代码样式的设置" title="Even主题中的代码样式的设置"></p>
 <p>个人对于<code>Even</code>主题最不满意的是在显示代码段时其样式不太符合自己预期，在浏览器中分析代码段对应的<code>CSS</code>样式，可看出是由如下<code>CSS</code>代码控制的：</p>
 
@@ -293,23 +297,23 @@ $content-table-border-color: darken($deputy-color, 3%) !default;
 // Color of the code background.
 $code-background: $deputy-color !default;</code>
 </pre>
-<h1 id="样式修改">样式修改</h1>
+<h2 id="样式修改">样式修改</h2>
 <p>由于<code>SCSS</code>文件需要编译成<code>CSS</code>文件后才能被使用，而<code>Hugo</code>默认版本是不支持<code>SCSS</code>编译的，故需要下载<code>Hugo Extended</code>版本</p>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/hugo-extended-version-download.png" alt="Hugo下载Extended版本" title="Hugo下载Extended版本"></p>
 <p>下载完毕后，需将其添加到环境变量，其各种指令的用法与默认版<code>Hugo</code>的用法相同，根据实际情况在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中修改<code>$theme-color-config</code>的值，然后调用<code>hugo server -w -D</code>等命令即可实时展示修改效果。</p>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-color-config.png" alt="Even主题颜色设置" title="Even主题颜色设置"></p>
-<h2 id="结果展示">结果展示</h2>
-<h3 id="default样式">Default样式</h3>
+<h3 id="结果展示">结果展示</h3>
+<h4 id="default样式">Default样式</h4>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-default-style.png" alt="Even主题Default样式" title="Even主题Default样式"></p>
-<h3 id="mint-green样式">Mint Green样式</h3>
+<h4 id="mint-green样式">Mint Green样式</h4>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-mint-green-style.png" alt="Even主题Mint Green样式" title="Even主题Mint Green样式"></p>
-<h3 id="cobalt-blue样式">Cobalt Blue样式</h3>
+<h4 id="cobalt-blue样式">Cobalt Blue样式</h4>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-cobalt-blue-style.png" alt="Even主题Cobalt Blue样式" title="Even主题Cobalt Blue样式"></p>
-<h3 id="hot-pink样式">Hot Pink样式</h3>
+<h4 id="hot-pink样式">Hot Pink样式</h4>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-hot-pink-style.png" alt="Even主题Hot Pink样式" title="Even主题Hot Pink样式"></p>
-<h3 id="dark-violet样式">Dark Violet样式</h3>
+<h4 id="dark-violet样式">Dark Violet样式</h4>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-dark-violet-style.png" alt="Even主题Dark Violet样式" title="Even主题Dark Violet样式"></p>
-<h2 id="扩展">扩展</h2>
+<h3 id="扩展">扩展</h3>
 <p>可根据个人喜好在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>动态的添加自己喜欢的颜色配置</p>
 
 <pre class="line-numbers language-scss ">
@@ -327,7 +331,7 @@ $theme-color-map: (
   &#39;Dark Violet&#39;: #9932CC #f5f4fa
 );</code>
 </pre>
-<h1 id="致谢">致谢</h1>
+<h2 id="致谢">致谢</h2>
 <ul>
 <li><a href="https://github.com/olOwOlo/hugo-theme-even">https://github.com/olOwOlo/hugo-theme-even</a></li>
 <li><a href="https://github.com/ahonn/hexo-theme-even">https://github.com/ahonn/hexo-theme-even</a></li>

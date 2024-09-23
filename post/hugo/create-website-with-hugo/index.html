@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="飞狐" /><meta name="description" content="Blog of Rosen Lu" /><meta name="keywords" content="github pages, github, Go, Hugo" />
+<meta name="author" content="飞狐" /><meta name="description" content="根据个人经验，记录如何利用Github Pages和基于Go的Hugo搭建个人博客，给其他人提供参考" /><meta name="keywords" content="github pages, github, Go, Hugo" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/create-website-with-hugo/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="利用Github Pages和基于Go的Hugo搭建个人博客">
-  <meta property="og:description" content="Blog of Rosen Lu">
+  <meta property="og:description" content="根据个人经验，记录如何利用Github Pages和基于Go的Hugo搭建个人博客，给其他人提供参考">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,14 +54,14 @@
     <meta property="article:tag" content="Github">
 
   <meta itemprop="name" content="利用Github Pages和基于Go的Hugo搭建个人博客">
-  <meta itemprop="description" content="Blog of Rosen Lu">
+  <meta itemprop="description" content="根据个人经验，记录如何利用Github Pages和基于Go的Hugo搭建个人博客，给其他人提供参考">
   <meta itemprop="datePublished" content="2016-02-27T22:23:37+08:00">
   <meta itemprop="dateModified" content="2016-02-27T22:23:37+08:00">
   <meta itemprop="wordCount" content="2539">
   <meta itemprop="keywords" content="github pages,github,Go,Hugo">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Github Pages和基于Go的Hugo搭建个人博客">
-  <meta name="twitter:description" content="Blog of Rosen Lu">
+  <meta name="twitter:description" content="根据个人经验，记录如何利用Github Pages和基于Go的Hugo搭建个人博客，给其他人提供参考">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,24 +183,28 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#环境准备">环境准备</a></li>
-    <li><a href="#过程概要">过程概要</a>
+    <li>
       <ul>
-        <li><a href="#在github上创建一个自己的项目">在Github上创建一个自己的项目</a></li>
-        <li><a href="#利用hugo作为博客生成器">利用Hugo作为博客生成器</a>
+        <li><a href="#环境准备">环境准备</a></li>
+        <li><a href="#过程概要">过程概要</a>
           <ul>
-            <li><a href="#安装go">安装Go</a></li>
-            <li><a href="#安装hugo">安装Hugo</a></li>
+            <li><a href="#在github上创建一个自己的项目">在Github上创建一个自己的项目</a></li>
+            <li><a href="#利用hugo作为博客生成器">利用Hugo作为博客生成器</a>
+              <ul>
+                <li><a href="#安装go">安装Go</a></li>
+                <li><a href="#安装hugo">安装Hugo</a></li>
+              </ul>
+            </li>
+            <li><a href="#在github-pages上托管hugo">在Github Pages上托管Hugo</a>
+              <ul>
+                <li><a href="#安装命令">安装命令</a></li>
+                <li><a href="#相关命令">相关命令</a></li>
+              </ul>
+            </li>
+            <li><a href="#利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</a></li>
+            <li><a href="#开启自定义域名的https访问">开启自定义域名的HTTPS访问</a></li>
           </ul>
         </li>
-        <li><a href="#在github-pages上托管hugo">在Github Pages上托管Hugo</a>
-          <ul>
-            <li><a href="#安装命令">安装命令</a></li>
-            <li><a href="#相关命令">相关命令</a></li>
-          </ul>
-        </li>
-        <li><a href="#利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</a></li>
-        <li><a href="#开启自定义域名的https访问">开启自定义域名的HTTPS访问</a></li>
       </ul>
     </li>
   </ul>
@@ -212,15 +216,15 @@
 	
     <div class="post-content image-border">
 	 <p>一直以来都想拥有一个属于自己的博客，前段时间在学习<code>Go</code> ，于是利用<code>Hugo</code> 和<code>Github Pages</code> 搭建了一个简易的个人博客，先简单记录下。</p>
-<h1 id="环境准备">环境准备</h1>
+<h2 id="环境准备">环境准备</h2>
 <ul>
 <li><a href="https://golang.org/"><strong>Go</strong></a>1.18.3+</li>
 <li><a href="https://gohugo.io"><strong>Hugo</strong></a>v0.100+</li>
 <li><a href="https://github.com/"><strong>Github</strong></a>账号</li>
 <li><a href="https://www.godaddy.com"><strong>GoDaddy</strong></a>域名</li>
 </ul>
-<h1 id="过程概要">过程概要</h1>
-<h2 id="在github上创建一个自己的项目">在Github上创建一个自己的项目</h2>
+<h2 id="过程概要">过程概要</h2>
+<h3 id="在github上创建一个自己的项目">在Github上创建一个自己的项目</h3>
 <ol>
 <li>在<code>Github</code>上创建一个项目，本文中该项目名为blog<br>
 <img src="/blog_img/hugo/create-website-with-hugo/create-github-repository.png" alt="创建Github项目" title="创建Github项目"></li>
@@ -230,9 +234,9 @@
 在 <code>Github Pages</code>这个区域可以看见本项目的发布链接为<code>https://fox321.github.io/blog/</code> ，点击该链接可以访问该项目对应的静态页面<br>
 <img src="/blog_img/hugo/create-website-with-hugo/check-github-project-address.png" alt="查看项目发布链接" title="查看项目发布链接"></li>
 </ol>
-<h2 id="利用hugo作为博客生成器">利用Hugo作为博客生成器</h2>
+<h3 id="利用hugo作为博客生成器">利用Hugo作为博客生成器</h3>
 <p>由于<code>Github Pages</code>只支持静态的<code>HTML</code>页面托管，所以需要采用<code>Jekyll</code> 、<code>Logdown</code> 等静态博客生成器来快速生成<code>HTML</code>页面，避免纯手动编写时的费时费力。由于自己近期一直在学习<code>Go</code>，为了加深自己对于<code>Go</code>的运用，于是便选择 <code>Hugo</code>作为自己的博客生成器。 <code>Hugo</code>是一个基于<code>Go</code>开发的静态生成器，它采用<a href="https://zh.wikipedia.org/zh-cn/Markdown"><strong>Markdown</strong></a>语法来编写博客生成，然后生成相应的<code>HTML</code>页面。</p>
-<h3 id="安装go">安装Go</h3>
+<h4 id="安装go">安装Go</h4>
 <p>访问<a href="https://golang.org/dl/"><strong>Golang下载页</strong></a>根据自己电脑的操作系统选择是Linux版本或Windows版本，同时注意是选择32位还是64位，一定要与自己的操作系统相匹配。以我自己的64位win7系统为例，安装过程如下：</p>
 <ol>
 <li>
@@ -256,7 +260,7 @@ go version go1.18.3 windows/amd64</code>
 </pre>
 </li>
 </ol>
-<h3 id="安装hugo">安装Hugo</h3>
+<h4 id="安装hugo">安装Hugo</h4>
 <p><code>Hugo</code>的安装过程与<code>Go</code>的类似.</p>
 <ul>
 <li>
@@ -276,8 +280,8 @@ hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284&#43;extended windows/amd6
 </li>
 </ul>
 <p>关于<code>Hugo</code>的基本操作命令，可以参见<a href="https://gohugo.io/overview/quickstart/"><strong>Hugo快速入门</strong></a>，此处不再详述。</p>
-<h2 id="在github-pages上托管hugo">在Github Pages上托管Hugo</h2>
-<h3 id="安装命令">安装命令</h3>
+<h3 id="在github-pages上托管hugo">在Github Pages上托管Hugo</h3>
+<h4 id="安装命令">安装命令</h4>
 <p>虽然官方文档<a href="https://gohugo.io/tutorials/github-pages-blog/"><strong>在Github Pages上托管Hugo</strong></a>上有相应的说明,个人总感觉其说明信息不够详细，故将自己的实现过程记录如下：</p>
 <ol>
 <li>将之前在Github上创建的blog项目<code>clone</code>到本地目录<br>
@@ -303,7 +307,7 @@ hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284&#43;extended windows/amd6
 <li>访问 <code>https://fox321.github.io/blog</code> ，出现如下页面，至此<code>Hugo</code>博客托管到<code>Github Pages</code>成功！<br>
 <img src="/blog_img/hugo/create-website-with-hugo/visit-github-pages-hugo-site.png" alt="访问Github Pages页面&quot;" title="访问Github Pages页面"></li>
 </ol>
-<h3 id="相关命令">相关命令</h3>
+<h4 id="相关命令">相关命令</h4>
 <ol>
 <li>
 <p>生成绑定到指定域名的页面</p>
@@ -328,7 +332,7 @@ hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284&#43;extended windows/amd6
 </pre>
 </li>
 </ol>
-<h2 id="利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</h2>
+<h3 id="利用godaddy配置自定义域名">利用GoDaddy配置自定义域名</h3>
 <p>在<a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/"><strong>Using a custom domain with GitHub Pages</strong></a>中有详细的说明，我自己配置的时候主要是按照<a href="https://help.github.com/articles/setting-up-an-apex-domain/"><strong>Setting up an apex domain</strong></a>中的说明在<a href="https://www.godaddy.com/"><strong>GoDaddy</strong></a>上的说明来设置的。</p>
 <ol>
 <li>在<code>public</code>目录下创建一个名为 <code>CNAME</code>的文件，并在该文件中写入我们要自定义的域名，我自己的域名为 <code>http://lucumt.info</code> ，故填入<code>lucumt.info</code><br>
@@ -352,7 +356,7 @@ hugo v0.100.2-d25cb2943fd94ecf781412aeff9682d5dc62e284&#43;extended windows/amd6
 <li>取消订单功能消失了，现在只能打人工客服电话取消。</li>
 </ul>
 <p>如果大家有<code>GoDaddy</code>之外更好的域名服务网站，欢迎给我留言，当然国内的域名服务商除外！</p>
-<h2 id="开启自定义域名的https访问">开启自定义域名的HTTPS访问</h2>
+<h3 id="开启自定义域名的https访问">开启自定义域名的HTTPS访问</h3>
 <p>请参见本人写的另外一篇文章 <strong><a href="https://lucumt.info/post/migrate-github-blog-from-http-to-https/">将基于Github Pages的自定义域名博客迁移到Https</a></strong> ，此处不再详述。</p>
 <p>&lt;&ndash;待续&ndash;&gt;</p>
     </div>

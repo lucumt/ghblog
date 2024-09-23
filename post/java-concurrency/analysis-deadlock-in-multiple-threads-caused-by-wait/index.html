@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="一次由wait造成的死锁问题分析" /><meta name="keywords" content="java, multiple-threads, deadlock" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="记录java多线程编程中一次由wait造成的死锁问题分析，给自己和相关人员提供总结与参考" /><meta name="keywords" content="java, multiple-threads, deadlock" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="一次由wait造成的死锁问题分析">
-  <meta property="og:description" content="一次由wait造成的死锁问题分析">
+  <meta property="og:description" content="记录java多线程编程中一次由wait造成的死锁问题分析，给自己和相关人员提供总结与参考">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Java Concurrency">
 
   <meta itemprop="name" content="一次由wait造成的死锁问题分析">
-  <meta itemprop="description" content="一次由wait造成的死锁问题分析">
+  <meta itemprop="description" content="记录java多线程编程中一次由wait造成的死锁问题分析，给自己和相关人员提供总结与参考">
   <meta itemprop="datePublished" content="2020-09-12T18:07:27+08:00">
   <meta itemprop="dateModified" content="2020-09-12T18:07:27+08:00">
   <meta itemprop="wordCount" content="1630">
   <meta itemprop="keywords" content="java,multiple-threads,deadlock">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="一次由wait造成的死锁问题分析">
-  <meta name="twitter:description" content="一次由wait造成的死锁问题分析">
+  <meta name="twitter:description" content="记录java多线程编程中一次由wait造成的死锁问题分析，给自己和相关人员提供总结与参考">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,13 +180,17 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#原始代码">原始代码</a></li>
-    <li><a href="#执行结果状态查看">执行结果&amp;状态查看</a></li>
-    <li><a href="#原因分析">原因分析</a></li>
-    <li><a href="#改进代码">改进代码</a>
+    <li>
       <ul>
-        <li><a href="#消除死循环">消除死循环</a></li>
-        <li><a href="#实现轮流打印">实现轮流打印</a></li>
+        <li><a href="#原始代码">原始代码</a></li>
+        <li><a href="#执行结果状态查看">执行结果&amp;状态查看</a></li>
+        <li><a href="#原因分析">原因分析</a></li>
+        <li><a href="#改进代码">改进代码</a>
+          <ul>
+            <li><a href="#消除死循环">消除死循环</a></li>
+            <li><a href="#实现轮流打印">实现轮流打印</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -198,7 +202,7 @@
 	
     <div class="post-content image-border">
 	 <p>在<a href="/post/java-concurrency/print-a-b-c-in-turn-by-threads/">多种方式实现在Java中用线程轮流打印ABC</a>中自己本想用单个锁通过调用<code>wait()</code>实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。</p>
-<h1 id="原始代码">原始代码</h1>
+<h2 id="原始代码">原始代码</h2>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint4Test {
@@ -250,13 +254,13 @@
     }
 }</code>
 </pre>
-<h1 id="执行结果状态查看">执行结果&amp;状态查看</h1>
+<h2 id="执行结果状态查看">执行结果&amp;状态查看</h2>
 <p>运行上述程序，可发现在输出若干字符后，程序处于阻塞状态，输出停止：</p>
 <p><img src="/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/all-threads-stopped-print-characters.png" alt="程序停止输出" title="程序停止输出"></p>
 <p>利用<code>jps</code>和<code>jstack</code>命令查看，可发现3个进程都处于<code>WAITING</code>状态形成类似死锁的现象，由此导致程序停止输出。</p>
 <p><img src="/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/all-threads-are-waiting-for-awake.png" alt="线程都处于等待状态" title="线程都处于等待状态"></p>
 <p>由于多次运行上述代码，均能出现此问题(只不过出现的时间间隔不同)，可知程序代码肯定编写不正确。</p>
-<h1 id="原因分析">原因分析</h1>
+<h2 id="原因分析">原因分析</h2>
 <p>最开始检查代码时看起来一切正常:</p>
 <ol>
 <li>某线程首先通过<code>wait()</code>进入等待状态</li>
@@ -334,9 +338,9 @@
 </ol>
 <p>图示说明如下：</p>
 <p><img src="/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/multi-thread-deadlock-analysis.png" alt="分析图示1" title="分析图示"></p>
-<h1 id="改进代码">改进代码</h1>
+<h2 id="改进代码">改进代码</h2>
 <p>找到问题原因后，要修复此问题也很容，只需要避免所有的线程同时调用<code>wait()</code>方法即可，可在调用<code>wait()</code>前加个判断，确保始终有一个线程不用进入<code>WAITING</code>状态，能够释放锁。</p>
-<h2 id="消除死循环">消除死循环</h2>
+<h3 id="消除死循环">消除死循环</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint4Test {
@@ -394,7 +398,7 @@
     }
 }</code>
 </pre>
-<h2 id="实现轮流打印">实现轮流打印</h2>
+<h3 id="实现轮流打印">实现轮流打印</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint4Test {

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署" /><meta name="keywords" content="hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署以简化工作" /><meta name="keywords" content="hugo, theme, even" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/hugo/using-github-action-to-auto-build-deploy/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
-  <meta property="og:description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
+  <meta property="og:description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署以简化工作">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,14 +54,14 @@
     <meta property="article:tag" content="Go">
 
   <meta itemprop="name" content="利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
-  <meta itemprop="description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
+  <meta itemprop="description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署以简化工作">
   <meta itemprop="datePublished" content="2022-09-03T18:35:57+08:00">
   <meta itemprop="dateModified" content="2022-09-03T18:35:57+08:00">
   <meta itemprop="wordCount" content="1534">
   <meta itemprop="keywords" content="hugo,theme,even">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
-  <meta name="twitter:description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署">
+  <meta name="twitter:description" content="简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署以简化工作">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,7 +183,7 @@
 	
     <div class="post-content image-border">
 	 <p>作为一名IT民工，善于利用各种工具提升工作效率才算合格，本文简单记录自己如何利用<a href="https://github.com/features/actions">GitHub Actions</a>实现个人<a href="https://gohugo.io/">Hugo</a>博客在<a href="https://pages.github.com/">GitHub Pages</a>中的自动化部署。</p>
-<h1 id="传统方式">传统方式</h1>
+<h2 id="传统方式">传统方式</h2>
 <p>自己的个人博客创建于2016年，在这期间自己一直基于如下方式创建并部署更新博客：</p>
 <p>1.利用<code>hugo</code>命令创建对应的博客markdown文件</p>
 
@@ -213,7 +213,7 @@ git push origin master</code>
 <code>git subtree push --prefix=public git@github.com:lucumt/ghblog.git gh-pages</code>
 </pre>
 <p>上述过程中的1,2,4阶段是编写博客的必经阶段，而3,5阶段其实没太多必要，完全可以用工具自动化实现。作为IT从业者，我们需要尽可能的减少不必要的操作。</p>
-<h1 id="改进方式">改进方式</h1>
+<h2 id="改进方式">改进方式</h2>
 <p>结合网络上的相关资料，自己把实现方案定在了<code>GitHub Actions</code>和<a href="https://www.travis-ci.com/">Travis CI</a>二者之一，考虑到<code>GitHub</code>中已经内置了<code>GitHub Actions</code> ，最终解决采用其作为实现方案。</p>
 <p>在<code>Hugo</code>的官方文档<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action">Build Hugo With GitHub Action</a>中也推荐采用<code>GitHub Actions</code>作为持续集成部署方案，并提供了相应的流水线配置代码:</p>
 
@@ -306,7 +306,7 @@ jobs:
 <p>将该<code>yaml</code>文件放到对应<code>GitHub</code>项目下的<code>.github/workflows</code>目录下即完成全部配置。</p>
 <p>当执行<code>git push origin master</code>后，<code>GitHub Actions</code>会开启自动构建部署，运行结果如下，至此整个设置过程完毕！</p>
 <p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/hugo-automatic-build-result.png" alt="GitHub Actions执行结果" title="GitHub Actions执行结果"></p>
-<h1 id="其它">其它</h1>
+<h2 id="其它">其它</h2>
 <p>由于<code>GitHub Action</code>支持定时语法，将流水线触发条件修改如下</p>
 
 <pre class="line-numbers language-yaml ">
