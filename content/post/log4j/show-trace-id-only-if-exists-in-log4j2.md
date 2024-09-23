@@ -4,7 +4,7 @@ date: 2022-10-13T17:47:46+08:00
 lastmod: 2022-10-13T17:47:46+08:00
 draft: false
 keywords: ["log4j2","traceId","链路追踪"]
-description: "简要介绍如何实现在Log4j2中实现只有在traceId有值时才输出"
+description: "简要介绍如何实现在Log4j2中实现只有在traceId有值时才输出，以便增强微服务开发模式下的日志追踪与分析"
 tags: ["java","log4j"]
 categories: ["java编程"]
 author: "Rosen Lu"

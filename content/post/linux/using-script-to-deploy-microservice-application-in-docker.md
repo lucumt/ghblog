@@ -4,7 +4,7 @@ date: 2023-03-16T11:22:47+08:00
 lastmod: 2023-03-16T11:22:47+08:00
 draft: false
 keywords: ["linux","docker","shell","微服务"]
-description: "利用shell脚本实现将微服务程序以docker容器方式自动部署"
+description: "利用shell脚本实现将微服务程序以docker容器方式自动部署，主要适用于ToB软件在客户现场部署的场景"
 tags: ["linux","docker","shell"]
 categories: ["脚本操作","持续集成"]
 author: "Rosen Lu"
@@ -49,7 +49,7 @@ mermaidDiagrams:
 
 <!--more-->
 
-# 流程图
+## 流程图
 
 整体流程如下图所示：
 
@@ -106,7 +106,7 @@ flowchart TD
     classDef success fill:#37ad61,color:#ffffff,font-weight:bold,stroke-width:0
 ```
 
-# 使用说明
+## 使用说明
 
 此部分操作主要基于前述的流程以`shell`脚本的形式实现，相关源码参见[**deploy.sh**](https://github.com/lucumt/myrepository/blob/master/linux/docker_image_deploy.sh)，具体操作流程如下：
 
@@ -150,7 +150,7 @@ flowchart TD
 
   ![升级过程执行失败](/blog_img/linux/using-script-to-deploy-microservice-application-in-docker/deploy-shell-execute-failed.png "升级过程执行失败")
 
-# 待优化点
+## 待优化点
 
 * 升级过程缺少记录，无法查看在特定时间范围通过该脚本执行升级的次数，可通过写入文件实现简单的数据库记录
 * 缺少回退功能，在最后启动`docker`容器失败是，应能将之前关闭的服务启动，确保能持续对外提供服务

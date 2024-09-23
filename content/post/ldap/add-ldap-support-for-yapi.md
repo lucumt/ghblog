@@ -4,7 +4,7 @@ date: 2022-12-01T11:23:00+08:00
 lastmod: 2023-04-14T11:23:00+08:00
 draft: false
 keywords: ["yapi","ldap","docker"]
-description: ""
+description: "简要介绍如何给基于Docker创建的Yapi添加LDAP登录认证，以方面其使用"
 tags: ["ldap","docker"]
 categories: ["工具使用","系统集成"]
 author: "Rosen Lu"

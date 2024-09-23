@@ -4,7 +4,7 @@ date: 2023-04-14T11:22:34+08:00
 lastmod: 2023-04-14T11:22:34+08:00
 draft: false
 keywords: ["ldap","docker","gitlab"]
-description: "给Gitlab添加LDAP登录认证并禁止普通账号登录"
+description: "给Gitlab添加LDAP登录认证并禁止普通账号登录，主要是给自建LDAP提供使用改进参考"
 tags: ["ldap","docker"]
 categories: ["工具使用","系统集成"]
 author: "Rosen Lu"
@@ -51,7 +51,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 安装步骤
+## 安装步骤
 
 1. 创建一个名为`gitlab_test`的文件夹，之后创建一个名为`docker-compose.yml`的文件，写入如下内容
 
@@ -100,7 +100,7 @@ highchartsDiagrams:
 
    ![gitlab登录支持ldap](/blog_img/ldap/add-ldap-support-for-gitlab/gitlab-login-with-ldap-page.png "gitlab登录支持ldap") 
 
-# 添加额外的管理员
+## 添加额外的管理员
 
 `gitlab`默认只有`root`这1个admin账号，当禁止非`LDAP`方式登录时会将`root`账号的登录一并禁止掉，故需要预先将一些`LDAP`账户设置为管理员账号，操作过程如下：
 
@@ -127,7 +127,7 @@ highchartsDiagrams:
 
    ![gitlab添加管理员操作成功](/blog_img/ldap/add-ldap-support-for-gitlab/login-gitlab-and-show-admin-menu.png "gitlab添加管理员操作成功") 
 
-# 只允许LDAP登录
+## 只允许LDAP登录
 
 主要参考[How to disable standard authentication](https://github.com/sameersbn/docker-gitlab/issues/2604)进行操作：
 

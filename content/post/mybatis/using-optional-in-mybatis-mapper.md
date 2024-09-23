@@ -4,7 +4,7 @@ date: 2020-02-13T14:40:19+08:00
 lastmod: 2020-02-13T14:40:19+08:00
 draft: false
 keywords: ["mybatis","optional"]
-description: ""
+description: "在MyBatis接口中使用Optional进行非空判断，避免冗余的If Else判断"
 tags: ["mybatis"]
 categories: ["Java编程","MyBatis系列"]
 author: "Rosen Lu"
@@ -45,7 +45,7 @@ sequenceDiagrams:
 <!--more-->
 完整代码参见[**spring-mybatis-example**](https://github.com/lucumt/spring-mybatis-example)
 
-# 查询单条记录
+## 查询单条记录
 
 由于在查询单条记录时，若数据库中不存在该记录，则会默认返回null，此时可用`Optional`进行避免。
 
@@ -99,7 +99,7 @@ public class TestBookService {
 
 ![Optional执行结果](/blog_img/mybatis/using-optional-in-mybatis-mapper/mybatis-optional-test-result.png "Optional执行结果") 
 
-# 查询多条记录
+## 查询多条记录
 
 当查询的结果为`List`时，即使没有数据`MyBatis`也会返回一个空的`List`，其size为0但不为null，此时不需要我们进行非空判断。
 

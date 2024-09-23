@@ -4,7 +4,7 @@ date: 2022-12-20T10:04:00+08:00
 lastmod: 2023-03-28T10:04:00+08:00
 draft: true
 keywords: ["ldap","禅道"]
-description: "简要介绍基于Docker环境给禅道软件集成LDAP实现单点登录"
+description: "简要介绍基于Docker环境给禅道软件集成LDAP实现单点登录，主要涉及到对部分代码的定制化修改"
 tags: ["ldap","docker"]
 categories: ["工具使用","系统集成"]
 author: "Rosen Lu"

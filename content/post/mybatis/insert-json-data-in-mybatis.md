@@ -4,7 +4,7 @@ date: 2021-04-15T09:37:41+08:00
 lastmod: 2021-04-15T09:37:41+08:00
 draft: false
 keywords: ["Java","MyBatis","JSON"]
-description: ""
+description: "以一个简单的Java Demo展示如何在MyBatis中插入JSON格式数据"
 tags: ["Java","MyBatis"]
 categories: ["Java编程","MyBatis系列"]
 author: "Rosen Lu"
@@ -43,15 +43,15 @@ sequenceDiagrams:
 
 <!--more-->
 
-#  基本信息
+## 基本信息
 
 完整代码参见[**spring-mybatis-example**](https://github.com/lucumt/spring-mybatis-example)，核心代码为[**JsonNodeTypeHandler**](#handler类)配置类。
 
-## 项目结构
+### 项目结构
 
 ![项目结构](/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-project-structure.png "项目结构") 
 
-## 表结构
+### 表结构
 
 ```sql
 CREATE TABLE `user_info` (
@@ -62,7 +62,7 @@ CREATE TABLE `user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
 ```
 
-## pom文件
+### pom文件
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -135,7 +135,7 @@ CREATE TABLE `user_info` (
 </project>
 ```
 
-## 模型类
+### 模型类
 
 ```java
 @Data
@@ -151,7 +151,7 @@ public class UserModel {
 }
 ```
 
-## Handler类
+### Handler类
 
 ```java
 @MappedTypes(JsonNode.class)
@@ -225,7 +225,7 @@ public class JsonNodeTypeHandler extends BaseTypeHandler<JsonNode> {
 }
 ```
 
-## 配置文件
+### 配置文件
 
 ```yaml
 server:
@@ -250,7 +250,7 @@ mybatis:
   type-handlers-package: com.lucumt.handler.mybatis
 ```
 
-## Mapper类
+### Mapper类
 
 ```java
 public interface UserMapper {
@@ -263,7 +263,7 @@ public interface UserMapper {
 }
 ```
 
-## Mapper文件
+### Mapper文件
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -286,7 +286,7 @@ public interface UserMapper {
 </mapper>
 ```
 
-## Service类
+### Service类
 
 ```java
 @Service
@@ -309,9 +309,9 @@ public class UserService {
 }
 ```
 
-# 测试
+## 测试
 
-## 测试类
+### 测试类
 
 ```java
 @SpringBootTest
@@ -359,7 +359,7 @@ public class TestUserService {
 }
 ```
 
-## 测试结果
+### 测试结果
 
 ![测试结果](/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-json-test-result.png "测试结果") 
 

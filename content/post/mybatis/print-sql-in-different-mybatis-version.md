@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Java编程","MyBatis系列"]
 tags = ["Java","MyBatis"]
 date = "2017-12-18T18:33:14+08:00"
-description = "在不同版本的mybatis中通过log4j打印实际执行的SQL"
+description = "在不同版本的mybatis中通过log4j打印实际执行的SQL,主要用于日志分析时减少冗余日志"
 keywords = ["Java","MyBatis"]
 title = "在不同版本的MyBatis中通过Log4j打印实际执行的SQL"
 
@@ -45,6 +45,7 @@ public void testMybatis(){
 ## MyBatis3.1.1分析
 
 ### Log4j相关配置
+
 在`MyBatis3.1.1`及以前的版本中若我们想通过`Log4j`配置来打印实际执行的SQL，log4j.properties的配置通常类似如下
 ```properties
 # 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
@@ -100,6 +101,7 @@ public final class ConnectionLogger extends BaseJdbcLogger implements Invocation
 ## MyBatis3.4.5分析
 
 ### Log4j相关配置
+
 在`MyBatis3.2.0`及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，`log4j.properties`的配置通常类似如下
 ```properties
 # 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
@@ -108,6 +110,7 @@ log4j.logger.com.lucumt.mapper=DEBUG
 在本文写作时，mybatis官网上已有关于这方面更 **[详细的说明](http://www.mybatis.org/mybatis-3/zh/logging.html)** 。
 
 ### 原理分析 
+
 同样以`log4j.logger.java.sql.Connection=DEBUG`为例，其sql日志来源于`ConnectionLogger`，对应代码如下
 
 ```java

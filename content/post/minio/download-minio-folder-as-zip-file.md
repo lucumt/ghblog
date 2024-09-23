@@ -4,7 +4,7 @@ date: 2022-08-20T20:35:44+08:00
 lastmod: 2022-08-20T20:35:44+08:00
 draft: false
 keywords: ["MinIO","ZIP","文件夹"]
-description: "简要记录将MinIO中的文件夹下载为ZIP文件的代码实现"
+description: "基于Java代码简要记录将MinIO中的文件夹下载为ZIP文件的代码实现"
 tags: ["MinIO","Java"]
 categories: ["Java编程"]
 author: "Rosen Lu"
@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 文件夹下载
+## 文件夹下载
 
 该文件夹在`MinIO`中存储的路径为`2022-07/80/iodp-dataset-demo`，其下包含多个文件夹
 
@@ -117,7 +117,7 @@ public class MinioServiceImpl implements IMinioService {
 
 ![MinIO下载文件夹](/blog_img/minio/download-minio-folder-as-zip-file/minio-file-list.png "MinIO下载文件夹") 
 
-# 写入ZIP文件
+## 写入ZIP文件
 
 由于`MinIO`中返回的文件信息已经具有层级结构，故在进行`ZIP`压缩时可基于文件路径直接设置其存储位置[^1]
 
