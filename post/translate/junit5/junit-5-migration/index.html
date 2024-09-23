@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="从JUnit 4 迁移到JUnit 5的简要说明" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是从JUnit 4 迁移到JUnit 5的简要说明" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-migration/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]从JUnit 4 迁移到JUnit 5 - 权威指南">
-  <meta property="og:description" content="从JUnit 4 迁移到JUnit 5的简要说明">
+  <meta property="og:description" content="JUnit5翻译专题，主要是从JUnit 4 迁移到JUnit 5的简要说明">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,14 +54,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]从JUnit 4 迁移到JUnit 5 - 权威指南">
-  <meta itemprop="description" content="从JUnit 4 迁移到JUnit 5的简要说明">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是从JUnit 4 迁移到JUnit 5的简要说明">
   <meta itemprop="datePublished" content="2023-06-21T22:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-21T22:21:43+08:00">
   <meta itemprop="wordCount" content="5513">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]从JUnit 4 迁移到JUnit 5 - 权威指南">
-  <meta name="twitter:description" content="从JUnit 4 迁移到JUnit 5的简要说明">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是从JUnit 4 迁移到JUnit 5的简要说明">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,38 +183,42 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#概览">概览</a></li>
-    <li><a href="#关键迁移步骤">关键迁移步骤</a></li>
-    <li><a href="#依赖">依赖</a></li>
-    <li><a href="#注解">注解</a>
+    <li>
       <ul>
-        <li><a href="#异常">异常</a></li>
-        <li><a href="#超时">超时</a></li>
+        <li><a href="#概览">概览</a></li>
+        <li><a href="#关键迁移步骤">关键迁移步骤</a></li>
+        <li><a href="#依赖">依赖</a></li>
+        <li><a href="#注解">注解</a>
+          <ul>
+            <li><a href="#异常">异常</a></li>
+            <li><a href="#超时">超时</a></li>
+          </ul>
+        </li>
+        <li><a href="#测试类和方法">测试类和方法</a>
+          <ul>
+            <li><a href="#断言">断言</a></li>
+            <li><a href="#假设">假设</a></li>
+          </ul>
+        </li>
+        <li><a href="#分类">分类</a></li>
+        <li><a href="#runners">Runners</a>
+          <ul>
+            <li><a href="#spring-runner">Spring Runner</a></li>
+            <li><a href="#mockito-runner">Mockito Runner</a></li>
+          </ul>
+        </li>
+        <li><a href="#规则">规则</a>
+          <ul>
+            <li><a href="#预期异常">预期异常</a></li>
+            <li><a href="#临时目录">临时目录</a></li>
+            <li><a href="#自定义规则">自定义规则</a></li>
+            <li><a href="#自定义类规则">自定义类规则</a></li>
+          </ul>
+        </li>
+        <li><a href="#参数化测试">参数化测试</a></li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#测试类和方法">测试类和方法</a>
-      <ul>
-        <li><a href="#断言">断言</a></li>
-        <li><a href="#假设">假设</a></li>
-      </ul>
-    </li>
-    <li><a href="#分类">分类</a></li>
-    <li><a href="#runners">Runners</a>
-      <ul>
-        <li><a href="#spring-runner">Spring Runner</a></li>
-        <li><a href="#mockito-runner">Mockito Runner</a></li>
-      </ul>
-    </li>
-    <li><a href="#规则">规则</a>
-      <ul>
-        <li><a href="#预期异常">预期异常</a></li>
-        <li><a href="#临时目录">临时目录</a></li>
-        <li><a href="#自定义规则">自定义规则</a></li>
-        <li><a href="#自定义类规则">自定义类规则</a></li>
-      </ul>
-    </li>
-    <li><a href="#参数化测试">参数化测试</a></li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -227,7 +231,7 @@
 <p><img src="/blog_img/translate/junit5/junit-5-migration/junit-4-junit-5.webp" alt="JUnit 4 to JUnit 5" title="JUnit 4 to JUnit 5"></p>
 <p>在教程中，我们将了解从<code>JUnit 4</code>迁移到<code>JUnit 5</code>所需的步骤，我们将了解如何将现有测试与新版本一起运行，以及必须进行哪些更改才能迁移代码。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="概览">概览</h1>
+<h2 id="概览">概览</h2>
 <p><code>JUnit 5</code>不同于之前的版本，它采用模块化设计，这种新架构的关键点是将编写测试、扩展和工具之间的关注点分开。</p>
 <p><code>JUnit</code>被拆分为3个不同的子工程：</p>
 <ul>
@@ -240,7 +244,7 @@
 <p>此外，<code>JUnit 5</code>利用了<code>Java 8</code>中的一些特性如lambda用于惰性评估，<code>JUnit 4</code>从没使用超过<code>Java 7</code>的版本因而错失了<code>Java 8</code>的特性。</p>
 <p>同样，<code>JUnit 4</code>在参数化测试方面有缺陷并且缺乏嵌套测试，由此激发了第三方开发者为这些场景开发专门的Runner。</p>
 <p><code>JUnit 5</code>给参数化测试提供了更好的支持，在对嵌套测试提供原生支持的同时也增加了一些新功能。</p>
-<h1 id="关键迁移步骤">关键迁移步骤</h1>
+<h2 id="关键迁移步骤">关键迁移步骤</h2>
 <p><code>JUnit</code>在<code>JUnit Vintage</code>测试引擎的帮助下提供了渐进的迁移路径，我们可使用<code>JUnit Vintage</code>测试引擎在<code>JUnit 5</code>中运行<code>JUnit 4</code>相关的测试。</p>
 <p>所有<code>JUnit 4</code>相关的类都位于<code>org.junit</code>包下，所有<code>JUnit 5</code>相关的类都位于<code>org.junit.jupiter</code>包下，如果<code>JUnit 4</code>和<code>JUnit 5</code>在当前类路径下同时存在，也不会产生冲突。</p>
 <p>因此，我们可以将之前实现的<code>JUnit 4</code>测试与<code>JUnit 5</code>测试保留在一起，直到完成迁移，同时可逐步规划迁移。</p>
@@ -272,7 +276,7 @@
 </tbody>
 </table>
 <p>接下来我们将更深入地研究每个步骤。</p>
-<h1 id="依赖">依赖</h1>
+<h2 id="依赖">依赖</h2>
 <p>先看看需要做什么才能在新平台上运行现有测试，为了同时运行<code>JUnit 4</code>和<code>JUnit 5</code>测试，需要如下操作：</p>
 <ul>
 <li><code>JUnit Jupiter</code>用于编写和运行<code>JUnit 5</code>测试</li>
@@ -314,7 +318,7 @@ dependencies {
     testRuntime(&#39;org.junit.vintage:junit-vintage-engine:5.8.0&#39;)
 }</code>
 </pre>
-<h1 id="注解">注解</h1>
+<h2 id="注解">注解</h2>
 <p>注解位于<code>org.junit.jupiter.api</code>包中而不是<code>org.junit</code>。</p>
 <p>大部分的注解名称也不相同：</p>
 <table>
@@ -357,7 +361,7 @@ dependencies {
 </table>
 <p>在大多数情况下，我们可以查找并替换相关的包名与类名。</p>
 <p>但是，<code>@Test</code>注解不再具有<code>expected</code>和<code>timeout</code>属性。</p>
-<h2 id="异常">异常</h2>
+<h3 id="异常">异常</h3>
 <p>我们无法在<code>@Test</code>注解中使用<code>expected</code>属性。</p>
 <p>可用<code>JUnit 5</code>中的<code>assertThrows()</code>方法来替换<code>JUnit 4</code>中的<code>expected</code>属性：</p>
 
@@ -378,7 +382,7 @@ class JUnit5ExceptionTest {
     }
 }</code>
 </pre>
-<h2 id="超时">超时</h2>
+<h3 id="超时">超时</h3>
 <p>同样也无法在<code>@Test</code>注解中使用<code>timeout</code>属性。</p>
 <p>可在<code>JUnit 5</code>中使用<code>assertTimeout()</code>方法来替换<code>JUnit 4</code>中的<code>timeout</code>属性。</p>
 
@@ -397,7 +401,7 @@ class JUnit5TimeoutTest {
     }
 }</code>
 </pre>
-<h1 id="测试类和方法">测试类和方法</h1>
+<h2 id="测试类和方法">测试类和方法</h2>
 <p>如前所述，断言和假设被移动到新的类中，同样的，方法参数的顺序在某些场景下所有不同。</p>
 <p>下述表格总结了<code>JUnit 4</code>和<code>JUnit 5</code>中测试类和测试方法的一些主要的不同点：</p>
 <table>
@@ -449,7 +453,7 @@ class JUnit5TimeoutTest {
 <p>值得注意的是，我们在<code>JUnit 4</code>中自己编写的测试类和方法必须是<code>public</code>修饰的。</p>
 <p><code>JUnit 5</code>移除了上述限制，测试方法和测试类可以在包中私有，我们可在提供的示例中看到这种差异。</p>
 <p>接下来我们详细看看测试类和测试方法中的变化。</p>
-<h2 id="断言">断言</h2>
+<h3 id="断言">断言</h3>
 <p>断言方法位于<code>org.junit.jupiter.api.Assertions</code>类中，而不是<code>org.junit.Assert</code>类中。</p>
 <p>在大多数场景下，我们可直接查找并替换包名。</p>
 <p>然而，如果我们给断言提供了自定义消息，在编译时会报错，可选的断言消息现在是最后一个参数，这种参数顺序看起来更自然：</p>
@@ -490,7 +494,7 @@ class JUnit5HamcrestTest {
     }
 }</code>
 </pre>
-<h2 id="假设">假设</h2>
+<h3 id="假设">假设</h3>
 <p>假设方法位于<code>org.junit.jupiter.Assumptions</code>类中，而不是<code>org.junit.Assume</code>类中。</p>
 <p>这些方法有类似的改动，假设消息现在是最后一个参数。</p>
 
@@ -512,7 +516,7 @@ class JUnit5AssumptionTest {
 }</code>
 </pre>
 <p>同样需要注意的是，现在不再有<code>Assume.assumeNotNUll()</code>和<code>Assume.assumeNoException()</code> 。</p>
-<h1 id="分类">分类</h1>
+<h2 id="分类">分类</h2>
 <p><code>JUnit 4</code>中的<code>@Category</code>注解在<code>JUnit 5</code>中被<code>@Tag</code>注解替换，此外我们不再使用标记接口，而是向注解传递字符串参数。</p>
 <p>在<code>JUnit 4</code>可通过标记接口来使用分类：</p>
 
@@ -572,9 +576,9 @@ class JUnit5TagTest {}</code>
     }
 }</code>
 </pre>
-<h1 id="runners">Runners</h1>
+<h2 id="runners">Runners</h2>
 <p><code>JUnit 4</code>中的<code>@RunWith</code>注解在<code>JUnit 5</code>中不存在，可通过使用<code>org.junit.jupiter.api.extension</code>包和<code>@ExtendWith</code>注解中的新扩展模型实现相似的功能。</p>
-<h2 id="spring-runner">Spring Runner</h2>
+<h3 id="spring-runner">Spring Runner</h3>
 <p><code>JUnit 4</code>中使用的一个流行的runner是Spring test runner，在<code>JUnit 5</code>中需要将其替换为一个<code>Spring</code>扩展。</p>
 <p>如果我们使用<code>Spring 5</code>，该扩展会与<code>Spring Test</code>绑定在一起。</p>
 
@@ -623,7 +627,7 @@ dependencies {
     testImplementation(&#39;com.github.sbrannen:spring-test-junit5:1.5.0&#39;)
 }</code>
 </pre>
-<h2 id="mockito-runner">Mockito Runner</h2>
+<h3 id="mockito-runner">Mockito Runner</h3>
 <p><code>JUnit 4</code>中另一个流行的runner是Mockito runner，在使用<code>JUnit 5</code>时需要将其替换为<code>JUnit 5</code>中的<code>Mockito</code>扩展。</p>
 <p>要使用<code>Mockito</code>扩展，需要在<code>pom.xml</code>中添加相关的依赖：</p>
 
@@ -677,7 +681,7 @@ class JUnit5MockitoTest {
     }
 }</code>
 </pre>
-<h1 id="规则">规则</h1>
+<h2 id="规则">规则</h2>
 <p><code>JUnit 4</code>中的<code>@Rule</code>和<code>@ClassRule</code>注解在<code>JUnit 5</code>中不存在，可通过使用<code>org.junit.jupiter.api.extension</code>包和<code>@ExtendWith</code>注解中的新扩展模型实现相似的功能。</p>
 <p>然而，要实现一个平滑的迁移，<code>junit-jupiter-migrationsupport</code>模块提供了<code>JUnit 4</code>中的规则子集和子类的支持:</p>
 <ul>
@@ -704,7 +708,7 @@ class JUnit5MockitoTest {
     testImplementation(&#39;org.junit.jupiter:junit-jupiter-migrationsupport:5.8.0&#39;)
 }</code>
 </pre>
-<h2 id="预期异常">预期异常</h2>
+<h3 id="预期异常">预期异常</h3>
 <p>在<code>JUnit 4</code>中使用<code>@Test(expected = SomeException.class)</code>注解不允许我们检查异常的详细信息，若需要检查，则要使用<code>ExpectedException</code>规则。</p>
 <p><code>JUnit 5</code>迁移支持允许我们通过在测试中添加<code>@EnableRuleMigrationSupport</code>来仍然使用该规则。</p>
 
@@ -725,7 +729,7 @@ class JUnit5ExpectedExceptionTest {
 }</code>
 </pre>
 <p>由于我们将所有内容都集中在一起，结果更具有可读性。</p>
-<h2 id="临时目录">临时目录</h2>
+<h3 id="临时目录">临时目录</h3>
 <p>在<code>JUnit 4</code>中可通过使用<code>TemporaryFolder</code>规则来创建和清除一个临时目录，同样的，<code>JUnit 5</code>迁移支持允许我们添加<code>@EnableRuleMigrationSupport</code>来继续使用该功能。</p>
 
 <pre class="line-numbers language-java ">
@@ -766,7 +770,7 @@ public void shouldCreateNewFile(@TempDir Path anotherDirectory) {
     Assertions.assertNotNull(textFile);
 }</code>
 </pre>
-<h2 id="自定义规则">自定义规则</h2>
+<h3 id="自定义规则">自定义规则</h3>
 <p>迁移<code>JUnit 4</code>中的规则时需要将其重写为<code>JUnit 5</code>中的扩展。</p>
 <p>可通过实现<code>BeforeEachCallback</code>和<code>AfterEachCallback</code>接口来重现引用了<code>@Rule</code>注解的业务逻辑。</p>
 <p>例如，我们有一个实现性能日志的<code>JUnit 4</code>规则：</p>
@@ -815,7 +819,7 @@ public class PerformanceLoggerExtension
     }
 }</code>
 </pre>
-<h2 id="自定义类规则">自定义类规则</h2>
+<h3 id="自定义类规则">自定义类规则</h3>
 <p>类似的，可通过实现<code>BeforeEachCallback</code>和<code>AfterEachCallback</code>接口来重现引用了<code>@ClassRule</code>注解的业务逻辑。</p>
 <p>在某些场景中，我们可能在<code>JUnit 4</code>中将类规则编写为匿名内部类，如下述例子，有一个服务器资源我们希望可以很轻松的在不同的测试中使用设置。</p>
 
@@ -875,7 +879,7 @@ class JUnit5ServerTest {
     }
 }</code>
 </pre>
-<h1 id="参数化测试">参数化测试</h1>
+<h2 id="参数化测试">参数化测试</h2>
 <p>在<code>JUnit 4</code>中编写参数化测试时需要使用<code>Parameterized</code> runner，此外，我们需要通过一个添加了<code>@Parameterized.Parameters</code>注解的方法来传递参数化数据：</p>
 
 <pre class="line-numbers language-java ">
@@ -928,7 +932,7 @@ public class JUnit4ParameterizedTest {
 <div class="admonition note"><p class="admonition-title">注意</p>
 <p>在<code>JUnit 5</code>中与<code>JUnit 4</code>参数化测试最接近的是使用<code>@ParameterizedTest</code>和<code>@MethodSource</code>数据源，但<code>JUnit 5</code>中的参数化测试有多项改进，可在<a href="/post/translate/junit5/junit-5-parameterized-tests/"><strong>JUnit 5参数化测试</strong></a>中阅读有关改进的更多信息。</p>
 </div>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>从<code>JUnit 4</code>迁移到<code>JUnit 5</code>需要一些工作，具体取决于现有测试的编写方式。</p>
 <ul>
 <li>我们可以将<code>JUnit 4</code>测试与<code>JUnit 5</code>测试一起运行，以允许逐步迁移。</li>

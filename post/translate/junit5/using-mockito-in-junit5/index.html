@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="在JUnit 5中使用Mockito" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是关于如何在JUnit 5中使用Mockito" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/using-mockito-in-junit5/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]在JUnit 5中使用Mockito">
-  <meta property="og:description" content="在JUnit 5中使用Mockito">
+  <meta property="og:description" content="JUnit5翻译专题，主要是关于如何在JUnit 5中使用Mockito">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,14 +54,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]在JUnit 5中使用Mockito">
-  <meta itemprop="description" content="在JUnit 5中使用Mockito">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是关于如何在JUnit 5中使用Mockito">
   <meta itemprop="datePublished" content="2023-06-19T19:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-18T19:21:43+08:00">
   <meta itemprop="wordCount" content="1782">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]在JUnit 5中使用Mockito">
-  <meta name="twitter:description" content="在JUnit 5中使用Mockito">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是关于如何在JUnit 5中使用Mockito">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,12 +183,16 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#相关视频">相关视频</a></li>
-    <li><a href="#手工初始化">手工初始化</a></li>
-    <li><a href="#基于注解初始化">基于注解初始化</a></li>
-    <li><a href="#mock自动注入">Mock自动注入</a></li>
-    <li><a href="#junit5-mockito扩展">JUnit5 Mockito扩展</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li>
+      <ul>
+        <li><a href="#相关视频">相关视频</a></li>
+        <li><a href="#手工初始化">手工初始化</a></li>
+        <li><a href="#基于注解初始化">基于注解初始化</a></li>
+        <li><a href="#mock自动注入">Mock自动注入</a></li>
+        <li><a href="#junit5-mockito扩展">JUnit5 Mockito扩展</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -201,9 +205,9 @@
 <p><img src="/blog_img/translate/junit5/using-mockito-in-junit5/junit-5-mockito.webp" alt="JUnit 5 Mockito" title="JUnit 5 Mockito"></p>
 <p>在本教程中将学习在<code>JUnit 5</code>中如何使用<code>Mockito</code>框架，我们将以独立的方式学习测试框架，之后学习如何在<code>JUnit 5</code>中使用<code>Mockito</code>扩展。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="相关视频">相关视频</h1>
+<h2 id="相关视频">相关视频</h2>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=p7_cTAF39A8"><strong>学习视频</strong></a>。</p>
-<h1 id="手工初始化">手工初始化</h1>
+<h2 id="手工初始化">手工初始化</h2>
 <p>在做其它事情之前，需要添加<code>Mockito</code>相关的依赖：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -246,7 +250,7 @@
 <li>代码会变得很冗长</li>
 <li>无法检测框架的使用情况以及检测不正常的打桩</li>
 </ul>
-<h1 id="基于注解初始化">基于注解初始化</h1>
+<h2 id="基于注解初始化">基于注解初始化</h2>
 <p><code>Mockito.mock()</code>的一种声明式替代方案为给要mock的对象上添加<code>@Mock</code>注解，同时需要调用一个特殊方法来初始化被注解的对象。</p>
 <p>在<code>Mockito 2</code>中有一个<code>MockitoAnnotations.initMocks()</code>方法，该方法已经被废弃并在<code>Mockito 3</code>中被<code>MockitoAnnotations.openMocks()</code>替代，该方法返回一个<code>AutoCloseable</code>对象可用于在测试之后关闭资源。</p>
 
@@ -290,7 +294,7 @@
 <ul>
 <li>无法检测框架的使用情况以及检测不正常的打桩</li>
 </ul>
-<h1 id="mock自动注入">Mock自动注入</h1>
+<h2 id="mock自动注入">Mock自动注入</h2>
 <p>同样可以通过给对应属性添加<code>@InjectMocks</code>注解来自动注入mock对象。</p>
 <p>当调用<code>MockitoAnnotations.openMocks()</code>时,<code>Mockito</code>会执行如下操作：</p>
 <ul>
@@ -341,7 +345,7 @@
 <div class="admonition danger"><p class="admonition-title">注意</p>
 <p>不推荐使用属性注入或setter注入，使用构造器注入时，我们可以百分百确定没有注入相关依赖之前无法实例化该类。</p>
 </div>
-<h1 id="junit5-mockito扩展">JUnit5 Mockito扩展</h1>
+<h2 id="junit5-mockito扩展">JUnit5 Mockito扩展</h2>
 <p><code>JUnit 5</code>中同样有一个<code>Mockito</code>扩展让实例化更简单。</p>
 <p>要使用该扩展，首先需要添加对应的依赖。</p>
 
@@ -426,7 +430,7 @@ void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
 <ul>
 <li>需要一个额外的依赖<code>org.mockito:mockito-junit-jupiter</code></li>
 </ul>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>在<code>JUnit 5</code>中有3种不同的方式使用<code>Mockito</code>，前2种方式可独立于框架单独使用，而第3种方式需使用<code>JUnit 5</code>中的<code>Mockito</code>扩展。</p>
 <p>Mock对象可通过一下方式创建和初始化:</p>
 <ul>

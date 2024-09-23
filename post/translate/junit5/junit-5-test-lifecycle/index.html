@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译关于JUnit5生命周期的博文" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是关于JUnit5生命周期的博文" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-test-lifecycle/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit 5 生命周期 - 注释之前和之后">
-  <meta property="og:description" content="翻译关于JUnit5生命周期的博文">
+  <meta property="og:description" content="JUnit5翻译专题，主要是关于JUnit5生命周期的博文">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit 5 生命周期 - 注释之前和之后">
-  <meta itemprop="description" content="翻译关于JUnit5生命周期的博文">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是关于JUnit5生命周期的博文">
   <meta itemprop="datePublished" content="2023-06-16T19:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-16T19:21:43+08:00">
   <meta itemprop="wordCount" content="2342">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit 5 生命周期 - 注释之前和之后">
-  <meta name="twitter:description" content="翻译关于JUnit5生命周期的博文">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是关于JUnit5生命周期的博文">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,16 +182,20 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#生命周期相关方法">生命周期相关方法</a></li>
-    <li><a href="#测试生命周期">测试生命周期</a>
+    <li>
       <ul>
-        <li><a href="#按类实例测试">按类实例测试</a></li>
-        <li><a href="#更具体的例子">更具体的例子</a></li>
+        <li><a href="#生命周期相关方法">生命周期相关方法</a></li>
+        <li><a href="#测试生命周期">测试生命周期</a>
+          <ul>
+            <li><a href="#按类实例测试">按类实例测试</a></li>
+            <li><a href="#更具体的例子">更具体的例子</a></li>
+          </ul>
+        </li>
+        <li><a href="#嵌套测试生命周期">嵌套测试生命周期</a></li>
+        <li><a href="#扩展生命周期">扩展生命周期</a></li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#嵌套测试生命周期">嵌套测试生命周期</a></li>
-    <li><a href="#扩展生命周期">扩展生命周期</a></li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -204,12 +208,12 @@
 <p><img src="/blog_img/translate/junit5/junit-5-test-lifecycle/junit-5-chart-diagram.webp" alt="JUnit 5 Chart Diagram" title="JUnit 5 Chart Diagram"></p>
 <p>在本教程中我们将学习如何在测试类的每个测试方法或测试类中所有方法之前和之后运行代码，同时将了解嵌套测试和扩展测试时的执行顺序。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="生命周期相关方法">生命周期相关方法</h1>
+<h2 id="生命周期相关方法">生命周期相关方法</h2>
 <p>一个生命周期方法是指任何添加了<code>@BeforeAll</code>、<code>@AfterAll</code>、<code>@BeforeEach</code>或<code>@AfterEach</code>注解的方法，生命周期方法在实际测试方法之前或之后执行。</p>
 <p><code>@BeforeAll</code>和<code>@AfterAll</code>注解表示在测试类中使用使用该注解的方法应该在全部的测试方法之前或之后执行。</p>
 <p>与之相似，<code>@BeforeEach</code>和<code>@AfterEach</code>分别表示使用该注解的方法应该在测试类中的每个测试方法之前或之后执行。</p>
 <p>如果测试类中有10个测试方法，<code>@BeforeEach</code> 和<code>@AfterEach</code>会执行10次，而<code>@BeforeAll</code>和<code>@AfterAll</code>只执行一次。</p>
-<h1 id="测试生命周期">测试生命周期</h1>
+<h2 id="测试生命周期">测试生命周期</h2>
 <p>默认情况下，<code>JUnit</code>在执行测试中的每个测试方法之前都会创建一个新的实例，这有助于我们单独运行各个测试方法并避免意外的副作用。</p>
 <p>要了解该机制是如何工作的，可以看一下下面的示例:</p>
 
@@ -268,7 +272,7 @@
 After the entire test fixture</code>
 </pre>
 <p>观察上述输出，可发现<code>JUnit</code>会为每个测试方法构造一个测试类，生命周期相关的fixture方法只执行一次，测试相关的生命周期方法会被执行多次。</p>
-<h2 id="按类实例测试">按类实例测试</h2>
+<h3 id="按类实例测试">按类实例测试</h3>
 <p>也可以让<code>JUnit</code>在同一个测试实例中执行所有的测试方法，如果将测试类使用<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解，<code>JUnit</code>将为每个测试类创建一个测试实例。</p>
 <p>由于实例共享，此时没有必要使用静态方法：</p>
 
@@ -308,7 +312,7 @@ public class PerClassLifecycleTest {
 <div class="admonition danger"><p class="admonition-title">注意</p>
 <p>​    如果测试方法依赖于存储在实例变量中的状态，则需要在使用<code>@BeforeEach</code> 或<code>@AfterEach</code>注解的生命周期方法中重置其状态，要尽可能的避免编写依赖与存储实例状态的测试方法。</p>
 </div>
-<h2 id="更具体的例子">更具体的例子</h2>
+<h3 id="更具体的例子">更具体的例子</h3>
 <p>现在我们知道了生命周期方法如何工作的，进一步探索如何在实践中使用它们是有益的。通常如果有一些计算成本较高的东西，可以在多个测试方法中进行共享。</p>
 <p>此类示例包括打开数据库连接、从依赖注入框架获取上下文或读取文件。</p>
 
@@ -349,7 +353,7 @@ public class ExpensiveResourceTest {
     }
 }</code>
 </pre>
-<h1 id="嵌套测试生命周期">嵌套测试生命周期</h1>
+<h2 id="嵌套测试生命周期">嵌套测试生命周期</h2>
 <p>生命周期方法同样可以用于嵌套测试，但在默认情况下<code>@BeforeAll</code> 和<code>@AfterAll</code>注解不会工作，这是由于嵌套类是内部类，而<code>Java</code>内部类中不支持静态方法。</p>
 <p>可将嵌套类添加<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解来实现类似效果：</p>
 
@@ -420,7 +424,7 @@ After each happy path</code>
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="/post/translate/junit5/junit-5-nested-tests/"><strong>JUnit5 嵌套测试</strong></a></p>
 </div>
-<h1 id="扩展生命周期">扩展生命周期</h1>
+<h2 id="扩展生命周期">扩展生命周期</h2>
 <p>在使用扩展时，<code>JUnit</code>除了调用测试类的生命周期方法之外，还调用对应扩展的生命周期回调方法。</p>
 <p><code>JUnit</code>会确保多个注册扩展的封装行为，假设有扩展<code>ExtensionOne</code>和<code>ExtensionTwo</code>，它会确保<code>ExtensionOne</code>中所有before相关的方法都在<code>ExtensionTwo</code>之前执行，类似的，<code>ExtensionOne</code>中所有after相关的方法都在<code>ExtensionTwo</code>之侯执行。</p>
 <p>看看如下的例子：</p>
@@ -484,7 +488,7 @@ After each from ExtensionOne</code>
 <p><code>JUnit5</code>官方文档中有关于执行顺序和扩展的更详细说明</p>
 <p><a href="https://junit.org/junit5/docs/current/user-guide/#extensions-execution-order"><strong>JUnit5 User Guide</strong></a></p>
 </div>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>要在每次测试之前和之后执行一段代码，可使用<code>JUnit5</code>中的<code>@BeforeEach</code>和<code>@AfterEach</code>注解，类似的，若要对测试实例中的所有测试执行一次代码，可使用<code>@BeforeAll</code>和<code>@AfterAll</code>注解。</p>
 <p>此外，可通过给测试类添加<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解让其执行测试时只创建一个实例，它同时为嵌套测试中开启了&quot;before all&quot;和&quot;after all&quot;相关的生命周期方法。</p>
 <p>最后，当注册多个扩展时，<code>JUnit5</code>会确保它们生命周期方法的封装行为。</p>

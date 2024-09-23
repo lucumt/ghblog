@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译关于JUnit 5中断言方法的使用" /><meta name="keywords" content="junit5, assert" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是关于JUnit 5中断言方法的使用" /><meta name="keywords" content="junit5, assert" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-assertions/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit 5 断言 - 验证测试结果">
-  <meta property="og:description" content="翻译关于JUnit 5中断言方法的使用">
+  <meta property="og:description" content="JUnit5翻译专题，主要是关于JUnit 5中断言方法的使用">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit 5 断言 - 验证测试结果">
-  <meta itemprop="description" content="翻译关于JUnit 5中断言方法的使用">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是关于JUnit 5中断言方法的使用">
   <meta itemprop="datePublished" content="2023-05-01T13:37:22+08:00">
   <meta itemprop="dateModified" content="2023-05-01T13:37:22+08:00">
   <meta itemprop="wordCount" content="4390">
   <meta itemprop="keywords" content="junit5,assert">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit 5 断言 - 验证测试结果">
-  <meta name="twitter:description" content="翻译关于JUnit 5中断言方法的使用">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是关于JUnit 5中断言方法的使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,30 +182,34 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#概览">概览</a></li>
-    <li><a href="#断言">断言</a>
+    <li>
       <ul>
-        <li><a href="#值比较">值比较</a></li>
-        <li><a href="#布尔值">布尔值</a></li>
-        <li><a href="#空值">空值</a></li>
-        <li><a href="#迭代器">迭代器</a></li>
-        <li><a href="#数组">数组</a></li>
-        <li><a href="#值对象">值对象</a></li>
-        <li><a href="#引用对象">引用对象</a></li>
-        <li><a href="#异常">异常</a></li>
-        <li><a href="#超时">超时</a></li>
+        <li><a href="#概览">概览</a></li>
+        <li><a href="#断言">断言</a>
+          <ul>
+            <li><a href="#值比较">值比较</a></li>
+            <li><a href="#布尔值">布尔值</a></li>
+            <li><a href="#空值">空值</a></li>
+            <li><a href="#迭代器">迭代器</a></li>
+            <li><a href="#数组">数组</a></li>
+            <li><a href="#值对象">值对象</a></li>
+            <li><a href="#引用对象">引用对象</a></li>
+            <li><a href="#异常">异常</a></li>
+            <li><a href="#超时">超时</a></li>
+          </ul>
+        </li>
+        <li><a href="#自定义错误信息">自定义错误信息</a></li>
+        <li><a href="#分组断言">分组断言</a></li>
+        <li><a href="#高级匹配">高级匹配</a>
+          <ul>
+            <li><a href="#hamcrest">Hamcrest</a></li>
+            <li><a href="#assertj">AssertJ</a></li>
+            <li><a href="#truth">Truth</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#自定义错误信息">自定义错误信息</a></li>
-    <li><a href="#分组断言">分组断言</a></li>
-    <li><a href="#高级匹配">高级匹配</a>
-      <ul>
-        <li><a href="#hamcrest">Hamcrest</a></li>
-        <li><a href="#assertj">AssertJ</a></li>
-        <li><a href="#truth">Truth</a></li>
-      </ul>
-    </li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -216,13 +220,13 @@
     <div class="post-content image-center">
 	 <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-assertions/"><strong>JUnit 5 Assertions: Verifying Test Results</strong></a>。</p>
 <p><img src="/blog_img/translate/junit5/junit-5-assertions/junit-5-checklist-with-computer.webp" alt="JUnit 5 Assertions" title="JUnit 5 Assertions"></p>
-<h1 id="概览">概览</h1>
+<h2 id="概览">概览</h2>
 <p>在本文中，我们将学习如何通过<code>JUnit 5</code>断言来验证测试结果，我们将学习断言的基本方法吗、如何自定义错误消息，以及如何将多个断言作为一个分组运行。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="断言">断言</h1>
+<h2 id="断言">断言</h2>
 <p><code>JUnit 5</code>断言让测试结果与预期结果的验证变得更容易，只要一个测试中有断言失败，整个测试就会失败。类似的，只有单个测试中所有的断言都通过，测试才能通过。</p>
 <p><code>JUnit 5</code>中的断言是<code>org.junit.jupiter.api.Assertions</code>中的静态方法，下面我们将会详细了解这些方法的使用场景。</p>
-<h2 id="值比较">值比较</h2>
+<h3 id="值比较">值比较</h3>
 <p>在验证结果时，一个最常见的场景是我们希望预期结果与实际结果相等，<code>JUnit 5</code>提供了<code>assertEquals()</code>与<code>assertNotEquals()</code>方法来对值进行相等性和不等性比较。</p>
 <p>在这个例子中，我们有一个简单的<code>Calculator</code>类用于将两数相加，我们希望计算结果是准确的：</p>
 
@@ -240,7 +244,7 @@ void addNumbers() {
 Expected :3
 Actual   :2</code>
 </pre>
-<h2 id="布尔值">布尔值</h2>
+<h3 id="布尔值">布尔值</h3>
 <p>通常，当我们希望返回的值为true或者false，可通过<code>assertEquals()</code>方法实现，但<code>JUnit 5</code>中提供了更简洁的<code>assertTrue()</code>与<code>assertFalse()</code>方法来实现此功能。</p>
 <p>在下面例子中我们可验证一个人的名字是否以特定字母开头：</p>
 
@@ -252,7 +256,7 @@ void firstNameStartsWithJ() {
 }</code>
 </pre>
 <p>类似的，若要断言返回值不为true，可通过<code>assertFalse()</code>实现。</p>
-<h2 id="空值">空值</h2>
+<h3 id="空值">空值</h3>
 <p>有时候我们希望一个对象为空或者非空，要实现此目的，可通过<code>JUnit 5</code>中的断言方法<code>assertNull()</code>和<code>assertNotNull()</code>实现。</p>
 <p>在下面的例子中我们可验证一个人的名字是否不为空：</p>
 
@@ -272,7 +276,7 @@ void personHasFirstName() {
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="https://www.arhohuttunen.com/avoiding-unnecessary-null-checks/"><strong>避免不必要的空值检测</strong></a></p>
 </div>
-<h2 id="迭代器">迭代器</h2>
+<h3 id="迭代器">迭代器</h3>
 <p>有时候我们需要验证一个集合中包含我们期望的元素，例如，我们可能想验证自己的排序算法是否有效。</p>
 <p><code>JUnit 5</code>中的<code>assertIterableEquals()</code>可用于验证一个迭代器对象是否包含我们期望的元素，我们可以比较任何实现了<code>Iterable</code>接口的类。</p>
 <p>在下面例子中我们可验证一个list在排序后元其素顺序是否正确：</p>
@@ -305,7 +309,7 @@ Actual   :&lt;4&gt;</code>
 <blockquote>
 <p><strong>两个迭代器只有在它们全部为空或包含相同的值时才相等。</strong></p>
 </blockquote>
-<h2 id="数组">数组</h2>
+<h3 id="数组">数组</h3>
 <p>断言数组与断言迭代器很类似，可通过<code>JUnit 5</code>中的<code>assertArrayEquals()</code>方法实现:</p>
 
 <pre class="line-numbers language-java ">
@@ -322,7 +326,7 @@ void arraysEqual() {
 <blockquote>
 <p><strong>两个数组只有在都为空或者包含相同的元素时才相等<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></strong></p>
 </blockquote>
-<h2 id="值对象">值对象</h2>
+<h3 id="值对象">值对象</h3>
 <p>在断言两个对象是否相等时，我们需要考虑一些事项。</p>
 <p>在下面的例子中有一个<code>Person</code>类包含姓和名，我们想比较两个<code>Person</code>对象是否相同：</p>
 
@@ -370,7 +374,7 @@ Actual   :com.arhohuttunen.junit5.assertions.Person@2b2948e2</code>
 }</code>
 </pre>
 <p>重新运行测试，可发现测试执行通过，重写<code>equals()</code>方法后在比较对象是否相等时通过属性比较实现。</p>
-<h2 id="引用对象">引用对象</h2>
+<h3 id="引用对象">引用对象</h3>
 <p>有时我们想确保两个对象指向或者不指向同一个实例，例如，要验证某个方法返回的是对象副本而不是相同的对象,<code>JUnit 5</code>提供了<code>assertSame()</code>和<code>assertNotSame()</code>方法来实现此功能：</p>
 
 <pre class="line-numbers language-java ">
@@ -389,7 +393,7 @@ void personsAreNotSameInstance() {
 Expected :not same
 Actual   :&lt;Person{firstName=&#39;John&#39;, lastName=&#39;Doe&#39;}&gt;</code>
 </pre>
-<h2 id="异常">异常</h2>
+<h3 id="异常">异常</h3>
 <p>要确保程序中的错误处理能正常工作，我们可以验证一段代码在某些条件下是否抛出特定的异常，这可以通过<code>JUnit 5</code>中的<code>assertThrows()</code>方法来实现：</p>
 
 <pre class="line-numbers language-java ">
@@ -422,7 +426,7 @@ void divideByZeroThrowsIllegalArgumentException() {
     assertEquals(&#34;Cannot divide by zero&#34;, thrown.getMessage());
 }</code>
 </pre>
-<h2 id="超时">超时</h2>
+<h3 id="超时">超时</h3>
 <p>有时候我们想确保程序执行时间不能超过某个限制，此时我们可用<code>assertTimeout()</code>或<code>assertTimeoutPreemptively()</code>来实现。</p>
 <p>这两个方法的不同点在于<code>assertTimeout()</code>与调用者在同一个线程中执行，并且即使超时也不会中止，而<code>assertTimeoutPreemptively()</code>则与调用者在不同的线程中，在超时后会中止。</p>
 <p>前面的意思是第一种方式的测试将一直执行下去，而第二种方式测试如果超过超时程序就会立即停止。</p>
@@ -461,7 +465,7 @@ void abortWhenTimeoutExceeded() {
 <code>org.opentest4j.AssertionFailedError: execution timed out after 50 ms</code>
 </pre>
 <p>这里的区别在于执行在超时处停止程序运行。</p>
-<h1 id="自定义错误信息">自定义错误信息</h1>
+<h2 id="自定义错误信息">自定义错误信息</h2>
 <p>为<code>JUnit 5</code>断言提供自定义错误消息很容易，所有断言方法都有一个可选的错误消息作为最后一个参数：</p>
 
 <pre class="line-numbers language-java ">
@@ -493,7 +497,7 @@ void addingEmployeesToPersonnel() {
 }</code>
 </pre>
 <p>上述例子中的错误消息不是那么复杂，但是，通过使用此种方式<code>JUnit 5</code>只会在断言失败时才构造错误消息，我们只需在程序运行失败时耗费相应的计算成本。</p>
-<h1 id="分组断言">分组断言</h1>
+<h2 id="分组断言">分组断言</h2>
 <p>在执行测试时，测试程序将在第一次断言失败时终止，而利用<code>JUnit 5</code>中的分组断言，我们可以在反馈失败之前运行完所有的断言测试，可以通过使用<code>assertAll()</code>方法并提供不同的断言作为该方法的参数来实现此功能。</p>
 <p>假设我们想要验证一个人的名字是否正确，这意味着我们需要验证姓和名都是正确的：</p>
 
@@ -519,11 +523,11 @@ void firstAndLastNameMatches() {
 <blockquote>
 <p><strong>单个测试只能有一条原因导致测试失败，我们不应该试图通过在单个测试中验证多个条件来减少测试数量，但在某些场景下，当断言在语义上密切相关时，我们可在单个测试中添加多个断言。</strong></p>
 </blockquote>
-<h1 id="高级匹配">高级匹配</h1>
+<h2 id="高级匹配">高级匹配</h2>
 <p>虽然<code>JUnit 5</code>中的断言足以满足许多测试场景，但有时我们需要更强的选项。例如验证一个列表是否为特定大小、列表是否包含具有特定属性值的元素、列表是否已排序并包含特定的元素等，我们可以自己编写代码逻辑来实现，但更好的方式是断言库替我们实现。</p>
 <p>此时<code>JUnit 5</code>断言是不够的，因此<code>JUnit 5</code>文档建议我们在这种场景下使用第三方断言库，其中最流行的是<code>Hamcrest</code>、<code>AssertJ</code>和<code>Truth</code>。</p>
 <p>我们不准备在此教程中介绍这些库的详细信息，但我们可以快速看一下这些类库中的一些断言方法是如何使用的。</p>
-<h2 id="hamcrest">Hamcrest</h2>
+<h3 id="hamcrest">Hamcrest</h3>
 <p><code>Hamcrest</code>是它们中最古老的一个，在下面的例子中我们想验证一个列表是否只包含一个元素，在<code>JUnit 5</code>中可通过如下方式实现：</p>
 
 <pre class="line-numbers language-java ">
@@ -545,7 +549,7 @@ void listHasOneItem() {
 }</code>
 </pre>
 <p>阅读此段代码，看起来更流畅，更接近自然语言，但我们可能会争论说第一个例子的可读性足够好，也许我们还没被说服。</p>
-<h2 id="assertj">AssertJ</h2>
+<h3 id="assertj">AssertJ</h3>
 <p>接下来，我们快速浏览下<code>AssertJ</code>,<code>Hamcrest</code>和<code>AssertJ</code>最主要的区别是<code>Hamcrest</code>依赖于匹配器方法，而在<code>AssertJ</code>中我们可以进行链式方法调用。</p>
 <p>如果我们想知道一个列表是否包含具有特定属性值的元素该怎么办？先只用<code>JUnit 5</code>编写测试代码：</p>
 
@@ -571,7 +575,7 @@ void listHasPerson() {
 }</code>
 </pre>
 <p>很容易发现这种方式可读性更好，同时我们也在测试代码中移除了容易出错的代码逻辑。</p>
-<h2 id="truth">Truth</h2>
+<h3 id="truth">Truth</h3>
 <p>最后，我们来看下<code>Truth</code>,它和<code>AssertJ</code>很像，最显著的差异是<code>Truth</code>试图提供更简单的API，而<code>AssertJ</code>则有一系列更复杂的断言方法。</p>
 <p>看下第三个示例，我们想验证一个列表中是否来排序并且包含特定的元素，下面的代码是用<code>Truth</code>实现的效果：</p>
 
@@ -586,7 +590,7 @@ void listHasItemsInOrder() {
 }</code>
 </pre>
 <p>再一次，变得更简洁和更容易阅读。</p>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p><code>JUnit 5</code>中的断言方法让预期结果与实际结果的验证变得更容易：</p>
 <ul>
 <li>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="翻译关于JUnit 5中关联测试的实现与使用" /><meta name="keywords" content="junit5" />
+<meta name="author" content="" /><meta name="description" content="JUnit5翻译专题，主要是翻译关于JUnit 5中关联测试的实现与使用" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-nested-tests/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起">
-  <meta property="og:description" content="翻译关于JUnit 5中关联测试的实现与使用">
+  <meta property="og:description" content="JUnit5翻译专题，主要是翻译关于JUnit 5中关联测试的实现与使用">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起">
-  <meta itemprop="description" content="翻译关于JUnit 5中关联测试的实现与使用">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是翻译关于JUnit 5中关联测试的实现与使用">
   <meta itemprop="datePublished" content="2023-05-02T13:12:24+08:00">
   <meta itemprop="dateModified" content="2023-05-02T13:12:24+08:00">
   <meta itemprop="wordCount" content="3081">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起">
-  <meta name="twitter:description" content="翻译关于JUnit 5中关联测试的实现与使用">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是翻译关于JUnit 5中关联测试的实现与使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,16 +182,20 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#无嵌套测试">无嵌套测试</a></li>
-    <li><a href="#添加嵌套类">添加嵌套类</a></li>
-    <li><a href="#添加二级嵌套">添加二级嵌套</a></li>
-    <li><a href="#避免陷阱">避免陷阱</a>
+    <li>
       <ul>
-        <li><a href="#忽略代码异味">忽略代码异味</a></li>
-        <li><a href="#试图消除重复">试图消除重复</a></li>
+        <li><a href="#无嵌套测试">无嵌套测试</a></li>
+        <li><a href="#添加嵌套类">添加嵌套类</a></li>
+        <li><a href="#添加二级嵌套">添加二级嵌套</a></li>
+        <li><a href="#避免陷阱">避免陷阱</a>
+          <ul>
+            <li><a href="#忽略代码异味">忽略代码异味</a></li>
+            <li><a href="#试图消除重复">试图消除重复</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -205,7 +209,7 @@
 <p>在本教程中我们讲学习如何利用<code>JUnit 5</code>编写嵌套测试，学习如何提供一个层级结构用于描述测试方法间的依赖关系。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=TsCew_Oq6uE"><strong>学习视频</strong></a></p>
-<h1 id="无嵌套测试">无嵌套测试</h1>
+<h2 id="无嵌套测试">无嵌套测试</h2>
 <p>为了给嵌套测试奠定基础，首先看一个没有嵌套的例子，为了简洁起见省略了测试内容，完整的内容在<code>GitHub</code>中。</p>
 
 <pre class="line-numbers language-java ">
@@ -248,7 +252,7 @@ MoneyTest &gt; monies with different amounts are not equal PASSED
 MoneyTest &gt; monies with different currencies are not equal PASSED</code>
 </pre>
 <p>此处没有太多的测试方法，所以仍然具有较好的可读性，然而，我们已经能够看出关联的测试方法在输出结果中没有分组在一起。</p>
-<h1 id="添加嵌套类">添加嵌套类</h1>
+<h2 id="添加嵌套类">添加嵌套类</h2>
 <p><code>JUnit 5</code>中的嵌套测试为我们提供了一种构建层级结构的实现，可基于逻辑结构组织测试，组织起来的嵌套结构能让我们更好的表述测试方法间的关系。</p>
 <p>通过在测试类中创建内部类并添加<code>@Nested</code>注解，我们可在<code>JUnit 5</code>中创建嵌套测试，同样可通过添加<code>@DisplayName</code>注解给嵌套类赋予一个更容易阅读的名称。</p>
 
@@ -298,7 +302,7 @@ MoneyTest &gt; equality is based on values &gt; monies with same amounts are equ
 <p><img src="/blog_img/translate/junit5/junit-5-nested-tests/junit-5-nested-test-intellij-idea.webp" alt="JUnit 5 Nested Test In Intellij IDEA" title="JUnit 5 Nested Test In Intellij IDEA"></p>
 <figcaption>在Intellij IDEA中运行嵌套测试</figcaption>
 <p>该报告看起来已经要好一些，每个嵌套类都可被展开或折叠，可只关注于想要的结果。</p>
-<h1 id="添加二级嵌套">添加二级嵌套</h1>
+<h2 id="添加二级嵌套">添加二级嵌套</h2>
 <p>来看一个更复杂的示例，我们正在测试一个REST controller，我们正在测试用于创建、读取和删除产品的<code>HTTP</code> <code>POST</code>、<code>GET</code>和<code>DELETE</code>方法，我们会检查验证各种内容，如请求正文字段和<code>HTTP</code>响应状态码。</p>
 
 <pre class="line-numbers language-java ">
@@ -448,9 +452,9 @@ ProductControllerTest &gt; Creating a product &gt; when fields are missing &gt; 
 ProductControllerTest &gt; Creating a product &gt; when fields are missing &gt; do not create a product PASSED</code>
 </pre>
 <p>输出结果受益于嵌套，相关联的结果更容易被找到，如果我们设法创建一个经过深思熟虑的结构，它就像导航结果的面包屑一样便于使用。</p>
-<h1 id="避免陷阱">避免陷阱</h1>
+<h2 id="避免陷阱">避免陷阱</h2>
 <p>如果使用得当，<code>JUnit 5</code>嵌套测试可以成为一个强有力的工具，但是同其它的工具一样，使用嵌套测试也会伴随着一些陷阱。</p>
-<h2 id="忽略代码异味">忽略代码异味</h2>
+<h3 id="忽略代码异味">忽略代码异味</h3>
 <p>当我们有编写嵌套测试的冲动时，我们应该问下自己为什么要这样做，如果测试类变得越来越大并且需要进行组织，或许意味着测试类正在做太多的事情。</p>
 <p>我们应该问自己这些问题：</p>
 <ul>
@@ -458,7 +462,7 @@ ProductControllerTest &gt; Creating a product &gt; when fields are missing &gt; 
 <li>嵌套类中的任一假定测试是否意味着其在做不止一件事情？</li>
 </ul>
 <p>相对于添加更多的结构来测试，我们应该考虑是否有必要进行重构，添加层级结构也会增加测试的复杂性，应该尽可能的避免添加复杂性。</p>
-<h2 id="试图消除重复">试图消除重复</h2>
+<h3 id="试图消除重复">试图消除重复</h3>
 <p>许多教程建议我们通过在<code>@BeforeEach</code>方法中构造共享对象并将它们定义为类成员变量来消除重复，这个建议的初衷是好的，但在测试代码中消除重复有更多的讲究。</p>
 <p>我们仔细看下之前的产品controller测试：</p>
 
@@ -556,7 +560,7 @@ class WhenProductIsFound {
 <li><a href="https://www.arhohuttunen.com/test-readability/"><strong>如何让测试代码易于阅读</strong></a></li>
 </ul>
 </div>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>我们可通过嵌套测试来添加层级结构，可通过创建具有<code>@Nested</code>注解的内部类来创建嵌套测试。</p>
 <p>嵌套测试有助于我们更好的描述测试方法之间的关系，嵌套测试还能够提高测试代码和测试结果的可读性和导航性。</p>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-nested-tests"><strong>GitHub</strong></a>中找到。</p>

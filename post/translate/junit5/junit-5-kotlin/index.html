@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5 整合Kotlin" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是如何在JUnit5中整合Kotlin" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-kotlin/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit5 整合Kotlin">
-  <meta property="og:description" content="JUnit5 整合Kotlin">
+  <meta property="og:description" content="JUnit5翻译专题，主要是如何在JUnit5中整合Kotlin">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit5 整合Kotlin">
-  <meta itemprop="description" content="JUnit5 整合Kotlin">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是如何在JUnit5中整合Kotlin">
   <meta itemprop="datePublished" content="2023-06-21T19:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-21T19:21:43+08:00">
   <meta itemprop="wordCount" content="3030">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit5 整合Kotlin">
-  <meta name="twitter:description" content="JUnit5 整合Kotlin">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是如何在JUnit5中整合Kotlin">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,18 +182,22 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#相关视频">相关视频</a></li>
-    <li><a href="#配置">配置</a></li>
-    <li><a href="#基本功能">基本功能</a></li>
-    <li><a href="#惰性评估">惰性评估</a></li>
-    <li><a href="#断言">断言</a></li>
-    <li><a href="#参数化测试">参数化测试</a></li>
-    <li><a href="#动态测试">动态测试</a></li>
-    <li><a href="#嵌套测试">嵌套测试</a></li>
-    <li><a href="#静态方法和属性">静态方法和属性</a></li>
-    <li><a href="#生命周期方法">生命周期方法</a></li>
-    <li><a href="#可重复注解">可重复注解</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li>
+      <ul>
+        <li><a href="#相关视频">相关视频</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#基本功能">基本功能</a></li>
+        <li><a href="#惰性评估">惰性评估</a></li>
+        <li><a href="#断言">断言</a></li>
+        <li><a href="#参数化测试">参数化测试</a></li>
+        <li><a href="#动态测试">动态测试</a></li>
+        <li><a href="#嵌套测试">嵌套测试</a></li>
+        <li><a href="#静态方法和属性">静态方法和属性</a></li>
+        <li><a href="#生命周期方法">生命周期方法</a></li>
+        <li><a href="#可重复注解">可重复注解</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -206,9 +210,9 @@
 <p><img src="/blog_img/translate/junit5/junit-5-kotlin/junit-5-kotlin.webp" alt="JUnit 5 Kotlin" title="JUnit 5 Kotlin"></p>
 <p>在本教程中将学习在<code>Java</code>和<code>Kotlin</code>中编写<code>JUnit 5</code>测试的差异，同时也将学习如何在<code>Gradle Kotlin DSL</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>在构建脚本中配置<code>JUnit 5</code>环境。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="相关视频">相关视频</h1>
+<h2 id="相关视频">相关视频</h2>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=94KTm9b00VM"><strong>学习视频</strong></a>。</p>
-<h1 id="配置">配置</h1>
+<h2 id="配置">配置</h2>
 <p>我们使用<code>Groovy DSL</code>将传统的<code>Gradle</code>构建脚本编写为<code>build.gradle</code>文件。<code>Gradle Kotlin DSL</code>对多项改进提供了替代语法，如内容辅助和重构，通过<code>Kotlin DSL</code>编写的构建脚本被命名为<code>build.gradle.kts</code>。要在<code>Kotlin</code>中编写<code>JUnit 5</code>测试，首先需要在<code>build.gradle.kts</code>中添加<code>junit-jupiter</code>坐标并且告知其在测试中使用<code>JUnit</code>平台。</p>
 
 <pre class="line-numbers language-groovy ">
@@ -220,7 +224,7 @@ tasks.withType&lt;Test&gt; {
     useJUnitPlatform()
 }</code>
 </pre>
-<h1 id="基本功能">基本功能</h1>
+<h2 id="基本功能">基本功能</h2>
 <p><code>JUnit 5</code>中的大部分功能在<code>Kotlin</code>中都能像在<code>Java</code>中一样正常工作，一切都是开箱即用的。</p>
 <p>一个显著的不同是如何在测试报告或IDE中自定义展示测试方法的名称。</p>
 <p>在<code>Java</code>中，我们可使用<code>@DisplayName</code>注解来让方法名可读，但在<code>Kotlin</code>中我们给变量和方法添加反引号来表示。</p>
@@ -232,7 +236,7 @@ fun `1 &#43; 2 = 3`() {
 }</code>
 </pre>
 <p>利用反引号让代码和测试结果更具有可读性，通常我们不应该使用这样的方法名称吗，但它对此需求实现很方便。</p>
-<h1 id="惰性评估">惰性评估</h1>
+<h2 id="惰性评估">惰性评估</h2>
 <p><code>JUnit 5</code>通过lambda对错误消息提供了惰性评估，利用lambda可避免构建不必要的昂贵错误消息。</p>
 <p>在<code>Kotlin</code>中，如果一个函数的最后一个参数接收一个函数，就能重写为括号外的lambda表达式。</p>
 
@@ -245,7 +249,7 @@ fun `1 &#43; 2 = 3`() {
 }</code>
 </pre>
 <p>相对于<code>Java</code>，此种实现方式让在<code>Kotlin</code>中编写断言时的语法更简洁。</p>
-<h1 id="断言">断言</h1>
+<h2 id="断言">断言</h2>
 <p><code>JUnit 5</code>中的任何断言都能在<code>Kotlin</code>中正常工作，然而有几种<code>Kotlin</code>特定的断言方法更适合该语言，这些断言方法是<code>org.junit.jupiter.api</code>包中的顶级函数。</p>
 <p>下面是一个代码抛出异常的断言示例，在<code>Java</code>中，我们可通过在<code>assertThrows()</code>调用中传入一个lambda表达式，在<code>Kotlin</code>中，同样可通过在断言调用后添加一个lambda表达式让其更具有可读性。</p>
 
@@ -271,7 +275,7 @@ fun `Square of a number should equal the number multiplied by itself`() {
 }</code>
 </pre>
 <p>相比较<code>Java</code>，此种方式不太冗长同时更具有可读性。</p>
-<h1 id="参数化测试">参数化测试</h1>
+<h2 id="参数化测试">参数化测试</h2>
 <p>在<code>JUnit 5</code>中有多种方式编写参数化测试，它们中的大部分可在<code>Kotlin</code>中无需修改直接运行。</p>
 <p>需要考虑的一点是在使用<code>@MethodSource</code>注解时有一些不同，此注解在类中接收一个静态方法作为参数来源。</p>
 <p>要在<code>Kotlin</code>中实现同样功能，我们需要创建一个伴生对象并给相关方法添加<code>@JvmStatic</code>注解，此注解将使该方法以<code>Java</code>静态方法的形式存在。</p>
@@ -301,7 +305,7 @@ fun `Square of a number`(input: Int, expected: Int) {
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="/post/translate/junit5/junit-5-parameterized-tests/"><strong>JUnit 5 参数化测试</strong></a></p>
 </div>
-<h1 id="动态测试">动态测试</h1>
+<h2 id="动态测试">动态测试</h2>
 <p><code>JUnit 5</code>引入了一种新的编程模型，允许我们通过<code>@TestFactory</code>注解注释的工厂方法在运行时生成动态测试。</p>
 <p>通常我们会提供一个<code>DynamicTest</code>示例的集合，以前述的计算器为例：</p>
 
@@ -335,7 +339,7 @@ fun `Square of a number`() = listOf(
 }</code>
 </pre>
 <p>此种方式除了语法略有不同，与我们在参数化测试种的实现很相似。</p>
-<h1 id="嵌套测试">嵌套测试</h1>
+<h2 id="嵌套测试">嵌套测试</h2>
 <p><code>JUnit 5</code>中的嵌套测试允许我们给测试定义层级结构，同<code>Java</code>中类似，我们或许希望下述代码能正常运行：</p>
 
 <pre class="line-numbers language-kotlin ">
@@ -376,7 +380,7 @@ fun `Square of a number`() = listOf(
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="/post/translate/junit5/junit-5-nested-tests/"><strong>JUnit 5 嵌套测试</strong></a></p>
 </div>
-<h1 id="静态方法和属性">静态方法和属性</h1>
+<h2 id="静态方法和属性">静态方法和属性</h2>
 <p>我们已经简要介绍了静态方法和<code>Kotlin</code>，要让<code>Kotlin</code>中的方法看起来像一个<code>Java</code>静态方法，我们需要创建一个伴生对象并给对应方法上添加<code>@JvmStatic</code>注解。</p>
 
 <pre class="line-numbers language-kotlin ">
@@ -415,7 +419,7 @@ fun `Square of a number`() = listOf(
     }</code>
 </pre>
 <p>添加上该注解后会暴露该<code>Kotlin</code>属性作为一个<code>Java</code>属性并且<code>JUnit 5</code>能够发现它。</p>
-<h1 id="生命周期方法">生命周期方法</h1>
+<h2 id="生命周期方法">生命周期方法</h2>
 <p><code>JUnit 5</code>中的生命周期方法同样能在<code>Kotlin</code>中运行。</p>
 <p>然而，添加了<code>@BeforeAll</code>和<code>@AfterAll</code>注解的方法在默认情况下需要为静态方法，原因是<code>JUnit 5</code>为每个测试方法创建一个测试实例，并且没有其他方法可以在所有测试之间共享状态。</p>
 <p>幸运的是，在<code>JUnit 5</code>中可通过添加<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解让每个测试类只创建一个测试实例，通过对生命周期更改消除了对静态方法的要求。</p>
@@ -448,7 +452,7 @@ class LifecycleTest {
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="/post/translate/junit5/junit-5-test-lifecycle/"><strong>JUnit 5 生命周期</strong></a></p>
 </div>
-<h1 id="可重复注解">可重复注解</h1>
+<h2 id="可重复注解">可重复注解</h2>
 <p>当前<code>Kotlin</code>并不支持重复注解，因此使用多个扩展或标签进行测试比 Java 稍微复杂一些。</p>
 <p>譬如，在<code>Java</code>中我们可重复添加<code>@Tag</code>注解来给某个测试添加多个标签：</p>
 
@@ -475,7 +479,7 @@ class RepeatableAnnotationTest</code>
 )
 class RepeatableAnnotationTest</code>
 </pre>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>尽管在某些场景下有些语法与<code>Java</code>中的不同，大部分<code>JUnit 5</code>的功能特性能在<code>Kotlin</code>中完美运行，然而，由于<code>Kotlin</code>语言的工作方式，我们通常可以使代码更具可读性。</p>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-gradle-kotlin"><strong>GitHub</strong></a>中找到。</p>
 <div class="footnotes" role="doc-endnotes">

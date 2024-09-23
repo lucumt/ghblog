@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5 Gradle示例 - 基于Gradle运行测试" /><meta name="keywords" content="junit5, gradle" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是JUnit5 Gradle示例，基于Gradle运行测试" /><meta name="keywords" content="junit5, gradle" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-gradle-example/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit5 Gradle示例 - 基于Gradle运行测试">
-  <meta property="og:description" content="JUnit5 Gradle示例 - 基于Gradle运行测试">
+  <meta property="og:description" content="JUnit5翻译专题，主要是JUnit5 Gradle示例，基于Gradle运行测试">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -54,14 +54,14 @@
     <meta property="article:tag" content="Gradle">
 
   <meta itemprop="name" content="[译]JUnit5 Gradle示例 - 基于Gradle运行测试">
-  <meta itemprop="description" content="JUnit5 Gradle示例 - 基于Gradle运行测试">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是JUnit5 Gradle示例，基于Gradle运行测试">
   <meta itemprop="datePublished" content="2023-06-27T14:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-27T14:21:43+08:00">
   <meta itemprop="wordCount" content="809">
   <meta itemprop="keywords" content="junit5,gradle">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit5 Gradle示例 - 基于Gradle运行测试">
-  <meta name="twitter:description" content="JUnit5 Gradle示例 - 基于Gradle运行测试">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是JUnit5 Gradle示例，基于Gradle运行测试">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -187,7 +187,7 @@
 <p><img src="/blog_img/translate/junit5/junit-5-gradle-example/junit-5-gradle.webp" alt="JUnit 5 Maven" title="JUnit 5 Maven"></p>
 <p>在本教程中，我们将学习在基于<code>Gradle</code>编写<code>JUnit 5</code>测试时如何获取相关的依赖，以及如何配置<code> JUnit Gradle</code>插件来运行相关测试。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="相关依赖">相关依赖</h1>
+<h2 id="相关依赖">相关依赖</h2>
 <p>若要能够编写<code>JUnit 5</code>测试需要在<code>build.gradle</code>中添加junit-jupiter作为依赖项：</p>
 
 <pre class="line-numbers language-groovy ">
@@ -203,7 +203,7 @@
 }</code>
 </pre>
 <p>至此我们已经有了使用<code>Gradle</code>编写和运行<code>JUnit 5</code>测试的最基本配置。</p>
-<h1 id="旧版本配置">旧版本配置</h1>
+<h2 id="旧版本配置">旧版本配置</h2>
 <p>从<code>JUnit Jupiter 5.4.0</code>开始有一个聚合器组件<code>junit-jupiter</code>它可以传递对<code>junit-jupiter-api</code>、<code>junit-jupiter-params</code>和<code>junit-jupiter-engine</code>的依赖以简化依赖关系管理,这意味着我们不需要额外的依赖项就能够编写参数化测试。</p>
 <p>为了能够使用旧版本编写<code>JUnit 5</code>测试，需要<code>junit-jupiter-api</code>组件作为依赖项，同时需要在运行时类路径下添加JUnit Jupiter测试引擎：</p>
 
@@ -228,7 +228,7 @@
 apply plugin: &#39;org.junit.platform.gradle.plugin&#39;</code>
 </pre>
 <p>至此我们已经有了使用旧版本的<code>Gradle</code>运行<code>JUnit 5</code>测试的基本配置。</p>
-<h1 id="运行测试">运行测试</h1>
+<h2 id="运行测试">运行测试</h2>
 <p><code>JUnit Gradle</code>插件默认情况下在<code>src/test/java</code>目录下查找测试用例。</p>
 <p>可通过添加一个空测试来检查我们的配置是否生效。</p>
 
@@ -253,7 +253,7 @@ apply plugin: &#39;org.junit.platform.gradle.plugin&#39;</code>
 BUILD SUCCESSFUL in 2s</code>
 </pre>
 <p>好了，<code> JUnit Gradle</code>插件现在可正常运行我们的测试。</p>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>在这个<code>JUnit 5 Gradle</code>教程中，我们学习了如何添加编写<code>JUnit 5</code>测试所需的依赖项以及如何配置<code>JUnit Gradle</code>插件以便能够运行测试。</p>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-gradle"><strong>GitHub</strong></a>中找到。</p>
     </div>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何开始编写基于JUnit5的测试程序" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，简要介绍如何开始编写基于JUnit5的测试程序" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-getting-started/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit 5 入门 - 编写第一段测试代码">
-  <meta property="og:description" content="简要介绍如何开始编写基于JUnit5的测试程序">
+  <meta property="og:description" content="JUnit5翻译专题，简要介绍如何开始编写基于JUnit5的测试程序">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit 5 入门 - 编写第一段测试代码">
-  <meta itemprop="description" content="简要介绍如何开始编写基于JUnit5的测试程序">
+  <meta itemprop="description" content="JUnit5翻译专题，简要介绍如何开始编写基于JUnit5的测试程序">
   <meta itemprop="datePublished" content="2023-05-01T09:51:22+08:00">
   <meta itemprop="dateModified" content="2023-05-01T09:51:22+08:00">
   <meta itemprop="wordCount" content="1179">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit 5 入门 - 编写第一段测试代码">
-  <meta name="twitter:description" content="简要介绍如何开始编写基于JUnit5的测试程序">
+  <meta name="twitter:description" content="JUnit5翻译专题，简要介绍如何开始编写基于JUnit5的测试程序">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,16 +182,20 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#设置">设置</a></li>
-    <li><a href="#编写第一个测试">编写第一个测试</a></li>
-    <li><a href="#运行测试">运行测试</a>
+    <li>
       <ul>
-        <li><a href="#在-intellij-idea中运行">在 Intellij IDEA中运行</a></li>
-        <li><a href="#在maven中运行">在Maven中运行</a></li>
-        <li><a href="#在gradle中运行">在Gradle中运行</a></li>
+        <li><a href="#设置">设置</a></li>
+        <li><a href="#编写第一个测试">编写第一个测试</a></li>
+        <li><a href="#运行测试">运行测试</a>
+          <ul>
+            <li><a href="#在-intellij-idea中运行">在 Intellij IDEA中运行</a></li>
+            <li><a href="#在maven中运行">在Maven中运行</a></li>
+            <li><a href="#在gradle中运行">在Gradle中运行</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -204,7 +208,7 @@
 <p><img src="/blog_img/translate/junit5/junit-5-getting-started/get-started-junit-5.webp" alt="Get Started JUnit 5" title="Get Started JUnit 5"></p>
 <p>在本文中，我们将学习如何编写和运行简单的<code>JUnit5</code>单元测试、如何设置前提条件、与我们想测试的对象进行交互，以及验证程序是否按照预期执行。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="设置">设置</h1>
+<h2 id="设置">设置</h2>
 <p>附带的源码示例已经包含基于<code>Maven</code>和<code>Gradle</code>的配置，但为了方便起见，同时也提供了分步教程指南。</p>
 <div class="admonition note"><p class="admonition-title">补充阅读</p>
 <ul>
@@ -212,7 +216,7 @@
 <li><a href="https://www.arhohuttunen.com/junit-5-gradle-example/"><strong>JUnit5 Gradle示例</strong></a></li>
 </ul>
 </div>
-<h1 id="编写第一个测试">编写第一个测试</h1>
+<h2 id="编写第一个测试">编写第一个测试</h2>
 <p>当我们测试某段代码时，我们希望确保其能够按照预期来运行。在编写自动化测试时基于下述步骤：</p>
 <ol>
 <li>首先，对我们要测试的代码<strong>设置前提条件</strong></li>
@@ -257,14 +261,14 @@ class CalculatorTest {
 </pre>
 <p>测试类可以用任何名称，但在本文中我们将测试代码放入<code>CalculatorTest</code>类中，我们将测试类简单叫做<code>addNumbers()</code>以便能够描述我们正在尝试做的事情。</p>
 <p>为了能够执行测试，我们需要给测试方法加上<code>@Test</code>注解，通过这种方式测试执行器能将该方法识别为一个测试方法。</p>
-<h1 id="运行测试">运行测试</h1>
+<h2 id="运行测试">运行测试</h2>
 <p>我们可以有多种方式运行测试代码，当使用IDE工具时可以从IDE工具中直接运行，我们也可以使用像<code>Maven</code>或<code>Gradle</code>这样的构建工具在命令行中执行测试。</p>
 <p>当软件(代码)按照预期执行时，测试结果为<code>pass</code>,当出现预期之外的结果时，测试结果为<code>failed</code>。</p>
-<h2 id="在-intellij-idea中运行">在 Intellij IDEA中运行</h2>
+<h3 id="在-intellij-idea中运行">在 Intellij IDEA中运行</h3>
 <p>在使用类似Intellij IDEA这类IDE工具时，我们可以直接右键点击测试类并且选择运行<code>CalculatorTest</code>，或者我们可以使用快捷键<code>Ctrl+Shift+F10</code>(Windows系统)和<code>Ctrl+Shift+R</code>(Mac系统)来运行测试。</p>
 <p>下图中可以查看在Intellij IDEA中执行<code>JUnit 5</code>测试通过的结果：</p>
 <p><img src="/blog_img/translate/junit5/junit-5-getting-started/junit-5-test-result-in-intellij-idea.webp" alt="Run Test In Intellij IDEA" title="Run Test In Intellij IDEA"></p>
-<h2 id="在maven中运行">在Maven中运行</h2>
+<h3 id="在maven中运行">在Maven中运行</h3>
 <p>若要使用<code>Maven</code>从命令行运行测试，可执行下述命令：</p>
 
 <pre class="no-line-numbers language-bash ">
@@ -287,7 +291,7 @@ class CalculatorTest {
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------</code>
 </pre>
-<h2 id="在gradle中运行">在Gradle中运行</h2>
+<h3 id="在gradle中运行">在Gradle中运行</h3>
 <p>若要使用<code>Gradle</code>从命令行运行测试，可执行下述命令：</p>
 
 <pre class="no-line-numbers language-bash ">
@@ -300,7 +304,7 @@ class CalculatorTest {
 com.arhohuttunen.CalculatorTest &gt; addNumbers() PASSED
 BUILD SUCCESSFUL in 0s</code>
 </pre>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p>在这个<code>JUnit 5</code>入门示例中，我们学习了如何编写和运行简单的<code>JUnit 5</code>测试，本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-starter"><strong>GitHub</strong></a>中找到。</p>
     </div>
 

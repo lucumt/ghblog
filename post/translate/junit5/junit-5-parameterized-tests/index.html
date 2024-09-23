@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译关于JUnit5参数化测试实用指南" /><meta name="keywords" content="junit5" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是关于JUnit5参数化测试实用指南" /><meta name="keywords" content="junit5" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-parameterized-tests/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]JUnit 5 参数化测试实用指南">
-  <meta property="og:description" content="翻译关于JUnit5参数化测试实用指南">
+  <meta property="og:description" content="JUnit5翻译专题，主要是关于JUnit5参数化测试实用指南">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit">
 
   <meta itemprop="name" content="[译]JUnit 5 参数化测试实用指南">
-  <meta itemprop="description" content="翻译关于JUnit5参数化测试实用指南">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是关于JUnit5参数化测试实用指南">
   <meta itemprop="datePublished" content="2023-06-17T09:21:43+08:00">
   <meta itemprop="dateModified" content="2023-06-17T09:21:43+08:00">
   <meta itemprop="wordCount" content="3424">
   <meta itemprop="keywords" content="junit5">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]JUnit 5 参数化测试实用指南">
-  <meta name="twitter:description" content="翻译关于JUnit5参数化测试实用指南">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是关于JUnit5参数化测试实用指南">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,22 +182,26 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#相关视频">相关视频</a></li>
-    <li><a href="#概览">概览</a></li>
-    <li><a href="#单参数与valuesource">单参数与@ValueSource</a></li>
-    <li><a href="#空值与nullsource">空值与@NullSource</a></li>
-    <li><a href="#多参数与methodsource">多参数与@MethodSource</a></li>
-    <li><a href="#共享参数与argumentsource">共享参数与@ArgumentSource</a></li>
-    <li><a href="#多参数与csvsource">多参数与@CsvSource</a>
+    <li>
       <ul>
-        <li><a href="#空csv参数">空CSV参数</a></li>
-        <li><a href="#将字符串转换为其它类型">将字符串转换为其它类型</a></li>
-        <li><a href="#自定义类型转换">自定义类型转换</a></li>
-        <li><a href="#将多参数转化为对象">将多参数转化为对象</a></li>
+        <li><a href="#相关视频">相关视频</a></li>
+        <li><a href="#概览">概览</a></li>
+        <li><a href="#单参数与valuesource">单参数与@ValueSource</a></li>
+        <li><a href="#空值与nullsource">空值与@NullSource</a></li>
+        <li><a href="#多参数与methodsource">多参数与@MethodSource</a></li>
+        <li><a href="#共享参数与argumentsource">共享参数与@ArgumentSource</a></li>
+        <li><a href="#多参数与csvsource">多参数与@CsvSource</a>
+          <ul>
+            <li><a href="#空csv参数">空CSV参数</a></li>
+            <li><a href="#将字符串转换为其它类型">将字符串转换为其它类型</a></li>
+            <li><a href="#自定义类型转换">自定义类型转换</a></li>
+            <li><a href="#将多参数转化为对象">将多参数转化为对象</a></li>
+          </ul>
+        </li>
+        <li><a href="#自定义测试参数名称">自定义测试参数名称</a></li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
-    <li><a href="#自定义测试参数名称">自定义测试参数名称</a></li>
-    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -210,12 +214,12 @@
 <p><img src="/blog_img/translate/junit5/junit-5-parameterized-tests/junit-5-checklist-clipboard.webp" alt="JUnit 5 Chart Checklist" title="JUnit 5 Chart Checklist"></p>
 <p>在本教程中我们将学习如何编写<code>JUnit5</code>参数化测试，本教程以结构化方式展现以便能够同时解答关于参数化测试的常见问题。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="相关视频">相关视频</h1>
+<h2 id="相关视频">相关视频</h2>
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=0xSCbTYAiF0"><strong>学习视频</strong></a>。</p>
-<h1 id="概览">概览</h1>
+<h2 id="概览">概览</h2>
 <p>参数化测试使得可以使用不同的参数多次运行同一个测试方法，通过这种方式我们可以快速的验证不同的场景而无需为它们分别编写测试代码。</p>
 <p>可以像编写常规<code>JUnit 5</code>测试一样编写<code>JUnit 5</code>参数化测试代码，但必须使用<code>@ParameterizedTest</code>注释，同时必须为相关测试声明参数源，可通过不同类型的参数来源注解来声明参数源。</p>
-<h1 id="单参数与valuesource">单参数与@ValueSource</h1>
+<h2 id="单参数与valuesource">单参数与@ValueSource</h2>
 <p>最简单的参数源为<code>@ValueSource</code>，它使得我们可创建一个包含原始类型(如何<code>short</code>、<code>byte</code>、<code>int</code>、<code>long</code>、<code>float</code>、<code>double</code>、<code>char</code>、<code>boolean</code>、<code>String</code>或<code>Class</code>)的数组来使用。</p>
 <p>下述代码使用不同字符串作为测试参数：</p>
 
@@ -258,7 +262,7 @@ void postRequestWithDifferentProtocols(Protocol protocol) {
 }</code>
 </pre>
 <p>执行上述测试后，可发现测试方法基于<code>Protocol</code>中的每个枚举值分别执行了一次。</p>
-<h1 id="空值与nullsource">空值与@NullSource</h1>
+<h2 id="空值与nullsource">空值与@NullSource</h2>
 <p><code>@ValueSource</code>注解不接收null值。</p>
 <p>有一个名为<code>@NullSource</code>的特殊注解，可用来在测试中提供null参数，另一个特殊的注解是<code>@EmptySource</code>，它为<code>String</code>、<code>List</code>、<code>Set</code>、<code>Map</code>或数组提供empty值。</p>
 <p>在下述例子中，我们将null值、空字符串和空白字符串传递给测试方法：</p>
@@ -273,7 +277,7 @@ void nullEmptyAndBlankStrings(String text) {
 }</code>
 </pre>
 <p>也可以使用<code>@NullAndEmptySource</code>将两者结合起来。</p>
-<h1 id="多参数与methodsource">多参数与@MethodSource</h1>
+<h2 id="多参数与methodsource">多参数与@MethodSource</h2>
 <p><code>@ValueSource</code>和<code>@EnumSource</code>注解只有在测试方法只有一个参数时生效，不过我们经常需要使用多个参数。</p>
 <p><code>@MethodSource</code>注解允许我们引用一个返回多参数的工厂方法，此类方法需返回<code>Stream</code>、<code>Iterable</code>、<code>Iterator</code>或参数数组。</p>
 <p>假设我们有一个<code>DateUtils</code>类基于数字获取对应月份的名称，我们需要在参数化测试中传递多个参数，因此我们可以在工厂方法中使用<code>Stream</code>参数实现。</p>
@@ -311,7 +315,7 @@ private static Stream&lt;Arguments&gt; monthNames() {
     );
 }</code>
 </pre>
-<h1 id="共享参数与argumentsource">共享参数与@ArgumentSource</h1>
+<h2 id="共享参数与argumentsource">共享参数与@ArgumentSource</h2>
 <p>也可通过<code>@MethodSource</code>注解来引用其它类中的方法，需要使用方法的全限定名来实现。</p>
 
 <pre class="line-numbers language-java ">
@@ -353,7 +357,7 @@ void externalPalindromeMethodSource(String string) {
     assertTrue(StringUtils.isPalindrome(string));
 }</code>
 </pre>
-<h1 id="多参数与csvsource">多参数与@CsvSource</h1>
+<h2 id="多参数与csvsource">多参数与@CsvSource</h2>
 <p><code>@CsvSource</code>注解允许我们使用以逗号分隔的字符串参数，基于该注解能够以相当紧凑的方式给测试方法提供多个参数。</p>
 
 <pre class="line-numbers language-java ">
@@ -381,7 +385,7 @@ void readTasks(String title, Status status, LocalDate date) {
     System.out.printf(&#34;%s, %s, %s&#34;, title, status, date);
 }</code>
 </pre>
-<h2 id="空csv参数">空CSV参数</h2>
+<h3 id="空csv参数">空CSV参数</h3>
 <p>如果<code>@CsvSource</code>中有empty值，<code>JUnit 5</code>会将其作为<code>null</code>值。</p>
 
 <pre class="line-numbers language-java ">
@@ -409,7 +413,7 @@ void customNullArgument(String title, Status status, LocalDate date) {
     assertNull(title);
 }</code>
 </pre>
-<h2 id="将字符串转换为其它类型">将字符串转换为其它类型</h2>
+<h3 id="将字符串转换为其它类型">将字符串转换为其它类型</h3>
 <p>为了更好的支持类似<code>@CsvSource</code>等注解，<code>JUnit 5</code>对原始参数类型、枚举，<code>java.time</code>包中的日期和时间类型进行自动转换。</p>
 <p>例如，这意味着它会自动将以下日期字符串转换为<code>LocalDate</code>实例:</p>
 
@@ -448,7 +452,7 @@ void convertStringToLocalDate(LocalDate localDate) {
     }
 }</code>
 </pre>
-<h2 id="自定义类型转换">自定义类型转换</h2>
+<h3 id="自定义类型转换">自定义类型转换</h3>
 <p>若要编写自定义参数转换器，则需要实现<code>ArgumentConverter</code>接口，之后则可在任何需要自定义转换的参数上使用<code>@ConvertWith</code>注解。</p>
 <p>举例来说，我们要写一个转换器将十六进制转化为十进制，除了实现<code>ArgumentConverter</code>，在只需要处理一种类型时我们也可以继承<code>TypedArgumentConverter</code>类：</p>
 
@@ -503,7 +507,7 @@ void convertWithCustomHexConverter(int decimal, @HexValue int hex) {
     assertEquals(decimal, hex);
 }</code>
 </pre>
-<h2 id="将多参数转化为对象">将多参数转化为对象</h2>
+<h3 id="将多参数转化为对象">将多参数转化为对象</h3>
 <p>默认情况下，提供参数化测试的参数对应于单个方法参数，可以使用<code>ArgumentsAccessor</code>将这些参数聚合到单个测试方法参数中。</p>
 <p>为了创建一个更具可读性和可重用性的参数聚合器，我们可编码自己实现：</p>
 
@@ -545,7 +549,7 @@ void aggregateArgumentsWithAnnotation(@CsvToTask Task task) {
 }</code>
 </pre>
 <p>现在可以在任何需要的地方使用该聚合器注解。</p>
-<h1 id="自定义测试参数名称">自定义测试参数名称</h1>
+<h2 id="自定义测试参数名称">自定义测试参数名称</h2>
 <p>默认情况下，<code>JUnit 5</code>参数化测试的显示名称包括所有参数的调用索引和字符串表示形式，然而，我们可以通过<code>@ParameterizedTest</code>注解中的name属性来展示自定义的名称。</p>
 <p>再次基于前面的月份名称示例：</p>
 
@@ -573,7 +577,7 @@ private static Stream&lt;Arguments&gt; monthNames() {
 ├─ 2 =&gt; number=2, month=February
 └─ 3 =&gt; number=12, month=December</code>
 </pre>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p><code>JUnit 5</code>参数化测试允许我们消除重复的测试代码，它使得通过使用不同的参数来多次执行同一个测试方法成为可能。</p>
 <ul>
 <li>如果我们只有一个参数在大多数情况下使用<code>@ValueSource</code>即可满足要求，我们也可以使用<code>@EnumSource</code>、<code>@NullSource</code>和<code>@EmptySource</code></li>

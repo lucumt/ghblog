@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="Junit 5 预期异常 - 如何检测异常是否抛出" /><meta name="keywords" content="junit, exception" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="JUnit5翻译专题，主要是Junit 5 预期异常以及如何检测异常是否抛出" /><meta name="keywords" content="junit, exception" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/translate/junit5/junit-5-expected-exception/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="[译]Junit 5 预期异常 - 如何检测异常是否抛出">
-  <meta property="og:description" content="Junit 5 预期异常 - 如何检测异常是否抛出">
+  <meta property="og:description" content="JUnit5翻译专题，主要是Junit 5 预期异常以及如何检测异常是否抛出">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +53,14 @@
     <meta property="article:tag" content="Junit5">
 
   <meta itemprop="name" content="[译]Junit 5 预期异常 - 如何检测异常是否抛出">
-  <meta itemprop="description" content="Junit 5 预期异常 - 如何检测异常是否抛出">
+  <meta itemprop="description" content="JUnit5翻译专题，主要是Junit 5 预期异常以及如何检测异常是否抛出">
   <meta itemprop="datePublished" content="2023-07-02T14:21:43+08:00">
   <meta itemprop="dateModified" content="2023-07-02T14:21:43+08:00">
   <meta itemprop="wordCount" content="626">
   <meta itemprop="keywords" content="junit,exception">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[译]Junit 5 预期异常 - 如何检测异常是否抛出">
-  <meta name="twitter:description" content="Junit 5 预期异常 - 如何检测异常是否抛出">
+  <meta name="twitter:description" content="JUnit5翻译专题，主要是Junit 5 预期异常以及如何检测异常是否抛出">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -186,9 +186,9 @@
 <p><img src="/blog_img/translate/junit5/junit-5-expected-exception/junit-5-laptop-with-service-error.webp" alt="JUnit 5 Service Error" title="JUnit 5 Service Error"></p>
 <p>在本文中，我们将学习如何使用<code>JUnit 5</code>断言抛出异常以及如何检查抛出异常的错误消息。</p>
 <p>本文是<a href="https://www.arhohuttunen.com/junit-5-tutorial/"><strong>JUnit 5 教程</strong></a>的一部分。</p>
-<h1 id="概览">概览</h1>
+<h2 id="概览">概览</h2>
 <p>为了确保我们的错误处理逻辑正常工作，验证一段代码在某些条件下是否出发特定异常是有必要的。</p>
-<h1 id="断言抛出异常">断言抛出异常</h1>
+<h2 id="断言抛出异常">断言抛出异常</h2>
 <p>断言一段代码抛出特定的异常可通过使用<code>JUnit 5</code>中的<code>assertThrows()</code>方法来完成：</p>
 
 <pre class="line-numbers language-java ">
@@ -200,7 +200,7 @@ void notEnoughFunds() {
 }</code>
 </pre>
 <p>在此示例中，如果我们尝试从帐户余额允许的银行帐户中提取更多资金，则相关代码实现会抛出<code>NotEnoughFundsException</code>异常。</p>
-<h1 id="失败的断言">失败的断言</h1>
+<h2 id="失败的断言">失败的断言</h2>
 <p>现在，假设在我们的示例中忘记在提款前检查余额，如果不抛出异常，测试将失败并显示错误消息：</p>
 
 <pre class="line-numbers language-bash ">
@@ -213,7 +213,7 @@ org.opentest4j.AssertionFailedError: Balance must be greater than amount of with
 <code>Balance must be greater than amount of withdrawal ==&gt; Unexpected exception type thrown ==&gt; expected: &lt;com.arhohuttunen.junit5.exception.NotEnoughFundsException&gt; but was: &lt;java.lang.NullPointerException&gt;
 org.opentest4j.AssertionFailedError: Balance must be greater than amount of withdrawal ==&gt; Unexpected exception type thrown ==&gt; expected: &lt;com.arhohuttunen.junit5.exception.NotEnoughFundsException&gt; but was: &lt;java.lang.NullPointerException&gt;</code>
 </pre>
-<h1 id="断言异常消息">断言异常消息</h1>
+<h2 id="断言异常消息">断言异常消息</h2>
 <p>此外，有时我们想要验证异常的一些信息，例如错误消息或原因，在这种情况下可以捕获抛出的异常：</p>
 
 <pre class="line-numbers language-java ">
@@ -224,7 +224,7 @@ void notEnoughFundsWithMessage() {
     assertEquals(&#34;Attempted to withdraw 100 with a balance of 0&#34;, thrown.getMessage());
 }</code>
 </pre>
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
 <p><code>JUnit 5</code>可以轻松断言使用<code>assertThrows()</code>方法引出发预期的异常，此外也可以捕获抛出的异常以检查错误消息等更多信息。</p>
 <p>本文的示例代码能在<a href="https://github.com/arhohuttunen/junit5-examples/tree/main/junit5-expected-exception"><strong>GitHub</strong></a>中找到。</p>
     </div>
