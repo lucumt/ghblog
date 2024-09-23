@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
 date = "2017-04-01T21:57:30+08:00"
-description = "Blog of Rosen Lu"
+description = "翻译自国外一篇关于介绍使用多线程带来的成本的博文"
 keywords = ["java concurrency"]
 title = "3. [译]多线程的成本"
 

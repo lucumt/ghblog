@@ -4,7 +4,7 @@ author = "飞狐"
 categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
 date = "2016-03-07T18:03:18+08:00"
-description = "Blog of Rosen Lu"
+description = "翻译国外的一篇介绍Java多线程编程中volatile关键字用法介绍的博文"
 keywords = ["Java"]
 title = "[译] Java Volatile 关键字详解"
 

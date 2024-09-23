@@ -4,7 +4,7 @@ date: 2024-08-23T13:17:18+08:00
 lastmod: 2024-08-23T13:17:18+08:00
 draft: false
 keywords: ["Git","Worktree"]
-description: "翻译一篇国外的关于Git Worktree使用的博文"
+description: "翻译一篇国外的关于Git Worktree使用的博文，主要用于解决多分支开发时切换不方便的问题"
 tags: ["Git"]
 categories: ["翻译"]
 author: "Rosen Lu"

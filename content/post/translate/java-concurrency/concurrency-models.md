@@ -4,9 +4,10 @@ categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
 draft = false
 date = "2017-08-05T00:10:11+08:00"
-description = "Blog of Rosen Lu"
+description = "翻译外网的一篇关于java多线程编程中并发模型的博文，主要集中于理论层面"
 keywords = ["java concurrency"]
 title = "4. [译]并发的模型"
+autoCollapseToc = true
 
 +++
 

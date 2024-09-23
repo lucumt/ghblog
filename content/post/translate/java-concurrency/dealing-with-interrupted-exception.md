@@ -4,11 +4,11 @@ date: 2018-12-15T11:57:36+08:00
 lastmod: 2018-12-15T11:57:36+08:00
 draft: false
 keywords: ["Java多线程"]
-description: ""
+description: "翻译外网的一篇文章，主要是关于在Java多线程编程中如何处理InterruptedException"
+autoCollapseToc: true
 tags: ["Java"]
 categories: ["Java编程","Java多线程","翻译"]
 author: "Rosen Lu"
-
 ---
 
 本文翻译自 **[Dealing with InterruptedException](https://www.ibm.com/developerworks/library/j-jtp05236/)** 
@@ -38,7 +38,7 @@ author: "Rosen Lu"
 
 中断的协作特性的一个好处是它为安全的构建可取消的任务提供了更大的灵活性。实际上我们很少想要立即终止一个任务，如果任务在更新期间被取消，程序数据结构可能会处于不一致的状态。而中断操作允许我们在任务终止之前做其它的一些操作，如清理任何正在运行的任务、恢复不变量、将终端请求通知给其它任务等。
 
-## 处理InterruptedException
+## InterruptedException
 
 如果抛出`InterruptedException`异常意味着该方法是一个阻塞方法，那么调用一个阻塞方法意味着调用方法也是阻塞方法，我们应该有一个处理`InterruptedException`异常的策略。通过最简单的策略是直接抛出`InterruptedException`，如代码清单1中puskTask()和getTask()方法所示,这样做即可使方法响应中断，并且通常只需要在throws字句中添加`InterruptedException`。
 

@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
 date = "2017-04-01T13:18:43+08:00"
-description = "本文介绍了多线程的优点"
+description = "翻译自国外的一篇关于介绍多线程的优点的博文"
 keywords = ["java concurrency"]
 title = "2. [译]多线程的优点"
 

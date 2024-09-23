@@ -3,7 +3,7 @@ author = "飞狐"
 categories = ["Java编程","翻译"]
 tags = ["Java","Java Concurrency"]
 date = "2017-03-30T14:49:08+08:00"
-description = "Blog of Rosen Lu"
+description = "翻译自国外某个博主关于java多线程的博文，本节主要是序言部分"
 keywords = ["java concurrency"]
 title = "1. [译]Java多线程与并发教程"
 
