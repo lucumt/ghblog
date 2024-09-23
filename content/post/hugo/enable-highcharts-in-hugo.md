@@ -4,7 +4,7 @@ date: 2023-04-02T16:39:51+08:00
 lastmod: 2023-04-03T16:39:51+08:00
 draft: false
 keywords: ["hugo","highcharts","go"]
-description: "简要介绍如何在Hugo中开启Highcharts图表支持"
+description: "简要介绍如何在Hugo中开启Highcharts图表支持以便支持数据统计分析相关的功能"
 tags: ["hugo","highcharts","go"]
 categories: ["个人博客","系统集成"]
 author: "Rosen Lu"
@@ -59,7 +59,7 @@ highchartsDiagrams:
 
 <!--more-->
 
-# 修改过程
+## 修改过程
 
 1. 在`assets/sass/_custom_custom.scss`中添加如下代码
 
@@ -269,11 +269,11 @@ highchartsDiagrams:
    }
    ```
 
-# 展示效果
+## 展示效果
 
 处于篇幅考虑，在展示部分只展示最终效果，原始代码请参见[enable-highcharts-in-hugo.md](https://raw.githubusercontent.com/lucumt/ghblog/master/content/post/hugo/enable-highcharts-in-hugo.md)
 
-## 图1-Bubble chart
+### 图1-Bubble chart
 
 ```highcharts
   {
@@ -404,7 +404,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图2-Basic column
+### 图2-Basic column
 
 ```highcharts
 {
@@ -478,7 +478,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图3-Basic line
+### 图3-Basic line
 
 ```highcharts
   {
@@ -559,7 +559,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图4-3D donut
+### 图4-3D donut
 
 ```highcharts
  {
@@ -602,7 +602,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图5-Tile map
+### 图5-Tile map
 
 ```highcharts
   {
@@ -1047,7 +1047,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图6-Sankey diagram
+### 图6-Sankey diagram
 
 ```highcharts
 {
@@ -1117,7 +1117,7 @@ highchartsDiagrams:
   }
 ```
 
-## 图7-Gauge series
+### 图7-Gauge series
 
 ```highcharts
 {
@@ -1212,7 +1212,7 @@ highchartsDiagrams:
 }
 ```
 
-## 图8-Arc diagram
+### 图8-Arc diagram
 
 ```highcharts
  {
@@ -1298,7 +1298,7 @@ highchartsDiagrams:
 }
 ```
 
-# 特殊图表
+## 特殊图表
 
 对于某些复杂的`Highcharts`图表，可尝试将其转化为一个`JavaScript`对象以兼容前述的实现方案，保持优雅。若实现难度较大，可将相关的`html`代码直接嵌入`markdown`中来实现相关功能，但通过此种方式会导致无法对相关的图表进行动态配置。
 

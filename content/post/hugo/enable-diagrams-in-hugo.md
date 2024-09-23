@@ -4,7 +4,7 @@ date: 2023-03-27T09:46:50+08:00
 lastmod: 2023-03-27T09:46:50+08:00
 draft: false
 keywords: ["flowchart","sequence","mermaid","hugo","markdown"]
-description: ""
+description: "简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能"
 tags: ["hugo","go"]
 categories: ["个人博客","系统集成"]
 author: "Rosen Lu"
@@ -106,7 +106,7 @@ mermaidDiagrams:
 
 <!--more-->
 
-# 背景
+## 背景
 
 个人`Hugo`博客切换为`Even`已经有好几年了，相关功能也是基于此主题扩展而来，不过`Even`主题的作者已经很久没有此主题,GitHub上大量的issue都由于过期而自动关闭[^1]，同时个人发现该主题下`layouts/partials/scripts.html`对于`flowchart`和`sequence`的实现并不完善，缺少对应的初始化代码，基于此我决定在该主题的基础上自己实现相关功能！
 
@@ -116,7 +116,7 @@ PS: `Even`主题[^2]很受欢迎，希望作者早日恢复维护!
 
 ![Even主题无法初始化图表](/blog_img/hugo/enable-diagrams-in-hugo/even-theme-does-not-have-diagram-init-code.png "Even主题无法初始化图表") 
 
-# 修改说明
+## 修改说明
 
 由于`Hugo`支持代码高亮，当图表相关的数据当采用`Markdown`的codeblock方式写入时，如下图所示默认情况下，其会以代码高亮的方式显示，很明显此种方式不满足要求。
 
@@ -148,9 +148,9 @@ layouts/
 
 ![加载js和css文件时提示资源完整性校验不通过](/blog_img/hugo/enable-diagrams-in-hugo/invalid_integrity_check_for_js_and_css.png "加载js和css文件时提示资源完整性校验不通过") 
 
-# flowchart图表
+## flowchart图表
 
-## 修改过程
+### 修改过程
 
 * 在`layouts/_default/_markup`创建文件`render-codeblock-flow.html`并添加如下代码
 
@@ -210,7 +210,7 @@ layouts/
               }"
   ```
 
-## 自定义样式
+### 自定义样式
 
  不同于`sequence`,`flowchart`的使用很灵活，其[官网](https://flowchart.js.org/)上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何对其中的`flowstate`进行配置从而让图表展示不同的样式。
 
@@ -223,7 +223,7 @@ layouts/
 下图展示了一个通过设置不同`flowstate`来设置流程图不同组件样式的示例。
 ![flowstate自定义样式设置](/blog_img/hugo/enable-diagrams-in-hugo/flowchart-flowstate-custom-config.png "flowstate自定义样式设置") 
 
-## 展示效果
+### 展示效果
 
 基于对应`markdown`页面的下述配置展示相关效果
 
@@ -264,7 +264,7 @@ flowchartDiagrams:
             }"
 ```
 
-### 图表1
+#### 图表1
 
 * 原始代码
 
@@ -296,7 +296,7 @@ flowchartDiagrams:
   cond(no)->sub1(right)->op
   ```
 
-### 图表2
+#### 图表2
 
 * 原始代码
 
@@ -330,7 +330,7 @@ flowchartDiagrams:
   cond(no)->sub
   ```
 
-### 图表3
+#### 图表3
 
 * 原始代码
 
@@ -373,9 +373,9 @@ flowchartDiagrams:
   c2(no)->op2->e
   ```
 
-# sequence图表
+## sequence图表
 
-## 修改过程
+### 修改过程
 
 * 在`layouts/_default/_markup`创建文件`render-codeblock-sequence.html`并添加如下代码
 
@@ -436,7 +436,7 @@ flowchartDiagrams:
               }"
   ```
 
-## 自定义样式
+### 自定义样式
 
 在`sequence`的[官方网站](https://bramp.github.io/js-sequence-diagrams/)上对于该图表的初始化只提供的`theme`这一个属性而且其值也只有simple和hand两个选项，对于字体，背景色等没有像`flowchart`那么丰富的支持。
 
@@ -452,7 +452,7 @@ What，于是乎我只能自己fork源码自己修改了，修改好的代码参
 
 ![sequence图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/sequence-custom-config.png "sequence图表动态配置") 
 
-## 展示效果
+### 展示效果
 
 基于对应`markdown`页面的下述配置展示相关效果
 
@@ -480,7 +480,7 @@ sequenceDiagrams:
             }"
 ```
 
-### 图表1
+#### 图表1
 
 * 原始代码
 
@@ -504,7 +504,7 @@ sequenceDiagrams:
   D-->>A: Dashed open arrow
   ```
 
-### 图表2
+#### 图表2
 
 * 原始代码
 
@@ -528,7 +528,7 @@ sequenceDiagrams:
   Note over A,B: Note over both A and B
   ```
 
-### 图表3
+#### 图表3
 
 * 原始代码
 
@@ -550,7 +550,7 @@ sequenceDiagrams:
   Note right of A: By listing the participants\n you can change their order
   ```
 
-### 图表4
+#### 图表4
 
 * 原始代码
 
@@ -572,7 +572,7 @@ sequenceDiagrams:
   Andrew->>China: I am good thanks!
   ```
 
-### 图表5
+#### 图表5
 
 * 原始代码
 
@@ -598,11 +598,11 @@ sequenceDiagrams:
   App->>System: Stop
   ```
 
-# mermaid图表
+## mermaid图表
 
 [mermaid](https://mermaid.js.org/)是一个功能强大的`Markdown`图表显示控件，其本身的功能已经包含前述的`flowchart`和`sequence`，但由于`Even`主题的作者默认并没有加上此图表的支持，同时`Hugo`的官网有专门的配置说明[^5]，故本次一并加上。
 
-## 修改过程
+### 修改过程
 
 * 在`layouts/_default/_markup`创建文件`render-codeblock-mermaid.html`并添加如下代码
 
@@ -649,13 +649,13 @@ sequenceDiagrams:
     }"
   ```
 
-## 自定义样式
+### 自定义样式
 
 `mermaid`图表的自定义配置主要基于themes来实现，在其[官网文档](https://mermaid.js.org/config/theming.html)上有很详细的说明，下图为一个简单的示例
 
 ![mermaid图表动态配置](/blog_img/hugo/enable-diagrams-in-hugo/mermaid-custom-config.png "mermaid图表动态配置") 
 
-## 展示效果
+### 展示效果
 
 基于对应`markdown`页面的下述配置展示相关效果
 
@@ -667,7 +667,7 @@ mermaidDiagrams:
   }"
 ```
 
-### 图表1-Sequence
+#### 图表1-Sequence
 
 * 原始代码
 
@@ -699,7 +699,7 @@ mermaidDiagrams:
   Bob-->>John: Jolly good!
   ```
 
-### 图表2-Flow
+#### 图表2-Flow
 
 * 原始代码
 
@@ -725,7 +725,7 @@ mermaidDiagrams:
       C -->|Three| F[fa:fa-car Car]
   ```
 
-### 图表3-Class
+#### 图表3-Class
 
 * 原始代码
 
@@ -781,7 +781,7 @@ mermaidDiagrams:
       }
   ```
 
-### 图表4-State
+#### 图表4-State
 
 * 原始代码
 
@@ -809,7 +809,7 @@ mermaidDiagrams:
       Crash --> [*]
   ```
 
-### 图表5-ER
+#### 图表5-ER
 
 * 原始代码
 
@@ -841,7 +841,7 @@ mermaidDiagrams:
       PRODUCT ||--o{ ORDER-ITEM : "ordered in"
   ```
 
-### 图表6-Gantt
+#### 图表6-Gantt
 
 * 原始代码
 
@@ -871,7 +871,7 @@ mermaidDiagrams:
       Parallel 4   :         des6, after des2, 1d
   ```
 
-### 图表7-UserJourney
+#### 图表7-UserJourney
 
 * 原始代码
 
@@ -903,7 +903,7 @@ mermaidDiagrams:
         Sit down: 3: Me
   ```
 
-### 图表8-Git
+#### 图表8-Git
 
 * 原始代码
 
@@ -939,7 +939,7 @@ mermaidDiagrams:
       commit
   ```
 
-### 图表9-Pie
+#### 图表9-Pie
 
 * 原始代码
 
@@ -961,7 +961,7 @@ mermaidDiagrams:
       "Rats" : 15
   ```
 
-### 图表10-Mindmap
+#### 图表10-Mindmap
 
 * 原始代码
 
@@ -1009,7 +1009,7 @@ mermaidDiagrams:
         Mermaid
   ```
 
-### 图表11-timeline
+#### 图表11-timeline
 
 * 原始代码
 
@@ -1035,7 +1035,7 @@ mermaidDiagrams:
             晚上: 加班coding
   ```
 
-### 图表12-graph
+#### 图表12-graph
 
 * 原始代码
 

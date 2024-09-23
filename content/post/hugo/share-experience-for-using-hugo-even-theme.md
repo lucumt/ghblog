@@ -4,7 +4,7 @@ date: 2022-09-18T09:43:19+08:00
 lastmod: 2022-09-18T09:43:19+08:00
 draft: false
 keywords: ["hugo","theme","even"]
-description: "个人Hugo博客关于Even主题的一些使用改进"
+description: "个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助"
 tags: ["hugo","Go"]
 categories: ["个人博客"]
 author: "Rosen Lu"
@@ -43,19 +43,19 @@ sequenceDiagrams:
 
 <!--more-->
 
-# GitHub Actions自动部署
+## GitHub Actions自动部署
 
 参见[利用GitHub Action实现Hugo博客在GitHub Pages自动部署](/post/hugo/using-github-action-to-auto-build-deploy/)。
 
-# 改进Back to top
+## 改进Back to top
 
-## 背景
+### 背景
 
 原始的返回顶部按钮太小且背景提示色不明显，查看起来不直观。
 
 ![返回顶部按钮原始展示方式](/blog_img/hugo/share-experience-for-using-hugo-even-theme/back-to-top-original-display.png "返回顶部按钮原始展示方式") 
 
-## 修改代码
+### 修改代码
 
 在`assets/sass/_partial/_back-to-top.scss`中修改如下配置
 
@@ -87,13 +87,13 @@ sequenceDiagrams:
 }
 ```
 
-## 运行效果
+### 运行效果
 
 改进后的效果如下所示，不仅按钮变大，而且也能根据不同的主题颜色动态的进行改变。
 
 ![返回顶部按钮改进显示](/blog_img/hugo/share-experience-for-using-hugo-even-theme/back-to-top-button-display-with-theme-color.png "返回顶部按钮改进显示") 
 
-## 其它
+### 其它
 
 在`assets/sass/_partial/_back-to-top.scss`中有如下代码用于控制此按钮只有在非手机浏览器的环境下显示，此方式可用于其它需要在手机浏览器环境禁用的场景。
 
@@ -105,9 +105,9 @@ sequenceDiagrams:
 }
 ```
 
-# 区分Draft与非Draft
+## 区分Draft与非Draft
 
-## 背景
+### 背景
 
 * 有时候会遇到一些典型场景或者灵感突发，想把它们写入博客中，但由于时间限制一时半会又难以完成，可创建对应的`markdown`文件，将`draft`设置为`true`，然后在正常打包时即可排除这些草稿文章，在本地编写时可用类似`hugo server -w -D`的指令来包含草稿文章。
 
@@ -115,7 +115,7 @@ sequenceDiagrams:
 
   ![无法区分是否为草稿文章](/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-article-list-do-not-show-draft-status.png "无法区分是否为草稿文章") 
 
-## 修改代码
+### 修改代码
 
 * 测试`assets/sass/_partial/_archive.scss`添加如下代码
 
@@ -173,17 +173,17 @@ sequenceDiagrams:
   </span>
   ```
 
-## 运行效果
+### 运行效果
 
 ![列表中显示文章状态](/blog_img/hugo/share-experience-for-using-hugo-even-theme/hugo-article-list-with-draft-status.png "列表中显示文章状态") 
 
-# 部署时才添加访问统计
+## 部署时才添加访问统计
 
-## 背景
+### 背景
 
 在本地编写博客时，需要多次访问未完成的页面，此种页面没必要添加记录到网站访问次数统计中。
 
-## 修改代码
+### 修改代码
 
 在`layouts/partials/scripts.html`中修改如下，在最外层添加` if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production")`来判断环境
 
@@ -232,15 +232,15 @@ sequenceDiagrams:
 {{- end -}}
 ```
 
-## 使用方式
+### 使用方式
 
 在项目部署时通过添加`-e "production"`来指定为生产环境，如`hugo -b "https://lucumt.info/" -e "production"`。
 
-# Fork me on Github
+## Fork me on Github
 
 原始代码来源[https://github.com/olOwOlo/hugo-theme-even/pull/412](https://github.com/olOwOlo/hugo-theme-even/pull/412)[^1]，参考代码见[如何在博客园添加 Fork me on GitHub 彩带效果](https://www.cnblogs.com/quanxiaoha/p/10490484.html)
 
-## 修改代码
+### 修改代码
 
 * `config.toml`中添加如下配置，若`ithubForkURL`值为空，则不显示**Fork me on GitHub**
 
@@ -270,15 +270,15 @@ sequenceDiagrams:
 
 * `static`目录下添加一个名为`forkme_right_gray.png`的图片，
 
-## 运行效果
+### 运行效果
 
 ![forkme on github效果](/blog_img/hugo/share-experience-for-using-hugo-even-theme/forkme-on-github-icon.png "forkme on github效果") 
 
-# 代码块可复制
+## 代码块可复制
 
 原始代码来源[https://github.com/olOwOlo/hugo-theme-even/pull/413](https://github.com/olOwOlo/hugo-theme-even/pull/413)
 
-## 修改代码
+### 修改代码
 
 * `config.toml`中添加如下配置，用于控制是否开启代码复制功能
 
@@ -345,15 +345,15 @@ sequenceDiagrams:
   {{ end }}
   ```
 
-## 运行效果
+### 运行效果
 
 在非手机浏览器中当开启`enableCopyCode`开关后，在代码左侧会出现如下效果[^2]
 
 ![复制代码按钮](/blog_img/hugo/share-experience-for-using-hugo-even-theme/copy-code-button-on-top-right.png "复制代码按钮") 
 
-# 添加搜索功能
+## 添加搜索功能
 
-## 修改代码
+### 修改代码
 
 此部分的代码主要参考[给hugo添加搜索功能](https://sobaigu.com/hugo-set-featuer-search.html)基于[fuse](https://fusejs.io/)实现的，由于基于此博文实现的搜索效果展示比较简陋，故个人做了如下改进:
 
@@ -390,7 +390,7 @@ sequenceDiagrams:
   }
   ```
 
-## 运行效果[^3]
+### 运行效果[^3]
 
 * 默认的搜索界面
 

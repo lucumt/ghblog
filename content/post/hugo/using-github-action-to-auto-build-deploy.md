@@ -4,7 +4,7 @@ date: 2022-09-03T18:35:57+08:00
 lastmod: 2022-09-03T18:35:57+08:00
 draft: false
 keywords: ["hugo","theme","even"]
-description: "简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署"
+description: "简要叙述利用GitHub Action实现Hugo博客在GitHub Pages自动部署以简化工作"
 tags: ["hugo","Github Pages","github","go"]
 categories: ["个人博客"]
 author: "Rosen Lu"
@@ -43,7 +43,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 传统方式
+## 传统方式
 
 自己的个人博客创建于2016年，在这期间自己一直基于如下方式创建并部署更新博客：
 
@@ -81,7 +81,7 @@ git subtree push --prefix=public git@github.com:lucumt/ghblog.git gh-pages
 
 上述过程中的1,2,4阶段是编写博客的必经阶段，而3,5阶段其实没太多必要，完全可以用工具自动化实现。作为IT从业者，我们需要尽可能的减少不必要的操作。
 
-# 改进方式 
+## 改进方式 
 
 结合网络上的相关资料，自己把实现方案定在了`GitHub Actions`和[Travis CI](https://www.travis-ci.com/)二者之一，考虑到`GitHub`中已经内置了`GitHub Actions` ，最终解决采用其作为实现方案。
 
@@ -198,7 +198,7 @@ jobs:
 
 ![GitHub Actions执行结果](/blog_img/hugo/using-github-action-to-auto-build-deploy/hugo-automatic-build-result.png "GitHub Actions执行结果")  
 
-# 其它
+## 其它
 
 由于`GitHub Action`支持定时语法，将流水线触发条件修改如下
 

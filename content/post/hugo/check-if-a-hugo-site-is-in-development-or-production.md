@@ -4,7 +4,7 @@ date: 2022-06-19T12:09:19+08:00
 lastmod: 2022-06-19T12:09:19+08:00
 draft: false
 keywords: ["hugo","go","development","production"]
-description: ""
+description: "翻译外网中关于如何检测一个Hugo站点是开发环境还是生产环境的博文"
 tags: ["hugo","go"]
 categories: ["翻译","个人博客"]
 author: "Rosen Lu"
@@ -55,7 +55,7 @@ highchartsDiagrams:
 
 有时我们希望能在使用`Hugo`的时候基于开发环境或生产环境展示不同的内容，在之前我使用过`$.Site.IsServer`来检查是否运行于开发服务器，不过其无法实现在开发环境查看生产环境的显示样式。
 
-# 检查环境
+## 检查环境
 
 实际上`Hugo`有一系列的方式来区分生产环境和开发环境，不过[Hugo文档](https://gohugo.io/functions/hugo/)中关于如何区分它们的说明不太友好。
 
@@ -70,7 +70,7 @@ highchartsDiagrams:
 
 当使用`hugo server`在本地开发时，默认被设置为`development`，当使用`hugo`来构建站点时，默认被设置为`production`。
 
-# 基于环境动态展示
+## 基于环境动态展示
 
 若想实现根据环境动态展示，可使用下述代码中的几种方法之一：
 
@@ -93,7 +93,7 @@ highchartsDiagrams:
 {{ end }}
 ```
 
-# 手工设置环境变量
+## 手工设置环境变量
 
 若要在编写博文时将环境设置为`production`，可使用下述命令启动`Hugo`服务器：
 

@@ -4,7 +4,7 @@ date: 2020-09-12T18:07:27+08:00
 lastmod: 2020-09-12T18:07:27+08:00
 draft: false
 keywords: ["java","multiple-threads","deadlock"]
-description: "一次由wait造成的死锁问题分析"
+description: "记录java多线程编程中一次由wait造成的死锁问题分析，给自己和相关人员提供总结与参考"
 tags: ["Java","Java Concurrency"]
 categories: ["Java编程"]
 author: "Rosen Lu"
@@ -44,7 +44,7 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 原始代码
+## 原始代码
 
 ```java
 public class ThreadPrint4Test {
@@ -97,7 +97,7 @@ public class ThreadPrint4Test {
 }
 ```
 
-# 执行结果&状态查看
+## 执行结果&状态查看
 
 运行上述程序，可发现在输出若干字符后，程序处于阻塞状态，输出停止：
 
@@ -109,7 +109,7 @@ public class ThreadPrint4Test {
 
 由于多次运行上述代码，均能出现此问题(只不过出现的时间间隔不同)，可知程序代码肯定编写不正确。 
 
-# 原因分析
+## 原因分析
 
 最开始检查代码时看起来一切正常:
 
@@ -194,13 +194,11 @@ public void run() {
 
 ![分析图示1](/blog_img/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/multi-thread-deadlock-analysis.png "分析图示") 
 
-
-
-# 改进代码
+## 改进代码
 
 找到问题原因后，要修复此问题也很容，只需要避免所有的线程同时调用`wait()`方法即可，可在调用`wait()`前加个判断，确保始终有一个线程不用进入`WAITING`状态，能够释放锁。
 
-## 消除死循环
+### 消除死循环
 
 ```java
 public class ThreadPrint4Test {
@@ -259,7 +257,7 @@ public class ThreadPrint4Test {
 }
 ```
 
-## 实现轮流打印
+### 实现轮流打印
 
 ```java
 public class ThreadPrint4Test {
