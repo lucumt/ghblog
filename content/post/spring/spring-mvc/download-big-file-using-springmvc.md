@@ -4,7 +4,7 @@ author = "飞狐"
 categories = ["Java编程","Spring系列"]
 tags = ["Java","Spring","SpringMVC"]
 date = "2016-03-20T16:41:29+08:00"
-description = "Blog of Rosen Lu"
+description = "简要记录在利用SpringMVC下载大文件时内存溢出的处理"
 keywords = ["Java","SpringMVC"]
 title = "利用SpringMVC下载大文件时内存溢出的处理"
 

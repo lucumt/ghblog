@@ -44,9 +44,9 @@ sequenceDiagrams:
 
 <!--more-->
 
-# 组件说明
+## 组件说明
 
-## BeanFactory
+### BeanFactory
 
 在`BeanFactory`的API中，一开始就有如下一句描述
 
@@ -127,7 +127,7 @@ sequenceDiagrams:
 * `Spring`中Bean如何初始化
 * 描述`Spring`中Bean的生命周期
 
-## FactoryBean
+### FactoryBean
 
 `FactoryBean`从名字就能看出来是一个Bean，但不是普通的Bean，否则`Spring`作者为啥要单独的创建这个接口呢？`FactoryBean`也是一个接口，其源码如下，从中可以看出该接口只有3个方法，与`BeanFactory`相比数量大为减少，同时这3个接口方法的作用也同`BeanFactory`中的相关方法类似。
 
@@ -198,7 +198,7 @@ protected SqlSessionFactory buildSqlSessionFactory() throws Exception {
 
 在创建`SqlSessionFactory`时需要依赖数据库的配置等一些配置信息，但这些配置信息若通过`BeanFactory`以传统的**实例化**->**初始化**的方式创建时是很难办到的，虽然可以通过`BeanPostProcessors`的接口中的回调方法来实现，但会导致代码复杂并且不能满足某些特殊场景下的需求，而通过`FactoryBean`我们只需要根据实际业务逻辑在`getObject()`方法中创建对应的对象并返回即可，由于对象的创建由我们自己把控，在达到代码简洁的同时，创建的对象也能被`Spring`容器管理。
 
-## 使用示例
+### 使用示例
 
 假设有如下所示的Group类
 
@@ -267,7 +267,7 @@ public static void main(String[] args) {
 * 当直接通过`FactoryBean`实现类的接口名称获取对象时，得到的是该`FactoryBean`实现类中创建的对象本身，也是我们正常的使用方式
 * 当在`FactoryBean`接口对象名前面加上`&`前缀时，得到的是`FactoryBean`实现类本身，一般用于调试分析。
 
-# 二者之间的区别
+## 二者之间的区别
 
 * 相同点：
   * 都是接口类，需要使用者自己实现相应的方法
@@ -277,16 +277,14 @@ public static void main(String[] args) {
   * `BeanFactory`基于`Spring`规范实现，其创建的bean会在`Spring`容器中经历完整的生命周期，能够调用`@PostConstruct`、`BeanPostProcessors`等接口和方法
   * `Spring`容器只负责`FactoryBean`创建的bean对象的生命周期管理，不负责bean对象的创建和销毁(因为由我们自己实现了嘛!)，所以调用`@PostConstruct`和`@PreDestroy`方法不会生效，需要实现`DisposableBean`等接口来达到该目的
 
-
-
-# 相关使用场景
+## 相关使用场景
 
 * **`BeanFactory`**:
   * 项目中各种常规的`POJO`、`Dao`、`Service`等不涉及复杂构造的场景
 * **`FactoryBean`**:
   * 对象的构造(实例化)较为复杂，通常是系统中的一些底层组件，如`SqlSessionFactoryBean`、`ProxyFactoryBean`等
 
-# 参考文档
+## 参考文档
 
 * https://www.cnblogs.com/aspirant/p/9082858.html
 * https://spring.io/blog/2011/08/09/what-s-a-factorybean

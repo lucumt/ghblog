@@ -14,6 +14,7 @@ title = "利用Spring和JUnit对数据库操作进行单元测试"
 <!--more-->
 
 ## 所有方法都回滚
+
 在该单元测试类的开头加上 `@TransactionConfiguration(defaultRollback=true)` 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。
 ```java
 package com.hirain.testmanagement.service.test;
@@ -64,6 +65,7 @@ public class ProjectServiceTest{
 ```
 
 ## 指定方法回滚
+
 若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 `@TransactionConfiguration(defaultRollback=true)` ，同时在对应的方法上加上注解声明 `@Rollback(true)` 即可达到目的。
 ```java
 package com.hirain.testmanagement.service.test;
