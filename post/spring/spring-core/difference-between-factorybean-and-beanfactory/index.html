@@ -179,16 +179,20 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#组件说明">组件说明</a>
+    <li>
       <ul>
-        <li><a href="#beanfactory">BeanFactory</a></li>
-        <li><a href="#factorybean">FactoryBean</a></li>
-        <li><a href="#使用示例">使用示例</a></li>
+        <li><a href="#组件说明">组件说明</a>
+          <ul>
+            <li><a href="#beanfactory">BeanFactory</a></li>
+            <li><a href="#factorybean">FactoryBean</a></li>
+            <li><a href="#使用示例">使用示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#二者之间的区别">二者之间的区别</a></li>
+        <li><a href="#相关使用场景">相关使用场景</a></li>
+        <li><a href="#参考文档">参考文档</a></li>
       </ul>
     </li>
-    <li><a href="#二者之间的区别">二者之间的区别</a></li>
-    <li><a href="#相关使用场景">相关使用场景</a></li>
-    <li><a href="#参考文档">参考文档</a></li>
   </ul>
 </nav>
   </div>
@@ -198,8 +202,8 @@
 	
     <div class="post-content image-border">
 	 <p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><strong>BeanFactory</strong></a>和<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html"><strong>FactoryBean</strong></a>的区别与使用场景是<a href="https://spring.io/"><strong>Spring</strong></a>面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。</p>
-<h1 id="组件说明">组件说明</h1>
-<h2 id="beanfactory">BeanFactory</h2>
+<h2 id="组件说明">组件说明</h2>
+<h3 id="beanfactory">BeanFactory</h3>
 <p>在<code>BeanFactory</code>的API中，一开始就有如下一句描述</p>
 <blockquote>
 <p>The root interface for accessing a Spring bean container</p>
@@ -272,7 +276,7 @@
 <li><code>Spring</code>中Bean如何初始化</li>
 <li>描述<code>Spring</code>中Bean的生命周期</li>
 </ul>
-<h2 id="factorybean">FactoryBean</h2>
+<h3 id="factorybean">FactoryBean</h3>
 <p><code>FactoryBean</code>从名字就能看出来是一个Bean，但不是普通的Bean，否则<code>Spring</code>作者为啥要单独的创建这个接口呢？<code>FactoryBean</code>也是一个接口，其源码如下，从中可以看出该接口只有3个方法，与<code>BeanFactory</code>相比数量大为减少，同时这3个接口方法的作用也同<code>BeanFactory</code>中的相关方法类似。</p>
 
 <pre class="line-numbers language-java ">
@@ -337,7 +341,7 @@ protected SqlSessionFactory buildSqlSessionFactory() throws Exception {
 }</code>
 </pre>
 <p>在创建<code>SqlSessionFactory</code>时需要依赖数据库的配置等一些配置信息，但这些配置信息若通过<code>BeanFactory</code>以传统的<strong>实例化</strong>-&gt;<strong>初始化</strong>的方式创建时是很难办到的，虽然可以通过<code>BeanPostProcessors</code>的接口中的回调方法来实现，但会导致代码复杂并且不能满足某些特殊场景下的需求，而通过<code>FactoryBean</code>我们只需要根据实际业务逻辑在<code>getObject()</code>方法中创建对应的对象并返回即可，由于对象的创建由我们自己把控，在达到代码简洁的同时，创建的对象也能被<code>Spring</code>容器管理。</p>
-<h2 id="使用示例">使用示例</h2>
+<h3 id="使用示例">使用示例</h3>
 <p>假设有如下所示的Group类</p>
 
 <pre class="line-numbers language-java ">
@@ -399,7 +403,7 @@ public class Group {
 <li>当直接通过<code>FactoryBean</code>实现类的接口名称获取对象时，得到的是该<code>FactoryBean</code>实现类中创建的对象本身，也是我们正常的使用方式</li>
 <li>当在<code>FactoryBean</code>接口对象名前面加上<code>&amp;</code>前缀时，得到的是<code>FactoryBean</code>实现类本身，一般用于调试分析。</li>
 </ul>
-<h1 id="二者之间的区别">二者之间的区别</h1>
+<h2 id="二者之间的区别">二者之间的区别</h2>
 <ul>
 <li>相同点：
 <ul>
@@ -415,7 +419,7 @@ public class Group {
 </ul>
 </li>
 </ul>
-<h1 id="相关使用场景">相关使用场景</h1>
+<h2 id="相关使用场景">相关使用场景</h2>
 <ul>
 <li><strong><code>BeanFactory</code></strong>:
 <ul>
@@ -428,7 +432,7 @@ public class Group {
 </ul>
 </li>
 </ul>
-<h1 id="参考文档">参考文档</h1>
+<h2 id="参考文档">参考文档</h2>
 <ul>
 <li>
 <p><a href="https://www.cnblogs.com/aspirant/p/9082858.html">https://www.cnblogs.com/aspirant/p/9082858.html</a></p>
