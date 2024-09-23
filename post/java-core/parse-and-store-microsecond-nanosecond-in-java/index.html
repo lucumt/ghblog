@@ -179,17 +179,21 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#javautildate中相关实现">java.util.Date中相关实现</a>
+    <li>
       <ul>
-        <li><a href="#格式化测试">格式化测试</a></li>
-        <li><a href="#对比数据测试">对比数据测试</a></li>
-      </ul>
-    </li>
-    <li><a href="#localdatetime中实现">LocalDateTime中实现</a></li>
-    <li><a href="#localdatetime与时间戳互转">LocalDateTime与时间戳互转</a>
-      <ul>
-        <li><a href="#与微秒互转">与微秒互转</a></li>
-        <li><a href="#与纳秒互转">与纳秒互转</a></li>
+        <li><a href="#javautildate中相关实现">java.util.Date中相关实现</a>
+          <ul>
+            <li><a href="#格式化测试">格式化测试</a></li>
+            <li><a href="#对比数据测试">对比数据测试</a></li>
+          </ul>
+        </li>
+        <li><a href="#localdatetime中实现">LocalDateTime中实现</a></li>
+        <li><a href="#localdatetime与时间戳互转">LocalDateTime与时间戳互转</a>
+          <ul>
+            <li><a href="#与微秒互转">与微秒互转</a></li>
+            <li><a href="#与纳秒互转">与纳秒互转</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -201,8 +205,8 @@
 	
     <div class="post-content image-border">
 	 <p>在软件开发领域，大部分时间精确到秒或毫秒即可满足日常需求，但在某些对时间要求严格的场景中需要使用微秒、纳秒等更精确的时间值，本文简要记录如何在Java中通过<a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>实现对于微秒、纳秒的精确解析以及转化为<code>long</code>型时间戳。</p>
-<h1 id="javautildate中相关实现">java.util.Date中相关实现</h1>
-<h2 id="格式化测试">格式化测试</h2>
+<h2 id="javautildate中相关实现">java.util.Date中相关实现</h2>
+<h3 id="格式化测试">格式化测试</h3>
 <p>首先采用采用如下代码验证<code>java.util.Date</code>和<code>java.text.SimpleDateFormat</code>对于时间戳的支持情况。</p>
 
 <pre class="line-numbers language-java ">
@@ -263,7 +267,7 @@
 <p>运行结果如下：</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/date-format-test-1.png" alt="不同时间格式下的Date输出" title="不同时间格式下的Date输出"></p>
 <p>从上图中可以看出时间精确到微秒之后，采用<code>java.util.Date</code>和<code>java.text.SimpleDateFormat</code>进行输出时前后的结果已经不一致。同时也可以大致猜测，当使用<code>java.util.Date</code>时不能用其进行微秒或纳秒等高精度的时间存储展示，但此问题是由<code>java.util.Date</code>还是<code>java.text.SimpleDateFormat</code>造成的暂不确定。</p>
-<h2 id="对比数据测试">对比数据测试</h2>
+<h3 id="对比数据测试">对比数据测试</h3>
 <p>为了测试结果的准确性，在<a href="https://www.timestamp-converter.com/">www.timestamp-converter.com</a>中获取一个可用于验证的时间戳信息如下所示</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/timestamp-test-data.png" alt="测试用的时间戳" title="测试用的时间戳"></p>
 <p>其中基于毫秒的时间戳为<code>1676628010725</code>，格式化后的显示为<code>2023-02-17T10:00:10.725Z</code>，采用下述代码进行验证：</p>
@@ -296,7 +300,7 @@
 <blockquote>
 <p><strong><code>java.util.Date</code>和<code>java.text.SimpleDateFormat</code>均不支持微秒和纳秒级别的时间精度。</strong></p>
 </blockquote>
-<h1 id="localdatetime中实现">LocalDateTime中实现</h1>
+<h2 id="localdatetime中实现">LocalDateTime中实现</h2>
 <p>由于<code>JDK8</code>中引入了<code>LocalDateTime</code>，故将最开始的测试代码都修改为使用<code>java.time.LocalDateTime</code>和<code>java.time.format.DateTimeFormatter</code>进行测试</p>
 
 <pre class="line-numbers language-java ">
@@ -366,7 +370,7 @@
 <blockquote>
 <p><strong><code>java.time.LocalDateTime</code>支持纳秒级别的时间存储，支持<code>java.time.format.DateTimeFormatter</code>支持纳秒级别的时间显示。</strong></p>
 </blockquote>
-<h1 id="localdatetime与时间戳互转">LocalDateTime与时间戳互转</h1>
+<h2 id="localdatetime与时间戳互转">LocalDateTime与时间戳互转</h2>
 <p>在<code>java.util.Date</code>中可以很容易的通过<code>Date().getTime()</code>和<code>new Date(long timestamp)</code>来分别获取时间戳和基于时间戳构造时间，而在<code>java.time.LocalDateTime</code>中要实现类似功能则稍微复杂点。</p>
 <p>当要获取long类型的时间戳时，需要先获取秒，再获取微秒或纳秒，然后根据他们之前的换算关系进行累加返回，相关公式如下：</p>
 <blockquote>
@@ -376,7 +380,7 @@
 </ul>
 </blockquote>
 <p>有了时间戳之后根据上述公式进行反向操作，分别获取秒与微秒(纳秒)，然后根据这2个数值通过<code>Instant</code>构建即可。</p>
-<h2 id="与微秒互转">与微秒互转</h2>
+<h3 id="与微秒互转">与微秒互转</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class TestDateConvert4 {
@@ -416,7 +420,7 @@
 </pre>
 <p>测试结果如下，符合预期</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/convert-to-millis-timestamp-test.png" alt="微秒级别的时间戳转换" title="微秒级别的时间戳转换"></p>
-<h2 id="与纳秒互转">与纳秒互转</h2>
+<h3 id="与纳秒互转">与纳秒互转</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class TestDateConvert5 {

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="多种方式实现在Java中用线程轮流打印ABC" /><meta name="keywords" content="java, thread" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现" /><meta name="keywords" content="java, thread" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/java-concurrency/print-a-b-c-in-turn-by-threads/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="多种方式实现在Java中用线程轮流打印ABC">
-  <meta property="og:description" content="多种方式实现在Java中用线程轮流打印ABC">
+  <meta property="og:description" content="由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Java Concurrency">
 
   <meta itemprop="name" content="多种方式实现在Java中用线程轮流打印ABC">
-  <meta itemprop="description" content="多种方式实现在Java中用线程轮流打印ABC">
+  <meta itemprop="description" content="由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现">
   <meta itemprop="datePublished" content="2020-09-08T11:11:06+08:00">
   <meta itemprop="dateModified" content="2020-09-08T11:11:06+08:00">
   <meta itemprop="wordCount" content="765">
   <meta itemprop="keywords" content="java,thread">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="多种方式实现在Java中用线程轮流打印ABC">
-  <meta name="twitter:description" content="多种方式实现在Java中用线程轮流打印ABC">
+  <meta name="twitter:description" content="由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,13 +180,17 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#原理分析">原理分析</a></li>
-    <li><a href="#代码实现">代码实现</a>
+    <li>
       <ul>
-        <li><a href="#基于waitnotify">基于wait&amp;notify</a></li>
-        <li><a href="#基于reentrantlockcondition">基于ReentrantLock&amp;Condition</a></li>
-        <li><a href="#基于semaphore">基于Semaphore</a></li>
-        <li><a href="#单个锁volatile变量">单个锁&amp;volatile变量</a></li>
+        <li><a href="#原理分析">原理分析</a></li>
+        <li><a href="#代码实现">代码实现</a>
+          <ul>
+            <li><a href="#基于waitnotify">基于wait&amp;notify</a></li>
+            <li><a href="#基于reentrantlockcondition">基于ReentrantLock&amp;Condition</a></li>
+            <li><a href="#基于semaphore">基于Semaphore</a></li>
+            <li><a href="#单个锁volatile变量">单个锁&amp;volatile变量</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -198,7 +202,7 @@
 	
     <div class="post-content image-border">
 	 <p>在<code>Java</code>中采用3个线程不停的轮流打印ABC这3个字符，采用不同的方式实现。</p>
-<h1 id="原理分析">原理分析</h1>
+<h2 id="原理分析">原理分析</h2>
 <p>实现思路如下：</p>
 <ul>
 <li>要在一个<code>while</code>循环中，实现不停的打印</li>
@@ -206,8 +210,8 @@
 <li>为了打破死循环，还需要一个启动线程延后调用</li>
 </ul>
 <p><img src="/blog_img/java-concurrency/print-a-b-c-in-turn-by-threads/threads-print-character-process.png" alt="原理图" title="原理图"></p>
-<h1 id="代码实现">代码实现</h1>
-<h2 id="基于waitnotify">基于wait&amp;notify</h2>
+<h2 id="代码实现">代码实现</h2>
+<h3 id="基于waitnotify">基于wait&amp;notify</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint1Test {
@@ -267,7 +271,7 @@
     }
 }</code>
 </pre>
-<h2 id="基于reentrantlockcondition">基于ReentrantLock&amp;Condition</h2>
+<h3 id="基于reentrantlockcondition">基于ReentrantLock&amp;Condition</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint2Test {
@@ -328,7 +332,7 @@
     }
 }</code>
 </pre>
-<h2 id="基于semaphore">基于Semaphore</h2>
+<h3 id="基于semaphore">基于Semaphore</h3>
 
 <pre class="line-numbers language-java ">
 <code>public class ThreadPrint3Test {
@@ -381,7 +385,7 @@
     }
 }</code>
 </pre>
-<h2 id="单个锁volatile变量">单个锁&amp;volatile变量</h2>
+<h3 id="单个锁volatile变量">单个锁&amp;volatile变量</h3>
 <p>此种方式不需要唤醒线程，同时便于很方便的修改线程数目。</p>
 
 <pre class="line-numbers language-java ">

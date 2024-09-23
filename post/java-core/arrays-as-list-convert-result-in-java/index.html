@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="Arrays.asList类型转换结果的坑" /><meta name="keywords" content="Arrays.asList, 类型转换, 封装, 原始类型" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="记录下在java中使用Arrays.asList进行类型转换结果的坑以及解决方案" /><meta name="keywords" content="Arrays.asList, 类型转换, 封装, 原始类型" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/java-core/arrays-as-list-convert-result-in-java/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="Arrays.asList类型转换结果的坑">
-  <meta property="og:description" content="Arrays.asList类型转换结果的坑">
+  <meta property="og:description" content="记录下在java中使用Arrays.asList进行类型转换结果的坑以及解决方案">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Java">
 
   <meta itemprop="name" content="Arrays.asList类型转换结果的坑">
-  <meta itemprop="description" content="Arrays.asList类型转换结果的坑">
+  <meta itemprop="description" content="记录下在java中使用Arrays.asList进行类型转换结果的坑以及解决方案">
   <meta itemprop="datePublished" content="2019-07-22T10:47:12+08:00">
   <meta itemprop="dateModified" content="2022-02-22T10:47:12+08:00">
   <meta itemprop="wordCount" content="918">
   <meta itemprop="keywords" content="Arrays.asList,类型转换,封装,原始类型">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Arrays.asList类型转换结果的坑">
-  <meta name="twitter:description" content="Arrays.asList类型转换结果的坑">
+  <meta name="twitter:description" content="记录下在java中使用Arrays.asList进行类型转换结果的坑以及解决方案">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -179,10 +179,14 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#问题描述">问题描述</a></li>
-    <li><a href="#问题分析">问题分析</a></li>
-    <li><a href="#解决方案">解决方案</a></li>
-    <li><a href="#aslist不可变原因分析">asList不可变原因分析</a></li>
+    <li>
+      <ul>
+        <li><a href="#问题描述">问题描述</a></li>
+        <li><a href="#问题分析">问题分析</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+        <li><a href="#aslist不可变原因分析">asList不可变原因分析</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -192,7 +196,7 @@
 	
     <div class="post-content image-border">
 	 <p>在各种<code>Java</code>编程规范中都强调尽量不用<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-">java.util.Arrays.asList()</a>方法以避免调用此方法生成的<code>List</code>无法进行修改操作，个人近期在使用过程中发现该方法的另外一个坑，简单记录下。</p>
-<h1 id="问题描述">问题描述</h1>
+<h2 id="问题描述">问题描述</h2>
 <p>在程序中需要检测某个元素是否在数组中，处于缩短代码篇幅的考虑，自己采用了<code>Arrays.asList</code>方法将其转化为<code>List</code>然后调用<code>contains</code>方法来判断：</p>
 
 <pre class="line-numbers language-java ">
@@ -203,7 +207,7 @@
 </pre>
 <p>但实际执行结果和自己预期的不一致，理论上的结果应该为<code>true</code>，而实际返回的结果为<code>false</code></p>
 <p><img src="/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-contains-result-not-as-expected.png" alt="Arrays.asList输出结果不符合预期" title="Arrays.asList输出结果不符合预期"></p>
-<h1 id="问题分析">问题分析</h1>
+<h2 id="问题分析">问题分析</h2>
 <p>在Debug模式下查看<code>Arrays.asList(data)</code>返回的值，发现其返回的结果不是预期中的<code>List&lt;Integer&gt;</code>而是<code>List&lt;int[]&gt;</code>，从而导致调用<code>List.contains()</code>方法失效!</p>
 <p><img src="/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-contains-variable-debug.png" alt="Arrays.asList输出不符合预期的debug" title="Arrays.asList输出不符合预期的debug"></p>
 <p>在IDEA中将<code>Arrays.asList(data)</code>返回的结果单独赋值给一个变量，可发现其类型确实为<code>List&lt;int[]&gt;</code>，若将结果类型修改为<code>List&lt;Integer&gt;</code>则会报错，如下图所示：</p>
@@ -213,7 +217,7 @@
 <p>no instance(s) of type variable(s) exist so that int[] conforms to Integer inference variable T has incompatible bounds: equality constraints: Integer lower bounds: int[]</p>
 </blockquote>
 <p>上述文字的核心内容为<code>Arrays.asList</code>需要获取<code>Object</code>类型，而<code>int</code>是原生类型，但<code>int[]</code>符合要求，因此<code>Arrays.asList()</code>方法会将原始的<code>int</code>数组视作一个<code>int[]</code>对象进行处理，从而导致此结果<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
-<h1 id="解决方案">解决方案</h1>
+<h2 id="解决方案">解决方案</h2>
 <p>找到问题原因后修改起来也很容易，按照通常的编程习惯，只需要把数组的定义从<code>int</code>修改为<code>Integer</code>即可</p>
 
 <pre class="line-numbers language-java ">
@@ -246,7 +250,7 @@ Arrays.stream(ints).boxed().toList();</code>
 </pre>
 </li>
 </ul>
-<h1 id="aslist不可变原因分析">asList不可变原因分析</h1>
+<h2 id="aslist不可变原因分析">asList不可变原因分析</h2>
 <p>查看<code>Arrays.asList</code>返回结果中的<code>List</code>，发现其返回的是内部自己实现的<code>ArrayList</code>，但该<code>ArrayList</code>没有重写<code>add</code>方法。</p>
 <p><img src="/blog_img/java-core/arrays-as-list-convert-result-in-java/arrays-as-list-create-custom-arraylist.png" alt="Arrays.asList实现了自定义的ArrayList" title="Arrays.asList实现了自定义的ArrayList"></p>
 <p>但<a href="https://docs.oracle.com/javase/8/docs/api/java/util/AbstractList.html">AbstractList</a>默认没有实现<code>add()</code>方法而是抛出一个异常，从而导致无法通过调用<code>add()</code>方法添加元素。</p>

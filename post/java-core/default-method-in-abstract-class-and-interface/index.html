@@ -180,7 +180,7 @@
 	
     <div class="post-content image-border">
 	 <p>在开发大规模的<code>Java</code>项目时，通常会涉及到各种设计模式，本文简要说明当使用<a href="https://zh.wikipedia.org/zh-cn/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95"><strong>模板方法</strong></a>时，如何利用接口default方法或抽象类对具体的子类进行精简，便于开发与维护。</p>
-<h1 id="背景说明">背景说明</h1>
+<h2 id="背景说明">背景说明</h2>
 <p>假设部门要进行一次团建，主要包含如下3个活动：</p>
 <ul>
 <li>轰趴(play)</li>
@@ -332,7 +332,7 @@ public class PersonC extends TeamBuilding {
 }</code>
 </pre>
 <p>接下来以抽象类和接口默认方法分别说明如何设计父类以便达成上述目的。</p>
-<h1 id="抽象类实现">抽象类实现</h1>
+<h2 id="抽象类实现">抽象类实现</h2>
 <p>仿照<code>Java</code>多线程编程中的<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractQueuedSynchronizer.html"><strong>AbstractQueuedSynchronizer</strong></a>类里面的获取锁与释放锁的实现，在父类中给所有的方法都取消<code>abstract</code>修饰符，默认用<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/UnsupportedOperationException.html"><strong>UnsupportedOperationException</strong></a>实现全部方法，子类按需<code>override</code>即可。</p>
 <p><code>AbstractQueuedSynchronizer</code>相关实现 ：</p>
 
@@ -370,7 +370,7 @@ protected boolean tryRelease(int arg) {
 
 }</code>
 </pre>
-<h1 id="接口实现">接口实现</h1>
+<h2 id="接口实现">接口实现</h2>
 <p>在<code>JDK8</code>和以上版本中，也可将抽象类修改为接口，利用<a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html"><strong>接口默认方法</strong></a>实现，相关代码如下：</p>
 
 <pre class="line-numbers language-java ">

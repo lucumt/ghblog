@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何通过JDK8时区常量进行时区相关操作" /><meta name="keywords" content="java, timezone, 硬编码" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何通过JDK8时区常量进行时区相关操作，以提高代码可维护性" /><meta name="keywords" content="java, timezone, 硬编码" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="利用JDK8时区常量进行时区相关操作">
-  <meta property="og:description" content="简要介绍如何通过JDK8时区常量进行时区相关操作">
+  <meta property="og:description" content="简要介绍如何通过JDK8时区常量进行时区相关操作，以提高代码可维护性">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -51,14 +51,14 @@
     <meta property="article:tag" content="Java">
 
   <meta itemprop="name" content="利用JDK8时区常量进行时区相关操作">
-  <meta itemprop="description" content="简要介绍如何通过JDK8时区常量进行时区相关操作">
+  <meta itemprop="description" content="简要介绍如何通过JDK8时区常量进行时区相关操作，以提高代码可维护性">
   <meta itemprop="datePublished" content="2021-06-08T16:01:47+08:00">
   <meta itemprop="dateModified" content="2021-06-08T16:01:47+08:00">
   <meta itemprop="wordCount" content="937">
   <meta itemprop="keywords" content="java,timezone,硬编码">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用JDK8时区常量进行时区相关操作">
-  <meta name="twitter:description" content="简要介绍如何通过JDK8时区常量进行时区相关操作">
+  <meta name="twitter:description" content="简要介绍如何通过JDK8时区常量进行时区相关操作，以提高代码可维护性">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -180,7 +180,7 @@
 	
     <div class="post-content image-border">
 	 <p>在进行<code>Java</code>编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用<code>JDK</code>内置的时区常量来进行时区相关操作。</p>
-<h1 id="zoneid使用">ZoneId使用</h1>
+<h2 id="zoneid使用">ZoneId使用</h2>
 <p>在涉及到时区的操作时，通常采用类似如下的代码以<a href="https://zh.wikipedia.org/zh-cn/%E5%AF%AB%E6%AD%BB"><strong>硬编码</strong></a>方式实现相关功能。</p>
 
 <pre class="line-numbers language-java ">
@@ -237,7 +237,7 @@ System.out.println(datetime3);
 LocalDateTime datetime4 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(ZoneId.SHORT_IDS.get(&#34;CST&#34;)));
 System.out.println(datetime4);</code>
 </pre>
-<h1 id="zoneid分析">ZoneId分析</h1>
+<h2 id="zoneid分析">ZoneId分析</h2>
 <p>由于前述<code>ZoneId.SHORT_IDS</code>中的时区都是通过字符串表示的，在上网查询的情况下可通过如下代码获取各个时区与<a href="https://zh.wikipedia.org/zh-cn/UTC%E5%81%8F%E7%A7%BB%E9%87%8F"><strong>UTC偏移量</strong></a>的对应关系</p>
 
 <pre class="line-numbers language-java ">
