@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="在进行Java开发时，NullPointerException是一个很常见的异常，在Java8中提供了Optional来避免此问题，而在MyBatis 3.5.0中也提供了对Optional的支持，本文简要叙述如何在MyBatis中使用Optional。
-" /><meta name="keywords" content="mybatis, optional" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="在MyBatis接口中使用Optional进行非空判断，避免冗余的If Else判断" /><meta name="keywords" content="mybatis, optional" />
 
 
 
@@ -43,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/mybatis/using-optional-in-mybatis-mapper/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在MyBatis接口中使用Optional进行非空判断">
-  <meta property="og:description" content="在进行Java开发时，NullPointerException是一个很常见的异常，在Java8中提供了Optional来避免此问题，而在MyBatis 3.5.0中也提供了对Optional的支持，本文简要叙述如何在MyBatis中使用Optional。">
+  <meta property="og:description" content="在MyBatis接口中使用Optional进行非空判断，避免冗余的If Else判断">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +51,14 @@
     <meta property="article:tag" content="Mybatis">
 
   <meta itemprop="name" content="在MyBatis接口中使用Optional进行非空判断">
-  <meta itemprop="description" content="在进行Java开发时，NullPointerException是一个很常见的异常，在Java8中提供了Optional来避免此问题，而在MyBatis 3.5.0中也提供了对Optional的支持，本文简要叙述如何在MyBatis中使用Optional。">
+  <meta itemprop="description" content="在MyBatis接口中使用Optional进行非空判断，避免冗余的If Else判断">
   <meta itemprop="datePublished" content="2020-02-13T14:40:19+08:00">
   <meta itemprop="dateModified" content="2020-02-13T14:40:19+08:00">
   <meta itemprop="wordCount" content="642">
   <meta itemprop="keywords" content="mybatis,optional">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在MyBatis接口中使用Optional进行非空判断">
-  <meta name="twitter:description" content="在进行Java开发时，NullPointerException是一个很常见的异常，在Java8中提供了Optional来避免此问题，而在MyBatis 3.5.0中也提供了对Optional的支持，本文简要叙述如何在MyBatis中使用Optional。">
+  <meta name="twitter:description" content="在MyBatis接口中使用Optional进行非空判断，避免冗余的If Else判断">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -183,7 +182,7 @@
     <div class="post-content image-border">
 	 <p>在进行<code>Java</code>开发时，<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/NullPointerException.html"><strong>NullPointerException</strong></a>是一个很常见的异常，在<code>Java8</code>中提供了<a href="https://www.oracle.com/technical-resources/articles/java/java8-optional.html"><strong>Optional</strong></a>来避免此问题，而在<a href="https://blog.mybatis.org/2019/01/mybatis-350-released.html"><strong>MyBatis 3.5.0</strong></a>中也提供了对<code>Optional</code>的支持，本文简要叙述如何在<code>MyBatis</code>中使用<code>Optional</code>。</p>
 <p>完整代码参见<a href="https://github.com/lucumt/spring-mybatis-example"><strong>spring-mybatis-example</strong></a></p>
-<h1 id="查询单条记录">查询单条记录</h1>
+<h2 id="查询单条记录">查询单条记录</h2>
 <p>由于在查询单条记录时，若数据库中不存在该记录，则会默认返回null，此时可用<code>Optional</code>进行避免。</p>
 <p>首先确保<code>MyBatis</code>的版本不低于<strong>3.5.0</strong>，在mapper中可以仿照如下定义接口</p>
 
@@ -228,7 +227,7 @@ public class TestBookService {
 </pre>
 <p>其执行结果如下，可见<code>Optional</code>在Mapper接口中生效。</p>
 <p><img src="/blog_img/mybatis/using-optional-in-mybatis-mapper/mybatis-optional-test-result.png" alt="Optional执行结果" title="Optional执行结果"></p>
-<h1 id="查询多条记录">查询多条记录</h1>
+<h2 id="查询多条记录">查询多条记录</h2>
 <p>当查询的结果为<code>List</code>时，即使没有数据<code>MyBatis</code>也会返回一个空的<code>List</code>，其size为0但不为null，此时不需要我们进行非空判断。</p>
 <p>定义如下接口</p>
 

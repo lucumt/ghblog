@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简单记录下如何在MyBatis中插入JSON，以备参考。
-" /><meta name="keywords" content="Java, MyBatis, JSON" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="以一个简单的Java Demo展示如何在MyBatis中插入JSON格式数据" /><meta name="keywords" content="Java, MyBatis, JSON" />
 
 
 
@@ -43,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/mybatis/insert-json-data-in-mybatis/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="MyBatis中插入JSON格式数据">
-  <meta property="og:description" content="简单记录下如何在MyBatis中插入JSON，以备参考。">
+  <meta property="og:description" content="以一个简单的Java Demo展示如何在MyBatis中插入JSON格式数据">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -53,14 +52,14 @@
     <meta property="article:tag" content="Mybatis">
 
   <meta itemprop="name" content="MyBatis中插入JSON格式数据">
-  <meta itemprop="description" content="简单记录下如何在MyBatis中插入JSON，以备参考。">
+  <meta itemprop="description" content="以一个简单的Java Demo展示如何在MyBatis中插入JSON格式数据">
   <meta itemprop="datePublished" content="2021-04-15T09:37:41+08:00">
   <meta itemprop="dateModified" content="2021-04-15T09:37:41+08:00">
   <meta itemprop="wordCount" content="664">
   <meta itemprop="keywords" content="Java,MyBatis,JSON">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="MyBatis中插入JSON格式数据">
-  <meta name="twitter:description" content="简单记录下如何在MyBatis中插入JSON，以备参考。">
+  <meta name="twitter:description" content="以一个简单的Java Demo展示如何在MyBatis中插入JSON格式数据">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -182,23 +181,27 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#基本信息">基本信息</a>
+    <li>
       <ul>
-        <li><a href="#项目结构">项目结构</a></li>
-        <li><a href="#表结构">表结构</a></li>
-        <li><a href="#pom文件">pom文件</a></li>
-        <li><a href="#模型类">模型类</a></li>
-        <li><a href="#handler类">Handler类</a></li>
-        <li><a href="#配置文件">配置文件</a></li>
-        <li><a href="#mapper类">Mapper类</a></li>
-        <li><a href="#mapper文件">Mapper文件</a></li>
-        <li><a href="#service类">Service类</a></li>
-      </ul>
-    </li>
-    <li><a href="#测试">测试</a>
-      <ul>
-        <li><a href="#测试类">测试类</a></li>
-        <li><a href="#测试结果">测试结果</a></li>
+        <li><a href="#基本信息">基本信息</a>
+          <ul>
+            <li><a href="#项目结构">项目结构</a></li>
+            <li><a href="#表结构">表结构</a></li>
+            <li><a href="#pom文件">pom文件</a></li>
+            <li><a href="#模型类">模型类</a></li>
+            <li><a href="#handler类">Handler类</a></li>
+            <li><a href="#配置文件">配置文件</a></li>
+            <li><a href="#mapper类">Mapper类</a></li>
+            <li><a href="#mapper文件">Mapper文件</a></li>
+            <li><a href="#service类">Service类</a></li>
+          </ul>
+        </li>
+        <li><a href="#测试">测试</a>
+          <ul>
+            <li><a href="#测试类">测试类</a></li>
+            <li><a href="#测试结果">测试结果</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -210,11 +213,11 @@
 	
     <div class="post-content image-border">
 	 <p>简单记录下如何在<a href="https://mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>中插入<a href="https://www.json.org/json-en.html"><strong>JSON</strong></a>，以备参考。</p>
-<h1 id="基本信息">基本信息</h1>
+<h2 id="基本信息">基本信息</h2>
 <p>完整代码参见<a href="https://github.com/lucumt/spring-mybatis-example"><strong>spring-mybatis-example</strong></a>，核心代码为<a href="#handler%E7%B1%BB"><strong>JsonNodeTypeHandler</strong></a>配置类。</p>
-<h2 id="项目结构">项目结构</h2>
+<h3 id="项目结构">项目结构</h3>
 <p><img src="/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-project-structure.png" alt="项目结构" title="项目结构"></p>
-<h2 id="表结构">表结构</h2>
+<h3 id="表结构">表结构</h3>
 
 <pre class="line-numbers language-sql ">
 <code>CREATE TABLE `user_info` (
@@ -224,7 +227,7 @@
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin</code>
 </pre>
-<h2 id="pom文件">pom文件</h2>
+<h3 id="pom文件">pom文件</h3>
 
 <pre class="line-numbers language-xml ">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
@@ -296,7 +299,7 @@
 
 &lt;/project&gt;</code>
 </pre>
-<h2 id="模型类">模型类</h2>
+<h3 id="模型类">模型类</h3>
 
 <pre class="line-numbers language-java ">
 <code>@Data
@@ -311,7 +314,7 @@ public class UserModel {
     private JsonNode info;
 }</code>
 </pre>
-<h2 id="handler类">Handler类</h2>
+<h3 id="handler类">Handler类</h3>
 
 <pre class="line-numbers language-java ">
 <code>@MappedTypes(JsonNode.class)
@@ -384,7 +387,7 @@ public class JsonNodeTypeHandler extends BaseTypeHandler&lt;JsonNode&gt; {
 
 }</code>
 </pre>
-<h2 id="配置文件">配置文件</h2>
+<h3 id="配置文件">配置文件</h3>
 
 <pre class="line-numbers language-yaml ">
 <code>server:
@@ -408,7 +411,7 @@ mybatis:
   type-aliases-package: com.lucumt.model,com.lucumt.vo
   type-handlers-package: com.lucumt.handler.mybatis</code>
 </pre>
-<h2 id="mapper类">Mapper类</h2>
+<h3 id="mapper类">Mapper类</h3>
 
 <pre class="line-numbers language-java ">
 <code>public interface UserMapper {
@@ -420,7 +423,7 @@ mybatis:
     void deleteUser(Integer id);
 }</code>
 </pre>
-<h2 id="mapper文件">Mapper文件</h2>
+<h3 id="mapper文件">Mapper文件</h3>
 
 <pre class="line-numbers language-xml ">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
@@ -442,7 +445,7 @@ mybatis:
 
 &lt;/mapper&gt;</code>
 </pre>
-<h2 id="service类">Service类</h2>
+<h3 id="service类">Service类</h3>
 
 <pre class="line-numbers language-java ">
 <code>@Service
@@ -464,8 +467,8 @@ public class UserService {
     }
 }</code>
 </pre>
-<h1 id="测试">测试</h1>
-<h2 id="测试类">测试类</h2>
+<h2 id="测试">测试</h2>
+<h3 id="测试类">测试类</h3>
 
 <pre class="line-numbers language-java ">
 <code>@SpringBootTest
@@ -512,7 +515,7 @@ public class TestUserService {
 
 }</code>
 </pre>
-<h2 id="测试结果">测试结果</h2>
+<h3 id="测试结果">测试结果</h3>
 <p><img src="/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-json-test-result.png" alt="测试结果" title="测试结果"></p>
     </div>
 

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="简要记录将MinIO中的文件夹下载为ZIP文件的代码实现" /><meta name="keywords" content="MinIO, ZIP, 文件夹" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="基于Java代码简要记录将MinIO中的文件夹下载为ZIP文件的代码实现" /><meta name="keywords" content="MinIO, ZIP, 文件夹" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/minio/download-minio-folder-as-zip-file/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="将MinIO中的文件夹下载为ZIP文件">
-  <meta property="og:description" content="简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
+  <meta property="og:description" content="基于Java代码简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Java">
 
   <meta itemprop="name" content="将MinIO中的文件夹下载为ZIP文件">
-  <meta itemprop="description" content="简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
+  <meta itemprop="description" content="基于Java代码简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
   <meta itemprop="datePublished" content="2022-08-20T20:35:44+08:00">
   <meta itemprop="dateModified" content="2022-08-20T20:35:44+08:00">
   <meta itemprop="wordCount" content="891">
   <meta itemprop="keywords" content="MinIO,ZIP,文件夹">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="将MinIO中的文件夹下载为ZIP文件">
-  <meta name="twitter:description" content="简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
+  <meta name="twitter:description" content="基于Java代码简要记录将MinIO中的文件夹下载为ZIP文件的代码实现">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -181,7 +181,7 @@
 	
     <div class="post-content image-border">
 	 <p>公司项目采用<a href="https://min.io/"><strong>MinIO</strong></a>作为数据存储，最近遇到一个需求是将其中的某个文件夹的数据基于其原有的结构下载为<code>ZIP</code>文件，网上有很多下载为<code>ZIP</code>的代码，个人觉得其中好多不够精简，简单记录下自己的实现。</p>
-<h1 id="文件夹下载">文件夹下载</h1>
+<h2 id="文件夹下载">文件夹下载</h2>
 <p>该文件夹在<code>MinIO</code>中存储的路径为<code>2022-07/80/iodp-dataset-demo</code>，其下包含多个文件夹</p>
 <p><img src="/blog_img/minio/download-minio-folder-as-zip-file/minio-folder-structure.png" alt="MinIO文件夹存储" title="MinIO文件夹存储"></p>
 <p>在特定文件夹下包含多个数据文件</p>
@@ -242,7 +242,7 @@ public class MinioServiceImpl implements IMinioService {
 </pre>
 <p>基于上述代码从<code>MinIO</code>中返回的文件信息类似如下所示：</p>
 <p><img src="/blog_img/minio/download-minio-folder-as-zip-file/minio-file-list.png" alt="MinIO下载文件夹" title="MinIO下载文件夹"></p>
-<h1 id="写入zip文件">写入ZIP文件</h1>
+<h2 id="写入zip文件">写入ZIP文件</h2>
 <p>由于<code>MinIO</code>中返回的文件信息已经具有层级结构，故在进行<code>ZIP</code>压缩时可基于文件路径直接设置其存储位置<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 
 <pre class="line-numbers language-java ">

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录" /><meta name="keywords" content="ldap, docker, gitlab" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录，主要是给自建LDAP提供使用改进参考" /><meta name="keywords" content="ldap, docker, gitlab" />
 
 
 
@@ -42,7 +42,7 @@
 <meta property="og:url" content="https://lucumt.info/post/ldap/add-ldap-support-for-gitlab/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="给Gitlab添加LDAP登录认证">
-  <meta property="og:description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录">
+  <meta property="og:description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录，主要是给自建LDAP提供使用改进参考">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Docker">
 
   <meta itemprop="name" content="给Gitlab添加LDAP登录认证">
-  <meta itemprop="description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录">
+  <meta itemprop="description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录，主要是给自建LDAP提供使用改进参考">
   <meta itemprop="datePublished" content="2023-04-14T11:22:34+08:00">
   <meta itemprop="dateModified" content="2023-04-14T11:22:34+08:00">
   <meta itemprop="wordCount" content="974">
   <meta itemprop="keywords" content="ldap,docker,gitlab">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="给Gitlab添加LDAP登录认证">
-  <meta name="twitter:description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录">
+  <meta name="twitter:description" content="给Gitlab添加LDAP登录认证并禁止普通账号登录，主要是给自建LDAP提供使用改进参考">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -181,9 +181,13 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#安装步骤">安装步骤</a></li>
-    <li><a href="#添加额外的管理员">添加额外的管理员</a></li>
-    <li><a href="#只允许ldap登录">只允许LDAP登录</a></li>
+    <li>
+      <ul>
+        <li><a href="#安装步骤">安装步骤</a></li>
+        <li><a href="#添加额外的管理员">添加额外的管理员</a></li>
+        <li><a href="#只允许ldap登录">只允许LDAP登录</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -193,7 +197,7 @@
 	
     <div class="post-content image-border">
 	 <p>简要记录如何基于<code>docker</code>创建<code>Gitlab</code>并集成<code>ldap</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>且仅允许<code>LDAP</code>账号登录。</p>
-<h1 id="安装步骤">安装步骤</h1>
+<h2 id="安装步骤">安装步骤</h2>
 <ol>
 <li>
 <p>创建一个名为<code>gitlab_test</code>的文件夹，之后创建一个名为<code>docker-compose.yml</code>的文件，写入如下内容</p>
@@ -240,7 +244,7 @@ services:
 <p><img src="/blog_img/ldap/add-ldap-support-for-gitlab/gitlab-login-with-ldap-page.png" alt="gitlab登录支持ldap" title="gitlab登录支持ldap"></p>
 </li>
 </ol>
-<h1 id="添加额外的管理员">添加额外的管理员</h1>
+<h2 id="添加额外的管理员">添加额外的管理员</h2>
 <p><code>gitlab</code>默认只有<code>root</code>这1个admin账号，当禁止非<code>LDAP</code>方式登录时会将<code>root</code>账号的登录一并禁止掉，故需要预先将一些<code>LDAP</code>账户设置为管理员账号，操作过程如下：</p>
 <ol>
 <li>
@@ -267,7 +271,7 @@ exit</code>
 <p><img src="/blog_img/ldap/add-ldap-support-for-gitlab/login-gitlab-and-show-admin-menu.png" alt="gitlab添加管理员操作成功" title="gitlab添加管理员操作成功"></p>
 </li>
 </ol>
-<h1 id="只允许ldap登录">只允许LDAP登录</h1>
+<h2 id="只允许ldap登录">只允许LDAP登录</h2>
 <p>主要参考<a href="https://github.com/sameersbn/docker-gitlab/issues/2604">How to disable standard authentication</a>进行操作：</p>
 <ol>
 <li>
