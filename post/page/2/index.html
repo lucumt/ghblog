@@ -810,6 +810,30 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script type="text/javascript">
+let sectionYearChartData = [
+{
+	name: '按年新增',
+	type: 'column',
+	color:"#16982b",
+	yAxis: 1,
+	data: JSON.parse("[11,12,8,6,5,8,23,41,11]"),
+	tooltip: {
+		valueSuffix: ' 篇'
+	}
+},
+{
+	name: '按年完成',
+	color:"#0047AB",
+	type: 'spline',
+	marker: {
+        symbol: 'cycle'
+    },
+	data: JSON.parse("[11,23,31,37,42,50,73,114,125]"),
+	tooltip: {
+		valueSuffix: ' 篇'
+	}
+}];
+
 Highcharts.chart('section_year_chart_1', {
     chart: {
         zoomType: 'xy'
@@ -872,27 +896,7 @@ Highcharts.chart('section_year_chart_1', {
             }
         }]
     },
-    series: [
-	
-	{
-        name: '按年新增',
-        type: 'column',
-		color:"#16982b",
-        yAxis: 1,
-        data: JSON.parse("[11,12,8,6,5,8,23,41,11]"),
-        tooltip: {
-            valueSuffix: ' 篇'
-        }
-    },
-	{
-        name: '按年累计',
-		color:"#0047AB",
-        type: 'spline',
-        data: JSON.parse("[11,23,31,37,42,50,73,114,125]"),
-        tooltip: {
-            valueSuffix: ' 篇'
-        }
-    }]
+    series: sectionYearChartData
 });
 Highcharts.chart('section_year_chart_2', {
     chart: {
