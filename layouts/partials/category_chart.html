@@ -1,8 +1,4 @@
 {{ $terms := .Data.Terms.ByCount -}}
-{{ $tagCount := dict -}}
-{{range $name, $taxonomy := .Site.Taxonomies.tags -}} 
-	{{ $tagCount = merge $tagCount (dict $name .Count) -}}
-{{end}}
 {{ $data := slice -}}
 {{ $heatData := slice -}}
 {{ range $key, $value := $terms -}}
@@ -21,7 +17,13 @@
 	 {{- $cateColor := math.Rand | mul 10 | math.Floor -}}
 	 
 	 {{ range $kt, $vt := $tags -}}
-	     {{- $heatTagCount := (int (index $tagCount $vt)) -}}
+		 {{- $heatTagCount := 0 -}}
+		 {{ $catePages := index site.Taxonomies.categories $cateName -}}
+         {{ range $k1,$v1 := $catePages -}}
+		        {{ if in $v1.Params.tags $vt -}}
+					{{- $heatTagCount = add $heatTagCount 1 -}}
+				{{ end }}
+		 {{ end -}}
 		 {{- $heatCateTotal = add $heatCateTotal $heatTagCount -}}
 		 {{- $subData = $subData | append (dict "name" $vt "value" $heatTagCount) -}}
 		 
@@ -101,6 +103,7 @@ Highcharts.chart('category_bubble_chart', {
 });
 let random = (Math.random() * 10 ) << 0;
 let heatData = JSON.parse({{ jsonify $heatData }});
+console.log({{ jsonify $heatData }});
 let heatValueData = heatData.map(m => m.value);
 let heatMax = Math.max(...heatValueData);
 let heatMin = Math.min(...heatValueData);
