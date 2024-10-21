@@ -1,41 +1,39 @@
-{{ $terms := .Data.Terms.ByCount -}}
-{{ $data := slice -}}
-{{ $heatData := slice -}}
-{{ range $key, $value := $terms -}}
-	 {{ $tags := (slice) }} 
-	 {{ range $k1, $v1 := $value.Pages -}}
-		  {{ range $k2, $v2 := $v1.Params.tags -}}
-				{{ $tag := $v2 | lower -}}
-				{{ $tags = union $tags ( slice $tag ) -}}
-		  {{ end -}}
-	 {{ end -}}
-	 {{ $subData := slice -}}
-	 {{ $heatCateTotal := 0 -}}
+{{- $terms := .Data.Terms.ByCount -}}
+{{- $data := slice -}}
+{{- $heatData := slice -}}
+{{- range $key, $value := $terms -}}
+	 {{- $tags := (slice) }} 
+	 {{- range $k1, $v1 := $value.Pages -}}
+		  {{- range $k2, $v2 := $v1.Params.tags -}}
+				{{- $tag := $v2 | lower -}}
+				{{- $tags = union $tags ( slice $tag ) -}}
+		  {{- end -}}
+	 {{- end -}}
+	 {{- $subData := slice -}}
 	 
 	 {{- $cateName := $value.Term -}}
 	 {{- $cateId := print "cate-" print $cateName -}}
 	 {{- $cateColor := math.Rand | mul 10 | math.Floor -}}
+	 {{- $catePages := index site.Taxonomies.categories $cateName -}}
 	 
-	 {{ range $kt, $vt := $tags -}}
+	 {{- range $kt, $vt := $tags -}}
 		 {{- $heatTagCount := 0 -}}
-		 {{ $catePages := index site.Taxonomies.categories $cateName -}}
-         {{ range $k1,$v1 := $catePages -}}
-		        {{ if in $v1.Params.tags $vt -}}
+         {{- range $k1,$v1 := $catePages -}}
+		        {{- if in $v1.Params.tags $vt -}}
 					{{- $heatTagCount = add $heatTagCount 1 -}}
 				{{ end }}
-		 {{ end -}}
-		 {{- $heatCateTotal = add $heatCateTotal $heatTagCount -}}
+		 {{- end -}}
 		 {{- $subData = $subData | append (dict "name" $vt "value" $heatTagCount) -}}
 		 
 		 {{- $tagId := print $cateName print "-" print $vt -}}
 		 {{- $heatTagData := dict "name" $vt "id" $tagId "color" $cateColor "value" $heatTagCount "parent" $cateId -}}
 		 {{- $heatData = $heatData | append $heatTagData -}}
-	 {{ end -}}
+	 {{- end -}}
 	 {{- $cateData := dict "name" $cateName "data" $subData -}}
-	 {{- $heatCateData := dict "name" $cateName "id" $cateId "color" $cateColor "value" $heatCateTotal -}}
+	 {{- $heatCateData := dict "name" $cateName "id" $cateId "color" $cateColor "value" (len $catePages) -}}
 	 {{- $heatData = $heatData | append $heatCateData -}}
-	 {{ $data = $data | append $cateData -}}
-{{ end -}}
+	 {{- $data = $data | append $cateData -}}
+{{- end -}}
 <div id="category_heat_chart" class="chart_style"></div>
 <div id="category_bubble_chart" class="chart_style"></div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -103,7 +101,6 @@ Highcharts.chart('category_bubble_chart', {
 });
 let random = (Math.random() * 10 ) << 0;
 let heatData = JSON.parse({{ jsonify $heatData }});
-console.log({{ jsonify $heatData }});
 let heatValueData = heatData.map(m => m.value);
 let heatMax = Math.max(...heatValueData);
 let heatMin = Math.min(...heatValueData);
