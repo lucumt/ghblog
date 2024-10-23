@@ -6,8 +6,15 @@
     <description>Recent content in 持续集成 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jul 2024 19:37:01 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Oct 2024 15:21:19 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Harbor清理垃圾时一直提示10010 object is not found导致清理失败</title>
+      <link>https://lucumt.info/post/devops/can-not-garbage-collection-in-harbor/</link>
+      <pubDate>Wed, 23 Oct 2024 15:21:19 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/can-not-garbage-collection-in-harbor/</guid>
+      <description>&lt;p&gt;记录&lt;code&gt;Harbor&lt;/code&gt;清理镜像垃圾时遇到的错误&lt;code&gt;{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;NOT_FOUND&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;{\&amp;quot;code\&amp;quot;:10010,\&amp;quot;message\&amp;quot;:\&amp;quot;object is not found\&amp;quot;,\&amp;quot;details\&amp;quot;:\&amp;quot;2cc49b89751876fa18acb008\&amp;quot;}&amp;quot;}]}&lt;/code&gt;导致回收失败，不能正常清理，最终占用越来越多的磁盘空间的解决过程。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>KubeSphere中整合LDAP后不生效的原因分析</title>
       <link>https://lucumt.info/post/devops/ldap-integration-not-working/</link>
