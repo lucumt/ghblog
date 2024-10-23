@@ -81,7 +81,7 @@ highchartsDiagrams:
 
 ![相关错误Google搜索结果](/blog_img/devops/can-not-garbage-collection-in-harbor/harbor-garbage-collection-failed-search-result.png "相关错误Google搜索结果")  
 
-基于[这条回复](https://github.com/goharbor/harbor/issues/13440#issuecomment-721318580)、[这条回复](https://github.com/goharbor/harbor/issues/13732#issuecomment-743085175)以及[这篇文章](https://blog.51cto.com/foxhound/2482127)上说的是需要将`registry`数据库下的`admin_job`表的`deleted`字段从false修改为true，当前使用的`Harbor`版本为`v2.10.3`基于`docker`部署，进入名为`harbor-db`的容器后发现由于自己的`Harbor`版本相对于别人反馈的版本更新吗，该表并不存在！
+基于[这条回复](https://github.com/goharbor/harbor/issues/13440#issuecomment-721318580)、[这条回复](https://github.com/goharbor/harbor/issues/13732#issuecomment-743085175)以及[这篇文章](https://blog.51cto.com/foxhound/2482127)上说的是需要将`registry`数据库下的`admin_job`表的`deleted`字段从false修改为true，当前使用的`Harbor`版本为`v2.10.3`基于`docker`部署，进入名为`harbor-db`的容器后发现由于自己的`Harbor`版本相对于别人反馈的版本更新，该表并不存在！
 
 ![admin job表不存在](/blog_img/devops/can-not-garbage-collection-in-harbor/admin_job_table_not_exists.png "admin job表不存在") 
 
