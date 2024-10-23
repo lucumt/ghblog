@@ -55,7 +55,7 @@
   <meta itemprop="description" content="基于自己实际的使用经验，记录通过Harbor清理垃圾时遇到10010错误提示object is not found导致垃圾清理失败时的解决方案">
   <meta itemprop="datePublished" content="2024-10-23T15:21:19+08:00">
   <meta itemprop="dateModified" content="2024-10-23T15:21:19+08:00">
-  <meta itemprop="wordCount" content="1559">
+  <meta itemprop="wordCount" content="1558">
   <meta itemprop="keywords" content="Harbor,Garbage Collection,清理垃圾,失败,object is not found">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Harbor清理垃圾时一直提示10010 object is not found导致清理失败">
@@ -196,7 +196,7 @@
 <h2 id="解决">解决</h2>
 <p>根据前述报错信息去Google查找，发现在<code>GitHub</code>上这个问题很普遍</p>
 <p><img src="/blog_img/devops/can-not-garbage-collection-in-harbor/harbor-garbage-collection-failed-search-result.png" alt="相关错误Google搜索结果" title="相关错误Google搜索结果"></p>
-<p>基于<a href="https://github.com/goharbor/harbor/issues/13440#issuecomment-721318580">这条回复</a>、<a href="https://github.com/goharbor/harbor/issues/13732#issuecomment-743085175">这条回复</a>以及<a href="https://blog.51cto.com/foxhound/2482127">这篇文章</a>上说的是需要将<code>registry</code>数据库下的<code>admin_job</code>表的<code>deleted</code>字段从false修改为true，当前使用的<code>Harbor</code>版本为<code>v2.10.3</code>基于<code>docker</code>部署，进入名为<code>harbor-db</code>的容器后发现由于自己的<code>Harbor</code>版本相对于别人反馈的版本更新吗，该表并不存在！</p>
+<p>基于<a href="https://github.com/goharbor/harbor/issues/13440#issuecomment-721318580">这条回复</a>、<a href="https://github.com/goharbor/harbor/issues/13732#issuecomment-743085175">这条回复</a>以及<a href="https://blog.51cto.com/foxhound/2482127">这篇文章</a>上说的是需要将<code>registry</code>数据库下的<code>admin_job</code>表的<code>deleted</code>字段从false修改为true，当前使用的<code>Harbor</code>版本为<code>v2.10.3</code>基于<code>docker</code>部署，进入名为<code>harbor-db</code>的容器后发现由于自己的<code>Harbor</code>版本相对于别人反馈的版本更新，该表并不存在！</p>
 <p><img src="/blog_img/devops/can-not-garbage-collection-in-harbor/admin_job_table_not_exists.png" alt="admin job表不存在" title="admin job表不存在"></p>
 <p>对<code>blob</code>表查询其总数，结果如下，虽然总数很多，但并没有提供啥有用的信息</p>
 <p><img src="/blog_img/devops/can-not-garbage-collection-in-harbor/postgres-blob-data-count.png" alt="blob总数查询" title="blob总数查询"></p>
