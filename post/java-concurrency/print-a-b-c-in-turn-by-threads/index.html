@@ -55,7 +55,7 @@
   <meta itemprop="description" content="由于面试时踩过坑，记录下多种方式实现在Java中用线程轮流打印ABC的实现">
   <meta itemprop="datePublished" content="2020-09-08T11:11:06+08:00">
   <meta itemprop="dateModified" content="2020-09-08T11:11:06+08:00">
-  <meta itemprop="wordCount" content="765">
+  <meta itemprop="wordCount" content="897">
   <meta itemprop="keywords" content="java,thread">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="多种方式实现在Java中用线程轮流打印ABC">
@@ -189,6 +189,7 @@
             <li><a href="#基于reentrantlockcondition">基于ReentrantLock&amp;Condition</a></li>
             <li><a href="#基于semaphore">基于Semaphore</a></li>
             <li><a href="#单个锁volatile变量">单个锁&amp;volatile变量</a></li>
+            <li><a href="#基于locksupport">基于LockSupport</a></li>
           </ul>
         </li>
       </ul>
@@ -438,6 +439,69 @@
             }
         }
 
+    }
+}</code>
+</pre>
+<h3 id="基于locksupport">基于LockSupport</h3>
+<p>此种方式更加简洁</p>
+
+<pre class="line-numbers language-java ">
+<code>import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
+
+public class ThreadPrintTestA {
+
+    public static void main(String[] args) {
+        PThread ta = new PThread(&#34;A&#34;);
+        PThread tb = new PThread(&#34;B&#34;);
+        PThread tc = new PThread(&#34;C&#34;);
+
+        ta.setWakeupThread(tb);
+        tb.setWakeupThread(tc);
+        tc.setWakeupThread(ta);
+
+        ta.setName(&#34;thread-1&#34;);
+        tb.setName(&#34;thread-2&#34;);
+        tc.setName(&#34;thread-3&#34;);
+
+        ta.start();
+        tb.start();
+        tc.start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            LockSupport.unpark(ta);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+class PThread extends Thread {
+
+    private String str;
+    private Thread wakeupThread;
+
+    public PThread(String str) {
+        this.str = str;
+    }
+
+    public void setWakeupThread(Thread wakeupThread) {
+        this.wakeupThread = wakeupThread;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                LockSupport.park();
+                System.out.println(str &#43; &#34;\t&#34; &#43; currentThread().getName());
+                TimeUnit.MILLISECONDS.sleep(100);
+                LockSupport.unpark(wakeupThread);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }</code>
 </pre>
