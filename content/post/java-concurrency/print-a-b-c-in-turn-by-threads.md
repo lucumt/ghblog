@@ -291,3 +291,68 @@ public class ThreadPrint4Test {
 }
 ```
 
+### 基于LockSupport
+
+此种方式更加简洁
+
+```java
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
+
+public class ThreadPrintTestA {
+
+    public static void main(String[] args) {
+        PThread ta = new PThread("A");
+        PThread tb = new PThread("B");
+        PThread tc = new PThread("C");
+
+        ta.setWakeupThread(tb);
+        tb.setWakeupThread(tc);
+        tc.setWakeupThread(ta);
+
+        ta.setName("thread-1");
+        tb.setName("thread-2");
+        tc.setName("thread-3");
+
+        ta.start();
+        tb.start();
+        tc.start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            LockSupport.unpark(ta);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+class PThread extends Thread {
+
+    private String str;
+    private Thread wakeupThread;
+
+    public PThread(String str) {
+        this.str = str;
+    }
+
+    public void setWakeupThread(Thread wakeupThread) {
+        this.wakeupThread = wakeupThread;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                LockSupport.park();
+                System.out.println(str + "\t" + currentThread().getName());
+                TimeUnit.MILLISECONDS.sleep(100);
+                LockSupport.unpark(wakeupThread);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
