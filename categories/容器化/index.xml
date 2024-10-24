@@ -6,8 +6,15 @@
     <description>Recent content in 容器化 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 23 Oct 2024 15:21:19 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 24 Oct 2024 10:09:39 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置Harbor中镜像清理的策略实现定期自动清理冗余镜像</title>
+      <link>https://lucumt.info/post/devops/config-harbor-strategy-to-clean-images/</link>
+      <pubDate>Thu, 24 Oct 2024 10:09:39 +0800</pubDate>
+      <guid>https://lucumt.info/post/devops/config-harbor-strategy-to-clean-images/</guid>
+      <description>&lt;p&gt;基于个人实际使用经验，简要记录如何通过给&lt;code&gt;Harbor&lt;/code&gt;项目配置镜像策略实现自动清理冗余的&lt;code&gt;Docker&lt;/code&gt;镜像，达到节省磁盘空间的目的。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Harbor清理垃圾时一直提示10010 object is not found导致清理失败</title>
       <link>https://lucumt.info/post/devops/can-not-garbage-collection-in-harbor/</link>
