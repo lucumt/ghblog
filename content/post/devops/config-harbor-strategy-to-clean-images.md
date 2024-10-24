@@ -1,8 +1,8 @@
 ---
 title: "配置Harbor中镜像清理的策略实现定期自动清理冗余镜像"
-date: 2024-06-25T10:09:39+08:00
-lastmod: 2024-06-25T10:09:39+08:00
-draft: true
+date: 2024-10-24T10:09:39+08:00
+lastmod: 2024-10-24T10:09:39+08:00
+draft: false
 keywords: ["harbor","镜像清理","定时任务",“自动清理”]
 description: "基于个人实际使用经验，简要记录如何通过给Harbor项目配置镜像策略实现自动清理冗余的Docker镜像，达到节省磁盘空间的目的"
 tags: ["harbor"]
