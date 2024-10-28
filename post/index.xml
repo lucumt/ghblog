@@ -548,6 +548,13 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[译]如何处理MySQL中的死锁</title>
+      <link>https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/</link>
+      <pubDate>Sat, 25 Sep 2021 17:03:21 +0800</pubDate>
+      <guid>https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://medium.com/geekculture/how-to-deal-with-deadlocks-in-mysql-58f4d830788b&#34;&gt;&lt;strong&gt;How to deal with deadlocks in mysql&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
       <link>https://lucumt.info/post/devops/upload-docker-image-to-harbor-via-shell/</link>
       <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>

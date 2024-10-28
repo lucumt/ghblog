@@ -16,6 +16,13 @@
       <description>&lt;p&gt;简单记录下自己在使用&lt;code&gt;Grafana&lt;/code&gt;过程中的一点点经验总结：通过修改sql的方式来消除柱状图中多余的0值。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>[译]如何处理MySQL中的死锁</title>
+      <link>https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/</link>
+      <pubDate>Sat, 25 Sep 2021 17:03:21 +0800</pubDate>
+      <guid>https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://medium.com/geekculture/how-to-deal-with-deadlocks-in-mysql-58f4d830788b&#34;&gt;&lt;strong&gt;How to deal with deadlocks in mysql&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>MySQL中由于user表中错误的host配置导入无法登录数据库</title>
       <link>https://lucumt.info/post/mysql/mysql-can-not-login-due-to-incorrect-host-config/</link>
       <pubDate>Thu, 22 Aug 2019 11:32:19 +0800</pubDate>
