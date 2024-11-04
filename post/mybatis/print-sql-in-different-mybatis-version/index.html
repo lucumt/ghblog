@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -208,8 +208,7 @@
     <div class="post-content image-border">
 	 <p>项目中ORM框架用的是 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>，最近由于业务上的需求将<code>MyBatis</code>从<strong>3.1.1</strong>升级到<strong>3.4.5</strong>，发现升级后通过<a href="https://logging.apache.org/log4j/1.2/download.html"><strong>Log4j</strong></a>显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
 <p>假设我们测试的sql文件为UserMapper.xml ， 对应的代码如下，其命名空间为<code>com.lucumt.mapper.UserMappper</code></p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
 &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;
 
@@ -218,10 +217,8 @@
         	SELECT id,username,password,create_time AS createTime FROM system_users WHERE username!=#{username}
     	&lt;/select&gt;
    &lt;/mapper&gt;</code>
-</pre>
-<p>对应的执行代码如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>对应的执行代码如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Test
 public void testMybatis(){
     String resource = &#34;mybatis-config.xml&#34;;
@@ -235,23 +232,19 @@ public void testMybatis(){
     	System.out.println(u.toString());
     }
 }</code>
-</pre>
-<p>本文会基于上述代码说明不同版本下如何利用<code>Log4j</code>在<code>MyBatis</code>中配置打印日志以及其实现原理。</p>
+</pre><p>本文会基于上述代码说明不同版本下如何利用<code>Log4j</code>在<code>MyBatis</code>中配置打印日志以及其实现原理。</p>
 <h2 id="mybatis311分析">MyBatis3.1.1分析</h2>
 <h3 id="log4j相关配置">Log4j相关配置</h3>
 <p>在<code>MyBatis3.1.1</code>及以前的版本中若我们想通过<code>Log4j</code>配置来打印实际执行的SQL，log4j.properties的配置通常类似如下</p>
-
-<pre class="line-numbers language-properties ">
+<pre class="line-numbers language-properties " title="properties">
 <code># 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
 log4j.logger.java.sql.Connection=DEBUG 
 log4j.logger.java.sql.Statement=DEBUG 
 log4j.logger.java.sql.PreparedStatement=DEBUG 
 log4j.logger.java.sql.ResultSet=DEBUG </code>
-</pre>
-<h3 id="原理分析">原理分析</h3>
+</pre><h3 id="原理分析">原理分析</h3>
 <p>以<code>log4j.logger.java.sql.Connection=DEBUG</code>这个配置为例，分析源码可知其sql日志来源于<code>ConnectionLogger</code>，查看 <code>ConnectionLogger</code>的代码可知<code>ConnectionLogger</code>以硬编码的方式生成了一个log对象,当<code>DEBUG</code>模式开启时该log对象会打印sql语句等信息。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
 
   //生成一个Connection的log
@@ -287,23 +280,19 @@ log4j.logger.java.sql.ResultSet=DEBUG </code>
   //... other code
 
 }</code>
-</pre>
-<p>运行结果如下<br>
+</pre><p>运行结果如下<br>
 <img src="/blog_img/mybatis/print-sql-in-different-mybatis-version/mybatis-3.1.1-print-sql-result.png" alt="&ldquo;MyBatis3.1.1时显示执行SQL&rdquo;" title="MyBatis1.1.1时显示执行SQL">   <br>
 从上述代码可知在<code>Mybatis3.1.1</code>中通过<code>Log4j</code>实现打印执行SQL的操作很简单，实现原理也易懂，但其存在的一个缺点: <strong>当开启打印SQL日志后，会打印所有正在执行的SQL语句，不能实现针对特定SQL的打印</strong> ，基于此<code>MyBatis</code>从3.2.0版本之后重新实现了相关功能。</p>
 <h2 id="mybatis345分析">MyBatis3.4.5分析</h2>
 <h3 id="log4j相关配置-1">Log4j相关配置</h3>
 <p>在<code>MyBatis3.2.0</code>及以后的版本中若我们想通过Log4j配置来打印实际执行的SQL，<code>log4j.properties</code>的配置通常类似如下</p>
-
-<pre class="line-numbers language-properties ">
+<pre class="line-numbers language-properties " title="properties">
 <code># 在不开启log4j DEBUG模式下显示mybatis中运行的SQL语句 
 log4j.logger.com.lucumt.mapper=DEBUG </code>
-</pre>
-<p>在本文写作时，mybatis官网上已有关于这方面更 <strong><a href="http://www.mybatis.org/mybatis-3/zh/logging.html">详细的说明</a></strong> 。</p>
+</pre><p>在本文写作时，mybatis官网上已有关于这方面更 <strong><a href="http://www.mybatis.org/mybatis-3/zh/logging.html">详细的说明</a></strong> 。</p>
 <h3 id="原理分析-1">原理分析</h3>
 <p>同样以<code>log4j.logger.java.sql.Connection=DEBUG</code>为例，其sql日志来源于<code>ConnectionLogger</code>，对应代码如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
 
   private final Connection connection;
@@ -335,10 +324,8 @@ log4j.logger.com.lucumt.mapper=DEBUG </code>
   //... other code
 
 }</code>
-</pre>
-<p>从上述代码可知，其日志生成是调用<code>BaseJdbcLogger</code>的构造方法生成的，<em>BaseJdbcLogger</em> 代码如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>从上述代码可知，其日志生成是调用<code>BaseJdbcLogger</code>的构造方法生成的，<em>BaseJdbcLogger</em> 代码如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>public abstract class BaseJdbcLogger {
 
   protected Log statementLog;
@@ -356,12 +343,10 @@ log4j.logger.com.lucumt.mapper=DEBUG </code>
    
   //... other code
 }</code>
-</pre>
-<p>DEBUG模式下查看<code>ConnectionLogger</code>的调用堆栈如下<br>
+</pre><p>DEBUG模式下查看<code>ConnectionLogger</code>的调用堆栈如下<br>
 <img src="/blog_img/mybatis/print-sql-in-different-mybatis-version/connection_logger_stack.png" alt="&ldquo;ConnectionLogger的调用堆栈&rdquo;" title="ConnectionLogger的调用堆栈"><br>
 从其调用堆栈可知log对象是通过<code>MappedStatement</code>生成的，如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class SimpleExecutor extends BaseExecutor {
    
   //... other code
@@ -381,10 +366,8 @@ log4j.logger.com.lucumt.mapper=DEBUG </code>
     }
   }
 }</code>
-</pre>
-<p>查看<code>MappedStatement</code>的源码，发现log的生成是在<code>Builder</code>方法中，如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>查看<code>MappedStatement</code>的源码，发现log的生成是在<code>Builder</code>方法中，如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>public final class MappedStatement {
 
   public static class Builder {
@@ -409,34 +392,26 @@ log4j.logger.com.lucumt.mapper=DEBUG </code>
       mappedStatement.lang = configuration.getDefaultScriptingLanguageInstance();
     }
 }</code>
-</pre>
-<p>通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 <strong>namespace+方法id</strong> 组成，在本例中为<code>com.lucumt.mapper.UserMappper.getUsers</code>，而前面的配置为<code>log4j.logger.com.lucumt.mapper=DEBUG</code> ，由于<code>Log4j</code>中的log示例的继承关系，相当于<code>com.lucumt.mapper.UserMappper.getUser</code>也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下<br>
+</pre><p>通过上面的代码可知log对象是由logId生成的，进一步debug发现logId是由 <strong>namespace+方法id</strong> 组成，在本例中为<code>com.lucumt.mapper.UserMappper.getUsers</code>，而前面的配置为<code>log4j.logger.com.lucumt.mapper=DEBUG</code> ，由于<code>Log4j</code>中的log示例的继承关系，相当于<code>com.lucumt.mapper.UserMappper.getUser</code>也开启了DEBUG模式，故在实际执行时可以显示打印SQL语句，运行结果如下<br>
 <img src="/blog_img/mybatis/print-sql-in-different-mybatis-version/mybatis-3.4.5-print-sql-result.png" alt="&ldquo;MyBatis3.4.5时显示执行SQL&rdquo;" title="MyBatis3.4.5时显示执行SQL"><br>
 利用新版<code>MyBatis</code>的这一特性，我们可以实现类似如下的不同粒度sql打印</p>
-
-<pre class="line-numbers language-properties ">
+<pre class="line-numbers language-properties " title="properties">
 <code>log4j.logger.com.xxx.mapper=DEBUG #打印xxx包下所有的执行SQL
 log4j.logger.com.yyy.mapper.PersonMapper=DEBUG #打印PersonMapper下所有的执行SQL
 log4j.logger.com.zzz.mapper.GroupMapper.getGroups=DEBUG #只打印getGroups对应的执行SQL  </code>
-</pre>
-<p>由前面的代码可知<code>MappedStatement</code>的Build方法在生成log对象时会检测是否有<code>logPrefix</code>配置，若有则用<code>logPrefix</code>来生成log对象，于是可以通过设置<code>logPrefix</code>以另外一种方式配置打印sql。 可在<code>MyBatis</code>配置文件中添加如下配置</p>
-
-<pre class="line-numbers language-xml ">
+</pre><p>由前面的代码可知<code>MappedStatement</code>的Build方法在生成log对象时会检测是否有<code>logPrefix</code>配置，若有则用<code>logPrefix</code>来生成log对象，于是可以通过设置<code>logPrefix</code>以另外一种方式配置打印sql。 可在<code>MyBatis</code>配置文件中添加如下配置</p>
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;settings&gt;
    &lt;setting name=&#34;logPrefix&#34; value=&#34;dao.&#34;/&gt; &lt;!-- 设置前缀为dao --&gt;
    &lt;setting name=&#34;logImpl&#34; value=&#34;log4j&#34;/&gt; &lt;!-- 设置使用log4j为日志实现类 --&gt;
 &lt;/settings&gt;</code>
-</pre>
-<p>然后将 log4j.properties的配置修改为</p>
-
-<pre class="no-line-numbers language-properties ">
+</pre><p>然后将 log4j.properties的配置修改为</p>
+<pre class="no-line-numbers language-properties " title="properties">
 <code>log4j.logger.dao=DEBUG</code>
-</pre>
-<p>执行结果与前面相同，通过 <code>logPrefix</code>可以在有些时候简化sql打印配置。</p>
+</pre><p>执行结果与前面相同，通过 <code>logPrefix</code>可以在有些时候简化sql打印配置。</p>
 <h3 id="待分析问题">待分析问题</h3>
 <p>若将<code>MyBatis</code>的版本变<strong>3.3.0</strong>时，通过<code>Log4j</code>配置打印SQL时，如下所示的配置方式只有部分生效，原因待分析</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>log4j.logger.com.xxx=DEBUG #可以打印SQL
 log4j.logger.com.xxx.mapper=DEBUG #可以打印SQL
 log4j.logger.com.xxx.mapper.UserMapper=DEBUG #不能打印SQL
@@ -659,6 +634,51 @@ log4j.logger.com.xxx.mapper.UserMapper.getUsers=DEBUG #不能打印SQL</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

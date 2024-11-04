@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -186,16 +186,13 @@
 <h2 id="检查环境">检查环境</h2>
 <p>实际上<code>Hugo</code>有一系列的方式来区分生产环境和开发环境，不过<a href="https://gohugo.io/functions/hugo/">Hugo文档</a>中关于如何区分它们的说明不太友好。</p>
 <p>下述代码展示了在<code>Hugo</code>中检测环境的两种方式：</p>
-
-<pre class="line-numbers language-go ">
+<pre class="line-numbers language-go " title="go">
 <code>{{ hugo.Environment }} returns &#34;development&#34; or &#34;production&#34;
 {{ hugo.IsProduction }} returns true or false</code>
-</pre>
-<p>当使用<code>hugo server</code>在本地开发时，默认被设置为<code>development</code>，当使用<code>hugo</code>来构建站点时，默认被设置为<code>production</code>。</p>
+</pre><p>当使用<code>hugo server</code>在本地开发时，默认被设置为<code>development</code>，当使用<code>hugo</code>来构建站点时，默认被设置为<code>production</code>。</p>
 <h2 id="基于环境动态展示">基于环境动态展示</h2>
 <p>若想实现根据环境动态展示，可使用下述代码中的几种方法之一：</p>
-
-<pre class="line-numbers language-go ">
+<pre class="line-numbers language-go " title="go">
 <code>{{ if eq hugo.Environment &#34;development&#34; }}
   I render when in development
 {{ end }}
@@ -212,31 +209,24 @@
   I render when &lt;strong&gt;not&lt;/strong&gt; in production, which means
   I would render if the environment were manually set to &#34;test&#34;
 {{ end }}</code>
-</pre>
-<h2 id="手工设置环境变量">手工设置环境变量</h2>
+</pre><h2 id="手工设置环境变量">手工设置环境变量</h2>
 <p>若要在编写博文时将环境设置为<code>production</code>，可使用下述命令启动<code>Hugo</code>服务器：</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 短命令
 hugo server -e production
 
 # 长命令
 hugo server --environment production</code>
-</pre>
-<p>也可通过设置系统环境变量来实现：</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p>也可通过设置系统环境变量来实现：</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>HUGO_ENVIRONMENT=production hugo server</code>
-</pre>
-<p><code>Hugo</code>要求能改变其配置的环境变量必须以<code>HUGO_</code>前缀开头，可在<a href="https://gohugo.io/getting-started/configuration/#configure-with-environment-variables">Hugo环境变量说明</a>中了解具体信息。</p>
+</pre><p><code>Hugo</code>要求能改变其配置的环境变量必须以<code>HUGO_</code>前缀开头，可在<a href="https://gohugo.io/getting-started/configuration/#configure-with-environment-variables">Hugo环境变量说明</a>中了解具体信息。</p>
 <p>如果我们想在构建时将环境变量设置为除了<code>production</code>之外的其它值，可使用下述几种方法之一，在这些方法中，我们将环境变量设置为<code>development</code>，也可设置为我们期望的其它任何值。</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>hugo -e development
 hugo --environment development
 HUGO_ENVIRONMENT=development hugo</code>
-</pre>
-<p>希望此文能帮助你来构建自己的<code>Hugo</code>站点，喜欢此文章的话可以的点赞或评论！</p>
+</pre><p>希望此文能帮助你来构建自己的<code>Hugo</code>站点，喜欢此文章的话可以的点赞或评论！</p>
     </div>
 
     
@@ -440,6 +430,51 @@ HUGO_ENVIRONMENT=development hugo</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

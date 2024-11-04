@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -187,22 +187,19 @@
 	
     <div class="post-content image-border">
 	 <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<a href="http://docs.oracle.com/javase/6/docs/api/"><strong>Runtime</strong></a>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Runtime runtime = Runtime.getRuntime();
 String mysqlCmd = &#34;mysqldump&#34; &#43; &#34; -u&#34; &#43; username &#43; &#34; -p&#34; &#43; password &#43; 
            &#34;  -h &#34; &#43; databaseAddress &#43; &#34; &#34; &#43;databaseName;
 Process process = runtime.exec(mysqlCmd);</code>
-</pre>
-<p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
-<pre class="line-numbers language-java ">
+</pre><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
+<pre class="line-numbers language-java " title="java">
 <code>java.io.IOException: Cannot run program &#34;mysqldump&#34;: CreateProcess error=2, The system cannot find the file specified
 	at java.lang.ProcessBuilder.start(ProcessBuilder.java:460)
 	at java.lang.Runtime.exec(Runtime.java:593)
 	at java.lang.Runtime.exec(Runtime.java:431)
 	at java.lang.Runtime.exec(Runtime.java:328)</code>
-</pre>
-<p>Google之后，在<a href="http://stackoverflow.com/"><strong>Stackoverflow</strong></a>发现两个相关的问题：</p>
+</pre><p>Google之后，在<a href="http://stackoverflow.com/"><strong>Stackoverflow</strong></a>发现两个相关的问题：</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/15850548/error-when-backing-up-mysql-database">Error when backing up MYSQL database</a></li>
 <li><a href="http://stackoverflow.com/questions/13376132/backup-mysql-database-java-code">backup mysql database java code</a></li>
@@ -221,20 +218,16 @@ Process process = runtime.exec(mysqlCmd);</code>
 <p><img src="https://ooo.0o0.ooo/2016/03/03/56d7ebcbce7fc.png" alt="mysql3.png"><br>
 这下问题原因变得很清楚了，我们在<code>cmd</code>中执行<code>mysql</code>和<code>mysqldump</code>命令以及输出PATH环境变量时，系统会把当前用户的<code>用户变量</code>中的PATH和操作系统的<code>系统变量</code>中的PATH变量整合到一块，所以我们在cmd中操作时一切正常。但是当我们在<code>Java</code>程序中执行<code>mysqldump</code>命令时，由于<code>Java</code>程序的运行和用户无关，无法获取到<code>用户变量</code>中的PATH值，所以当我们在<code>Java</code>程序中执行<code>mysqldump</code>命令时会出错。这也正好和<a href="http://stackoverflow.com/"><strong>Stackoverflow</strong></a>中说明的原因一致。</p>
 <p>由于有的电脑上会出现此问题，有的电脑上没有此问题，进一步的深究问题的根源，发现发生问题的电脑和服务器在安装<code>MySQL</code>数据库时都是通过我们自己写的<code>bat</code>脚本来安装的。而<code>bat</code>脚本中设置环境变量的代码如下:</p>
-
-<pre class="line-numbers language-powershell ">
+<pre class="line-numbers language-powershell " title="powershell">
 <code>@echo %Path%
 setx PATH &#34;%Path%;C:\INTA\Database\bin;&#34;
 @echo %Path%</code>
-</pre>
-<p>问题的关键就在于<code>setx PATH &quot;%Path%;C:\INTA\Database\bin;&quot;</code>这行代码，这样写的话只会把<code>MySQL</code>的执行路径加入到当前执行该脚本的<code>用户变量</code>中，不会加入到<code>环境变量</code>中。而那些没有出问题的电脑都是我自己手动在<code>系统变量</code>中设置<code>MySQL</code>执行路径的！该问题的解决方法也很简单，在<code>setx</code>后面加上<code>-m</code>即可，这样<code>bat</code>脚本执行时会把<code>MySQL</code>的执行路径写入<code>系统变量</code>的PATH变量中，不会写入<code>用户变量</code>的PATH变量中：</p>
-
-<pre class="line-numbers language-powershell ">
+</pre><p>问题的关键就在于<code>setx PATH &quot;%Path%;C:\INTA\Database\bin;&quot;</code>这行代码，这样写的话只会把<code>MySQL</code>的执行路径加入到当前执行该脚本的<code>用户变量</code>中，不会加入到<code>环境变量</code>中。而那些没有出问题的电脑都是我自己手动在<code>系统变量</code>中设置<code>MySQL</code>执行路径的！该问题的解决方法也很简单，在<code>setx</code>后面加上<code>-m</code>即可，这样<code>bat</code>脚本执行时会把<code>MySQL</code>的执行路径写入<code>系统变量</code>的PATH变量中，不会写入<code>用户变量</code>的PATH变量中：</p>
+<pre class="line-numbers language-powershell " title="powershell">
 <code>@echo %Path%
 setx -m PATH &#34;%Path%;C:\INTA\Database\bin;&#34;
 @echo %Path%</code>
-</pre>
-<p>Orz~<br>
+</pre><p>Orz~<br>
 想不到由于一个<code>-m</code>而让自己郁闷了这么久!</p>
     </div>
 
@@ -453,6 +446,51 @@ setx -m PATH &#34;%Path%;C:\INTA\Database\bin;&#34;
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

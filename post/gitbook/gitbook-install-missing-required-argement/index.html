@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -201,8 +201,7 @@
 <p>通过<code>gitbook install</code> 进行相关插件的安装。</p>
 <h2 id="问题描述">问题描述</h2>
 <p>通过<code>gitbook install</code> 进行相关插件的安装，终端出现类似如下错误导致安装过程失败</p>
-
-<pre class="line-numbers language-powershell ">
+<pre class="line-numbers language-powershell " title="powershell">
 <code>D:\code\gitbook-doc&gt;gitbook install
 info: installing 24 plugins using npm@3.9.2
 info:
@@ -226,20 +225,17 @@ Error: Missing required argument #1
     at C:\Users\yunqiang.lu\.gitbook\versions\3.2.3\node_modules\npm\node_modules\iferr\index.js:13:50 {
   code: &#39;EMISSINGARG&#39;
 }</code>
-</pre>
-<h2 id="原因分析">原因分析</h2>
+</pre><h2 id="原因分析">原因分析</h2>
 <p>原作者不知道，本人也不知道，期待有大神能给出具体原因分析。</p>
 <h2 id="解决方案">解决方案</h2>
 <p>需要用<code>npm</code>先手工安装对应的插件，之后再执行<code>gitbook install</code>就不会出错。</p>
 <p>以本文为例，出错的插件为<code>gitbook-plugin-mermaid-fox</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，则按照下述方式执行即可</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 必须先执行该指令
 npm install gitbook-plugin-mermaid-fox
 
 gitbook install</code>
-</pre>
-<div class="footnotes" role="doc-endnotes">
+</pre><div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
@@ -449,6 +445,51 @@ gitbook install</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

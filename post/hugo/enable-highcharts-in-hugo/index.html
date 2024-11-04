@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -213,26 +213,21 @@
 <ol>
 <li>
 <p>在<code>assets/sass/_custom_custom.scss</code>中添加如下代码</p>
-
-<pre class="line-numbers language-scss ">
+<pre class="line-numbers language-scss " title="scss">
 <code>.highcharts {
    border: 1px dashed #c9c9c9;
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-highcharts.html</code>并添加如下代码</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;div id=&#34;highcharts_{{ .Ordinal }}&#34; class=&#34;highcharts&#34;&gt;
     {{- .Inner }}
 &lt;/div&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/partials/scripts.html</code>补充原有的代码，添加上初始化功能</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!-- highcharts js --&gt;
 {{- if and (or .Params.highchartsDiagrams.enable (and .Site.Params.highchartsDiagrams.enable (ne .Params.highchartsDiagrams.enable false))) (or .IsPage .IsHome) -}}
   &lt;script src=&#34;https://code.highcharts.com/highcharts.js&#34;&gt;&lt;/script&gt;
@@ -264,12 +259,10 @@
 	  }
   &lt;/script&gt;
 {{- end }}</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在对应的<code>markdown</code>页面头部开启<code>highcharts</code>的展示，可根据实际情况添加自定义配置</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>highchartsDiagrams: 
   enable: true
   options: &#34;
@@ -281,12 +274,10 @@
        }
     }
 &#34;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>仿照如下的代码，将<code>Highcharts</code>的代码块以<code>JavaScript</code>对象的形式加入特定<code>Markdown</code>代码标签中，注意 <strong><code>JavaScript</code>代码中不要加入任何注释，否则会导致程序解析出错!</strong></p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>​```highcharts
  {
     chart: {
@@ -353,8 +344,7 @@
     }]
 }
 ​```</code>
-</pre>
-<p>让<code>Hugo</code>重新选然后即可展示出类似如下效果</p>
+</pre><p>让<code>Hugo</code>重新选然后即可展示出类似如下效果</p>
 <div id="highcharts_5" class="highcharts"> {
     chart: {
         plotBackgroundColor: null,
@@ -2831,6 +2821,51 @@ Highcharts.getJSON(
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

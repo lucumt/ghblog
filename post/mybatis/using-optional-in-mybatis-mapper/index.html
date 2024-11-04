@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -185,16 +185,13 @@
 <h2 id="查询单条记录">查询单条记录</h2>
 <p>由于在查询单条记录时，若数据库中不存在该记录，则会默认返回null，此时可用<code>Optional</code>进行避免。</p>
 <p>首先确保<code>MyBatis</code>的版本不低于<strong>3.5.0</strong>，在mapper中可以仿照如下定义接口</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public interface BookMapper {
 
     Optional&lt;BookModel&gt; findById(Integer id);
 }</code>
-</pre>
-<p>之后在对应的service类中可以按照如下方式使用</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>之后在对应的service类中可以按照如下方式使用</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Service
 public class BookService {
 
@@ -207,10 +204,8 @@ public class BookService {
         return book;
     }
 }</code>
-</pre>
-<p>执行下述单元测试代码</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>执行下述单元测试代码</p>
+<pre class="line-numbers language-java " title="java">
 <code>@SpringBootTest
 public class TestBookService {
 
@@ -224,22 +219,18 @@ public class TestBookService {
         System.out.println(book);
     }
 }</code>
-</pre>
-<p>其执行结果如下，可见<code>Optional</code>在Mapper接口中生效。</p>
+</pre><p>其执行结果如下，可见<code>Optional</code>在Mapper接口中生效。</p>
 <p><img src="/blog_img/mybatis/using-optional-in-mybatis-mapper/mybatis-optional-test-result.png" alt="Optional执行结果" title="Optional执行结果"></p>
 <h2 id="查询多条记录">查询多条记录</h2>
 <p>当查询的结果为<code>List</code>时，即使没有数据<code>MyBatis</code>也会返回一个空的<code>List</code>，其size为0但不为null，此时不需要我们进行非空判断。</p>
 <p>定义如下接口</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public interface BookMapper {
     
     List&lt;BookModel&gt; selectByType(Integer type);
 }</code>
-</pre>
-<p>mapper文件如下</p>
-
-<pre class="line-numbers language-xml ">
+</pre><p>mapper文件如下</p>
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
 &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;
 &lt;mapper namespace=&#34;com.lucumt.mapper.BookMapper&#34;&gt;
@@ -253,10 +244,8 @@ public class TestBookService {
     &lt;/select&gt;
 
 &lt;/mapper&gt;</code>
-</pre>
-<p>业务类代码</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>业务类代码</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Service
 public class BookService {
 
@@ -268,10 +257,8 @@ public class BookService {
         return bookList;
     }
 }</code>
-</pre>
-<p>执行下述单元测试代码时能测试通过，可见在查询集合列表是不需要判断是否为空。</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>执行下述单元测试代码时能测试通过，可见在查询集合列表是不需要判断是否为空。</p>
+<pre class="line-numbers language-java " title="java">
 <code>@SpringBootTest
 public class TestBookService {
 
@@ -285,8 +272,7 @@ public class TestBookService {
         Assertions.assertTrue(bookList.size() == 0);
     }
 }</code>
-</pre>
-<p><img src="/blog_img/mybatis/using-optional-in-mybatis-mapper/mybatis-list-test-result.png" alt="List执行结果" title="List执行结果"></p>
+</pre><p><img src="/blog_img/mybatis/using-optional-in-mybatis-mapper/mybatis-list-test-result.png" alt="List执行结果" title="List执行结果"></p>
 <p>从上述试验可知，当获取的结果为<code>List</code>时，不使用<code>Optinal</code>关键字也能避免空指针问题。</p>
     </div>
 
@@ -490,6 +476,51 @@ public class TestBookService {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

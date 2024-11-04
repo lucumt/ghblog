@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -181,48 +181,39 @@
     <div class="post-content image-border">
 	 <p>记录下如何基于<a href="https://numpy.org/"><strong>NumPy</strong></a>将<code>npz</code>文件解析成多个<code>csv</code>文件，以自己项目中使用的<code>npz</code>文件结构为例，其它地方使用时可能会有差异</p>
 <p>执行下述代码分析其key结构</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>if __name__ == &#39;__main__&#39;:
     src_file = r&#39;D:\test-001.npz&#39;
     results = np.load(src_file)
     for key, value in results.items():
         print(key)</code>
-</pre>
-<p>输出结果类似如下</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>输出结果类似如下</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>CAN/2/localmap1__message394/left_line_id_11
 CAN/2/localmap1__message394/left_line_id_12
 CAN/2/localmap1__message394/left_line_id_13
 CAN/2/localmap1__message396/_timestamp
 CAN/2/localmap1__message396/timeStamp
 CAN/2/localmap1__message396/right_line_id_15</code>
-</pre>
-<p>基于此可发现其组织结构为<code>协议</code>/<code>通道</code>/<code>序号</code>/<code>信号</code>/<code>报文</code>，我们要做的时基于以信号为单位生成<code>csv</code>文件</p>
+</pre><p>基于此可发现其组织结构为<code>协议</code>/<code>通道</code>/<code>序号</code>/<code>信号</code>/<code>报文</code>，我们要做的时基于以信号为单位生成<code>csv</code>文件</p>
 <p>改进测试代码</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>if __name__ == &#39;__main__&#39;:
     src_file = r&#39;D:\test-001.npz&#39;
     results = np.load(src_file)
     for key, value in results.items():
         print(key &#43; &#34;\t&#34; &#43; str(len(value)))</code>
-</pre>
-<p>执行后输出结果类似如下</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>执行后输出结果类似如下</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>CAN/2/localmap1__message394/left_line_id_11	322
 CAN/2/localmap1__message394/left_line_id_12	322
 CAN/2/localmap1__message394/left_line_id_13	322
 CAN/2/localmap1__message396/_timestamp	350
 CAN/2/localmap1__message396/timeStamp	350
 CAN/2/localmap1__message396/right_line_id_15	350</code>
-</pre>
-<p>可发现一个报文对应多行记录，且每个信号下的报文记录数基本上相同。</p>
+</pre><p>可发现一个报文对应多行记录，且每个信号下的报文记录数基本上相同。</p>
 <p>同时也能发现在<code>npz</code>中的数据是一行一行的，逐行拼接在一起，若要转化为<code>csv</code>文件，则涉及到行专列操作，同样可基于<code>NumPy</code>进行操作，完整的代码如下</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>import os
 import shutil
 import numpy as np
@@ -491,6 +482,51 @@ if __name__ == &#39;__main__&#39;:
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

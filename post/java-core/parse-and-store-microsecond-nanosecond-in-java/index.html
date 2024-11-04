@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -208,8 +208,7 @@
 <h2 id="javautildate中相关实现">java.util.Date中相关实现</h2>
 <h3 id="格式化测试">格式化测试</h3>
 <p>首先采用采用如下代码验证<code>java.util.Date</code>和<code>java.text.SimpleDateFormat</code>对于时间戳的支持情况。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TestDateConvert1 {
 
     public static void main(String[] args) {
@@ -263,16 +262,14 @@
     }
 
 }</code>
-</pre>
-<p>运行结果如下：</p>
+</pre><p>运行结果如下：</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/date-format-test-1.png" alt="不同时间格式下的Date输出" title="不同时间格式下的Date输出"></p>
 <p>从上图中可以看出时间精确到微秒之后，采用<code>java.util.Date</code>和<code>java.text.SimpleDateFormat</code>进行输出时前后的结果已经不一致。同时也可以大致猜测，当使用<code>java.util.Date</code>时不能用其进行微秒或纳秒等高精度的时间存储展示，但此问题是由<code>java.util.Date</code>还是<code>java.text.SimpleDateFormat</code>造成的暂不确定。</p>
 <h3 id="对比数据测试">对比数据测试</h3>
 <p>为了测试结果的准确性，在<a href="https://www.timestamp-converter.com/">www.timestamp-converter.com</a>中获取一个可用于验证的时间戳信息如下所示</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/timestamp-test-data.png" alt="测试用的时间戳" title="测试用的时间戳"></p>
 <p>其中基于毫秒的时间戳为<code>1676628010725</code>，格式化后的显示为<code>2023-02-17T10:00:10.725Z</code>，采用下述代码进行验证：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public static void testDateCreate() {
     DateFormat df1 = new SimpleDateFormat(&#34;yyyy/MM/dd HH:mm:ss&#34;);
     DateFormat df2 = new SimpleDateFormat(&#34;yyyy/MM/dd HH:mm:ss.SSS&#34;);
@@ -288,8 +285,7 @@
     System.out.println(&#34;精确到微秒:\t&#34; &#43; df3.format(date));
     System.out.println(&#34;精确到纳秒:\t&#34; &#43; df4.format(date));
 }</code>
-</pre>
-<p>运行结果如下</p>
+</pre><p>运行结果如下</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/date-format-test-2.png" alt="Date对比测试结果" title="Date对比测试结果"></p>
 <p>从结果中可知微秒与纳秒的结果与网站中展示的不一致，但是仍然无法确定到底是<code>java.util.Date</code>还是<code>java.text.SimpleDateFormat</code>的原因。</p>
 <p>在<code>java.util.Date</code>的<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html#Date--">官方文档</a>中可找到如下说明，从图中可知当采用时间戳来构造<code>java.util.Date</code>时，其接收的参数为毫秒相对数据值，不支持微秒和纳秒。</p>
@@ -302,8 +298,7 @@
 </blockquote>
 <h2 id="localdatetime中实现">LocalDateTime中实现</h2>
 <p>由于<code>JDK8</code>中引入了<code>LocalDateTime</code>，故将最开始的测试代码都修改为使用<code>java.time.LocalDateTime</code>和<code>java.time.format.DateTimeFormatter</code>进行测试</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TestDateConvert3 {
 
     public static void main(String[] args) {
@@ -358,8 +353,7 @@
     }
 
 }</code>
-</pre>
-<p>测试结果如下：</p>
+</pre><p>测试结果如下：</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/localdatetime-format-test-1.png" alt="java.time.LocalDateTime测试结果" title="java.time.LocalDateTime测试结果"></p>
 <p>从中可知当联合采用<code>java.time.LocalDateTime</code>和<code>java.time.format.DateTimeFormatter</code>时，能够支持到纳秒级别，可满足要求。</p>
 <p>在<code>java.time.LocalDateTime</code>的<a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">官方文档</a>中有如下说明，从图中可知<code>java.time.LocalDateTime</code>支持到纳秒级别的时间精度</p>
@@ -381,8 +375,7 @@
 </blockquote>
 <p>有了时间戳之后根据上述公式进行反向操作，分别获取秒与微秒(纳秒)，然后根据这2个数值通过<code>Instant</code>构建即可。</p>
 <h3 id="与微秒互转">与微秒互转</h3>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TestDateConvert4 {
 
     public static void main(String[] args) {
@@ -417,12 +410,10 @@
     }
     
 }</code>
-</pre>
-<p>测试结果如下，符合预期</p>
+</pre><p>测试结果如下，符合预期</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/convert-to-millis-timestamp-test.png" alt="微秒级别的时间戳转换" title="微秒级别的时间戳转换"></p>
 <h3 id="与纳秒互转">与纳秒互转</h3>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TestDateConvert5 {
 
     public static void main(String[] args) {
@@ -457,8 +448,7 @@
     }
 
 }</code>
-</pre>
-<p>测试结果如下，符合预期</p>
+</pre><p>测试结果如下，符合预期</p>
 <p><img src="/blog_img/java-core/parse-and-store-microsecond-in-java/convert-to-nanos-timestamp-test.png" alt="纳秒级别的时间戳转换" title="纳秒级别的时间戳转换"></p>
 <p>参考文章：</p>
 <ul>
@@ -676,6 +666,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

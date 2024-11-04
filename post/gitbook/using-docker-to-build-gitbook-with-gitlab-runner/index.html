@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -367,35 +367,27 @@
 <ol>
 <li>
 <p>在宿主机上执行如下指令安装<a href="https://github.com/jqlang/jq"><strong>jq</strong></a>指令，后续会用其来解析<code>GitLab</code>中返回的<code>JSON</code>数据</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 在宿主机上安装jq，用于解析json文件
 apt install -y jq</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>安装之前请仿照下图将本文最后的<a href="#%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC"><strong>文件&amp;脚本</strong></a></p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-build-file-folder.png" alt="GitBook镜像构建前准备" title="GitBook镜像构建前准备"></p>
 </li>
 <li>
 <p>运行下述指令构建需要的镜像</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>docker build -t gitbook_custom:v1.0</code>
-</pre>
-<p><code>Dockerfile</code>在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p><code>Dockerfile</code>在构建过程中会对它认为没有变化的文件和日志输出进行缓存，要想查看全部日志并取消缓存，可用如下指令</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>docker build -t gitbook_custom:v1.0  --progress string . --no-cache</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行下述指令启动<code>Docker</code>容器并执行相关的初始化操作</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>docker-compose down &amp;&amp; docker-compose up -d &amp;&amp; bash gitlab_runner_config_init.sh</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>安装过程中会有类似如下输出:</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-install-output-1.png" alt="GitBook安装过程1" title="GitBook安装过程1"></p>
@@ -410,16 +402,14 @@ apt install -y jq</code>
 <h3 id="测试验证">测试验证</h3>
 <h4 id="自动构建">自动构建</h4>
 <p>由于<a href="#%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><strong>自动构建脚本</strong></a>中有如下配置，其中构建阶段的值被设置为<code>build</code>会导致每次代码发生变更时都执行自动构建</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>stages:
   - build
 
 # build阶段执行的操作命令 
 build:
   stage: build</code>
-</pre>
-<p>当我们通过<code>git push</code>将代码推送到<code>GitLab</code>后，在对应的<code>GitLab</code>工程中依次点击<code>CI/CD</code>-&gt;<code>Pipelines</code>，会有类似如下输出，可以看到此时<code>GitLab Runner</code>正在执行构建</p>
+</pre><p>当我们通过<code>git push</code>将代码推送到<code>GitLab</code>后，在对应的<code>GitLab</code>工程中依次点击<code>CI/CD</code>-&gt;<code>Pipelines</code>，会有类似如下输出，可以看到此时<code>GitLab Runner</code>正在执行构建</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running.png" alt="GitLab Runner正在执行" title="GitLab Runner正在执行"></p>
 <p>点击对应的按钮可查看构建执行日志，类似如下：</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitlab-pipeline-running-log.png" alt="GitLab Runner执行日志结果" title="GitLab Runner执行日志结果"></p>
@@ -570,33 +560,26 @@ build:
 <p>如下所示<code>GitBook</code>中默认生成的菜单为<code>Introduction</code>，不太直观，可根据实际需求动态修改(对于菜单目录的生成可参考<a href="#%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9B%AE%E5%BD%95"><strong>自动生成目录</strong></a>实现)</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-default-menu.png" alt="GitBook默认菜单展示" title="GitBook默认菜单展示"></p>
 <p>将默认目录从</p>
-
-<pre class="no-line-numbers language-markdown ">
+<pre class="no-line-numbers language-markdown " title="markdown">
 <code>* [Introduction](README.md)</code>
-</pre>
-<p>修改为</p>
-
-<pre class="no-line-numbers language-markdown ">
+</pre><p>修改为</p>
+<pre class="no-line-numbers language-markdown " title="markdown">
 <code>* [概览](README.md)</code>
-</pre>
-<p>之后的展示效果类似如下</p>
+</pre><p>之后的展示效果类似如下</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-custom-menu.png" alt="GitBook自定义菜单展示" title="GitBook自定义菜单展示"></p>
 <h3 id="自定义样式">自定义样式</h3>
 <p>若<code>GitBook</code>中的样式不满足我们的需求，可通过添加自定义<code>CSS</code>文件进行定制，实际使用中发现该文件必须叫做<code>website.css</code>且需位于生成的静态文件目录下才生效。</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>&#34;styles&#34;: {
     &#34;website&#34;: &#34;./styles/website.css&#34;,
 }</code>
-</pre>
-<h2 id="使用展示">使用展示</h2>
+</pre><h2 id="使用展示">使用展示</h2>
 <p>可通过<code>Nginx</code>对应端口访问相应的<code>GitBook</code>页面，个人项目中的界面类似如下，供参考</p>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-web-page-view.png" alt="GitBook页面浏览" title="GitBook页面浏览"></p>
 <h2 id="文件脚本">文件&amp;脚本</h2>
 <h3 id="dockerfile脚本">Dockerfile脚本</h3>
 <p>用于构建同时包含<code>GitLab Runner</code>与<code>GitBook</code>的容器</p>
-
-<pre class="line-numbers language-dockerfile ">
+<pre class="line-numbers language-dockerfile " title="dockerfile">
 <code>FROM gitlab/gitlab-runner:v15.5.2
 
 # 更改为公司内部的镜像源
@@ -624,11 +607,9 @@ COPY book.js /usr/local/gitbook/tmp/book.js
 COPY custom.css /usr/local/gitbook/tmp/custom.css
 COPY favicon.ico /usr/local/gitbook/tmp/favicon.ico
 COPY auto_generate_summary.sh /usr/local/gitbook/auto_generate_summary.sh</code>
-</pre>
-<h3 id="docker启停脚本">docker启停脚本</h3>
+</pre><h3 id="docker启停脚本">docker启停脚本</h3>
 <p><code>docker-compose.yml</code>用于启动<code>GitLab Runner</code>与<code>Nginx</code>容器</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>version: &#34;3&#34;
 services:
  gitbook:
@@ -647,11 +628,9 @@ services:
      - $PWD/data:/usr/share/nginx/html
    restart: always
    container_name: gitbook-nginx</code>
-</pre>
-<h3 id="自动构建脚本">自动构建脚本</h3>
+</pre><h3 id="自动构建脚本">自动构建脚本</h3>
 <p><code>.gitlab-ci.yml</code>是<code>GitLab Runner</code>构建时使用的文件，此文件规定了构建过程中要具体执行的步骤，只有此文件必须存在于目标文档对应的<code>GitLab</code>仓库，用于每次修改文档时触发自动构建</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>variables:
   # 是否自动生成目录
   AUTO_SUMMARY: &#34;true&#34;
@@ -677,11 +656,9 @@ build:
     - rm -rf /usr/local/gitbook/data/*
     - cp -r /usr/local/gitbook/tmp/_book/*  /usr/local/gitbook/data/
     - cp -rf /usr/local/gitbook/tmp/favicon.ico  /usr/local/gitbook/data/gitbook/images/favicon.ico</code>
-</pre>
-<h3 id="自动注册脚本">自动注册脚本</h3>
+</pre><h3 id="自动注册脚本">自动注册脚本</h3>
 <p><code>gitlab_runner_config_init.sh</code>用于注册<code>GitLab Runner</code>同时检测<code>GitBook</code>是否存在</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>#/bin/bash
 
 #更新文件权限
@@ -741,11 +718,9 @@ else
 fi
 
 printf &#34;\033[32m===================gitlab runner初始化完毕!=====================\033[0m\n&#34;</code>
-</pre>
-<h3 id="自动生成目录">自动生成目录</h3>
+</pre><h3 id="自动生成目录">自动生成目录</h3>
 <p><code>auto_generate_summary.sh</code>用于自动生成目录，<code>GitBook</code>左侧的目录树依赖于此脚本的生成结果，此文件会在<code>GitLab Runner</code>构建阶段执行</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>#!/bin/bash
 # 先清空文件
 echo &#34;&#34; &gt;  docs/SUMMARY.md
@@ -819,12 +794,10 @@ do
     	echo &#34;&#43; [$dir]($dir)&#34; &gt;&gt; docs/SUMMARY.md
     fi
 done</code>
-</pre>
-<h3 id="目录分类显示">目录分类显示</h3>
+</pre><h3 id="目录分类显示">目录分类显示</h3>
 <p><img src="/blog_img/gitbook/using-docker-to-build-gitbook-with-gitlab-runner/gitbook-menu-category.png" alt="GitBook目录分类显示" title="GitBook目录分类显示"></p>
 <p>若需要在生成目录时能自动进行如上图所示的分类展示，则可将上述脚本修改为类似如下</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>#!/bin/bash
 : &#39;
 此脚本用于生成目录时可根据目录类别分成多个子类，要分类的顶层文件夹记录在special_tags数组变量中
@@ -931,11 +904,9 @@ baseWrite(){
 }
 
 baseReader</code>
-</pre>
-<h3 id="自定义样式-1">自定义样式</h3>
+</pre><h3 id="自定义样式-1">自定义样式</h3>
 <p><code>custom.css</code>是自定义样式文件，当对<code>GitBook</code>的某些样式不满意时，可用自定义<code>CSS</code>文件来覆盖</p>
-
-<pre class="line-numbers language-css ">
+<pre class="line-numbers language-css " title="css">
 <code>.book .book-body .page-wrapper .page-inner {
   max-width: 1200px !important;
 }
@@ -984,11 +955,9 @@ th {
   background-color: #2674BA;
   color: white;
 }</code>
-</pre>
-<h3 id="gitbook配置文件">GitBook配置文件</h3>
+</pre><h3 id="gitbook配置文件">GitBook配置文件</h3>
 <p><code>book.js</code>是<code>GitBook</code>的配置文件，包含全局配置与各种插件</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>module.exports = {
     // markdown文档所在路径
     root: &#39;./docs&#39;,
@@ -1134,8 +1103,7 @@ th {
         }
     }
 };</code>
-</pre>
-<div class="footnotes" role="doc-endnotes">
+</pre><div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
@@ -1362,6 +1330,51 @@ th {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

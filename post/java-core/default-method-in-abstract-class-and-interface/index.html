@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -188,8 +188,7 @@
 <li>唱歌(sing)</li>
 </ul>
 <p>这3个按照时间顺序先后进行，大家可以选择参加启动的一个或多个，则可以创建一个类似如下的类来表示上述流程</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public abstract class TeamBuilding {
 
     public void participate() {
@@ -205,11 +204,9 @@
     public abstract void sing();
 
 }</code>
-</pre>
-<p>上述代码中<code>participate()</code>方法表示参加此次活动，里面包含了3个抽象方法，表示 邀请了所有人，被邀请人员可以选择性参加其中一个或多个活动。</p>
+</pre><p>上述代码中<code>participate()</code>方法表示参加此次活动，里面包含了3个抽象方法，表示 邀请了所有人，被邀请人员可以选择性参加其中一个或多个活动。</p>
 <p>按照正常思维实际使用时需要继承该类并分别实现该类中的方法，即使不参加其中某一项活动，对应的实现类参考如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class PersonA extends TeamBuilding {
 
     @Override
@@ -263,11 +260,9 @@ public class PersonC extends TeamBuilding {
         System.out.println(&#34;sing a song&#34;);
     }
 }</code>
-</pre>
-<p>可以看出相关的实现类中，有很多空的实现方法，形成了冗余，不便于维护。</p>
+</pre><p>可以看出相关的实现类中，有很多空的实现方法，形成了冗余，不便于维护。</p>
 <p>同时在模板方法中每增加一个步骤，所有的子类中都需要实现方法，改动量大，也不便于维护。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public abstract class TeamBuilding {
 
     public void participate() {
@@ -287,10 +282,8 @@ public class PersonC extends TeamBuilding {
     public abstract void sing();
 
 }</code>
-</pre>
-<p>期望实现的效果是对应的子类中是实现自己关注的流程，且添加新的步骤时，子类不用全部改动，类似如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>期望实现的效果是对应的子类中是实现自己关注的流程，且添加新的步骤时，子类不用全部改动，类似如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>public class PersonA extends TeamBuilding {
 
     @Override
@@ -330,13 +323,11 @@ public class PersonC extends TeamBuilding {
         System.out.println(&#34;sing a song&#34;);
     }
 }</code>
-</pre>
-<p>接下来以抽象类和接口默认方法分别说明如何设计父类以便达成上述目的。</p>
+</pre><p>接下来以抽象类和接口默认方法分别说明如何设计父类以便达成上述目的。</p>
 <h2 id="抽象类实现">抽象类实现</h2>
 <p>仿照<code>Java</code>多线程编程中的<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractQueuedSynchronizer.html"><strong>AbstractQueuedSynchronizer</strong></a>类里面的获取锁与释放锁的实现，在父类中给所有的方法都取消<code>abstract</code>修饰符，默认用<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/UnsupportedOperationException.html"><strong>UnsupportedOperationException</strong></a>实现全部方法，子类按需<code>override</code>即可。</p>
 <p><code>AbstractQueuedSynchronizer</code>相关实现 ：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>protected boolean tryAcquire(int arg) {
     throw new UnsupportedOperationException();
 }
@@ -344,10 +335,8 @@ public class PersonC extends TeamBuilding {
 protected boolean tryRelease(int arg) {
     throw new UnsupportedOperationException();
 }</code>
-</pre>
-<p>相关代码如下：</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>相关代码如下：</p>
+<pre class="line-numbers language-java " title="java">
 <code>public abstract class TeamBuilding {
 
     public void participate() {
@@ -369,11 +358,9 @@ protected boolean tryRelease(int arg) {
     }
 
 }</code>
-</pre>
-<h2 id="接口实现">接口实现</h2>
+</pre><h2 id="接口实现">接口实现</h2>
 <p>在<code>JDK8</code>和以上版本中，也可将抽象类修改为接口，利用<a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html"><strong>接口默认方法</strong></a>实现，相关代码如下：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public interface TeamBuilding {
 
     default void participate() {
@@ -395,10 +382,8 @@ protected boolean tryRelease(int arg) {
     }
 
 }</code>
-</pre>
-<p>对应的子类实现如下：</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>对应的子类实现如下：</p>
+<pre class="line-numbers language-java " title="java">
 <code>public class PersonA implements TeamBuilding {
 
     @Override
@@ -641,6 +626,51 @@ public class PersonC implements TeamBuilding {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

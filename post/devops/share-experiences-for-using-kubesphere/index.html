@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -258,8 +258,7 @@
 </blockquote>
 <h3 id="script中定义参数">script中定义参数</h3>
 <p>在<code>script</code>中输入符合 <code>Groovy</code>语法的代码即可，为了在多个steps之间实现参数共享，需要在定义参数时加上<code>env.</code>前缀<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，类似如下：</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>switch(PRODUCT_PHASE) {
     case &#34;sit&#34;:
         env.NODE_PORT = 13003
@@ -275,27 +274,21 @@
         break
 }
 env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
-</pre>
-<h3 id="script中读取参数">script中读取参数</h3>
-
-<pre class="no-line-numbers language-groovy ">
+</pre><h3 id="script中读取参数">script中读取参数</h3>
+<pre class="no-line-numbers language-groovy " title="groovy">
 <code>print env.DUBBO_IP</code>
-</pre>
-<h3 id="shell中读取参数">shell中读取参数</h3>
+</pre><h3 id="shell中读取参数">shell中读取参数</h3>
 <p>需要采用<code>$参数名</code>(去掉<code>env.</code>前缀)的方式，类似如下</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>docker build -f kubesphere/Dockerfile \
 -t idp-data:$BUILD_TAG  \
 --build-arg  PROJECT_VERSION=$PROJECT_VERSION \
 --build-arg  NODE_PORT=$NODE_PORT \
 --build-arg  DUBBO_PORT=$DUBBO_PORT \
 --build-arg PRODUCT_PHASE=$PRODUCT_PHASE .</code>
-</pre>
-<h3 id="yaml文件中读取参数">yaml文件中读取参数</h3>
+</pre><h3 id="yaml文件中读取参数">yaml文件中读取参数</h3>
 <p>在<code>Kubernetes</code>中需要一个yaml文件来配置要生成的pod，其参数的获取也是采用<code>$参数名</code>的方式</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>spec:
   ports:
     - name: http
@@ -312,11 +305,9 @@ env.DUBBO_IP = &#34;10.30.5.170&#34;</code>
     app: lucumt-data-$PRODUCT_PHASE
   sessionAffinity: None
   type: NodePort</code>
-</pre>
-<h3 id="dockerfile中读取参数">Dockerfile中读取参数</h3>
+</pre><h3 id="dockerfile中读取参数">Dockerfile中读取参数</h3>
 <p>当在<code>docker</code>的build阶段传递正确的参数后，在Dockerfile中需要采用<code>${参数名}</code>的方式获取参数</p>
-
-<pre class="line-numbers language-dockerfile ">
+<pre class="line-numbers language-dockerfile " title="dockerfile">
 <code># 基础镜像
 FROM  openjdk:8-jdk
 # author
@@ -332,8 +323,7 @@ ARG NODE_PORT
 ARG DUBBO_PORT
 ENV PARAMS=&#34;--server.port=${NODE_PORT} --spring.application.name=lucumt-data --spring.profiles.active=${PRODUCT_PHASE} --dubbo.protocol.port=${DUBBO_PORT}&#34;
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &#39;Asia/Shanghai&#39; &gt;/etc/timezone</code>
-</pre>
-<h2 id="编译与部署">编译与部署</h2>
+</pre><h2 id="编译与部署">编译与部署</h2>
 <p>由于公司研发环境与互联网隔离，故需要在前后端分别设置可用的镜像才能确保编译正常。</p>
 <h3 id="前端">前端</h3>
 <ul>
@@ -344,8 +334,7 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &#3
 </li>
 <li>
 <p><code>Nginx</code>默认的端口为80，且其默认的conf文件较为简陋，为了实现<code>nginx</code>的个性化配置，可以自己预先配置好一个conf文件，然后在docker构建时，将其覆盖即可</p>
-
-<pre class="line-numbers language-dockerfile ">
+<pre class="line-numbers language-dockerfile " title="dockerfile">
 <code>FROM nginx
 
 RUN mkdir -p /usr/share/nginx/html/lucumt-web
@@ -356,34 +345,28 @@ COPY dist /usr/share/nginx/html/lucumt-web
 COPY kubesphere/idp.conf /etc/nginx/conf.d/
 
 EXPOSE 8080</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <h3 id="后端">后端</h3>
 <ul>
 <li>
 <p>获取<code>Maven</code>版本号：</p>
-
-<pre class="no-line-numbers language-shell ">
+<pre class="no-line-numbers language-shell " title="shell">
 <code>mvn help:evaluate -Dexpression=project.version -q -DforceStdout</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>由于在<code>shell</code>中不方便定义全局变量，而<code>Maven</code>的版本号只能在执行相关命令时获取，为了实现版本号的共享，可将两者结合起来，在<code>shell</code>中利用<code>maven</code>命令获取版本号，然后再由<code>Groovy</code>脚本将其赋值为全局环境变量:</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>env.PROJECT_VERSION = sh(script: &#39;mvn help:evaluate -Dexpression=project.version -q -DforceStdout&#39;, returnStdout: true)
 env.BUILD_TIME = new Date().format(&#34;yyyyMMdd-HHmmss&#34;)
 env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <h2 id="k8s容器探活">K8S容器探活</h2>
 <p><code>KubeSphere</code>对于容器的启动、就绪和存活的探测依赖于<code>Kubernetes</code>的<a href="https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">相关实现</a>，实际使用中<code>KubeSphere</code>只需要能正常检测到就绪状态即可，现阶段项目中也只基于就绪探测来实现。</p>
 <h3 id="后端-1">后端</h3>
 <p><code>SpringBoot</code>程序可基于<a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready.html">Spring Boot Actuator</a>中提供的<code>actuator/health</code>进行就绪检测，相关配置如下:</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>containers:
   - image: &#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system:${BUILD_TAG}&#39;
     readinessProbe:
@@ -393,11 +376,9 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
       timeoutSeconds: 10
       failureThreshold: 30
       periodSeconds: 5</code>
-</pre>
-<h3 id="前端-1">前端</h3>
+</pre><h3 id="前端-1">前端</h3>
 <p>由于前端没有单独的接口对外暴露，故可采用在<code>Docker</code>容器中执行linux命令的方式来检测是否就绪，个人采用<code>uname</code>，相关配置如下：</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>containers:
   - image: &#39;$REGISTRY/$DOCKERHUB_NAMESPACE/lucumt-system-web:${BUILD_TAG}&#39;
     readinessProbe:
@@ -407,8 +388,7 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
       timeoutSeconds: 10
       failureThreshold: 30
       periodSeconds: 5</code>
-</pre>
-<h2 id="运行效果">运行效果</h2>
+</pre><h2 id="运行效果">运行效果</h2>
 <p>运行效果如下，可实现动态的指定测试阶段和代码分支：</p>
 <p><img src="/blog_img/devops/share-experiences-for-using-kubesphere/kubesphere-jenkins-pipeline-run-dialog.png" alt="KubeSphere流水线运行效果" title="KubeSphere流水线运行效果"></p>
 <h2 id="参考代码">参考代码</h2>
@@ -647,6 +627,51 @@ env.BUILD_TAG = PROJECT_VERSION &#43; &#34;-&#34; &#43; BUILD_TIME</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

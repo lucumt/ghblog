@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -184,8 +184,7 @@
 	 <p>近期有个项目组有个<code>Vue</code>项目需要在基于<code>KubeSphere</code>的<code>Jenkins</code>流水线中用高版本的<code>nodejs</code>进行编译，自己一开始尝试通过在流水线中直接升级<code>nodejs</code>版本，但并未成功，后来参考<code>KubeSphere</code>论坛上的相关说明才解决该问题，简单记录下。</p>
 <h2 id="问题尝试">问题&amp;尝试</h2>
 <p>项目中使用的<code>KubeSphere</code>版本为<code>v3.3.1</code>，基于<code>nodejs</code>环境对某个 <code>Vue3</code>项目进行编译打包时，<code>KubeSphere</code>提示构建过程出错。Google搜索一番过后，大部分都说要升级<code>nodejs</code>版本，自己当前的版本为<code>v10.16.3</code>，确实有些低，于是尝试用如下指令升级版本</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>rm -rf node_modules package-lock.json yarn.lock
 npm cache clean --force
 
@@ -195,16 +194,13 @@ npm install node@16.16.0
 npm install
 node -v
 npm run build:qiankun</code>
-</pre>
-<p>重新执行后依旧报错，同时<code>node -v</code>输出的结果依然是<code>v10.16.3</code>，版本不是预期的升级后版本。</p>
+</pre><p>重新执行后依旧报错，同时<code>node -v</code>输出的结果依然是<code>v10.16.3</code>，版本不是预期的升级后版本。</p>
 <p>为啥<code>npm install node@16.16.0</code>这条指令执行正常，而<code>node -v</code>输出的仍然为旧版本呢？</p>
 <p>在构建之前添加如下两条指令进行分析</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>$PWD/node_modules/node/bin/node -v
 node config list</code>
-</pre>
-<p>输出结果如下</p>
+</pre><p>输出结果如下</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/npm-debug-output.png" alt="npm调试输出" title="npm调试输出"></p>
 <p>可以看出<code>npm install node@16.16.0</code>只是升级当前工程的<code>nodejs</code>版本，但是全局的版本还是旧的而编译时使用的是全局版本，导致问题出现。</p>
 <p>将该指令变为<code>npm install node@16.16.0 -g</code>再次执行，结果提示权限不足</p>
@@ -221,17 +217,14 @@ node config list</code>
 <p>由于自己采用的是<code>KubeSphere</code>来集成<code>Jenkins</code>，其他人是否遇到了类似问题？通过相关关键词搜索后发现一篇文章<a href="https://ask.kubesphere.io/forum/d/6859-kubesphere311devopsnodejs"><strong>kubesphere3.1.1，devops工程如何升级node.js</strong></a>，其遇到的问题和我自己的很类似。</p>
 <p>根据该问题中的回复，需要对<code>Jenkins</code>流水线文件头部的配置进行修改</p>
 <p>原始配置如下</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>agent {
     node {
         label &#39;nodejs&#39;
     }
 }</code>
-</pre>
-<p>修改为</p>
-
-<pre class="line-numbers language-groovy ">
+</pre><p>修改为</p>
+<pre class="line-numbers language-groovy " title="groovy">
 <code>agent {
     kubernetes {
         inheritFrom &#39;nodejs base&#39;
@@ -241,10 +234,8 @@ node config list</code>
         }
     }
 }</code>
-</pre>
-<p>同时将前端构建指令修改如下</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>同时将前端构建指令修改如下</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>rm -rf node_modules package-lock.json yarn.lock
 npm cache clean --force
 
@@ -252,8 +243,7 @@ npm config set registry https://mirrors.xxx.com/repository/NPM/
 npm install
 node -v
 npm run build:qiankun</code>
-</pre>
-<p>再次执行相关构建，输出类似如下，可以看出<code>nodejs</code>版本已经修改为我们希望的版本，且能正常编译通过</p>
+</pre><p>再次执行相关构建，输出类似如下，可以看出<code>nodejs</code>版本已经修改为我们希望的版本，且能正常编译通过</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/node-version-upgraded.png" alt="node版本升级" title="node版本升级"></p>
 <p>基于上述方式修改后，初次执行时可能会出现类似如下错误，出错的原因是相关镜像还没下载下来，多执行几次即可。</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/kubernetes-agent-not-working.png" alt="kubernetes执行报错" title="kubernetes执行报错"></p>
@@ -262,8 +252,7 @@ npm run build:qiankun</code>
 <p>继续在该问题下寻找答案，发现<code>KubeSphere</code>官方的技术支持人员有给出答案</p>
 <p><img src="/blog_img/devops/switch-nodejs-version-in-jenkins-pipeline/kubesphere-support-reply.png" alt="kubesphere技术支持人员回复" title="kubesphere技术支持人员回复"></p>
 <p>将<code>docker</code>构建阶段的容器从<code>nodejs</code>修改为<code>base</code>即可，重新执行流水线可正常执行<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，至此问题解决完毕。</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>stage(&#39;镜像构建&#39;) {
     agent none
         steps {
@@ -275,11 +264,9 @@ npm run build:qiankun</code>
         }
     }
 }</code>
-</pre>
-<h2 id="后记">后记</h2>
+</pre><h2 id="后记">后记</h2>
 <p>虽然此文以<code>nodejs</code>举例，但对于其它的语言也可适用，假设使用的是<code>Golang</code>，对应的<code>Jenkins</code>流水线文件头部可修改如下</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>agent {
     kubernetes {
         inheritFrom &#39;go base&#39;
@@ -289,8 +276,7 @@ npm run build:qiankun</code>
         }
     }
 }</code>
-</pre>
-<p>通过上述方式可实现基于流水线级别的版本变更与隔离，使用起来更加方便。</p>
+</pre><p>通过上述方式可实现基于流水线级别的版本变更与隔离，使用起来更加方便。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -502,6 +488,51 @@ npm run build:qiankun</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

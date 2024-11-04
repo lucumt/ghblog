@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -186,8 +186,7 @@
 <p>如果在容器外，可通过<code>docker inspect --format='{{.Name}}' 容器id</code>指令很容易的获取容器名称，而在容器内部可通过<code>echo $HOSTNAME</code>快速的获取容器id，但对于容器名称的获取却不是很方便。</p>
 <h2 id="通过环境变量">通过环境变量</h2>
 <p>直接通过<code>-e</code>命令将容器名称传入，然后通过<code>$</code>获取容器名称。</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 指定名称创建容器
 docker run -e &#34;containerName=nginx-custom-test&#34; --name nginx-custom-test -d nginx
 
@@ -197,12 +196,10 @@ docker exec nginx-custom-test env | grep containerName
 # 先进入容器内部，然后执行
 docker exec -it nginx-custom-test /bin/bash
 echo $containerName</code>
-</pre>
-<p><img src="/blog_img/docker/get-docker-name-inside-docker-container/get-specified-container-name-via-env.png" alt="通过环境变量获取指定的容器名" title="通过环境变量获取指定的容器名"></p>
+</pre><p><img src="/blog_img/docker/get-docker-name-inside-docker-container/get-specified-container-name-via-env.png" alt="通过环境变量获取指定的容器名" title="通过环境变量获取指定的容器名"></p>
 <p>此种方式实现起来比较简单，但最大的问题是容器名称需要提前设置好，不太灵活，当容器名称随机生成时，此种方式就彻底失效了。</p>
 <h2 id="通过socket通信">通过socket通信</h2>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 容器名称随机生成
 docker run -v /run/docker.sock:/run/docker.sock:ro -d nginx
 
@@ -219,12 +216,10 @@ containerName=$(echo $dockerInfo |  awk -F&#39;[:,}]&#39; &#39;{for(i=1;i&lt;=NF
 
 # 格式化输出
 echo &#34;This is container $containerName&#34; | tr -d &#39;&#34;/&#39;</code>
-</pre>
-<p>执行结果如下，可看出对于随机生成的容器名也能正常获取。</p>
+</pre><p>执行结果如下，可看出对于随机生成的容器名也能正常获取。</p>
 <p><img src="/blog_img/docker/get-docker-name-inside-docker-container/get-random-container-name-via-sockets.png" alt="通过socket获取随机生成的容器名" title="通过socket获取随机生成的容器名"></p>
 <p><code>$dockerInfo</code>的格式化输出如下</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>{
     &#34;Id&#34;: &#34;c6b9dbccd51c211690194f13a8f37c7bc6858aa7c8d627bec11faa143d315bba&#34;,
     &#34;Created&#34;: &#34;2024-04-23T07:30:23.641193169Z&#34;,
@@ -680,6 +675,51 @@ echo &#34;This is container $containerName&#34; | tr -d &#39;&#34;/&#39;</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

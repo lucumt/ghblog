@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -218,18 +218,15 @@
 <h3 id="项目结构">项目结构</h3>
 <p><img src="/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-project-structure.png" alt="项目结构" title="项目结构"></p>
 <h3 id="表结构">表结构</h3>
-
-<pre class="line-numbers language-sql ">
+<pre class="line-numbers language-sql " title="sql">
 <code>CREATE TABLE `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
   `info` json NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin</code>
-</pre>
-<h3 id="pom文件">pom文件</h3>
-
-<pre class="line-numbers language-xml ">
+</pre><h3 id="pom文件">pom文件</h3>
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
 
 &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
@@ -298,10 +295,8 @@
     &lt;/dependencies&gt;
 
 &lt;/project&gt;</code>
-</pre>
-<h3 id="模型类">模型类</h3>
-
-<pre class="line-numbers language-java ">
+</pre><h3 id="模型类">模型类</h3>
+<pre class="line-numbers language-java " title="java">
 <code>@Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -313,10 +308,8 @@ public class UserModel {
 
     private JsonNode info;
 }</code>
-</pre>
-<h3 id="handler类">Handler类</h3>
-
-<pre class="line-numbers language-java ">
+</pre><h3 id="handler类">Handler类</h3>
+<pre class="line-numbers language-java " title="java">
 <code>@MappedTypes(JsonNode.class)
 public class JsonNodeTypeHandler extends BaseTypeHandler&lt;JsonNode&gt; {
 
@@ -386,10 +379,8 @@ public class JsonNodeTypeHandler extends BaseTypeHandler&lt;JsonNode&gt; {
     }
 
 }</code>
-</pre>
-<h3 id="配置文件">配置文件</h3>
-
-<pre class="line-numbers language-yaml ">
+</pre><h3 id="配置文件">配置文件</h3>
+<pre class="line-numbers language-yaml " title="yaml">
 <code>server:
   port: 8081
 
@@ -410,10 +401,8 @@ mybatis:
     map-underscore-to-camel-case: true
   type-aliases-package: com.lucumt.model,com.lucumt.vo
   type-handlers-package: com.lucumt.handler.mybatis</code>
-</pre>
-<h3 id="mapper类">Mapper类</h3>
-
-<pre class="line-numbers language-java ">
+</pre><h3 id="mapper类">Mapper类</h3>
+<pre class="line-numbers language-java " title="java">
 <code>public interface UserMapper {
 
     void addUser(UserModel userModel);
@@ -422,10 +411,8 @@ mybatis:
 
     void deleteUser(Integer id);
 }</code>
-</pre>
-<h3 id="mapper文件">Mapper文件</h3>
-
-<pre class="line-numbers language-xml ">
+</pre><h3 id="mapper文件">Mapper文件</h3>
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
 &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;
 &lt;mapper namespace=&#34;com.lucumt.mapper.UserMapper&#34;&gt;
@@ -444,10 +431,8 @@ mybatis:
     &lt;/delete&gt;
 
 &lt;/mapper&gt;</code>
-</pre>
-<h3 id="service类">Service类</h3>
-
-<pre class="line-numbers language-java ">
+</pre><h3 id="service类">Service类</h3>
+<pre class="line-numbers language-java " title="java">
 <code>@Service
 public class UserService {
 
@@ -466,11 +451,9 @@ public class UserService {
         userMapper.deleteUser(id);
     }
 }</code>
-</pre>
-<h2 id="测试">测试</h2>
+</pre><h2 id="测试">测试</h2>
 <h3 id="测试类">测试类</h3>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestUserService {
@@ -514,8 +497,7 @@ public class TestUserService {
     }
 
 }</code>
-</pre>
-<h3 id="测试结果">测试结果</h3>
+</pre><h3 id="测试结果">测试结果</h3>
 <p><img src="/blog_img/mybatis/insert-json-data-in-mybatis/spring-mybatis-json-test-result.png" alt="测试结果" title="测试结果"></p>
     </div>
 
@@ -699,6 +681,51 @@ public class TestUserService {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

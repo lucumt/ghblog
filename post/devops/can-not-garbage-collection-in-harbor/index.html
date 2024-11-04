@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -207,8 +207,7 @@
 </blockquote>
 <p>该段回复的主要意思是<strong>清理垃圾的时间太长超过了24小时，任务中心将该任务进行了强行终止与回收，进而导致非正常的查询失败错误。</strong></p>
 <p>而我之前也是等待了两三天也没清理成功，于是按照其说明修改<code>$PWD/common/config/jobservice/config.yml</code>，将对应时间从<strong>24</strong>修改为<strong>168</strong>,之后重启<code>Harbor</code>服务。</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>jobLoggers:
     - file
  ...
@@ -216,8 +215,7 @@
 reaper:
    max_update_hours: 168
    max_dangling_hours: 168</code>
-</pre>
-<p>基于<code>Docker</code>重启<code>Harbor</code>服务之后，我又等待了两三天，结果依旧和以前一样！</p>
+</pre><p>基于<code>Docker</code>重启<code>Harbor</code>服务之后，我又等待了两三天，结果依旧和以前一样！</p>
 <p>随着日常开发任务的迭代，<code>Harbor</code>镜像仓库占用的磁盘空间也越来越大，该问题必须解决，没办法，我只能硬着头皮继续翻看<code>GitHub</code>中关于这方面问题的相关检索结果。</p>
 <p>最终在<a href="https://github.com/goharbor/harbor/issues/20821#issuecomment-2275160905">这条回复</a>中找到<code>Harbor</code>开发者的如下说明</p>
 <blockquote>
@@ -438,6 +436,51 @@ reaper:
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

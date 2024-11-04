@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -189,8 +189,7 @@
 <p>由于在<code>MinIO</code>中是按照文件夹存储，一开始自己很显然的是想用直接去<code>MinIO</code>官网查看有没有直接下载文件夹的方式，在其官网<a href="https://docs.min.io/docs/java-client-api-reference.html"><strong>java-client-api-reference</strong></a>中没有找到支持文件夹下载的方式。</p>
 <p>接下来自己通过<a href="https://minio-java.min.io/io/minio/ListObjectsArgs.html"><strong>ListObjectsArgs</strong></a>传入文件夹名称<code>2022-07/80/iodp-dataset-demo</code>的方式想一次性把文件都获取到，在此种方式下程序执行结果为空。</p>
 <p>至此，可知道 <strong><code>MinIO</code>不支持原生的文件夹下载，只能按照文件挨个下载</strong>，为了获取所有文件，需要通过递归程序实现，相关代码如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Log4j2
 @Service
 public class MinioServiceImpl implements IMinioService {
@@ -239,13 +238,11 @@ public class MinioServiceImpl implements IMinioService {
         }
     }
 }</code>
-</pre>
-<p>基于上述代码从<code>MinIO</code>中返回的文件信息类似如下所示：</p>
+</pre><p>基于上述代码从<code>MinIO</code>中返回的文件信息类似如下所示：</p>
 <p><img src="/blog_img/minio/download-minio-folder-as-zip-file/minio-file-list.png" alt="MinIO下载文件夹" title="MinIO下载文件夹"></p>
 <h2 id="写入zip文件">写入ZIP文件</h2>
 <p>由于<code>MinIO</code>中返回的文件信息已经具有层级结构，故在进行<code>ZIP</code>压缩时可基于文件路径直接设置其存储位置<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Override
 public void downloadDataset(int id, HttpServletResponse response) {
     DatasetModel dsModel = queryDataset(id);
@@ -279,8 +276,7 @@ public void downloadDataset(int id, HttpServletResponse response) {
         e.printStackTrace();
     }
 }</code>
-</pre>
-<p>下载后的<code>ZIP</code>文件如下所示，可见其层级结构与<code>MinIO</code>中原始存储的层级结构相同，功能正常实现。</p>
+</pre><p>下载后的<code>ZIP</code>文件如下所示，可见其层级结构与<code>MinIO</code>中原始存储的层级结构相同，功能正常实现。</p>
 <p><img src="/blog_img/minio/download-minio-folder-as-zip-file/minio-zip-file-structure.png" alt="下载后的zip文件" title="下载后的zip文件"></p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -493,6 +489,51 @@ public void downloadDataset(int id, HttpServletResponse response) {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

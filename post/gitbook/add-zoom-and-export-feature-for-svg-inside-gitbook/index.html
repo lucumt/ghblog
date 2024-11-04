@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -220,16 +220,13 @@
 <h3 id="缩放功能">缩放功能</h3>
 <p>在<code>GitHub</code>上对比相关的<code>SVG</code>组件后，最终选定<a href="https://github.com/bumbu/svg-pan-zoom"><strong>svg-pan-zoom</strong></a>作为<code>SVG</code>功能扩展度的实现，正好自己之前改进过一个基于<code>Mermaid</code>的<code>GitBook</code>插件<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>，可将<code>svg-pan-zoom</code>相关的功能整合到该插件中，后续<code>GitBook</code>中升级插件版本即可。</p>
 <p>在<code>svg-pan-zoom</code>的官方文档中可找到该组件的用法，十分简单</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>var panZoomTiger = svgPanZoom(&#39;#demo-tiger&#39;);
 // or
 var svgElement = document.querySelector(&#39;#demo-tiger&#39;)
 var panZoomTiger = svgPanZoom(svgElement)</code>
-</pre>
-<p>调用<code>svgPanZoom</code>时还可根据实际情况添加各种配置</p>
-
-<pre class="line-numbers language-javascript ">
+</pre><p>调用<code>svgPanZoom</code>时还可根据实际情况添加各种配置</p>
+<pre class="line-numbers language-javascript " title="javascript">
 <code>svgPanZoom(&#39;#demo-tiger&#39;, {
   viewportSelector: &#39;.svg-pan-zoom_viewport&#39;, 
   panEnabled: true, 
@@ -253,10 +250,8 @@ var panZoomTiger = svgPanZoom(svgElement)</code>
   customEventsHandler: {},
   eventsListenerElement: null
 });</code>
-</pre>
-<p>之后要找到<code>Mermaid</code>渲染图表结束时的回调方法，在其官网上没有找到相关的说明，但通过Google发现在<code>GitHub</code>上有<a href="https://github.com/mermaid-js/mermaid/issues/176">相关说明</a>，核心代码如下</p>
-
-<pre class="line-numbers language-javascript ">
+</pre><p>之后要找到<code>Mermaid</code>渲染图表结束时的回调方法，在其官网上没有找到相关的说明，但通过Google发现在<code>GitHub</code>上有<a href="https://github.com/mermaid-js/mermaid/issues/176">相关说明</a>，核心代码如下</p>
+<pre class="line-numbers language-javascript " title="javascript">
 <code>import mermaid from &#39;${src}&#39;;
 mermaid.run({
     querySelector: &#39;.mermaid&#39;,
@@ -264,10 +259,8 @@ mermaid.run({
         console.log(id);
     }
 });</code>
-</pre>
-<p>很显然可通过在<code>postRenderCallback</code>回调方法中添加我们自己的逻辑，相关的代码如下</p>
-
-<pre class="line-numbers language-javascript ">
+</pre><p>很显然可通过在<code>postRenderCallback</code>回调方法中添加我们自己的逻辑，相关的代码如下</p>
+<pre class="line-numbers language-javascript " title="javascript">
 <code>mermaid.run({
     querySelector: &#39;.mermaid&#39;,
     postRenderCallback: (id) =&gt; {
@@ -284,23 +277,19 @@ mermaid.run({
         panZoomTiger.updateBBox();
     }
 });</code>
-</pre>
-<p>至此<code>SVG</code>缩放功能整合完毕，接下来需要研究下载功能。</p>
+</pre><p>至此<code>SVG</code>缩放功能整合完毕，接下来需要研究下载功能。</p>
 <h3 id="下载功能">下载功能</h3>
 <p>由于<code>SVG</code>图像一般都是以源码的方式直接嵌入<code>HTML</code>页面中，故其下载功能较为简单，只需要找到对应的DOM节点，通过<code>JavaScript</code>相关的技术获取到其完整的内容，然后下载到本地即可。</p>
 <p>首先自己基于网络上的<a href="https://stackoverflow.com/questions/54626186/how-to-download-file-with-javascript">相关资料</a>找到如下代码，本地验证下载<code>txt</code>时能正常工作。</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>function downloadURI(uri, name) {
     var link = document.createElement(&#34;a&#34;);
     link.download = name;
     link.href = uri;
     link.click();
 }</code>
-</pre>
-<p>但当用其测试<code>SVG</code>下载时，下载的文件一直为空且浏览器也没提示任何错误，多次搜索发现Chrome出于安全考虑，默认情况下不允许通过<code>JavaScript</code>下载<code>SVG</code>文件，需要做一些特殊处理来规避此限制， 继续查找后找到<a href="https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an">一篇说明</a>，其中给出了如下的解决方案，经本地测试可行。</p>
-
-<pre class="line-numbers language-javascript ">
+</pre><p>但当用其测试<code>SVG</code>下载时，下载的文件一直为空且浏览器也没提示任何错误，多次搜索发现Chrome出于安全考虑，默认情况下不允许通过<code>JavaScript</code>下载<code>SVG</code>文件，需要做一些特殊处理来规避此限制， 继续查找后找到<a href="https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an">一篇说明</a>，其中给出了如下的解决方案，经本地测试可行。</p>
+<pre class="line-numbers language-javascript " title="javascript">
 <code>function downloadSvg() {
     var svg = document.getElementById(&#34;svg&#34;);
     var serializer = new XMLSerializer();
@@ -328,8 +317,7 @@ mermaid.run({
     downloadLink.click();
     document.body.removeChild(downloadLink);
 }</code>
-</pre>
-<p>缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的<code>GitBook</code>插件中即可，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>。</p>
+</pre><p>缩放与下载功能分别验证完毕后，接下来只需将其整合到对应的<code>GitBook</code>插件中即可，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-mermaid-fox"><strong>gitbook-plugin-mermaid-fox</strong></a>。</p>
 <h3 id="显示效果">显示效果</h3>
 <p>添加缩放和下载按钮后后默认显示效果如下，其中下载按钮位于右上角，缩放按钮位于右下角</p>
 <p><img src="/blog_img/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/complex-mermaid-sequence-diagram-width-tools.png" alt="Mermaid图表显示相关工具" title="Mermaid图表显示相关工具"></p>
@@ -340,8 +328,7 @@ mermaid.run({
 <ul>
 <li>
 <p><code>index.js</code>用于文件加载</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>function processMermaidBlockList(page) {
   const mermaidRegex = /^[ \t]*```\s*mermaid[ \t]*$([^`]*(?:`[^`]&#43;)*)```$/igm;
   let download=&#39;&lt;svg width=&#34;15&#34; height=&#34;15&#34; viewBox=&#34;0 0 8 8&#34; fill=&#34;#707070&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;m3 0v3h-2l3 3 3-3h-2v-3zm-3 7v1h8v-1z&#34;/&gt;&lt;/svg&gt;&#39;;
@@ -365,12 +352,10 @@ module.exports = {
     &#39;page:before&#39;: processMermaidBlockList
   }
 };</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p><code>plugin.js</code>核心代码</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>require([
   &#39;gitbook&#39;
 ], function (gitbook) {
@@ -430,8 +415,7 @@ function downloadData(id,ele) {
 	downloadLink.click();
 	document.body.removeChild(downloadLink);
 }</code>
-</pre>
-</li>
+</pre></li>
 </ul>
     </div>
 
@@ -652,6 +636,51 @@ function downloadData(id,ele) {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

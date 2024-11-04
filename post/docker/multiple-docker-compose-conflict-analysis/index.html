@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -188,19 +188,16 @@
 <ol>
 <li>
 <p>在某个目录下有两个<code>docker-compose.yml</code>文件，分别为<code>nginx_test_1.yml</code>和<code>nginx_test_2.yml</code></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>[root@fox docker_test]# pwd
 /root/docker_test
 [root@fox docker_test]# ls
 nginx_test_1.yml  nginx_test_2.yml</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>它们的内容分别如下</p>
 <p><code>nginx_test_1.yml</code>配置：</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>version: &#34;3&#34;
 services:
    nginx:
@@ -210,10 +207,8 @@ services:
      container_name: nginx_test_1
      ports:
        - &#34;8081:80&#34;</code>
-</pre>
-<p><code>nginx_test_2.yml</code>配置：</p>
-
-<pre class="line-numbers language-yaml ">
+</pre><p><code>nginx_test_2.yml</code>配置：</p>
+<pre class="line-numbers language-yaml " title="yaml">
 <code>version: &#34;3&#34;
 services:
    nginx:
@@ -223,8 +218,7 @@ services:
      container_name: nginx_test_2
      ports:
        - &#34;8082:80&#34;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>基于<code>nginx_test_1.yml</code>文件可正常启动</p>
 <p><img src="/blog_img/docker/multiple-docker-compose-conflict-analysis/docker-compose-start-success.png" alt="docker compose正常启动" title="docker compose正常启动"></p>
@@ -242,16 +236,14 @@ services:
 <h2 id="原因分析">原因分析</h2>
 <p>一开始自己以为是<code>docker-compose.yml</code>文件的问题，以为有语法问题，反复对这两个文件进行检查后并没有找出啥。</p>
 <p>同时<code>nginx_test_1.yml</code>和<code>nginx_test_2.yml</code>按照下述的指令操作，可正常启动：</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>docker-compose -f nginx_test_1.yml up -d
 docker ps
 docker-compose -f nginx_test_1.yml down
 docker-compose -f nginx_test_2.yml up -d
 docker ps
 docker-compose -f nginx_test_1.yml down</code>
-</pre>
-<p>若按照之前的方式操作依旧有问题，至此可以确认的是单个<code>docker-compose.yml</code>使用时没有问题，多个<code>docker-compose.yml</code>文件一起使用时会有问题。</p>
+</pre><p>若按照之前的方式操作依旧有问题，至此可以确认的是单个<code>docker-compose.yml</code>使用时没有问题，多个<code>docker-compose.yml</code>文件一起使用时会有问题。</p>
 <p>需要从<code>docker-compos.yml</code>的使用机制着手。</p>
 <p>在网上搜索后，发现有人已经遇到类似的问题<a href="https://stackoverflow.com/questions/43126022/docker-is-not-creating-new-container-but-recreates-running-one"><strong>Docker is not creating new container but recreates running one</strong></a>，通过对该文章的阅读发现了问题根源：</p>
 <blockquote>
@@ -260,8 +252,7 @@ docker-compose -f nginx_test_1.yml down</code>
 <p>其中服务名称是在<code>yaml</code>文件中指定的，而服务名称可通过启动时<code>-p</code>参数指定，若没有该参数，则去环境变量中查找<code>COMPOSE_PROJECT_NAME</code>的值，若还是没有则以当前<code>yaml</code>文件的文件夹作为项目名称。</p>
 </blockquote>
 <p>具体到本问题中，在启动时没有指定<code>-p</code>参数，也没有指定<code>COMPOSE_PROJECT_NAME</code>环境变量，同时这两个<code>yaml</code>文件都位于<code>docker_test</code>目录下，则项目名称为<code>docker_test</code>，查看其源码，发现其服务名称都为<code>nginx</code>，由此导致问题产生！</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>version: &#34;3&#34;
 services:
    # 服务名称都为nginx
@@ -272,8 +263,7 @@ services:
      container_name: nginx_test_1
      ports:
        - &#34;8081:80&#34;</code>
-</pre>
-<h2 id="解决方案">解决方案</h2>
+</pre><h2 id="解决方案">解决方案</h2>
 <p>在<code>Docker Compose</code>的官网找到关于<code>COMPOSE_PROJECT_NAME</code>的<a href="https://docs.docker.com/compose/environment-variables/envvars/#compose_project_name"><strong>说明</strong></a>如下</p>
 <p><img src="/blog_img/docker/multiple-docker-compose-conflict-analysis/compose_project_name_instruction.png" alt="COMPOSE_PROJECT_NAME配置说明" title="COMPOSE_PROJECT_NAME配置说明"></p>
 <p>上述说明前半部分说明了<code>Docker Compose</code>会将项目名和服务名组合作为容器名称供启动使用，基于该描述前述两个<code>yaml</code>文件理论上的容器名称都为<code>docker_test_nginx-1</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，故而导致启动时冲突。</p>
@@ -520,6 +510,51 @@ services:
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

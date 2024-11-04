@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -218,8 +218,7 @@
 <p>首先需要获取死锁相关的信息，可通过<code>SHOW ENGINE INNODB STATUS</code>这条简单的的指令实现，不过其只显示最新的死锁信息，这对于了解一段时间内的死锁全过程信息没有太多帮助。</p>
 <p>幸好，从<code>MySQL5.5.30</code>开始其提供了一个名为<code>innodb_print_all_deadlocks</code>的配置项用于将所有的死锁都打印到错误日志中，同时启用此功能也不会导致停机。</p>
 <p>相关的日志内容看起来类似如下</p>
-
-<pre class="line-numbers language-sql ">
+<pre class="line-numbers language-sql " title="sql">
 <code>*** (1) TRANSACTION:
 TRANSACTION 450913541522, ACTIVE 0 sec starting index read
 mysql tables in use 1, locked 1
@@ -241,18 +240,15 @@ Record lock, heap no 95 PHYSICAL RECORD: n_fields 24; compact format; info bits 
 *** (2) WAITING FOR THIS LOCK TO BE GRANTED:
 RECORD LOCKS space id 5817 page no 4486 n bits 0 index PRIMARY of table `db`.`user` trx id 450913541519 lock mode S locks rec but not gap waiting
 Record lock, heap no 99 PHYSICAL RECORD: n_fields 29; compact format; info bits 0</code>
-</pre>
-<p>尽管其中包含许多信息，但由于我只关心哪个事务/线程在持有/等待哪些锁，将上述内容精简如下：</p>
-
-<pre class="line-numbers language-sql ">
+</pre><p>尽管其中包含许多信息，但由于我只关心哪个事务/线程在持有/等待哪些锁，将上述内容精简如下：</p>
+<pre class="line-numbers language-sql " title="sql">
 <code>Transaction 1: update `table1` set `scroll_to` = 3901, `updated_at` = ‘2021–08–17 11:30:53’ where `id` = 668126442
 -&gt; Holding an X lock on `db`.`user`
 -&gt; Wait for an X lock on `db`.`table1`
 Transaction 2: insert into `table2` (`user_id`, `company_id`, `date`, `steps`, `updated_at`, `created_at`) values (491031, 1, ‘2021–08–17’, 359, ‘2021–08–17 11:30:53’, ‘2021–08–17 11:30:53’)
 -&gt; Hold an X lock on `db`.`table1`
 -&gt; Wait for an S lock on `db`.`user`</code>
-</pre>
-<p>可以看出尽管日志中没有明确的说明事务1持有了哪个锁，我们仍然可以推断出事务1在<code>db.user</code>中持有锁，而事务2正在等待该锁。</p>
+</pre><p>可以看出尽管日志中没有明确的说明事务1持有了哪个锁，我们仍然可以推断出事务1在<code>db.user</code>中持有锁，而事务2正在等待该锁。</p>
 <p>同样可看出事务1虽然只是更新<code>table1</code>，但却在表<code>user</code>上持有锁，对事务2也类似，其向<code>table2</code>中插入数据但却在<code>table1</code>上持有锁，然后等待<code>user</code>表中的锁。咋一看很奇怪，这是由于此处显示的查询语句只是整个事务的<strong>一部分</strong>，这意味着在更新表<code>table1</code>之前，事务1已经在<code>user</code>表上执行了某些操作因而持有X锁，此分析同样适用于事务2，这些持有/获取锁的信息有助于在源码中具体定位事务的位置。</p>
 <h3 id="源码中定位到相关事务">源码中定位到相关事务</h3>
 <p>接下来就是在应用程序源码中找到事务，通常是通过编辑器的搜索功能实现，事务中应该包含我们在步骤1中发现的持有/等待锁相关的查询。</p>
@@ -469,6 +465,51 @@ Transaction 2: insert into `table2` (`user_id`, `company_id`, `date`, `steps`, `
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

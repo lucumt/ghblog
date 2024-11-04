@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -207,8 +207,7 @@
 <p>排除枚举方法之后，只能对其进行分析找出通用的处理方式。下图展示了在相交矩形的左下角和右上角的位置，仔细分析后便可发现<strong>相交矩形的左下角x,y坐标是两个矩形左下角x,y坐标中取较大值，相交矩形的右上角x,y坐标是两个矩形右上角x,y坐标中取较小值</strong>。<br>
 <img src="/blog_img/algorithm/calculate-total-area-of-two-rectangles/position_calculate.png" alt="矩形相交坐标计算" title="矩形相交时形成的新矩形的坐标来源"><br>
 通过分析归纳之后，我们将之前的16种相交情况统一为1个表达式，而这个表达式在编程时是很容易实现的，下面的代码展示了如何利用该表达式计算相交矩形的坐标以及其面积。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public static int calculateIntersectArea(int k, int l, int m, int n, int p,int q, int r, int s) {
 	int leftDownX = 0, leftDownY = 0, rightUpX = 0, rightUpY = 0;
 	leftDownX = k &gt; p ? k : p;
@@ -217,12 +216,10 @@
 	rightUpY = n &lt; s ? n : s;
 	return (rightUpX - leftDownX) * (rightUpY - leftDownY);
 }</code>
-</pre>
-<p>寻找出如何计算相交矩形的面积之后，还需要解决一个问题:<strong>上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误</strong>，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：<strong>如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！</strong>，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4种情况：<br>
+</pre><p>寻找出如何计算相交矩形的面积之后，还需要解决一个问题:<strong>上述实现只有在矩形相交时才正确，当矩形不相交时计算结果错误</strong>，为此需要找出一个方法判定两个矩形是否相交。若利用枚举方法同样会有前述的16种情形需要考虑，同样很复杂，显然枚举方法不适合使用。换一种思路：<strong>如果把矩形不相交的情形排除掉，那么剩下的情形就是矩形相交了！</strong>，而矩形不相交则相对容易多了，假设这两个矩形分别为A和B，则它们不相交一共有如下图所示的4种情况：<br>
 <img src="/blog_img/algorithm/calculate-total-area-of-two-rectangles/no_interact_position_compare.png" alt="矩形不相交坐标计算" title="矩形不相交的4种情况"><br>
 相应的代码实现如下：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public static boolean isIntersect(int k, int l, int m, int n, int p, int q, int r, int s) {
 	
 	boolean nointersect = false;
@@ -237,10 +234,8 @@
 
 	return !nointersect;
 }</code>
-</pre>
-<p>利用上述2个判断方法，可以方便准确的计算出两个矩形在相交时的总面积，相应的代码如下:</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>利用上述2个判断方法，可以方便准确的计算出两个矩形在相交时的总面积，相应的代码如下:</p>
+<pre class="line-numbers language-java " title="java">
 <code>public static int solution(int k, int l, int m, int n, int p, int q, int r, int s) {
 
 	int widthA = m - k;
@@ -258,8 +253,7 @@
 	}
 	return totalArea;
 }</code>
-</pre>
-<p>分析解决这个问题给我最深的感触是：<strong>有时候若某一类问题用枚举实现很复杂时，尝试去分析其中的规律，找出通用的解决方法</strong>，不仅在算法方面，或许在生活中其它方面也适用吧！</p>
+</pre><p>分析解决这个问题给我最深的感触是：<strong>有时候若某一类问题用枚举实现很复杂时，尝试去分析其中的规律，找出通用的解决方法</strong>，不仅在算法方面，或许在生活中其它方面也适用吧！</p>
     </div>
 
     <div class="post-copyright">
@@ -474,6 +468,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

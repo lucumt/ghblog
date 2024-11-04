@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -209,15 +209,12 @@
 <p>如果你喜欢通过视频学习，可以查看<code>Youtube</code>中相关的<a href="https://www.youtube.com/watch?v=p7_cTAF39A8"><strong>学习视频</strong></a>。</p>
 <h2 id="手工初始化">手工初始化</h2>
 <p>在做其它事情之前，需要添加<code>Mockito</code>相关的依赖：</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>dependencies {
     testImplementation(&#39;org.mockito:mockito-core:3.12.4&#39;)
 }</code>
-</pre>
-<p>如果我们只是想创建一个要注入其它对象的mock，最简单的方式是调用<code>Mockito.mock()</code>方法，该方法将要实例化的对象的类作为参数。</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>如果我们只是想创建一个要注入其它对象的mock，最简单的方式是调用<code>Mockito.mock()</code>方法，该方法将要实例化的对象的类作为参数。</p>
+<pre class="line-numbers language-java " title="java">
 <code>class MockitoManualTest {
 
     private OrderRepository orderRepository;
@@ -239,8 +236,7 @@
         assertNotNull(savedOrder.getCreationDate());
     }
 }</code>
-</pre>
-<p>手工初始化在我们没有太多要mock的对象时是一个合法的解决方案。</p>
+</pre><p>手工初始化在我们没有太多要mock的对象时是一个合法的解决方案。</p>
 <p><strong>优点</strong>:</p>
 <ul>
 <li>对要mock的对象有最大程度的控制</li>
@@ -253,8 +249,7 @@
 <h2 id="基于注解初始化">基于注解初始化</h2>
 <p><code>Mockito.mock()</code>的一种声明式替代方案为给要mock的对象上添加<code>@Mock</code>注解，同时需要调用一个特殊方法来初始化被注解的对象。</p>
 <p>在<code>Mockito 2</code>中有一个<code>MockitoAnnotations.initMocks()</code>方法，该方法已经被废弃并在<code>Mockito 3</code>中被<code>MockitoAnnotations.openMocks()</code>替代，该方法返回一个<code>AutoCloseable</code>对象可用于在测试之后关闭资源。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class MockitoAnnotationTest {
 
     @Mock
@@ -283,8 +278,7 @@
         assertNotNull(savedOrder.getCreationDate());
     }
 }</code>
-</pre>
-<p><code>MockitoAnnotations.openMocks(this)</code>方法的调用可告知<code>Mockito</code>扫描测试类中任何包含有<code>@Mock</code>注解的属性并将这些属性初始化为mock对象。</p>
+</pre><p><code>MockitoAnnotations.openMocks(this)</code>方法的调用可告知<code>Mockito</code>扫描测试类中任何包含有<code>@Mock</code>注解的属性并将这些属性初始化为mock对象。</p>
 <p><strong>优点</strong>:</p>
 <ul>
 <li>容易创建mock对象</li>
@@ -302,8 +296,7 @@
 <li>对有<code>@InjectMocks</code>的属性创建实例并尝试将前一个步骤中创建的mock对象注入其中</li>
 </ul>
 <p>使用<code>@InjectMocks</code>与我们手工创建实例所做的相同，但现在是自动化的。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class MockitoInjectMocksTests {
 
     @Mock
@@ -332,8 +325,7 @@
         assertNotNull(savedOrder.getCreationDate());
     }
 }</code>
-</pre>
-<p><code>Mockito</code>将首先尝试通过构造器注入的方式注入mock对象，之后为setter注入、属性注入。</p>
+</pre><p><code>Mockito</code>将首先尝试通过构造器注入的方式注入mock对象，之后为setter注入、属性注入。</p>
 <p><strong>优点</strong>：</p>
 <ul>
 <li>容易注入mock对象</li>
@@ -348,15 +340,12 @@
 <h2 id="junit5-mockito扩展">JUnit5 Mockito扩展</h2>
 <p><code>JUnit 5</code>中同样有一个<code>Mockito</code>扩展让实例化更简单。</p>
 <p>要使用该扩展，首先需要添加对应的依赖。</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>dependencies {
     testImplementation(&#39;org.mockito:mockito-junit-jupiter:3.12.4&#39;)
 }</code>
-</pre>
-<p>现在可使用该扩展并避免对<code>MockitoAnnotations.openMocks()</code>的方法调用：</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>现在可使用该扩展并避免对<code>MockitoAnnotations.openMocks()</code>的方法调用：</p>
+<pre class="line-numbers language-java " title="java">
 <code>@ExtendWith(MockitoExtension.class)
 public class MockitoExtensionTest {
 
@@ -379,10 +368,8 @@ public class MockitoExtensionTest {
         assertNotNull(savedOrder.getCreationDate());
     }
 }</code>
-</pre>
-<p>同样可以在<code>MockitoExtension</code>中使用<code>@InjectMocks</code>注解来进一步的简化配置。</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>同样可以在<code>MockitoExtension</code>中使用<code>@InjectMocks</code>注解来进一步的简化配置。</p>
+<pre class="line-numbers language-java " title="java">
 <code>@ExtendWith(MockitoExtension.class)
 public class MockitoExtensionInjectMocksTest {
 
@@ -402,10 +389,8 @@ public class MockitoExtensionInjectMocksTest {
         assertNotNull(savedOrder.getCreationDate());
     }
 }</code>
-</pre>
-<p>如果我们不像在测试用例间共享mock变量，可将mock对象注入到方法参数中。</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>如果我们不像在测试用例间共享mock变量，可将mock对象注入到方法参数中。</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Test
 void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
     OrderService orderService = new OrderService(orderRepository);
@@ -417,8 +402,7 @@ void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
 
     assertNotNull(savedOrder.getCreationDate());
 }</code>
-</pre>
-<p>将mock对象注入方法参数中既适用于生命周期方法也适用于测试方法本身。</p>
+</pre><p>将mock对象注入方法参数中既适用于生命周期方法也适用于测试方法本身。</p>
 <p><strong>优点</strong>：</p>
 <ul>
 <li>不需要调用<code>MockitoAnnotations.openMocks()</code>方法</li>
@@ -644,6 +628,51 @@ void createOrderSetsTheCreationDate(@Mock OrderRepository orderRepository) {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -186,8 +186,7 @@
 <h2 id="软件安装">软件安装</h2>
 <p>在<a href="/post/ldap/add-ldap-support-for-grafana/"><strong>给Grafana软件集成LDAP实现单点登录</strong></a>一文中简要说明了如何基于<code>docker</code>安装<code>Grafana</code>，本节出于简化使用与维护的目的，将<code>Grafana</code>与<code>Prometheus</code>合并到一个<code>docker-compose.yml</code>文件中，相关的文件如下</p>
 <p><code>docker-compose.yml</code>文件</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>version: &#34;3&#34;
 services:
   prometheus:
@@ -214,10 +213,8 @@ services:
       # 管理员密码
       - GF_SECURITY_ADMIN_PASSWORD=xxx
       - GF_AUTH_LDAP_ENABLED=true</code>
-</pre>
-<p><code>ldap.toml</code>文件，用于<code>Grafana</code>接入<code>LDAP</code></p>
-
-<pre class="line-numbers language-toml ">
+</pre><p><code>ldap.toml</code>文件，用于<code>Grafana</code>接入<code>LDAP</code></p>
+<pre class="line-numbers language-toml " title="toml">
 <code>[[servers]]
 host = &#34;10.10.0.55&#34;
 port = 389
@@ -247,10 +244,8 @@ org_role = &#34;Editor&#34;
 [[servers.group_mappings]]
 group_dn = &#34;*&#34;
 org_role = &#34;Viewer&#34;</code>
-</pre>
-<p><code>prometheus.yml</code>文件用于配置要接入<code>Prometheus</code>的系统</p>
-
-<pre class="line-numbers language-yaml ">
+</pre><p><code>prometheus.yml</code>文件用于配置要接入<code>Prometheus</code>的系统</p>
+<pre class="line-numbers language-yaml " title="yaml">
 <code>global:
   scrape_interval:     15s # 默认抓取周期
   external_labels:
@@ -262,28 +257,22 @@ scrape_configs:
     static_configs:
       # 这个为监听指定服务服务的ip和port
       - targets: [&#39;10.30.31.56:9188&#39;,&#39;10.30.5.113:9188&#39;]</code>
-</pre>
-<p>上述这些文件必须位于同一目录下，之后通过<code>docker-compose</code>启动</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>上述这些文件必须位于同一目录下，之后通过<code>docker-compose</code>启动</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>root@lucumt:~/grafana# ls
 docker-compose.yml  grafana_data  ldap.toml  prometheus.yml  prometheus_data
 root@lucumt:~/grafana# docker-compose up -d</code>
-</pre>
-<h2 id="系统接入">系统接入</h2>
+</pre><h2 id="系统接入">系统接入</h2>
 <p>主要基于<code>node exporter</code>实现，参考 <a href="https://www.cnblogs.com/rainbow-tan/p/16623772.html"><strong>centos7安装node export</strong></a> 一文进行相关操作。</p>
 <ol>
 <li>
 <p>在安装有<code>node exporter</code>服务器上的<code>/usr/local/bin/</code>目录下复制名为<code>node_exporter</code>的文件到目标机器的<code>/usr/local/bin/</code>目录下，并将其赋予可执行权限</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>chmod &#43;x /usr/local/bin/node_exporter</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行<code>vi /etc/systemd/system/node_exporter.service</code>并输入下述内容</p>
-
-<pre class="line-numbers language-toml ">
+<pre class="line-numbers language-toml " title="toml">
 <code>[Unit]
 Description=cicd_exporter
 After=network.target
@@ -294,15 +283,12 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行下述命令将其设置为<code>Linux</code>服务同时开机自启动</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>systemctl daemon-reload &amp;&amp; systemctl start node_exporter &amp;&amp; systemctl enable node_exporter</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在目标机器的浏览器中输入<code>http://127.0.0.1:9188</code>若能正常显示，则表示<code>node_exporter</code>安装成功</p>
 </li>
@@ -517,6 +503,51 @@ WantedBy=multi-user.target</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -225,8 +225,7 @@ python_run->end
 <p>由于目标客户的环境为<code>Windows</code>，同项目成员沟通后决定采用<code>CMD</code>批处理脚本来包含上述命令，实际部署或升级时只需要运行该批处理脚本即可。</p>
 <h3 id="面临的问题">面临的问题</h3>
 <p>最开始采用的install.bat批处理脚本类似如下</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
@@ -235,12 +234,10 @@ conda activate lyq_test
 pip install -r requirements.txt
 python hello.py
 pause</code>
-</pre>
-<p>运行结果如下，可发现从<code>conda create -n lyq_test -y</code>之后的指令均没有执行</p>
+</pre><p>运行结果如下，可发现从<code>conda create -n lyq_test -y</code>之后的指令均没有执行</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-terminated-after-conda-create.png" alt="在conda create之后终止执行" title="在conda create之后终止执行"></p>
 <p>一开始自己以为是由于<code>Anaconda</code>的创建需要时间，于是参考<code>Stackoverflow</code>中的说明<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>在<code>conda activate</code>之前添加了一条睡眠指令，测试结果和上图一样，问题依旧。</p>
-
-<pre class="line-numbers language-sh ">
+<pre class="line-numbers language-sh " title="sh">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
@@ -251,17 +248,14 @@ conda activate lyq_test
 pip install -r requirements.txt
 python hello.py
 pause</code>
-</pre>
-<p>参考网上的资料和自己尝试后发现将批处理脚本中的命令用<code>&amp;&amp;</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>拼接起来然后一起执行就能达到要求</p>
-
-<pre class="line-numbers language-shell ">
+</pre><p>参考网上的资料和自己尝试后发现将批处理脚本中的命令用<code>&amp;&amp;</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>拼接起来然后一起执行就能达到要求</p>
+<pre class="line-numbers language-shell " title="shell">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
 conda create -n lyq_test -y &amp;&amp; conda activate lyq_test &amp;&amp; pip install -r requirements.txt &amp;&amp; python hello.py
 pause</code>
-</pre>
-<p>运行结果如下，虽然批处理脚本的执行结果符合自己的预期，但此种解决方案带来了一个很严重的副作用</p>
+</pre><p>运行结果如下，虽然批处理脚本的执行结果符合自己的预期，但此种解决方案带来了一个很严重的副作用</p>
 <blockquote>
 <p><strong>通过<code>&amp;&amp;</code>将多条指令拼接在一起的结果是脚本中只有一条超长的指令，会导致批处理脚本的可读性和可维护性都严重降低！</strong></p>
 </blockquote>
@@ -269,8 +263,7 @@ pause</code>
 <h2 id="解决方案">解决方案</h2>
 <p>由于随着项目的进行，install.bat脚本肯定会进行不断地修正与更新，install.bat脚本的可维护性与可读性是必须要解决的问题，但采用<code>&amp;&amp;</code>拼接的方式也不能放弃，只能另想它法。</p>
 <p>继续寻求<code>Stackoverflow</code><sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>的协助<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>，将install.bat通过<code>SET</code>来重新赋值的方式进行变量拼接，修改后的代码如下</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
@@ -283,13 +276,11 @@ echo %command%
 echo 开始执行拼接后的命令
 %command%
 pause</code>
-</pre>
-<p>执行结果如下，虽然能成功进入<code>Anaconda</code>环境，但是后续的指令都没有执行。</p>
+</pre><p>执行结果如下，虽然能成功进入<code>Anaconda</code>环境，但是后续的指令都没有执行。</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-execute-failed-1.png" alt="批处理脚本中途执行失败" title="批处理脚本中途执行失败"></p>
 <p>看起来似乎是胜利在望，但仔细分析后发现只所以能进入<code>Anaconda</code>环境是由于第1个<code>&amp;&amp;</code>配置生效，导致批处理文件提前执行，而后续的拼接指令没有机会执行<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>，还是没法实现最终目的。</p>
 <p>为了避免提前执行，尝试用双引号将相关指令封装起来，在拼接完成后统一执行</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
@@ -302,13 +293,11 @@ echo %command%
 echo 开始执行拼接后的命令
 %command%
 pause</code>
-</pre>
-<p>执行结果如下，虽然最终的执行结果符合预期，但很明显打印出来的拼接数据不是我们想要的，不利于后续分析，同时一些<code>echo</code>打印指令没有执行，此方案存在瑕疵，实际使用中风险很大。</p>
+</pre><p>执行结果如下，虽然最终的执行结果符合预期，但很明显打印出来的拼接数据不是我们想要的，不利于后续分析，同时一些<code>echo</code>打印指令没有执行，此方案存在瑕疵，实际使用中风险很大。</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-execute-success-and-echo-wrong-data.png" alt="批处理脚本最终执行成功但无法调试" title="批处理脚本最终执行成功但无法调试"></p>
 <p>经过一段时间的搜索后没有找到自己想要的答案，只能在<code>Stackoverflow</code>上提问希望能获得帮助，最终通过<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>得到了一个较为满意的解决方案。</p>
 <p>该方案主要通过<strong>字符串截取</strong>来实现<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>，修改后的脚本如下</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>@echo off
 title 一键部署与升级脚本
 echo ===========开始创建conda环境==============
@@ -322,8 +311,7 @@ echo %command%
 echo ==========开始执行拼接后的命令============
 %command:~1,-1%
 pause</code>
-</pre>
-<p>脚本执行结果如下，结果符合预期，在确保脚本能正常执行的前提下也满足了可维护性与可读性，问题解决!</p>
+</pre><p>脚本执行结果如下，结果符合预期，在确保脚本能正常执行的前提下也满足了可维护性与可读性，问题解决!</p>
 <p><img src="/blog_img/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/batch-file-extracted-command-executed-sucesss.png" alt="通过字符串截取方式优化脚本" title="通过字符串截取方式优化脚本"></p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -571,6 +559,51 @@ pause</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -197,20 +197,17 @@
 	 <p>由于项目需要，最近使用了在<code>html5</code>中播放视频的功能，期间遇到了几个坑，先简单记录下。</p>
 <h2 id="在html5页面中播放视频">在html5页面中播放视频</h2>
 <p>如何在<code>html5</code>页面中嵌入视频的代码在网上很容易直接搜索到，典型的代码如下所示：</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;video width=&#34;320&#34; height=&#34;240&#34; controls=&#34;controls&#34;&gt;
   &lt;source src=&#34;movie.mp4&#34; type=&#34;video/mp4&#34;/&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;</code>
-</pre>
-<p>之后的效果显示如下，从图中我们可以看出该视频播放界面包含<code>快进</code> 、<code>音量调整</code> 和<code>全屏播放</code>这几个按钮<br>
+</pre><p>之后的效果显示如下，从图中我们可以看出该视频播放界面包含<code>快进</code> 、<code>音量调整</code> 和<code>全屏播放</code>这几个按钮<br>
 <img src="/blog_img/web/show-video-in-html5-page/screen-img-1.png" alt="浏览器中正常播放视频" title="浏览器中正常播放视频"></p>
 <h2 id="在iframe中不能全屏播放视频">在iframe中不能全屏播放视频</h2>
 <p>项目中好多地方都用<code>iframe</code>来嵌套html页面，最开始我是用类似如下代码在被<code>iframe</code>包含的页面中嵌入前面的视频播放代码，
 发现显示出来的视频播放器没有全屏播放按钮，通过升级浏览器版本和清除缓存等方法依然不奏效。搜索<a href="http://stackoverflow.com/"><strong>stackoverflow</strong></a>找到一个类似的问题<a href="http://stackoverflow.com/questions/15276929/how-to-make-a-video-fullscreen-when-it-is-placed-inside-an-iframe"><strong>How to make a video fullscreen when it is placed inside an iframe?</strong></a>，阅读后发现只需要将<code>iframe</code>修改成<code>&lt;iframe … allowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot;&gt;</code>即可</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;iframe&gt;
   &lt;!DOCTYPE html&gt;
   &lt;html&gt;
@@ -223,8 +220,7 @@
     &lt;body&gt;
   &lt;/html&gt;
 &lt;/iframe&gt;</code>
-</pre>
-<p><img src="/blog_img/web/show-video-in-html5-page/screen-img-2.png" alt="视频无法进行全屏播放" title="视频无法进行全屏播放"></p>
+</pre><p><img src="/blog_img/web/show-video-in-html5-page/screen-img-2.png" alt="视频无法进行全屏播放" title="视频无法进行全屏播放"></p>
 <h2 id="隐藏声音调整按钮">隐藏声音调整按钮</h2>
 <p>有些演示视频只有图像没有声音，为了避免对使用者造成不必要的干扰，可以将声音播放按钮屏蔽掉，由于自己项目只支持基于<code>webkit</code>内核的<code>Chrome</code>浏览器访问，通过Google之后在 <a href="http://stackoverflow.com/"><strong>stackoverflow</strong></a>找到
 <a href="http://stackoverflow.com/questions/15126921/why-do-no-user-agents-implement-the-css-cursor-style-for-video-elements/15145555#15145555"><strong>Why do no user-agents implement the CSS cursor style for video elements</strong></a>这篇文章，其中列出了播放视频时相关控制按钮的css类：</p>
@@ -247,8 +243,7 @@
 <li>video::-webkit-media-controls-toggle-closed-captions-button</li>
 </ul>
 <p>为了屏蔽掉声音播放按钮，我们只需使用<code>video::-webkit-media-controls-volume-slider</code>和<code>video::-webkit-media-controls-mute-button</code>这两个属性即可，相应的css代码如下：</p>
-
-<pre class="line-numbers language-css ">
+<pre class="line-numbers language-css " title="css">
 <code>/**隐藏视频音量大小调整控件**/
 .no_sound_style&gt;video::-webkit-media-controls-volume-slider{
 	display:none;
@@ -258,8 +253,7 @@
 .no_sound_style&gt;video::-webkit-media-controls-mute-button{
 	display:none;
 }</code>
-</pre>
-<p>对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见<br>
+</pre><p>对应的显示效果如下图所示，可以看到音量喇叭和音量调整空间都消失不见<br>
 <img src="/blog_img/web/show-video-in-html5-page/screen-img-3.png" alt="屏蔽了声音播放按钮" title="屏蔽了播放器中的声音播放按钮"></p>
     </div>
 
@@ -477,6 +471,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

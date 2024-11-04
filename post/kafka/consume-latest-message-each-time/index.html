@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -182,8 +182,7 @@
 	 <p>近期项目中有一个数据展示功能，其数据来源于<a href="https://kafka.apache.org/"><strong>Kafka</strong></a>，项目要求<code>Kafka</code>每次都消费最新的数据，简要记录下其实现方案。</p>
 <h2 id="固定组实现-不生效">固定组实现-不生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>同时采用固定group，<strong>此种方式只在第一次读取时有效，后续再次读取时仍然从上次读取的地方开始继续读</strong>，不满足使用要求。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Properties props = new Properties();
 props.put(&#34;bootstrap.servers&#34;, &#34;10.10.2.98:9004&#34;);
 // 每次将组名动态生成
@@ -198,12 +197,10 @@ KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
 
 String topic = &#34;raw_message&#34;;
 consumer.subscribe(Arrays.asList(topic));</code>
-</pre>
-<h2 id="动态组实现-生效">动态组实现-生效</h2>
+</pre><h2 id="动态组实现-生效">动态组实现-生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>，同时每次消费时将group的名称动态生成，这样即可确保每次读取的都是最新的消息。</p>
 <p>其缺点是group的数量会不断增加，偏移量___consumer_offsets 多次保存，且没找到有效的删除group的方法，也没办法做到定期清理，会对性能产生影响，通常只作为测试与实现使用。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Properties props = new Properties();
 props.put(&#34;bootstrap.servers&#34;, &#34;10.10.2.98:9004&#34;);
 // 每次将组名动态生成
@@ -218,11 +215,9 @@ KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
 
 String topic = &#34;raw_message&#34;;
 consumer.subscribe(Arrays.asList(topic));</code>
-</pre>
-<h2 id="固定组实现-生效">固定组实现-生效</h2>
+</pre><h2 id="固定组实现-生效">固定组实现-生效</h2>
 <p>将<code>auto.offset.reset</code>设置为<code>latest</code>的同时，group名称固定不变 ，给对应Consumer调用<a href="https://kafka.apache.org/0100/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#seekToEnd(java.util.Collection)"><strong>seekToEnd()</strong></a>方法，此种方式不需要动态切换组，推荐使用此方式。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Properties props = new Properties();
 props.put(&#34;bootstrap.servers&#34;, &#34;10.10.2.98:9004&#34;);
 props.put(&#34;group.id&#34;, &#34;test-group-1&#34;);
@@ -442,6 +437,51 @@ consumer.seekToEnd(topics);</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

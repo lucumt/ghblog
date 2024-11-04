@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -199,35 +199,28 @@
 <p>result:</p>
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/podman-search-trend.png" alt="Podman search trends" title="Podman search trends"></p>
 <p>embed code:</p>
-
-<pre class="no-line-numbers language-html ">
+<pre class="no-line-numbers language-html " title="html">
 <code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js&#34;&gt;&lt;/script&gt; &lt;script type=&#34;text/javascript&#34;&gt; trends.embed.renderExploreWidget(&#34;TIMESERIES&#34;, {&#34;comparisonItem&#34;:[{&#34;keyword&#34;:&#34;Podman&#34;,&#34;geo&#34;:&#34;&#34;,&#34;time&#34;:&#34;today 5-y&#34;}],&#34;category&#34;:0,&#34;property&#34;:&#34;&#34;}, {&#34;exploreQuery&#34;:&#34;date=today%205-y&amp;q=Podman&#34;,&#34;guestPath&#34;:&#34;https://trends.google.com:443/trends/embed/&#34;}); &lt;/script&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p><code>Docker</code> search trend</p>
 <p>result:</p>
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/docker-search-trend.png" alt="Docker search trends" title="Docker search trends"></p>
 <p>embed code:</p>
-
-<pre class="no-line-numbers language-html ">
+<pre class="no-line-numbers language-html " title="html">
 <code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js&#34;&gt;&lt;/script&gt; &lt;script type=&#34;text/javascript&#34;&gt; trends.embed.renderExploreWidget(&#34;TIMESERIES&#34;, {&#34;comparisonItem&#34;:[{&#34;keyword&#34;:&#34;Docker&#34;,&#34;geo&#34;:&#34;&#34;,&#34;time&#34;:&#34;today 5-y&#34;}],&#34;category&#34;:0,&#34;property&#34;:&#34;&#34;}, {&#34;exploreQuery&#34;:&#34;date=today%205-y&amp;q=Docker&#34;,&#34;guestPath&#34;:&#34;https://trends.google.com:443/trends/embed/&#34;}); &lt;/script&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p><code>Kubernetes</code> search trend</p>
 <p>result:</p>
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/docker-search-trend.png" alt="Kubernetes search trends" title="Kubernetes search trends"></p>
 <p>embed code:</p>
-
-<pre class="no-line-numbers language-html ">
+<pre class="no-line-numbers language-html " title="html">
 <code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://ssl.gstatic.com/trends_nrtr/3728_RC01/embed_loader.js&#34;&gt;&lt;/script&gt; &lt;script type=&#34;text/javascript&#34;&gt; trends.embed.renderExploreWidget(&#34;TIMESERIES&#34;, {&#34;comparisonItem&#34;:[{&#34;keyword&#34;:&#34;Kubernetes&#34;,&#34;geo&#34;:&#34;&#34;,&#34;time&#34;:&#34;today 5-y&#34;}],&#34;category&#34;:0,&#34;property&#34;:&#34;&#34;}, {&#34;exploreQuery&#34;:&#34;date=today%205-y&amp;q=Kubernetes&#34;,&#34;guestPath&#34;:&#34;https://trends.google.com:443/trends/embed/&#34;}); &lt;/script&gt;</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <p>If we put the embed codes into single page, usually we can put these three code blocks into html page directly:</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -246,8 +239,7 @@
 
 &lt;/body&gt;
 &lt;/html&gt;</code>
-</pre>
-<p>However,if we test it inside a web server we will find <strong>only the first one can works fine,the others are not.</strong></p>
+</pre><p>However,if we test it inside a web server we will find <strong>only the first one can works fine,the others are not.</strong></p>
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/only-the-first-one-working.png" alt="Only the first chart is working" title="Only the first chart is working"></p>
 <p>Let&rsquo;s modify the code and make only one chart left,we will find that <strong>it will works fine where there are only one chart!</strong></p>
 <p>We can check it at <a href="https://jsfiddle.net/kt82567q/"><strong>live demo with three charts not working</strong></a> and <a href="https://jsfiddle.net/kt82567q/1/"><strong>live demo with one chart working</strong></a>.</p>
@@ -255,8 +247,7 @@
 <p>When the page has three charts,we can check the browser console and will find that there are no error inside it, there must be something wrong with my code!</p>
 <p>After search on the Internet I found a solution<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>,the reason is that <strong>we have imported duplicated<code>embed_loader.js</code>,it only needs imported one!</strong></p>
 <p>Change code as below</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -276,8 +267,7 @@
 
 &lt;/body&gt;
 &lt;/html&gt;</code>
-</pre>
-<p>Test it again we will find all the charts working fine,that&rsquo;s all!</p>
+</pre><p>Test it again we will find all the charts working fine,that&rsquo;s all!</p>
 <p><img src="/blog_img/web/embed-multiple-google-trends-charts-into-single-html-page/all-charts-working-file.png" alt="All charts working fine" title="All charts working fine"></p>
 <p>We can check it at <a href="https://jsfiddle.net/upgnjfkx/"><strong>live demo with three charts working</strong></a></p>
 <div class="footnotes" role="doc-endnotes">
@@ -490,6 +480,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

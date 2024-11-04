@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -235,8 +235,7 @@
 <ul>
 <li>
 <p>基于<code>Class</code>类的<code>forName</code>模拟复现:</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TestClassForName {
 
     public static void main(String[] args) {
@@ -253,14 +252,12 @@
         System.out.println(&#34;output info after Class.forName invoke outside try-catch&#34;);
     }
 }</code>
-</pre>
-<p>输出结果如下，可见<code>try-catch</code>之后的代码块还能正常执行</p>
+</pre><p>输出结果如下，可见<code>try-catch</code>之后的代码块还能正常执行</p>
 <p><img src="/blog_img/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/class-not-found-exception-produce-result-1.png" alt="利用Class中的forName模拟" title="利用Class中的forName模拟"></p>
 </li>
 <li>
 <p>基于<code>ClassLoader</code>中的<code>loadClass</code>复现：</p>
-
-<pre class="line-numbers language-JAVA ">
+<pre class="line-numbers language-JAVA " title="JAVA">
 <code>public class TestClassLoader {
 
     public static void main(String[] args) {
@@ -277,8 +274,7 @@
         System.out.println(&#34;output info after ClassLoader.loadClass invoke outside try-catch&#34;);
     }
 }</code>
-</pre>
-<p>输出结果如下</p>
+</pre><p>输出结果如下</p>
 <p><img src="/blog_img/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/class-not-found-exception-produce-result-2.png" alt="利用ClassLoader中的loadClass模拟" title="利用ClassLoader中的loadClass模拟"></p>
 </li>
 </ul>
@@ -313,8 +309,7 @@
 <li>
 <p>类加载阶段出错，在编译后jar文件中删除要调用的class类即可实现：</p>
 <p>要编译为jar文件的代码</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>/* 类结构
 &#43;---src
 |   &#43;---main
@@ -339,10 +334,8 @@ public class InnerApi {
         System.out.println(&#34;hello&#34;);
     }
 }</code>
-</pre>
-<p>主执行类</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>主执行类</p>
+<pre class="line-numbers language-java " title="java">
 <code>import com.lucumt.api.OuterApi;
 
 public class TestNoClassDefFoundError1 {
@@ -356,16 +349,14 @@ public class TestNoClassDefFoundError1 {
         System.out.println(&#34;OutApi invoke&#34;);
     }
 }</code>
-</pre>
-<p>将上述工程编译打包为jar文件，然后在jar文件中去掉InnerApi，将其引入包含执行类的测试工程，此时其结构如下：</p>
+</pre><p>将上述工程编译打包为jar文件，然后在jar文件中去掉InnerApi，将其引入包含执行类的测试工程，此时其结构如下：</p>
 <p><img src="/blog_img/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/no-class-def-found-error-reproduce-1.png" alt="在jar文件中删除类" title="在jar文件中删除类"></p>
 <p>输出结果如下，可以看出虽然抛出了异常，但在<code>try-catch</code>代码块之后的代码还是能够执行</p>
 <p><img src="/blog_img/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/no-class-def-found-error-result-1.png" alt="类不存在导致错误" title="类不存在导致错误"></p>
 </li>
 <li>
 <p>类初始化阶段出错，通过某种方式强制初始化出错：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>
 public class TestNoClassDefFoundError2 {
 
@@ -386,8 +377,7 @@ class Demo {
         System.out.println(&#34;hello&#34;);
   }
 }</code>
-</pre>
-<p>输出结果如下，不同于前一个测试，此处的<code>try-catch</code>之后的代码没有机会执行</p>
+</pre><p>输出结果如下，不同于前一个测试，此处的<code>try-catch</code>之后的代码没有机会执行</p>
 <p><img src="/blog_img/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/no-class-def-found-error-result-2.png" alt="类初始化失败导致错误" title="类初始化失败导致错误"></p>
 </li>
 </ul>
@@ -652,6 +642,51 @@ class Demo {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

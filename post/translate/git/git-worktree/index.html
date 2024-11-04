@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -184,17 +184,14 @@
 <p>这就是<code>worktree</code>，通过它我们可在不必多次<code>clone</code>的前提下通过不同的分支创建不同的工作空间。</p>
 <p>可通过<code>git worktree add ../my_second_worktree the_other_branch</code>来创建一个新的<code>worktree</code>，该指令会生成一个名为<code>my_second_worktree</code>的新文件夹并使用``the_other_branch<code>分支中的代码，之后可在里面独立运行并使用各种常规的</code>git`指令。</p>
 <p>可通过下述指令来快速查看创建的所有<code>worktree</code></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>$ git worktree list
 /Users/charlesfeval/git/my_repo                   bd502b1 [user/chfeval/240614_that_feature]
 /Users/charlesfeval/git/my_repo--other_worktree   15d0988 [user/chfeval/240616_fix_versionin]
 /Users/charlesfeval/git/my_repo--bugfix_2  9c26708 [user/chfeval/240617_fix_rockin]</code>
-</pre>
-<p>如果已经用<code>worktree</code>完成了相关操作，可使用类似<code> git worktree remove ../my_second_worktree</code>来删除。</p>
+</pre><p>如果已经用<code>worktree</code>完成了相关操作，可使用类似<code> git worktree remove ../my_second_worktree</code>来删除。</p>
 <p>下面是<a href="https://git-scm.com/docs/git-worktree">官方文档</a>上关于该指令的说明</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>usage: git worktree add [-f] [--detach] [--checkout] [--lock [--reason &lt;string&gt;]]
                         [-b &lt;new-branch&gt;] &lt;path&gt; [&lt;commit-ish&gt;]
    or: git worktree list [-v | --porcelain [-z]]
@@ -407,6 +404,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

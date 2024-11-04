@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -292,8 +292,7 @@ start_build(right)->compile_code(right)->build_image(right)->upload_image(right)
 <h3 id="理论基础">理论基础</h3>
 <p>部署到<code>Docker</code>的理论基础是通过<code>Jenkins</code>所在的宿主机(目前部门内部的<code>Jenkins</code>与<code>KubeSphere</code>都在同一台宿主机上)通过<code>SSH(Secure Shell)</code>在要部署的服务器上执行<code>Docker</code>相关执行，将之前需要手工执行的操作步骤以自动化的方式替代。</p>
 <p>关于<code>SSH</code>远程执行的相关操作说明，详情请参见 <a href="https://www.cnblogs.com/sparkdev/p/6842805.html"><strong>SSH远程执行任务</strong></a> ，常用的指令如下</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 执行单条指令
 ssh nick@xxx.xxx.xxx.xxx &#34;df -h&#34;
 
@@ -305,8 +304,7 @@ ssh nick@xxx.xxx.xxx.xxx &lt; test.sh
 
 # 远程执行脚本，带参数
 ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld即为传入的参数</code>
-</pre>
-<p>考虑到基于<code>Docker</code>部署时需要先检测同名的<code>Docker</code>容器是否存在，如存在要将其先该容器停止并删除，之后再创建新的同名容器，这一系列操作直接用指令写很复杂也不便于阅读，用<code>shell</code>脚本替代较为合适。</p>
+</pre><p>考虑到基于<code>Docker</code>部署时需要先检测同名的<code>Docker</code>容器是否存在，如存在要将其先该容器停止并删除，之后再创建新的同名容器，这一系列操作直接用指令写很复杂也不便于阅读，用<code>shell</code>脚本替代较为合适。</p>
 <p>同时考虑到要兼容多个不同的工程和版本，需要传递相关的参数进行区分，故最终采用的方案为<strong>以带参数的放方式执行远程脚本</strong>。</p>
 <p>初略的架构图如下：</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/ssh-server-docker.png" alt="通过ssh操作多个服务器" title="通过ssh操作多个服务器"></p>
@@ -353,29 +351,23 @@ ssh nick@xxx.xxx.xxx.xxx &#39;bash -s&#39; &lt; test.sh helloworld # helloworld�
 <ol>
 <li>
 <p>在要执行的服务器上执行下述指令，检测<code>ssh</code>目录是否存在</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>ls ~/.ssh/ 
 # 如果该目录提示不存在，需要先ssh localhost用root用户登录一下ssh</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>以<code>root</code>账户或其它具有权限的账户在终端中执行下述指令来生成秘钥</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 邮箱名称可根据实际情况填写
 ssh-keygen -t rsa -b 4096 -C &#34;xxx@xxx.com&#34;</code>
-</pre>
-<p>执行过程中一路按<code>Enter</code>键即可，执行结果类似如下  <img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/linux-ssh-keygen-output.png" alt="Linux中生成ssh相关秘钥" title="Linux中生成ssh相关秘钥"></p>
+</pre><p>执行过程中一路按<code>Enter</code>键即可，执行结果类似如下  <img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/linux-ssh-keygen-output.png" alt="Linux中生成ssh相关秘钥" title="Linux中生成ssh相关秘钥"></p>
 </li>
 <li>
 <p>执行下述指令，将公钥写入到<code>authorized_keys</code>文件中(若缺少此步骤会导致<code>Jenkins</code>进行免密登录时一直认证不通过)</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>cd ~/.ssh
 cat id_rsa.pub &gt;&gt; authorized_keys</code>
-</pre>
-<p>执行结果输出类似如下，至此公钥与私钥配置完毕。</p>
+</pre><p>执行结果输出类似如下，至此公钥与私钥配置完毕。</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/write-pub-key-to-authorized-keys.png" alt="将公钥写入授权文件" title="将公钥写入授权文件"></p>
 </li>
 </ol>
@@ -410,15 +402,13 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 </ol>
 <h3 id="流水线配置">流水线配置</h3>
 <p>在<code>Jenkins</code>中添加类似如下的代码并执行测试，若测试正常，则表示<code>Jenkins</code>中基于<code>SSH</code>的远程部署全部配置完成，操作过程全部结束！</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>sshagent(credentials: [&#39;10-30-31-24-key&#39;]) {
     sh &#39;&#39;&#39;if [ $TARGET_IP = \&#39;10.30.31.24\&#39; ];then 
           ssh -o StrictHostKeyChecking=no root@10.30.31.24  \&#39;bash -s\&#39; &lt; cicd/ssh_deploy.sh &#34;${REGISTRY}/${DOCKERHUB_NAMESPACE}&#34;  ${NODE_PORT} ${PRODUCT_PHASE} &#34;xxx-batch-storage:${BUILD_TAG}&#34;
           fi&#39;&#39;&#39;
 }</code>
-</pre>
-<p>有如下几点需要注意：</p>
+</pre><p>有如下几点需要注意：</p>
 <ol>
 <li>
 <p><code>ID</code>值为前面在<code>Jenkins</code>中添加凭据时输入的值</p>
@@ -440,8 +430,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 </li>
 <li>
 <p>在<code>KubeSphere</code>中建立类似如下流水线</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>pipeline {
   agent {
     node {
@@ -480,8 +469,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
     GITHUB_ACCOUNT = &#39;kubesphere&#39;
   }
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行该流水线，在最后一个步骤的输出如下，可以看出<code>docker ps</code>的执行结果符合预期(至于<code>pwd</code>和<code>echo $HOSTNAME</code>输出结果有差异是由于<code>Jenkins</code>容器本身执行时使用的是特定的账户以及特定的路径导致的)</p>
 <p><img src="/blog_img/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/kubesphere-ssh-test-result.png" alt="KubeSphere中ssh测试执行结果" title="KubeSphere中ssh测试执行结果"></p>
@@ -490,8 +478,7 @@ cat id_rsa.pub &gt;&gt; authorized_keys</code>
 <h2 id="参考示例">参考示例</h2>
 <h3 id="远程shell脚本">远程shell脚本</h3>
 <p>注意： <code>shell</code>脚本在我们要通过ssh远程执行的那台<code>执行者</code>的电脑上，而不是位于被执行者的电脑上。</p>
-
-<pre class="line-numbers language-shell ">
+<pre class="line-numbers language-shell " title="shell">
 <code>#!/bin/bash
 
 harbor_url=$1
@@ -536,10 +523,8 @@ else
   printf &#34;\033[31m$module_name对应的容器启动失败,容器id为${container_id:0:12}!\033[0m\n&#34;
   exit 1
 fi</code>
-</pre>
-<h3 id="jenkins流水线">Jenkins流水线</h3>
-
-<pre class="line-numbers language-groovy ">
+</pre><h3 id="jenkins流水线">Jenkins流水线</h3>
+<pre class="line-numbers language-groovy " title="groovy">
 <code>pipeline {
   agent {
     node {
@@ -900,6 +885,51 @@ docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/xxx-batch-storage:$BUILD_TAG&#39;&#3
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -227,8 +227,7 @@
 <h2 id="interruptedexception">InterruptedException</h2>
 <p>如果抛出<code>InterruptedException</code>异常意味着该方法是一个阻塞方法，那么调用一个阻塞方法意味着调用方法也是阻塞方法，我们应该有一个处理<code>InterruptedException</code>异常的策略。通过最简单的策略是直接抛出<code>InterruptedException</code>，如代码清单1中puskTask()和getTask()方法所示,这样做即可使方法响应中断，并且通常只需要在throws字句中添加<code>InterruptedException</code>。</p>
 <p>代码清单1： 通过向调用者传递<code>InterruptedException</code>来避免捕获</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class TaskQueue {
     private static final int MAX_TASKS = 1000;
  
@@ -243,11 +242,9 @@
         return queue.take();
     }
 }</code>
-</pre>
-<p>有时在传播异常之前需要进行一些清理，在这种情况下，你可以捕获<code>InterruptedException</code>，执行清理然后重新抛出异常。代码清单2，一种用于匹配在线游戏服务中玩家的机制展示了这种技术。<code>matchPlayers()</code>方法等待两个玩家到达后就开始一个新的游戏，如果在一个玩家到达后但在第二个玩家到达之前被中断，它会在重新抛出<code>InterruptedException</code>异常之前将该玩家放回队列，这样玩家的请求就不会丢失。</p>
+</pre><p>有时在传播异常之前需要进行一些清理，在这种情况下，你可以捕获<code>InterruptedException</code>，执行清理然后重新抛出异常。代码清单2，一种用于匹配在线游戏服务中玩家的机制展示了这种技术。<code>matchPlayers()</code>方法等待两个玩家到达后就开始一个新的游戏，如果在一个玩家到达后但在第二个玩家到达之前被中断，它会在重新抛出<code>InterruptedException</code>异常之前将该玩家放回队列，这样玩家的请求就不会丢失。</p>
 <p>代码清单2: 在重新抛出<code>InterruptedException</code>之前基于任务进行特定清理</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class PlayerMatcher {
     private PlayerSource players;
  
@@ -275,12 +272,10 @@
          }
     }
 }</code>
-</pre>
-<h3 id="不要吞没中断">不要吞没中断</h3>
+</pre><h3 id="不要吞没中断">不要吞没中断</h3>
 <p>有些时候抛出<code>InterruptedException</code>异常并不合适，例如在由<code>Runnable</code>定义的任务中调用一个可中断方法，在这种情形下，你不能抛出<code>InterruptedException</code>，但你也不想做其它任何事情。当阻塞方法检测到中断并抛出<code>InterruptedException</code>时，它会清除中断状态。如果捕获<code>InterruptedException</code>异常但无法重新抛出它，则应保留中断发生时的证据，以便调用堆栈上的代码可以了解中断并在必要时对其进行响应。如代码清单3所示，这个任务是通过调用<code>interrupt()</code>来 <em>重新中断(reinterrupt)</em> 当前线程完成的。每当你捕获<code>InterruptedException</code>并且不重新抛出它时，要在返回之前重新中断当前线程(即清除中断状态)。</p>
 <p>代码清单3: 捕获<code>InterruptedException</code>后恢复中断状态</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>public class TaskRunner implements Runnable {
     private BlockingQueue&lt;Task&gt; queue;
  
@@ -301,11 +296,9 @@
          }
     }
 }</code>
-</pre>
-<p>对于<code>InterruptedException</code>最糟糕的处理是吞没它，在捕获它之后既不重新抛出它也不重新设置当前线程的中断状态。</p>
+</pre><p>对于<code>InterruptedException</code>最糟糕的处理是吞没它，在捕获它之后既不重新抛出它也不重新设置当前线程的中断状态。</p>
 <p>代码清单4: 吞下中断&ndash;不要这样做</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>// 不要这么做
 public class TaskRunner implements Runnable {
     private BlockingQueue&lt;Task&gt; queue;
@@ -326,15 +319,13 @@ public class TaskRunner implements Runnable {
          }
     }
 }</code>
-</pre>
-<p>如果你无法重新抛出<code>InterruptedException</code>，不论你是否计划对中断请求进行响应，你仍然应该重新设置当前线程的中断状态，因为单个中断请求可能有多个接收人。标准线程池(<code>ThreadPoolExecutor</code>)中的工作线程实现了响应中断，因此中断线程池中运行的任务可能会同时影响到取消任务和通知执行线程当前线程池正在关闭。如果该任务吞下中断请求，则工作线程可能不会知道该中断被请求过，这可能会延迟应用程序或关闭服务。</p>
+</pre><p>如果你无法重新抛出<code>InterruptedException</code>，不论你是否计划对中断请求进行响应，你仍然应该重新设置当前线程的中断状态，因为单个中断请求可能有多个接收人。标准线程池(<code>ThreadPoolExecutor</code>)中的工作线程实现了响应中断，因此中断线程池中运行的任务可能会同时影响到取消任务和通知执行线程当前线程池正在关闭。如果该任务吞下中断请求，则工作线程可能不会知道该中断被请求过，这可能会延迟应用程序或关闭服务。</p>
 <h2 id="实现可取消的任务">实现可取消的任务</h2>
 <p>在Java语言规范中没有任何内容可以中断任何特定语义，但在较大程序中，很难保持除了取消操作之外的任何中断语义。依赖于具体的业务活动，用户可以通过GUI或JMS、WebService服务等来请求取消操作。也可以由程序逻辑请求实现，例如，网络爬虫在检测到磁盘空间已满时自动关闭，或者并行算法可能会启动多个线程来搜索解决方案的不同区域并在其中一个找到解决方案后取消其余的。</p>
 <p>一个任务不能仅仅因为它可以取消而意味着它需要立即响应中断请求。对于通过代码循环执行的任务，通常是在每个循环中检查中断状态。根据循环执行的时间长短，在任务代码通知线程中断之前可能需要一些时间(通过调用<code>Thread.isInterrupted()</code>轮询中断中断或调用一个阻塞方法)。如果任务需要更具响应性，则可以更频繁的轮询中断状态。阻塞方法通常在进入该方法时立即轮询中断状态，如果要提高响应性，可以直接抛出<code>InterruptedException</code>异常。</p>
 <p>当你知道一个线程即将结束执行时，吞下一个中断是可接受的。只有当调用可中断方法的类是<code>Thread</code>的一部分而不是<code>Runnable</code>或通用库代码时才会出现此种情形，如代码清单5所示。它创建了一个枚举质数的线程，并且允许线程在中断时退出。这个寻找质数的循环在两个地方检查中断：一个通过轮迅while循环判断条件中的<code>isInterrupted()</code>方法，另一个则是通过调用阻塞的<code>BlockingQueue.put()</code>方法。</p>
 <p>代码清单5: 在知道线程将结束时可以吞下中断</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class PrimeProducer extends Thread {
     private final BlockingQueue&lt;BigInteger&gt; queue;
  
@@ -354,14 +345,12 @@ public class TaskRunner implements Runnable {
  
     public void cancel() { interrupt(); }
 }</code>
-</pre>
-<h3 id="非中断阻塞">非中断阻塞</h3>
+</pre><h3 id="非中断阻塞">非中断阻塞</h3>
 <p>并非所有的阻塞方法都会抛出<code>InterruptedException</code>。输入流和输出流由于等待I/O操作完成而阻塞，但它们不会抛出<code>InterruptedException</code>异常，并且如果它们被中断，也不会提前返回。但在套接字I/O的情形下，如果一个线程关闭套接字，在其它线程中的阻塞I/O操作将会通过<code>SocketException</code>提早结束。java.nio包中的非阻塞I/O操作也不支持可中断的I/O操作，但可以通过关闭通道或请求唤醒<code>Selector</code>来实现类似的阻塞操作。类似的，尝试获取内部锁(进入一个同步块)不能被中断，但使用<code>ReentrantLock</code>能实现可中断的获取锁。</p>
 <h3 id="非取消任务">非取消任务</h3>
 <p>有些任务只是简单的拒绝被中断从而导致它们无法取消。但即使是不可取消的任务也应该保留中断状态，以防在调用堆栈上的代码想要在不可取消的任务完成后响应中断。代码清单6显示了一个方法等待阻塞队列直到其中某个元素可用，无论它是否被中断。为了安分守己，该方法在完成后会清除最终代码块中的中断状态，以避免剥夺调用者发出的中断请求。由于会导致无限循环而不能在该方法中恢复中断状态。(<code>BlockingQueue.take()</code>可以在调用时立即轮询中断状态，如果发现有中断状态集则立即抛出<code>InterruptedException</code>异常。)</p>
 <p>代码清单6: 非取消的任务在返回之前恢复中断状态</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public Task getNextTask(BlockingQueue&lt;Task&gt; queue) {
     boolean interrupted = false;
     try {
@@ -378,8 +367,7 @@ public class TaskRunner implements Runnable {
             Thread.currentThread().interrupt();
     }
 }</code>
-</pre>
-<h2 id="总结">总结</h2>
+</pre><h2 id="总结">总结</h2>
 <p>你可以使用Java平台提供的协作中断机制来构建灵活的取消策略。线程活动可以决定它们是否可以取消、如何响应中断，如果立即返回会影响应用程序的完整性时，它们可以推迟中断以执行特定于任务的清理活动。即是想完全忽略代码中的中断，也要确保在捕获<code>InterruptedException</code>时恢复中断状态，并且不要重新抛出它以便调用它的代码不会被剥夺对于中断发生的感知。</p>
 <p>&lt;–翻译结束!–&gt;</p>
     </div>
@@ -598,6 +586,51 @@ public class TaskRunner implements Runnable {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

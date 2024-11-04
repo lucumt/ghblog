@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -260,8 +260,7 @@
 <p>从上图可知经过高亮处理后的图表代码已经与<code>html</code>标签混杂在一起，为了能正常展示图表数据，必须要有一种方式能够准确的获取原始的图表代码，此时需要借助<code>Hugo</code>的<a href="https://gohugo.io/templates/render-hooks/">Render Hooks</a>功能，其主要功能是<strong>让我们通过自定义的模板来覆盖<code>Hugo</code>默认的功能实现</strong>。如下图所示经过Markup处理后的，会将原始的代码文件基于对应codeblock文件中的代码来展示，在对应的<code>html</code>中包含我们原始的代码块文件，采用<code>JavaScript</code>或<code>jQuery</code>都能快速的获取到对应代码，之后调用对应图表<code>JavaScript</code>库来进行渲染或初始化即可。</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/hugo-diagram-show-as-highlight-html.png" alt="经过render hooks处理后按html展示" title="经过render hooks处理后按html展示"></p>
 <p>根据<code>Hugo</code>官方<a href="https://gohugo.io/templates/render-hooks/">Render Hooks</a>上的说明，需要在<code>layouts/_default/_markup</code>文件夹下建立对应的<code>html</code>文件，其命名规则为<code>render-xxx-[yyy].html</code>,其中xxx为一级类别，yyy为二级类别(可选的)，如要重写所有的代码展示可创建文件<code>render-codeblock.html</code>，要重写所有的图片展示可创建文件<code>render-image.html</code>,要重写所有的<code>mermaid</code>代码展示则需要添加上二级分类<code>render-codeblock-mermiad.html</code>。</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>layouts/
 └── _default/
     └── _markup/
@@ -271,8 +270,7 @@
         ├── render-image.html
         ├── render-image.rss.xml
         └── render-link.html</code>
-</pre>
-<div class="admonition warning"><p class="admonition-title">注意</p>
+</pre><div class="admonition warning"><p class="admonition-title">注意</p>
 <p>当我们最终修改完毕后，若页面上没有正常展示相关的图表且浏览器控制台出现如下错误，需要在<code>layouts/partials/scripts.html</code>或<code>config.toml</code>中重新修改相关报错文件的<code>integrity</code>值，或在<code>static/lib</code>下重新下载相关的文件，确保其校验值一致，即可消除错误。</p>
 </div>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/invalid_integrity_check_for_js_and_css.png" alt="加载js和css文件时提示资源完整性校验不通过" title="加载js和css文件时提示资源完整性校验不通过"></p>
@@ -281,17 +279,14 @@
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-flow.html</code>并添加如下代码</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;div id=&#34;flow_{{ .Ordinal }}&#34;&gt;
   {{- .Inner | safeHTML }}
 &lt;/div&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/partials/scripts.html</code>补充原有的代码，添加上初始化功能</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!-- flowchart --&gt;
 {{- if and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) -}}
   {{- if .Site.Params.publicCDN.enable -}}
@@ -320,13 +315,11 @@
 	$(&#34;[id^=flow_]&#34;).flowChart(flowOptions);
 	&lt;/script&gt;
 {{- end -}}</code>
-</pre>
-<p>上述代码中通过<code>let flowOptions = {...flowSiteOptions, ...flowPageOptions};</code>来确保页面上的配置覆盖全局配置，优先级更高。</p>
+</pre><p>上述代码中通过<code>let flowOptions = {...flowSiteOptions, ...flowPageOptions};</code>来确保页面上的配置覆盖全局配置，优先级更高。</p>
 </li>
 <li>
 <p>在对应的<code>markdown</code>页面头部开启<code>flowchart</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>flowchartDiagrams:
   enable: true
   options: &#34;{
@@ -337,8 +330,7 @@
               &#39;line-length&#39;: 50,
               &#39;text-margin&#39;: 10
             }&#34;</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <h3 id="自定义样式">自定义样式</h3>
 <p>不同于<code>sequence</code>,<code>flowchart</code>的使用很灵活，其<a href="https://flowchart.js.org/">官网</a>上虽然只有4个demo，但已经覆盖了大部分功能，本小节简要介绍如何对其中的<code>flowstate</code>进行配置从而让图表展示不同的样式。</p>
@@ -348,8 +340,7 @@
 <img src="/blog_img/hugo/enable-diagrams-in-hugo/flowchart-flowstate-custom-config.png" alt="flowstate自定义样式设置" title="flowstate自定义样式设置"></p>
 <h3 id="展示效果">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>flowchartDiagrams:
   enable: true
   options: &#34;{
@@ -384,13 +375,11 @@
                 &#39;approved&#39;: {&#39;fill&#39;: &#39;peru&#39;}
               }
             }&#34;</code>
-</pre>
-<h4 id="图表1">图表1</h4>
+</pre><h4 id="图表1">图表1</h4>
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```flow
 st=&gt;start: 开始框
 op=&gt;operation: 处理框
@@ -402,8 +391,7 @@ st-&gt;op-&gt;cond
 cond(yes)-&gt;io-&gt;e
 cond(no)-&gt;sub1(right)-&gt;op
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="flow_6">st=>start: 开始框
@@ -421,8 +409,7 @@ cond(no)->sub1(right)->op
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```flow
 st=&gt;start: 开始节点
 in=&gt;inputoutput: 输入
@@ -435,8 +422,7 @@ st(right)-&gt;in-&gt;op-&gt;cond
 cond(yes,right)-&gt;out-&gt;e
 cond(no)-&gt;sub
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="flow_8">st=>start: 开始节点
@@ -455,8 +441,7 @@ cond(no)->sub
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```flow
 st=&gt;start: Start|past:&gt;http://www.google.com[blank]
 e=&gt;end: End:&gt;http://www.google.com
@@ -473,8 +458,7 @@ cond(no)-&gt;sub1(left)-&gt;op1
 c2(yes)-&gt;io-&gt;e
 c2(no)-&gt;op2-&gt;e
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="flow_10">st=>start: Start|past:>http://www.google.com[blank]
@@ -499,17 +483,14 @@ c2(no)->op2->e
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-sequence.html</code>并添加如下代码</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;div id=&#34;sequence_{{ .Ordinal }}&#34;&gt;
     {{- .Inner | safeHTML }}
 &lt;/div&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/partials/scripts.html</code>补充原有的代码，添加上初始化功能</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!-- js-sequence-diagrams --&gt;
 {{- if and (or .Params.sequenceDiagrams.enable (and .Site.Params.sequenceDiagrams.enable (ne .Params.sequenceDiagrams.enable false))) (or .IsPage .IsHome) -}}
   {{- if .Site.Params.publicCDN.enable -}}
@@ -542,13 +523,11 @@ c2(no)->op2->e
 	$(&#34;[id^=sequence_]&#34;).sequenceDiagram(seqOptions);
   &lt;/script&gt;
 {{- end }}</code>
-</pre>
-<p>可以看出，其实现代码与<code>flowchart</code>的类似。</p>
+</pre><p>可以看出，其实现代码与<code>flowchart</code>的类似。</p>
 </li>
 <li>
 <p>在对应的<code>markdown</code>页面头部开启<code>sequence</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果。</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>sequenceDiagrams: 
   enable: true
   options: &#34;{
@@ -556,8 +535,7 @@ c2(no)->op2->e
                &#39;font-size&#39;: 14,
                &#39;font-family&#39;: &#39;Andale Mono, monospace&#39;
             }&#34;</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <h3 id="自定义样式-1">自定义样式</h3>
 <p>在<code>sequence</code>的<a href="https://bramp.github.io/js-sequence-diagrams/">官方网站</a>上对于该图表的初始化只提供的<code>theme</code>这一个属性而且其值也只有simple和hand两个选项，对于字体，背景色等没有像<code>flowchart</code>那么丰富的支持。</p>
@@ -569,8 +547,7 @@ c2(no)->op2->e
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/sequence-custom-config.png" alt="sequence图表动态配置" title="sequence图表动态配置"></p>
 <h3 id="展示效果-1">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>sequenceDiagrams: 
   enable: true
   options: &#34;{
@@ -592,13 +569,11 @@ c2(no)->op2->e
                     &#39;stroke&#39;:&#39;#219b15&#39;
                 }
             }&#34;</code>
-</pre>
-<h4 id="图表1-1">图表1</h4>
+</pre><h4 id="图表1-1">图表1</h4>
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```sequence
 Title: Here is a title
 A-&gt;B: Normal line
@@ -606,8 +581,7 @@ B--&gt;C: Dashed line
 C-&gt;&gt;D: Open arrow
 D--&gt;&gt;A: Dashed open arrow
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="sequence_16">Title: Here is a title
@@ -621,8 +595,7 @@ D-->>A: Dashed open arrow
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```sequence
 # Example of a comment.
 Note left of A: Note to the\n left of A
@@ -630,8 +603,7 @@ Note right of A: Note to the\n right of A
 Note over A: Note over A
 Note over A,B: Note over both A and B
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="sequence_18"># Example of a comment.
@@ -645,16 +617,14 @@ Note over A,B: Note over both A and B
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```sequence
 participant C
 participant B
 participant A
 Note right of A: By listing the participants\n you can change their order
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="sequence_20">participant C
@@ -667,16 +637,14 @@ Note right of A: By listing the participants\n you can change their order
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```sequence
 Andrew-&gt;China: Says Hello
 Note right of China: China thinks\nabout it
 China--&gt;Andrew: How are you?
 Andrew-&gt;&gt;China: I am good thanks!
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="sequence_22">Andrew->China: Says Hello
@@ -689,8 +657,7 @@ Andrew->>China: I am good thanks!
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```sequence
 participant System
 participant App
@@ -699,8 +666,7 @@ App--&gt;&gt;Module: Alive?
 Module--&gt;&gt;App: Yay!
 App-&gt;&gt;System: Stop
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div id="sequence_24">participant System
@@ -717,18 +683,15 @@ App->>System: Stop
 <ul>
 <li>
 <p>在<code>layouts/_default/_markup</code>创建文件<code>render-codeblock-mermaid.html</code>并添加如下代码</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;div class=&#34;mermaid&#34;&gt;
   {{- .Inner | safeHTML }}
 &lt;/div&gt;
 {{ .Page.Store.Set &#34;hasMermaid&#34; true }}</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/partials/scripts.html</code>添加如下代码</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!-- mermaid js --&gt;
 {{- if and (or .Params.mermaidDiagrams.enable (and .Site.Params.mermaidDiagrams.enable (ne .Params.mermaidDiagrams.enable false))) (or .IsPage .IsHome) -}}
 	{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
@@ -750,39 +713,33 @@ App->>System: Stop
 	  &lt;/script&gt;
 	{{ end }}
 {{- end }}</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在对应的<code>markdown</code>页面头部开启<code>mermaid</code>的展示，可根据实际情况添加自定义配置，保存对应<code>markdown</code>文件后页面会自动刷新并展示对应效果</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>mermaidDiagrams: 
   enable: true
   options: &#34;{
      &#39;theme&#39;:&#39;forest&#39;
   }&#34;</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <h3 id="自定义样式-2">自定义样式</h3>
 <p><code>mermaid</code>图表的自定义配置主要基于themes来实现，在其<a href="https://mermaid.js.org/config/theming.html">官网文档</a>上有很详细的说明，下图为一个简单的示例</p>
 <p><img src="/blog_img/hugo/enable-diagrams-in-hugo/mermaid-custom-config.png" alt="mermaid图表动态配置" title="mermaid图表动态配置"></p>
 <h3 id="展示效果-2">展示效果</h3>
 <p>基于对应<code>markdown</code>页面的下述配置展示相关效果</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>mermaidDiagrams: 
   enable: true
   options: &#34;{
      &#39;theme&#39;:&#39;forest&#39;
   }&#34;</code>
-</pre>
-<h4 id="图表1-sequence">图表1-Sequence</h4>
+</pre><h4 id="图表1-sequence">图表1-Sequence</h4>
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 sequenceDiagram
 Alice-&gt;&gt;John: Hello John, how are you?
@@ -794,8 +751,7 @@ John--&gt;&gt;Alice: Great!
 John-&gt;&gt;Bob: How about you?
 Bob--&gt;&gt;John: Jolly good!
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">sequenceDiagram
@@ -814,8 +770,7 @@ Bob-->>John: Jolly good!
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 flowchart TD
     A[Christmas] --&gt;|Get money| B(Go shopping)
@@ -824,8 +779,7 @@ flowchart TD
     C --&gt;|Two| E[iPhone]
     C --&gt;|Three| F[fa:fa-car Car]
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">flowchart TD
@@ -841,8 +795,7 @@ flowchart TD
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermiad
 classDiagram
     Animal &lt;|-- Duck
@@ -866,8 +819,7 @@ classDiagram
       &#43;run()
     }
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">classDiagram
@@ -898,8 +850,7 @@ classDiagram
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 stateDiagram-v2
     [*] --&gt; Still
@@ -909,8 +860,7 @@ stateDiagram-v2
     Moving --&gt; Crash
     Crash --&gt; [*]
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>显示效果</p>
 <div class="mermaid">stateDiagram-v2
@@ -927,8 +877,7 @@ stateDiagram-v2
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 erDiagram
     CUSTOMER }|..|{ DELIVERY-ADDRESS : has
@@ -940,8 +889,7 @@ erDiagram
     PRODUCT-CATEGORY ||--|{ PRODUCT : contains
     PRODUCT ||--o{ ORDER-ITEM : &#34;ordered in&#34;
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">erDiagram
@@ -960,8 +908,7 @@ erDiagram
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 gantt
     section Section
@@ -972,8 +919,7 @@ gantt
     Parallel 3   :         des5, after des3, 3d
     Parallel 4   :         des6, after des2, 1d
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">gantt
@@ -991,8 +937,7 @@ gantt
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 journey
     title My working day
@@ -1004,8 +949,7 @@ journey
       Go downstairs: 5: Me
       Sit down: 3: Me
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">journey
@@ -1024,8 +968,7 @@ journey
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 gitGraph
     commit
@@ -1039,8 +982,7 @@ gitGraph
     commit
     commit
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">gitGraph
@@ -1061,16 +1003,14 @@ gitGraph
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 pie title Pets adopted by volunteers
     &#34;Dogs&#34; : 386
     &#34;Cats&#34; : 85
     &#34;Rats&#34; : 15
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">pie title Pets adopted by volunteers
@@ -1084,8 +1024,7 @@ pie title Pets adopted by volunteers
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 mindmap
   root((mindmap))
@@ -1105,8 +1044,7 @@ mindmap
       Pen and paper
       Mermaid
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">mindmap
@@ -1133,8 +1071,7 @@ mindmap
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
         timeline
         title 我的日常
@@ -1143,8 +1080,7 @@ mindmap
           下午 : 需求评审会 : 小组周会: coding
           晚上: 加班coding
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">        timeline
@@ -1160,8 +1096,7 @@ mindmap
 <ul>
 <li>
 <p>原始代码</p>
-
-<pre class="line-numbers language- ">
+<pre class="line-numbers language- " title="">
 <code>​```mermaid
 graph TB
     c1--&gt;a2
@@ -1175,8 +1110,7 @@ graph TB
     c1--&gt;c2
     end
 ​```</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>展示效果</p>
 <div class="mermaid">graph TB
@@ -1469,6 +1403,51 @@ graph TB
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

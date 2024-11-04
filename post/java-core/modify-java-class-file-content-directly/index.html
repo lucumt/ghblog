@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -201,8 +201,7 @@
 <p><strong>注：由于直接修改<code>class</code>文件会涉及到<code>class</code>文件结构的相关知识，所以利用此种方式时最好对<code>class</code>文件结构有一定的了解</strong></p>
 <h2 id="修改class文件中的变量">修改Class文件中的变量</h2>
 <p>下面的代码为一个典型的输出<code>Hello World</code>的<code>Java</code>小程序</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.lucumt;
 
 public class Test {
@@ -215,8 +214,7 @@ public class Test {
 		System.out.println(&#34;=====Hello &#34;&#43;language&#43;&#34; World!======&#34;);
 	}
 }</code>
-</pre>
-<p>在cmd命令行中运行该程序的结果如下<br>
+</pre><p>在cmd命令行中运行该程序的结果如下<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/simple-class-before-modifing-running-result.png" alt="未修改之前的运行结果" title="未修改之前的Java代码运行结果"><br>
 若想将运行结果从<code>Hello Java World</code>修改为<code>Hello Golang China</code>，除了通过修改源代码重新编译运行这个方法之外我们还可以利用工具直接修改原有的<code>class</code>文件来实现。</p>
 <p>首先从 <a href="http://set.ee/jbe/" title="点击链接去下载jbe"><strong>JBE</strong></a>下载 JBE(Java Bytecode Editor),JBE是一个用于浏览和修改Java Class文件的开源软件，在其官网上可以看到如下图所示的说明信息<br>
@@ -234,8 +232,7 @@ public class Test {
 <p>由于<code>Java</code>文件后生成的<code>class</code>文件是一个包含<code>Java</code>字节码的二进制文件，程序最终执行的就是二进制文件中的字节码，我们的需求可以归纳为如何修改<code>Java</code>字节码文件。前一部分通过JBE来修改<code>class</code>文件只不过是将这个过程进行了图形化封装，我们需要找到更底层的实现方法来适应我们的需求。</p>
 <p>此时<a href="http://jboss-javassist.github.io/javassist/" title="Javassist官网"><strong>Javassist</strong></a>闪亮登场！在<code>Javassit</code>官网关于其的第一句介绍为<strong>Javassist (Java Programming Assistant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java</strong> 。<code>Javassist</code>天生就是为修改<code>Java</code>字节码而来的，它提供了源代码和字节码两种级别的API接口，为了实现的简便性，本文主要介绍利用源代码API来修改<code>class</code>文件。</p>
 <p>下面的代码为一个计算两个整数相加的程序</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.lucumt;
 
 public class Test1 {
@@ -249,12 +246,10 @@ public class Test1 {
 		return a&#43;b;
 	}
 }</code>
-</pre>
-<p>正常情况下，其输出结果如下<br>
+</pre><p>正常情况下，其输出结果如下<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-method-before-modifing-running-result.png" alt="未修改方法前的运行结果" title="未修改方法前的运行结果"><br>
 若我们想将<code>addNumber</code>的返回结果从两个数之和变为两个数立方后求和，则可以利用<code>Javassist</code>提供的API通过Java程序来直接修改<code>class</code>文件。关于如何使用<code>Javassist</code>请直接参看相应的 <a href="http://jboss-javassist.github.io/javassist/tutorial/tutorial.html"><strong>入门教程</strong></a>，本文不再详细说明，利用<code>Javassist</code>修改 <code>addNumber</code>的<code>Java</code>代码如下：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.lucumt.test;
 
 import java.io.IOException;
@@ -304,8 +299,7 @@ public class UpdateMethod {
 
 	}
 }</code>
-</pre>
-<p>运行该代码后重新执行后的结果如下，从图中可以看出运行结果符合预期<br>
+</pre><p>运行该代码后重新执行后的结果如下，从图中可以看出运行结果符合预期<br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-method-after-modifing-runnning-result.png" alt="修改方法后的运行结果" title="修改方法后的运行结果"></p>
 <p>关于<code>UpdateMethod</code>工具类有如下几点说明：</p>
 <ul>
@@ -328,8 +322,7 @@ public class UpdateMethod {
 <p>从中可知，方法中的参数从<code>$1</code>开始，若该方法为非<code>static</code>方法，可以用<code>$0</code>来表示该方法实例自身，若该方法为<code>static</code>方法，则 <code>$0</code> 不可用</p>
 <h2 id="在class文件中增加方法">在Class文件中增加方法</h2>
 <p><code>Javassist</code>不仅可以修改已有的方法，还可以给<code>class</code>文件增加新的方法。仍以前面的 Test1 <code>Java</code>代码中为例，现要求增加一个名为<code>showParameter</code>的方法并在<code>addNumber</code>方法中调用，其主要功能是输出<code>addNumber</code>中传入的参数。利用<code>Javassist</code>修改<code>class</code>文件实现该功能的代码如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.lucumt.test;
 
 import java.io.IOException;
@@ -378,8 +371,7 @@ public class AddMethod {
 
 	}
 }</code>
-</pre>
-<p>运行该代码后重新执行Test1后的结果如下，从图中可以看出运行结果符合预期  <br>
+</pre><p>运行该代码后重新执行Test1后的结果如下，从图中可以看出运行结果符合预期  <br>
 <img src="/blog_img/java-core/modify-java-class-file-content-directly/java-add-method-runnning-result.png" alt="新增方法后的运行结果" title="新增方法后的运行结果"><br>
 从上述代码可以看出，利用<code>Javassist</code>增加方法比修改方法更简单，先将要新增的方法内容赋值到字符串，然后分别调用相关类的<code>make</code>和 <code>addMethod</code>方法即可。</p>
 <h2 id="后记">后记</h2>
@@ -601,6 +593,51 @@ public class AddMethod {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

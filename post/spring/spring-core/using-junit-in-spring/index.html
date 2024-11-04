@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -199,8 +199,7 @@
 	 <p>在进行Java程序开发时，我们偶尔会被要求使用<a href="http://junit.org/"><strong>JUnit</strong></a>进行单元测试来确保我们所写的程序逻辑是正确的。一个良好的单元测试应该具备 <code>覆盖度高</code>，<code>可重复执行</code>,<code>单一性</code>等特点。本文主要关注<code>可重复执行</code>，在Web开发中，大部分方法都会使数据库的记录发生变化，为了能够重复执行，必须利用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><strong>数据库事务</strong></a>来进行<code>回滚</code>从而达到重复执行的目的。最原始的方法是利用 <a href="https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html"><strong>java.sql.Connection</strong></a>类的 <code>commit()</code> 或 <code>rollback()</code> 方法来在每个单元测试方法中手动的进行提交或回滚，此种方式使得单元测试代码嵌入了与实际业务逻辑无关的数据库操作事务控制代码。利用<a href="https://spring.io/"><strong>Spring</strong></a>和<a href="http://junit.org/"><strong>JUnit</strong></a>通过注解的方式我们可以很容易的对单元测试中的数据库操作进行事务控制。</p>
 <h2 id="所有方法都回滚">所有方法都回滚</h2>
 <p>在该单元测试类的开头加上 <code>@TransactionConfiguration(defaultRollback=true)</code> 可以确保该类中的所有方法在执行完毕之后默认都进行回滚。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.hirain.testmanagement.service.test;
  
 import static org.junit.Assert.assertEquals;
@@ -246,11 +245,9 @@ public class ProjectServiceTest{
 	}
  
 }</code>
-</pre>
-<h2 id="指定方法回滚">指定方法回滚</h2>
+</pre><h2 id="指定方法回滚">指定方法回滚</h2>
 <p>若想只对某个特定的方法进行回滚，需要在该单元测试类的开头去掉 <code>@TransactionConfiguration(defaultRollback=true)</code> ，同时在对应的方法上加上注解声明 <code>@Rollback(true)</code> 即可达到目的。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.hirain.testmanagement.service.test;
  
 import static org.junit.Assert.assertEquals;
@@ -513,6 +510,51 @@ public class ProjectServiceTest{
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

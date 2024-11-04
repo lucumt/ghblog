@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -231,26 +231,21 @@
 <h2 id="源码分析">源码分析</h2>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-code-style-css-code.png" alt="Even主题中的代码样式的设置" title="Even主题中的代码样式的设置"></p>
 <p>个人对于<code>Even</code>主题最不满意的是在显示代码段时其样式不太符合自己预期，在浏览器中分析代码段对应的<code>CSS</code>样式，可看出是由如下<code>CSS</code>代码控制的：</p>
-
-<pre class="line-numbers language-css ">
+<pre class="line-numbers language-css " title="css">
 <code>.post .post-content code, .post .post-content pre {
     padding: 7px;
     font-size: .9em;
     font-family: Consolas,Monaco,Menlo,dejavu sans mono,bitstream vera sans mono,courier new,monospace;
     background: #f8f5ec;
 }</code>
-</pre>
-<p>分析<code>Even</code>主题的源码后发现其主要是基于<a href="https://sass-lang.com/"><strong>Sass</strong></a>框架通过<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_partial/_post/_code.scss">_code.scss</a>和<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_partial/_post/_content.scss">_content.scss</a>联合实现的，其中背景设置是通过<code>background: $code-background;</code>实现</p>
+</pre><p>分析<code>Even</code>主题的源码后发现其主要是基于<a href="https://sass-lang.com/"><strong>Sass</strong></a>框架通过<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_partial/_post/_code.scss">_code.scss</a>和<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_partial/_post/_content.scss">_content.scss</a>联合实现的，其中背景设置是通过<code>background: $code-background;</code>实现</p>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/hugo-code-block-scss-source-code.png" alt="Even主题中通过scss设置代码块样式" title="Even主题中通过scss设置代码块样式"></p>
 <p>由于<code>Sass</code>支持通过变量来动态的设置<code>CSS</code>属性值，故<code>$code-background</code>显然也是一个变量，查看源码后发现其在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中有如下定义:</p>
-
-<pre class="line-numbers language-scss ">
+<pre class="line-numbers language-scss " title="scss">
 <code>// Color of the code background.
 $code-background: $deputy-color !default;</code>
-</pre>
-<p>在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中继续查找<code>$deputy-color</code>的定义，可找出在该文件开头有如下代码，其中<code>$deputy-color</code>是通过<code>$theme-color-config</code>在<code>$theme-color-map</code>中查找相关的颜色设置，自己博客之前默认淡黄色的代码块样式就是通过<code>Default</code>样式设置的。</p>
-
-<pre class="line-numbers language-scss ">
+</pre><p>在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中继续查找<code>$deputy-color</code>的定义，可找出在该文件开头有如下代码，其中<code>$deputy-color</code>是通过<code>$theme-color-config</code>在<code>$theme-color-map</code>中查找相关的颜色设置，自己博客之前默认淡黄色的代码块样式就是通过<code>Default</code>样式设置的。</p>
+<pre class="line-numbers language-scss " title="scss">
 <code>// ==============================
 // Variables
 // ==============================
@@ -281,10 +276,8 @@ $theme-color: nth($theme-color-list, 1) !default;
 
 // Deputy theme color of the site.
 $deputy-color: nth($theme-color-list, 2) !default;</code>
-</pre>
-<p>进一步分析后发现<code>$deputy-color</code>在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中的多个地方都有使用，从而可以确定通过修改<code>$theme-color-config</code>的值就能达到动态更改博客主题样式的目的。</p>
-
-<pre class="line-numbers language-scss ">
+</pre><p>进一步分析后发现<code>$deputy-color</code>在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中的多个地方都有使用，从而可以确定通过修改<code>$theme-color-config</code>的值就能达到动态更改博客主题样式的目的。</p>
+<pre class="line-numbers language-scss " title="scss">
 <code>// Deputy theme color of the site.
 $deputy-color: nth($theme-color-list, 2) !default;
 
@@ -296,8 +289,7 @@ $content-table-border-color: darken($deputy-color, 3%) !default;
 
 // Color of the code background.
 $code-background: $deputy-color !default;</code>
-</pre>
-<h2 id="样式修改">样式修改</h2>
+</pre><h2 id="样式修改">样式修改</h2>
 <p>由于<code>SCSS</code>文件需要编译成<code>CSS</code>文件后才能被使用，而<code>Hugo</code>默认版本是不支持<code>SCSS</code>编译的，故需要下载<code>Hugo Extended</code>版本</p>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/hugo-extended-version-download.png" alt="Hugo下载Extended版本" title="Hugo下载Extended版本"></p>
 <p>下载完毕后，需将其添加到环境变量，其各种指令的用法与默认版<code>Hugo</code>的用法相同，根据实际情况在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>中修改<code>$theme-color-config</code>的值，然后调用<code>hugo server -w -D</code>等命令即可实时展示修改效果。</p>
@@ -315,8 +307,7 @@ $code-background: $deputy-color !default;</code>
 <p><img src="/blog_img/hugo/change-hugo-style-in-even-theme/even-theme-dark-violet-style.png" alt="Even主题Dark Violet样式" title="Even主题Dark Violet样式"></p>
 <h3 id="扩展">扩展</h3>
 <p>可根据个人喜好在<a href="https://github.com/lucumt/ghblog/blob/master/assets/sass/_variables.scss">_variables.scss</a>动态的添加自己喜欢的颜色配置</p>
-
-<pre class="line-numbers language-scss ">
+<pre class="line-numbers language-scss " title="scss">
 <code>// ========== Theme Color ========== //
 // Config here to change theme color
 // Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
@@ -330,8 +321,7 @@ $theme-color-map: (
   &#39;Hot Pink&#39;: #FF69B4 #f8f5f5,
   &#39;Dark Violet&#39;: #9932CC #f5f4fa
 );</code>
-</pre>
-<h2 id="致谢">致谢</h2>
+</pre><h2 id="致谢">致谢</h2>
 <ul>
 <li><a href="https://github.com/olOwOlo/hugo-theme-even">https://github.com/olOwOlo/hugo-theme-even</a></li>
 <li><a href="https://github.com/ahonn/hexo-theme-even">https://github.com/ahonn/hexo-theme-even</a></li>
@@ -539,6 +529,51 @@ $theme-color-map: (
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

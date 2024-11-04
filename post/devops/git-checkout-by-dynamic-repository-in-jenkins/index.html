@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -248,8 +248,7 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
 </div>
 <h2 id="解决思路">解决思路</h2>
 <p>由于最初是每个工程项目都有一个单独的<code>Jenkins</code>流水线，故在通过<code>Git</code>下载代码时采用的是类似下图的直接写死<code>Gitlab</code>工程仓库地址的方式，很明显此种方式不满足要求。</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>stage(&#39;拉取代码&#39;) {
     agent none
     steps {
@@ -257,8 +256,7 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
         git(credentialsId: &#39;gitlab-account&#39;, url: &#39;http://gitlab.xxx.com/lucumt-group/system.git&#39;, branch: &#39;$BRANCH_NAME&#39;, changelog: true, poll: false)
     }
 }</code>
-</pre>
-<p>在网上搜索后发现一篇文章<a href="https://stackoverflow.com/questions/56421553/dynamically-selecting-git-repo-in-jenkins-job">dynamically-selecting-git-repo-in-jenkins-job</a>,其采用<code>parameters</code>实现，将<code>Gitlab</code>仓库的地址存储在一个变量中，然后<code>Git</code>下载时实际计算变量值并进行下载。此方案看起来符合要求，进一步查找后发现<code>parameters</code>本身无法直接修改<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，不满足使用要求。</p>
+</pre><p>在网上搜索后发现一篇文章<a href="https://stackoverflow.com/questions/56421553/dynamically-selecting-git-repo-in-jenkins-job">dynamically-selecting-git-repo-in-jenkins-job</a>,其采用<code>parameters</code>实现，将<code>Gitlab</code>仓库的地址存储在一个变量中，然后<code>Git</code>下载时实际计算变量值并进行下载。此方案看起来符合要求，进一步查找后发现<code>parameters</code>本身无法直接修改<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，不满足使用要求。</p>
 <p>由于先前对代码分支名称的获取可通过<code>$BRANCH_NAME</code>来实现，自己尝试采用类似的方式来验证，最终找到了符合要求的实现方案</p>
 <p><img src="/blog_img/devops/git-checkout-by-dynamic-repository-in-jenkins/jenkins-pipeline-dynamic-checkout-code-testing-result.png" alt="采用不同方式尝试在jenkins中实现动态下载" title="采用不同方式尝试在jenkins中实现动态下载"></p>
 <p>下图展示了完整的使用链路，可发现其实现复杂度不是很高</p>
@@ -527,6 +525,51 @@ classDef checkstyle fill:#6bacf2,color:#ffffff,font-weight:bold
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -182,19 +182,16 @@
 	 <p>在进行<code>Java</code>编程时有时候会涉及到时区相关的操作，本文简要介绍一种通过使用<code>JDK</code>内置的时区常量来进行时区相关操作。</p>
 <h2 id="zoneid使用">ZoneId使用</h2>
 <p>在涉及到时区的操作时，通常采用类似如下的代码以<a href="https://zh.wikipedia.org/zh-cn/%E5%AF%AB%E6%AD%BB"><strong>硬编码</strong></a>方式实现相关功能。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>LocalDateTime datetime1 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(&#34;Asia/Shanghai&#34;));
 System.out.println(datetime1);
 LocalDateTime datetime2 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(&#34;America/Chicago&#34;));
 System.out.println(datetime2);</code>
-</pre>
-<p>上述代码中涉及到的时区名称虽然可通过网络查询获得，但使用起来不是特别方便，有木有可能通过<code>JDK</code>内置的API实现呢？</p>
+</pre><p>上述代码中涉及到的时区名称虽然可通过网络查询获得，但使用起来不是特别方便，有木有可能通过<code>JDK</code>内置的API实现呢？</p>
 <p>通过查阅网络资料以及<code>JDK</code>的官方文档，最终找到了答案，那就是<code>ZoneId</code>! 在其<a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html"><strong>官方文档</strong></a>中有如下说明</p>
 <p><img src="/blog_img/java-core/get-datetime-in-specific-timezone/zone-id-description.png" alt="ZoneId描述信息" title="ZoneId描述信息"></p>
 <p>基于上述说明在<code>ZoneId</code>的源码中，可找到如下代码段，该代码段中内置了一些常用时区表示，通过它们可以用更简洁的方式实现。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>    public static final Map&lt;String, String&gt; SHORT_IDS;
     static {
         Map&lt;String, String&gt; map = new HashMap&lt;&gt;(64);
@@ -228,28 +225,22 @@ System.out.println(datetime2);</code>
         map.put(&#34;HST&#34;, &#34;-10:00&#34;);
         SHORT_IDS = Collections.unmodifiableMap(map);
     }</code>
-</pre>
-<p>基于上述代码段改进后的使用方式如下，可以看出相对于初始实现稍微简洁那么一丢丢~</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>基于上述代码段改进后的使用方式如下，可以看出相对于初始实现稍微简洁那么一丢丢~</p>
+<pre class="line-numbers language-java " title="java">
 <code>LocalDateTime datetime3 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(ZoneId.SHORT_IDS.get(&#34;CTT&#34;)));
 System.out.println(datetime3);
 LocalDateTime datetime4 = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(ZoneId.SHORT_IDS.get(&#34;CST&#34;)));
 System.out.println(datetime4);</code>
-</pre>
-<h2 id="zoneid分析">ZoneId分析</h2>
+</pre><h2 id="zoneid分析">ZoneId分析</h2>
 <p>由于前述<code>ZoneId.SHORT_IDS</code>中的时区都是通过字符串表示的，在上网查询的情况下可通过如下代码获取各个时区与<a href="https://zh.wikipedia.org/zh-cn/UTC%E5%81%8F%E7%A7%BB%E9%87%8F"><strong>UTC偏移量</strong></a>的对应关系</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Map&lt;String, String&gt; zoneIdMap = ZoneId.SHORT_IDS;
 zoneIdMap.forEach((k, v) -&gt; {
     ZoneOffset offset = ZoneId.of(v).getRules().getStandardOffset(Instant.EPOCH);
     System.out.println(k &#43; &#34;\t\t&#34; &#43; offset &#43; &#34;\t\t&#34; &#43; v);
 });</code>
-</pre>
-<p>执行结果如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>执行结果如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>CTT		&#43;08:00		Asia/Shanghai
 ART		&#43;02:00		Africa/Cairo
 CNT		-03:30		America/St_Johns
@@ -278,10 +269,8 @@ EAT		&#43;03:00		Africa/Addis_Ababa
 IET		-05:00		America/Indiana/Indianapolis
 MIT		-11:00		Pacific/Apia
 NET		&#43;04:00		Asia/Yerevan</code>
-</pre>
-<p>上述输出结果是无序的，不便于对比使用，可将代码改进如下以便其能按顺序输出</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>上述输出结果是无序的，不便于对比使用，可将代码改进如下以便其能按顺序输出</p>
+<pre class="line-numbers language-java " title="java">
 <code>Map&lt;String, String&gt; zoneIdMap = ZoneId.SHORT_IDS;
 zoneIdMap.entrySet().stream()
     .sorted((c1, c2) -&gt; {
@@ -294,10 +283,8 @@ zoneIdMap.entrySet().stream()
         ZoneOffset offset = ZoneId.of(value).getRules().getStandardOffset(Instant.EPOCH);
         System.out.println(e.getKey() &#43; &#34;\t\t&#34; &#43; offset &#43; &#34;\t\t&#34; &#43; value);
     });</code>
-</pre>
-<p>改进后的输出结果如下，除了个别时区之外基本上都覆盖到了。</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>改进后的输出结果如下，除了个别时区之外基本上都覆盖到了。</p>
+<pre class="line-numbers language-java " title="java">
 <code>NST		&#43;12:00		Pacific/Auckland
 SST		&#43;11:00		Pacific/Guadalcanal
 AET		&#43;10:00		Australia/Sydney
@@ -326,8 +313,7 @@ PST		-08:00		America/Los_Angeles
 AST		-10:00		America/Anchorage
 HST		-10:00		-10:00
 MIT		-11:00		Pacific/Apia</code>
-</pre>
-<p><code>SHORT_IDS</code>中内置的时区总共有28条，但从上述输出结果来看，仍有个别时区遗漏在其中，在<code>ZoneId</code>的API文档中说明<code>SHORT_IDS</code>是来源于<code>TZDB 2005r</code>，不过我没有在网上找到这方面的详细资料。对于不在<code>SHORT_IDS</code>中的，可从<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"><strong>List of tz database time zones</strong></a>中获取响应的时区然后通过硬编码方式实现。</p>
+</pre><p><code>SHORT_IDS</code>中内置的时区总共有28条，但从上述输出结果来看，仍有个别时区遗漏在其中，在<code>ZoneId</code>的API文档中说明<code>SHORT_IDS</code>是来源于<code>TZDB 2005r</code>，不过我没有在网上找到这方面的详细资料。对于不在<code>SHORT_IDS</code>中的，可从<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"><strong>List of tz database time zones</strong></a>中获取响应的时区然后通过硬编码方式实现。</p>
     </div>
 
     
@@ -530,6 +516,51 @@ MIT		-11:00		Pacific/Apia</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -206,8 +206,7 @@
 </ul>
 <p>注: 根据实际运行电脑的配置，有可能不注释<code>volatile</code>关键字时调用stop()方法也能让display()方法立即停止运行。</p>
 <p>代码清单1: <code>volatile</code>关键字的使用</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class VolatileTest {
 
 	//注释掉volatile关键字时display()方法会一直运行下去
@@ -245,8 +244,7 @@
 		vt.test();
 	}
 }</code>
-</pre>
-<p>上述代码展示了<code>volatile</code>的典型使用场景:</p>
+</pre><p>上述代码展示了<code>volatile</code>的典型使用场景:</p>
 <blockquote>
 <p><strong>当有两个或以上的线程同时读取一个共享的可变变量时，为了确保每个线程都能获取到最新的值，应该使用<code>volatile</code>关键字对该变量进行修饰，确保该变量的可见性</strong>。</p>
 </blockquote>
@@ -264,8 +262,7 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
 <p>从这段文字可以看出<code>volatile</code>相对于独占锁提供了更加简便的方式让变量一致且可靠的更新，<code>volatile</code>只确保读取的值正确，对写入影响不大，而独占锁则限制了同时只能有一个读或写，导致出现性能问题以及在特定的场景下无法使用的问题(如代码清单1所示，若采用独占锁则同时只能有一个线程运行，违背了设计初衷)。</p>
 <p>下述代码展示了一个典型的生产者/消费者模式，由于独占锁的存在，即使没有使用<code>volatile</code>关键字，程序也能正常工作。</p>
 <p>代码清单2: 生产者/消费者模式</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class ProducerConsumerTest {
 
 	private static final int MAX_SIZE = 10;
@@ -332,12 +329,10 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
 		new ProducerConsumerTest().test();
 	}
 }</code>
-</pre>
-<h2 id="利用volatile在单例模式中实现双重检查">利用volatile在单例模式中实现双重检查</h2>
+</pre><h2 id="利用volatile在单例模式中实现双重检查">利用volatile在单例模式中实现双重检查</h2>
 <p><code>volatile</code>关键字不仅可以确保线程可见性，还能禁止重排序，它的一个典型应用是利用双重检查实现线程安全的单例设计模式，如代码清单3所示。在该程序中主要利用了<code>volatile</code>禁止重排序的功能，详细说明请参见<a href="https://item.jd.com/11740734.html">Java并发编程的艺术</a>P67中的 <strong>双重检查锁定与延迟初始化</strong> 。</p>
 <p>代码清单3: 利用双重检查实现线程安全的单例模式</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class Singleton {
 
 	private static volatile Singleton instance = null;
@@ -356,8 +351,7 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
     	return instance;
     }
 }</code>
-</pre>
-<p>参考文章:</p>
+</pre><p>参考文章:</p>
 <ul>
 <li><a href="https://item.jd.com/11740734.html">Java并发编程的艺术</a></li>
 <li><a href="https://liuzhengyang.github.io/2017/03/28/volatileandlock/">volatile和lock原理分析</a></li>
@@ -581,6 +575,51 @@ A field may be declared volatile, in which case the Java Memory Model ensures th
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -255,8 +255,7 @@
 <p>由于自己之前采用的是<code>Cloudflare</code>，按照<code>Github</code>的官方文档进行操作时，在进行DNS检查时一开始会提示如下信息</p>
 <p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-failed.png" alt="&ldquo;HTTPS DNS检查失败&rdquo;" title="HTTPS DNS检查失败"></p>
 <p>利用<code>dig</code>命令检查后结果如下</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>[root@vm-16-6-centos ~]# dig &#43;noall &#43;answer lucumt.info
 lucumt.info.            60      IN      A       185.199.110.153
 lucumt.info.            60      IN      A       185.199.111.153
@@ -273,11 +272,9 @@ lucumt.github.io.       2280    IN      A       185.199.111.153
 lucumt.github.io.       2280    IN      A       185.199.110.153
 lucumt.github.io.       2280    IN      A       185.199.108.153
 [root@vm-16-6-centos ~]#</code>
-</pre>
-<p>发现已经切换过来，并且通过浏览器也能以<code>HTTPS</code>的方式正常访问，就是DNS检查结果一直失败，虽然不影响使用，但对于一个有强迫症的人来说页面上有一项检查失败还是很难受的。</p>
+</pre><p>发现已经切换过来，并且通过浏览器也能以<code>HTTPS</code>的方式正常访问，就是DNS检查结果一直失败，虽然不影响使用，但对于一个有强迫症的人来说页面上有一项检查失败还是很难受的。</p>
 <p>给<code>Github</code>官方发送Support Request后很快收到了回复<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，原因为<code>Cloudflare</code>的缓存还没有清除干净，等待2-3后即可恢复正常。</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>$ dig  NS lucumt.info
 
 ; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Debian &lt;&lt;&gt;&gt; NS lucumt.info
@@ -299,8 +296,7 @@ lucumt.info.        23305   IN  NS  angela.ns.cloudflare.com.
 ;; SERVER: 10.127.5.10#53(10.127.5.10)
 ;; WHEN: Thu Jan 19 18:28:08 PST 2023
 ;; MSG SIZE  rcvd: 100</code>
-</pre>
-<p>根据官方人员的反馈等待2-3天后再次检查，发现DNS检查通过!</p>
+</pre><p>根据官方人员的反馈等待2-3天后再次检查，发现DNS检查通过!</p>
 <p><img src="/blog_img/hugo/migrate-github-blog-from-http-to-https/github-pages-dns-check-success.png" alt="&ldquo;HTTPS DNS检查通过&rdquo;" title="HTTPS DNS检查通过"></p>
 <p>参考:</p>
 <ul>
@@ -536,6 +532,51 @@ lucumt.info.        23305   IN  NS  angela.ns.cloudflare.com.
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

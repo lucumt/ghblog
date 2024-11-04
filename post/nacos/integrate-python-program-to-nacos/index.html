@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -211,30 +211,23 @@
 <p>官网文档的说明如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-register-instance.png" alt="Nacos注册实例" title="Nacos注册实例"></p>
 <p>从中可看出只有<code>service_name</code>、<code>ip</code>与<code>port</code> 是必填项，而我们在实际使用中经常需要通过group进行区分，上述文档中并没有相关说明，翻看其源码发现<code>add_naming_instance</code>的方法签名如下，其中包含group相关信息，<strong>文档没有与源码保持一致，必须吐槽下<code>Nacos</code>官方！</strong></p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>def add_naming_instance(self, service_name, ip, port, cluster_name=None, weight=1.0, metadata=None,
                         enable=True, healthy=True, ephemeral=True,group_name=DEFAULT_GROUP_NAME):</code>
-</pre>
-<p>同时可发现要注册实例，必须先获得一个<code>NacosClient</code>对象之后才能进行对应操作，基于官方文档的实现如下：</p>
-
-<pre class="line-numbers language-python ">
+</pre><p>同时可发现要注册实例，必须先获得一个<code>NacosClient</code>对象之后才能进行对应操作，基于官方文档的实现如下：</p>
+<pre class="line-numbers language-python " title="python">
 <code>client = nacos.NacosClient(server_address, namespace=namespace)
 client.add_naming_instance(service_name, service_address, port, group_name=group_name)</code>
-</pre>
-<p>由于对<code>Nacos</code>的各种操作都涉及到<code>NacosClient</code>，故可将其定义为一个全局变量，后续在其它地方可直接使用</p>
-
-<pre class="line-numbers language-python ">
+</pre><p>由于对<code>Nacos</code>的各种操作都涉及到<code>NacosClient</code>，故可将其定义为一个全局变量，后续在其它地方可直接使用</p>
+<pre class="line-numbers language-python " title="python">
 <code>global NACOS_CLIENT
 NACOS_CLIENT = nacos.NacosClient(server_address, namespace=namespace)
 NACOS_CLIENT.add_naming_instance(service_name, service_address, port, group_name=group_name)</code>
-</pre>
-<h3 id="程序启动后监听">程序启动后监听</h3>
+</pre><h3 id="程序启动后监听">程序启动后监听</h3>
 <p>安装完成后可在<code>Nacos</code>页面的服务菜单中看见对应的实例，但经过十几秒后该实例会显示为如下图所示的不健康状态，之后会自动从<code>Nacos</code>服务列表中移除掉：</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-instance-not-health.png" alt="Nacos实例不健康" title="Nacos实例不健康"></p>
 <p>造成此现象的原因为<code>nacos-sdk-python</code>没有提供自动发送心跳的机制，需要自己实现代码来持续不断地发送心跳请求以维持健康状态，可通过异步线程的方式实现，相关代码如下：</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>NACOS_SERVER = None
 NACOS_SERVICE = None
 NACOS_CLIENT = None
@@ -274,54 +267,44 @@ def send_heartbeat(client, service_name, ip, port, group_name):
     while True:
         client.send_heartbeat(service_name, ip, port, group_name=group_name)
         time.sleep(5)</code>
-</pre>
-<h2 id="读取配置">读取配置</h2>
+</pre><h2 id="读取配置">读取配置</h2>
 <p>在<code>Java</code>中通过引入<code>spring-cloud-starter-alibaba-nacos-discovery</code>依赖可直接解析相关的配置文件，非常方便，而在<code>Python</code>中相对没这么简洁，其使用方法如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-get-config.png" alt="Nacos读取配置" title="Nacos读取配置"></p>
 <p>使用代码类似如下</p>
-
-<pre class="no-line-numbers language-python ">
+<pre class="no-line-numbers language-python " title="python">
 <code>config = NACOS_CLIENT.get_config(data_id, group, no_snapshot=True)</code>
-</pre>
-<p>其返回值是一个<a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries"><strong>dictionary</strong></a>对象，获取之后可根据实际情况做进一步处理</p>
+</pre><p>其返回值是一个<a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries"><strong>dictionary</strong></a>对象，获取之后可根据实际情况做进一步处理</p>
 <h2 id="日志系统启用">日志系统启用</h2>
 <p>在<a href="https://www.alibabacloud.com/help/en/mse/support/how-do-i-obtain-logs-from-a-nacos-client#p-vhz-cfm-2xy"><strong>How do I obtain logs from a Nacos client</strong></a>中有如下信息说明<code>Nacos</code>中的日志与<a href="https://docs.python.org/3/library/logging.html"><strong>logging</strong></a>模块保持一致，只需要通过<code>logging</code>开启日志即可。</p>
 <blockquote>
 <p>A Python Nacos client uses the logging module of Python, which is consistent with the logging module of your application. Logs of a Python Nacos client are displayed in application logs.</p>
 </blockquote>
 <p>可在<code>app.py</code>程序的头部添加类似如下代码即可开启<code>Nacos</code>日志</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>logger = logging.getLogger(name)
 logger.setLevel(logging.INFO)</code>
-</pre>
-<p>开启后显示效果类似如下</p>
+</pre><p>开启后显示效果类似如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-log-output.png" alt="Nacos日志输出" title="Nacos日志输出"></p>
 <h2 id="调用其它程序">调用其它程序</h2>
 <p>在<code>Spring</code>中可通过<a href="https://spring.io/projects/spring-cloud-openfeign"><strong>OpenFeign</strong></a>或<a href="https://dubbo.apache.org/en/index.html"><strong>Dubbo</strong></a>来调用注册到<code>Nacos</code>中的服务接口，由于<code>Python</code>与<code>Java</code>是两套不同的体系，在<code>Python</code>只能通过<a href="https://pypi.org/project/requests/"><strong>Requests</strong></a>模块直接发送对应的<code>HTTP</code>请求实现，类似如下代码：</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>url = &#39;http://127.0.0.1:8081/user/queryAll&#39;
 response = requests.get(url).text
 print(response)</code>
-</pre>
-<p>在上述代码中，url地址中的<code>ip</code>和<code>port</code>以硬编码的形式指定，实际使用环境的<code>ip</code>和<code>port</code>会动态变化，显然此种方式使用起来不灵活。结合<code>Nacos</code>本身的特性，可先通过服务名称获取对应的服务实例信息，则其中解析出<code>ip</code>和<code>port</code>，之后发送请求，从而消除动态配置。</p>
+</pre><p>在上述代码中，url地址中的<code>ip</code>和<code>port</code>以硬编码的形式指定，实际使用环境的<code>ip</code>和<code>port</code>会动态变化，显然此种方式使用起来不灵活。结合<code>Nacos</code>本身的特性，可先通过服务名称获取对应的服务实例信息，则其中解析出<code>ip</code>和<code>port</code>，之后发送请求，从而消除动态配置。</p>
 <h3 id="获取实例">获取实例</h3>
 <p>获取实例的方法说明如下</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-query-instance.png" alt="Nacos查询实例" title="查询实例"></p>
 <p>相关调用代码类似如下:</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>namespace = NACOS_SERVICE.namespace
 group_name = NACOS_SERVICE.group_name
 instances = NACOS_CLIENT.list_naming_instance(service_name, namespace_id=namespace,group_name=group_name,healthy_only=True)</code>
-</pre>
-<p>执行后的结果类似如下，可通过在<code>hosts</code>中找到对应的<code>ip</code>和<code>port</code>为调用做准备</p>
+</pre><p>执行后的结果类似如下，可通过在<code>hosts</code>中找到对应的<code>ip</code>和<code>port</code>为调用做准备</p>
 <p><img src="/blog_img/nacos/integrate-python-program-to-nacos/nacos-query-instance-result.png" alt="Nacos查询实例结果" title="Nacos查询实例结果"></p>
 <h3 id="调用接口">调用接口</h3>
 <p>获取到<code>ip</code>和<code>port</code>之后，接下来就是正常的发送<code>HTTP</code>请求，此时已经和<code>Nacos</code>没有关系</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>instances = get_instance(service)
 ip = instances[&#39;hosts&#39;][0][&#39;ip&#39;]
 port = instances[&#39;hosts&#39;][0][&#39;port&#39;]
@@ -532,6 +515,51 @@ print(response)</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

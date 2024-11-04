@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -208,8 +208,7 @@
 	 <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
 <h2 id="原实现方式">原实现方式</h2>
 <p>最开始自己只准备了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境，由于环境数量不多，对于不同环境的端口配置自己是在代码中直接实现的<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code> switch(PRODUCT_PHASE) {
      case &#34;dev&#34;:
      env.NODE_PORT = 12002
@@ -224,8 +223,7 @@
      env.NODE_PORT = 15002
      break
  }</code>
-</pre>
-<p>此种方式将相关环境相关的配置全都集中到<code>Jenkins</code>流水线中，在最初的使用阶段可减少配置文件数量，能够快速编写流水线，快速交付使用。但随着项目规模与人员的扩大，当需要灵活配置多套环境时，此种方式采用硬编码的方式会显得捉襟见肘。</p>
+</pre><p>此种方式将相关环境相关的配置全都集中到<code>Jenkins</code>流水线中，在最初的使用阶段可减少配置文件数量，能够快速编写流水线，快速交付使用。但随着项目规模与人员的扩大，当需要灵活配置多套环境时，此种方式采用硬编码的方式会显得捉襟见肘。</p>
 <p><img src="/blog_img/devops/using-nacos-and-kubesphere-to-create-multiple-environments/kubesphere-build-without-nacos-config.png" alt="kubesphere原始部署方式" title="kubesphere原始部署方式"></p>
 <h2 id="修改后的方式">修改后的方式</h2>
 <p>结合项目实际情况以及避免后续再次修改<code>KubeSphere</code>流水线，为了实现<strong>灵活的配置多套环境</strong>，自己制定了如下2个规则：</p>
@@ -245,8 +243,7 @@
 <p><code>Jenkins</code>默认不支持<code>JSON</code>、<code>YAML</code>的解析，需要在<code>Jenkins</code>中预先安装<a href="https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/">Pipeline Utility Steps</a>插件，该插件提供了对<code>JSON</code>、<code>YAML</code>、<code>CSV</code>、<code>PROPERTIES</code>等常见文件格式的读取与修改操作。</p>
 <h3 id="json文件设计">JSON文件设计</h3>
 <p><code>JSON</code>文件设计如下，通过env、server、dubbo等属性记录环境和端口信息，通过project来记录具体的项目名称，由于配置文件中的key都是固定的，后续<code>Groovy</code>解析时会较为方便，在需要扩展环境时只需要更新此<code>JSON</code>文件即可。</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>{
     &#34;portConfig&#34;:[
         {
@@ -281,11 +278,9 @@
         }
     ]
 }</code>
-</pre>
-<h3 id="读取namespace">读取namespace</h3>
+</pre><h3 id="读取namespace">读取namespace</h3>
 <p>在<a href="https://nacos.io/zh-cn/docs/open-api.html">Nacos Open Api</a>中可知查询<code>namespace</code>的请求为<code>/nacos/v1/console/namespaces</code>，基于<code>Groovy</code>的读取代码如下：</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>response = sh(script: &#34;curl -X GET &#39;http://xxx.xxx.xxx.xxx:8848/nacos/v1/console/namespaces&#39;&#34;, returnStdout: true)
 jsonData = readJSON text: response
 namespaces = jsonData.data
@@ -294,11 +289,9 @@ for(nm in namespaces){
         NACOS_NAMESPACE = nm.namespace
     }
 }</code>
-</pre>
-<h3 id="读取nacos配置文件">读取Nacos配置文件</h3>
+</pre><h3 id="读取nacos配置文件">读取Nacos配置文件</h3>
 <p>在<a href="https://nacos.io/zh-cn/docs/open-api.html">Nacos Open Api</a>中可知查询配置文件的请求为<code>/nacos/v1/cs/configs</code>，基于<code>Groovy</code>的读取代码如下：</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>response = sh(script: &#34;curl -X GET &#39;http://xxx.xxx.xxx.xxx:8848/nacos/v1/cs/configs?dataId=idp-custom-config.json&amp;group=idp-custom-config&amp;tenant=0f894ca6-4231-43dd-b9f3-960c02ad20fa&#39;&#34;, returnStdout: true)
 jsonData = readJSON text: response
 configs = jsonData.portConfig
@@ -315,11 +308,9 @@ for(config in configs){
         env.NODE_PORT = port.server
 	}
 }</code>
-</pre>
-<h3 id="根据yaml文件">根据YAML文件</h3>
+</pre><h3 id="根据yaml文件">根据YAML文件</h3>
 <p>由于自己将项目中变化的部分已经单独抽取为了一个<code>YAML</code>文件，故只需要修改此单独配置文件即可，在修改过程中，处于简化考虑，自己先将原有的<code>YAML</code>文件删除，之后重新写入，相关代码如下</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code>yamlFile = &#39;src/main/resources/bootstrap-dev.yml&#39;
 yamlData = readYaml file: yamlFile
 yamlData.spring.cloud.nacos.discovery.group = BUILD_TYPE
@@ -328,8 +319,7 @@ yamlData.spring.cloud.nacos.config.namespace = NACOS_NAMESPACE
 sh &#34;rm $yamlFile&#34;
 
 writeYaml file: yamlFile, data: yamlData</code>
-</pre>
-<h3 id="运行效果">运行效果</h3>
+</pre><h3 id="运行效果">运行效果</h3>
 <p>上述的配置均需要在项目编译之前进行，配置完毕的流水线运行效果如下，程序可正常运行，改造目的实现。</p>
 <p><img src="/blog_img/devops/using-nacos-and-kubesphere-to-create-multiple-environments/kubesphere-build-with-multiplep-environments.png" alt="kubesphere多环境运行" title="kubesphere多环境运行"></p>
 <h2 id="参考代码">参考代码</h2>
@@ -552,6 +542,51 @@ writeYaml file: yamlFile, data: yamlData</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

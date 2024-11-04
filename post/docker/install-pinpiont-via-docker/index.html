@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -198,8 +198,7 @@
 	 <p>简要记录如何基于<code>docker-compose</code>的方式安装<code>Pinpoint</code>，以及基于<code>Dockerfile</code>与<code>Jenkins</code>流水线将项目添加到<code>Pinpoint</code>中进行实时监控。</p>
 <h2 id="docker-compose安装">docker-compose安装</h2>
 <p>按照下述指令安装<code>docker-compose</code>:</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 下载安装docker-compose
 curl -L https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
 
@@ -208,36 +207,29 @@ chmod &#43;x /usr/local/bin/docker-compose
 
 # 验证是否安装正确
 docker-compose version</code>
-</pre>
-<h2 id="pinpoint安装与测试">Pinpoint安装与测试</h2>
+</pre><h2 id="pinpoint安装与测试">Pinpoint安装与测试</h2>
 <ol>
 <li>
 <p>在终端执行下述指令下载<code>Pinpoint</code>全家桶并解压该文件</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>wget https://github.com/pinpoint-apm/pinpoint-docker/archive/refs/tags/2.2.2.tar.gz
 tar -zxvf 2.2.2.tar.gz</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>进入该目录，可发现其把相关的组件都下载完毕</p>
 <p><img src="/blog_img/docker/install-pinpiont-via-docker/pinpoint-folder-list.png" alt="Pinpoint文件目录" title="Pinpoint文件目录"></p>
 </li>
 <li>
 <p>在该目录下创建一个名为<code>start.sh</code>的脚本文件，写入如下内容</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>#!/bin/bash
 docker-compose up -d zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-agent pinpoint-web pinpoint-collector</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行下述命令启动<code>Pinpoint</code>全套的服务</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>bash start.sh</code>
-</pre>
-<p>若一切正常约5-10秒左右就会启动完毕，执行输出类似如下(第一次执行时会下载相关的镜像，此时耗时较长)</p>
+</pre><p>若一切正常约5-10秒左右就会启动完毕，执行输出类似如下(第一次执行时会下载相关的镜像，此时耗时较长)</p>
 <p><img src="/blog_img/docker/install-pinpiont-via-docker/pinpoint-start-with-bash.png" alt="Pinpoint启动结果" title="Pinpoint启动结果"></p>
 </li>
 <li>
@@ -250,12 +242,10 @@ docker-compose up -d zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-
 </li>
 <li>
 <p>若想关闭<code>Pinpoint</code>服务，同样可在该目录下创建一个名为<code>stop.sh</code>的脚本，写入如下内容，然后执行该脚本即可</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>#!/bin/bash
 docker-compose down zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-agent pinpoint-web pinpoint-collector</code>
-</pre>
-</li>
+</pre></li>
 </ol>
 <h2 id="将新系统接入pinpoint">将新系统接入Pinpoint</h2>
 <p>目前的接入方案是在通过<code>Jenkins</code>部署时，通过脚本的方式自动替换相关的文件，然后打包部署，流程图如下</p>
@@ -277,8 +267,7 @@ docker-compose down zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-a
 <ul>
 <li>
 <p>利用<code>Nginx</code>搭建一个静态的文件下载服务器，核心配置如下</p>
-
-<pre class="line-numbers language-nginx ">
+<pre class="line-numbers language-nginx " title="nginx">
 <code>server {
         listen       8788;
         server_name  zip-download;
@@ -321,12 +310,10 @@ docker-compose down zoo1 zoo2 zoo3 pinpoint-quickstart pinpoint-hbase pinpoint-a
         error_page   500 502 503 504  /50x.html;
 
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>Docker</code>镜像构建时，添加上<code>Pinpoint</code>相关的配置，<code>Dockerfile</code>内容如下</p>
-
-<pre class="line-numbers language-dockerfile ">
+<pre class="line-numbers language-dockerfile " title="dockerfile">
 <code>FROM  openjdk:8-jdk
 LABEL maintainer=lucumt@gmail.com
 
@@ -349,12 +336,10 @@ RUN ls
 # 添加Pinpoint相关的依赖
 ENV AGENT=&#34;-javaagent:/home/xxxx/pinpoint/pinpoint-bootstrap-1.8.5.jar -Dpinpoint.agentId=${PRODUCT_PHASE} -Dpinpoint.applicationName=${DEPLOY_NAME}&#34;
 ENTRYPOINT [&#34;/bin/sh&#34;,&#34;-c&#34;,&#34;java ${AGENT} -Dfile.encoding=utf8 -jar ${PARAMS1} ${PARAMS2}&#34;]</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>Jenkins</code>中采用<code>Shell</code>脚本对<code>Dockerfile</code>进行替换并打包，对应的流水线代码如下，其核心为通过<code>profiler.collector.ip</code>指定<code>Pinpoint</code>服务器的IP地址，对于<code>SpringBoot</code>项目，将<code>actuator</code>健康检查的接口屏蔽掉，避免在<code>Kubernetes</code>等环境下干扰使用</p>
-
-<pre class="line-numbers language-groovy ">
+<pre class="line-numbers language-groovy " title="groovy">
 <code> stage(&#39;镜像构建&#39;) {
       agent none
       steps {
@@ -393,8 +378,7 @@ ENTRYPOINT [&#34;/bin/sh&#34;,&#34;-c&#34;,&#34;java ${AGENT} -Dfile.encoding=ut
         }
       }
     }</code>
-</pre>
-</li>
+</pre></li>
 </ul>
 <p>实际访问效果如下，可发现在主页中能够显示相关项目</p>
 <p><img src="/blog_img/docker/install-pinpiont-via-docker/pinpoint-with-custom-project.png" alt="APM使用示例" title="APM使用示例"></p>
@@ -617,6 +601,51 @@ ENTRYPOINT [&#34;/bin/sh&#34;,&#34;-c&#34;,&#34;java ${AGENT} -Dfile.encoding=ut
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

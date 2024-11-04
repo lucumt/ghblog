@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -50,7 +50,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2024-10-24T10:09:39+08:00">
+  <meta itemprop="dateModified" content="2024-11-01T21:13:04+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
@@ -303,14 +303,12 @@
   <div class="post-content">
     <div class="post-summary">
       <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<a href="http://docs.oracle.com/javase/6/docs/api/"><strong>Runtime</strong></a>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Runtime runtime = Runtime.getRuntime();
 String mysqlCmd = &#34;mysqldump&#34; &#43; &#34; -u&#34; &#43; username &#43; &#34; -p&#34; &#43; password &#43; 
            &#34;  -h &#34; &#43; databaseAddress &#43; &#34; &#34; &#43;databaseName;
 Process process = runtime.exec(mysqlCmd);</code>
-</pre>
-<p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
+</pre><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
     </div>
     <div class="read-more">
       <a href="/post/mysql/can-not-run-program-mysqldump/" class="read-more-link">阅读更多</a>

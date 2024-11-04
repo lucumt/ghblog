@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -185,23 +185,19 @@
 <ol>
 <li>
 <p>在<code>config.toml</code>中添加如下内容，确保可输出<code>JSON</code>格式的数据</p>
-
-<pre class="line-numbers language-toml ">
+<pre class="line-numbers language-toml " title="toml">
 <code>[outputs]
   home = [&#34;HTML&#34;, &#34;RSS&#34;, &#34;JSON&#34;]</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/_default</code>下面创建一个<code>index.json</code>并写入如下内容</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>{{- $.Scratch.Add &#34;index&#34; slice -}}
 {{- range .Site.RegularPages -}}
   {{- $.Scratch.Add &#34;index&#34; (dict &#34;title&#34; .Title &#34;tags&#34; .Params.tags &#34;categories&#34; .Params.categories &#34;date&#34; .Params.date &#34;contents&#34; .Plain &#34;permalink&#34; .Permalink) -}}
 {{- end -}}
 {{- $.Scratch.Get &#34;index&#34; | jsonify -}}</code>
-</pre>
-<p>此步骤执行完毕后可通过<code>http://IP:1313/index.json</code>查看输出的<code>JSON</code>文件，结果类似如下</p>
+</pre><p>此步骤执行完毕后可通过<code>http://IP:1313/index.json</code>查看输出的<code>JSON</code>文件，结果类似如下</p>
 <p><img src="/blog_img/hugo/enable-search-in-even-theme/hugo-index-json-output.png" alt="Hugo中输出index.json文件" title="Hugo中输出index.json文件"></p>
 <p>此步骤较为关键，后续的检索即是对<code>index.json</code>的内容进行检索，其中包含了<code>title</code>、<code>tag</code>等属性，作用如下</p>
 <table>
@@ -244,19 +240,16 @@
 <ol>
 <li>
 <p>在<code>content</code>目录下创建一个名为<code>search.md</code>的文件，需要添加<code>layout: &quot;search&quot;</code>配置来确保其内容是通过模板文件生成，同时在菜单部分添加如下配置，确保搜索功能能展示出来</p>
-
-<pre class="line-numbers language-toml ">
+<pre class="line-numbers language-toml " title="toml">
 <code>[[menu.main]]
 	name = &#34;搜索&#34;
 	weight = 50
 	identifier = &#34;search&#34;
 	url = &#34;/search/&#34;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/_default</code>下创建一个名为<code>search.html</code>的文件，并写入如下内容，确保前一个步骤中的模板文件引入能生效</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>{{ define &#34;main&#34; }}
 	&lt;section&gt;
 	  &lt;div&gt;
@@ -280,12 +273,10 @@
 	  &lt;/div&gt;
 	&lt;/script&gt;
 {{ end }}</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>layouts/partials/scripts.html</code>中添加如下代码，引入对应的<code>js</code>文件</p>
-
-<pre class="line-numbers language-html ">
+<pre class="line-numbers language-html " title="html">
 <code>&lt;!-- search function --&gt;
 {{ if eq (trim .Page.RelPermalink &#34;/&#34;) &#34;search&#34;}}
 	&lt;script src=&#34;https://code.jquery.com/jquery-3.3.1.min.js&#34;&gt;&lt;/script&gt;
@@ -293,12 +284,10 @@
 	&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js&#34;&gt;&lt;/script&gt;
 	&lt;script src=&#34;{{ &#34;lib/search/search.js&#34; | absURL }}&#34;&gt;&lt;/script&gt;
 {{- end }}</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在<code>static/lib/search</code>下创建一个名为<code>search.js</code>的文件，并写入如下内容，它是我们的搜索核心，至此整个搜索功能添加完毕</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>summaryInclude=60;
 var fuseOptions = {
   shouldSort: true,
@@ -416,8 +405,7 @@ function render(templateString, data) {
   }
   return templateString;
 }</code>
-</pre>
-</li>
+</pre></li>
 </ol>
 <h2 id="索引功能验证">索引功能验证</h2>
 <ol>
@@ -640,6 +628,51 @@ function render(templateString, data) {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

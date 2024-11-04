@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -216,8 +216,7 @@
 <h2 id="测试生命周期">测试生命周期</h2>
 <p>默认情况下，<code>JUnit</code>在执行测试中的每个测试方法之前都会创建一个新的实例，这有助于我们单独运行各个测试方法并避免意外的副作用。</p>
 <p>要了解该机制是如何工作的，可以看一下下面的示例:</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>class PerMethodLifecycleTest {
     public PerMethodLifecycleTest() {
         System.out.println(&#34;Constructor&#34;);
@@ -253,13 +252,11 @@
         System.out.println(&#34;Second test&#34;);
     }
 }</code>
-</pre>
-<p>需要注意的是使用<code>@BeforeAll</code>和<code>@AfterAll</code>注解的方法是静态方法，这是因为每个测试方法在创建新的实例时，它们之间没有共享状态。</p>
+</pre><p>需要注意的是使用<code>@BeforeAll</code>和<code>@AfterAll</code>注解的方法是静态方法，这是因为每个测试方法在创建新的实例时，它们之间没有共享状态。</p>
 <p>通过下图可更直观的理解：</p>
 <p><img src="/blog_img/translate/junit5/junit-5-test-lifecycle/junit-5-per-method-lifecycle.svg" alt="JUnit 5 Per Method Lifecycle" title="JUnit 5 Per Method Lifecycle"></p>
 <p>执行上述测试类中的测试方法会得到如下输出(输出结果进行了格式化以便其看起来更直观)</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>Before the entire test fixture
   Constructor
     Before each test
@@ -270,13 +267,11 @@
       Second test
     After each test
 After the entire test fixture</code>
-</pre>
-<p>观察上述输出，可发现<code>JUnit</code>会为每个测试方法构造一个测试类，生命周期相关的fixture方法只执行一次，测试相关的生命周期方法会被执行多次。</p>
+</pre><p>观察上述输出，可发现<code>JUnit</code>会为每个测试方法构造一个测试类，生命周期相关的fixture方法只执行一次，测试相关的生命周期方法会被执行多次。</p>
 <h3 id="按类实例测试">按类实例测试</h3>
 <p>也可以让<code>JUnit</code>在同一个测试实例中执行所有的测试方法，如果将测试类使用<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解，<code>JUnit</code>将为每个测试类创建一个测试实例。</p>
 <p>由于实例共享，此时没有必要使用静态方法：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PerClassLifecycleTest {
     @BeforeAll
@@ -291,12 +286,10 @@ public class PerClassLifecycleTest {
 
     // ...
 }</code>
-</pre>
-<p>同样的，可以用下图理解其执行过程:</p>
+</pre><p>同样的，可以用下图理解其执行过程:</p>
 <p><img src="/blog_img/translate/junit5/junit-5-test-lifecycle/junit-5-per-class-lifecycle.svg" alt="JUnit 5 Per Class Lifecycle" title="JUnit 5 Per Class Lifecycle"></p>
 <p>此时的执行结果略有不同：</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>Constructor
   Before the entire test fixture
     Before each test
@@ -306,8 +299,7 @@ public class PerClassLifecycleTest {
       Second test
     After each test
   After the entire test fixture</code>
-</pre>
-<p>从输出结果中可看出，生命周期相关方法的执行顺序没有发生改变，但不同之处在于<code>JUnit</code>只会构建一次测试类。</p>
+</pre><p>从输出结果中可看出，生命周期相关方法的执行顺序没有发生改变，但不同之处在于<code>JUnit</code>只会构建一次测试类。</p>
 <p>根本区别在于，在构造新测试类实例的默认生命周期方法中会重置实例变量中存储的状态，而当每个类的生命周期方法仅构造一次实例时，存储在实例变量中的状态则会在测试方法之间共享。</p>
 <div class="admonition danger"><p class="admonition-title">注意</p>
 <p>​    如果测试方法依赖于存储在实例变量中的状态，则需要在使用<code>@BeforeEach</code> 或<code>@AfterEach</code>注解的生命周期方法中重置其状态，要尽可能的避免编写依赖与存储实例状态的测试方法。</p>
@@ -315,8 +307,7 @@ public class PerClassLifecycleTest {
 <h3 id="更具体的例子">更具体的例子</h3>
 <p>现在我们知道了生命周期方法如何工作的，进一步探索如何在实践中使用它们是有益的。通常如果有一些计算成本较高的东西，可以在多个测试方法中进行共享。</p>
 <p>此类示例包括打开数据库连接、从依赖注入框架获取上下文或读取文件。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ExpensiveResourceTest {
     private JettyServer jettyServer;
@@ -352,12 +343,10 @@ public class ExpensiveResourceTest {
         assertEquals(404, response);
     }
 }</code>
-</pre>
-<h2 id="嵌套测试生命周期">嵌套测试生命周期</h2>
+</pre><h2 id="嵌套测试生命周期">嵌套测试生命周期</h2>
 <p>生命周期方法同样可以用于嵌套测试，但在默认情况下<code>@BeforeAll</code> 和<code>@AfterAll</code>注解不会工作，这是由于嵌套类是内部类，而<code>Java</code>内部类中不支持静态方法。</p>
 <p>可将嵌套类添加<code>@TestInstance(Lifecycle.PER_CLASS)</code>注解来实现类似效果：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class NestedLifecycleTest {
     @Nested
     class HappyPath {
@@ -406,10 +395,8 @@ public class ExpensiveResourceTest {
         }
     }
 }</code>
-</pre>
-<p>如我们所见，生命周期方法分别应用在每个嵌套测试中：</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>如我们所见，生命周期方法分别应用在每个嵌套测试中：</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>Before entire exceptional path
   Exceptional path one
   Exceptional path two
@@ -420,16 +407,14 @@ After each happy path
 Before each happy path
   Happy path two
 After each happy path</code>
-</pre>
-<div class="admonition note"><p class="admonition-title">补充阅读</p>
+</pre><div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><a href="/post/translate/junit5/junit-5-nested-tests/"><strong>JUnit5 嵌套测试</strong></a></p>
 </div>
 <h2 id="扩展生命周期">扩展生命周期</h2>
 <p>在使用扩展时，<code>JUnit</code>除了调用测试类的生命周期方法之外，还调用对应扩展的生命周期回调方法。</p>
 <p><code>JUnit</code>会确保多个注册扩展的封装行为，假设有扩展<code>ExtensionOne</code>和<code>ExtensionTwo</code>，它会确保<code>ExtensionOne</code>中所有before相关的方法都在<code>ExtensionTwo</code>之前执行，类似的，<code>ExtensionOne</code>中所有after相关的方法都在<code>ExtensionTwo</code>之侯执行。</p>
 <p>看看如下的例子：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class ExtensionOne implements BeforeEachCallback, AfterEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) {
@@ -465,10 +450,8 @@ public class ExtensionLifecycleTest {
         System.out.println(&#34;Second test&#34;);
     }
 }</code>
-</pre>
-<p>执行上述代码后，可在结果中看见相关扩展的封装行为：</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>执行上述代码后，可在结果中看见相关扩展的封装行为：</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>Before each from ExtensionOne
   Before each from ExtensionTwo
     Before each test
@@ -483,8 +466,7 @@ Before each from ExtensionOne
     After each test
   After each from ExtensionTwo
 After each from ExtensionOne</code>
-</pre>
-<div class="admonition note"><p class="admonition-title">补充阅读</p>
+</pre><div class="admonition note"><p class="admonition-title">补充阅读</p>
 <p><code>JUnit5</code>官方文档中有关于执行顺序和扩展的更详细说明</p>
 <p><a href="https://junit.org/junit5/docs/current/user-guide/#extensions-execution-order"><strong>JUnit5 User Guide</strong></a></p>
 </div>
@@ -697,6 +679,51 @@ After each from ExtensionOne</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

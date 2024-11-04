@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -186,38 +186,27 @@
 <h2 id="传统方式">传统方式</h2>
 <p>自己的个人博客创建于2016年，在这期间自己一直基于如下方式创建并部署更新博客：</p>
 <p>1.利用<code>hugo</code>命令创建对应的博客markdown文件</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>hugo new post/hugo/using-github-action-to-auto-build-deploy.md</code>
-</pre>
-<p>2.利用下述命令开启<code>hugo</code>博客的动态监听展示，并进行编写</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p>2.利用下述命令开启<code>hugo</code>博客的动态监听展示，并进行编写</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>hugo server -w -D</code>
-</pre>
-<p>3.博客内容编写完成后，利用下述命令将其切换到实际部署环境</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p>3.博客内容编写完成后，利用下述命令将其切换到实际部署环境</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>hugo server --baseUrl=&#34;https://lucumt.info/&#34; --watch=false --appendPort=false --renderToDisk --environment production</code>
-</pre>
-<p>4.执行下述命令提交到<code>master</code>分支</p>
-
-<pre class="line-numbers language-bash ">
+</pre><p>4.执行下述命令提交到<code>master</code>分支</p>
+<pre class="line-numbers language-bash " title="bash">
 <code>git add -A
 git commit -a -m &#34;xxxx&#34;
 git push origin master</code>
-</pre>
-<p>5.利用下述命令将<code>public</code>目录中的内容从<code>master</code> 分支同步到<code>gh-pages</code>分支</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p>5.利用下述命令将<code>public</code>目录中的内容从<code>master</code> 分支同步到<code>gh-pages</code>分支</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>git subtree push --prefix=public git@github.com:lucumt/ghblog.git gh-pages</code>
-</pre>
-<p>上述过程中的1,2,4阶段是编写博客的必经阶段，而3,5阶段其实没太多必要，完全可以用工具自动化实现。作为IT从业者，我们需要尽可能的减少不必要的操作。</p>
+</pre><p>上述过程中的1,2,4阶段是编写博客的必经阶段，而3,5阶段其实没太多必要，完全可以用工具自动化实现。作为IT从业者，我们需要尽可能的减少不必要的操作。</p>
 <h2 id="改进方式">改进方式</h2>
 <p>结合网络上的相关资料，自己把实现方案定在了<code>GitHub Actions</code>和<a href="https://www.travis-ci.com/">Travis CI</a>二者之一，考虑到<code>GitHub</code>中已经内置了<code>GitHub Actions</code> ，最终解决采用其作为实现方案。</p>
 <p>在<code>Hugo</code>的官方文档<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action">Build Hugo With GitHub Action</a>中也推荐采用<code>GitHub Actions</code>作为持续集成部署方案，并提供了相应的流水线配置代码:</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>name: github pages
 
 on:
@@ -250,8 +239,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public</code>
-</pre>
-<p>该配置代码已经很完善，个人根据实际情况对其做了如下修改：</p>
+</pre><p>该配置代码已经很完善，个人根据实际情况对其做了如下修改：</p>
 <p>1.在Build阶段，将<code>hugo</code>命令改为适合个人环境的<code>hugo -b &quot;https://lucumt.info/&quot; -e &quot;production&quot;</code></p>
 <p>2.在个人<code>GitHub</code>中设置<code>github_token</code></p>
 <p>其中关于<code>github_token</code>的配置可按如下步骤配置：</p>
@@ -269,8 +257,7 @@ jobs:
 <p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/generate-action-secrets-name-violation.png" alt="设置action secret失败" title="设置action secret失败"></p>
 <p>6.在流水线中将<code>github_token</code>值设置为步骤5中<code>secret</code>的名称，类似<code>${{ secrets.GH_PAGE_ACTION_TOKEN }}s</code>，至此<code>github_token</code>设置过程完毕。</p>
 <p>配置后完整的流水线代码如下：</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>name: pages-auto-build-deploy
 on:
   # workflow_dispatch: 
@@ -302,14 +289,12 @@ jobs:
           github_token: ${{ secrets.GH_PAGE_ACTION_TOKEN }}
           publish_dir: ./public
           commit_message: ${{ github.event.head_commit.message }}</code>
-</pre>
-<p>将该<code>yaml</code>文件放到对应<code>GitHub</code>项目下的<code>.github/workflows</code>目录下即完成全部配置。</p>
+</pre><p>将该<code>yaml</code>文件放到对应<code>GitHub</code>项目下的<code>.github/workflows</code>目录下即完成全部配置。</p>
 <p>当执行<code>git push origin master</code>后，<code>GitHub Actions</code>会开启自动构建部署，运行结果如下，至此整个设置过程完毕！</p>
 <p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/hugo-automatic-build-result.png" alt="GitHub Actions执行结果" title="GitHub Actions执行结果"></p>
 <h2 id="其它">其它</h2>
 <p>由于<code>GitHub Action</code>支持定时语法，将流水线触发条件修改如下</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>on:
   push:
     branches:
@@ -317,8 +302,7 @@ jobs:
   schedule:
       # Runs everyday at 8:00 AM
       - cron: &#34;0 8 * * *&#34;</code>
-</pre>
-<p>可实现每天上午8点自动触发构建，由于构建过程中会往<code>gh-pages</code>分支下提交代码，从而间接达成在<code>GitHub</code>中每天提交代码，在<code>GitHub</code>主页面展示时保持全绿的功能！<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</pre><p>可实现每天上午8点自动触发构建，由于构建过程中会往<code>gh-pages</code>分支下提交代码，从而间接达成在<code>GitHub</code>中每天提交代码，在<code>GitHub</code>主页面展示时保持全绿的功能！<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <p><img src="/blog_img/hugo/using-github-action-to-auto-build-deploy/github-commit-everyday.png" alt="GitHub实现每天都提交" title="GitHub实现每天都提交"></p>
 <p>参考文档:</p>
 <ol>
@@ -538,6 +522,51 @@ jobs:
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

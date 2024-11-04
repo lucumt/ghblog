@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -183,13 +183,11 @@
 <p>本文简要介绍自己在<code>GitBook</code>插件定制化修改过程中如何实现从多个不同的文件夹下加载<code>js</code>和<code>css</code>文件的实现过程。</p>
 <h2 id="问题背景">问题背景</h2>
 <p>由于<code>GitBook</code>官方默认的代码高亮插件<a href="https://github.com/GitbookIO/plugin-highlight"><strong>highlight</strong></a>使用的是<a href="https://highlightjs.org/"><strong>highlightjs</strong></a>，其功能没有<a href="https://prismjs.com/"><strong>prismjs</strong></a>完善，故最初将<code>GitBook</code>的代码高亮采用<code>prismjs</code>实现，对应的插件为<a href="https://github.com/gaearon/gitbook-plugin-prism"><strong>gitbook-plugin-prism</strong></a>，其使用方式也很简单，只需要在<code>book.json</code>中添加如下配置:</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>{
   &#34;plugins&#34;: [&#34;prism&#34;, &#34;-highlight&#34;]
 }</code>
-</pre>
-<p>该插件使用起来一切正常，由于部门<code>GitBook</code>的一大用途是记录设计方案与实现的代码，经常会有多个功能相似的对比代码进行展示，占用了大量的空间篇幅且阅读也不是很方便，需要添加一个<a href="https://www.w3schools.com/howto/howto_js_tabs.asp"><strong>tab</strong></a>效果对其进行分组归类。</p>
+</pre><p>该插件使用起来一切正常，由于部门<code>GitBook</code>的一大用途是记录设计方案与实现的代码，经常会有多个功能相似的对比代码进行展示，占用了大量的空间篇幅且阅读也不是很方便，需要添加一个<a href="https://www.w3schools.com/howto/howto_js_tabs.asp"><strong>tab</strong></a>效果对其进行分组归类。</p>
 <p>在网上搜索相关的<code>GitBook</code>插件后，主要有<a href="https://github.com/lwhiteley/gitbook-plugin-codegroup"><strong>gitbook-plugin-codegroup</strong></a>以及<a href="https://github.com/GitbookIO/plugin-codetabs"><strong>gitbook-plugin-codetabs</strong></a>，它们的对比如下：</p>
 <table>
 <thead>
@@ -221,8 +219,7 @@
 <p>确定好方案后，接下来就需要将这两个插件组合到一起，查看它们的源码，发现都各自引入了静态文件</p>
 <p><img src="/blog_img/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/gitbook-plugins-assets-config.png" alt="gitbook插件中都分别引入了静态文件" title="gitbook插件中都分别引入了静态文件"></p>
 <p>自己首先想到的是添加多个<code>assets</code>然后在<code>js</code>和<code>css</code>使用完整路径，类似如下：</p>
-
-<pre class="line-numbers language-js ">
+<pre class="line-numbers language-js " title="js">
 <code>module.exports = {
     book: {
         assets: [&#39;./assets1&#39;,&#39;./assets2&#39;],
@@ -233,16 +230,12 @@
             &#39;codetabs1.js&#39;,&#39;codetabs2.js&#39;
         ]
     },</code>
-</pre>
-<p>但此种方式明显不可行，通过<code>gitbook serve</code>启动之后，终端控制台提示类似如下错误</p>
-
-<pre class="no-line-numbers language-bash ">
+</pre><p>但此种方式明显不可行，通过<code>gitbook serve</code>启动之后，终端控制台提示类似如下错误</p>
+<pre class="no-line-numbers language-bash " title="bash">
 <code>TypeError [ERR_INVALID_ARG_TYPE]: The &#34;path&#34; argument must be of type string. Received an instance of List</code>
-</pre>
-<p>很明显<code>assets</code>的值只能为单个字符串，不能为数组。</p>
+</pre><p>很明显<code>assets</code>的值只能为单个字符串，不能为数组。</p>
 <p>接下来尝试将<code>assets</code> 配置去掉，改为类似如下代码</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>book: {
    css: [
        &#39;./assets1/codetabs1.css&#39;,&#39;./assets2/codetabs2.css&#39;
@@ -251,14 +244,12 @@
        &#39;./assets1/codetabs1.js&#39;,&#39;./assets2/codetabs2.js&#39;
    ]
 },</code>
-</pre>
-<p>此时通过<code>gitbook serve</code>启动时，终端控制台提示一切正常，但访问对应的页面时，显示效果不正常，通过<code>Chrome</code>调试工具可发现上述的<code>js</code>和<code>css</code>都显示为<code>404</code>，都未能正常加载，导致页面显示不正常。</p>
+</pre><p>此时通过<code>gitbook serve</code>启动时，终端控制台提示一切正常，但访问对应的页面时，显示效果不正常，通过<code>Chrome</code>调试工具可发现上述的<code>js</code>和<code>css</code>都显示为<code>404</code>，都未能正常加载，导致页面显示不正常。</p>
 <p>看来<code>assets</code>属性不能省略，且不能以数组方式配置，此时很容易想到的是将这些静态资源文件都放置到一个文件夹下，不就解决了此问题？</p>
 <p>理论上确实可行，但是理想很丰满，现实很骨感，此种方式并不能满足自己的实际需求！</p>
 <p>原因为<code>gitbook-plugin-prism</code>插件的<code>index.js</code>中有如下代码，通过此代码可知<code>gitbook-plugin-prism</code>中是通过去<code>npm</code>仓库中获取<code>prismjs</code>的源文件，而不是直接将<code>primsjs</code>下载到该插件的资源文件目录下，通过这种方式可实现<code>gitbook-plugin-prism</code>与<code>prismjs</code>的解耦，且能快速的升级<code>prismjs</code>，是一个合理且优秀的设计！</p>
 <p>作为一个对代码编写要求很高的人，当前要将别人优秀的习惯保持下来，这样的话就不能将代码分组的静态文件与<code>prismjs</code>代码高亮相关的文件混合在一起，问题产生！</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>function getAssets() {
 
   var cssFiles = getConfig(this, &#39;pluginsConfig.prism.css&#39;, []);
@@ -282,8 +273,7 @@
     css: cssNames
   };
 }</code>
-</pre>
-<h2 id="解决方案">解决方案</h2>
+</pre><h2 id="解决方案">解决方案</h2>
 <p>既不能同时支持多个<code>assets</code>属性，自己又不想破坏<code>prismjs</code>本身的结构，怎么办？</p>
 <p>一开始自己通过<code>Google</code>和<code>GitHub</code>去查找相关的资料，没有找到自己想要的东西，后来用<code>ChatGPT</code>连续切换了好几次提示词，结果答案都是错的.</p>
 <blockquote>
@@ -295,8 +285,7 @@
 <p>找到问题原因后，接下来自己尝试手工把相关的<code>js</code>和<code>css</code>文件加到<code>_book</code>下对应的插件目录中，此时可通过浏览器地址直接访问，不会出现<code>404</code>问题，但是相关的静态资源文件仍然没有加载，在生成的html源码中也没有看见。</p>
 <p><img src="/blog_img/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/gitbook-plugin-resource-files-not-loaded.png" alt="gitbook资源文件没有加载" title="gitbook资源文件没有加载"></p>
 <p>问题原因为我们没有在下述代码中引入对应的<code>js</code>和<code>css</code>文件。</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>book: {
     assets: &#39;./assets&#39;,
         css: [
@@ -306,24 +295,20 @@
             &#39;codetabs.js&#39;
         ]
 },</code>
-</pre>
-<p>要想文件被加载，则必须要引入相关文件，要想文件能被正常访问，在<code>_book</code>下对应的插件目录中必须要有对应的文件。</p>
+</pre><p>要想文件被加载，则必须要引入相关文件，要想文件能被正常访问，在<code>_book</code>下对应的插件目录中必须要有对应的文件。</p>
 <p>至此，问题的解决方案找到！</p>
 <p>引入文件很容易实现，直接在数组中添加对应的文件即可，但如何引入相关文件呢？经过多处查看代码后，自己在<a href="https://github.com/gaearon/gitbook-plugin-prism/blob/master/index.js#L151"><strong>index.js</strong></a>中找到了答案</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>try {
     fs.writeFileSync(outputFile, fs.readFileSync(inputFile));
 } catch (e) {
     console.warn(&#39;Failed to write prism-ebook.css. See https://git.io/v1LHY for side effects.&#39;);
     console.warn(e);
 }</code>
-</pre>
-<p>利用相关的<code>JavaScript</code> API手工将文件写入<code>_book</code>下对应插件的目录中！之后将<code>assets</code>的值设置为对应插件的名称，既能同时访问多个文件！</p>
+</pre><p>利用相关的<code>JavaScript</code> API手工将文件写入<code>_book</code>下对应插件的目录中！之后将<code>assets</code>的值设置为对应插件的名称，既能同时访问多个文件！</p>
 <p>经过多次测试，最终捣鼓出可用的代码，在不破坏<code>prismjs</code>完整性的同时还能加载插件自身的<code>js</code>和<code>css</code>文件，完整代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox/"><strong>gitbook-plugin-prism-codetab-fox</strong></a></p>
 <p>核心的<code>index.js</code>代码如下，主要是通过<code>syncFile</code>函数进行文件写入：</p>
-
-<pre class="line-numbers language-javascript ">
+<pre class="line-numbers language-javascript " title="javascript">
 <code>var Prism = require(&#39;prismjs&#39;);
 var languages = require(&#39;prismjs&#39;).languages;
 var path = require(&#39;path&#39;);
@@ -455,8 +440,7 @@ module.exports = {
         page: // xxx
     }
 };</code>
-</pre>
-<p>自己改造后的插件名为<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox"><strong>gitbook-plugin-prism-codetab-fox</strong></a>，将该插件在<code>book.json</code>中启用并运行<code>gitbook install &amp;&amp; gitbook serve</code>命令后，可以看见在对应的<code>GitBook</code>工程下分别将<code>prismjs</code>和<code>codetab</code>相关的插件都安装到<code>node modules</code>模块下。</p>
+</pre><p>自己改造后的插件名为<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox"><strong>gitbook-plugin-prism-codetab-fox</strong></a>，将该插件在<code>book.json</code>中启用并运行<code>gitbook install &amp;&amp; gitbook serve</code>命令后，可以看见在对应的<code>GitBook</code>工程下分别将<code>prismjs</code>和<code>codetab</code>相关的插件都安装到<code>node modules</code>模块下。</p>
 <p><img src="/blog_img/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/gitbook-node-modules.png" alt="gitbook node modules列表" title="gitbook node modules列表"></p>
 <p>分别检查这两个<code>js</code>模块，可发现其内容都正常</p>
 <p><img src="/blog_img/gitbook/gitbook-plugin-load-css-and-js-from-multiple-folder/gitbook-node-modules-files.png" alt="gitbook node modules文件列表" title="gitbook node modules文件列表"></p>
@@ -666,6 +650,51 @@ module.exports = {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

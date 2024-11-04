@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -188,8 +188,7 @@
     <div class="post-content image-border">
 	 <p>在利用 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>进行多条数据插入时，为了提高性能我们可能会使用批量插入的功能来实现。示例代码如下:</p>
 <p>SQL配置文件:</p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;insert id=&#34;addAuthorityRoleBatch&#34; parameterType=&#34;List&#34;&gt;
     INSERT INTO system_authority_role(role_id,authority_id)
       VALUES
@@ -197,10 +196,8 @@
         (#{authRole.roleId},#{authRole.authorityId})
       &lt;/foreach&gt;
   &lt;/insert&gt;</code>
-</pre>
-<p>Java代码:</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>Java代码:</p>
+<pre class="line-numbers language-java " title="java">
 <code>   public void adjustRoleAuth(String roleId, String authIdsStr) {
 		authRoleDao.deleteAuthorityRoleByRole(roleId);
 		String[] authIds=authIdsStr.split(&#34;;&#34;);
@@ -210,18 +207,14 @@
 		}
 		authRoleDao.addAuthorityRoleBatch(authRoleList);
   }</code>
-</pre>
-<p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>上面的代码大多数时候可以正常运行，但是偶尔会出现如下异常：</p>
+<pre class="line-numbers language-java " title="java">
 <code>### SQL: INSERT INTO system_authority_role(role_id,authority_id)       VALUES
 ### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;&#39; at line 2
 ; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;&#39; at line 2
 at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:233</code>
-</pre>
-<p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<strong>该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</strong> 为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>上面的异常堆栈信息显示现在执行的MySQL语句发生了语法错误，INSERT VALUE后面的值为空，由于该问题有时候发生，有时候不发生，给我们分析该问题造成了一定的困扰。<strong>该问题产生的根源为批量插入时的集合数据为空，使得SQL配置文件中的foreach循环没有执行，从而导致SQL语句不完整，进而产生该异常。</strong> 为了解决该问题我们可以批量插入之前先检查List数据集合是否为空，只有在不为空的情况下才进行插入，如下所示：</p>
+<pre class="line-numbers language-java " title="java">
 <code>public void adjustRoleAuth(String roleId, String authIdsStr) {
 	authRoleDao.deleteAuthorityRoleByRole(roleId);
 	String[] authIds=authIdsStr.split(&#34;;&#34;);
@@ -451,6 +444,51 @@ at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTransla
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

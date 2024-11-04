@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -207,24 +207,20 @@
 <img src="/blog_img/translate/java-concurrency/java-volatile-keyword/java-volatile-1.png" alt="java-volatile-1.png" title="java-volatile-1.png"><br>
 对于非<code>volatile</code>变量而言，Java虚拟机(JVM)不能确保什么时候将数据从主内存读取到CPU缓存以及什么时候将CPU缓存的数据写入到主内存中。而这可能会引起一些问题，我将稍后解释。</p>
 <p>假设两个或更多的线程对下面这个包含一个计数器的共享变量拥有访问权限：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class SharedObject {
     public int counter = 0;
 }</code>
-</pre>
-<p>再次假设，只有Thread1会增加counter变量的值，但是Thread1和Thread2都能在任意时刻读取counter变量的值。</p>
+</pre><p>再次假设，只有Thread1会增加counter变量的值，但是Thread1和Thread2都能在任意时刻读取counter变量的值。</p>
 <p>如果couner变量没有声明为<code>volatile</code>将无法保证在何时把CPU缓存中的值写入主内存中。这意味着counter变量在CPU缓存中的值可能会与主内存中的值不一样，如下所示：<br>
 <img src="/blog_img/translate/java-concurrency/java-volatile-keyword/java-volatile-2.png" alt="java-volatile-2.png" title="java-volatile-2.png"><br>
 造成线程不能获取变量最新值得原因为变量值没有被其它线程及时写回主内存中，这就是所谓的可见性问题。某个线程的更新对其它线程不可见。</p>
 <p>将counter变量声明为<code>volatile</code>之后，所有对counter变量的写操作会立即写入主内存中，同样，所有对counter变量的读操作都会从主内存中读取数据。下面的代码块展示了如何将counter变量声明为<code>volatile</code> ：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class SharedObject {
     public volatile int counter = 0;
 }</code>
-</pre>
-<p>因此定义一个<code>volatile</code>变量可以保证写变量的操作对于其它线程可见。</p>
+</pre><p>因此定义一个<code>volatile</code>变量可以保证写变量的操作对于其它线程可见。</p>
 <h2 id="volatile先行发生原则">Volatile先行发生原则</h2>
 <p>从<code>Java5</code>之后<code>volatile</code>关键字不仅能用于确保变量从主内存中读取和写入，事实上<code>volatile</code>关键字还有如下作用：</p>
 <ul>
@@ -234,8 +230,7 @@
 <p>上述说明需要更进一步的解释。</p>
 <p>当一个线程向一个<code>volatile</code>变量写操作，此时不仅这个<code>volatile</code>变量自身会写入主内存，所有这个<code>volatile</code>变量写入之前受影响发生改变的变量也会刷写入主内存。当一个线程向一个<code>volatile</code>变量读操作时它同样也会从主内存中读取所有和这个<code>volatile</code>变量一起刷写入主内存的变量。</p>
 <p>看看下面这个示例：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>Thread A:
     sharedObject.nonVolatile = 123;
     sharedObject.counter     = sharedObject.counter &#43; 1;
@@ -243,12 +238,10 @@
 Thread B:
     int counter     = sharedObject.counter;
     int nonVolatile = sharedObject.nonVolatile;</code>
-</pre>
-<p>由于线程A在写操作<code>volatile</code>变量sharedObject.counter之前写操作非<code>volatile</code>变量sharedObject.nonVolatile，因而当线程A写操作变量sharedObject.counter后,变量sharedObject.nonVolatile和sharedObject.counter都被写入主内存。</p>
+</pre><p>由于线程A在写操作<code>volatile</code>变量sharedObject.counter之前写操作非<code>volatile</code>变量sharedObject.nonVolatile，因而当线程A写操作变量sharedObject.counter后,变量sharedObject.nonVolatile和sharedObject.counter都被写入主内存。</p>
 <p>由于线程B以读取<code>volatile</code>变量sharedObject.counter开始，因而变量sharedObject.counter和变量sharedObject.nonVolatile都会被写入线程B所使用的CPU缓存中。当线程B读取sharedObject.nonVolatile变量时，它将能看见被线程A写入的变量。</p>
 <p>开发人员可以利用这个扩展的可见性来优化线程之间变量的可见性。不同于把每个变量都设置为<code>volatile</code> ，此时只有少部分变量需要声明为<code>volatile</code> 。下面是一个利用此规则编写的简单示例程序Exchanger ：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class Exchanger {
 
     private Object   object       = null;
@@ -271,23 +264,19 @@ Thread B:
         return obj;
     }
 }</code>
-</pre>
-<p>线程A随时可能会通过调用put()方法增加对象，线程B随时可能会通过调用 take()方法获取对象。只要线程A只调用 put() ，线程B只调用take() ,这个Exchanger就可以通过一个<code>volatile</code>变量正常工作（排除 <code>synchronized</code>代码块的使用）。</p>
+</pre><p>线程A随时可能会通过调用put()方法增加对象，线程B随时可能会通过调用 take()方法获取对象。只要线程A只调用 put() ，线程B只调用take() ,这个Exchanger就可以通过一个<code>volatile</code>变量正常工作（排除 <code>synchronized</code>代码块的使用）。</p>
 <p>然而，JVM可能会重排序Java指令来优化性能，如果JVM可以通过不改变这些重排序指令的语义来实现此功能。如果JVM调换了put()和 take()中的读和写的指令，会发生什么呢？如果put()真的像下面这样执行会出现什么情况呢？</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>while(hasNewObject) {
     //等待，不覆盖已经存在的新对象
 }
 hasNewObject = true; //volatile写入
 object = newObject;</code>
-</pre>
-<p>请注意此时对于<code>volatile</code>变量hasNewObject的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。</p>
+</pre><p>请注意此时对于<code>volatile</code>变量hasNewObject的写操作会在新变量的实际设置前先执行，而这在JVM看来可能会完全合法。两个写操作指令的值不再依赖于对方。</p>
 <p>但是，对于执行指令重排序可能会损害object变量的可见性。首先，线程B可能会在线程A对object真实的写入一个值到object之前读取到hasNewObject的值为true。其次,现在甚至不能保证什么时候写入object的新值会刷写入主内存（好吧，下次线程A在其它地方写入  <code>volatile</code>变量。。。）</p>
 <p>为了阻止上面所述的这种情况发生，<code>volatile</code>关键字提供了一个 <strong>先行发生原则</strong>。先行发生保证确保对于<code>volatile</code>变量的读写指令不会被重排序。程序运行中前后的指令可能会被重排序，但是<code>volatile</code>读写指令不能和它前后的任何指令重新排序。</p>
 <p>看看下面这个例子：</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>sharedObject.nonVolatile1 = 123;
 sharedObject.nonVolatile2 = 456;
 sharedObject.nonVolatile3 = 789;
@@ -297,8 +286,7 @@ sharedObject.volatile     = true; //a volatile variable
 int someValue1 = sharedObject.nonVolatile4;
 int someValue2 = sharedObject.nonVolatile5;
 int someValue3 = sharedObject.nonVolatile6;</code>
-</pre>
-<p>JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatile</code>写指令（它们都必须在<code>volatile</code>写指令之前执行）。</p>
+</pre><p>JVM可能会重新排序前3条指令，只要它们都先发生于<code>volatile</code>写指令（它们都必须在<code>volatile</code>写指令之前执行）。</p>
 <p>同样的，JVM可能会重新排序最后3条指令，只要<code>volatile</code>写指令先行发生于它们，这3条指令都不能被重新排序到<code>volatile</code>指令的前面。</p>
 <p>这就是<code>volatile</code>先行发生原则的基本含义。</p>
 <h2 id="volatile并不是万能的">Volatile并不是万能的</h2>
@@ -536,6 +524,51 @@ int someValue3 = sharedObject.nonVolatile6;</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -188,8 +188,7 @@
 <h2 id="解决">解决</h2>
 <p>一开始自己想通过<code>Grafana</code>面板的过滤这些0值，搜索一番后并没有找到基于<code>Grafana</code>的解决方案，给出的答案是通过修改sql来规避此问题<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，对比该答案，还发现自己遇到的问题类似。</p>
 <p>原始查询sql：</p>
-
-<pre class="line-numbers language-sql ">
+<pre class="line-numbers language-sql " title="sql">
 <code>SELECT 
     DATE_FORMAT(t.start_time,&#39;%Y-%m-%d&#39;) AS `taskDate`,
     SUM(IF(t.instance_status = 0,1,0)) AS `未知`,
@@ -207,13 +206,11 @@
 WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
   GROUP BY taskDate
   ORDER BY taskDate</code>
-</pre>
-<p><code>mysql</code>中查询结果：</p>
+</pre><p><code>mysql</code>中查询结果：</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/mysql-query-result-1.png" alt="mysql原始查询结果" title="mysql原始查询结果"></p>
 <p><strong>为了解决该问题，需要将<code>IF</code>中的默认值从<code>0</code>修改为<code>null</code>。</strong></p>
 <p>改进后的sql:</p>
-
-<pre class="line-numbers language-sql ">
+<pre class="line-numbers language-sql " title="sql">
 <code>SELECT 
     DATE_FORMAT(t.start_time,&#39;%Y-%m-%d&#39;) AS `taskDate`,
     SUM(IF(t.instance_status = 0,1,null)) AS `未知`,
@@ -231,8 +228,7 @@ WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
 WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
   GROUP BY taskDate
   ORDER BY taskDate</code>
-</pre>
-<p><code>mysql</code>中查询结果如下，可看出除了将<code>0</code>值修改为<code>null</code>之外，其余的查询数据是一致的。</p>
+</pre><p><code>mysql</code>中查询结果如下，可看出除了将<code>0</code>值修改为<code>null</code>之外，其余的查询数据是一致的。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/mysql-query-result-2.png" alt="mysql改进后的查询结果" title="mysql改进后的查询结果"></p>
 <p>在<code>Grafana</code>中查看显示效果类似如下，可发现0值已经消失，问题初步解决。</p>
 <p><img src="/blog_img/devops/hidden-zero-value-in-grafana-bar-chart/bar-chart-without-zero-values.png" alt="柱状图不显示0值" title="柱状图不显示0值"></p>
@@ -455,6 +451,51 @@ WHERE t.start_time&gt; DATE_SUB(NOW(), INTERVAL 14 DAY)
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

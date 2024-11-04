@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -213,8 +213,7 @@
 <p>安装过程主要参考<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，相关配置与安装步骤如下：</p>
 <h2 id="系统配置与依赖">系统配置与依赖</h2>
 <h3 id="关闭防火墙">关闭防火墙</h3>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 关闭交换内存
 swapoff -a
 
@@ -227,10 +226,8 @@ sed -i &#39;s/^SELINUX=enforcing$/SELINUX=disabled/&#39; /etc/selinux/config
 firewall-cmd --state 
 systemctl stop firewalld.service 
 systemctl disable firewalld.service </code>
-</pre>
-<h3 id="配置docker参数">配置docker参数</h3>
-
-<pre class="line-numbers language-bash ">
+</pre><h3 id="配置docker参数">配置docker参数</h3>
+<pre class="line-numbers language-bash " title="bash">
 <code>mkdir /etc/docker/
 vim /etc/docker/daemon.json
 
@@ -242,10 +239,8 @@ vim /etc/docker/daemon.json
   ],
   &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;]
 }</code>
-</pre>
-<h3 id="配置内核参数">配置内核参数</h3>
-
-<pre class="line-numbers language-bash ">
+</pre><h3 id="配置内核参数">配置内核参数</h3>
+<pre class="line-numbers language-bash " title="bash">
 <code>## 配置网卡转发,看值是否为1
 sysctl -a |grep &#39;net.ipv4.ip_forward = 1&#39;
 sysctl -a |grep &#39;net.bridge.bridge-nf-call-iptables = 1&#39;
@@ -259,10 +254,8 @@ net.bridge.bridge-nf-call-iptables=1
 EOF
 
 sysctl -p /etc/sysctl.d/k8s.conf</code>
-</pre>
-<h3 id="安装docker">安装docker</h3>
-
-<pre class="line-numbers language-bash ">
+</pre><h3 id="安装docker">安装docker</h3>
+<pre class="line-numbers language-bash " title="bash">
 <code>#安装相关依赖
 yum install -y yum-utils device-mapper-persistent-data lvm2 epel-release
 
@@ -280,18 +273,14 @@ systemctl start docker
 
 #查看docker信息
 docker info</code>
-</pre>
-<h3 id="配置container">配置container</h3>
-
-<pre class="line-numbers language-bash ">
+</pre><h3 id="配置container">配置container</h3>
+<pre class="line-numbers language-bash " title="bash">
 <code>containerd config default &gt; /etc/containerd/config.toml
 systemctl daemon-reload
 systemctl restart containerd</code>
-</pre>
-<h2 id="安装kubernetes">安装Kubernetes</h2>
+</pre><h2 id="安装kubernetes">安装Kubernetes</h2>
 <h3 id="添加k8s源">添加k8s源</h3>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -301,32 +290,25 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF</code>
-</pre>
-<h3 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h3>
+</pre><h3 id="安装kubelet和kubeadm">安装kubelet和kubeadm</h3>
 <ol>
 <li>
 <p>执行下述指令，安装<code>kubelet kubeadm</code></p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>yum -y install kubectl kubelet kubeadm</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行下述指令，修改<code>kubelet</code>配置 <strong>（把kubelet驱动方式改为和docker驱动方式一致，否则会有报错）</strong></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>cat &lt;&lt;EOF &gt;/etc/sysconfig/kubelet
 KUBELET_CGROUP_ARGS=&#34;--cgroup-driver=systemd&#34;
 EOF</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>执行下述执行添加自启动</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>systemctl enable kubelet</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>前序步骤执行完成后，执行<code>kubectl version</code>输出结果如下，可以看出其无法访问<code>8080</code>端口，结果输出不完整。造成此现象的原因为没有执行<code>kubeadm init</code></p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubectl-version-output-1.png" alt="kubectl version输出结果不完善" title="kubectl version输出结果不完善"></p>
@@ -336,11 +318,9 @@ EOF</code>
 <ol>
 <li>
 <p>执行下述命令进行初始化</p>
-
-<pre class="no-line-numbers language-bash ">
+<pre class="no-line-numbers language-bash " title="bash">
 <code>kubeadm init --v=5  --upload-certs --image-repository k8s.m.daocloud.io</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>前述命令的输出如下，可以看出创建过程一直阻塞</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-waiting-to-boot-up-control-plane.png" alt="kubeadm init创建过程阻塞" title="kubeadm init创建过程阻塞"></p>
@@ -354,12 +334,10 @@ EOF</code>
 <ol>
 <li>
 <p>由于原始的报错信息没有提供太多有用的信息，故通过下述命令来输出其完整的日志<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>systemctl status kubelet -l &gt; logs.txt
 cat logs.txt</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>查看logs.txt的内容，输出如下</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-failed-to-plull-image.png" alt="kubeadm init找不到镜像导致部署出错" title="kubeadm init找不到镜像导致部署出错"></p>
@@ -380,24 +358,20 @@ cat logs.txt</code>
 </li>
 <li>
 <p>依次执行下述命令来重新配置<code>containerd</code></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>sed -i &#39;s/registry.k8s.io/registry.aliyuncs.com\/google_containers/&#39; /etc/containerd/config.toml
 systemctl daemon-reload
 systemctl restart containerd</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>之后重新执行下述命令</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 移除之前的旧配置
 kubeadm reset -f
 
 # 初始化
 kubeadm init --v=5  --upload-certs --image-repository k8s.m.daocloud.io</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>运行上述命令后的输出类似如下，可以看出<code>kubeadm init</code>顺利执行成功，整个过程耗时不超过1分钟，至此问题解决!</p>
 <p><img src="/blog_img/k8s/kubeadm-init-not-working-due-to-default-registry-config/kubeadm-init-execute-success.png" alt="kubeadm init执行成功" title="kubeadm init执行成功"></p>
@@ -620,6 +594,51 @@ kubeadm init --v=5  --upload-certs --image-repository k8s.m.daocloud.io</code>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

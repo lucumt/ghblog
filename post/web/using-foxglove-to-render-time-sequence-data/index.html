@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -276,15 +276,13 @@ render_data->select_chassis
 <ol>
 <li>
 <p>在<code>Foxglove</code>对应的<a href="https://github.com/foxglove/studio"><strong>GitHub地址</strong></a>上有其UI端的安装说明，主要采用<code>Docker</code>安装，相关的指令如下<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code># 官方原始的说明
 docker run --rm -p &#34;8080:8080&#34; ghcr.io/foxglove/studio:latest
 
 # 个人新保存的镜像
 docker run --rm -p &#34;8080:8080&#34;  lucumt/foxglove_studio:1.74.1</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>上述指令安装完成之后，在浏览器中输入<code>http://127.0.0.1:8080</code>会打开类似如下界面，在<code>打开数据源</code>对话框中选择最下面的<code>打开连接</code></p>
 <p><img src="/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-init-open.png" alt="foxglove初次打开" title="foxglove初次打开"></p>
@@ -305,19 +303,16 @@ docker run --rm -p &#34;8080:8080&#34;  lucumt/foxglove_studio:1.74.1</code>
 <ol>
 <li>
 <p><code>Foxglove</code>前后端通信主要基于<code>WebSocket</code>实现，本文采用<code>Netty</code>提供的<code>WebSocket</code>工具类来简化使用，对应的<code>Maven</code>版本为</p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;dependency&gt;
     &lt;groupId&gt;org.yeauty&lt;/groupId&gt;
     &lt;artifactId&gt;netty-websocket-spring-boot-starter&lt;/artifactId&gt;
     &lt;version&gt;0.12.0&lt;/version&gt;
 &lt;/dependency&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>添加一个名为<code>FoxgloveServer</code>的类用于暴露<code>WebSocket</code>端口，此时在程序启动后前后端已具备初步的通信能力</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Slf4j
 @ServerEndpoint(port = &#34;8765&#34;)
 public class FoxgloveServer {
@@ -363,12 +358,10 @@ public class FoxgloveServer {
     }
 
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>建立一个名为<code>ChannelInfo</code>的<code>topic</code>类，代码如下所示，需要注意的是类名必须为<code>ChannelInfo</code>，否则最后生成的<code>JSON</code>格式错误会导致<code>topic</code>无法注册<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Data
 public class ChannelInfo {
 
@@ -402,12 +395,10 @@ public class ChannelInfo {
      */
     private String schemaEncoding;
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>添加一个名为<code>ChannelUtil</code>的类，用于创建对应的<code>topic</code></p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>public class ChannelUtil {
 
     public static List&lt;ChannelInfo&gt; createChannels() {
@@ -477,12 +468,10 @@ public class ChannelInfo {
     }
 
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>对前述的<code>FoxgloveServer</code>类中的<code>onOpen</code>方法添加类似如下代码，用于真正的注册相关的<code>topic</code>，可注册的<code>topic</code>数目可根据实际需求添加任意多个</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@OnOpen
 public void onOpen(Session session) {
     log.info(&#34;这是一次新的链接 ---》 new connection&#34; &#43; session.hashCode());
@@ -504,8 +493,7 @@ public void onOpen(Session session) {
 
     session.sendText(JSON.toJSONString(advertise));
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>若连接配置正确，在UI界面的左侧会出现相关的<code>topic</code>列表，如前述步骤所示，至此<code>topic</code>的创建与注册完成</p>
 </li>
@@ -515,8 +503,7 @@ public void onOpen(Session session) {
 <ol>
 <li>
 <p><code>topic</code>注册完毕后，不能直接使用，需要创建<code>panel</code>并选中对应的<code>topic</code>，此时UI端会给<code>server</code>端通过<code>WebSocket</code>协议发送对应的事件消息，需修改<code>FoxgloveServer</code>中的<code>onMessage</code>方法</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@OnMessage
 public void onMessage(Session session, String message) {
     JSONObject msg = JSON.parseObject(message);
@@ -546,13 +533,11 @@ private void createThread(JSONObject msg) {
         threadMap.put(channelId, thread);
     }
 }</code>
-</pre>
-<p>其中<code>SendDataThread</code>类是一个继承自<code>Thread</code>类，用于封装<code>Kafka</code>的数据发送流程，具体的发送逻辑需要再次继承<code>SendDataThread</code>类来实现。</p>
+</pre><p>其中<code>SendDataThread</code>类是一个继承自<code>Thread</code>类，用于封装<code>Kafka</code>的数据发送流程，具体的发送逻辑需要再次继承<code>SendDataThread</code>类来实现。</p>
 </li>
 <li>
 <p>在前述<code>topic</code>列表中<code>纯文本</code>对应的名称为<code>/drive/chassis_code</code>，对应的数据结构如下</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>{
     &#34;type&#34;: &#34;object&#34;,
     &#34;properties&#34;: {
@@ -561,10 +546,8 @@ private void createThread(JSONObject msg) {
         }
     }
 }</code>
-</pre>
-<p>则可继承<code>SendDataThread</code>编写相应的实现类</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>则可继承<code>SendDataThread</code>编写相应的实现类</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Slf4j
 public class SendChassisThread extends SendDataThread {
 
@@ -594,10 +577,8 @@ public class SendChassisThread extends SendDataThread {
         }
     }
 }</code>
-</pre>
-<p>对应的<code>ChassisInfo</code>类代码如下</p>
-
-<pre class="line-numbers language-java ">
+</pre><p>对应的<code>ChassisInfo</code>类代码如下</p>
+<pre class="line-numbers language-java " title="java">
 <code>@Data
 public class ChassisInfo {
 
@@ -607,8 +588,7 @@ public class ChassisInfo {
     @JsonProperty(&#34;时间戳&#34;)
     private Timestamp timestamp;
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>启动<code>server</code>端程序，在<code>Foxglove</code>UI端按照下图所示点击创建按钮，在出现的<code>panel</code>列表中选择<strong>原始消息</strong>(英文环境下为<strong>Raw Message</strong>)，用于展示纯文本消息</p>
 <p><img src="/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-create-panel.png" alt="foxglove创建面板" title="foxglove创建面板"></p>
@@ -619,8 +599,7 @@ public class ChassisInfo {
 </li>
 <li>
 <p>从上面报错的初步信息可知是UI端在解析二进制文件时出错，与官方Demo的<code>WebSocket</code>数据包进行对比，折腾一段时间后其原因是<code>Foxglove</code>有自己特定的编码算法，不能直接返回生成的原始消息，需要对其基于<code>byte</code>进行编码，之后UI端自行解码。相关的编码代码如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>package com.visualization.foxglove.util;
 
 import com.alibaba.fastjson.JSON;
@@ -728,12 +707,10 @@ public class DataUtil {
     }
 
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>将数据发送的代码修改如下，并重新启动<code>server</code>端服务</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Override
 public void run() {
     while (running) {
@@ -752,8 +729,7 @@ public void run() {
         }
     }
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在UI端查看，可发现此时能正常播放消息，至此<code>Foxglove</code>前后端交互的配置基本搭建完毕，后续就是根据不同的面板类型进行针对性的编码。</p>
 <p><img src="/blog_img/web/using-foxglove-to-render-time-sequence-data/foxglove-display-text-message-success.png" alt="foxglove正常展示消息" title="foxglove正常展示消息"></p>
@@ -994,6 +970,51 @@ public void run() {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

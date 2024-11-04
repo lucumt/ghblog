@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -184,8 +184,7 @@
     <div class="post-content image-border">
 	 <p>之前在公司内部推广<a href="https://kubesphere.io/">KubeSphere</a>用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>整合其它系统的成熟经验，很自然的想将<code>LDAP</code>集成到<code>KubeSphere</code>中。原以为会很容易，一番折腾下来费了不好功夫(<strong><code>KubeSphere</code>要求使用<code>LDAP</code>时必须设置管理员账号和密码</strong>)，简单记录下。</p>
 <p>公司内部的<code>LDAP</code>系统支持匿名登录，在给其它系统(如<a href="https://github.com/fjc0k/docker-YApi">yapi</a>)集成<code>LDAP</code>时，只需要输入对应的<code>host</code>、<code>uid</code>、<code>searchDN</code>即可，整合起来十分便捷，类似如下：</p>
-
-<pre class="line-numbers language-json ">
+<pre class="line-numbers language-json " title="json">
 <code>&#34;ldapLogin&#34;:{
    &#34;enable&#34;:&#34;true&#34;,
    &#34;server&#34;:&#34;ldap://192.168.0.2:389&#34;,
@@ -193,10 +192,8 @@
    &#34;searchStandard&#34;:&#34;uid&#34;,
    &#34;usernameKey&#34;:&#34;uid&#34;
 }</code>
-</pre>
-<p>公司内部的<code>KubeSphere</code>版本为<code>v3.1.1</code>，在集成<code>LDAP</code>之前先去官网查看了相关说明，在<a href="https://kubesphere.io/zh/docs/v3.3/access-control-and-account-management/external-authentication/use-an-ldap-service/">LDAP身份提供者</a>中有如下说明：</p>
-
-<pre class="line-numbers language-yaml ">
+</pre><p>公司内部的<code>KubeSphere</code>版本为<code>v3.1.1</code>，在集成<code>LDAP</code>之前先去官网查看了相关说明，在<a href="https://kubesphere.io/zh/docs/v3.3/access-control-and-account-management/external-authentication/use-an-ldap-service/">LDAP身份提供者</a>中有如下说明：</p>
+<pre class="line-numbers language-yaml " title="yaml">
 <code>spec:
  authentication:
    jwtSecret: &#39;&#39;
@@ -216,10 +213,8 @@
          userSearchBase: cn=users,dc=nas
          loginAttribute: uid
          mailAttribute: mail</code>
-</pre>
-<p>可以看出其默认多了<code>managerDN</code>和<code>managerPassword</code>这两个管理员属性，但由于公司的<code>LDAP</code>默认对外不提供管理员账号和密码，只能匿名登录认证，且自己之前在其它系统中匿名配置<code>LDAP</code>都很顺畅，于是通过匿名方式配置如下：</p>
-
-<pre class="line-numbers language-yaml ">
+</pre><p>可以看出其默认多了<code>managerDN</code>和<code>managerPassword</code>这两个管理员属性，但由于公司的<code>LDAP</code>默认对外不提供管理员账号和密码，只能匿名登录认证，且自己之前在其它系统中匿名配置<code>LDAP</code>都很顺畅，于是通过匿名方式配置如下：</p>
+<pre class="line-numbers language-yaml " title="yaml">
 <code>provider:
     host: 192.168.1.22:389
     #managerDN: uid=root,cn=users,dc=nas
@@ -227,8 +222,7 @@
     userSearchBase: dc=lucumt,dc=info
     loginAttribute: uid
     mailAttribute: mail</code>
-</pre>
-<p>将官方文档中要求的<code>managerDN</code>和<code>managerPassword</code>屏蔽掉，接着重启<code>KubeSphere</code>系统，登录过程出现如下提示：</p>
+</pre><p>将官方文档中要求的<code>managerDN</code>和<code>managerPassword</code>屏蔽掉，接着重启<code>KubeSphere</code>系统，登录过程出现如下提示：</p>
 <p><img src="/blog_img/devops/setting-ldap-for-kubesphere/kubesphere-ldap-login-failed.png" alt="集成LDAP登录失败" title="集成LDAP登录失败"></p>
 <p>错误信息提示说密码不能为空，但是我们登录的时候肯定有输入密码的，那只可能是<code>managerPassword</code>为空导致的。</p>
 <p>查找<code>KubeSphere</code>官网相关说明发现其对于<code>managerDN</code>和<code>managerPassword</code>没有说明是选填项，结合前面的报错信息，可得出如下结论</p>
@@ -237,8 +231,7 @@
 </blockquote>
 <p><img src="/blog_img/devops/setting-ldap-for-kubesphere/kubesphere-ldap-setting-explanation.png" alt="集成LDAP登录参数说明" title="集成LDAP参数说明"></p>
 <p>于是只能找公司相关部门申请<code>LDAP</code>具有只读账号的管理员权限，配置类似如下，之后重启<code>KubeSphere</code>可正常集成<code>LDAP</code>登录。</p>
-
-<pre class="line-numbers language-yaml ">
+<pre class="line-numbers language-yaml " title="yaml">
 <code>provider:
     host: 192.168.1.22:389
     managerDN: admin=cn,dc=lucumt,dc=info
@@ -246,8 +239,7 @@
     userSearchBase: dc=lucumt,dc=info
     loginAttribute: uid
     mailAttribute: mail</code>
-</pre>
-<p>只能说<code>KubeSphere</code>在这方面做的不太好，已经在其官网反馈此问题!</p>
+</pre><p>只能说<code>KubeSphere</code>在这方面做的不太好，已经在其官网反馈此问题!</p>
     </div>
 
     
@@ -452,6 +444,51 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

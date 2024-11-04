@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -182,62 +182,50 @@
 	 <p>简要介绍如何在<code>Python</code>中利用<a href="https://docs.python.org/3/reference/simple_stmts.html#global"><strong>global</strong></a>关键字定义的全局变量在不同模块间共享，避免后续重复犯错。</p>
 <h2 id="背景">背景</h2>
 <p>它们位于同一个模块下：</p>
-
-<pre class="line-numbers language-bash ">
+<pre class="line-numbers language-bash " title="bash">
 <code>$ ls
 __pycache__/  app1.py  main.py</code>
-</pre>
-<p>各自内容分别如下</p>
+</pre><p>各自内容分别如下</p>
 <p><code>app1.py</code>有一个 <code>global</code>修饰的全局变量，通过<code>set_variables</code>方法对其值进行修改</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>MESSAGE = None
 
 
 def set_variables():
     global MESSAGE
     MESSAGE = &#34;Hello Python&#34;</code>
-</pre>
-<p><code>main.py</code>主程序，调用上述方法并打印出<code>MESSAGE</code>的值</p>
-
-<pre class="line-numbers language-python ">
+</pre><p><code>main.py</code>主程序，调用上述方法并打印出<code>MESSAGE</code>的值</p>
+<pre class="line-numbers language-python " title="python">
 <code>from app1 import set_variables
 
 if __name__ == &#39;__main__&#39;:
     set_variables()
     # print(MESSAGE)</code>
-</pre>
-<h2 id="不生效用法">不生效用法</h2>
+</pre><h2 id="不生效用法">不生效用法</h2>
 <p>一开始自己想复用<code>import xxx from xxx</code> 这种用法，将<code>main.py</code>修改为如下</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>from app1 import set_variables, MESSAGE
 
 if __name__ == &#39;__main__&#39;:
     set_variables()
     print(MESSAGE)</code>
-</pre>
-<p>结果输出值为<code>None</code>，没有达到预期的结果。</p>
+</pre><p>结果输出值为<code>None</code>，没有达到预期的结果。</p>
 <h2 id="正确用法">正确用法</h2>
 <p>直接用<code>import xxx</code>实现</p>
-
-<pre class="line-numbers language-python ">
+<pre class="line-numbers language-python " title="python">
 <code>import app1
 
 if __name__ == &#39;__main__&#39;:
     app1.set_variables()
     print(app1.MESSAGE)</code>
-</pre>
-<p>或用<code>import xxx as xxx</code>给其加上一个别名</p>
-
-<pre class="line-numbers language-python ">
+</pre><p>或用<code>import xxx as xxx</code>给其加上一个别名</p>
+<pre class="line-numbers language-python " title="python">
 <code>import app1 as a
 
 if __name__ == &#39;__main__&#39;:
     a.set_variables()
     print(a.MESSAGE)</code>
-</pre>
-<h2 id="原因分析">原因分析</h2>
+</pre><h2 id="原因分析">原因分析</h2>
 <p>参见<a href="https://stackoverflow.com/questions/49636945/global-variable-not-changing-between-files-in-python"><strong>Global variable not changing between files in python</strong></a>中的大佬回答如下：</p>
 <blockquote>
 <p>The syntax <code>from globals.py import *</code> makes copies of the variables within <code>globals.py</code> into your local file. To access the variables themselves without making copies, <code>import globals</code> and use the variable directly: <code>globals.filename</code>. You no longer need the <code>global</code> keyword if you access the variable this way.</p>
@@ -444,6 +432,51 @@ if __name__ == &#39;__main__&#39;:
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>

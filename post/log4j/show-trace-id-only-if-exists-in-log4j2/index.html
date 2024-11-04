@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.73db591f2a62e178a7e21e92549934d42e8d734d4150222e6eddc38d7961af87.css" rel="stylesheet">
+<link href="/sass/main.min.d6495393766072e624b7a230737c9c78bf92c18161fd9eac32f46bc772c02ccb.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -207,8 +207,7 @@
 <ol>
 <li>
 <p><code>pom.xml</code>中排除<code>Spring Boot</code>自带的日志框架并添加<code>log4j2</code>依赖</p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
@@ -236,12 +235,10 @@
     &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
     &lt;version&gt;${spring.boot.version}&lt;/version&gt;
 &lt;/dependency&gt;</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>添加<code>Filter</code>用于从请求header中获取前端传递的<code>trace-id</code>并传入<a href="https://logback.qos.ch/manual/mdc.html"><strong>MDC</strong></a>中</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Order(0)
 @Component
 @WebFilter(filterName = &#34;traceIdFilter&#34;, urlPatterns = &#34;/*&#34;)
@@ -268,12 +265,10 @@ public class TraceIdFilter implements Filter {
     }
 
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p>在主启动类中添加如下配置用于在线程间传递<code>MDC</code>值</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@SpringBootApplication
 public class TestApplication {
 
@@ -286,12 +281,10 @@ public class TestApplication {
         SpringApplication.run(TestApplication.class, args);
     }
 }</code>
-</pre>
-</li>
+</pre></li>
 <li>
 <p><code>log4j2.xml</code>配置如下</p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;Configuration status=&#34;warn&#34;&gt;
     &lt;Appenders&gt;
         &lt;!-- Console appender configuration --&gt;
@@ -306,16 +299,14 @@ public class TestApplication {
         &lt;/Root&gt;
     &lt;/Loggers&gt;
 &lt;/Configuration&gt;</code>
-</pre>
-<p>其中的<code>%green{[TraceId-%X{TRACE_ID}]}</code>就是将获取到的<code>trace-id</code>在控制台中按照<code>TraceId-xxx</code>的格式以绿色打印出来，该段配置是我们进行链路最终的核心。</p>
+</pre><p>其中的<code>%green{[TraceId-%X{TRACE_ID}]}</code>就是将获取到的<code>trace-id</code>在控制台中按照<code>TraceId-xxx</code>的格式以绿色打印出来，该段配置是我们进行链路最终的核心。</p>
 <p>其中<code>%X</code>专门用于获取<code>MDC</code>中的值，在<code>log4j2</code>官网对应的说明如下</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-%25X-instruction.png" alt="log4j2关于%X的用法说明" title="log4j2关于%X的用法说明"></p>
 </li>
 </ol>
 <h2 id="测试问题">测试&amp;问题</h2>
 <p>测试代码如下</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>@Slf4j
 @RestController
 @RequestMapping(&#34;user&#34;)
@@ -332,16 +323,14 @@ public class UserController {
     }
 
 }</code>
-</pre>
-<p>在Postman中发送类似如下请求，在header中将<code>trace-id</code>的值设置为123456</p>
+</pre><p>在Postman中发送类似如下请求，在header中将<code>trace-id</code>的值设置为123456</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/postman-test-interface.png" alt="通过postman发送带header的请求" title="通过postman发送带header的请求"></p>
 <p>在控制台可发现类似如下输出，可发现前面几条系统启动时输出的日志也会按照<code>trace-id</code>格式进行输出，由于此时还没接收到前端发送的请求，故其值为空导致只显示一个<code>TraceId-</code>前缀，<strong>看起来不美观且影响使用</strong>。</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-empty-trace-id-output.png" alt="traceId没有值时也会输出" title="traceId没有值时也会输出"></p>
 <h2 id="解决方案">解决方案</h2>
 <p>终极目标是实现在有<code>trace-id</code>时按照格式输出，没有时则正常输出，很明显要达成此效果需要判断<code>trace-id</code>是否为空。</p>
 <p>最开始<code>Google</code>和<code>Stackoverflow</code>搜索的结果建议使用<a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#scriptpatternselector"><strong>ScriptPatternSelector</strong></a>，在官网给出的使用示例如下，看起来有一丢丢复杂，在有多个<a href="https://logging.apache.org/log4j/2.x/manual/appenders.html"><strong>Appenders</strong></a>时不适合扩展。</p>
-
-<pre class="line-numbers language-xml ">
+<pre class="line-numbers language-xml " title="xml">
 <code>&lt;PatternLayout&gt;
   &lt;ScriptPatternSelector defaultPattern=&#34;[%-5level] %c{1.} %C{1.}.%M.%L %msg%n&#34;&gt;
     &lt;Script name=&#34;BeanShellSelector&#34; language=&#34;bsh&#34;&gt;&lt;![CDATA[
@@ -357,25 +346,21 @@ public class UserController {
     &lt;PatternMatch key=&#34;Flow&#34; pattern=&#34;[%-5level] %c{1.} ====== %C{1.}.%M:%L %msg ======%n&#34;/&gt;
   &lt;/ScriptPatternSelector&gt;
 &lt;/PatternLayout&gt;</code>
-</pre>
-<p>上述方式需要设置两个<code>Pattern</code>且在不同的<code>Appender</code>中都需要动态配置，使用起来不是特别灵活。</p>
+</pre><p>上述方式需要设置两个<code>Pattern</code>且在不同的<code>Appender</code>中都需要动态配置，使用起来不是特别灵活。</p>
 <p>有木有可能通过一个<code>Pattern</code>同时兼容这两种情况呢？</p>
 <p>经过网络搜索和查看<code>log4j2</code>中关于<a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#pattern-layout"><strong>Pattern Layout</strong></a>的说明之后，最终找到了解决方案，那就是<code>%notEmpty</code>!</p>
 <p>官方文档中关于<code>%notEmpty</code>的说明如下</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-%25notEmpty-instruction.png" alt="log4j2关于%notEmpty的用法说明" title="log4j2关于%notEmpty的用法说明"></p>
 <p>基于上述说明可尝试将<code>%green{%notEmpty{[TraceId-%X{TRACE_ID}]}}</code>修改为<code>%green{%notEmpty{[TraceId-%X{TRACE_ID}]}}</code>，最终完整的<code>PatternLayout</code>如下</p>
-
-<pre class="no-line-numbers language-xml ">
+<pre class="no-line-numbers language-xml " title="xml">
 <code>&lt;PatternLayout pattern=&#34;%yellow{[%d{yyyy-MM-dd HH:mm:ss.SSS}]} %clr{[%-5level]} %green{%notEmpty{[TraceId-%X{TRACE_ID}]}} %cyan{[%c]}- %msg%n&#34; /&gt;</code>
-</pre>
-<p>重新调用<code>Postman</code>的输出结果如下，完美实现功能！</p>
+</pre><p>重新调用<code>Postman</code>的输出结果如下，完美实现功能！</p>
 <p><img src="/blog_img/log4j/show-trace-id-only-if-exists-in-log4j2/log4j2-with-not-empty-trace-id-output.png" alt="traceId只有在有值时才输出" title="traceId只有在有值时才输出"></p>
 <h2 id="服务间调用">服务间调用</h2>
 <p>在微服务中通常会有多个模块协同工作，各个模块之间也可能会互相调用，在此种情况下也需要将<code>trace-id</code>准确的传递与获取，确保单次请求调用链路中的<code>trace-id</code>都一样才能体现链路追踪的意义。</p>
 <h3 id="feign调用">Feign调用</h3>
 <p>当使用<code>Feign</code>作为远程调用实现时，需在<strong>被调用方</strong>中添加如下配置代码才能确保<code>trace-id</code>被正常传递与获取。</p>
-
-<pre class="line-numbers language-java ">
+<pre class="line-numbers language-java " title="java">
 <code>import com.hirain.orienlink.mfs.filter.TraceIdFilter;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -595,6 +580,51 @@ public class FeignConfig implements RequestInterceptor {
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-sXBpWttHfaxTNfMdM4N1gfeIc01bFaKVrPdaECaHxNQy1QOAOt1R6HVcpPyPtwIr5pAsfa7eIg+DQIHzIODh8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 
 </body>
 </html>
