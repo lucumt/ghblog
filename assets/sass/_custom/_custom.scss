@@ -80,3 +80,39 @@ figcaption {
   user-select: none;
   margin-right: 6px;
 }
+
+.codetabs {
+	border: 1px solid rgba(211, 220, 228, 1.00);
+}
+
+.codetabs .codetabs-header {
+	background: #f7f8f9;
+}
+
+.codetabs .codetabs-header .tab {
+	display: inline-block;
+	padding: 3px 20px;
+	cursor: pointer;
+	opacity: 0.5;
+	border-right: 1px solid rgba(211, 220, 228, 1.00);
+	border-bottom: 1px solid rgba(211, 220, 228, 1.00);
+	background-color: #f7f7f7;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.codetabs .codetabs-header .tab.active {
+	border-bottom: 0px;
+	cursor: default;
+	opacity: 1;
+	background: #fff;
+	color: #2674ba;
+}
+
+.codetabs .codetabs-body .tab {
+	display: none;
+}
+
+.codetabs .codetabs-body .tab.active {
+	display: block;
+}
