@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>[译]二叉树莫里斯遍历 - 飞狐的部落格</title>
+  <title>[译]二叉树的莫里斯遍历 - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="本文翻译自What is Morris traversal
-" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要介绍如何使用莫里斯算法在不适用递归和栈的情形下对二叉树进行遍历" /><meta name="keywords" content="二叉树, 遍历, 莫里斯" />
 
 
 
@@ -27,38 +26,36 @@
 <meta name="generator" content="Hugo 0.126.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/" />
+<link rel="canonical" href="https://lucumt.info/post/translate/algorithm/what-is-morris-traversal/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
-<meta property="og:url" content="http://localhost:1313/post/translate/algorithm/what-is-morris-traversal/">
+<link href="/sass/main.min.2d85dc0f018cb0224c2d088d09fe31bf17c3793affb37f7303834db3877e15c6.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/translate/algorithm/what-is-morris-traversal/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="[译]二叉树莫里斯遍历">
-  <meta property="og:description" content="本文翻译自What is Morris traversal">
+  <meta property="og:title" content="[译]二叉树的莫里斯遍历">
+  <meta property="og:description" content="简要介绍如何使用莫里斯算法在不适用递归和栈的情形下对二叉树进行遍历">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
     <meta property="article:published_time" content="2023-08-18T11:18:47+08:00">
     <meta property="article:modified_time" content="2023-08-18T11:18:47+08:00">
+    <meta property="article:tag" content="二叉树">
 
-  <meta itemprop="name" content="[译]二叉树莫里斯遍历">
-  <meta itemprop="description" content="本文翻译自What is Morris traversal">
+  <meta itemprop="name" content="[译]二叉树的莫里斯遍历">
+  <meta itemprop="description" content="简要介绍如何使用莫里斯算法在不适用递归和栈的情形下对二叉树进行遍历">
   <meta itemprop="datePublished" content="2023-08-18T11:18:47+08:00">
   <meta itemprop="dateModified" content="2023-08-18T11:18:47+08:00">
-  <meta itemprop="wordCount" content="12">
-  <meta itemprop="keywords" content="翻译,算法">
+  <meta itemprop="wordCount" content="1111">
+  <meta itemprop="keywords" content="二叉树,遍历,莫里斯">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="[译]二叉树莫里斯遍历">
-  <meta name="twitter:description" content="本文翻译自What is Morris traversal">
+  <meta name="twitter:title" content="[译]二叉树的莫里斯遍历">
+  <meta name="twitter:description" content="简要介绍如何使用莫里斯算法在不适用递归和栈的情形下对二叉树进行遍历">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -67,23 +64,17 @@
 <!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
+<![endif]--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-solarizedlight.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-highlight/prism-line-highlight.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css"/>
 </head>
 <body>
-
-  
-	  
 	  
 	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
 	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
 		 src="/blog_img/forkme_right_gray.png" 
 		 alt="Fork me on GitHub">
-	  </a>
-  
-
-
-  <div id="mobile-navbar" class="mobile-navbar">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
     <a href="/" class="logo">Rosen&#39;s World</a>
   </div>
@@ -105,7 +96,7 @@
         <li class="mobile-menu-item">分类</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于我</li>
-      </a><a href="/links/">
+      </a><a href="https://tech.lucumt.info">
         <li class="mobile-menu-item">外链</li>
       </a><a href="/search/">
         <li class="mobile-menu-item">搜索</li>
@@ -116,10 +107,7 @@
 
 
 </nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
   <a href="/" class="logo">Rosen&#39;s World</a>
 </div>
 
@@ -140,23 +128,20 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于我</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/links/">外链</a>
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/search/">搜索</a>
       </li>
   </ul>
 </nav>
 
-    </header>
-
-    
-    <main id="main" class="main">
+    </header><main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">[译]二叉树莫里斯遍历</h1>
+      <h1 class="post-title">[译]二叉树的莫里斯遍历</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2023-08-18 </span>
@@ -164,34 +149,233 @@
             <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
             <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
             </div>
-        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
-  </div>
-</div>
+    
 	 
 	  	
 	
-    <div class="post-content image-border">
+    <div class="post-content image-center">
 	 <p>本文翻译自<a href="https://www.educative.io/answers/what-is-morris-traversal"><strong>What is Morris traversal</strong></a></p>
+<p><strong>莫里斯(中序)遍历</strong>是一种对二叉树不使用递归或堆栈进行便利的算法，在此种遍历中，将创建链接作为后继节点并利用它们打印节点，遍历完成后将更改恢复为原始二叉树。</p>
+<h2 id="算法">算法</h2>
+<ul>
+<li>将<code>root</code>节点赋值给<code>curr</code>变量节点</li>
+<li>当<code>curr</code>不为空时，检查<code>curr</code>是否有左子节点</li>
+<li>若<code>curr</code>没有左子节点，打印<code>curr</code>节点并将其指向<code>curr</code>右边的节点</li>
+<li>若<code>curr</code>有左子节点，将<code>curr</code>指向其左子树中的最右节点的右子节点</li>
+<li>将<code>curr</code>指向此左节点</li>
+</ul>
+<h2 id="示例">示例</h2>
+<p>以下图所示的二叉树为例演示如何使用莫里斯遍历</p>
+<p><img src="/blog_img/translate/what-is-morris-traversal/binary_tree.svg" alt="初始二叉树" title="初始二叉树"></p>
+<p>根节点的值为4，将其初始化赋值给<code>curr</code>,4有左子节点，因此其成为其左子树中最右边节点的右子节点(中序遍历中节点4的前一个直接节点)，最终节点4成为节点3的右子节点同时<code>curr</code>的值被设置为2。</p>
+<p><img src="/blog_img/translate/what-is-morris-traversal/1st_and_2nd_iterations.svg" alt="前两次遍历" title="前两次遍历"></p>
+<p>现在<code>curr</code>的值为2，拥有左右子节点且右节点被连接到root，因此我们将<code>curr</code>设置为节点1，<code>curr</code>现在没有子节点，其右节点将会指向节点2。</p>
+<p><img src="/blog_img/translate/what-is-morris-traversal/3rd_and_4th_iterations.svg" alt="第3次和第4次遍历" title="第3次和第4次遍历"></p>
+<p>节点1被输出是由于其没有左子节点并且<code>curr</code>指向了节点2，在第1轮的迭代中其已经成为了节点1的右子节点。在接下来的迭代中，节点2同时具有左右子节点。但是，循环的双重条件使得它在到达自身时就停止，这意味着其左子树已经遍历完毕，因此其输出自身值并继续处理右子节点3。输出节点3之后，<code>curr</code>指向节点3并执行同节点2类似的操作。其可发现左子树已经被遍历并继续对节点4进行相同的操作，之后二叉树其余的部分仿照类似的步骤进行遍历。</p>
+<h2 id="代码">代码</h2>
+<p>下面用不同的语言实现了上述算法</p>
+ <div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">   
+<pre class="line-numbers language-c " title="C++版本">
+<code>#include &lt;iostream&gt;
+using namespace std; 
+
+struct Node { 
+	int data; 
+	struct Node* left_node; 
+	struct Node* right_node; 
+}; 
+
+void Morris(struct Node* root) 
+{ 
+	struct Node *curr, *prev; 
+
+	if (root == NULL) 
+		return; 
+
+	curr = root; 
+
+	while (curr != NULL) { 
+
+		if (curr-&gt;left_node == NULL) { 
+			cout &lt;&lt; curr-&gt;data &lt;&lt; endl; 
+			curr = curr-&gt;right_node; 
+		} 
+
+		else { 
+
+			/* Find the previous (prev) of curr */
+			prev = curr-&gt;left_node; 
+			while (prev-&gt;right_node != NULL &amp;&amp; prev-&gt;right_node != curr) 
+				prev = prev-&gt;right_node; 
+
+			/* Make curr as the right child of its
+			previous */
+			if (prev-&gt;right_node == NULL) { 
+				prev-&gt;right_node = curr; 
+				curr = curr-&gt;left_node; 
+			} 
+
+			/* fix the right child of previous */
+			else { 
+				prev-&gt;right_node = NULL; 
+				cout &lt;&lt; curr-&gt;data &lt;&lt; endl; 
+				curr = curr-&gt;right_node; 
+			} 
+		} 
+	} 
+} 
+
+struct Node* add_node(int data) 
+{ 
+	struct Node* node = new Node; 
+	node-&gt;data = data; 
+	node-&gt;left_node = NULL; 
+	node-&gt;right_node = NULL; 
+
+	return (node); 
+} 
+
+int main() 
+{ 
+
+	struct Node* root = add_node(4); 
+	root-&gt;left_node = add_node(2); 
+	root-&gt;right_node = add_node(5); 
+	root-&gt;left_node-&gt;left_node = add_node(1); 
+	root-&gt;left_node-&gt;right_node = add_node(3); 
+	Morris(root); 
+	return 0; 
+} </code>
+</pre><pre class="line-numbers language-python " title="Python版本">
+<code>class Node: 
+	def __init__(self, data): 
+		self.data = data 
+		self.left_node = None
+		self.right_node = None
+
+def Morris(root): 
+	# Set current to root of binary tree 
+	curr = root 
+	
+	while(curr is not None): 
+		
+		if curr.left_node is None: 
+			print curr.data, 
+			curr = curr.right_node 
+		else: 
+			# Find the previous (prev) of curr 
+			prev = curr.left_node 
+			while(prev.right_node is not None and prev.right_node != curr): 
+				prev = prev.right_node 
+
+			# Make curr as right child of its prev 
+			if(prev.right_node is None): 
+				prev.right_node = curr 
+				curr = curr.left_node 
+				
+			# fix the right child of prev
+			else: 
+				prev.right_node = None
+				print curr.data, 
+				curr = curr.right_node 
+			
+
+root = Node(4) 
+root.left_node = Node(2) 
+root.right_node = Node(5) 
+root.left_node.left_node = Node(1) 
+root.left_node.right_node = Node(3) 
+
+Morris(root) </code>
+</pre><pre class="line-numbers language-java " title="Java版本">
+<code>class Node { 
+	int data; 
+	Node left_node, right_node; 
+
+	Node(int item) { 
+		data = item; 
+		left_node =  null;
+		right_node = null; 
+	} 
+} 
+
+class Tree { 
+	Node root; 
+
+	void Morris(Node root) { 
+		Node curr, prev; 
+
+		if (root == null) {
+		   return; 
+		}
+
+		curr = root; 
+		while (curr != null) { 
+			if (curr.left_node == null) { 
+				System.out.print(curr.data &#43; &#34; &#34;); 
+				curr = curr.right_node; 
+			} else { 
+				/* Find the previous (prev) of curr */
+				prev = curr.left_node; 
+				while (prev.right_node != null &amp;&amp; prev.right_node != curr) {
+					prev = prev.right_node; 
+				}
+
+				/* Make curr as right child of its prev */
+				if (prev.right_node == null) { 
+					prev.right_node = curr; 
+					curr = curr.left_node; 
+				} 
+
+				/* fix the right child of prev*/
+
+				else { 
+					prev.right_node = null; 
+					System.out.print(curr.data &#43; &#34; &#34;); 
+					curr = curr.right_node; 
+				} 
+
+			} 
+
+		}
+	} 
+
+	public static void main(String args[]) { 
+		
+		Tree tree = new Tree(); 
+		tree.root = new Node(4); 
+		tree.root.left_node = new Node(2); 
+		tree.root.right_node = new Node(5); 
+		tree.root.left_node.left_node = new Node(1); 
+		tree.root.left_node.right_node = new Node(3); 
+
+		tree.Morris(tree.root); 
+	} 
+} </code>
+</pre> </div>
+</div>   
+<p>注：由于尚未掌握此算法，所以只是生搬硬套的翻译，质量不高请见谅！</p>
     </div>
 
     
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a>
+          </div>
       <nav class="post-nav">
         <a class="prev" href="/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/algorithm/morris-traversal-for-binary-node/">
-            <span class="next-text nav-default">对二叉树进行莫里斯遍历</span>
+        <a class="next" href="/post/translate/docker/4000-stars-and-counting-a-trip-down-memory-lane/">
+            <span class="next-text nav-default">[译]4000个点赞并且在不断增加，回忆之旅</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -224,9 +408,7 @@
 
       </div>
     </main>
-	
-
-    <footer id="footer" class="footer">
+	<footer id="footer" class="footer">
       <div class="social-links">
       <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
@@ -245,7 +427,11 @@
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
-  
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
   <span class="copyright-year">
     &copy; 
@@ -254,71 +440,154 @@
   </span>
 </div>
 
-    </footer>
-
-    <div class="back-to-top" id="back-to-top" title="回到顶部">
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
       <i class="iconfont icon-up"></i>
     </div>
-  </div>
-  <script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
 
 
-
-
-
-
-
-
-
-
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
-
-
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    console.log(codeDiv);
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+    
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
+    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
 
+
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+  
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>
