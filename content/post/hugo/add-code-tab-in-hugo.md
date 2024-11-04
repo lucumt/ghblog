@@ -73,22 +73,22 @@ func main() {
 
 {{% /codetabs %}}
 
-```go
-package main
+```css
+body {
+  background-color: lightblue;
+}
 
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
+h1 {
+  color: white;
+  text-align: center;
 }
 ```
 
  {{% codetabs %}}   
 
-```sql
-INSERT INTO table2
-SELECT * FROM table1
-WHERE condition;
+```bash
+#!/bin/sh
+echo "Hello world"
 ```
 
 ```php::世界上最好的语言
