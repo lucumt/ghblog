@@ -97,7 +97,7 @@ echo "My first PHP script!";
 ?>
 ```
 
-```python
+```python::大模型的首选
 a = 33
 b = 33
 if b > a:
