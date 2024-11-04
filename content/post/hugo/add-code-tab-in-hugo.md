@@ -5,7 +5,7 @@ lastmod: 2024-11-01T21:13:04+08:00
 draft: true
 keywords: ["hugo"]
 description: "简要记录如何给Hugo博客添加代码分组，以便在代码较多时能减少页面篇幅同时便于阅读"
-tags: ["hugo","Go"]
+tags: ["hugo","go"]
 categories: ["个人博客"]
 author: "Rosen Lu"
 

@@ -5,7 +5,7 @@ lastmod: 2022-09-18T09:43:19+08:00
 draft: false
 keywords: ["hugo","theme","even"]
 description: "个人Hugo博客关于Even主题的一些使用改进，期待能给相关使用人员提供一些帮助"
-tags: ["hugo","Go"]
+tags: ["hugo","go"]
 categories: ["个人博客"]
 author: "Rosen Lu"
 

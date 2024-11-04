@@ -15,7 +15,7 @@
 </head>
 <body>
 
-  {{ with .Site.Params.githubForkUrl }}
+  {{- with .Site.Params.githubForkUrl -}}
 	  <!-- fork me on github --->
 	  <!-- see https://github.blog/2008-12-19-github-ribbons/ -->
 	  <a href="{{ . }}" title="{{ . }}" target="_blank">  
@@ -23,18 +23,18 @@
 		 src="/blog_img/forkme_right_gray.png" 
 		 alt="Fork me on GitHub">
 	  </a>
-  {{ end }}
+  {{- end -}}
 
 
-  {{ partial "slideout.html" . }}
+  {{- partial "slideout.html" . -}}
   <div class="container" id="mobile-panel">
-    {{ if not .Params.hideHeaderAndFooter -}}
+    {{- if not .Params.hideHeaderAndFooter -}}
     <header id="header" class="header">
-        {{ partial "header.html" . }}
+        {{- partial "header.html" . }}
     </header>
     {{- end }}
 
-    {{ block "main" . }}
+    {{- block "main" . -}}
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
@@ -45,16 +45,16 @@
     </main>
 	{{ end }}
 
-    {{ if not .Params.hideHeaderAndFooter -}}
+    {{- if not .Params.hideHeaderAndFooter -}}
     <footer id="footer" class="footer">
       {{ partial "footer.html" . }}
     </footer>
-    {{- end }}
+    {{- end -}}
 
     <div class="back-to-top" id="back-to-top" title="回到顶部">
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  {{ partial "scripts.html" . }}
+  {{- partial "scripts.html" . -}}
 </body>
 </html>

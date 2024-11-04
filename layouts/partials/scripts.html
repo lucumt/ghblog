@@ -6,18 +6,18 @@
 {{- else -}}
   <script type="text/javascript" src="{{ "lib/jquery/jquery-3.6.4.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "lib/slideout/slideout-1.0.1.min.js" | relURL }}"></script>
-  {{ if .Site.Params.fancybox }}<script type="text/javascript" src="{{ "lib/fancybox/jquery.fancybox-3.1.20.min.js" | relURL }}"></script>{{ end }}
+  {{- if .Site.Params.fancybox -}}<script type="text/javascript" src="{{ "lib/fancybox/jquery.fancybox-3.1.20.min.js" | relURL }}"></script>{{- end -}}
 {{- end -}}
 
 <!-- timeago.JS -->
 {{- if and (or .Params.enableOutdatedInfoWarning (and .Site.Params.outdatedInfoWarning.enable (ne .Params.enableOutdatedInfoWarning false))) (or .IsPage .IsHome) }}
   {{- if .Site.Params.publicCDN.enable }}
-    {{ .Site.Params.publicCDN.timeagoJS | safeHTML }}
-    {{ .Site.Params.publicCDN.timeagoLocalesJS | safeHTML }}
-  {{- else }}
-    <script type="text/javascript" src="{{ "lib/timeago/timeago-3.0.2.min.js" | relURL }}"></script>
-    <script type="text/javascript" src="{{ "lib/timeago/timeago.locales-3.0.2.min.js" | relURL }}"></script>
-  {{- end }}
+    {{- .Site.Params.publicCDN.timeagoJS | safeHTML -}}
+    {{- .Site.Params.publicCDN.timeagoLocalesJS | safeHTML -}}
+  {{- else -}}
+    <script type="text/javascript" src="{{ "lib/timeago/timeago-3.0.2.min.js" | relURL -}}"></script>
+    <script type="text/javascript" src="{{ "lib/timeago/timeago.locales-3.0.2.min.js" | relURL -}}"></script>
+  {{- end -}}
   <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
     var languageCode = {{ .Site.LanguageCode }}.replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
     timeago().render(document.querySelectorAll('.timeago'), languageCode);
@@ -26,12 +26,12 @@
 {{- end -}}
 
 <!-- search function -->
-{{ if eq (trim .Page.RelPermalink "/") "search"}}
+{{- if eq (trim .Page.RelPermalink "/") "search" -}}
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
 	<script src="{{ "lib/search/search.js" | absURL }}"></script>
-{{- end }}
+{{- end -}}
 
 <!-- flowchart -->
 {{- if and (or .Params.flowchartDiagrams.enable (and .Site.Params.flowchartDiagrams.enable (ne .Params.flowchartDiagrams.enable false))) (or .IsPage .IsHome) -}}
@@ -81,8 +81,8 @@
     {{- else if .Site.Params.sequenceDiagrams.options -}}
       window.sequenceDiagramsOptions = {{ .Site.Params.sequenceDiagrams.options | safeJS }};
     {{- end -}}*/
-    let seqPageOptions = {{ .Page.Params.sequenceDiagrams.options }};
-	let seqSiteOptions = {{ .Site.Params.sequenceDiagrams.options }};
+    let seqPageOptions = {{- .Page.Params.sequenceDiagrams.options -}};
+	let seqSiteOptions = {{- .Site.Params.sequenceDiagrams.options -}};
 	seqPageOptions = !!seqPageOptions ? seqPageOptions : "{}"
 	seqSiteOptions = !!seqSiteOptions ? seqSiteOptions : "{}"
 	
@@ -92,17 +92,17 @@
 	let seqOptions = {...seqSiteOptions, ...seqPageOptions}; 
 	$("[id^=sequence_]").sequenceDiagram(seqOptions);
   </script>
-{{- end }}
+{{- end -}}
 
 <!-- mermaid js -->
 {{- if and (or .Params.mermaidDiagrams.enable (and .Site.Params.mermaidDiagrams.enable (ne .Params.mermaidDiagrams.enable false))) (or .IsPage .IsHome) -}}
-	{{ if .Page.Store.Get "hasMermaid" }}
+	{{- if .Page.Store.Get "hasMermaid" -}}
 	  <script type="module">
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
-		 //import mermaid from {{ "lib/mermaid/mermaid.esm.min.mjs" | relURL }}
+		 //import mermaid from {{- "lib/mermaid/mermaid.esm.min.mjs" | relURL -}}
 		
-		let mermaidPageOptions = {{ .Page.Params.mermaidDiagrams.options }};
-		let mermaidSiteOptions = {{ .Site.Params.mermaidDiagrams.options }};
+		let mermaidPageOptions = {{- .Page.Params.mermaidDiagrams.options -}};
+		let mermaidSiteOptions = {{- .Site.Params.mermaidDiagrams.options -}};
 		mermaidPageOptions = !!mermaidPageOptions ? mermaidPageOptions : "{}"
 		mermaidSiteOptions = !!mermaidSiteOptions ? mermaidSiteOptions : "{}"
 
@@ -113,8 +113,8 @@
 
 		mermaid.initialize(mermaidOptions);
 	  </script>
-	{{ end }}
-{{- end }}
+	{{- end -}}
+{{- end -}}
 
 <!-- highcharts js -->
 {{- if and (or .Params.highchartsDiagrams.enable (and .Site.Params.highchartsDiagrams.enable (ne .Params.highchartsDiagrams.enable false))) (or .IsPage .IsHome) -}}
@@ -129,8 +129,8 @@
   <script type="text/javascript">
 	  document.addEventListener('DOMContentLoaded', initHighcharts);
 	  function initHighcharts(){
-		let highchartsPageOptions = {{ .Page.Params.highchartsDiagrams.options }};
-		let highchartsSiteOptions = {{ .Site.Params.highchartsDiagrams.options }};
+		let highchartsPageOptions = {{- .Page.Params.highchartsDiagrams.options -}};
+		let highchartsSiteOptions = {{- .Site.Params.highchartsDiagrams.options -}};
 		highchartsPageOptions = !!highchartsPageOptions ? highchartsPageOptions : "{}"
 		highchartsSiteOptions = !!highchartsSiteOptions ? highchartsSiteOptions : "{}"
 
@@ -147,33 +147,33 @@
 		}
 	  }
   </script>
-{{- end }}
+{{- end -}}
 
 
-{{ $even := resources.Get "js/even.js" }}
-{{ $main := resources.Get "js/main.js" }}
-{{ $js := slice $even $main | resources.Concat "js/main.js" | minify | fingerprint }}
-<script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+{{- $even := resources.Get "js/even.js" -}}
+{{- $main := resources.Get "js/main.js" -}}
+{{- $js := slice $even $main | resources.Concat "js/main.js" | minify | fingerprint -}}
+<script type="text/javascript" src="{{- $js.RelPermalink -}}"></script>
 
-{{- if and (or .Params.mathjax (and .Site.Params.mathjax (ne .Params.mathjax false))) (or .IsPage .IsHome) }}
+{{- if and (or .Params.mathjax (and .Site.Params.mathjax (ne .Params.mathjax false))) (or .IsPage .IsHome) -}}
   <script type="text/javascript">
     window.MathJax = {
       tex: {
         {{ if or .Params.mathjaxEnableSingleDollar (and .Site.Params.mathjaxEnableSingleDollar (ne .Params.mathjaxEnableSingleDollar false)) -}}
           inlineMath: [['$','$'], ['\\(','\\)']],
-        {{ end -}}
-        {{ if or .Params.mathjaxEnableAutoNumber (and .Site.Params.mathjaxEnableAutoNumber (ne .Params.mathjaxEnableAutoNumber false)) -}}
+        {{- end -}}
+        {{- if or .Params.mathjaxEnableAutoNumber (and .Site.Params.mathjaxEnableAutoNumber (ne .Params.mathjaxEnableAutoNumber false)) -}}
           tags: 'ams',
-        {{ end -}}
+        {{- end -}}
       }
     };
   </script>
-  {{ if .Site.Params.mathjaxUseLocalFiles -}}
+  {{- if .Site.Params.mathjaxUseLocalFiles -}}
     <script type="text/javascript" async src="{{ "lib/mathjax/es5/tex-mml-chtml.js" | relURL }}"></script>
   {{- else -}}
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
-  {{- end }}
-{{- end }}
+  {{- end -}}
+{{- end -}}
 
 <!-- only work in production mode -->
 {{- if and (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") (ne (trim .Page.RelPermalink "/") "links") -}}
