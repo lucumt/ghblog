@@ -36,10 +36,7 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <link href="/sass/main.min.2d85dc0f018cb0224c2d088d09fe31bf17c3793affb37f7303834db3877e15c6.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
-<meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/hugo/enable-diagrams-in-hugo/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="在Hugo中开启图表支持">
   <meta property="og:description" content="简要记录如何在Hugo博客中集成flowchart、sequence和mermaid这3种图表，以增强表格的功能">
@@ -73,19 +70,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css"/>
 </head>
 <body>
-
-  
-	  
 	  
 	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
 	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
 		 src="/blog_img/forkme_right_gray.png" 
 		 alt="Fork me on GitHub">
-	  </a>
-  
-
-
-  <div id="mobile-navbar" class="mobile-navbar">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
     <a href="/" class="logo">Rosen&#39;s World</a>
   </div>
@@ -118,10 +108,7 @@
 
 
 </nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
   <a href="/" class="logo">Rosen&#39;s World</a>
 </div>
 
@@ -149,10 +136,7 @@
   </ul>
 </nav>
 
-    </header>
-
-    
-    <main id="main" class="main">
+    </header><main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
@@ -1193,9 +1177,7 @@ graph TB
 
       </div>
     </main>
-	
-
-    <footer id="footer" class="footer">
+	<footer id="footer" class="footer">
       <div class="social-links">
       <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
@@ -1227,18 +1209,11 @@ graph TB
   </span>
 </div>
 
-    </footer>
-
-    <div class="back-to-top" id="back-to-top" title="回到顶部">
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
       <i class="iconfont icon-up"></i>
     </div>
-  </div>
-  <script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-
-<script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js"></script>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js"></script>
     <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js"></script><script>
 	   
 	
@@ -1260,8 +1235,8 @@ graph TB
 	
 	<link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous"><script>
        
-    let seqPageOptions = "{ 'theme': 'simple', 'width':1, 'line-width': 1, 'font-size': 14, 'font-family': 'Andale Mono, monospace', 'line':{ 'stroke-width': 1 }, 'rect':{ 'stroke-width': 1, 'fill':'#deffcc' }, 'text':{ 'fill':'#219b15', 'stroke-width':1, 'stroke':'#219b15' } }";
-	let seqSiteOptions = "";
+    let seqPageOptions ="{ 'theme': 'simple', 'width':1, 'line-width': 1, 'font-size': 14, 'font-family': 'Andale Mono, monospace', 'line':{ 'stroke-width': 1 }, 'rect':{ 'stroke-width': 1, 'fill':'#deffcc' }, 'text':{ 'fill':'#219b15', 'stroke-width':1, 'stroke':'#219b15' } }";
+	let seqSiteOptions ="";
 	seqPageOptions = !!seqPageOptions ? seqPageOptions : "{}"
 	seqSiteOptions = !!seqSiteOptions ? seqSiteOptions : "{}"
 	
@@ -1270,15 +1245,10 @@ graph TB
 	
 	let seqOptions = {...seqSiteOptions, ...seqPageOptions}; 
 	$("[id^=sequence_]").sequenceDiagram(seqOptions);
-  </script>
-
-
-	  <script type="module">
+  </script><script type="module">
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm'
 		 
-		
-		let mermaidPageOptions = "{ 'theme':'forest' }";
-		let mermaidSiteOptions = "{theme: 'default',startOnLoad: true }";
+		let mermaidSiteOptions ="{theme: 'default',startOnLoad: true }";
 		mermaidPageOptions = !!mermaidPageOptions ? mermaidPageOptions : "{}"
 		mermaidSiteOptions = !!mermaidSiteOptions ? mermaidSiteOptions : "{}"
 
@@ -1288,18 +1258,7 @@ graph TB
 		let mermaidOptions = {...mermaidSiteOptions, ...mermaidPageOptions}; 
 
 		mermaid.initialize(mermaidOptions);
-	  </script>
-	
-
-
-
-
-
-
-
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
-
-
+	  </script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -1444,6 +1403,5 @@ graph TB
 		 });
 	 }
   </script>
-
 </body>
 </html>
