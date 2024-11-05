@@ -23,7 +23,7 @@
       <description>&lt;p&gt;记录&lt;code&gt;Harbor&lt;/code&gt;清理镜像垃圾时遇到的错误&lt;code&gt;{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;NOT_FOUND&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;{\&amp;quot;code\&amp;quot;:10010,\&amp;quot;message\&amp;quot;:\&amp;quot;object is not found\&amp;quot;,\&amp;quot;details\&amp;quot;:\&amp;quot;2cc49b89751876fa18acb008\&amp;quot;}&amp;quot;}]}&lt;/code&gt;导致回收失败，不能正常清理，最终占用越来越多的磁盘空间的解决过程。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>记录如何解决个人博客没有被Bing检索收录的问题</title>
+      <title>记录如何解决Hugo博客没有被Bing检索收录的问题</title>
       <link>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</link>
       <pubDate>Mon, 07 Oct 2024 21:24:46 +0800</pubDate>
       <guid>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</guid>
