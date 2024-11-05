@@ -23,6 +23,13 @@
       <description>&lt;p&gt;记录&lt;code&gt;Harbor&lt;/code&gt;清理镜像垃圾时遇到的错误&lt;code&gt;{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;NOT_FOUND&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;{\&amp;quot;code\&amp;quot;:10010,\&amp;quot;message\&amp;quot;:\&amp;quot;object is not found\&amp;quot;,\&amp;quot;details\&amp;quot;:\&amp;quot;2cc49b89751876fa18acb008\&amp;quot;}&amp;quot;}]}&lt;/code&gt;导致回收失败，不能正常清理，最终占用越来越多的磁盘空间的解决过程。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>记录如何解决个人博客没有被Bing检索收录的问题</title>
+      <link>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</link>
+      <pubDate>Mon, 07 Oct 2024 21:24:46 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</guid>
+      <description>&lt;p&gt;自己的&lt;code&gt;Hugo&lt;/code&gt;博客一直以来都无法被&lt;a href=&#34;https://www.bing.com/&#34;&gt;&lt;strong&gt;Bing&lt;/strong&gt;&lt;/a&gt;收录检索，本文简要记录自己通过改进&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客内容以及给&lt;code&gt;Bing&lt;/code&gt;多次发送技术支持邮件来解决这一问题的过程。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>[译]Git Worktree使用说明</title>
       <link>https://lucumt.info/post/translate/git/git-worktree/</link>
       <pubDate>Fri, 23 Aug 2024 13:17:18 +0800</pubDate>

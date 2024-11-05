@@ -6,8 +6,15 @@
     <description>Recent content in Hugo on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Nov 2023 10:35:48 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Oct 2024 21:24:46 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>记录如何解决个人博客没有被Bing检索收录的问题</title>
+      <link>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</link>
+      <pubDate>Mon, 07 Oct 2024 21:24:46 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</guid>
+      <description>&lt;p&gt;自己的&lt;code&gt;Hugo&lt;/code&gt;博客一直以来都无法被&lt;a href=&#34;https://www.bing.com/&#34;&gt;&lt;strong&gt;Bing&lt;/strong&gt;&lt;/a&gt;收录检索，本文简要记录自己通过改进&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客内容以及给&lt;code&gt;Bing&lt;/code&gt;多次发送技术支持邮件来解决这一问题的过程。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给Hugo中的Even主题添加搜索功能</title>
       <link>https://lucumt.info/post/hugo/enable-search-in-even-theme/</link>
