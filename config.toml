@@ -72,6 +72,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   
   githubForkUrl = "https://github.com/lucumt/ghblog"
   enableCopyCode = true
+  codeTabSeperator = "#"
 
   since = "2016"            # Site creation time          # 站点建立时间
   # use public git repo url to link lastmod git commit, enableGitInfo should be true.

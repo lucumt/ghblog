@@ -24,6 +24,7 @@ mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
 centerImage: false
 borderImage: true
+codeTabSeperator: "::"
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -49,7 +50,26 @@ highchartsDiagrams:
   options: ""
 ---
 
+[**Hugo**](https://gohugo.io/)默认没有提供代码分组的支持，本文基于[这条帖子](https://discourse.gohugo.io/t/code-tabs-widget/975)和[gitbook-plugin-prism-codetab-fox](https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox)通过修改[Even](https://github.com/olOwOlo/hugo-theme-even)主题的相关代码，实现基于Tab的代码块分组功能。
+
 <!--more-->
+
+## 代码修改
+
+1. 测试
+2. 测试
+3. 测试
+4. 测试
+5. 测试
+6. 测试
+7. 测试
+8. 测试
+
+## 展示效果
+
+相关源码如下
+
+实际展示效果如下
 
  {{% codetabs %}}   
 

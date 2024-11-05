@@ -8,8 +8,12 @@
 {{- end }}
 
 {{- $attributes := .Attributes }}
-{{- $title :=index (split .Type "::") 1 | default .Type -}}
-{{- $type :=index (split .Type "::") 0 | default .Type -}}
+
+{{- $globalCodeTabSeperator := site.Params.codeTabSeperator | default "#" -}}
+{{- $codeTabSeperator := .Page.Params.codeTabSeperator | default $globalCodeTabSeperator -}}
+{{- $title :=index (split .Type $codeTabSeperator) 1 | default .Type -}}
+{{- $type :=index (split .Type $codeTabSeperator) 0 | default .Type -}}
+
 {{- $classes := slice (printf $classStr $type) .Attributes.class }}
 {{- $attributes = merge $attributes (dict "class" (delimit $classes " ") "title" $title) -}}
 <pre

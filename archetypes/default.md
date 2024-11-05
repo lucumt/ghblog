@@ -24,6 +24,7 @@ mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
 centerImage: false
 borderImage: true
+#codeTabSeperator: "::"
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false

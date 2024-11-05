@@ -111,7 +111,7 @@ author: "Rosen Lu"
 
 ![Bing正常收录](/blog_img/hugo/enable-bing-index-for-my-hugo-website/bing_site_result_working.png "Bing正常收录")
 
-同时在`Bing Webmaster`中也能查看正常的数据
+同时在`Bing Webmaster`中也能查看正常的数据，至此问题基本解决完毕！
 
 ![BingWebmaster显示正常检索](/blog_img/hugo/enable-bing-index-for-my-hugo-website/bing-webmaster-indexed-result.png "BingWebmaster显示正常检索")
 
