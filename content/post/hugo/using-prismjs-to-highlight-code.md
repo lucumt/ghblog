@@ -94,7 +94,10 @@ hugo server
    {{- $lineCount := len (split .Inner "\n") -}}
    {{- if gt $lineCount 1 }}
      {{- $classStr = print "line-numbers " print $classStr  }}
+   {{- else -}}
+     {{- $classStr = print "no-line-numbers " print $classStr  }}
    {{- end }}
+   
    {{- $attributes := .Attributes }}
    {{- $classes := slice (printf $classStr .Type) .Attributes.class }}
    {{- $attributes = merge $attributes (dict "class" (delimit $classes " ")) }}
@@ -115,6 +118,11 @@ hugo server
    ```css
    .line-numbers .line-numbers-rows{
        border-right: 0px !important;
+   }
+   
+   /*只有一行代码时没必要显示行号*/
+   .no-line-numbers{
+     position: relative
    }
    ```
 
