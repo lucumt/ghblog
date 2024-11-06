@@ -16,6 +16,13 @@
       <description>&lt;p&gt;自己的&lt;code&gt;Hugo&lt;/code&gt;博客一直以来都无法被&lt;a href=&#34;https://www.bing.com/&#34;&gt;&lt;strong&gt;Bing&lt;/strong&gt;&lt;/a&gt;收录检索，本文简要记录自己通过改进&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客内容以及给&lt;code&gt;Bing&lt;/code&gt;多次发送技术支持邮件来解决这一问题的过程。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>在Hugo中利用Prism进行代码高亮</title>
+      <link>https://lucumt.info/post/hugo/using-prismjs-to-highlight-code/</link>
+      <pubDate>Tue, 30 Jul 2024 18:31:44 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/using-prismjs-to-highlight-code/</guid>
+      <description>&lt;p&gt;简要介绍如何在基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;主题的&lt;a href=&#34;https://gohugo.io&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客中采用&lt;a href=&#34;https://prismjs.com&#34;&gt;&lt;strong&gt;Prism&lt;/strong&gt;&lt;/a&gt;替换默认的&lt;a href=&#34;https://github.com/alecthomas/chroma&#34;&gt;&lt;strong&gt;Chroma&lt;/strong&gt;&lt;/a&gt;进行代码高亮显示，实现支持更多的语言和更好的识别。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>创建多个GitHub Pages并且利用GoDaddy分别配置子域名</title>
       <link>https://lucumt.info/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/</link>
       <pubDate>Mon, 20 May 2024 09:44:44 +0800</pubDate>

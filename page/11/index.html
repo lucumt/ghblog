@@ -134,6 +134,31 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/dealing-with-interrupted-exception/">[译]如何处理InterruptedException</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-15 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"> Java多线程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自 <strong><a href="https://www.ibm.com/developerworks/library/j-jtp05236/">Dealing with InterruptedException</a></strong></p>
+<p>这个故事可能很熟悉: 你正在编写一个测试程序，需要将程序暂停一段时间,于是你调用了<code>Thread.sleep()</code>来实现。
+但此时编译器或IDE会立即提示你没有处理非运行时异常 <strong><a href="https://docs.oracle.com/javase/8/docs/api/?java/lang/InterruptedException.html">InterruptedException</a></strong>。那么，什么是<code>InterruptedException</code>,为什么我们要必须处理它呢？</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/dealing-with-interrupted-exception/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/how-to-use-volatile-in-java/">volatile关键字在Java程序中的使用</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-12-08 </span>
@@ -320,28 +345,6 @@
     </div>
     <div class="read-more">
       <a href="/post/other/different-ways-find-bug-in-complex-code/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mybatis/print-sql-in-different-mybatis-version/">在不同版本的MyBatis中通过Log4j打印实际执行的SQL</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-12-18 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/mybatis%E7%B3%BB%E5%88%97/"> MyBatis系列 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中ORM框架用的是 <a href="http://www.mybatis.org/mybatis-3/"><strong>MyBatis</strong></a>，最近由于业务上的需求将<code>MyBatis</code>从<strong>3.1.1</strong>升级到<strong>3.4.5</strong>，发现升级后通过<a href="https://logging.apache.org/log4j/1.2/download.html"><strong>Log4j</strong></a>显示SQL的配置方式发生了变化，由于变化较大，故先记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mybatis/print-sql-in-different-mybatis-version/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

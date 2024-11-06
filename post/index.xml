@@ -37,6 +37,13 @@
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://fev.al/posts/git-worktree/&#34;&gt;&lt;strong&gt;Git Worktree&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
+      <title>在Hugo中利用Prism进行代码高亮</title>
+      <link>https://lucumt.info/post/hugo/using-prismjs-to-highlight-code/</link>
+      <pubDate>Tue, 30 Jul 2024 18:31:44 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/using-prismjs-to-highlight-code/</guid>
+      <description>&lt;p&gt;简要介绍如何在基于&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;&lt;strong&gt;Even&lt;/strong&gt;&lt;/a&gt;主题的&lt;a href=&#34;https://gohugo.io&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客中采用&lt;a href=&#34;https://prismjs.com&#34;&gt;&lt;strong&gt;Prism&lt;/strong&gt;&lt;/a&gt;替换默认的&lt;a href=&#34;https://github.com/alecthomas/chroma&#34;&gt;&lt;strong&gt;Chroma&lt;/strong&gt;&lt;/a&gt;进行代码高亮显示，实现支持更多的语言和更好的识别。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>KubeSphere中整合LDAP后不生效的原因分析</title>
       <link>https://lucumt.info/post/devops/ldap-integration-not-working/</link>
       <pubDate>Wed, 03 Jul 2024 19:37:01 +0800</pubDate>
