@@ -6,8 +6,15 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Oct 2024 10:09:39 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2024 21:13:04 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>给Hugo博客添加代码分组</title>
+      <link>https://lucumt.info/post/hugo/add-code-tab-in-hugo/</link>
+      <pubDate>Fri, 01 Nov 2024 21:13:04 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/add-code-tab-in-hugo/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;默认没有提供代码分组的支持，本文基于&lt;a href=&#34;https://discourse.gohugo.io/t/code-tabs-widget/975&#34;&gt;这条帖子&lt;/a&gt;和&lt;a href=&#34;https://github.com/gitbook-plugin-fox/gitbook-plugin-prism-codetab-fox&#34;&gt;gitbook-plugin-prism-codetab-fox&lt;/a&gt;通过修改&lt;a href=&#34;https://github.com/olOwOlo/hugo-theme-even&#34;&gt;Even&lt;/a&gt;主题的相关代码，实现基于Tab的代码块分组功能。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>配置Harbor中镜像清理的策略实现定期自动清理冗余镜像</title>
       <link>https://lucumt.info/post/devops/config-harbor-strategy-to-clean-images/</link>

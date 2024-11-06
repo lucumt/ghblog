@@ -134,6 +134,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/">一次由wait造成的死锁问题分析</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-09-12 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在<a href="/post/java-concurrency/print-a-b-c-in-turn-by-threads/">多种方式实现在Java中用线程轮流打印ABC</a>中自己本想用单个锁通过调用<code>wait()</code>实现轮流打印，但一直遇到全部等待并停止执行的死锁问题，经过网上求助和自己分析，最终找到问题原因，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-concurrency/analysis-deadlock-in-multiple-threads-caused-by-wait/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java-concurrency/print-a-b-c-in-turn-by-threads/">多种方式实现在Java中用线程轮流打印ABC</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-09-08 </span>
@@ -321,27 +342,6 @@
     </div>
     <div class="read-more">
       <a href="/post/mysql/difference-and-usage-for-various-select-count/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/">ClassNotFoundException与NoClassDefFoundError对比</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-01-02 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/ClassNotFoundException.html"><strong>ClassNotFoundException</strong></a>与<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/NoClassDefFoundError.html"><strong>NoClassDefFoundError</strong></a>是<code>Java</code>开发中经常会遇到的异常与错误，本文基于个人工作中遇到的场景以及网上的资料，简要总结它们的差异、出现场景以及规避方案。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/difference-between-class-not-found-exception-and-no-class-def-found-error/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
