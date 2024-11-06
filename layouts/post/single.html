@@ -13,7 +13,7 @@
             {{ end -}}
           </div>
         {{- end }}
-        {{- if .Site.Params.moreMeta }}
+        {{- if or .Site.Params.moreMeta .Params.moreMeta }}
           <span class="more-meta"> {{ T "wordCount" .WordCount }} </span>
           <span class="more-meta"> {{ T "readingTime" .ReadingTime }} </span>
         {{- end }}
