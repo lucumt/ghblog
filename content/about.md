@@ -58,7 +58,7 @@ sequenceDiagrams:
 
 ### 教育信息
 
-* [中国矿业大学](http://www.cumt.edu.cn/)&nbsp;(2006.9-2010.6)
+* [中国矿业大学](http://www.cumt.edu.cn/)
 * [计算机科学与技术](http://cs.cumt.edu.cn/)&nbsp;(本科)
 
 ### 自我评价
