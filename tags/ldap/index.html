@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.2d85dc0f018cb0224c2d088d09fe31bf17c3793affb37f7303834db3877e15c6.css" rel="stylesheet">
+<link href="/sass/main.min.e40488554eb62dbd93e56cb3183d65b327bc5bf44f76e5c2f6e9f7e602e619a8.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/tags/ldap/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="Ldap">
@@ -332,22 +332,20 @@
   }
 
   async function copyCodeToClipboard(button, codeDiv) {
-    console.log(codeDiv);
     const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    
 	button.innerHTML = copiedIcon;
     setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
   function addCopyButtonToDom(button, codeDiv) {
-    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
     codeDiv.parentNode.insertBefore(wrapper, codeDiv);
     wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
