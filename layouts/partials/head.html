@@ -91,8 +91,8 @@
 <![endif]-->` | safeHTML }}
 
 {{- if .Store.Get "hasCodeBlock" -}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-solarizedlight.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-highlight/prism-line-highlight.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css"/>
+<link href="{{ "lib/prism-1.29.0/themes/prism-solarizedlight.min.css" | relURL }}" rel="stylesheet">
+<link href="{{ "lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" | relURL }}" rel="stylesheet">
+<link href="{{ "lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" | relURL }}" rel="stylesheet">
 {{- end -}}
 
