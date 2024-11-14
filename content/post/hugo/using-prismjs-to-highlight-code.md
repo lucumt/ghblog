@@ -209,22 +209,20 @@ hugo server
      }
    
      async function copyCodeToClipboard(button, codeDiv) {
-       console.log(codeDiv);
        const codeToCopy = codeDiv.querySelector(":scope > code")
          .innerText;
        await navigator.clipboard.writeText(codeToCopy);
        button.blur();
-       //button.innerHTML = "&#x2714;";
    	button.innerHTML = copiedIcon;
        setTimeout(() => button.innerHTML = copyIcon, 2000);
      }
    
      function addCopyButtonToDom(button, codeDiv) {
-       codeDiv.insertBefore(button, codeDiv.firstChild);
        const wrapper = document.createElement("div");
        wrapper.className = "highlight-wrapper";
        codeDiv.parentNode.insertBefore(wrapper, codeDiv);
        wrapper.appendChild(codeDiv);
+   	wrapper.insertBefore(button, wrapper.firstChild);
      }
    
      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
