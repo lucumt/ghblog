@@ -51,7 +51,7 @@
   <meta itemprop="description" content="简要介绍如何使用Prism来替换Hugo博客默认的代码高亮实现Chroma，实现支持更多的语言和更好的识别">
   <meta itemprop="datePublished" content="2024-07-30T18:31:44+08:00">
   <meta itemprop="dateModified" content="2024-07-30T18:31:44+08:00">
-  <meta itemprop="wordCount" content="1898">
+  <meta itemprop="wordCount" content="1894">
   <meta itemprop="keywords" content="hugo,prism,chroma,highlight,代码高亮">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Hugo中利用Prism进行代码高亮">
@@ -344,22 +344,20 @@ pre[class*=language-] {
   }
 
   async function copyCodeToClipboard(button, codeDiv) {
-    console.log(codeDiv);
     const codeToCopy = codeDiv.querySelector(&#34;:scope &gt; code&#34;)
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    //button.innerHTML = &#34;&amp;#x2714;&#34;;
 	button.innerHTML = copiedIcon;
     setTimeout(() =&gt; button.innerHTML = copyIcon, 2000);
   }
 
   function addCopyButtonToDom(button, codeDiv) {
-    codeDiv.insertBefore(button, codeDiv.firstChild);
     const wrapper = document.createElement(&#34;div&#34;);
     wrapper.className = &#34;highlight-wrapper&#34;;
     codeDiv.parentNode.insertBefore(wrapper, codeDiv);
     wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
