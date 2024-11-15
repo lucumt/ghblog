@@ -107,6 +107,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/gitbook/</loc>
+    <lastmod>2024-09-06T10:26:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2024-09-06T10:26:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</loc>
+    <lastmod>2024-09-06T10:26:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/git/git-worktree/</loc>
     <lastmod>2024-08-23T13:17:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -179,20 +200,6 @@
   <url>
     <loc>https://lucumt.info/tags/ldap/</loc>
     <lastmod>2024-07-03T19:37:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2024-07-03T19:37:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/gitbook/</loc>
-    <lastmod>2024-06-27T20:35:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

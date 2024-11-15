@@ -6,8 +6,15 @@
     <description>Recent content in 工具使用 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 03 Jul 2024 19:37:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2024 10:26:52 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Hugo来替代GitBook实现文档展示</title>
+      <link>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</link>
+      <pubDate>Fri, 06 Sep 2024 10:26:52 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;中的&lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;hugo-book&lt;/a&gt;主题简要记录搭建并生成类似&lt;code&gt;GitBook&lt;/code&gt;的展示效果，以便在需要进行文档管理与展示时，可以多一种选择。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>KubeSphere中整合LDAP后不生效的原因分析</title>
       <link>https://lucumt.info/post/devops/ldap-integration-not-working/</link>

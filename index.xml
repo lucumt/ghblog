@@ -37,6 +37,13 @@
       <description>&lt;p&gt;自己的&lt;code&gt;Hugo&lt;/code&gt;博客一直以来都无法被&lt;a href=&#34;https://www.bing.com/&#34;&gt;&lt;strong&gt;Bing&lt;/strong&gt;&lt;/a&gt;收录检索，本文简要记录自己通过改进&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;博客内容以及给&lt;code&gt;Bing&lt;/code&gt;多次发送技术支持邮件来解决这一问题的过程。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>利用Hugo来替代GitBook实现文档展示</title>
+      <link>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</link>
+      <pubDate>Fri, 06 Sep 2024 10:26:52 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;中的&lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;hugo-book&lt;/a&gt;主题简要记录搭建并生成类似&lt;code&gt;GitBook&lt;/code&gt;的展示效果，以便在需要进行文档管理与展示时，可以多一种选择。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>[译]Git Worktree使用说明</title>
       <link>https://lucumt.info/post/translate/git/git-worktree/</link>
       <pubDate>Fri, 23 Aug 2024 13:17:18 +0800</pubDate>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>利用Hugo来替代GitBook实现文档展示 - 飞狐的部落格</title>
@@ -16,48 +16,41 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简要记录如何利用Hugo来搭建并生成类似GitBook的展示效果，给文档管理提供另外一种选择" /><meta name="keywords" content="hugo,gitbook,文档展示" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
 
 
-
-
-
-
-<meta name="generator" content="Hugo 0.126.1 with theme even" />
-
-
-<link rel="canonical" href="http://localhost:1313/post/hugo/using-hugo-to-show-document-like-gitbook/" />
+<link rel="canonical" href="https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-<link href="/sass/main.min.56c134526758d45742d5973fa79fa64559d94d7bbfe861b5a171e7af2bfc19ee.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
-<meta property="og:url" content="http://localhost:1313/post/hugo/using-hugo-to-show-document-like-gitbook/">
+<link href="/sass/main.min.e40488554eb62dbd93e56cb3183d65b327bc5bf44f76e5c2f6e9f7e602e619a8.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/">
   <meta property="og:site_name" content="飞狐的部落格">
   <meta property="og:title" content="利用Hugo来替代GitBook实现文档展示">
-  <meta property="og:description" content="飞狐的个人博客">
+  <meta property="og:description" content="简要记录如何利用Hugo来搭建并生成类似GitBook的展示效果，给文档管理提供另外一种选择">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2023-04-06T10:26:52+08:00">
-    <meta property="article:modified_time" content="2023-04-06T10:26:52+08:00">
+    <meta property="article:published_time" content="2024-09-06T10:26:52+08:00">
+    <meta property="article:modified_time" content="2024-09-06T10:26:52+08:00">
     <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="Gitbook">
 
   <meta itemprop="name" content="利用Hugo来替代GitBook实现文档展示">
-  <meta itemprop="description" content="飞狐的个人博客">
-  <meta itemprop="datePublished" content="2023-04-06T10:26:52+08:00">
-  <meta itemprop="dateModified" content="2023-04-06T10:26:52+08:00">
-  <meta itemprop="keywords" content="Hugo">
+  <meta itemprop="description" content="简要记录如何利用Hugo来搭建并生成类似GitBook的展示效果，给文档管理提供另外一种选择">
+  <meta itemprop="datePublished" content="2024-09-06T10:26:52+08:00">
+  <meta itemprop="dateModified" content="2024-09-06T10:26:52+08:00">
+  <meta itemprop="wordCount" content="1840">
+  <meta itemprop="keywords" content="hugo,gitbook,文档展示">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Hugo来替代GitBook实现文档展示">
-  <meta name="twitter:description" content="飞狐的个人博客">
+  <meta name="twitter:description" content="简要记录如何利用Hugo来搭建并生成类似GitBook的展示效果，给文档管理提供另外一种选择">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -66,23 +59,17 @@
 <!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 </head>
 <body>
-
-  
-	  
 	  
 	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
 	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
 		 src="/blog_img/forkme_right_gray.png" 
 		 alt="Fork me on GitHub">
-	  </a>
-  
-
-
-  <div id="mobile-navbar" class="mobile-navbar">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
     <a href="/" class="logo">Rosen&#39;s World</a>
   </div>
@@ -104,7 +91,7 @@
         <li class="mobile-menu-item">分类</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于我</li>
-      </a><a href="/links/">
+      </a><a href="https://tech.lucumt.info">
         <li class="mobile-menu-item">外链</li>
       </a><a href="/search/">
         <li class="mobile-menu-item">搜索</li>
@@ -115,10 +102,7 @@
 
 
 </nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
   <a href="/" class="logo">Rosen&#39;s World</a>
 </div>
 
@@ -139,17 +123,14 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于我</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/links/">外链</a>
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/search/">搜索</a>
       </li>
   </ul>
 </nav>
 
-    </header>
-
-    
-    <main id="main" class="main">
+    </header><main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
@@ -158,38 +139,241 @@
       <h1 class="post-title">利用Hugo来替代GitBook实现文档展示</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2023-04-06 </span>
-        
-        
+        <span class="post-time"> 2024-09-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#搭建与配置">搭建与配置</a>
+          <ul>
+            <li><a href="#环境搭建">环境搭建</a></li>
+            <li><a href="#页面别名">页面别名</a></li>
+            <li><a href="#目录层级">目录层级</a></li>
+            <li><a href="#页面顺序">页面顺序</a></li>
+            <li><a href="#代码高亮">代码高亮</a></li>
+          </ul>
+        </li>
+        <li><a href="#样例展示">样例展示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
 	 
 	  	
 	
     <div class="post-content image-border">
-	 
+	 <p>基于<a href="https://gohugo.io">Hugo</a>中的<a href="https://github.com/alex-shpak/hugo-book">hugo-book</a>主题简要记录搭建并生成类似<code>GitBook</code>的展示效果，以便在需要进行文档管理与展示时，可以多一种选择。</p>
+<h2 id="背景">背景</h2>
+<p>部门内部使用<a href="https://www.gitbook.com">GitBook</a>进行知识库的管理已经有一段时间<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，并且在此期间个人也积累了<a href="/tags/gitbook/">一些经验</a>，但由于其实基于<code>Nodejs</code>开发以及开源的<code>v2</code>版本不再维护的原因<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>，导致其构建速度、环境搭建、插件开发等方面都存在一些不便之处。</p>
+<p>由于自己一直使用<code>Hugo</code>进行博客编写，而<code>Hugo</code>是一款知名的博客编写工具，其生态圈十分繁荣，为了给部门和自己提供更多的选择，个人计划采用<code>Hugo</code>实现类似的功能作为可选的替代品。在其官方网站的<a href="https://themes.gohugo.io">主题列表</a>中发现<code>hugo-book</code>的显示效果和<code>GitBook</code>类似，简单测试后基本满足要求。</p>
+<h2 id="搭建与配置">搭建与配置</h2>
+<h3 id="环境搭建">环境搭建</h3>
+<p>依次执行下述命令</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>git clone https://github.com/alex-shpak/hugo-book.git
+cd hugo-book
+
+# 删除demo页
+rm -rf exampleSite
+
+# 暂定不支持多语言,只创建content目录即可
+mkdir -p content/docs &amp;&amp; cd content
+
+# 创建简单的测试页面
+echo &#34;I am defult page&#34; &gt;&gt; _index.md
+echo &#34;Hello world A&#34; &gt;&gt; docs/index1.md
+echo &#34;Hello world B&#34; &gt;&gt; docs/index2.md
+
+# 创建配置文件
+echo &#34;title = &#39;个人笔记&#39;&#34; &gt;&gt; config.toml
+
+# 启动测试
+hugo server</code>
+</pre><p>若一切执行顺利，终端会出现类似如下输出</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo_server_start_success.png" alt="hugo网站启动正常" title="hugo网站启动正常"></p>
+<p>此时在浏览器中输入<code>http://127.0.0.1:1313</code>会有如下输出，默认主页展示的内容为<code>content/_index.md</code>中的内容，同时在页面左侧有名为<code>index1</code>和<code>index2</code>的菜单链接，其对应于我们在<code>content/docs</code>目录下创建的文件名</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-home-page.png" alt="系统主页展示" title="系统主页展示"></p>
+<p>点击链接后会显示对应文件的内容，支持<code>hugo-book</code>的环境基本搭建完毕。</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-page-menu-switch.png" alt="系统页面切换" title="系统页面切换"></p>
+<div class="admonition success"><p class="admonition-title">总结</p>
+<ul>
+<li>默认的页面内容位于<code>content/_index.md</code>文件中</li>
+<li>除了默认页面之外，其余的内容都需位于<code>content/docs</code>目录下</li>
+</ul>
+</div>
+<h3 id="页面别名">页面别名</h3>
+<p>虽然按照前述步骤已经能正常工作，但左侧的菜单名称默认是文件名称，使用起来不直观，需要将其设置为具有含义的名称，虽然可通过修改文件名称的方式来实现，但当标题包含中文或特殊字符时，可能会有显示问题。</p>
+<p><code>hugo-book</code>提供了名为<code>title</code>的属性来自定义页面显示内容，可将对应页面修改如下</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-bash " title="index1.md">
+<code>---
+title: &#34;第一个页面&#34;
+---</code>
+</pre><pre class="line-numbers language-bash " title="index2.md">
+<code>---
+title: &#34;第二个页面&#34;
+---</code>
+</pre></div>
+</div>  
+<p>之后浏览器中的显示效果如下</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-with-custom-menu-title.png" alt="自定义菜单名称" title="自定义菜单名称"></p>
+<h3 id="目录层级">目录层级</h3>
+<p>在实际的知识库文档管理中通常，页面数通常很多，需要对齐进行归类管理，<code>hugo-book</code>默认也提供了这方面的支持。</p>
+<p>创建类似如下的目录，并添加对应的文件，在文件中修改<code>title</code>属性，在文件夹下创建<code>_index.md</code>文件并修改其<code>title</code>属性为期望的名称，根据实际情况添加<code>bookCollapseSection: true</code>属性。</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>D:\code\githubCode\hugo-book\content&gt;tree /F
+文件夹 PATH 列表
+卷序列号为 33B9-4C35
+D:.
+│  _index.md
+│
+└─docs
+    │  index1.md
+    │  index2.md
+    │
+    ├─algorithm
+    │      dynamic-program.md
+    │      sorted-stack.md
+    │      _index.md
+    │
+    ├─code
+    │  │  _index.md
+    │  │
+    │  ├─golang
+    │  │      _index.md
+    │  │
+    │  ├─java
+    │  │      print-a-b-c.md
+    │  │      _index.md
+    │  │
+    │  └─python
+    │          pytorch-tutorial.md
+    │          _index.md
+    │
+    └─db
+            _index.md</code>
+</pre><p>操作完毕后，显示效果如下</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-with-multiple-menu-level.png" alt="具有多层级结构的菜单" title="具有多层级结构的菜单"></p>
+<div class="admonition success"><p class="admonition-title">总结</p>
+<ul>
+<li>目录名称默认为文件夹名称，但可通过在对应目下的<code>_index.md</code>文件设置<code>title</code>属性来实现</li>
+<li>可通过在文件夹下对应目下的<code>_index.md</code>文件中添加<code>bookCollapseSection: true</code>来控制目录是否支持展开/折叠</li>
+</ul>
+</div>
+<h3 id="页面顺序">页面顺序</h3>
+<p>可通过修改页面或<code>_index.md</code>中的<code>weight</code>属性来调整统一层级下的页面和目录结构的显示顺序，实现个性化的顺序显示。</p>
+<p>将签署代码中的相关文件头部修改如下</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-bash " title="index1.md">
+<code>---
+title: &#34;第一个页面&#34;
+weight: 2
+---</code>
+</pre><pre class="line-numbers language-bash " title="index2.md">
+<code>---
+title: &#34;第二个页面&#34;
+weight: 1
+---</code>
+</pre><pre class="line-numbers language-bash " title="code/_index.md">
+<code>---
+bookCollapseSection: true
+weight: 3
+title: 编程
+---</code>
+</pre><pre class="line-numbers language-bash " title="algorithm/_index.md">
+<code>weight: 4
+title: 算法</code>
+</pre><pre class="line-numbers language-bash " title="db/_index.md">
+<code>bookCollapseSection: true
+weight: 5
+title: 数据库</code>
+</pre></div>
+</div>  
+<p>修改后的展示效果类似如下</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-page-with-custom-order.png" alt="自定义页面和目录的展示顺序" title="自定义页面和目录的展示顺序"></p>
+<p>实际上在<code>archetypes</code>下的<code>posts.md</code>文件中已经提供默认的配置模板，当我们采用<code>hugo new</code>命令创建页面时，<code>hugo</code>会将Z和谐默认参数带入，只需根据实际情况修改即可。</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>---
+title: &#34;{{ .Name | humanize | title }}&#34;
+weight: 1
+# bookFlatSection: false
+# bookToc: true
+# bookHidden: false
+# bookCollapseSection: false
+# bookComments: false
+# bookSearchExclude: false
+---</code>
+</pre><h3 id="代码高亮">代码高亮</h3>
+<p>默认的代码高亮显示类似如下</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-default-code-highlight.png" alt="默认的代码高亮样式" title="默认的代码高亮样式"></p>
+<p>个人不太喜欢其风格，可在<code>config.toml</code>中添加类似如下配置修改为自己喜欢的样式</p>
+<pre class="line-numbers language-toml " title="toml">
+<code>[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+	startLevel = 1
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = &#34;&#34;
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = false
+    noClasses = true
+    style = &#34;perldoc&#34;
+    tabWidth = 4</code>
+</pre><p>修改后的显示效果如下</p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-updated-code-highlight.png" alt="修改后的代码高亮样式" title="修改后的代码高亮样式"></p>
+<h2 id="样例展示">样例展示</h2>
+<p>基于前述操作步骤以及<a href="/post/github/create-multiple-github-pages-and-config-godaddy-subdomain/">创建多个GitHub Pages并且利用GoDaddy分别配置子域名</a>中的说明，自己搭建了一个展示网站<a href="https://tech.lucumt.info/"><strong>https://tech.lucumt.info</strong></a>,展示效果如下，源码位于<a href="https://github.com/lucumt/tech">https://github.com/lucumt/tech</a></p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-for-lucumt-1.png" alt="个人网站展示效果-1" title="个人网站展示效果-1"></p>
+<p><img src="/blog_img/hugo/using-hugo-to-show-document-like-gitbook/hugo-book-for-lucumt-2.png" alt="个人网站展示效果-2" title="个人网站展示效果-2"></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>主要是基于开源版本的<code>v2</code>版本&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>参见<a href="https://github.com/GitbookIO/gitbook-cli?tab=readme-ov-file#%EF%B8%8F-deprecation-warning">Deprecation warning</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
     </div>
 
     
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/hugo/">hugo</a>
+          <a href="/tags/gitbook/">gitbook</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/nacos/integrate-python-program-to-nacos/">
+        <a class="prev" href="/post/hugo/enable-bing-index-for-my-hugo-website/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">在Python程序中使用Nacos</span>
+            <span class="prev-text nav-default">记录如何解决Hugo博客没有被Bing检索收录的问题</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/hugo/enable-highcharts-in-hugo/">
-            <span class="next-text nav-default">在Hugo中开启Highcharts图表支持</span>
+        <a class="next" href="/post/translate/git/git-worktree/">
+            <span class="next-text nav-default">[译]Git Worktree使用说明</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -222,9 +406,7 @@
 
       </div>
     </main>
-	
-
-    <footer id="footer" class="footer">
+	<footer id="footer" class="footer">
       <div class="social-links">
       <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
@@ -243,7 +425,11 @@
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
-  
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
   <span class="copyright-year">
     &copy; 
@@ -252,71 +438,150 @@
   </span>
 </div>
 
-    </footer>
-
-    <div class="back-to-top" id="back-to-top" title="回到顶部">
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
       <i class="iconfont icon-up"></i>
     </div>
-  </div>
-  <script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
 
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
 
 
-
-
-
-
-
-
-
-
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
-
-
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
 
 
 <script>
-  let copyContent = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
   <path fill-rule="evenodd" 
   d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
       5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
 </svg>`;
-  function createCopyButton(highlightDiv) {
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
     const div = document.createElement("div");
     div.className = "copy-code";
-    div.innerHTML = copyContent;
+    div.innerHTML = copyIcon;
     div.addEventListener("click", () =>
-      copyCodeToClipboard(div, highlightDiv)
+      copyCodeToClipboard(div, codeDiv)
     );
-    addCopyButtonToDom(div, highlightDiv);
+    addCopyButtonToDom(div, codeDiv);
   }
 
-  async function copyCodeToClipboard(button, highlightDiv) {
-    const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
       .innerText;
     await navigator.clipboard.writeText(codeToCopy);
     button.blur();
-    button.innerHTML = "&#x2714;";
-    setTimeout(() => button.innerHTML = copyContent, 2000);
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
   }
 
-  function addCopyButtonToDom(button, highlightDiv) {
-    highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  function addCopyButtonToDom(button, codeDiv) {
     const wrapper = document.createElement("div");
     wrapper.className = "highlight-wrapper";
-    highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
-    wrapper.appendChild(highlightDiv);
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
   }
 
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if(!isMobile){
-     document.querySelectorAll(".highlight").forEach((highlightDiv) => createCopyButton(highlightDiv));
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
   }
 </script>  
 
 
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>

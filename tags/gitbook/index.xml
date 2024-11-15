@@ -6,8 +6,15 @@
     <description>Recent content in Gitbook on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 27 Jun 2024 20:35:45 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2024 10:26:52 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Hugo来替代GitBook实现文档展示</title>
+      <link>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</link>
+      <pubDate>Fri, 06 Sep 2024 10:26:52 +0800</pubDate>
+      <guid>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;中的&lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;hugo-book&lt;/a&gt;主题简要记录搭建并生成类似&lt;code&gt;GitBook&lt;/code&gt;的展示效果，以便在需要进行文档管理与展示时，可以多一种选择。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给GitBook中的SVG图像提供缩放和下载功能</title>
       <link>https://lucumt.info/post/gitbook/add-zoom-and-export-feature-for-svg-inside-gitbook/</link>
