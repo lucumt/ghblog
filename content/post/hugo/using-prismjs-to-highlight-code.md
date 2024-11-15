@@ -115,7 +115,7 @@ hugo server
 
 2. 在`assets/sass/_custom/_custom.scss`中添加如下内容，主要用于正确显示行号位置
 
-   ```css
+   ```css { data-line="7" }
    .line-numbers .line-numbers-rows{
        border-right: 0px !important;
    }

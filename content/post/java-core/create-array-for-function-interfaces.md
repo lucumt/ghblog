@@ -81,9 +81,9 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ```
 
-基于`MyBatis-Plus`的查询代码如下，可以看出第
+基于`MyBatis-Plus`的查询代码如下，可以看出第8行的代码长度很长，出现了滚动条导致阅读起来不太方便
 
-```java
+```java { data-line="8" }
 public class UserMapperTest {
 
     @Resource
@@ -97,7 +97,24 @@ public class UserMapperTest {
 }
 ```
 
-## 分析
+虽然可以通过换行来消除滚动条，但本质上还是一行代码，当该类的属性很多时，若需要实现类似`SELECT *`的效果则会导致多个换行，还是不太便于阅读理解。
+
+```java { data-line="8-9" }
+public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        List<User> userList = userMapper.selectList(Wrappers.<User>lambdaQuery().select(User::getId, User::getName,
+                User::getAge, User::getEmail, User::getPhone, User::getDepartment));
+        Assertions.assertNotNull(userList);
+    }
+}
+```
+
+## 尝试
 
 ```bash
 echo "test"

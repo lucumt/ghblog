@@ -200,7 +200,7 @@ highchartsDiagrams:
 
 在原始的`md`文件中添加`{{%/* codetabs */%}}  `和`{{%/* /codetabs */%}}`,之后按照常规的方式添加一个或多个代码块
 
-```go
+```go { data-line="2,10,16" }
 {{%/* codetabs */%}}  
 ​```java
 class HelloWorld {
@@ -280,7 +280,7 @@ Map<String, Map<String, Map<String, List<String>>>> map = list.stream()
 
 此时可通过分隔符的方式设置自定义的tab名称，默认的分隔符为 `::`
 
-```go
+```go { data-line="2,10,16" }
 {{%/* codetabs */%}}  
 ​```java
 class HelloWorld {
