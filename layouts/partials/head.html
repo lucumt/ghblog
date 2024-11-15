@@ -22,32 +22,32 @@
 
 {{- if .Keywords -}}
   {{ $length := len .Keywords | add -1 -}}
-  <meta name="keywords" content="{{ range $index, $element := .Keywords }}{{ $element | safeHTML }}{{if ne $index $length }}, {{ end }}{{ end }}" />
+  <meta name="keywords" content="{{- range $index, $element := .Keywords -}}{{- $element | safeHTML -}}{{- if ne $index $length -}}, {{- end -}}{{- end -}}" />
 {{- else if .Site.Params.keywords -}}
   {{ $length := len .Site.Params.keywords | add -1 -}}
-  <meta name="keywords" content="{{ range $index, $element := .Site.Params.keywords }}{{ $element | safeHTML }}{{if ne $index $length }}, {{ end }}{{ end }}" />
-{{- end }}
+  <meta name="keywords" content="{{- range $index, $element := .Site.Params.keywords -}}{{- $element | safeHTML -}}{{- if ne $index $length -}}, {{- end -}}{{- end -}}" />
+{{- end -}}
 
 <!-- baidu & google verification  -->
-{{ with .Site.Params.baiduVerification }}<meta name="baidu-site-verification" content="{{.}}" />{{ end }}
-{{ with .Site.Params.googleVerification }}<meta name="google-site-verification" content="{{.}}" />{{ end }}
+{{- with .Site.Params.baiduVerification -}}<meta name="baidu-site-verification" content="{{- . -}}" />{{- end -}}
+{{- with .Site.Params.googleVerification -}}<meta name="google-site-verification" content="{{- . -}}" />{{- end -}}
 
 <!-- Site Generator -->
-<meta name="generator" content="Hugo {{ .Site.Hugo.Version }} with theme even" />
+<meta name="generator" content="Hugo {{- .Site.Hugo.Version -}} with theme even" />
 
 <!-- Permalink & RSSlink -->
-<link rel="canonical" href="{{ .Permalink }}" />
-{{- with .OutputFormats.Get "RSS" }}
-  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
-  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+<link rel="canonical" href="{{- .Permalink -}}" />
+{{- with .OutputFormats.Get "RSS" -}}
+  <link href="{{- .Permalink -}}" rel="alternate" type="application/rss+xml" title="{{- $.Site.Title -}}" />
+  <link href="{{- .Permalink -}}" rel="feed" type="application/rss+xml" title="{{- $.Site.Title -}}" />
 {{- end -}}
 
 <!-- Favicon and Touch icons -->
-<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
-<link rel="manifest" href="{{ "manifest.json" | relURL }}">
-<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="{{- "apple-touch-icon.png" | relURL -}}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{- "favicon-32x32.png" | relURL -}}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{- "favicon-16x16.png" | relURL -}}">
+<link rel="manifest" href="{{- "manifest.json" | relURL -}}">
+<link rel="mask-icon" href="{{- "safari-pinned-tab.svg" | relURL -}}" color="#5bbad5">
 
 <!-- debug -->
 {{- if .Site.Params.debug -}}
