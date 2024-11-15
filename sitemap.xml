@@ -128,6 +128,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/java/</loc>
+    <lastmod>2024-08-21T19:51:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2024-08-21T19:51:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/mybatis/</loc>
+    <lastmod>2024-08-21T19:51:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/java-core/create-array-for-function-interfaces/</loc>
+    <lastmod>2024-08-21T19:51:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/hugo/using-prismjs-to-highlight-code/</loc>
     <lastmod>2024-07-30T18:31:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -436,13 +464,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2023-09-01T10:19:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/nacos/</loc>
     <lastmod>2023-09-01T10:19:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -514,13 +535,6 @@
   
   <url>
     <loc>https://lucumt.info/post/translate/junit5/testing-private-methods/</loc>
-    <lastmod>2023-07-03T22:42:07+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/java/</loc>
     <lastmod>2023-07-03T22:42:07+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1089,13 +1103,6 @@
   <url>
     <loc>https://lucumt.info/post/docker/get-docker-name-inside-docker-container/</loc>
     <lastmod>2021-05-06T13:16:52+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/mybatis/</loc>
-    <lastmod>2021-04-15T09:37:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

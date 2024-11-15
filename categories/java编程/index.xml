@@ -6,8 +6,15 @@
     <description>Recent content in Java编程 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Sep 2023 10:19:48 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Aug 2024 19:51:08 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/java%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码</title>
+      <link>https://lucumt.info/post/java-core/create-array-for-function-interfaces/</link>
+      <pubDate>Wed, 21 Aug 2024 19:51:08 +0800</pubDate>
+      <guid>https://lucumt.info/post/java-core/create-array-for-function-interfaces/</guid>
+      <description>&lt;p&gt;通过一个简单的实例介绍如何在使用&lt;a href=&#34;https://baomidou.com&#34;&gt;MyBatis-Plus&lt;/a&gt;时给&lt;a href=&#34;https://javadoc.io/doc/com.baomidou/mybatis-plus-core/3.4.3/com/baomidou/mybatisplus/core/toolkit/support/SFunction.html&#34;&gt;SFunction&lt;/a&gt;接口创建属性数组以简化代码，同时巩固下自己的&lt;code&gt;Java&lt;/code&gt;基础知识。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>由于Nacos导致的Spring Boot与Spring Cloud版本不兼容原因分析</title>
       <link>https://lucumt.info/post/nacos/spring-boot-cloud-version-not-compatible-due-to-nacos/</link>

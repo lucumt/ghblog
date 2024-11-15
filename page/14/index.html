@@ -16,18 +16,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="" /><meta name="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!" /><meta name="keywords" content="Hugo,theme,even" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
 
 
-
-
-
-
-<meta name="generator" content="Hugo 0.126.1 with theme even" />
-
-
-<link rel="canonical" href="https://lucumt.info/" />
-  <link href="https://lucumt.info/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
+<link rel="canonical" href="https://lucumt.info/" /><link href="https://lucumt.info/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
   <link href="https://lucumt.info/index.xml" rel="feed" type="application/rss+xml" title="飞狐的部落格" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -132,6 +125,30 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/translate/java-concurrency/java-volatile-keyword/">[译] Java Volatile 关键字详解</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-03-07 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文翻译自 <a href="http://tutorials.jenkov.com/java-concurrency/volatile.html"><strong>Java Volatile Keyword</strong></a></p>
+<p>Java关键字<code>volatile</code>用于将一个Java变量标记为<strong>在主内中存储</strong>，更准确的解释为：每次读取一个<code>volatile</code>变量时将从电脑的主内存中读取而不是从CPU缓存中读取，每次对一个<code>volatile</code>变量进行写操作时，将会写入到主内存中而不是写入到CPU缓存中。</p>
+<p>事实上，从<code>Java5</code>之后，<code>volatile</code>关键字不仅仅可以用来确保<code>volatile</code>变量是写入到主内存和从主内存读取数据，我会在下面的章节进行详细的介绍：</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/translate/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/can-not-run-program-mysqldump/">Windows中由于系统权限不同导致的mysqldump不生效的原因分析</a></h1>
