@@ -6,8 +6,22 @@
     <description>Recent content in Tags on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Nov 2024 21:13:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 Nov 2024 10:36:25 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React</title>
+      <link>https://lucumt.info/tags/react/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lucumt.info/tags/react/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vue</title>
+      <link>https://lucumt.info/tags/vue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://lucumt.info/tags/vue/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Go</title>
       <link>https://lucumt.info/tags/go/</link>

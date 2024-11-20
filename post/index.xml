@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Nov 2024 21:13:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 Nov 2024 10:36:25 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]为什么我使用Vue来替代React</title>
+      <link>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</link>
+      <pubDate>Mon, 18 Nov 2024 10:36:25 +0800</pubDate>
+      <guid>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://medium.com/@serpentarium13/why-i-chose-vue-over-react-b082d81315ab&#34;&gt;&lt;strong&gt;Why I chose Vue over React&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给Hugo博客添加代码分组</title>
       <link>https://lucumt.info/post/hugo/add-code-tab-in-hugo/</link>

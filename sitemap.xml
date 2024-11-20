@@ -2,8 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2024-11-01T21:13:04+08:00</lastmod>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/react/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/vue/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,27 +73,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/hugo/</loc>
-    <lastmod>2024-11-01T21:13:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2024-11-01T21:13:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2024-11-01T21:13:04+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2024-11-01T21:13:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -142,13 +177,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2024-08-23T13:17:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/java/</loc>
     <lastmod>2024-08-21T19:51:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -220,13 +248,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/html/</loc>
-    <lastmod>2024-06-14T11:07:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2024-06-14T11:07:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

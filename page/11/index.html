@@ -40,7 +40,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2024-11-01T21:13:04+08:00">
+  <meta itemprop="dateModified" content="2024-11-18T10:36:25+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
@@ -125,6 +125,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql/limit-large-size-data-in-mysql/">在MySQL中对大量数据进行limit offset分页查询的优化</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-02-11 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在软件开发中采用<code>LIMIT OFFSET</code>对数据库进行分页是常见操作，但在数据量很大时直接使用<code>LIMIT OFFSET</code>查询尾部的数据会导致性能很慢，本文简要介绍2种改进方案。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql/limit-large-size-data-in-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mysql/mysql-create-massive-test-data-quickly/">MySQL中快速创建大量测试数据</a></h1>
@@ -316,28 +337,6 @@
     </div>
     <div class="read-more">
       <a href="/post/java-core/default-method-in-abstract-class-and-interface/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/quartz/update-quartz-scheduler-dynamic/">在Quartz中动态设置定时任务的执行时间并立即生效</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-01-09 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><a href="http://www.quartz-scheduler.org/"><strong>Quartz</strong></a>是软件开发中常用的任务调度框架，实际中通常结合 <a href="https://spring.io/"><strong>Spring</strong></a> 一起使用，并在Spring的配置文件中利用<code>0 0 12 ? \* WED</code>这种方式以硬编码的方式配置定时任务的执行时间。有时候需要动态的设置定时任务的执行时间，如让用户自己选择何时备份数据，此时就需要采用动态设置其执行时间。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/quartz/update-quartz-scheduler-dynamic/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
