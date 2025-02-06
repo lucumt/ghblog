@@ -6,8 +6,15 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Nov 2024 10:36:25 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2024 13:17:29 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于MySQL配置数据库主主同步</title>
+      <link>https://lucumt.info/post/mysql/config-mysql-in-master-master-mode/</link>
+      <pubDate>Mon, 16 Dec 2024 13:17:29 +0800</pubDate>
+      <guid>https://lucumt.info/post/mysql/config-mysql-in-master-master-mode/</guid>
+      <description>&lt;p&gt;主要参考&lt;a href=&#34;https://cloud.tencent.com/developer/article/2254761&#34;&gt;这篇文章&lt;/a&gt;中的相关说明，记录如何在&lt;code&gt;MySQL&lt;/code&gt;中实现&lt;code&gt;主主同步&lt;/code&gt;，即两个数据库可同时操作然后同时同步数据给对方。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[译]为什么我使用Vue来替代React</title>
       <link>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</link>
