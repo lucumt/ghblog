@@ -40,7 +40,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2024-12-20T10:13:14+08:00">
+  <meta itemprop="dateModified" content="2025-02-06T14:16:03+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
@@ -125,6 +125,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java-core/send-ssl-mail-with-126-in-aliyun/">利用126邮箱在阿里云中发送SSL/TSL加密邮件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-03 </span>
+      <div class="post-category">
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>由于工作原因需要在阿里云中部署一个Web系统，该系统会调用邮箱服务器定时给相关人员发送通知邮件,在测试邮箱配置时，发现始终无法正确发送邮件，而之前在研发环境和测试环境都能正常工作。网上查找之后，发现是阿里云出于安全原因默认禁止了25端口的出方向访问，需要进行<a href="https://help.aliyun.com/knowledge_detail/56130.html?spm=5176.10695662.1996646101.searchclickresult.51d3cd65xV8EFf" title="25端口解封申请"><strong>25端口解封申请</strong></a>，按照说明提交相应的申请后没想到不到一个小时就提醒申请未通过，同时提示使用465端口来发送加密邮件。基于此，本文简要说明如何使用126邮箱通过465端口在阿里云中发送邮件。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/java-core/send-ssl-mail-with-126-in-aliyun/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java-core/default-method-in-abstract-class-and-interface/">在模板类中利用抽象类或接口default方法实现默认方法以简化开发与维护</a></h1>
@@ -315,28 +336,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/concurrency-models/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/web/cannot-open-birt-report-in-myeclipse-project/">在MyEclipse项目中不能打开birt报表的解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-04-07 </span>
-      <div class="post-category">
-          <a href="/categories/web%E7%BC%96%E7%A8%8B/"> Web编程 </a>
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      由于业务要求，需要在利用MyEclipse中开发的Web项目中添加Birt报表统计功能，新建完一个report.rptdesign文件后双击
-    </div>
-    <div class="read-more">
-      <a href="/post/web/cannot-open-birt-report-in-myeclipse-project/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

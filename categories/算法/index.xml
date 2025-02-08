@@ -6,8 +6,15 @@
     <description>Recent content in 算法 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 18 Aug 2023 11:18:47 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2025 14:16:03 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将有重叠或相邻的时间区间进行合并</title>
+      <link>https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/</link>
+      <pubDate>Thu, 06 Feb 2025 14:16:03 +0800</pubDate>
+      <guid>https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/</guid>
+      <description>&lt;p&gt;基于力扣中的&lt;a href=&#34;https://leetcode.cn/problems/merge-intervals/&#34;&gt;&lt;strong&gt;合并区间&lt;/strong&gt;&lt;/a&gt;题解对其进行适当的改进，以实现不仅能对重叠的时间区间进行合并，同时也可对相邻的时间区间进行合并。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[译]二叉树的莫里斯遍历</title>
       <link>https://lucumt.info/post/translate/algorithm/what-is-morris-traversal/</link>

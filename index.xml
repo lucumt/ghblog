@@ -6,8 +6,15 @@
     <description>Recent content on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Dec 2024 13:17:29 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2025 14:16:03 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将有重叠或相邻的时间区间进行合并</title>
+      <link>https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/</link>
+      <pubDate>Thu, 06 Feb 2025 14:16:03 +0800</pubDate>
+      <guid>https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/</guid>
+      <description>&lt;p&gt;基于力扣中的&lt;a href=&#34;https://leetcode.cn/problems/merge-intervals/&#34;&gt;&lt;strong&gt;合并区间&lt;/strong&gt;&lt;/a&gt;题解对其进行适当的改进，以实现不仅能对重叠的时间区间进行合并，同时也可对相邻的时间区间进行合并。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>基于MySQL配置数据库主主同步</title>
       <link>https://lucumt.info/post/mysql/config-mysql-in-master-master-mode/</link>

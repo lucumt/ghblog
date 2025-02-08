@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>将有重叠或相邻的时间区间进行合并 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间" /><meta name="keywords" content="区间重叠,区间相邻,合并" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.e40488554eb62dbd93e56cb3183d65b327bc5bf44f76e5c2f6e9f7e602e619a8.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="将有重叠或相邻的时间区间进行合并">
+  <meta property="og:description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-02-06T14:16:03+08:00">
+    <meta property="article:modified_time" content="2025-02-06T14:16:03+08:00">
+
+  <meta itemprop="name" content="将有重叠或相邻的时间区间进行合并">
+  <meta itemprop="description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
+  <meta itemprop="datePublished" content="2025-02-06T14:16:03+08:00">
+  <meta itemprop="dateModified" content="2025-02-06T14:16:03+08:00">
+  <meta itemprop="wordCount" content="1807">
+  <meta itemprop="keywords" content="区间重叠,区间相邻,合并">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="将有重叠或相邻的时间区间进行合并">
+  <meta name="twitter:description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://tech.lucumt.info">
+        <li class="mobile-menu-item">外链</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header><main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">将有重叠或相邻的时间区间进行合并</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-02-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+          <span class="more-meta"> 约 1807 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#改进">改进</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+	
+    <div class="post-content">
+	 <p>基于力扣中的<a href="https://leetcode.cn/problems/merge-intervals/"><strong>合并区间</strong></a>题解对其进行适当的改进，以实现不仅能对重叠的时间区间进行合并，同时也可对相邻的时间区间进行合并。</p>
+<h2 id="背景">背景</h2>
+<p>原始的<a href="https://leetcode.cn/problems/merge-intervals/">合并区间</a>中的问题描述如下：</p>
+<p>以数组 <code>intervals</code> 表示若干个区间的集合，其中单个区间为 <code>intervals[i] = [starti, endi]</code> 。请你合并所有重叠的区间，并返回 <em>一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间</em> 。</p>
+<p><strong>示例 1：</strong></p>
+<p>输入：intervals = [[1,3],[2,6],[8,10],[15,18]]<br>
+输出：[[1,6],[8,10],[15,18]]<br>
+解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6]</p>
+<p><strong>示例 2：</strong></p>
+<p>输入：intervals = [[1,4],[4,5]]<br>
+输出：[[1,5]]<br>
+解释：区间 [1,4] 和 [4,5] 可被视为重叠区间</p>
+<p>基于原题目的描述以及对应的答案，当输入为 [[1,3],[4,5]]时，输出依旧为 [[1,3],[4,5]]，而在个人项目中的数据都是整数，对于此种场景，由于3和4时连续的，故要求输出为  [[1,5]]，即<strong>当两个区间不重叠但相邻时也需要将其进行合并</strong>。</p>
+<h2 id="分析">分析</h2>
+<p>大体思路是先看明白原题的解决思路，然后再进行适当改进。</p>
+<p>官方提供的答案类似如下</p>
+<pre class="line-numbers language-java " data-line="2,10,14" title="java">
+<code>public List&lt;List&lt;Integer&gt;&gt; mergeIntervals(List&lt;List&lt;Integer&gt;&gt; configs) {
+    configs.sort(Comparator.comparingInt(a -&gt; a.get(0)));
+    List&lt;List&lt;Integer&gt;&gt; merged = new ArrayList&lt;&gt;();
+
+    for (List&lt;Integer&gt; config : configs) {
+        int start = config.get(0);
+        int end = config.get(1);
+
+        // 如果 merged 为空或当前区间与最后一个合并区间不重叠
+        if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start) {
+            merged.add(Arrays.asList(start, end));
+        } else {
+            // 有重叠或相邻，更新最后一个合并区间的结束点
+            merged.get(merged.size() - 1).set(1, Math.max(merged.get(merged.size() - 1).get(1), end));
+        }
+    }
+
+    return merged;
+}</code>
+</pre><p>上述代码中最关键的是高亮显示的3行代码(2,10,14)，它们的作用分别如下：</p>
+<ul>
+<li>第2行用于对输入数据基于区间的开始位置进行排序，只有排序后有序数组才能进行下一步的处理</li>
+<li>第10行用于识别到新的区间时，将其添加到最终结果列表中，识别的规则为新区间的开始位置与最后1个区间的结束位置</li>
+<li>第14行用于对重叠或相邻区间进行合并，由于数据已经排好序了，所以合并区间时只需要更新其结束位置即可</li>
+</ul>
+<p>以输入数据<code>[[2,6],[8,15],[1,3],[4,5],[16,19]]</code>为例，基于前述代码的运行结果为<code>[1, 6] [8, 15] [16, 19] </code>，接下来具体分析上述代码的运行过程：</p>
+<ol>
+<li>
+<p>执行第2行代码进行排序，结果如下</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/intervals-before-and-after-sort.png" alt="对数据进行排序" title="对数据进行排序"></p>
+</li>
+<li>
+<p>此时结果数组<code>merged</code>为空</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/init-result-data.png" alt="初始结果数据" title="初始结果数据"></p>
+</li>
+<li>
+<p>由于<code>merged</code>为空，将执行第10行的判断逻辑<code>merged.isEmpty()</code>，直接将1个遍历对象<code>[1,3]</code>加入<code>merged</code>中去</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-1-result.png" alt="第1次遍历" title="第1次遍历"></p>
+</li>
+<li>
+<p>接下来遍历的数据为<code>[2,6]</code>，对第10行的<code>merged.isEmpty()</code>不满足，同时由于当前遍历数据的结束区间为6，而<code>merged</code>中最后1个区间的结束数字为3，故第10行的<code>merged.get(merged.size() - 1).get(1) &lt; start</code>也同样不满足，此时即表示检测到区间重叠</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-2-check.png" alt="检测到重叠区间" title="检测到重叠区间"></p>
+</li>
+<li>
+<p>由于有重叠区间，故执行第14行的代码，由于排序时是按照开始位置进行排序的，故<strong>每次当前遍历区间的开始位置一定不会大于前面所有区间的开始位置</strong>，而结束位置没有进行排序，故只需重新设置结束区间即可。</p>
+<p>由于结束位置的大小存在不确定性，实际设置时需要将当前区间的结束位置和重叠区间的结束位置取最大值，然后重新设置。在本例中由于当前区间的结束位置为6，比<code>merged</code>中最后一个区间的结束位置3大，故重叠区间的结束位置为6
+<img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-2-result.png" alt="第2次遍历" title="第2次遍历"></p>
+</li>
+<li>
+<p>接下来遍历的数据为<code>[4,5]</code>，当执行第10行代码时，两个判断条件都不满足，同样表示检测到重叠区间，执行第14行的代码</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-3-check.png" alt="检测到重叠区间" title="检测到重叠区间"></p>
+</li>
+<li>
+<p>同步骤5中的判断逻辑类似，由于当前区间的结束位置为5，比<code>merged</code>中最后一个区间的结束位置6小，故重叠区间的结束位置依旧为6保持不变，此时意味着当前遍历的区间为一个重叠子区间</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-3-result.png" alt="第3次遍历" title="第3次遍历"></p>
+</li>
+<li>
+<p>接下来遍历的数据为<code>[8,15]</code>，由于当前区间的开始位置为8，比<code>merged</code>中最后一个区间的结束位置6大，此时意味着遇到没有重叠的区间，故第10行中的判断逻辑<code>merged.get(merged.size() - 1).get(1) &lt; start</code>会执行</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-4-check.png" alt="识别到新区间" title="识别到新区间"></p>
+</li>
+<li>
+<p>将该区间加入到<code>merged</code>中的结果如下</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-4-result.png" alt="第4次遍历" title="第4次遍历"></p>
+</li>
+<li>
+<p>接下来遍历的数据为<code>[16,19]</code>，其判断逻辑和步骤8中的类似，同样会执行第10行中的判断逻辑，最终结果如下，理论分析结果与实际运行结果一致，至此整个过程分析完毕。</p>
+<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-5-result.png" alt="第5次遍历" title="第5次遍历"></p>
+</li>
+</ol>
+<h2 id="改进">改进</h2>
+<p>理解了原有的算法逻辑之后，只需要修改识别新区间的判断条件即可，将判断条件修改为相邻，在本文中即是将第10行中的判断条件从<code>&lt; start</code>修改为<code>&lt; start -1 </code></p>
+<pre class="line-numbers language-java " title="java">
+<code>// 原有的只是合并重叠区间
+if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start) {
+    merged.add(Arrays.asList(start, end));
+} 
+
+//---------------------------------------------------------------------
+
+// 修改为相邻区间也能合并
+if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start - 1) {
+    merged.add(Arrays.asList(start, end));
+} </code>
+</pre><p>完整代码如下</p>
+<pre class="line-numbers language-java " title="java">
+<code>public List&lt;List&lt;Integer&gt;&gt; mergeIntervals(List&lt;List&lt;Integer&gt;&gt; configs) {
+    configs.sort(Comparator.comparingInt(a -&gt; a.get(0)));
+    List&lt;List&lt;Integer&gt;&gt; merged = new ArrayList&lt;&gt;();
+
+    for (List&lt;Integer&gt; config : configs) {
+        int start = config.get(0);
+        int end = config.get(1);
+
+        // 如果 merged 为空或当前区间与最后一个合并区间不相邻
+        if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start - 1) {
+            merged.add(Arrays.asList(start, end));
+        } else {
+            // 有重叠或相邻，更新最后一个合并区间的结束点
+            merged.get(merged.size() - 1).set(1, Math.max(merged.get(merged.size() - 1).get(1), end));
+        }
+    }
+
+    return merged;
+}</code>
+</pre>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/mysql/config-mysql-in-master-master-mode/">
+            <span class="next-text nav-default">基于MySQL配置数据库主主同步</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+	<footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+
+
+<script>
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" 
+  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
+      5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+</svg>`;
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
+    const div = document.createElement("div");
+    div.className = "copy-code";
+    div.innerHTML = copyIcon;
+    div.addEventListener("click", () =>
+      copyCodeToClipboard(div, codeDiv)
+    );
+    addCopyButtonToDom(div, codeDiv);
+  }
+
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
+      .innerText;
+    await navigator.clipboard.writeText(codeToCopy);
+    button.blur();
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
+  }
+
+  function addCopyButtonToDom(button, codeDiv) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "highlight-wrapper";
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
+  }
+
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
+  }
+</script>  
+
+
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
+</body>
+</html>
