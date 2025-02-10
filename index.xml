@@ -16,6 +16,13 @@
       <description>&lt;p&gt;基于力扣中的&lt;a href=&#34;https://leetcode.cn/problems/merge-intervals/&#34;&gt;&lt;strong&gt;合并区间&lt;/strong&gt;&lt;/a&gt;题解对其进行适当的改进，以实现不仅能对重叠的时间区间进行合并，同时也可对相邻的时间区间进行合并。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>给GitBook生成的html页面中添加水印支持</title>
+      <link>https://lucumt.info/post/gitbook/add-watermark-in-gitbook/</link>
+      <pubDate>Thu, 16 Jan 2025 13:38:21 +0800</pubDate>
+      <guid>https://lucumt.info/post/gitbook/add-watermark-in-gitbook/</guid>
+      <description>&lt;p&gt;简要介绍个人基于&lt;a href=&#34;https://zhensherlock.github.io/watermark-js-plus/&#34;&gt;&lt;strong&gt;watermark-js-plus&lt;/strong&gt;&lt;/a&gt;开发的一款&lt;code&gt;GitBook&lt;/code&gt;&lt;a href=&#34;https://github.com/gitbook-plugin-fox/gitbook-plugin-watermark-fox&#34;&gt;&lt;strong&gt;水印插件&lt;/strong&gt;&lt;/a&gt;，可用于给&lt;code&gt;GitBook&lt;/code&gt;所有页面添加自定义水印，且能根据需求动态的开启或关闭。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>基于MySQL配置数据库主主同步</title>
       <link>https://lucumt.info/post/mysql/config-mysql-in-master-master-mode/</link>
       <pubDate>Mon, 16 Dec 2024 13:17:29 +0800</pubDate>

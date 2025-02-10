@@ -37,6 +37,34 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/gitbook/</loc>
+    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/gitbook/add-watermark-in-gitbook/</loc>
+    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/tags/docker/</loc>
     <lastmod>2024-12-16T13:17:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -45,13 +73,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/mysql/</loc>
-    <lastmod>2024-12-16T13:17:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
     <lastmod>2024-12-16T13:17:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -179,20 +200,6 @@
   <url>
     <loc>https://lucumt.info/post/hugo/enable-bing-index-for-my-hugo-website/</loc>
     <lastmod>2024-10-07T21:24:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/gitbook/</loc>
-    <lastmod>2024-09-06T10:26:52+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2024-09-06T10:26:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
