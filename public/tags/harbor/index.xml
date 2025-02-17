@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Harbor on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/harbor/</link>
+    <description>Recent content in Harbor on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Oct 2024 10:09:39 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/harbor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置Harbor中镜像清理的策略实现定期自动清理冗余镜像</title>
+      <link>http://localhost:1313/post/devops/config-harbor-strategy-to-clean-images/</link>
+      <pubDate>Thu, 24 Oct 2024 10:09:39 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/config-harbor-strategy-to-clean-images/</guid>
+      <description>&lt;p&gt;基于个人实际使用经验，简要记录如何通过给&lt;code&gt;Harbor&lt;/code&gt;项目配置镜像策略实现自动清理冗余的&lt;code&gt;Docker&lt;/code&gt;镜像，达到节省磁盘空间的目的。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Harbor清理垃圾时一直提示10010 object is not found导致清理失败</title>
+      <link>http://localhost:1313/post/devops/can-not-garbage-collection-in-harbor/</link>
+      <pubDate>Wed, 23 Oct 2024 15:21:19 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/can-not-garbage-collection-in-harbor/</guid>
+      <description>&lt;p&gt;记录&lt;code&gt;Harbor&lt;/code&gt;清理镜像垃圾时遇到的错误&lt;code&gt;{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;NOT_FOUND&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;{\&amp;quot;code\&amp;quot;:10010,\&amp;quot;message\&amp;quot;:\&amp;quot;object is not found\&amp;quot;,\&amp;quot;details\&amp;quot;:\&amp;quot;2cc49b89751876fa18acb008\&amp;quot;}&amp;quot;}]}&lt;/code&gt;导致回收失败，不能正常清理，最终占用越来越多的磁盘空间的解决过程。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用Linux脚本将Docker镜像手工上传到Harbor仓库</title>
+      <link>http://localhost:1313/post/devops/upload-docker-image-to-harbor-via-shell/</link>
+      <pubDate>Thu, 24 Jun 2021 20:38:59 +0800</pubDate>
+      <guid>http://localhost:1313/post/devops/upload-docker-image-to-harbor-via-shell/</guid>
+      <description>&lt;p&gt;简要说明如何通过&lt;code&gt;Linux&lt;/code&gt;指令将特定的&lt;code&gt;Docker&lt;/code&gt;镜像手工上传到&lt;code&gt;Harbor&lt;/code&gt;仓库&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>基于Docker创建Harbor镜像仓库系统</title>
+      <link>http://localhost:1313/post/docker/install-harbor-via-docker/</link>
+      <pubDate>Tue, 25 May 2021 10:05:48 +0800</pubDate>
+      <guid>http://localhost:1313/post/docker/install-harbor-via-docker/</guid>
+      <description>&lt;p&gt;简要介绍基于&lt;code&gt;docker-compose&lt;/code&gt;安装&lt;code&gt;Harbor&lt;/code&gt;的过程，供后续参考。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

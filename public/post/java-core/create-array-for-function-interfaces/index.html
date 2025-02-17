@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="通过一个简单的实例介绍如何在使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码" /><meta name="keywords" content="java,泛型,数组,MyBatis,MyBatis Plus" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java-core/create-array-for-function-interfaces/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.e40488554eb62dbd93e56cb3183d65b327bc5bf44f76e5c2f6e9f7e602e619a8.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="http://localhost:1313/post/java-core/create-array-for-function-interfaces/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+  <meta property="og:description" content="通过一个简单的实例介绍如何在使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-08-21T19:51:08+08:00">
+    <meta property="article:modified_time" content="2024-08-21T19:51:08+08:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Mybatis">
+
+  <meta itemprop="name" content="使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+  <meta itemprop="description" content="通过一个简单的实例介绍如何在使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+  <meta itemprop="datePublished" content="2024-08-21T19:51:08+08:00">
+  <meta itemprop="dateModified" content="2024-08-21T19:51:08+08:00">
+  <meta itemprop="wordCount" content="2386">
+  <meta itemprop="keywords" content="java,泛型,数组,MyBatis,MyBatis Plus">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+  <meta name="twitter:description" content="通过一个简单的实例介绍如何在使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://tech.lucumt.info">
+        <li class="mobile-menu-item">外链</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header><main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用MyBatis-Plus时给SFunction接口创建属性数组以简化代码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-08-21 </span>
+        <div class="post-category">
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#尝试">尝试</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#改进">改进</a></li>
+        <li><a href="#后记">后记</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>通过一个简单的实例介绍如何在使用<a href="https://baomidou.com">MyBatis-Plus</a>时给<a href="https://javadoc.io/doc/com.baomidou/mybatis-plus-core/3.4.3/com/baomidou/mybatisplus/core/toolkit/support/SFunction.html">SFunction</a>接口创建属性数组以简化代码，同时巩固下自己的<code>Java</code>基础知识。</p>
+<h2 id="背景">背景</h2>
+<p>实体类<code>User</code>源码如下</p>
+<pre class="line-numbers language-java " title="java">
+<code>import lombok.Data;
+
+@Data
+public class User {
+    private Long id;
+    private String name;
+    private int age;
+    private String email;
+    private String department;
+    private String phone;
+}</code>
+</pre><p>接口类<code>UserMapper</code>源码如下，其集成了<code>MyBatis-Plus</code>的基础接口，以便后续可使用<code>MyBatis-Plus</code>进行快速开发。</p>
+<pre class="line-numbers language-java " title="java">
+<code>import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lucumt.entity.User;
+
+public interface UserMapper extends BaseMapper&lt;User&gt; {
+}</code>
+</pre><p>对应的测试代码如下，需要查询<code>User</code>类中的相关属性，可以看出第8行的代码长度很长，出现了滚动条导致阅读起来不太方便</p>
+<pre class="line-numbers language-java " data-line="8" title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(User::getId, User::getName, User::getAge, User::getEmail, User::getPhone, User::getDepartment));
+        Assertions.assertNotNull(userList);
+    }
+}</code>
+</pre><p>虽然可以通过换行来消除滚动条，但本质上还是一行代码，当该类的属性很多时，若需要实现类似<code>SELECT *</code>的效果则会导致多个换行，还是不太便于阅读理解。</p>
+<pre class="line-numbers language-java " data-line="8-9" title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(User::getId, User::getName,
+                User::getAge, User::getEmail, User::getPhone, User::getDepartment));
+        Assertions.assertNotNull(userList);
+    }
+}</code>
+</pre><p>自己期望将这些属性都放到一个数组中，在实现简化的同时也能便于阅读理解。</p>
+<h2 id="尝试">尝试</h2>
+<p>最开始自己很直接的想把上述属性提取到一个数组中，将代码修改如下</p>
+<pre class="line-numbers language-java " data-line="8-10" title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        SFunction&lt;User, ?&gt;[] properties = new SFunction[]{User::getId, User::getName,
+                User::getAge, User::getEmail, User::getPhone, User::getDepartment};
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(properties));
+        Assertions.assertNotNull(userList);
+    }
+}</code>
+</pre><p>修改完毕后编译器立即显示编译错误，直接放置到数据中的方式不通。</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/property-arrray-compile-error.png" alt="代码编译错误" title="代码编译错误"></p>
+<p>将其修改为如下后，编译错误消失，此时虽然实现了将它们都放到数组中，但是每个属性都需要进行变量声明，代码篇幅较多，不是自己期望的最优解。</p>
+<pre class="line-numbers language-java " data-line="15" title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        SFunction&lt;User, ?&gt; getId = User::getId;
+        SFunction&lt;User, ?&gt; getName = User::getName;
+        SFunction&lt;User, ?&gt; getAge = User::getAge;
+        SFunction&lt;User, ?&gt; getEmail = User::getEmail;
+        SFunction&lt;User, ?&gt; getPhone = User::getPhone;
+        SFunction&lt;User, ?&gt; getDepartment = User::getDepartment;
+        SFunction&lt;User, ?&gt;[] properties = new SFunction[]{getId, getName, getAge, getEmail, getPhone, getDepartment};
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(properties));
+        Assertions.assertNotNull(userList);
+    }
+}</code>
+</pre><h2 id="分析">分析</h2>
+<p>为啥第一种方式方式会报错，而第二种方式却能正常工作呢？</p>
+<p>自己虽然知道这和<code>Java</code>和<a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">泛型</a>相关的<a href="https://zh.wikipedia.org/wiki/%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4">类型擦除</a>，但限于自己孱弱的<code>Java</code>基础知识，并不能给出一个很好的解释。</p>
+<p>我决定寻求更专业的协助，在<code>Stackoverflow</code> 上提出了<a href="https://stackoverflow.com/questions/78763705/can-not-create-function-array-in-java-8">一个问题</a>，有2个大佬都从<a href="https://docs.oracle.com/javase/specs/">Java语言规范</a>的角度给出了让人信服的回答。</p>
+<p>首先前面图中出现的错误不是根本原因，基于我最开始的写法会导致多个错误，而IDE只会展示最顶层的错误，由此让人很迷惑，实际的原因是<code>类型擦除</code>。</p>
+<p>在<a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-10.html#jls-10.6">Array Initializers</a>中有如下说明</p>
+<blockquote>
+<p>Each variable initializer must be assignment-compatible (§5.2) with the array&rsquo;s component type, or a compile-time error occurs.</p>
+</blockquote>
+<p>翻译成人话就是数组中的每一个元素的类型都必须与数组类型兼容，否则会出现编译错误。</p>
+<p>前述的数组创建方式</p>
+<pre class="line-numbers language-java " title="java">
+<code>SFunction&lt;User, ?&gt;[] properties = new SFunction[]{User::getId, User::getName, 
+                   User::getAge, User::getEmail, User::getPhone, User::getDepartment};</code>
+</pre><p>实际上等价于下述代码</p>
+<pre class="line-numbers language-java " data-line="1-6" title="java">
+<code>SFunction getId = User::getId;
+SFunction getName = User::getName;
+SFunction getAge = User::getAge;
+SFunction getEmail = User::getEmail;
+SFunction getPhone = User::getPhone;
+SFunction getDepartment = User::getDepartment;
+SFunction&lt;User, ?&gt;[] properties = new SFunction[]{getId, getName, getName, getEmail, getPhone, getDepartment};</code>
+</pre><p>而上述6行代码是无法编译通过的，其错误信息和前面截图一样，这是代码层面的问题溯源。</p>
+<p>为什么那6行代码无法编译呢？需要在<code>Java语言规范</code>的<a href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-9.html#jls-9.9">Function Types</a>中去寻找答案</p>
+<blockquote>
+<p>The function type of the raw type of a generic functional interface I&lt;&hellip;&gt; is the erasure of the function type of the generic functional interface I&lt;&hellip;&gt;.</p>
+</blockquote>
+<p>在<a href="https://stackoverflow.com/a/78767296/3176419">这个回答</a>中回答者结合上述说明给出了详细的解释：</p>
+<p>由于存在继承关系，通用的<code>SFunction&lt;T, R&gt;</code>函数类型与<a href="https://docs.oracle.com/javase/8/docs/api/?java/util/function/Function.html">Function&lt;T, R&gt;</a>相同，其利用<code>T</code>作为输入，<code>R</code>作为输出，可以简单记做<code>T-&gt;R</code>。由于<code>T</code>和<code>R</code>都没有进行类型约束(即通过<code>extends</code>或<code>super</code>关键字进行约束)，故它们都将被类型擦除为默认的<code>Object</code>类型，故<code>SFunction&lt;T, R&gt;</code>的函数类型实际上为<code>Object-&gt;Object</code>。</p>
+<p>回到我们的问题中来<code>User::getId</code>是否兼容<code>Object-&gt;Object</code>呢？显然不是，其输入为 <code>User</code>，输出为<code>Integer</code>，实际的函数类型为<code>User-&gt;Integer</code>，故而不兼容。</p>
+<p>基于上述分析以及对应回答者的建议，有如下几种方式：</p>
+<ol>
+<li>
+<p>修改源码以兼容函数类型</p>
+<pre class="no-line-numbers language-java " title="java">
+<code>Function&lt;? super Object, ? extends Object&gt; properties = User::getId;</code>
+</pre></li>
+<li>
+<p>采用<code>List</code>代替数组</p>
+<pre class="no-line-numbers language-java " title="java">
+<code>List&lt;SFunction&lt;User, ?&gt;&gt; propertyList = Lists.newArrayList(User::getId, User::getName);</code>
+</pre></li>
+<li>
+<p>显示的指定为实际的类型</p>
+<pre class="line-numbers language-java " title="java">
+<code>// 通过变量实现
+SFunction&lt;User, ?&gt;[] properties = new SFunction[] {val -&gt; ((User) val).getId(),  val -&gt; ((User) val).getName() };
+
+// 方法引用实现
+SFunction&lt;User, ?&gt;[] propertiesss = new SFunction[]{(SFunction&lt;User, ?&gt;) User::getId, (SFunction&lt;User, ?&gt;) User::getName};   </code>
+</pre></li>
+<li>
+<p>编写一个特定的方法用于进行类型转化</p>
+<pre class="no-line-numbers language-java " title="java">
+<code>&lt;T, R&gt; SFunction&lt;T, R&gt; makeFunction(SFunction&lt;T, R&gt; x) { return x; }</code>
+</pre></li>
+</ol>
+<h2 id="改进">改进</h2>
+<p>前面的4种方式，第1种由于需要修改源码不现实，故不考虑，第2种是修改数据类型与<code>MyBatis-Plus</code>的方法签名不匹配，也不考虑。</p>
+<p>采用第3种方式可将代码修改如下，此种方式与之前的差别不大，还是无法避免强制转换</p>
+<pre class="line-numbers language-java " title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        SFunction&lt;User, ?&gt;[] properties = new SFunction[]{
+                (SFunction&lt;User, ?&gt;) User::getId,
+                (SFunction&lt;User, ?&gt;) User::getName,
+                (SFunction&lt;User, ?&gt;) User::getAge,
+                (SFunction&lt;User, ?&gt;) User::getEmail,
+                (SFunction&lt;User, ?&gt;) User::getPhone,
+                (SFunction&lt;User, ?&gt;) User::getDepartment
+        };
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(properties));
+        Assertions.assertNotNull(userList);
+    }
+}</code>
+</pre><p>第4种方式相较于第3种只是提供了一个额外的方法进行统一的类型转化，但本质上和之前的一样</p>
+<pre class="line-numbers language-java " title="java">
+<code>public class UserMapperTest {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Test
+    public void testQueryUsers() {
+        SFunction&lt;User, ?&gt;[] properties = new SFunction[]{
+                getProperty(User::getId),
+                getProperty(User::getName),
+                getProperty(User::getAge),
+                getProperty(User::getEmail),
+                getProperty(User::getPhone),
+                getProperty(User::getDepartment)
+        };
+        List&lt;User&gt; userList = userMapper.selectList(Wrappers.&lt;User&gt;lambdaQuery().select(properties));
+        Assertions.assertNotNull(userList);
+    }
+
+    private &lt;T, R&gt; SFunction&lt;T, R&gt; getProperty(SFunction&lt;T, R&gt; x) {
+        return x;
+    }
+}</code>
+</pre><h2 id="后记">后记</h2>
+<p>前述问题的解决主要是依赖于<code>Java语言规范</code>，而自己却一直不怎么关注，我想起了另外一件事情。</p>
+<p>虽然自己的在<code>Stackoverflow</code>上的<a href="https://stackoverflow.com/users/3176419/flyingfox">积分也很多</a>，但实话实说其中的大部分都是我在<code>ChatGPT</code>没有出来之前通过回答大量的<code>JavaScript</code>水出来的</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/my-stackoverflow-analysis.png" alt="个人Stackoverflow积分" title="个人Stackoverflow积分"></p>
+<p>如上图所示，截止到当前个人在<code>Stackoverflow</code> 上的总积分为13496，而自己回答了729个问题，排除掉自己提问带来的积分，平均每个回答带来的积分只有<code>18.4</code>，完全是数量压倒质量(quantity over quality)。</p>
+<p>具体到相关问题和回答时，自己的表现也一般，如下图所示，得分最高的回答也才10个赞，只贡献了50分。</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/my-stackoverflow-top-reputation.png" alt="个人Stackoverflow高赞回答" title="个人Stackoverflow高赞回答"></p>
+<p>而自己关注的另一位<a href="https://stackoverflow.com/users/6690200/xingbin">大佬</a>的回答概况如下，其平均得分是我的两倍</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/other-stackoverflow-analysis.png" alt="他人的Stackoverflow积分" title="他人的Stackoverflow积分"></p>
+<p>在具体问题和回答上的积分更是碾压我!</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/other-stackoverflow-top-reputation.png" alt="他人Stackoverflow高赞回答" title="他人Stackoverflow高赞回答"></p>
+<p>深入查看后可发现该大佬很多问题都是基于<code>Java语言规范</code>回答的，此种回答言简意赅，直击问题并且很容易获得很多赞，从而快速提高在<code>Stackoverflow</code>中的积分。</p>
+<p><img src="/blog_img/java-core/create-array-for-function-interfaces/answer-question-with-jls.png" alt="基于java规范回答问题" title="基于java规范回答问题"></p>
+<p>要想获得类似上面大佬一样的成就，必须要熟练掌握<code>Java语言规范</code>，而我们日常学习与开发中，更多关注的是<code>Java</code>的基本语法与使用场景，对<code>Java语言规范</code>则很少有人深入学习与研究。</p>
+<p>结合当前<code>Java</code>就业市场的内卷以及大的环境，如果不能深入钻研并精通某一方面，很容易遭到淘汰，我们不仅要提高知识面的广度，更要熟练掌握某一个领域才能在残酷的竞争中立足。</p>
+<p><strong>Quality over Quantity!</strong></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/mybatis/">mybatis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/translate/git/git-worktree/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[译]Git Worktree使用说明</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hugo/using-prismjs-to-highlight-code/">
+            <span class="next-text nav-default">在Hugo中利用Prism进行代码高亮</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+	<footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+
+
+<script>
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" 
+  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
+      5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+</svg>`;
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
+    const div = document.createElement("div");
+    div.className = "copy-code";
+    div.innerHTML = copyIcon;
+    div.addEventListener("click", () =>
+      copyCodeToClipboard(div, codeDiv)
+    );
+    addCopyButtonToDom(div, codeDiv);
+  }
+
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
+      .innerText;
+    await navigator.clipboard.writeText(codeToCopy);
+    button.blur();
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
+  }
+
+  function addCopyButtonToDom(button, codeDiv) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "highlight-wrapper";
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
+  }
+
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
+  }
+</script>  
+
+
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
+</body>
+</html>

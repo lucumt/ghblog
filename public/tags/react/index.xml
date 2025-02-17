@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on 飞狐的部落格</title>
+    <link>http://localhost:1313/tags/react/</link>
+    <description>Recent content in React on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Nov 2024 10:36:25 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[译]为什么我使用Vue来替代React</title>
+      <link>http://localhost:1313/post/translate/web/why-i-chose-vue-over-react/</link>
+      <pubDate>Mon, 18 Nov 2024 10:36:25 +0800</pubDate>
+      <guid>http://localhost:1313/post/translate/web/why-i-chose-vue-over-react/</guid>
+      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://medium.com/@serpentarium13/why-i-chose-vue-over-react-b082d81315ab&#34;&gt;&lt;strong&gt;Why I chose Vue over React&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
