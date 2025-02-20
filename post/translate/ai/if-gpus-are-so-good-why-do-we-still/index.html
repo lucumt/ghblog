@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>将有重叠或相邻的时间区间进行合并 - 飞狐的部落格</title>
+  <title>[译]既然GPU如此强大，为啥我们还需要使用CPU? - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,11 +16,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间" /><meta name="keywords" content="区间重叠,区间相邻,合并" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="本文翻译自If GPUs Are So Good, Why Do We Still Use CPUs At All?
+" /><meta name="keywords" content="CPU,GPU" />
 <meta name="generator" content="Hugo0.126.1with theme even" />
 
 
-<link rel="canonical" href="https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/" />
+<link rel="canonical" href="https://lucumt.info/post/translate/ai/if-gpus-are-so-good-why-do-we-still/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -30,25 +31,26 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <link href="/sass/main.min.e40488554eb62dbd93e56cb3183d65b327bc5bf44f76e5c2f6e9f7e602e619a8.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/algorithm/merge-overlapping-time-intervals/">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/translate/ai/if-gpus-are-so-good-why-do-we-still/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="将有重叠或相邻的时间区间进行合并">
-  <meta property="og:description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
+  <meta property="og:title" content="[译]既然GPU如此强大，为啥我们还需要使用CPU?">
+  <meta property="og:description" content="本文翻译自If GPUs Are So Good, Why Do We Still Use CPUs At All?">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2025-02-06T14:16:03+08:00">
-    <meta property="article:modified_time" content="2025-02-06T14:16:03+08:00">
+    <meta property="article:published_time" content="2025-02-17T11:21:37+08:00">
+    <meta property="article:modified_time" content="2025-02-17T11:21:37+08:00">
+    <meta property="article:tag" content="AI">
 
-  <meta itemprop="name" content="将有重叠或相邻的时间区间进行合并">
-  <meta itemprop="description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
-  <meta itemprop="datePublished" content="2025-02-06T14:16:03+08:00">
-  <meta itemprop="dateModified" content="2025-02-06T14:16:03+08:00">
-  <meta itemprop="wordCount" content="1807">
-  <meta itemprop="keywords" content="区间重叠,区间相邻,合并">
+  <meta itemprop="name" content="[译]既然GPU如此强大，为啥我们还需要使用CPU?">
+  <meta itemprop="description" content="本文翻译自If GPUs Are So Good, Why Do We Still Use CPUs At All?">
+  <meta itemprop="datePublished" content="2025-02-17T11:21:37+08:00">
+  <meta itemprop="dateModified" content="2025-02-17T11:21:37+08:00">
+  <meta itemprop="wordCount" content="2155">
+  <meta itemprop="keywords" content="CPU,GPU">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="将有重叠或相邻的时间区间进行合并">
-  <meta name="twitter:description" content="基于力扣中的算法题对区间合并算法进行改进，不仅能合并重叠区间，也能合并相邻的区间">
+  <meta name="twitter:title" content="[译]既然GPU如此强大，为啥我们还需要使用CPU?">
+  <meta name="twitter:description" content="本文翻译自If GPUs Are So Good, Why Do We Still Use CPUs At All?">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,157 +136,141 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">将有重叠或相邻的时间区间进行合并</h1>
+      <h1 class="post-title">[译]既然GPU如此强大，为啥我们还需要使用CPU?</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2025-02-06 </span>
+        <span class="post-time"> 2025-02-17 </span>
         <div class="post-category">
-            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"> 人工智能 </a>
             </div>
-          <span class="more-meta"> 约 1807 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2155 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#每秒万亿次浮点运算">每秒万亿次浮点运算</a></li>
+        <li><a href="#不同类型的程序">不同类型的程序</a>
+          <ul>
+            <li><a href="#串行程序">串行程序</a></li>
+            <li><a href="#并行程序">并行程序</a></li>
+          </ul>
+        </li>
+        <li><a href="#错误的二分法">错误的二分法</a></li>
+        <li><a href="#不同的处理器处理不同的程序">不同的处理器处理不同的程序</a></li>
+        <li><a href="#cpu擅长处理随机事件">CPU擅长处理随机事件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+	 
+	  	
 	
-    <div class="post-content">
-	 <p>基于力扣中的<a href="https://leetcode.cn/problems/merge-intervals/"><strong>合并区间</strong></a>题解对其进行适当的改进，以实现不仅能对重叠的时间区间进行合并，同时也可对相邻的时间区间进行合并。</p>
-<h2 id="背景">背景</h2>
-<p>原始的<a href="https://leetcode.cn/problems/merge-intervals/">合并区间</a>中的问题描述如下：</p>
-<p>以数组 <code>intervals</code> 表示若干个区间的集合，其中单个区间为 <code>intervals[i] = [starti, endi]</code> 。请你合并所有重叠的区间，并返回 <em>一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间</em> 。</p>
-<p><strong>示例 1：</strong></p>
-<p>输入：intervals = [[1,3],[2,6],[8,10],[15,18]]<br>
-输出：[[1,6],[8,10],[15,18]]<br>
-解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6]</p>
-<p><strong>示例 2：</strong></p>
-<p>输入：intervals = [[1,4],[4,5]]<br>
-输出：[[1,5]]<br>
-解释：区间 [1,4] 和 [4,5] 可被视为重叠区间</p>
-<p>基于原题目的描述以及对应的答案，当输入为 [[1,3],[4,5]]时，输出依旧为 [[1,3],[4,5]]，而在个人项目中的数据都是整数，对于此种场景，由于3和4时连续的，故要求输出为  [[1,5]]，即<strong>当两个区间不重叠但相邻时也需要将其进行合并</strong>。</p>
-<h2 id="分析">分析</h2>
-<p>大体思路是先看明白原题的解决思路，然后再进行适当改进。</p>
-<p>官方提供的答案类似如下</p>
-<pre class="line-numbers language-java " data-line="2,10,14" title="java">
-<code>public List&lt;List&lt;Integer&gt;&gt; mergeIntervals(List&lt;List&lt;Integer&gt;&gt; configs) {
-    configs.sort(Comparator.comparingInt(a -&gt; a.get(0)));
-    List&lt;List&lt;Integer&gt;&gt; merged = new ArrayList&lt;&gt;();
+    <div class="post-content image-center">
+	 <p>本文翻译自<a href="https://codingstuff.substack.com/p/if-gpus-are-so-good-why-do-we-still"><strong>If GPUs Are So Good, Why Do We Still Use CPUs At All?</strong></a></p>
+<p>最近Twitter上出现了一段2009年的老视频，它旨在让观众更直观地了解CPU和GPU之间的区别。</p>
+<p>可观看下述时长90秒的视频以了解更多:</p>
 
-    for (List&lt;Integer&gt; config : configs) {
-        int start = config.get(0);
-        int end = config.get(1);
 
-        // 如果 merged 为空或当前区间与最后一个合并区间不重叠
-        if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start) {
-            merged.add(Arrays.asList(start, end));
-        } else {
-            // 有重叠或相邻，更新最后一个合并区间的结束点
-            merged.get(merged.size() - 1).set(1, Math.max(merged.get(merged.size() - 1).get(1), end));
-        }
-    }
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/-P28LKWTzrI?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
 
-    return merged;
-}</code>
-</pre><p>上述代码中最关键的是高亮显示的3行代码(2,10,14)，它们的作用分别如下：</p>
+<p>其主要让CPU和GPU进行一场面对面的绘画比赛，相关处理器连接到发射彩蛋的机器上。</p>
+<p>CPU需要整整30秒才能绘制一个非常基本的笑脸：</p>
+<p><img src="/blog_img/translate/ai/if-gpus-are-so-good-why-do-we-still/cpu-paint-result.webp" alt="CPU绘画结果" title="CPU绘画结果"></p>
+<p>而GPU却在瞬间画出了蒙娜丽莎：</p>
+<p><img src="/blog_img/translate/ai/if-gpus-are-so-good-why-do-we-still/gpu-paint-result.webp" alt="GPU绘画结果" title="GPU绘画结果"></p>
+<p>这段视频和核心观点是CPU速度慢而GPU速度快，虽然是事实，但其中还有很多细节没有透露。</p>
+<h2 id="每秒万亿次浮点运算">每秒万亿次浮点运算</h2>
+<p>当我们谈论GPU比CPU的性能更好时，其实指的是一个指标TFLOPS，它本质上衡量的是处理器在一秒钟内可以进行多少万亿次数学运算。例如Nvidia A100 GPU每秒可进行9.7万亿次运算，而最近的Intel 24核心处理器每秒只能执行0.33万亿次运算，这意味着中等水平的GPU的运算速度至少比功能最强大的CPU快30倍。</p>
+<p>在我个人的MacBook中(Apple M3芯片)同时包含了GPU和CPU，能否去掉这些运行缓慢的CPU呢？</p>
+<h2 id="不同类型的程序">不同类型的程序</h2>
+<p>接下来定义两种类型的程序来说明此问题：<code>串行程序</code>和<code>并行程序</code>。</p>
+<h3 id="串行程序">串行程序</h3>
+<p><code>串行程序</code>指的是其中的所有指令都依次按序执行，下述代码即是一个例子：</p>
+<pre class="line-numbers language-go " title="go">
+<code>def sequential_calculation():
+    a = 0
+    b = 1
+
+    for _ in range(100):
+        a, b = b, a &#43; b
+        return b</code>
+</pre><p>在此段代码中，我们连续100次使用前2个数字来计算下一个数字，其重要特性是<strong>每个步骤都依赖于之前的2个步骤</strong>。如果你想通过手工计算来获取结果，则不能对你朋友说“让他从51步算到100步，而自己则从第1步到50步”，这是由于要计算第51的结果时需要获取49和50步的结果，每1个步骤的值都依赖前2个步骤的值来计算。</p>
+<h3 id="并行程序">并行程序</h3>
+<p>并行程序则指的是指令结果不彼此依赖，可互相执行，下述代码为一个示例：</p>
+<pre class="line-numbers language-python " title="python">
+<code>def parallel_multiply():
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    results = []
+
+    for n in numbers:
+        results.append(n * 2)
+
+    return results</code>
+</pre><p>在这个例子中，我们执行10次互相独立的乘法运算，核心是<strong>它们的执行顺序对最终结果无影响</strong>，如果你想将部分任务分给你朋友，则可以说“你执行奇数乘法，我执行偶数乘法”，我们可以分别并行的运算并得到一个正确结果。</p>
+<h2 id="错误的二分法">错误的二分法</h2>
+<p>事实上前面的划分是一种错误的二分法(关于<code>并行程序</code>的说明)，现实世界中的大部分大型程序混合着串行和并行代码，实际上几乎所有程序都有一定比例的指令/代码可以并行化。</p>
+<p>假设我们有个如下所示的程序需要执行20次计算，前10次是计算斐波那契数，它们需要依次计算，而之后的10次计算则可以并行计算，由于其中一半的指令可以独立并行执行，则可说该段代码可50%并行化。</p>
+<pre class="line-numbers language-python " title="python">
+<code>def half_parallelizeable():
+    # Part 1: 串行计算
+    a, b = 0, 1
+    fibonacci_list = [a, b]
+    for _ in range(8):  # 计算另外8个数
+        a, b = b, a &#43; b
+        fibonacci_list.append(b)
+
+    # Part 2: 每个步骤都是独立的
+    parallel_results = []
+    for n in fibonacci_list:
+        parallel_results.append(n * 2)
+    
+    return fibonacci_list, parallel_results</code>
+</pre><p>由于每个斐波那契数依赖于前面的两个数，所以前半部分是串行化，而后半部分则可采用完整的列表将每个数字单独翻倍并行计算。</p>
+<p>我们无法在不计算第6个和第7个斐波那契数的前提下计算第8个斐波那契数，但是一旦获取了完整的斐波那契数，则可将翻倍计算分发到任意多个可用的执行器上执行。</p>
+<h2 id="不同的处理器处理不同的程序">不同的处理器处理不同的程序</h2>
+<p>通常来说，CPU擅长<code>串行程序</code>而GPU则更擅长<code>并行程序</code>，这是因为CPU和GPU存在根本的设计差异。</p>
+<p>CPU具有少量的大内核(Apple的M3有8和CPU)，GPU则拥有大量的小内核（Nvidia的H100 GPU拥有上千个内核），这是GPU善于执行高度并行的程序的原因，它具有上千个简单的内核可用于对不同片段的数据并行的执行相同的操作。</p>
+<p>渲染视频游戏图形就是一种需要进行许多简单重复计算的应用程序。想象下我们的游戏屏幕是一个巨大的像素矩阵，当你突然将角色转向右侧时，这些像素都需要重新计算新的颜色值，幸运的是，屏幕顶部的像素计算与底部的像素计算是互相独立的，因此可将计算任务交给上千个GPU内核。这也是GPU对于游戏如此重要的原因。</p>
+<h2 id="cpu擅长处理随机事件">CPU擅长处理随机事件</h2>
+<p>在执行高度并行的任务（例如将 10,000个独立数字的矩阵相乘）时，CPU的速度比GPU慢得多，但CPU擅长复杂的顺序处理和复杂的决策。</p>
+<p>将CPU内核想象成一个繁忙的厨师长，他能够：</p>
 <ul>
-<li>第2行用于对输入数据基于区间的开始位置进行排序，只有排序后有序数组才能进行下一步的处理</li>
-<li>第10行用于识别到新的区间时，将其添加到最终结果列表中，识别的规则为新区间的开始位置与最后1个区间的结束位置</li>
-<li>第14行用于对重叠或相邻区间进行合并，由于数据已经排好序了，所以合并区间时只需要更新其结束位置即可</li>
+<li>当VIP客人有特殊饮食要求时，立即调整烹饪计划</li>
+<li>在准备精致酱汁和检查烤蔬菜之间无缝切换</li>
+<li>通过重新组织整个厨房工作流程来处理停电等意外情况</li>
+<li>精心安排多道菜品，让它们在恰当的时机送达，既热又新鲜</li>
+<li>在处理数十个处于不同完成状态的订单的同时保持食品质量</li>
 </ul>
-<p>以输入数据<code>[[2,6],[8,15],[1,3],[4,5],[16,19]]</code>为例，基于前述代码的运行结果为<code>[1, 6] [8, 15] [16, 19] </code>，接下来具体分析上述代码的运行过程：</p>
-<ol>
-<li>
-<p>执行第2行代码进行排序，结果如下</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/intervals-before-and-after-sort.png" alt="对数据进行排序" title="对数据进行排序"></p>
-</li>
-<li>
-<p>此时结果数组<code>merged</code>为空</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/init-result-data.png" alt="初始结果数据" title="初始结果数据"></p>
-</li>
-<li>
-<p>由于<code>merged</code>为空，将执行第10行的判断逻辑<code>merged.isEmpty()</code>，直接将1个遍历对象<code>[1,3]</code>加入<code>merged</code>中去</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-1-result.png" alt="第1次遍历" title="第1次遍历"></p>
-</li>
-<li>
-<p>接下来遍历的数据为<code>[2,6]</code>，对第10行的<code>merged.isEmpty()</code>不满足，同时由于当前遍历数据的结束区间为6，而<code>merged</code>中最后1个区间的结束数字为3，故第10行的<code>merged.get(merged.size() - 1).get(1) &lt; start</code>也同样不满足，此时即表示检测到区间重叠</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-2-check.png" alt="检测到重叠区间" title="检测到重叠区间"></p>
-</li>
-<li>
-<p>由于有重叠区间，故执行第14行的代码，由于排序时是按照开始位置进行排序的，故<strong>每次当前遍历区间的开始位置一定不会大于前面所有区间的开始位置</strong>，而结束位置没有进行排序，故只需重新设置结束区间即可。</p>
-<p>由于结束位置的大小存在不确定性，实际设置时需要将当前区间的结束位置和重叠区间的结束位置取最大值，然后重新设置。在本例中由于当前区间的结束位置为6，比<code>merged</code>中最后一个区间的结束位置3大，故重叠区间的结束位置为6
-<img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-2-result.png" alt="第2次遍历" title="第2次遍历"></p>
-</li>
-<li>
-<p>接下来遍历的数据为<code>[4,5]</code>，当执行第10行代码时，两个判断条件都不满足，同样表示检测到重叠区间，执行第14行的代码</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-3-check.png" alt="检测到重叠区间" title="检测到重叠区间"></p>
-</li>
-<li>
-<p>同步骤5中的判断逻辑类似，由于当前区间的结束位置为5，比<code>merged</code>中最后一个区间的结束位置6小，故重叠区间的结束位置依旧为6保持不变，此时意味着当前遍历的区间为一个重叠子区间</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-3-result.png" alt="第3次遍历" title="第3次遍历"></p>
-</li>
-<li>
-<p>接下来遍历的数据为<code>[8,15]</code>，由于当前区间的开始位置为8，比<code>merged</code>中最后一个区间的结束位置6大，此时意味着遇到没有重叠的区间，故第10行中的判断逻辑<code>merged.get(merged.size() - 1).get(1) &lt; start</code>会执行</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-4-check.png" alt="识别到新区间" title="识别到新区间"></p>
-</li>
-<li>
-<p>将该区间加入到<code>merged</code>中的结果如下</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-4-result.png" alt="第4次遍历" title="第4次遍历"></p>
-</li>
-<li>
-<p>接下来遍历的数据为<code>[16,19]</code>，其判断逻辑和步骤8中的类似，同样会执行第10行中的判断逻辑，最终结果如下，理论分析结果与实际运行结果一致，至此整个过程分析完毕。</p>
-<p><img src="/blog_img/algorithm/merge-overlapping-time-intervals/iteration-5-result.png" alt="第5次遍历" title="第5次遍历"></p>
-</li>
-</ol>
-<h2 id="改进">改进</h2>
-<p>理解了原有的算法逻辑之后，只需要修改识别新区间的判断条件即可，将判断条件修改为相邻，在本文中即是将第10行中的判断条件从<code>&lt; start</code>修改为<code>&lt; start -1 </code></p>
-<pre class="line-numbers language-java " title="java">
-<code>// 原有的只是合并重叠区间
-if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start) {
-    merged.add(Arrays.asList(start, end));
-} 
-
-//---------------------------------------------------------------------
-
-// 修改为相邻区间也能合并
-if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start - 1) {
-    merged.add(Arrays.asList(start, end));
-} </code>
-</pre><p>完整代码如下</p>
-<pre class="line-numbers language-java " title="java">
-<code>public List&lt;List&lt;Integer&gt;&gt; mergeIntervals(List&lt;List&lt;Integer&gt;&gt; configs) {
-    configs.sort(Comparator.comparingInt(a -&gt; a.get(0)));
-    List&lt;List&lt;Integer&gt;&gt; merged = new ArrayList&lt;&gt;();
-
-    for (List&lt;Integer&gt; config : configs) {
-        int start = config.get(0);
-        int end = config.get(1);
-
-        // 如果 merged 为空或当前区间与最后一个合并区间不相邻
-        if (merged.isEmpty() || merged.get(merged.size() - 1).get(1) &lt; start - 1) {
-            merged.add(Arrays.asList(start, end));
-        } else {
-            // 有重叠或相邻，更新最后一个合并区间的结束点
-            merged.get(merged.size() - 1).set(1, Math.max(merged.get(merged.size() - 1).get(1), end));
-        }
-    }
-
-    return merged;
-}</code>
-</pre>
+<p>相比之下，GPU内核就像一百名擅长重复性任务的一线厨师，他们可以在两秒钟内切好1个洋葱，但无法有效地管理整个厨房，如果要求GPU处理需求不断变化的晚餐服务，它将会很吃力。</p>
+<p>这就是为什么CPU对于运行计算机操作系统至关重要，现代计算机面临着源源不断的不可预测事件，app的启动与停止、网络掉线、文件访问、用户随机点击屏幕等。CPU擅长处理所有这些任务，同时保持系统响应能力，它可以立即从帮助 Chrome呈现网页切换到处理Zoom视频通话，再到处理新的USB设备连接——同时跟踪系统资源并确保每个应用程序都得到公平的关注。</p>
+<p>因此，尽管GPU擅长并行处理，但CPU仍然因其处理复杂逻辑和适应不断变化的条件的独特能力而不可或缺，Apple的M3等现代芯片兼具两者，将CPU灵活性与GPU计算能力相结合。</p>
+<p>事实上，更精确的绘画视频会显示CPU管理图像下载和内存分配，然后再调用GPU快速渲染像素。</p>
     </div>
 
     
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/ai/">AI</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/translate/ai/if-gpus-are-so-good-why-do-we-still/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">[译]既然GPU如此强大，为啥我们还需要使用CPU?</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/gitbook/add-watermark-in-gitbook/">
-            <span class="next-text nav-default">给GitBook生成的html页面中添加水印支持</span>
+        
+        <a class="next" href="/post/algorithm/merge-overlapping-time-intervals/">
+            <span class="next-text nav-default">将有重叠或相邻的时间区间进行合并</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

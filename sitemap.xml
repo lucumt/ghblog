@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/post/translate/ai/if-gpus-are-so-good-why-do-we-still/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/ai/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -16,8 +51,8 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2025-02-06T14:16:03+08:00</lastmod>
+    <loc>https://lucumt.info/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,13 +73,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/gitbook/</loc>
-    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
     <lastmod>2025-01-16T13:38:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -115,13 +143,6 @@
   
   <url>
     <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2024-11-18T10:36:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2024-11-18T10:36:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
