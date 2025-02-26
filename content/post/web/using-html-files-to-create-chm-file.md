@@ -2,7 +2,7 @@
 title: "利用Html文件生成chm文件"
 date: 2024-11-25T10:22:35+08:00
 lastmod: 2024-11-25T10:22:35+08:00
-draft: true
+draft: false
 keywords: ["chm","html","目录","脚本"]
 description: "对个人使用HTML网页生成CHM格式说明手册的使用经验进行简单的记录与分享，包含文档的生成，目录的配置以及踩坑事项。"
 tags: ["web"]
@@ -243,7 +243,7 @@ Language=0x804 中文（简体，中国）
 Title=简单的说明文档
 ```
 
-3.对应的`contents.hhc`(文件名可任意起名)文件内容如下，可发现其本质上是`HTML`文件，其中的代码层级结构即为我们期望展示的结构
+3.对应的`contents.hhc`(文件名可任意起名)文件内容如下，可发现其本质上是`HTML`文件，其中的`UL`相关的嵌套代码即为最终要展示的层级结构
 
 {{< details "+点击以展开/折叠" >}} 
 
@@ -337,13 +337,104 @@ Title=简单的说明文档
 
 ![复杂的文档构建](/blog_img/web/using-html-files-to-create-chm-file/chm-build-progress-2.png "复杂的文档构建")
 
-5.打开生成的文件，展示效果类似如下
+5.打开生成的文件，展示效果类似如下，可看出左侧出现了我们基于`hhc`文件设置的菜单，且能够正常的点击切换
 
 ![复杂的文档展示效果](/blog_img/web/using-html-files-to-create-chm-file/complex-chm-render.png "复杂的文档展示效果")
 
 ## 文件图标修改
 
+前述的菜单目录实现的核心为`<OBJECT>`对象，其中包含一个或多个`<param>`对象，通过键值对的方式设置相关参数值，可选的参数如下：
+
+| 参数          | 说明                                                       |
+| ------------- | ---------------------------------------------------------- |
+| `Name`        | 用于设置在菜单目录中的显示名称(即文件名和显示名称可不相同) |
+| `Local`       | 该对象对应的`HTML`文档，采用`相对路径`设置                 |
+| `ImageNumber` | 该对象在菜单目录中使用何种图标                             |
+
+其中`ImageNumber`的值可以设置为`从1到42`(若超过42不会报错且用默认值替代)，分别对应如下图标
+
+![chm图标列表](/blog_img/web/using-html-files-to-create-chm-file/chm-icons-list.jpg "chm图标列表")
+
+可通过如下代码来修改其值
+
+```html
+<OBJECT type="text/sitemap">
+    <param name="Name" value="第1章节">
+    <param name="Local" value="doc/ch1/index.html">
+    <param name="ImageNumber" value="3">
+</OBJECT>
+```
+
+基于上述说明修改前面的`hhc`文件，展示效果如下
+
+![chm展示多个图标](/blog_img/web/using-html-files-to-create-chm-file/chm-multiple-icons.png "chm展示多个图标")
+
+---
+
+下述内容来源于[此文章](https://www.cnblogs.com/lin1270/archive/2011/12/21/2295860.html)，个人并未做实际验证
+
+> 如果`<OBJECT>`中没有`ImageNumber`项时，如果`hhp`文件中的`ImageType`为`Picture`（默认是`Picture`），如果有子目录，就显示![图标1](/blog_img/web/using-html-files-to-create-chm-file/icon-1.jpg "图标1")，否则显示![图标2](/blog_img/web/using-html-files-to-create-chm-file/icon-2.jpg "图标2")，如果 `ImageType`为`Folder`，如果有子目录，就显示![图标3](/blog_img/web/using-html-files-to-create-chm-file/icon-3.jpg "图标3")，否则显示![图标4](/blog_img/web/using-html-files-to-create-chm-file/icon-4.jpg "图标4")
+
 ## 中文搜索支持
+
+可通过在`hhp`文件中添加`Full-text search`来添加搜索功能
+
+```ini
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=帮助手册.chm
+;此处用于设置菜单目录
+Contents file=contents.hhc
+Default topic=doc/ch1/index.html
+Display compile progress=Yes
+Language=0x804 中文（简体，中国）
+Title=简单的说明文档
+
+;支持搜索功能
+Full-text search=Yes
+```
+
+但个人在实际使用中遇到了中文搜索的一些坑，**需要将文件编码设置为`ANSI` 且在`HTML`文件中去掉显示的文件编码才能正常支持中文搜索**。
+
+演示说明如下：
+
+1.假设所有的`HTML`文件编码均为`UTF-8`且在文件源码中也通过如下代码进行显示声明
+
+```html
+<!--设置为utf-8编码 -->
+<meta charset="utf-8">
+```
+
+2.在生成的`CHM`文件中搜索中文关键字，可看出虽然实际有内容，但检索结果为空
+
+![中文搜索找不到结果](/blog_img/web/using-html-files-to-create-chm-file/chinese-search-not-found.png "中文搜索找不到结果")
+
+3.切换为英文单词搜索后，结果如下，虽然有结果，但是显示为乱码，同样无法使用
+
+![英文搜索结果乱码](/blog_img/web/using-html-files-to-create-chm-file/english-search-result-incorrect.png "英文搜索结果乱码")
+
+4.将对应的`HTML`文件以`ANSI`编码格式保存，重新生成`CHM`文件，发现其中文直接显示乱码，此时进行搜索已经无意义
+
+![CHM中文显示乱码](/blog_img/web/using-html-files-to-create-chm-file/chm-chinese-content-incorrect.png "CHM中文显示乱码")
+
+5.基于前述步骤，将对应`HTML`文件源码中的编码类型去掉，然后重新生成`CHM`文件
+
+```html
+<!--设置为utf-8编码 
+<meta charset="utf-8">-->
+```
+
+6.对重新生成的`CHM`文件进行中文检索，此时结果正常，如下图所示
+
+![正常搜索结果展示](/blog_img/web/using-html-files-to-create-chm-file/chm-search-correct-result.png "正常搜索结果展示")
+
+从上图的搜索结果可发现其展示的检索结果为`HTML`文件的`title`属性值而非实际的文件名称，故建议**在生成`hhc`文件时，`<OBJECT>`对象下的`Name`属性值要和`HTML`页面的`title`值保持一致**，避免使用上引起歧义，可通过代码脚本来达到此目的。
+
+## 遗留问题
+
+前述生成`CHM`文件的操作适用于简单的`HTML`文件，若`HTML`文件本身内容很复杂(如基于[GitBook](/tags/gitbook)生成)，则生成的`CHM`文件打开后可能会报错，原因尚未找出。
+
+![复杂HTML文件显示错误](/blog_img/web/using-html-files-to-create-chm-file/complex-html-files-error.png "复杂HTML文件显示错误")
 
 [^1]: [Microsoft HTML Help Downloads](https://learn.microsoft.com/zh-cn/previous-versions/windows/desktop/htmlhelp/microsoft-html-help-downloads?redirectedfrom=MSDN)
 
