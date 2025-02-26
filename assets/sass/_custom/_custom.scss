@@ -121,3 +121,9 @@ figcaption {
 .codetabs .codetabs-body .tab.active {
 	display: block;
 }
+
+details > .title > a {
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  font-weight: bold;
+}
