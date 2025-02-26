@@ -121,6 +121,27 @@
   </url>
   
   <url>
+    <loc>https://lucumt.info/tags/web/</loc>
+    <lastmod>2024-11-25T10:22:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</loc>
+    <lastmod>2024-11-25T10:22:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2024-11-25T10:22:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</loc>
     <lastmod>2024-11-18T10:36:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -451,13 +472,6 @@
   
   <url>
     <loc>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</loc>
-    <lastmod>2023-11-22T14:08:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/web/</loc>
     <lastmod>2023-11-22T14:08:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

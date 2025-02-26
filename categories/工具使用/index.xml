@@ -16,6 +16,13 @@
       <description>&lt;p&gt;简要介绍个人基于&lt;a href=&#34;https://zhensherlock.github.io/watermark-js-plus/&#34;&gt;&lt;strong&gt;watermark-js-plus&lt;/strong&gt;&lt;/a&gt;开发的一款&lt;code&gt;GitBook&lt;/code&gt;&lt;a href=&#34;https://github.com/gitbook-plugin-fox/gitbook-plugin-watermark-fox&#34;&gt;&lt;strong&gt;水印插件&lt;/strong&gt;&lt;/a&gt;，可用于给&lt;code&gt;GitBook&lt;/code&gt;所有页面添加自定义水印，且能根据需求动态的开启或关闭。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>利用Html文件生成chm文件</title>
+      <link>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</link>
+      <pubDate>Mon, 25 Nov 2024 10:22:35 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</guid>
+      <description>&lt;p&gt;对个人使用&lt;code&gt;HTML&lt;/code&gt;网页生成&lt;a href=&#34;https://en.wikipedia.org/wiki/Microsoft_Compiled_HTML_Help&#34;&gt;&lt;strong&gt;CHM&lt;/strong&gt;&lt;/a&gt;格式说明手册的使用经验进行简单的记录与分享。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>利用Hugo来替代GitBook实现文档展示</title>
       <link>https://lucumt.info/post/hugo/using-hugo-to-show-document-like-gitbook/</link>
       <pubDate>Fri, 06 Sep 2024 10:26:52 +0800</pubDate>

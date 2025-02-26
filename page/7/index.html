@@ -52,7 +52,9 @@
 <!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 </head>
 <body>
 	  
@@ -125,6 +127,28 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux/using-script-to-deploy-microservice-application-in-docker/">利用shell脚本实现将微服务程序以docker容器方式自动部署</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-03-16 </span>
+      <div class="post-category">
+          <a href="/categories/%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C/"> 脚本操作 </a>
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>基于<a href="/post/devops/git-checkout-by-dynamic-repository-in-jenkins/">在Jenkins中根据配置从不同的仓库中Checkout代码</a>一文，说明如何利用<code>shell</code>脚本在<code>Linux</code>系统中实现自动化的部署与升级。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/linux/using-script-to-deploy-microservice-application-in-docker/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cmd/combine-mutiple-command-with-ampersand-elegant-in-cmd/">在批处理脚本中利用&amp;&amp;命令将多条命令优雅的拼接在一起</a></h1>
@@ -321,27 +345,6 @@ div.mermaid > svg { max-width: 60% !important; }
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java-core/using-lambda-to-parse-and-group-data/">利用Java8中的lambda来实现字符串的解析与分组</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-11-15 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在项目中某个请求的参数采用了较为复杂的规则拼接而成，在服务器端查询时需要将其解析成符合要求的<code>Map</code>与<code>List</code>组合的格式。一开始自己采用的是传统的遍历方式实现，后续发现用<code>Java8</code>中引入的<code>lambda</code>表达式后代码变的更简洁、更优雅，故简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/java-core/using-lambda-to-parse-and-group-data/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -486,5 +489,56 @@ div.mermaid > svg { max-width: 60% !important; }
 
 
 
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>

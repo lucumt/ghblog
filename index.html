@@ -212,6 +212,28 @@
 
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/web/using-html-files-to-create-chm-file/">利用Html文件生成chm文件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2024-11-25 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+          <a href="/categories/%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86/"> 文档管理 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>对个人使用<code>HTML</code>网页生成<a href="https://en.wikipedia.org/wiki/Microsoft_Compiled_HTML_Help"><strong>CHM</strong></a>格式说明手册的使用经验进行简单的记录与分享。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/web/using-html-files-to-create-chm-file/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/translate/web/why-i-chose-vue-over-react/">[译]为什么我使用Vue来替代React</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2024-11-18 </span>
@@ -314,28 +336,6 @@
     </div>
     <div class="read-more">
       <a href="/post/hugo/enable-bing-index-for-my-hugo-website/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/using-hugo-to-show-document-like-gitbook/">利用Hugo来替代GitBook实现文档展示</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2024-09-06 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>基于<a href="https://gohugo.io">Hugo</a>中的<a href="https://github.com/alex-shpak/hugo-book">hugo-book</a>主题简要记录搭建并生成类似<code>GitBook</code>的展示效果，以便在需要进行文档管理与展示时，可以多一种选择。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/using-hugo-to-show-document-like-gitbook/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -481,5 +481,56 @@
 
 
 
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>

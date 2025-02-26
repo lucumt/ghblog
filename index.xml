@@ -37,6 +37,13 @@
       <description>&lt;p&gt;主要参考&lt;a href=&#34;https://cloud.tencent.com/developer/article/2254761&#34;&gt;这篇文章&lt;/a&gt;中的相关说明，记录如何在&lt;code&gt;MySQL&lt;/code&gt;中实现&lt;code&gt;主主同步&lt;/code&gt;，即两个数据库可同时操作然后同时同步数据给对方。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>利用Html文件生成chm文件</title>
+      <link>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</link>
+      <pubDate>Mon, 25 Nov 2024 10:22:35 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</guid>
+      <description>&lt;p&gt;对个人使用&lt;code&gt;HTML&lt;/code&gt;网页生成&lt;a href=&#34;https://en.wikipedia.org/wiki/Microsoft_Compiled_HTML_Help&#34;&gt;&lt;strong&gt;CHM&lt;/strong&gt;&lt;/a&gt;格式说明手册的使用经验进行简单的记录与分享。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>[译]为什么我使用Vue来替代React</title>
       <link>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</link>
       <pubDate>Mon, 18 Nov 2024 10:36:25 +0800</pubDate>

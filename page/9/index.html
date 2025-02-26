@@ -52,7 +52,9 @@
 <!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 </head>
 <body>
 	  
@@ -125,6 +127,28 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/k8s/service-node-port-range-config-not-working-in-k8s/">在Kubernetes中配置service-node-port-range不生效的问题</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-08-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>近期在公司内部搭建基于<a href="https://kubesphere.com.cn/"><strong>KubeSphere</strong></a>的持续集成平台时，发现其底层的<a href="https://kubernetes.io/"><strong>Kubernetes</strong></a>默认的端口范围为<strong>30000-32767</strong>而公司有多个采用微服务模块的项目在使用，默认的端口范围不便于分配使用，在基于网上文档修改的过程中自己踩到了一个坑，简单记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/k8s/service-node-port-range-config-not-working-in-k8s/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a></h1>
@@ -320,28 +344,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/upload-docker-image-to-harbor-via-shell/">利用Linux脚本将Docker镜像手工上传到Harbor仓库</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-06-24 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>简要说明如何通过<code>Linux</code>指令将特定的<code>Docker</code>镜像手工上传到<code>Harbor</code>仓库</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/upload-docker-image-to-harbor-via-shell/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -486,5 +488,56 @@
 
 
 
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>

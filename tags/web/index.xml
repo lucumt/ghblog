@@ -6,8 +6,15 @@
     <description>Recent content in Web on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 22 Nov 2023 14:08:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2024 10:22:35 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Html文件生成chm文件</title>
+      <link>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</link>
+      <pubDate>Mon, 25 Nov 2024 10:22:35 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/using-html-files-to-create-chm-file/</guid>
+      <description>&lt;p&gt;对个人使用&lt;code&gt;HTML&lt;/code&gt;网页生成&lt;a href=&#34;https://en.wikipedia.org/wiki/Microsoft_Compiled_HTML_Help&#34;&gt;&lt;strong&gt;CHM&lt;/strong&gt;&lt;/a&gt;格式说明手册的使用经验进行简单的记录与分享。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Foxglove自定义插件开发说明</title>
       <link>https://lucumt.info/post/web/foxglove-custom-plugin-develop/</link>

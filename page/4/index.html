@@ -52,7 +52,9 @@
 <!--[if lt IE 9]>
   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 </head>
 <body>
 	  
@@ -125,6 +127,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/">利用SSH实现在Jekins中给远程服务器部署项目</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-11-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>简要记录如何整合<code>Jenkins</code>与<code>SSH</code>免密登录，实现通过<code>Jenkins</code>流水线部署到不同的服务器环境下，提高开发与测试环境的灵活性。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/devops/using-ssh-to-deploy-in-remote-server-in-jenkins/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/web/using-foxglove-to-render-time-sequence-data/">搭建基于Foxglove的时序数据播放环境</a></h1>
@@ -328,28 +351,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-expected-exception/">[译]Junit 5 预期异常 - 如何检测异常是否抛出</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-07-02 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-expected-exception/"><strong>JUnit 5 Expected Exception: How to assert an exception is thrown?</strong></a></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-expected-exception/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -494,5 +495,56 @@
 
 
 
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
 </body>
 </html>
