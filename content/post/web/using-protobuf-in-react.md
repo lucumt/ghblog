@@ -2,7 +2,7 @@
 title: "在Nodejs和React中使用Protocol Buffers对数据进行编码解码"
 date: 2024-12-20T10:13:13+08:00
 lastmod: 2024-12-20T10:13:13+08:00
-draft: true
+draft: false
 keywords: ["Protocol Buffers","React","Node js"]
 description: "基于个人实际使用经验，简要分享下如何在Nodejs和React中使用Protocol Buffers进行编码/解码，从而提高网络传输效率"
 tags: ["react","protocol buffers"]
@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: true
+autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -257,14 +257,18 @@ function isNumeric(str) {
 
 ## 数据解码
 
-此部分操作采用`React`进行，相关操作步骤如下：
+此部分操作采用`React`进行，根据是否生成对应的`js`文件又可分为两种使用实现方式。
+
+### 生成js文件
+
+此种方式需要将`proto`文件郧县编译为`js`文件，在使用时可提高性能，推荐采用此种实现。
 
 1.执行下述指令创建一个`React`项目并创建相关的依赖
 
 ```bash
 npx create-react-app react-client-test -y
 cd react-client-test
-npm i protobufjs 
+npm i protobufjs google-protobuf
 
 # 个人实际操作发现此依赖包必须全局安装，否则会导致步骤3出错
 npm i -g protoc-gen-js
@@ -572,9 +576,56 @@ goog.object.extend(exports, proto);
 
 {{< /details>}}
 
-5.将`App.js`修改为如下代码
+5.将`App.js`修改为如下代码，可看出涉及到`Protocol Buffers`相关的代码只有4行，使用起来较为简洁，更具体的用法可参见此[说明](https://www.cnblogs.com/jiayouba/p/14302256.html)
 
-```js
+```js{data-line="4,12-15"}
+import * as React from 'react';
+import axios from 'axios';
+
+import proto from './prc_pb.js'
+
+function App() {
+  const [id, setId] = React.useState(0);
+  const [name, setName] = React.useState("");
+  const [points, setPoints] = React.useState([]);
+  let url = `http://127.0.0.1:3100`;
+  axios.get(url, { responseType: "arraybuffer" }).then(function (response) {
+    let result = proto.PcdData.deserializeBinary(response.data);
+    setId(result.getIdx());
+    setName(result.getName());
+    setPoints(result.getPointList());
+  }).catch(function (error) {
+    console.log(error);
+  });
+
+  // 只渲染20条数据
+  const listPoints = points.slice(0, 21).map((point, index) =>
+    <li key={index}>{point}</li>
+  );
+
+  return (
+    <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '80%', paddingTop: '30px' }}>
+      点云文件id：{id}<br />
+        点云文件名称：{name}<br />
+        点云文件大小：{points.length}<br />
+        点云数据信息：
+      <ul>{listPoints}</ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+6.通过`npm start`启动该程序，然后浏览器中访问`http://127.0.0.1:3000`的结果类似如下，可以看出`Protocol Buffers`数据正常解码并展示
+
+![点云数据展示](/blog_img/web/using-protobuf-in-react/point-cloud-render.png "点云数据展示")
+
+### 不生成js文件
+
+也可不通过 `proto`文件而直接调用`proto`文件对文件进行编码解码，此时不需要通过`npm`安装`protoc-gen-js`等依赖，同时要将`App.js`修改为如下所示，可看出涉及到`Protocol Buffers`的代码量变多，且由于存在`proto`文件的加载操作，其性能没有前一种高。
+
+```js{data-line="4-14,22"}
 import * as React from 'react';
 import axios from 'axios';
 import protobuf from 'protobufjs';
@@ -623,7 +674,3 @@ function App() {
 
 export default App;
 ```
-
-6.通过`npm start`启动该程序，然后浏览器中访问`http://127.0.0.1:3000`的结果类似如下，可以看出`Protocol Buffers`数据正常解码并展示
-
-![点云数据展示](/blog_img/web/using-protobuf-in-react/point-cloud-render.png "点云数据展示")
