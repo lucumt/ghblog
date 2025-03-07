@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>React on 飞狐的部落格</title>
-    <link>https://lucumt.info/tags/react/</link>
-    <description>Recent content in React on 飞狐的部落格</description>
+    <title>Protocol Buffers on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/protocol-buffers/</link>
+    <description>Recent content in Protocol Buffers on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 20 Dec 2024 10:13:13 +0800</lastBuildDate>
-    <atom:link href="https://lucumt.info/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lucumt.info/tags/protocol-buffers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在Nodejs和React中使用Protocol Buffers对数据进行编码解码</title>
       <link>https://lucumt.info/post/web/using-protobuf-in-react/</link>
       <pubDate>Fri, 20 Dec 2024 10:13:13 +0800</pubDate>
       <guid>https://lucumt.info/post/web/using-protobuf-in-react/</guid>
       <description>&lt;p&gt;网络上关于如何在&lt;a href=&#34;https://react.dev/&#34;&gt;&lt;strong&gt;React&lt;/strong&gt;&lt;/a&gt;中使用&lt;a href=&#34;https://protobuf.dev/&#34;&gt;&lt;strong&gt;Protocol Buffers&lt;/strong&gt;&lt;/a&gt;进行数据编码/解码的资料不是很多，正好自己有这方面的需求，参考多方面的资料后将整个流程调试通过，故简单记录下，供自己和他人使用参考。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>[译]为什么我使用Vue来替代React</title>
-      <link>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</link>
-      <pubDate>Mon, 18 Nov 2024 10:36:25 +0800</pubDate>
-      <guid>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</guid>
-      <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://medium.com/@serpentarium13/why-i-chose-vue-over-react-b082d81315ab&#34;&gt;&lt;strong&gt;Why I chose Vue over React&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

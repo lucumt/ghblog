@@ -6,8 +6,15 @@
     <description>Recent content in Web编程 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Nov 2024 10:36:25 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Dec 2024 10:13:13 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Nodejs和React中使用Protocol Buffers对数据进行编码解码</title>
+      <link>https://lucumt.info/post/web/using-protobuf-in-react/</link>
+      <pubDate>Fri, 20 Dec 2024 10:13:13 +0800</pubDate>
+      <guid>https://lucumt.info/post/web/using-protobuf-in-react/</guid>
+      <description>&lt;p&gt;网络上关于如何在&lt;a href=&#34;https://react.dev/&#34;&gt;&lt;strong&gt;React&lt;/strong&gt;&lt;/a&gt;中使用&lt;a href=&#34;https://protobuf.dev/&#34;&gt;&lt;strong&gt;Protocol Buffers&lt;/strong&gt;&lt;/a&gt;进行数据编码/解码的资料不是很多，正好自己有这方面的需求，参考多方面的资料后将整个流程调试通过，故简单记录下，供自己和他人使用参考。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[译]为什么我使用Vue来替代React</title>
       <link>https://lucumt.info/post/translate/web/why-i-chose-vue-over-react/</link>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在Nodejs和React中使用Protocol Buffers对数据进行编码解码 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="基于个人实际使用经验，简要分享下如何在Nodejs和React中使用Protocol Buffers进行编码/解码，从而提高网络传输效率" /><meta name="keywords" content="Protocol Buffers,React,Node js" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/web/using-protobuf-in-react/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f8a15eb0c012e3545d8b6ed47dcb94694059de6131ffb16c8bf6a65b3af1bf61.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/web/using-protobuf-in-react/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在Nodejs和React中使用Protocol Buffers对数据进行编码解码">
+  <meta property="og:description" content="基于个人实际使用经验，简要分享下如何在Nodejs和React中使用Protocol Buffers进行编码/解码，从而提高网络传输效率">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-12-20T10:13:13+08:00">
+    <meta property="article:modified_time" content="2024-12-20T10:13:13+08:00">
+    <meta property="article:tag" content="React">
+    <meta property="article:tag" content="Protocol Buffers">
+
+  <meta itemprop="name" content="在Nodejs和React中使用Protocol Buffers对数据进行编码解码">
+  <meta itemprop="description" content="基于个人实际使用经验，简要分享下如何在Nodejs和React中使用Protocol Buffers进行编码/解码，从而提高网络传输效率">
+  <meta itemprop="datePublished" content="2024-12-20T10:13:13+08:00">
+  <meta itemprop="dateModified" content="2024-12-20T10:13:13+08:00">
+  <meta itemprop="wordCount" content="3175">
+  <meta itemprop="keywords" content="Protocol Buffers,React,Node js">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在Nodejs和React中使用Protocol Buffers对数据进行编码解码">
+  <meta name="twitter:description" content="基于个人实际使用经验，简要分享下如何在Nodejs和React中使用Protocol Buffers进行编码/解码，从而提高网络传输效率">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://tech.lucumt.info">
+        <li class="mobile-menu-item">外链</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header><main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在Nodejs和React中使用Protocol Buffers对数据进行编码解码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-12-20 </span>
+        <div class="post-category">
+            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
+            </div>
+          <span class="more-meta"> 约 3175 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#文件定义">文件定义</a></li>
+        <li><a href="#数据编码">数据编码</a></li>
+        <li><a href="#数据解码">数据解码</a>
+          <ul>
+            <li><a href="#生成js文件">生成js文件</a></li>
+            <li><a href="#不生成js文件">不生成js文件</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+	
+    <div class="post-content">
+	 <p>网络上关于如何在<a href="https://react.dev/"><strong>React</strong></a>中使用<a href="https://protobuf.dev/"><strong>Protocol Buffers</strong></a>进行数据编码/解码的资料不是很多，正好自己有这方面的需求，参考多方面的资料后将整个流程调试通过，故简单记录下，供自己和他人使用参考。</p>
+<h2 id="文件定义">文件定义</h2>
+<p>可通过下述指令查看<code>React</code>的版本，自己当前的版本为<code>19.0.0</code></p>
+<pre class="line-numbers language-bash " title="bash">
+<code># 简单输出版本信息
+npm show react version
+
+# 详细输出版本信息
+npm info react</code>
+</pre><p>假设要从某个服务器上获取一系列的<a href="https://zh.wikipedia.org/zh-cn/%E9%BB%9E%E9%9B%B2">点云</a>数据进行渲染显示，由于点云数据的体积通常较大，为了缩短网络传输耗时，需对其进行编码与压缩来减少数据体积,</p>
+<p>相关流程如下</p>
+<p><img src="/blog_img/web/using-protobuf-in-react/protobuf-encode-decode-data.png" alt="Protocol Buffers编码与解码" title="Protocol Buffers编码与解码"></p>
+<p>可基于<code>Protocol Buffers</code>定义如下文件来表示单帧点云数据，其文件名假设为<code>prc.proto</code></p>
+<pre class="line-numbers language-protobuf " title="protobuf">
+<code>syntax = &#34;proto3&#34;;
+
+message PcdData{
+  // 数据帧序号
+  optional int32 idx=1;
+  
+  // 数据帧名称
+  string name=2;
+  
+  // 具体数据
+  repeated float point=3;
+}</code>
+</pre><h2 id="数据编码">数据编码</h2>
+<p>数据编码通常是在服务器端(或发送端)进行的，通过将相关数据编码为<code>Protocol Buffers</code>格式来减少数据传输体积，从而加快其传输效率。</p>
+<p><code>Protocol Buffers</code>数据编码过程主要是利用<a href="https://www.npmjs.com/package/pbjs">pbjs</a>将<code>proto</code>规范文件编译为<code>json</code>格式，然后填充数据并传输，此部分实现和<code>React</code>关系不大。</p>
+<p>以前面的<code>proto</code>文件为例，相关操作步骤如下：</p>
+<p>1.进入对应目录下安装<code>protobufjs-cli</code>，安装完毕后可测试<code>pbjs</code>是否正常</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>npm i protobufjs-cli
+
+# 采用下述指令进行测试
+node ./node_modules/protobufjs-cli/bin/pbjs</code>
+</pre><p>若安装正常，<code>pbjs</code>测试结果如下，关于此指令的详细使用，可参见<a href="https://cloud.tencent.com/developer/article/1960058">说明</a></p>
+<p><img src="/blog_img/web/using-protobuf-in-react/pbjs-command-test.png" alt="pbjs指令测试" title="pbjs指令测试"></p>
+<p>2.执行下述指令，分别生成对应的<code>json</code>规范文件</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>node ./node_modules/protobufjs-cli/bin/pbjs prc.proto -o pcd_data.json
+
+# 显示指定格式
+node ./node_modules/protobufjs-cli/bin/pbjs prc.proto -t json -o pcd_data.json</code>
+</pre><p>3.生成完毕的<code>json</code>文件如下</p>
+<pre class="line-numbers language-json " title="json">
+<code>{
+  &#34;options&#34;: {
+    &#34;syntax&#34;: &#34;proto3&#34;
+  },
+  &#34;nested&#34;: {
+    &#34;PcdData&#34;: {
+      &#34;oneofs&#34;: {
+        &#34;_idx&#34;: {
+          &#34;oneof&#34;: [
+            &#34;idx&#34;
+          ]
+        }
+      },
+      &#34;fields&#34;: {
+        &#34;idx&#34;: {
+          &#34;type&#34;: &#34;int32&#34;,
+          &#34;id&#34;: 1,
+          &#34;options&#34;: {
+            &#34;proto3_optional&#34;: true
+          }
+        },
+        &#34;name&#34;: {
+          &#34;type&#34;: &#34;string&#34;,
+          &#34;id&#34;: 2
+        },
+        &#34;point&#34;: {
+          &#34;rule&#34;: &#34;repeated&#34;,
+          &#34;type&#34;: &#34;float&#34;,
+          &#34;id&#34;: 3
+        }
+      }
+    }
+  }
+}</code>
+</pre><p>4.基于此<a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">说明</a>创建一个简单的服务器端，命名为<code>server.js</code>，确保其与前面的文件都处于同一个目录下</p>
+<pre class="line-numbers language-js " title="js">
+<code>const { createServer } = require(&#39;node:http&#39;);
+const hostname = &#39;127.0.0.1&#39;;
+const port = 3000;
+const server = createServer((req, res) =&gt; {
+  res.statusCode = 200;
+  res.setHeader(&#39;Content-Type&#39;, &#39;text/plain&#39;);
+  res.end(&#39;Hello World&#39;);
+});
+server.listen(port, hostname, () =&gt; {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});</code>
+</pre><p>可通过<code>node server.js</code>来启动并测试</p>
+<p>5.假设当前目录下有一个名为<code>000010.pcd</code>的点云文件，修改<code>server.js</code>添加上点云读取写入的相关逻辑，修改后的代码如下</p>
+<pre class="line-numbers language-js " data-line="7-10,37-43" title="js">
+<code>const { createServer } = require(&#39;node:http&#39;);
+const hostname = &#39;127.0.0.1&#39;;
+const port = 3100;
+
+let fs = require(&#39;fs&#39;);
+let readline = require(&#39;readline&#39;);
+let protobufjs = require(&#34;protobufjs&#34;);
+let pcdJson = require(&#34;./pcd_data.json&#34;)
+let pcdRoot = protobufjs.Root.fromJSON(pcdJson)
+let pcdMessage = pcdRoot.lookupType(&#34;PcdData&#34;);
+
+const server = createServer((req, res) =&gt; {
+  res.statusCode = 200;
+  loadPcdBinaryFile(req, res);
+});
+server.listen(port, hostname, () =&gt; {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+
+
+async function loadPcdBinaryFile(req, res) {
+  let fileStream = fs.createReadStream(`000010.pcd`);
+  let fileData = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+
+  let points = [];
+  for await (const line of fileData) {
+    let data = processPcdData(line);
+    if (data == null) {
+      continue;
+    }
+    points.push(...data);
+  }
+
+  let result = { idx: 1, name: &#39;000010.pcd&#39;, point: points }
+  let buff = pcdMessage.encode(pcdMessage.create(result)).finish();
+  res.setHeader(&#39;Content-Type&#39;, &#39;application/octet-stream&#39;);
+  res.setHeader(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);
+  res.setHeader(&#34;Access-Control-Allow-Headers&#34;, &#34;X-Requested-With&#34;);
+  res.write(buff,&#39;binary&#39;);
+  res.end(null, &#39;binary&#39;);
+}
+
+// 对点云文件进行处理，过滤掉无用的数据
+function processPcdData(line) {
+  let data = line.split(/\s/)
+  if (data.length != 4) {
+    return null;
+  }
+  for (let i = 0; i &lt; 4; i&#43;&#43;) {
+    if (!isNumeric(data[i])) {
+      return null;
+    }
+  }
+  return [Number(data[0]), Number(data[1]), Number(data[2])]
+}
+
+function isNumeric(str) {
+  if (typeof str != &#34;string&#34;) {
+    return false;
+  }
+  return !isNaN(str) &amp;&amp; !isNaN(parseFloat(str));
+}</code>
+</pre><p>关键部分代码已经高亮显示，可看出实际编码量并不多。</p>
+<p>6.在浏览器中打开<code>http://127.0.0.1:3100</code>可正常下载编码后的点云文件，用记事本或其它编辑器打开类似如下，由于<code>Protocol Buffers</code>编码的格式无法直接查看，所以大部分内容为乱码，尽管如此，其中的部分属性还是能正常查看(如name属性)。</p>
+<p>至此，<code>Protocol Buffers</code>数据编码操作完成。</p>
+<p><img src="/blog_img/web/using-protobuf-in-react/pcd-protobuf-file-open.png" alt="编码后的点云文件" title="编码后的点云文件"></p>
+<h2 id="数据解码">数据解码</h2>
+<p>此部分操作采用<code>React</code>进行，根据是否生成对应的<code>js</code>文件又可分为两种使用实现方式。</p>
+<h3 id="生成js文件">生成js文件</h3>
+<p>此种方式需要将<code>proto</code>文件郧县编译为<code>js</code>文件，在使用时可提高性能，推荐采用此种实现。</p>
+<p>1.执行下述指令创建一个<code>React</code>项目并创建相关的依赖</p>
+<pre class="line-numbers language-bash " title="bash">
+<code>npx create-react-app react-client-test -y
+cd react-client-test
+npm i protobufjs google-protobuf
+
+# 个人实际操作发现此依赖包必须全局安装，否则会导致步骤3出错
+npm i -g protoc-gen-js</code>
+</pre><p>2.基于此<a href="https://grpc.io/docs/protoc-installation/">说明</a>安装Protocol Buffer Compiler，安装完毕后可通过下述操作检查其是否正常</p>
+<p><img src="/blog_img/web/using-protobuf-in-react/protoc-version-check.png" alt="Proctoc版本检查" title="Proctoc版本检查"></p>
+<p>3.将前述的<code>prc.proto</code>文件拷贝到该项目的<code>src</code>目录下，之后执行下述指令生成<code>Protocol Buffers</code>对应的反序列化文件</p>
+<pre class="line-numbers language-bash " title="bash">
+<code># 必须在proto文件所在的目录下执行
+protoc --proto_path=./ --js_out=import_style=commonjs,binary:. ./*.proto</code>
+</pre><p>4.若一切正常，则会生成后缀为<code>_pb.js</code>的文件，本例中为<code>prc_pb.js</code>，其源码如下</p>
+<details>
+  <summary class="title"><a>+点击以展开/折叠</a></summary>
+  <pre class="line-numbers language-js " title="js">
+<code>// source: prc.proto
+/**
+ * @fileoverview
+ * @enhanceable
+ * @suppress {missingRequire} reports error on implicit type usages.
+ * @suppress {messageConventions} JS Compiler reports an error if a variable or
+ *     field starts with &#39;MSG_&#39; and isn&#39;t a translatable message.
+ * @public
+ */
+// GENERATED CODE -- DO NOT EDIT!
+/* eslint-disable */
+// @ts-nocheck
+
+var jspb = require(&#39;google-protobuf&#39;);
+var goog = jspb;
+var global =
+    (typeof globalThis !== &#39;undefined&#39; &amp;&amp; globalThis) ||
+    (typeof window !== &#39;undefined&#39; &amp;&amp; window) ||
+    (typeof global !== &#39;undefined&#39; &amp;&amp; global) ||
+    (typeof self !== &#39;undefined&#39; &amp;&amp; self) ||
+    (function () { return this; }).call(null) ||
+    Function(&#39;return this&#39;)();
+
+goog.exportSymbol(&#39;proto.PcdData&#39;, null, global);
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.PcdData = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.PcdData.repeatedFields_, null);
+};
+goog.inherits(proto.PcdData, jspb.Message);
+if (goog.DEBUG &amp;&amp; !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.PcdData.displayName = &#39;proto.PcdData&#39;;
+}
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array&lt;number&gt;}
+ * @const
+ */
+proto.PcdData.repeatedFields_ = [3];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_&lt;name&gt;, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.PcdData.prototype.toObject = function(opt_includeInstance) {
+  return proto.PcdData.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.PcdData} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.PcdData.toObject = function(includeInstance, msg) {
+  var f, obj = {
+idx: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+name: jspb.Message.getFieldWithDefault(msg, 2, &#34;&#34;),
+pointList: (f = jspb.Message.getRepeatedFloatingPointField(msg, 3)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.PcdData}
+ */
+proto.PcdData.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.PcdData;
+  return proto.PcdData.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.PcdData} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.PcdData}
+ */
+proto.PcdData.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setIdx(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 3:
+      var values = /** @type {!Array&lt;number&gt;} */ (reader.isDelimited() ? reader.readPackedFloat() : [reader.readFloat()]);
+      for (var i = 0; i &lt; values.length; i&#43;&#43;) {
+        msg.addPoint(values[i]);
+      }
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.PcdData.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.PcdData.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.PcdData} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.PcdData.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length &gt; 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getPointList();
+  if (f.length &gt; 0) {
+    writer.writePackedFloat(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int32 idx = 1;
+ * @return {number}
+ */
+proto.PcdData.prototype.getIdx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.setIdx = function(value) {
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.clearIdx = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.PcdData.prototype.hasIdx = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string name = 2;
+ * @return {string}
+ */
+proto.PcdData.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, &#34;&#34;));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.setName = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated float point = 3;
+ * @return {!Array&lt;number&gt;}
+ */
+proto.PcdData.prototype.getPointList = function() {
+  return /** @type {!Array&lt;number&gt;} */ (jspb.Message.getRepeatedFloatingPointField(this, 3));
+};
+
+
+/**
+ * @param {!Array&lt;number&gt;} value
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.setPointList = function(value) {
+  return jspb.Message.setField(this, 3, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.addPoint = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.PcdData} returns this
+ */
+proto.PcdData.prototype.clearPointList = function() {
+  return this.setPointList([]);
+};
+
+
+goog.object.extend(exports, proto);</code>
+</pre>
+</details>
+<p>5.将<code>App.js</code>修改为如下代码，可看出涉及到<code>Protocol Buffers</code>相关的代码只有4行，使用起来较为简洁，更具体的用法可参见此<a href="https://www.cnblogs.com/jiayouba/p/14302256.html">说明</a></p>
+<pre class="line-numbers language-js " data-line="4,12-15" title="js">
+<code>import * as React from &#39;react&#39;;
+import axios from &#39;axios&#39;;
+
+import proto from &#39;./prc_pb.js&#39;
+
+function App() {
+  const [id, setId] = React.useState(0);
+  const [name, setName] = React.useState(&#34;&#34;);
+  const [points, setPoints] = React.useState([]);
+  let url = `http://127.0.0.1:3100`;
+  axios.get(url, { responseType: &#34;arraybuffer&#34; }).then(function (response) {
+    let result = proto.PcdData.deserializeBinary(response.data);
+    setId(result.getIdx());
+    setName(result.getName());
+    setPoints(result.getPointList());
+  }).catch(function (error) {
+    console.log(error);
+  });
+
+  // 只渲染20条数据
+  const listPoints = points.slice(0, 21).map((point, index) =&gt;
+    &lt;li key={index}&gt;{point}&lt;/li&gt;
+  );
+
+  return (
+    &lt;div style={{ marginLeft: &#39;auto&#39;, marginRight: &#39;auto&#39;, width: &#39;80%&#39;, paddingTop: &#39;30px&#39; }}&gt;
+      点云文件id：{id}&lt;br /&gt;
+        点云文件名称：{name}&lt;br /&gt;
+        点云文件大小：{points.length}&lt;br /&gt;
+        点云数据信息：
+      &lt;ul&gt;{listPoints}&lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code>
+</pre><p>6.通过<code>npm start</code>启动该程序，然后浏览器中访问<code>http://127.0.0.1:3000</code>的结果类似如下，可以看出<code>Protocol Buffers</code>数据正常解码并展示</p>
+<p><img src="/blog_img/web/using-protobuf-in-react/point-cloud-render.png" alt="点云数据展示" title="点云数据展示"></p>
+<h3 id="不生成js文件">不生成js文件</h3>
+<p>也可不通过 <code>proto</code>文件而直接调用<code>proto</code>文件对文件进行编码解码，此时不需要通过<code>npm</code>安装<code>protoc-gen-js</code>等依赖，同时要将<code>App.js</code>修改为如下所示，可看出涉及到<code>Protocol Buffers</code>的代码量变多，且由于存在<code>proto</code>文件的加载操作，其性能没有前一种高。</p>
+<pre class="line-numbers language-js " data-line="4-14,22" title="js">
+<code>import * as React from &#39;react&#39;;
+import axios from &#39;axios&#39;;
+import protobuf from &#39;protobufjs&#39;;
+import pcdProto from &#39;./prc.proto&#39;;
+
+const loadProtobuf = async () =&gt; {
+  const root = await protobuf.load(pcdProto);
+  return root.lookupType(&#34;PcdData&#34;);
+};
+
+const decodeProtobuf = async (buffer) =&gt; {
+  const MyMessage = await loadProtobuf();
+  return MyMessage.decode(new Uint8Array(buffer));
+};
+
+function App() {
+  const [id, setId] = React.useState(0);
+  const [name, setName] = React.useState(&#34;&#34;);
+  const [points, setPoints] = React.useState([]);
+  let url = `http://127.0.0.1:3100`;
+  axios.get(url, { responseType: &#34;arraybuffer&#34; }).then(function (response) {
+    decodeProtobuf(response.data).then(result =&gt; {
+      setId(result.idx);
+      setName(result.name);
+      setPoints(result.point);
+    })
+  }).catch(function (error) {
+    console.log(error);
+  });
+
+  // 只渲染20条数据
+  const listPoints = points.slice(0, 21).map((point, index) =&gt;
+    &lt;li key={index}&gt;{point}&lt;/li&gt;
+  );
+
+  return (
+    &lt;div style={{ marginLeft: &#39;auto&#39;, marginRight: &#39;auto&#39;, width: &#39;80%&#39;, paddingTop: &#39;30px&#39; }}&gt;
+      点云文件id：{id}&lt;br /&gt;
+        点云文件名称：{name}&lt;br /&gt;
+        点云文件大小：{points.length}&lt;br /&gt;
+        点云数据信息：
+      &lt;ul&gt;{listPoints}&lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code>
+</pre>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/react/">react</a>
+          <a href="/tags/protocol-buffers/">protocol buffers</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/gitbook/add-watermark-in-gitbook/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">给GitBook生成的html页面中添加水印支持</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/mysql/config-mysql-in-master-master-mode/">
+            <span class="next-text nav-default">基于MySQL配置数据库主主同步</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+	<footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
+            crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+
+
+<script>
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" 
+  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
+      5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+</svg>`;
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
+    const div = document.createElement("div");
+    div.className = "copy-code";
+    div.innerHTML = copyIcon;
+    div.addEventListener("click", () =>
+      copyCodeToClipboard(div, codeDiv)
+    );
+    addCopyButtonToDom(div, codeDiv);
+  }
+
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
+      .innerText;
+    await navigator.clipboard.writeText(codeToCopy);
+    button.blur();
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
+  }
+
+  function addCopyButtonToDom(button, codeDiv) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "highlight-wrapper";
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
+  }
+
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
+  }
+</script>  
+
+
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
+</body>
+</html>

@@ -129,6 +129,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/">构建自定义的Nacos镜像支持MySQL数据源与LDAP认证</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-03-24 </span>
+      <div class="post-category">
+          <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/"> 容器化 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><code>Nacos</code>官方的<code>docker</code>镜像不支持<code>LDAP</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>同时在连接<code>mysql</code>方面在某些版本中会出现<strong>No Datasource Set</strong> 的异常，而其官方的release版本则很很稳定，同时又支持<code>LDAP</code>。目前部门很多项目都是基于<code>docker</code>部署的，处于简化使用，基于部署维护等原因，我决定通过Dockerfile来构建符合自己要求的<code>nacos</code>镜像，在确保性能稳定的同时也能支持<code>ldap</code>登录。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/docker/build-custom-nacos-image-to-support-ldap-and-mysql/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/linux/using-script-to-deploy-microservice-application-in-docker/">利用shell脚本实现将微服务程序以docker容器方式自动部署</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2023-03-16 </span>
@@ -319,28 +340,6 @@ div.mermaid > svg { max-width: 60% !important; }
     </div>
     <div class="read-more">
       <a href="/post/ldap/add-ldap-support-for-sonarqube/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ldap/add-ldap-support-for-yapi/">给Yapi添加LDAP登录认证</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-12-01 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/"> 系统集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><code>YApi</code> 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大</strong>的 api 管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，由去哪儿网开发，本文基于<a href="https://www.jianshu.com/p/a97d2efb23c5">为 Yapi 定制 apline 版 Docker 镜像</a>简要说明如何将基于<code>docker</code>安装的<code>Yapi</code>与<code>LDAP</code>集成。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/ldap/add-ldap-support-for-yapi/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
