@@ -606,8 +606,8 @@ function App() {
   });
 
   // 只渲染20条数据
-  const listPoints = points.slice(0, 21).map((point) =>
-    <li>{point}</li>
+  const listPoints = points.slice(0, 21).map((point, index) =>
+    <li key={index}>{point}</li>
   );
 
   return (
