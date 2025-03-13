@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2025-03-11T10:13:14+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2025-03-11T10:13:14+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/post/translate/ai/if-gpus-are-so-good-why-do-we-still/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/post/</loc>
-    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/tags/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>https://lucumt.info/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

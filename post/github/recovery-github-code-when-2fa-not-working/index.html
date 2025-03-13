@@ -47,7 +47,7 @@
   <meta itemprop="description" content="记录自己由于手机格式化导致的GitHub 2FA认证失效而无法登录后恢复GitHub账号的过程">
   <meta itemprop="datePublished" content="2024-04-03T10:12:47+08:00">
   <meta itemprop="dateModified" content="2024-04-03T10:12:47+08:00">
-  <meta itemprop="wordCount" content="4146">
+  <meta itemprop="wordCount" content="4310">
   <meta itemprop="keywords" content="github,2FA,ssh,recovery codes">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[杂谈]记一次个人GitHub账号的找回过程">
@@ -143,7 +143,7 @@
             <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
             <a href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E6%83%B3/"> 编程杂想 </a>
             </div>
-          <span class="more-meta"> 约 4146 字 </span>
+          <span class="more-meta"> 约 4310 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -173,7 +173,12 @@
 	  	
 	
     <div class="post-content image-border">
-	 <p>简要记录下由于自己手机格式化刷机后，<code>GitHub</code>两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过<code>github-recovery-codes.txt</code>恢复自己<code>GitHub</code>账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。</p>
+	 <p>简要记录下由于自己手机格式化刷机后，<code>GitHub</code>两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过<code>github-recovery-codes.txt</code>恢复自己<code>GitHub</code>账号的过程。</p>
+<p>2025/03/13更新，由于此篇文章的访问量较多，想必是很多人遇到了类似问题，为了节约大家时间，提前说明如下：</p>
+<blockquote>
+<p><strong>此文只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值</strong>。</p>
+</blockquote>
+<p>如果你个人也是由于手机刷机且没有开启<code>2FA</code>认证设备的远程备份或保存<code>github-recovery-codes.txt</code>，则对中国大陆用户来说，<code>GitHub</code>账号基本上找不回来了。</p>
 <h2 id="问题背景">问题背景</h2>
 <p>自己的<code>GitHub</code>账号注册了有些年头，之前一直是通过账号密码直接登录即可，但<code>GitHub</code>官网<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>从2023年3月份到2023年末对提交代码的用户逐步开启两阶段认证(<code>2FA</code>,全称为<code>two-factor authentication</code>)，由于那段时间每次登录时<code>GitHub</code>都会强制提示开启<code>2FA</code>功能，影响正常的使用，且<code>2FA</code>是大趋势，为了减少麻烦自己准备<code>2FA</code>功能。</p>
 <p><code>GitHub</code>官网提供了包括<code>TOTP</code>、<code>SMS</code>、<code>passkey</code>、<code>security key</code>、<code>GitHub Mobile</code>这5种方式来实现<code>2FA</code>，自己一开始想用的是<code>SMS</code>，但实际操作时发现其不支持中国大陆的手机号码(哎，又是一个简中特供)，而<code>GitHub Mobile</code>不能单独使用，只能在配置了其它<code>2FA</code>的前提下使用，可选的范围变小。综合考虑后自己决定采用<a href="https://authy.com/"><strong>Authy</strong></a>作为<code>TOTP</code>实现，按照官网的描述很快就配置完成，且正常的使用了半年多。</p>
@@ -261,8 +266,8 @@
 <h2 id="总结教训">总结&amp;教训</h2>
 <ol>
 <li>遇到事情一定要尝试各种可能的解决方案，不到最后一步，千万不要放弃</li>
-<li>做人做事要仔细认证，不要走马观花，如果一开始设置完<code>2FA</code>后就仔细阅读<code>GitHub</code>官方发的邮件，及时做好备份，也不会这么折腾</li>
-<li><code>AI</code>时代，人工客户越来也少,机器人客服越来越多，对资本家是好事，对普通用户不一定是好事，要学会适应潮流与大趋势。</li>
+<li>做人做事要仔细认证，不要走马观花，如果一开始设置完<code>2FA</code>后就仔细阅读<code>GitHub</code>官方发的邮件，及时做好备份，也不会这么折腾，尤其是<code>2FA</code>的App一定要开启远程备份</li>
+<li><code>AI</code>时代，人工客户越来也少,机器人客服越来越多，对资本家是好事，对普通用户不一定是好事，要学会适应潮流与大趋势</li>
 </ol>
 <div class="footnotes" role="doc-endnotes">
 <hr>

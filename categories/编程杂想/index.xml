@@ -13,7 +13,7 @@
       <link>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</link>
       <pubDate>Wed, 03 Apr 2024 10:12:47 +0800</pubDate>
       <guid>https://lucumt.info/post/github/recovery-github-code-when-2fa-not-working/</guid>
-      <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值。&lt;/p&gt;</description>
+      <description>&lt;p&gt;简要记录下由于自己手机格式化刷机后，&lt;code&gt;GitHub&lt;/code&gt;两阶段认证失败导致最终无法完整登录，尝试过多种方式后最终通过&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;恢复自己&lt;code&gt;GitHub&lt;/code&gt;账号的过程。&lt;/p&gt;&#xA;&lt;p&gt;2025/03/13更新，由于此篇文章的访问量较多，想必是很多人遇到了类似问题，为了节约大家时间，提前说明如下：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;此文只是单纯的作为记录，对其他遇到类似的问题的人不具有参考价值&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;如果你个人也是由于手机刷机且没有开启&lt;code&gt;2FA&lt;/code&gt;认证设备的远程备份或保存&lt;code&gt;github-recovery-codes.txt&lt;/code&gt;，则对中国大陆用户来说，&lt;code&gt;GitHub&lt;/code&gt;账号基本上找不回来了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>从复杂代码中找出Bug的几种方法</title>
