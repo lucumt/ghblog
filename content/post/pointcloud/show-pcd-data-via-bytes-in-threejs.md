@@ -1,12 +1,12 @@
 ---
 title: "在Three.js中加载字节形式的点云数据并展示"
-date: 2024-12-20T10:13:14+08:00
-lastmod: 2024-12-20T10:13:14+08:00
+date: 2025-03-11T10:13:14+08:00
+lastmod: 2025-03-11T10:13:14+08:00
 draft: true
 keywords: []
 description: ""
-tags: []
-categories: []
+tags: ["pointcloud","draco"]
+categories: ["web编程"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
