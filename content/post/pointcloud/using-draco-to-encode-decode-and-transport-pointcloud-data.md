@@ -22,6 +22,7 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+borderImage: false
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -39,13 +40,15 @@ sequenceDiagrams:
   options: ""
 ---
 
-简要记录个人使用[**Draco**](https://github.com/google/draco)对[**点云**](https://en.wikipedia.org/wiki/Point_cloud)数据进行编码与解码，减少网络传输过程中的数据体积大小，最终加快网络请求的过程。
+个人在项目中使用了[**Draco**](https://github.com/google/draco)对[**点云**](https://en.wikipedia.org/wiki/Point_cloud)数据进行编码与解码，其通过压缩点云数据以减少在网络传输过程中的数据包大小，最终加快点云帧的播放速度，同时由于网络上关于此方面的资料太少，故将其用法和个人踩过的坑简单记录下。
 
 <!--more-->
 
 ## 背景
 
-## 编码
+![点云文件传输方式对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/ways-to-transmit-point-cloud-data.png "点云文件传输方式对比") 
+
+## 点云编码
 
 ```js
 'use_strict';
@@ -163,7 +166,24 @@ function encodePointCloudToFile(file, data) {
 }
 ```
 
-## 解码
+分别执行下述指令对3个不同的点云`ply`文件编码为`drc`文件[^1]
+
+```bash
+node draco_encode_test.js 000000.ply 000000.drc
+node draco_encode_test.js 000001.ply 000001.drc
+node draco_encode_test.js 000002.ply 000002.drc
+```
+
+执行结果类似如下
+
+![Draco编码结果展示](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-decode-results.png "Draco编码结果展示") 
+
+基于上述文件可得出如下结论：
+
+1. 点云数据量较小时，压缩比不高
+2. 点云文件越大，压缩耗时越高
+
+## 点云解码
 
 ```js
 'use_strict';
@@ -244,11 +264,20 @@ function decodeDracoData(rawBuffer, decoder) {
 }
 ```
 
+## 精确度丢失
 
+利用下述代码对编码和解码过程中的数据进行输出对比
 
-## 浮点数转换
-
-## 整数转换
+```js
+function printPointClouds(points) {
+    // 最多只输出20点的坐标数据，便于进行对比
+    let num = points.length < 20 ? points.length : 20;
+    for (let i = 0; i < num * 3; i = i + 3) {
+        console.log(styleText('yellow', points[i] + '\t\t' + points[i + 1] + '\t' + points[i + 2]));
+    }
+}
+```
 
 ## 不同压缩比
 
+[^1]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
