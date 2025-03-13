@@ -47,6 +47,200 @@ sequenceDiagrams:
 
 ## 分析
 
+## 编码
+
+```js
+'use_strict';
+
+const fs = require('fs');
+const draco3d = require('draco3d');
+const {
+    styleText
+} = require('node:util');
+
+// Global encoder module variables.
+let encoderModule = null;
+let fileSize = 0,
+    encodedSize = 0,
+    startTime = null,
+    endTime = null;
+
+draco3d.createEncoderModule({}).then(function(module) {
+    encoderModule = module;
+    console.log('Encoder Module Initialized!');
+    encodeData(process.argv[2], process.argv[3]);
+});
+
+function encodeData(srcFile, dstFile) {
+    // Check if both the encoder module have been initialized.
+    if (encoderModule) {
+        startTime = new Date();
+        fs.readFile(srcFile, function(err, data) {
+            if (err) {
+                return console.log(err);
+            }
+            fileSize = data.byteLength;
+            console.log("Reading file of size " + styleText('green', `${fileSize}`) + " bytes for file " + srcFile);
+            var array = data.toString().split("\n");
+            let points = []
+            for (i in array) {
+                points = [...points, ...array[i].split(" ")];
+            }
+            points = points.map(i => Number(i));
+            encodePointCloudToFile(dstFile, points);
+        });
+    }
+}
+
+function encodePointCloudToFile(file, data) {
+    const encoder = new encoderModule.Encoder();
+    const pointBuilder = new encoderModule.PointCloudBuilder();
+    const pointCloud = new encoderModule.PointCloud();
+
+    const attrs = {
+        POSITION: 3
+    };
+
+    Object.keys(attrs).forEach((attr) => {
+
+        const numValues = data.length;
+        const stride = attrs[attr];
+        const numPoints = numValues / stride;
+        const encoderAttr = encoderModule[attr];
+
+        const attributeDataArray = new Float32Array(numValues);
+        for (let i = 0; i < numValues; ++i) {
+            attributeDataArray[i] = data[i]
+        }
+
+        pointBuilder.AddFloatAttribute(pointCloud, encoderAttr, numPoints, stride, attributeDataArray);
+    });
+
+
+    let encodedData = new encoderModule.DracoInt8Array();
+    // Set encoding options.
+    encoder.SetSpeedOptions(5, 5);
+    encoder.SetAttributeQuantization(encoderModule.POSITION, 10);
+    encoder.SetEncodingMethod(encoderModule.MESH_EDGEBREAKER_ENCODING);
+
+    // Encoding.
+    console.log("Encoding...");
+    encodedSize = encoder.EncodePointCloudToDracoBuffer(pointCloud, false, encodedData);
+    encoderModule.destroy(pointCloud);
+
+    if (encodedSize > 0) {
+        console.log("Encoded size is " + styleText('green', `${encodedSize}`) + " bytes");
+    } else {
+        console.log("Error: Encoding failed.");
+        return
+    }
+    // Copy encoded data to buffer.
+    const outputBuffer = new ArrayBuffer(encodedSize);
+    const outputData = new Int8Array(outputBuffer);
+    for (let i = 0; i < encodedSize; ++i) {
+        outputData[i] = encodedData.GetValue(i);
+    }
+    encoderModule.destroy(encodedData);
+    encoderModule.destroy(encoder);
+    encoderModule.destroy(pointBuilder);
+    fs.writeFile(file, Buffer.from(outputBuffer), "binary",
+        function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("The file " + file + " was saved!");
+            }
+        });
+    let endTime = new Date();
+    let timeCost = styleText('green', `${endTime - startTime}`)
+    let rate = styleText('green', (encodedSize / fileSize * 100).toFixed(2) + '%');
+    console.log(`Encode finished,time cost: ${timeCost}ms, compress rate: ${rate}`);
+}
+```
+
+## 解码
+
+```js
+'use_strict';
+
+const fs = require('fs');
+const assert = require('assert');
+const draco3d = require('draco3d');
+
+// Global decoder module variables.
+let decoderModule = null;
+
+draco3d.createDecoderModule({}).then(function(module) {
+    decoderModule = module;
+    console.log('Decoder Module Initialized!');
+    decodeData('000000.drc');
+});
+
+function decodeData(srcFile) {
+    if (!decoderModule) {
+        return;
+    }
+    fs.readFile(srcFile, function(err, data) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Decoding file of size " + data.byteLength + " ..");
+        // Decode mesh
+        const decoder = new decoderModule.Decoder();
+        decodeDracoData(data, decoder);
+    });
+}
+
+function decodeDracoData(rawBuffer, decoder) {
+    const buffer = new decoderModule.DecoderBuffer();
+    buffer.Init(new Float32Array(rawBuffer), rawBuffer.byteLength);
+    const geometryType = decoder.GetEncodedGeometryType(buffer);
+
+    let dracoGeometry = null;
+    let status;
+    if (geometryType === decoderModule.TRIANGULAR_MESH) {
+        dracoGeometry = new decoderModule.Mesh();
+        status = decoder.DecodeBufferToMesh(buffer, dracoGeometry);
+    } else if (geometryType === decoderModule.POINT_CLOUD) {
+        dracoGeometry = new decoderModule.PointCloud();
+        status = decoder.DecodeBufferToPointCloud(buffer, dracoGeometry);
+    } else {
+        const errorMsg = 'Error: Unknown geometry type.';
+        console.error(errorMsg);
+    }
+    console.log(`----------status: ${status}`);
+    decoderModule.destroy(buffer);
+
+    const attrs = {
+        POSITION: 3
+    };
+    const numPoints = dracoGeometry.num_points();
+    Object.keys(attrs).forEach((attr) => {
+        const decoderAttr = decoderModule[attr];
+        const attrId = decoder.GetAttributeId(dracoGeometry, decoderAttr);
+        const stride = attrs[attr];
+        const numValues = numPoints * stride;
+        console.log(`----------attrId: ${attrId}`);
+        console.log(`----------stride: ${stride}`);
+        console.log(`----------numValues: ${numValues}`);
+
+        const attribute = decoder.GetAttribute(dracoGeometry, attrId);
+        const attributeData = new decoderModule.DracoFloat32Array();
+        decoder.GetAttributeFloatForAllPoints(dracoGeometry, attribute, attributeData);
+        let points = [];
+        for (let i = 0; i < numValues; i = i + stride) {
+            for (let j = i; j < i + stride; j++) {
+                points.push(attributeData.GetValue(j));
+            }
+        }
+        console.log(points);
+        decoderModule.destroy(attributeData);
+    });
+}
+```
+
+
+
 ## 浮点数转换
 
 ```js
