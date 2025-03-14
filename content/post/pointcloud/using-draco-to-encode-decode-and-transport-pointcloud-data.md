@@ -1,5 +1,5 @@
 ---
-title: "利用draco的编码解码实现点云数据的高效传输"
+title: "利用Draco对点云数据进行编码解码以实现高效网络传输"
 date: 2025-02-26T10:20:20+08:00
 lastmod: 2025-02-26T10:20:20+08:00
 draft: true
@@ -56,21 +56,41 @@ sequenceDiagrams:
 
 在此问题中采用排除法以及基于前述的截图可以很快的找到问题原因：**网络传输太慢是由于数据包体积太大**，而个人项目中数据包的体积为1.3M，远超正常的网络请求数据包大小。
 
-![Draco对比说明](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-comparing-instruction.png "Draco对比说明") 
-
-要解决
-
-相关的流程如下
+要解决此问题也很简单，只需要有针对性的减少网络传输中的数据包大小即可，而之前项目中已经采用了常规的[gzip](https://en.wikipedia.org/wiki/Gzip)与[Protocol Buffers](https://protobuf.dev/)对相关请求进行了压缩处理，必须采用其它方式进一步的减少数据包体积。
 
 ![原始点云传输方式](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-transmit-point-cloud-data.png "原始点云传输方式") 
 
-整合`Draco`后的点云传输流程如下
+## 使用Draco
+
+在常规的数据压缩方式不满足要求之后，只能结合本身的业务特性进一步的寻求有针对性的压缩算法，由于项目中主要是涉及到点云数据，属于三维数据处理的范畴，一番对比后我们选择了`Draco`!
+
+`Draco`是`Google`官方推出专门处理3D数据的开源数据库，在其[官方文档](https://github.com/google/draco)中有如下说明
+
+> Draco is a library for compressing and decompressing 3D geometric [meshes](https://en.wikipedia.org/wiki/Polygon_mesh) and [point clouds](https://en.wikipedia.org/wiki/Point_cloud). It is intended to improve the storage and transmission of 3D graphics.
+
+可看出其主要作用是通过数据压缩与解压，来提升网格和点云数据的存储与传输效率。
+
+其本质上还是通过基于特定业务场景的算法对数据进行针对性的压缩，来减少其大小，数据变小后，当然能存储更多的数据，也能传输的更快！
+
+在[这篇文章](https://opensource.googleblog.com/2017/01/introducing-draco-compression-for-3d.html)中对其压缩比有直观对比展示，相对于常用的`zip`压缩，其压缩比很高，官方文档说明**最高可达到1%**。
+
+![Draco对比说明](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-comparing-instruction.png "Draco对比说明") 
+
+`Draco`主要是采用算法，将点云文件(通常是`ply`文件)或数据压缩编码为`drc`文件，此文件相对于原始的点云文件体积很小，适合网络传输，客户端接收后基于`Draco`进行解码为实际的点云数据[^3]，然后进行播放。
+
+相比之前的流程，整合`Draco`后的改进流程如下：
 
 ![Draco点云传输方式](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-transmit-point-cloud-data.png "Draco点云传输方式") 
 
-改进后的测试结果类似如下，压缩后的体积变为原来的三分之一(与`Draco`官方宣称的压缩率差别较大的原因是自己采用了多帧数据一起传输以及保留了较高的数据精度)，至于网络传输耗时则最快能缩短到100ms之内，即使在不同地域的网络进行点云传输，其耗时相对于改进前也大大缩短，基本上能满足实际生产使用要求。
+改进后的测试结果类似如下，压缩后的体积变为原来的三分之一，至于网络传输耗时则最快能缩短到100ms之内，即使在不同地域的网络进行点云传输，其耗时相对于改进前也大大缩短，基本上能满足实际生产使用要求。
 
 ![Draco点云文件传输耗时](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-point-cloud-transmit-time-cost.png "Draco点云文件传输耗时") 
+
+上图中采用`Draco`之后的数据压缩率相对于之前只有30%左右，与其官方宣称的最高1%的压缩率差异较大的原因如下：
+
+1. 自己测试中采用的是4帧点云数据同时传输，数据包里面附带了一些其它信息
+2. 自己项目中已经对原始点云数据采用`gzip`与`Protocol Buffers`进行了前期的处理，4帧点云原始大小为12M左右
+3. 为了保留较高的精确度，适当调整了压缩比设置参数
 
 ## 点云编码
 
@@ -321,3 +341,5 @@ function printPointClouds(points) {
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
 [^2]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
+[^3]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
+
