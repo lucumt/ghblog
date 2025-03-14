@@ -406,7 +406,7 @@ function printPointClouds(points) {
 
 ![基于Float的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Float的Draco点云渲染") 
 
-采用`Draco`基于`Int`类型编码或者低压缩率后渲染效果如下，相对于前一种方式而言其清晰度提升明显。
+采用`Draco`基于`Int`类型编码或者低压缩率后渲染效果如下，其显示效果与原始渲染效果差别已经很接近了。
 ![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
