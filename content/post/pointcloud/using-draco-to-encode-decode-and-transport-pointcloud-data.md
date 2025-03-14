@@ -394,24 +394,20 @@ function printPointClouds(points) {
 }
 ```
 
-## 不同压缩比
+## 使用效果对比
 
-原始点云数据直接渲染：
+原始点云数据直接渲染的效果如下
 
 ![原始点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-render.png "原始点云渲染") 
 
-采用`Draco`基于`Float`类型编码解码后渲染：
+采用`Draco`基于`Float`类型编码解码或采用高压缩率后渲染效果如下，如前所述此时其会损失一定程度的精确度，导致渲染后的效果与原始渲染效果有肉眼可见的清晰度差异。
+
+尽管如此还是能看清楚要展示的内容，此种方式适合对性能要求严苛的场景。
 
 ![基于Float的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Float的Draco点云渲染") 
 
-采用`Draco`基于`Int`类型编码解码后渲染：
-![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
-
-可得出如下结论
-
-> **压缩比越高，数据精度越低，耗时也越低**
-
-其本质上是时间换空间。
+采用`Draco`基于`Int`类型编码或者低压缩率后渲染效果如下，相对于前一种方式而言其清晰度提升明显。
+![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
 [^2]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
