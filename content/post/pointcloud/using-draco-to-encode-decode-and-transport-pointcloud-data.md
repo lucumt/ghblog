@@ -3,8 +3,8 @@ title: "利用draco的编码解码实现点云数据的高效传输"
 date: 2025-02-26T10:20:20+08:00
 lastmod: 2025-02-26T10:20:20+08:00
 draft: true
-keywords: ["点云","three.js","draco","编码","解码"]
-description: "基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便减少数据大小加快传输速度"
+keywords: ["点云","three.js","draco","编码","解码","网络传输"]
+description: "基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输"
 tags: ["pointcloud","draco"]
 categories: ["web编程"]
 author: "Rosen Lu"
@@ -22,7 +22,7 @@ reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
-borderImage: false
+borderImage: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
@@ -46,7 +46,31 @@ sequenceDiagrams:
 
 ## 背景
 
-![点云文件传输方式对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/ways-to-transmit-point-cloud-data.png "点云文件传输方式对比") 
+项目中某个功能模块需要将点云文件按帧进行连续播放，实现类似动画播放的效果，但实际对相关功能进行测试时发现有明显延迟，即使在公司内部网络具有`GPU`的环境进行测试也是如此[^1]
+
+![原始点云文件传输耗时](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-transmit-time-cost.png "原始点云文件传输耗时") 
+
+从数据截图可看出，即使在同一个区域的公司内部网络，其网络请求耗时也接近1s，而在不同区域的公司内网其耗时已经接近4s，完全不满足使用需求。
+
+造成点云数据传输缓慢的原因是多方面的，如网络环境、数据包体积、服务器性能、浏览器端硬件性能等。
+
+在此问题中采用排除法以及基于前述的截图可以很快的找到问题原因：**网络传输太慢是由于数据包体积太大**，而个人项目中数据包的体积为1.3M，远超正常的网络请求数据包大小。
+
+![Draco对比说明](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-comparing-instruction.png "Draco对比说明") 
+
+要解决
+
+相关的流程如下
+
+![原始点云传输方式](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-transmit-point-cloud-data.png "原始点云传输方式") 
+
+整合`Draco`后的点云传输流程如下
+
+![Draco点云传输方式](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-transmit-point-cloud-data.png "Draco点云传输方式") 
+
+改进后的测试结果类似如下，压缩后的体积变为原来的三分之一(与`Draco`官方宣称的压缩率差别较大的原因是自己采用了多帧数据一起传输以及保留了较高的数据精度)，至于网络传输耗时则最快能缩短到100ms之内，即使在不同地域的网络进行点云传输，其耗时相对于改进前也大大缩短，基本上能满足实际生产使用要求。
+
+![Draco点云文件传输耗时](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-point-cloud-transmit-time-cost.png "Draco点云文件传输耗时") 
 
 ## 点云编码
 
@@ -56,9 +80,7 @@ sequenceDiagrams:
 const fs = require('fs');
 const draco3d = require('draco3d');
 const readline = require('readline');
-const {
-    styleText
-} = require('node:util');
+const { styleText } = require('node:util');
 
 // Global encoder module variables.
 let encoderModule = null;
@@ -166,7 +188,7 @@ function encodePointCloudToFile(file, data) {
 }
 ```
 
-分别执行下述指令对3个不同的点云`ply`文件编码为`drc`文件[^1]
+分别执行下述指令对3个不同的点云`ply`文件编码为`drc`文件[^2]
 
 ```bash
 node draco_encode_test.js 000000.ply 000000.drc
@@ -176,7 +198,7 @@ node draco_encode_test.js 000002.ply 000002.drc
 
 执行结果类似如下
 
-![Draco编码结果展示](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-decode-results.png "Draco编码结果展示") 
+![Draco编码结果展示](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-results.png "Draco编码结果展示") 
 
 基于上述文件可得出如下结论：
 
@@ -280,4 +302,22 @@ function printPointClouds(points) {
 
 ## 不同压缩比
 
-[^1]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
+原始点云数据直接渲染：
+
+![原始点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-render.png "原始点云渲染") 
+
+采用`Draco`基于`Float`类型编码解码后渲染：
+
+![基于Float的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Float的Draco点云渲染") 
+
+采用`Draco`基于`Int`类型编码解码后渲染：
+![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
+
+可得出如下结论
+
+> **压缩比越高，数据精度越低，耗时也越低**
+
+其本质上是时间换空间。
+
+[^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
+[^2]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
