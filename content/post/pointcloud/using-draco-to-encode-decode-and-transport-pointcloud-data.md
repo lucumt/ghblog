@@ -60,7 +60,7 @@ sequenceDiagrams:
 
 ![原始点云传输方式](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-transmit-point-cloud-data.png "原始点云传输方式") 
 
-## 使用Draco
+## 整合Draco
 
 在常规的数据压缩方式不满足要求之后，只能结合本身的业务特性进一步的寻求有针对性的压缩算法，由于项目中主要是涉及到点云数据，属于三维数据处理的范畴，一番对比后我们选择了`Draco`!
 
@@ -92,7 +92,52 @@ sequenceDiagrams:
 2. 自己项目中已经对原始点云数据采用`gzip`与`Protocol Buffers`进行了前期的处理，4帧点云原始大小为12M左右
 3. 为了保留较高的精确度，适当调整了压缩比设置参数
 
+## 使用说明
+
+`Draco`官方提供如下2种数据编解码操作：
+
+1. 通过编程语言实现，当前主要是`C++`和`JavaScript`，从前面图示中可看出，在相同条件下使用`C++`进行编解码时其耗时相对于`JavaScript`耗时更短，当对性能严苛要求时，优先推荐`C++`实现。
+
+2. 通过脚本实现，主要是编译后的`C++`脚本，以命令行参数的形式执行，可结合`Shell`脚本实现批量的编码与解码
+
+   ```bash
+   # 数据编码
+   ./draco_encoder -point_cloud -i testdata/bun_zipper.ply -o out.drc
+   
+   # 数据解码
+   ./draco_decoder -i in.drc -o out.obj
+   ```
+
+本文主要聚焦于通过使用`JavaScript`以代码的方式对其进行相关操作。
+
+
+
+网络上关于`Draco`使用的资料不是很多，自己主要参考的是[draco_nodejs_example.js](https://github.com/google/draco/blob/main/javascript/npm/draco3d/draco_nodejs_example.js)中的相关实现，由于该示例中编解码实现都是基于网格(`Mesh`)实现，而个人项目涉及到的是点云(`PointCloud`)，故需要对其做适当的改进。
+
+理论上只需要将对应方法中的`Mesh`修改为`PointCloud`即可，自己实际操作时发现此路不通，只能基于其官方提供的[IDL](https://en.wikipedia.org/wiki/IDL_specification_language)格式的说明文件[draco_web_encoder.idl](https://github.com/google/draco/blob/main/src/draco/javascript/emscripten/draco_web_encoder.idl)和[draco_web_decoder.idl](https://github.com/google/draco/blob/main/src/draco/javascript/emscripten/draco_web_decoder.idl)进行修改。
+
+`IDL`中的描述类似如下，对于有编程基础的人而言很容易看懂。
+
+```idl
+interface PointCloudBuilder {
+  void PointCloudBuilder();
+  long AddFloatAttribute(PointCloud pc, draco_GeometryAttribute_Type type,
+                         long num_vertices, long num_components,
+                         [Const] float[] att_values);
+  long AddInt8Attribute(PointCloud pc, draco_GeometryAttribute_Type type,
+                        long num_vertices, long num_components,
+                        [Const] byte[] att_values);
+  long AddUInt8Attribute(PointCloud pc, draco_GeometryAttribute_Type type,
+                         long num_vertices, long num_components,
+                         [Const] octet[] att_values);
+                         
+    // xxx
+};
+```
+
 ## 点云编码
+
+基于`JavaScript`修改后的`Draco`点云编码实现如下，核心将指定的点云文件转化为指定的`drc`文件。
 
 ```js
 'use_strict';
@@ -118,7 +163,7 @@ draco3d.createEncoderModule({}).then(function(module) {
     encodeData(process.argv[2], process.argv[3]);
 });
 
-function encodeData(srcFile, dstFile) {	
+function encodeData(srcFile, dstFile) {
     startTime = new Date();
     let data = [];
     let rl = readline.createInterface({
@@ -128,17 +173,21 @@ function encodeData(srcFile, dstFile) {
 
     rl.on('line', (line) => {
         data.push(line);
-		const encoder = new TextEncoder();
-		fileSize += Buffer.byteLength(line);
+        const encoder = new TextEncoder();
+        fileSize += Buffer.byteLength(line);
     });
 
     rl.on('close', () => {
-		console.log("Reading file of size " + styleText('green', `${fileSize}`) + " bytes for file " + srcFile);
-		let points = []
-		for (i in data) {
-			points = [...points, ...data[i].split(" ").map(Number)];
-		}
-		encodePointCloudToFile(dstFile, points);
+        let readEndTime = new Date();
+        let readTimeCost = styleText('green', `${readEndTime - startTime}`);
+        console.log("Reading file of size " + styleText('green', `${fileSize}`) + " bytes for file " + srcFile + `,time cost: ${readTimeCost}ms`);
+        let points = []
+        for (i in data) {
+            points = [...points, ...data[i].split(" ").map(Number)];
+        }
+        let pointSize = styleText('green', `${data.length}`);
+        console.log(`point size: ${pointSize}`);
+        encodePointCloudToFile(dstFile, points);
     });
 }
 
@@ -202,7 +251,7 @@ function encodePointCloudToFile(file, data) {
             }
         });
     let endTime = new Date();
-    let timeCost = styleText('green', `${endTime - startTime}`)
+    let timeCost = styleText('green', `${endTime - startTime}`);
     let rate = styleText('green', (encodedSize / fileSize * 100).toFixed(2) + '%');
     console.log(`Encode finished,time cost: ${timeCost}ms, compress rate: ${rate}`);
 }
@@ -222,8 +271,9 @@ node draco_encode_test.js 000002.ply 000002.drc
 
 基于上述文件可得出如下结论：
 
-1. 点云数据量较小时，压缩比不高
-2. 点云文件越大，压缩耗时越高
+1. 点云数据量较小时，压缩率不高
+2. 点云文件越大，压缩耗时越高，主要耗时点在于`Draco`自身相关的操作
+3. 在文件大小相似时，不同内容的点云文件，其压缩率也可能不相同
 
 ## 点云解码
 
