@@ -269,20 +269,23 @@ node draco_encode_test.js 000002.ply 000002.drc
 
 ![Draco编码结果展示](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-results.png "Draco编码结果展示") 
 
-基于上述文件可得出如下结论：
+基于上述操作可得出如下结论：
 
-1. 点云数据量较小时，压缩率不高
+1. 点云数据量较小时，压缩率不高，事实上太小的数量也没必要这么折腾
 2. 点云文件越大，压缩耗时越高，主要耗时点在于`Draco`自身相关的操作
-3. 在文件大小相似时，不同内容的点云文件，其压缩率也可能不相同
+3. 在文件大小相似时，不同内容的点云文件，其压缩率也可能不相同，但不会偏离太大
+4. 鱼与熊掌不可兼得，`Draco`相当于提前利用编码过程中的耗时来实现减小文件体积与缩小传输耗时，另一种时间换空间？
 
 ## 点云解码
+
+基于`JavaScript`修改后的`Draco`点云解码实现如下
 
 ```js
 'use_strict';
 
 const fs = require('fs');
-const assert = require('assert');
 const draco3d = require('draco3d');
+const { styleText } = require('node:util');
 
 // Global decoder module variables.
 let decoderModule = null;
@@ -290,19 +293,22 @@ let decoderModule = null;
 draco3d.createDecoderModule({}).then(function(module) {
     decoderModule = module;
     console.log('Decoder Module Initialized!');
-    decodeData('000000.drc');
+    decodeData(process.argv[2]);
 });
+
+let startTime = null;
 
 function decodeData(srcFile) {
     if (!decoderModule) {
         return;
     }
+    startTime = new Date();
     fs.readFile(srcFile, function(err, data) {
         if (err) {
             return console.log(err);
         }
-        console.log("Decoding file of size " + data.byteLength + " ..");
-        // Decode mesh
+        let fileSize = styleText('green', `${data.byteLength} bytes`);
+        console.log("Decoding file of size " + fileSize + " ..");
         const decoder = new decoderModule.Decoder();
         decodeDracoData(data, decoder);
     });
@@ -325,7 +331,6 @@ function decodeDracoData(rawBuffer, decoder) {
         const errorMsg = 'Error: Unknown geometry type.';
         console.error(errorMsg);
     }
-    console.log(`----------status: ${status}`);
     decoderModule.destroy(buffer);
 
     const attrs = {
@@ -337,9 +342,6 @@ function decodeDracoData(rawBuffer, decoder) {
         const attrId = decoder.GetAttributeId(dracoGeometry, decoderAttr);
         const stride = attrs[attr];
         const numValues = numPoints * stride;
-        console.log(`----------attrId: ${attrId}`);
-        console.log(`----------stride: ${stride}`);
-        console.log(`----------numValues: ${numValues}`);
 
         const attribute = decoder.GetAttribute(dracoGeometry, attrId);
         const attributeData = new decoderModule.DracoFloat32Array();
@@ -350,11 +352,33 @@ function decodeDracoData(rawBuffer, decoder) {
                 points.push(attributeData.GetValue(j));
             }
         }
-        console.log(points);
         decoderModule.destroy(attributeData);
     });
+    let endTime = new Date();
+    let timeCost = styleText('green', `${endTime - startTime}`);
+    console.log(`Encode finished,time cost: ${timeCost}ms, decode point size: ` + styleText('green', `${numPoints}`));
+    decoderModule.destroy(decoder);
+    decoderModule.destroy(dracoGeometry);
 }
 ```
+
+执行下述指令对前述生成的drc文件分别进行解码
+
+```bash
+node draco_decode_test.js 000000.drc
+node draco_decode_test.js 000001.drc
+node draco_decode_test.js 000002.drc
+```
+
+执行结果类似如下，可以看出虽然其解码耗时也随着`drc`变大而增多，但相对于`JavaScript`形式的编码而言已经非常短，可直接用于生产环境。
+
+![Draco解码结果展示](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-decode-results.png "Draco解码结果展示") 
+
+进一步同前述编码过程的输出对比，可发现编码解码后的点云总数保持一致，那为啥其文件体积能缩小这么多呢？
+
+除了编码算法的功劳，还在于**其在不影响使用的前提下牺牲了一部分的精确度**，解码后的数据值无法完全同编码前的保持一致。
+
+![Draco编码解码结果对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-decode-compare.png "Draco编码解码结果对比") 
 
 ## 精确度丢失
 
