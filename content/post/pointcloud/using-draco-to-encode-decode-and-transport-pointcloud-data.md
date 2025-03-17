@@ -2,7 +2,7 @@
 title: "利用Draco对点云数据进行编码解码以实现高效网络传输"
 date: 2025-02-26T10:20:20+08:00
 lastmod: 2025-02-26T10:20:20+08:00
-draft: false
+draft: true
 keywords: ["点云","three.js","draco","编码","解码","网络传输"]
 description: "基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输"
 tags: ["pointcloud","draco"]
@@ -691,7 +691,7 @@ decoderModule.destroy(attributeData);
 在编码过程中设置高压缩比，以牺牲解码性能
 
 ```bash
-// 压缩率从5变为10
+# 压缩率从5变为10
 encoder.SetAttributeQuantization(encoderModule.POSITION, 5);
 ```
 
