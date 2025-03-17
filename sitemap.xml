@@ -16,48 +16,6 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/draco/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/pointcloud/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/</loc>
-    <lastmod>2025-02-26T10:20:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/translate/ai/if-gpus-are-so-good-why-do-we-still/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -66,6 +24,20 @@
   
   <url>
     <loc>https://lucumt.info/tags/ai/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/</loc>
+    <lastmod>2025-02-17T11:21:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
     <lastmod>2025-02-17T11:21:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -129,6 +101,13 @@
   
   <url>
     <loc>https://lucumt.info/tags/react/</loc>
+    <lastmod>2024-12-20T10:13:13+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2024-12-20T10:13:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
