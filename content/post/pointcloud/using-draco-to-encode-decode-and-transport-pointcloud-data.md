@@ -76,7 +76,7 @@ sequenceDiagrams:
 
 ![Draco对比说明](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-comparing-instruction.png "Draco对比说明") 
 
-`Draco`主要是采用算法，将点云文件(通常是`ply`文件)或数据压缩编码为`drc`文件，此文件相对于原始的点云文件体积很小，适合网络传输，客户端接收后基于`Draco`进行解码为实际的点云数据[^3]，然后进行播放。
+`Draco`主要是采用算法，将点云文件(通常是`ply`文件)或数据压缩编码为`drc`文件，此文件相对于原始的点云文件体积很小，适合网络传输，客户端接收后基于`Draco`进行解码为实际的点云数据[^2]，然后进行播放。
 
 相比之前的流程，整合`Draco`后的改进流程如下：
 
@@ -282,7 +282,7 @@ function isNumeric(str) {
 }
 ```
 
-分别执行下述指令对3个不同的点云`ply`文件编码为`drc`文件[^2]
+分别执行下述指令对3个不同的点云`ply`文件编码为`drc`文件
 
 ```bash
 node draco_encode_test.js 000000.ply 000000.drc
@@ -606,6 +606,5 @@ function printPointClouds(points) {
 ![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
-[^2]: 为了便于处理，实际测试时`ply`文件头部的声明标识去掉了只留下了纯坐标数字
-[^3]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
+[^2]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
 
