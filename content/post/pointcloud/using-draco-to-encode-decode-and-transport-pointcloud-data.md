@@ -487,9 +487,11 @@ for file in ply_src_data/*.ply; do
 done
 ```
 
-10.编码后测试结果如下，对比可看出，相对于`js`版本的耗时操作，采用脚本的方式几乎都是**秒级完成**，实际生产环境建议采用`C++`代码进行编码或类似上述的脚本编码
+10.编码后测试结果如下，对比可看出，相对于`js`版本的耗时操作，采用脚本的方式几乎都是**秒级完成**，实际生产环境建议采用`C++`代码进行编码或类似上述的脚本编码。
 
 ![Draco脚本文件编码结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-script-encode-result.png "Draco脚本文件编码结果") 
+
+同时输出过程中也提示可基于类似`-cl 10`的设置来获得更好的压缩效果，此操作虽然能减少文件大小，但同时会牺牲一定程度的精确度，后续部分会说明。
 
 11.`Draco`官方提供的编码脚本相对简单
 
