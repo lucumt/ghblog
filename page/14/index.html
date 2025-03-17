@@ -129,6 +129,32 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/calculate-total-area-of-two-rectangles/">计算两个平行于坐标轴的矩形相交的面积</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-02-26 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>之前面试时遇到一个算法题:</p>
+<blockquote>
+<p>假定两个矩形各条边都是平行于坐标轴，已知k、l、m、n分别为其中一个矩形左下角和右上角x轴、y轴坐标，p、q、r、s分别为另一个矩形的左下角和右上角x轴、y轴坐标，求这两个矩形的总面积，当矩形相交时要减去相交的面积。</p>
+</blockquote>
+<p>此题利用常规的枚举法很复杂，但利用排除法和归纳法却能很快解决，故先记录下。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/calculate-total-area-of-two-rectangles/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/web/show-video-in-html5-page/">在iframe嵌套的html5中播放视频时全屏显示和取消音量调整</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-10-30 </span>
@@ -335,34 +361,6 @@
     </div>
     <div class="read-more">
       <a href="/post/translate/java-concurrency/java-volatile-keyword/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mysql/can-not-run-program-mysqldump/">Windows中由于系统权限不同导致的mysqldump不生效的原因分析</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-03-03 </span>
-      <div class="post-category">
-          <a href="/categories/java%E7%BC%96%E7%A8%8B/"> Java编程 </a>
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>项目中用到了<code>MySQL</code>数据库的备份功能，通过调用<code>Java</code>程序中的<a href="http://docs.oracle.com/javase/6/docs/api/"><strong>Runtime</strong></a>来执行<code>mysqldump</code>命令自动的生成相关的<code>MySQL</code>数据库文件以供恢复之用。相关的代码如下:</p>
-<pre class="line-numbers language-java " title="java">
-<code>Runtime runtime = Runtime.getRuntime();
-String mysqlCmd = &#34;mysqldump&#34; &#43; &#34; -u&#34; &#43; username &#43; &#34; -p&#34; &#43; password &#43; 
-           &#34;  -h &#34; &#43; databaseAddress &#43; &#34; &#34; &#43;databaseName;
-Process process = runtime.exec(mysqlCmd);</code>
-</pre><p>但是在客户那里实际使用时，有时候会出现在cmd中<code>MySQL</code>命令可以正常识别但是程序不能正常执行的情况，报错信息如下:</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mysql/can-not-run-program-mysqldump/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
