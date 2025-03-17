@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Draco on 飞狐的部落格</title>
+    <link>https://lucumt.info/tags/draco/</link>
+    <description>Recent content in Draco on 飞狐的部落格</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Feb 2025 10:20:20 +0800</lastBuildDate>
+    <atom:link href="https://lucumt.info/tags/draco/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Draco对点云数据进行编码解码以实现高效网络传输</title>
+      <link>https://lucumt.info/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/</link>
+      <pubDate>Wed, 26 Feb 2025 10:20:20 +0800</pubDate>
+      <guid>https://lucumt.info/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/</guid>
+      <description>&lt;p&gt;个人在项目中使用了&lt;a href=&#34;https://github.com/google/draco&#34;&gt;&lt;strong&gt;Draco&lt;/strong&gt;&lt;/a&gt;对&lt;a href=&#34;https://en.wikipedia.org/wiki/Point_cloud&#34;&gt;&lt;strong&gt;点云&lt;/strong&gt;&lt;/a&gt;数据进行编码与解码，其通过压缩点云数据以减少在网络传输过程中的数据包大小，最终加快点云帧的播放速度，同时由于网络上关于此方面的资料太少，故将其用法和个人踩过的坑简单记录下。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
