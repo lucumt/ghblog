@@ -2,7 +2,7 @@
 title: "利用Draco对点云数据进行编码解码以实现高效网络传输"
 date: 2025-02-26T10:20:20+08:00
 lastmod: 2025-02-26T10:20:20+08:00
-draft: true
+draft: false
 keywords: ["点云","three.js","draco","编码","解码","网络传输"]
 description: "基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输"
 tags: ["pointcloud","draco"]
@@ -224,7 +224,7 @@ function encodePointCloudToFile(file, data) {
     let encodedData = new encoderModule.DracoInt8Array();
     // Set encoding options.
     encoder.SetSpeedOptions(5, 5);
-    encoder.SetAttributeQuantization(encoderModule.POSITION, 10);
+    encoder.SetAttributeQuantization(encoderModule.POSITION, 5);
     encoder.SetEncodingMethod(encoderModule.MESH_EDGEBREAKER_ENCODING);
 
     // Encoding.
@@ -576,7 +576,11 @@ done
 
 ## 精确度问题
 
-前述测试主要对比的是点云数据，没有对编码解码后的具体点云信息进行对比，而在点云总数符合要求时，其精确度可能会发生变化，最终对点云整体渲染显示效果造成干扰。
+前述测试主要对比的是点云数据，没有对编码解码后的具体点云信息进行对比，而在点云总数符合要求时，基于不同的压缩设置，其精确度可能会发生变化，最终对点云整体渲染显示效果造成干扰。
+
+关于压缩参数的设置，官方的说明如下
+
+> In general, the highest setting, `10`, will have the most compression but worst decompression speed. `0` will have the least compression, but best decompression speed. The default setting is `7`.
 
 利用下述代码对编码和解码过程中的数据进行输出对比
 
@@ -604,6 +608,9 @@ rl.on('close', () => {
     
     encodePointCloudToFile(dstFile, points);
 });
+
+// 压缩水平默认设置为5,其值范围从0到10
+encoder.SetAttributeQuantization(encoderModule.POSITION, 5);
 ```
 
 将解码部分修改如下
@@ -639,17 +646,11 @@ node draco_decode_test.js 000000.drc
 基于上述输出可得出如下结论：
 
 1. 点云解码后的结果与原始文件的数据顺序不一定一致，但同一个点云的相关数据(x,y,z,颜色等)一定是在一起的，点云存储的顺序对最终结果无影响
-2. 采用`Float`存储数据时，在编码解码过程中有一定程度精确度损失，可能会对最终的显示效果造成影响。
+2. 在低压缩度时，虽然解码速度上去了，但是数据的精确度牺牲很大(在本例中的z坐标数据都一样)，可能会对实际使用造成影响
 
 ### Int对比
 
-观察原始的点云数据输出，发现其小数点后最多有6位小数，尝试在编码过程中可将其放大为整数，解码过程中缩小为浮点数，以避免精确度的损失。
-
-执行下述代码安装依赖库
-
-```bash
-npm install decimal.js
-```
+观察原始的点云数据输出，发现其小数点后最多有6位小数，尝试在编码过程中可将其放大为整数，解码过程中缩小为浮点数，以验证是否为`Float`类型导致的精确度丢失。
 
 将编码部分修改如下
 
@@ -681,13 +682,22 @@ printPointClouds(points);
 decoderModule.destroy(attributeData);
 ```
 
-重新执行编解码后的输出如下，可以看出其对比结果与`Float`类型的差别不大
+重新执行编解码后的输出如下，可以看出其对比结果与`Float`类型的差别不大，精确度的丢失不是由于`Float`数据类型造成的
 
 ![Draco基于Int的编解码对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-int-compare.png "Draco基于Int的编解码对比") 
 
 ### 高压缩率对比
 
+在编码过程中设置高压缩比，以牺牲解码性能
 
+```bash
+// 压缩率从5变为10
+encoder.SetAttributeQuantization(encoderModule.POSITION, 5);
+```
+
+执行结果对比如下，可看出其精确度有了明显的提升！
+
+![Draco基于不同压缩率的对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-compress-level-compare.png "Draco基于不同压缩率的对比") 
 
 ## 显示效果对比
 
@@ -695,14 +705,14 @@ decoderModule.destroy(attributeData);
 
 ![原始点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-render.png "原始点云渲染") 
 
-采用`Draco`基于`Float`类型编码解码或采用高压缩率后渲染效果如下，如前所述此时其会损失一定程度的精确度，导致渲染后的效果与原始渲染效果有肉眼可见的清晰度差异。
+基于低压缩率编码解码后的渲染效果如下，如前所述此时其会损失一定程度的精确度，导致渲染后效果与原始渲染效果有肉眼可见的清晰度差异。
 
 尽管如此还是能看清楚要展示的内容，此种方式适合对性能要求严苛的场景。
 
-![基于Float的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于Float的Draco点云渲染") 
+![基于低压缩率的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png "基于低压缩率的Draco点云渲染") 
 
-采用`Draco`基于`Int`类型编码或者低压缩率后渲染效果如下，其显示效果与原始渲染效果差别已经很接近了。
-![基于Int的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于Int的Draco点云渲染") 
+采用高压缩率的编码解码后的渲染效果如下，其显示效果与原始渲染效果差别已经很接近了。
+![基于高压缩率的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于高压缩率的Draco点云渲染") 
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
 [^2]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
