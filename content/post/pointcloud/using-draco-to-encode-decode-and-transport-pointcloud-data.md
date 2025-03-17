@@ -276,6 +276,44 @@ node draco_encode_test.js 000002.ply 000002.drc
 3. 在文件大小相似时，不同内容的点云文件，其压缩率也可能不相同，但不会偏离太大
 4. 鱼与熊掌不可兼得，`Draco`相当于提前利用编码过程中的耗时来实现减小文件体积与缩小传输耗时，另一种时间换空间？
 
+## 脚本转换
+
+实际使用中不可能忍受如此长的编码时间，通过前面的说明可知，采用`C++`进行编解码效率更高，故可采用基于`C++`编译后的脚本进行数据编解码
+
+1.在`Draco`官网下载对应的源码文件后解压，进入`cmake`目录下，可发现有相关的编译文件
+
+![Draco编译文件列表](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-files.png "Draco编译文件列表") 
+
+2.基于[此说明](https://github.com/google/draco/blob/main/BUILDING.md)在`Draco`的根目录下执行如下操作
+
+```bash
+mkdir build_dir && cd build_dir
+cmake ../
+```
+
+3.若是初次执行，可能会有如下报错
+
+![Draco CMake失败](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-error.png "Draco CMake失败") 
+
+4.根据不同的操作系统，需要查询`no cmake_cxx_compiler could be found`的解决方案，并进行针对性的修复，以`CentOS 9`为例，可执行如下指令
+
+```bash
+yum -y update
+yum -y install g++
+```
+
+5.之后重新重新步骤2中的编译指令，可正常执行，同时可发现在当前目录下生成了一个名为`Makefile`的文件
+
+![Draco CMake成功](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-success.png "Draco CMake成功") 
+
+6.在当前目录下执行`make`指令
+
+![Draco开始make编译](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-progress.png "Draco开始make编译") 
+
+7.若一切正常，`make`指令编译后的输出类似如下，其中标红的即为可供最终使用的编码与解码脚本
+
+![Draco中make编译结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-result.png "Draco中make编译结果") 
+
 ## 点云解码
 
 基于`JavaScript`修改后的`Draco`点云解码实现如下
@@ -393,6 +431,8 @@ function printPointClouds(points) {
     }
 }
 ```
+
+// todo 不同压缩比实现
 
 ## 使用效果对比
 
