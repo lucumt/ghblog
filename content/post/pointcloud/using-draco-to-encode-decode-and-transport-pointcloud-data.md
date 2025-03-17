@@ -276,44 +276,6 @@ node draco_encode_test.js 000002.ply 000002.drc
 3. 在文件大小相似时，不同内容的点云文件，其压缩率也可能不相同，但不会偏离太大
 4. 鱼与熊掌不可兼得，`Draco`相当于提前利用编码过程中的耗时来实现减小文件体积与缩小传输耗时，另一种时间换空间？
 
-## 脚本转换
-
-实际使用中不可能忍受如此长的编码时间，通过前面的说明可知，采用`C++`进行编解码效率更高，故可采用基于`C++`编译后的脚本进行数据编解码
-
-1.在`Draco`官网下载对应的源码文件后解压，进入`cmake`目录下，可发现有相关的编译文件
-
-![Draco编译文件列表](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-files.png "Draco编译文件列表") 
-
-2.基于[此说明](https://github.com/google/draco/blob/main/BUILDING.md)在`Draco`的根目录下执行如下操作
-
-```bash
-mkdir build_dir && cd build_dir
-cmake ../
-```
-
-3.若是初次执行，可能会有如下报错
-
-![Draco CMake失败](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-error.png "Draco CMake失败") 
-
-4.根据不同的操作系统，需要查询`no cmake_cxx_compiler could be found`的解决方案，并进行针对性的修复，以`CentOS 9`为例，可执行如下指令
-
-```bash
-yum -y update
-yum -y install g++
-```
-
-5.之后重新重新步骤2中的编译指令，可正常执行，同时可发现在当前目录下生成了一个名为`Makefile`的文件
-
-![Draco CMake成功](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-success.png "Draco CMake成功") 
-
-6.在当前目录下执行`make`指令
-
-![Draco开始make编译](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-progress.png "Draco开始make编译") 
-
-7.若一切正常，`make`指令编译后的输出类似如下，其中标红的即为可供最终使用的编码与解码脚本
-
-![Draco中make编译结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-result.png "Draco中make编译结果") 
-
 ## 点云解码
 
 基于`JavaScript`修改后的`Draco`点云解码实现如下
@@ -418,6 +380,173 @@ node draco_decode_test.js 000002.drc
 
 ![Draco编码解码结果对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-decode-compare.png "Draco编码解码结果对比") 
 
+## 脚本转换
+
+前述过程中演示了基于`js`代码实现的编码与解码，虽然解码过程很快，但是编码过程很慢，实际使用中不可能忍受如此长的编码时间。
+
+前述的官方对比中采用`C++`进行编解码效率更高，故可采用基于`C++`编译后的脚本进行数据编解码来进一度缩短耗时。
+
+1.在`Draco`官网下载对应的源码文件后解压，进入`cmake`目录下，可发现有相关的编译文件
+
+![Draco编译文件列表](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-files.png "Draco编译文件列表") 
+
+2.基于[此说明](https://github.com/google/draco/blob/main/BUILDING.md)在`Draco`的根目录下执行如下操作
+
+```bash
+mkdir build_dir && cd build_dir
+cmake ../
+```
+
+3.若是初次执行，可能会有如下报错
+
+![Draco CMake失败](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-error.png "Draco CMake失败") 
+
+4.根据不同的操作系统，需要查询`no cmake_cxx_compiler could be found`的解决方案，并进行针对性的修复，以`CentOS 9`为例，可执行如下指令
+
+```bash
+yum -y update
+yum -y install g++
+```
+
+5.之后重新重新步骤2中的编译指令，可正常执行，同时可发现在当前目录下生成了一个名为`Makefile`的文件
+
+![Draco CMake成功](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-success.png "Draco CMake成功") 
+
+6.在当前目录下执行`make`指令
+
+![Draco开始make编译](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-progress.png "Draco开始make编译") 
+
+7.若一切正常，`make`指令编译后的输出类似如下，其中标红的即为可供最终使用的编码与解码脚本
+
+![Draco中make编译结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-make-result.png "Draco中make编译结果") 
+
+8.执行下述指令，创建对应的测试目录，并将`ply`文件拷贝到`ply_src_data`目录下去
+
+```bash
+cd .. && mkdir -p draco_test/ply_src_data
+
+cp build_dir/draco_encoder draco_test/
+cp build_dir/draco_decoder draco_test/
+
+cd draco_test
+
+# 将ply文件拷贝到ply_src_data目录下去
+```
+
+9.`Draco`官方提供的编码指令类似
+
+```bash
+# 包含网格数据
+./draco_encoder -i testdata/bun_zipper.ply -o out.drc
+
+# 单纯的对点云进行编码
+./draco_encoder -point_cloud -i testdata/bun_zipper.ply -o out.drc
+
+# 采用更高的压缩率
+./draco_encoder -point_cloud -cl 10 -i testdata/bun_zipper.ply -o out.drc
+```
+
+为了便于批量测试与统计，可将其封装为类似如下的`Shell`脚本
+
+```bash
+#!/bin/sh
+
+encode_drc(){
+  file=$1
+  dst_folder=$2
+  filename1=$(echo $file | awk -F "/" '{print $NF}')
+  filename2=$(echo $filename1 | awk -F "." '{print $1}')
+
+  echo "--------------begin to encode ${filename2}-------------------"
+
+  # 记录开始时间（秒.纳秒）
+  start=$(date +%s.%N)
+
+  # 转化为ply文件
+  echo $filename1
+  ./draco_encoder -point_cloud -i $file -o ${dst_folder}/${filename2}.drc
+
+  # 记录结束时间
+  end=$(date +%s.%N)
+
+  # 计算时间差（保留6位小数，即微秒）
+  runtime=$(echo "scale=3; ($end - $start) * 1000" | bc)
+
+  # 输出结果
+  GREEN='\033[32m'
+  # 重置样式
+  RESET='\033[0m'
+  echo -e "${filename1} enecode time cost: ${GREEN}${runtime}${RESET} ms\n\n"
+}
+
+dst_folder='drc_encode_result'
+rm -rf ${dst_folder}
+mkdir ${dst_folder}
+for file in ply_src_data/*.ply; do
+    encode_drc $file ${dst_folder}
+done
+```
+
+10.编码后测试结果如下，对比可看出，相对于`js`版本的耗时操作，采用脚本的方式几乎都是**秒级完成**，实际生产环境建议采用`C++`代码进行编码或类似上述的脚本编码
+
+![Draco脚本文件编码结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-script-encode-result.png "Draco脚本文件编码结果") 
+
+11.`Draco`官方提供的编码脚本相对简单
+
+```bash
+# 输出为obj文件
+./draco_decoder -i in.drc -o out.obj
+
+# 输出为ply文件
+./draco_decoder -i in.drc -o out.ply
+```
+
+同样将其封装为`Shell`脚本
+
+```bash
+#!/bin/sh
+
+decode_drc(){
+  file=$1
+  dst_folder=$2
+  filename1=$(echo $file | awk -F "/" '{print $NF}')
+  filename2=$(echo $filename1 | awk -F "." '{print $1}')
+
+  echo "--------------begin to decode ${filename1}-------------------"
+
+  # 记录开始时间（秒.纳秒）
+  start=$(date +%s.%N)
+
+  # 转化为ply文件
+  dst_file=${dst_folder}/${filename2}.ply
+  ./draco_decoder -i $file -o ${dst_file}
+
+  # 记录结束时间
+  end=$(date +%s.%N)
+
+  # 计算时间差（保留6位小数，即微秒）
+  runtime=$(echo "scale=3; ($end - $start) * 1000" | bc)
+
+  # 输出结果
+  GREEN='\033[32m'
+  # 重置样式
+  RESET='\033[0m'
+  point_size=$(awk 'NR==3' ${dst_file} | awk '{print $NF}')
+  echo -e "${filename1} decode time cost: ${GREEN}${runtime}${RESET} ms, point size: ${GREEN}${point_size}${RESET}\n"
+}
+
+dst_folder='ply_decode_result'
+rm -rf ${dst_folder}
+mkdir ${dst_folder}
+for file in drc_encode_result/*.drc; do
+    decode_drc $file ${dst_folder}
+done
+```
+
+12.解码操作执行结果如下，可看出解码后的点云数据总数与原始文件中保持一致，由于即使是`js`的解码耗时也不太多，故实际生产中采用脚本解码的方式并不常见。
+
+![Draco脚本文件解码结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-script-decode-result.png "Draco脚本文件解码结果") 
+
 ## 精确度丢失
 
 利用下述代码对编码和解码过程中的数据进行输出对比
@@ -434,7 +563,7 @@ function printPointClouds(points) {
 
 // todo 不同压缩比实现
 
-## 使用效果对比
+## 效果对比
 
 原始点云数据直接渲染的效果如下
 
