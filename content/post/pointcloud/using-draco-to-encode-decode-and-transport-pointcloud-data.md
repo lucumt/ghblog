@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: false
+autoCollapseToc: true
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -574,7 +574,9 @@ done
 
 ![Draco脚本文件解码结果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-script-decode-result.png "Draco脚本文件解码结果") 
 
-## 精确度丢失
+## 精确度问题
+
+前述测试主要对比的是点云数据，没有对编码解码后的具体点云信息进行对比，而在点云总数符合要求时，其精确度可能会发生变化，最终对点云整体渲染显示效果造成干扰。
 
 利用下述代码对编码和解码过程中的数据进行输出对比
 
@@ -588,9 +590,106 @@ function printPointClouds(points) {
 }
 ```
 
-// todo 不同压缩比实现
+将编码部分修改如下
 
-## 效果对比
+```javascript{data-line="8"}
+rl.on('close', () => {
+    // xxx
+    // 计算大小时排除掉表头的声明部分
+    let pointSize = styleText('green', `${data.length - 7}`);
+    console.log(`point size: ${pointSize}`);
+    
+    // 添加此行代码详细信息
+    printPointClouds(points);
+    
+    encodePointCloudToFile(dstFile, points);
+});
+```
+
+将解码部分修改如下
+
+```javascript{data-line="10"}
+decoder.GetAttributeFloatForAllPoints(dracoGeometry, attribute, attributeData);
+let points = [];
+for (let i = 0; i < numValues; i = i + stride) {
+    for (let j = i; j < i + stride; j++) {
+        points.push(attributeData.GetValue(j));
+    }
+}
+
+// 添加此行代码详细信息
+printPointClouds(points);
+
+decoderModule.destroy(attributeData);
+```
+
+然后可以执行下述指令并对比输出结果
+
+```bash
+node draco_encode_test.js 000000.ply 000000.drc
+node draco_decode_test.js 000000.drc
+```
+
+### Float对比
+
+点云数据通常情况下都是以`Float`形式存储的，执行完毕后的输出对比如下
+
+![Draco基于Float的编解码对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-float-compare.png "Draco基于Float的编解码对比") 
+
+基于上述输出可得出如下结论：
+
+1. 点云解码后的结果与原始文件的数据顺序不一定一致，但同一个点云的相关数据(x,y,z,颜色等)一定是在一起的，点云存储的顺序对最终结果无影响
+2. 采用`Float`存储数据时，在编码解码过程中有一定程度精确度损失，可能会对最终的显示效果造成影响。
+
+### Int对比
+
+观察原始的点云数据输出，发现其小数点后最多有6位小数，尝试在编码过程中可将其放大为整数，解码过程中缩小为浮点数，以避免精确度的损失。
+
+执行下述代码安装依赖库
+
+```bash
+npm install decimal.js
+```
+
+将编码部分修改如下
+
+```javascript{data-line="9"}
+rl.on('close', () => {
+    // xxx
+    // 计算大小时排除掉表头的声明部分
+    let pointSize = styleText('green', `${data.length - 7}`);
+    console.log(`point size: ${pointSize}`);
+    printPointClouds(points);
+
+    // 对点云数据进行放大
+    points = points.map(p => p*1_000_000);
+    encodePointCloudToFile(dstFile, points);
+});
+```
+
+将解码部分修改如下
+
+```javascript{data-line="5"}
+let points = [];
+for (let i = 0; i < numValues; i = i + stride) {
+    for (let j = i; j < i + stride; j++) {
+        // 对点云数据进行缩小
+        points.push(Number(attributeData.GetValue(j))/1_000_000);
+    }
+}		
+printPointClouds(points);
+decoderModule.destroy(attributeData);
+```
+
+重新执行编解码后的输出如下，可以看出其对比结果与`Float`类型的差别不大
+
+![Draco基于Int的编解码对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-int-compare.png "Draco基于Int的编解码对比") 
+
+### 高压缩率对比
+
+
+
+## 显示效果对比
 
 原始点云数据直接渲染的效果如下
 
