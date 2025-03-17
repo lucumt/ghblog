@@ -23,6 +23,7 @@ mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
 borderImage: true
+moreMeta: true
 
 # You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
