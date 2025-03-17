@@ -183,10 +183,15 @@ function encodeData(srcFile, dstFile) {
         console.log("Reading file of size " + styleText('green', `${fileSize}`) + " bytes for file " + srcFile + `,time cost: ${readTimeCost}ms`);
         let points = []
         for (i in data) {
-            points = [...points, ...data[i].split(" ").map(Number)];
+            let pdata = convertPcdToPointCloudData(data[i]);
+            if (!!pdata) {
+                points = [...points, ...pdata];
+            }
         }
-        let pointSize = styleText('green', `${data.length}`);
+        // 计算大小时排除掉表头的声明部分
+        let pointSize = styleText('green', `${data.length - 7}`);
         console.log(`point size: ${pointSize}`);
+        //printPointClouds(points);
         encodePointCloudToFile(dstFile, points);
     });
 }
@@ -254,6 +259,26 @@ function encodePointCloudToFile(file, data) {
     let timeCost = styleText('green', `${endTime - startTime}`);
     let rate = styleText('green', (encodedSize / fileSize * 100).toFixed(2) + '%');
     console.log(`Encode finished,time cost: ${timeCost}ms, compress rate: ${rate}`);
+}
+
+function convertPcdToPointCloudData(line) {
+    let data = line.split(/\s/);
+    if (data.length != 3) {
+        return null;
+    }
+    for (let i = 0; i < 3; i++) {
+        if (!isNumeric(data[i])) {
+            return null;
+        }
+    }
+    return [Number(data[0]), Number(data[1]), Number(data[2])];
+}
+
+function isNumeric(str) {
+    if (typeof str != "string") {
+        return false;
+    }
+    return !isNaN(str) && !isNaN(parseFloat(str));
 }
 ```
 
