@@ -348,3 +348,18 @@ server {
 ## 错误修复
 
 ## 效果展示对比
+
+本章节主要利用前述预先准备好的120个`pcd`和`drc`文件，在客户端对它们分别进行连续播放测试，对比其耗时以及显示效果。
+
+在[这篇文章](/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data)中已经说明了利用`Draco`压缩为`drc`文件后可大幅减少点云文件的大小
+
+![点云文件大小对比](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd-drc-compare.png "点云文件大小对比") 
+
+分别基于`pcd`和`drc`进行播放，其耗时对比如下
+
+![pcd文件加载耗时](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd-load-time-cost.png "pcd文件加载耗时") <br>
+
+![drc文件加载耗时](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc-load-time-cost.png "drc文件加载耗时") 
+
+从上述对比图可看出`drc`文件相对于原始的`pcd`文件，即使在经过`Protocol Buffers`序列化，其大小是原文件的1/20，且耗时在10ms级别，基本上实现了无感知延迟的点云连续播放。
+
