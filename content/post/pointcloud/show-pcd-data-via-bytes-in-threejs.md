@@ -345,7 +345,7 @@ server {
 
 ![Draco客户端点云渲染](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-client-render-page.png "Draco客户端点云渲染") 
 
-## 错误修复
+## 相关错误修复
 
 ## 效果展示对比
 
@@ -361,5 +361,14 @@ server {
 
 ![drc文件加载耗时](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc-load-time-cost.png "drc文件加载耗时") 
 
-从上述对比图可看出`drc`文件相对于原始的`pcd`文件，即使在经过`Protocol Buffers`序列化，其大小是原文件的1/20，且耗时在10ms级别，基本上实现了无感知延迟的点云连续播放。
+从上述对比图可看出`drc`文件相对于原始的`pcd`文件，即使在经过`Protocol Buffers`序列化，其大小是原文件的1/20，且**耗时在10ms级别**，基本上实现了无感知延迟的点云连续播放。
 
+基于公司内部局域网，将前述的120帧点云文件全部播放完毕后对比效果如下：
+
+`pcd`格式的点云文件全部播放完毕耗时**58s**，有肉眼可见的明显延迟
+
+![pcd连续播放效果](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd_play.gif "pcd连续播放效果") 
+
+`drc`格式的点云文件全部播放完毕耗时**7s**，播放体验十分流畅。
+
+![drc连续播放效果](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc_play.gif "drc连续播放效果") 
