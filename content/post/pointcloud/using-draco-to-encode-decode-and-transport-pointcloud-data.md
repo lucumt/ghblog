@@ -737,7 +737,11 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![pcd播放效果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/pcd_play.gif "pcd播放效果") | ![drc播放效果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/drc_play.gif "drc播放效果") |
 
+上述测试中`ply`和`drc`的请求耗时分别如下，其实际显示的耗时与肉眼看到的效果符合。
 
+![pcd文件加载耗时](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/pcd-load-time-cost.png "pcd文件加载耗时") <br>
+
+![drc文件加载耗时](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/drc-load-time-cost.png "drc文件加载耗时") 
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
 [^2]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
