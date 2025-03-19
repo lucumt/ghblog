@@ -712,6 +712,10 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);
 
 ## 显示效果对比
 
+关于对比效果更详细的说明可参见[在three.js中加载字节形式的点云数据并利用Draco加快渲染速度](/post/pointcloud/show-pcd-data-via-bytes-in-threejs)。
+
+### 渲染效果对比
+
 原始点云数据直接渲染的效果如下
 
 ![原始点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-render.png "原始点云渲染") 
@@ -724,6 +728,16 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);
 
 采用高量化压缩率的编码解码后的渲染效果如下，其显示效果与原始渲染效果差别已经很接近了。
 ![基于量化高压缩率的Draco点云渲染](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png "基于高量化压缩率的Draco点云渲染") 
+
+### 连续播放对比
+
+以前面批量转换中的点云数据为例(共有120帧)，分别基于`pcd`和`drc`将它们连续播放完毕，其播放效果对比如下，可看出基于`pcd`播放有肉眼可见的明显延迟，而基于`drc`的播放则十分流畅。
+
+| pcd播放                                                      | drc播放                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![pcd播放效果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/pcd_play.gif "pcd播放效果") | ![drc播放效果](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/drc_play.gif "drc播放效果") |
+
+
 
 [^1]: 数据差异较大的原因网络环境导致，左侧为公司内部网络测试、右侧为其它区域的分公司测试
 [^2]: 基于编码压缩时设置的参数，实际解码后的数据与原始数据会有一定程度的误差，但整体上不会对正常使用造成影响
