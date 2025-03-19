@@ -46,7 +46,7 @@
   <meta itemprop="description" content="基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输">
   <meta itemprop="datePublished" content="2025-02-26T10:20:20+08:00">
   <meta itemprop="dateModified" content="2025-02-26T10:20:20+08:00">
-  <meta itemprop="wordCount" content="5561">
+  <meta itemprop="wordCount" content="5725">
   <meta itemprop="keywords" content="点云,three.js,draco,编码,解码,网络传输">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Draco对点云数据进行编码解码以实现高效网络传输">
@@ -143,7 +143,7 @@
         <div class="post-category">
             <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
             </div>
-          <span class="more-meta"> 约 5561 字 </span>
+          <span class="more-meta"> 约 5725 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -169,7 +169,12 @@
             <li><a href="#高量化对比">高量化对比</a></li>
           </ul>
         </li>
-        <li><a href="#显示效果对比">显示效果对比</a></li>
+        <li><a href="#显示效果对比">显示效果对比</a>
+          <ul>
+            <li><a href="#渲染效果对比">渲染效果对比</a></li>
+            <li><a href="#连续播放对比">连续播放对比</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -722,6 +727,8 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);</code>
 </pre><p>执行结果对比如下，可看出其精确度有了明显的提升！</p>
 <p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-compress-level-compare.png" alt="Draco基于不同量化参数的对比" title="Draco基于不同量化参数的对比"></p>
 <h2 id="显示效果对比">显示效果对比</h2>
+<p>关于对比效果更详细的说明可参见<a href="/post/pointcloud/show-pcd-data-via-bytes-in-threejs">在three.js中加载字节形式的点云数据并利用Draco加快渲染速度</a>。</p>
+<h3 id="渲染效果对比">渲染效果对比</h3>
 <p>原始点云数据直接渲染的效果如下</p>
 <p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/original-point-cloud-render.png" alt="原始点云渲染" title="原始点云渲染"></p>
 <p>基于低量化压缩率编码解码后的渲染效果如下，如前所述此时其会损失一定程度的精确度，导致渲染后效果与原始渲染效果有肉眼可见的清晰度差异。</p>
@@ -729,6 +736,22 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);</code>
 <p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/float-draco-point-cloud-render.png" alt="基于低量化压缩率的Draco点云渲染" title="基于低量化压缩率的Draco点云渲染"></p>
 <p>采用高量化压缩率的编码解码后的渲染效果如下，其显示效果与原始渲染效果差别已经很接近了。
 <img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/int-draco-point-cloud-render.png" alt="基于量化高压缩率的Draco点云渲染" title="基于高量化压缩率的Draco点云渲染"></p>
+<h3 id="连续播放对比">连续播放对比</h3>
+<p>以前面批量转换中的点云数据为例(共有120帧)，分别基于<code>pcd</code>和<code>drc</code>将它们连续播放完毕，其播放效果对比如下，可看出基于<code>pcd</code>播放有肉眼可见的明显延迟，而基于<code>drc</code>的播放则十分流畅。</p>
+<table>
+<thead>
+<tr>
+<th>pcd播放</th>
+<th>drc播放</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/pcd_play.gif" alt="pcd播放效果" title="pcd播放效果"></td>
+<td><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/drc_play.gif" alt="drc播放效果" title="drc播放效果"></td>
+</tr>
+</tbody>
+</table>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
