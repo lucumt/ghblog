@@ -406,9 +406,17 @@ node draco_decode_test.js 000002.drc
 
 ![Draco编码解码结果对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-decode-compare.png "Draco编码解码结果对比") 
 
+由于原始的`pcd`文件中通常包含部分无效数据，为了排除干扰，可将其转化为纯净版的`ply`格式数据，将其同`Draco`编码后的结果进行对比如下，可发现编码后的`drc`文件大小只有`ply`的**1/40**，压缩比还是很客观的，若同原始的`pcd`文件进行对比，则压缩比会更高。
+
+![ply与drc文件对比](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/ply-drc-compare.png "ply与drc文件对比") 
+
 ## 脚本转换
 
-前述过程中演示了基于`js`代码实现的编码与解码，虽然解码过程很快，但是编码过程很慢，实际使用中不可能忍受如此长的编码时间。
+前述过程中演示了基于`js`代码实现的编码与解码，虽然解码过程很快，但是编码过程很慢，自己实测时对120个点云文件进行编码操作，花费了7个小时只完成了约80个`pcd`文件的转换，且提示如下错误导致后续的编码过程都阻塞，多次操作后依旧如此。
+
+![Draco编码报错](/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-error.png "Draco编码报错") 
+
+很明显实际生产环境不可能采用基于`JavaScript`的编码实现。
 
 前述的官方对比中采用`C++`进行编解码效率更高，故可采用基于`C++`编译后的脚本进行数据编解码来进一度缩短耗时。
 
