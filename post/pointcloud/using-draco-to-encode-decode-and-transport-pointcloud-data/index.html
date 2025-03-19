@@ -46,7 +46,7 @@
   <meta itemprop="description" content="基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输">
   <meta itemprop="datePublished" content="2025-02-26T10:20:20+08:00">
   <meta itemprop="dateModified" content="2025-02-26T10:20:20+08:00">
-  <meta itemprop="wordCount" content="5347">
+  <meta itemprop="wordCount" content="5561">
   <meta itemprop="keywords" content="点云,three.js,draco,编码,解码,网络传输">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Draco对点云数据进行编码解码以实现高效网络传输">
@@ -143,8 +143,8 @@
         <div class="post-category">
             <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
             </div>
-          <span class="more-meta"> 约 5347 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 5561 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -494,8 +494,12 @@ node draco_decode_test.js 000002.drc</code>
 <p>进一步同前述编码过程的输出对比，可发现编码解码后的点云总数保持一致，那为啥其文件体积能缩小这么多呢？</p>
 <p>除了编码算法的功劳，还在于<strong>其在不影响使用的前提下牺牲了一部分的精确度</strong>，解码后的数据值无法完全同编码前的保持一致。</p>
 <p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-decode-compare.png" alt="Draco编码解码结果对比" title="Draco编码解码结果对比"></p>
+<p>由于原始的<code>pcd</code>文件中通常包含部分无效数据，为了排除干扰，可将其转化为纯净版的<code>ply</code>格式数据，将其同<code>Draco</code>编码后的结果进行对比如下，可发现编码后的<code>drc</code>文件大小只有<code>ply</code>的<strong>1/40</strong>，压缩比还是很客观的，若同原始的<code>pcd</code>文件进行对比，则压缩比会更高。</p>
+<p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/ply-drc-compare.png" alt="ply与drc文件对比" title="ply与drc文件对比"></p>
 <h2 id="脚本转换">脚本转换</h2>
-<p>前述过程中演示了基于<code>js</code>代码实现的编码与解码，虽然解码过程很快，但是编码过程很慢，实际使用中不可能忍受如此长的编码时间。</p>
+<p>前述过程中演示了基于<code>js</code>代码实现的编码与解码，虽然解码过程很快，但是编码过程很慢，自己实测时对120个点云文件进行编码操作，花费了7个小时只完成了约80个<code>pcd</code>文件的转换，且提示如下错误导致后续的编码过程都阻塞，多次操作后依旧如此。</p>
+<p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-encode-error.png" alt="Draco编码报错" title="Draco编码报错"></p>
+<p>很明显实际生产环境不可能采用基于<code>JavaScript</code>的编码实现。</p>
 <p>前述的官方对比中采用<code>C++</code>进行编解码效率更高，故可采用基于<code>C++</code>编译后的脚本进行数据编解码来进一度缩短耗时。</p>
 <p>1.在<code>Draco</code>官网下载对应的源码文件后解压，进入<code>cmake</code>目录下，可发现有相关的编译文件</p>
 <p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/draco-cmake-files.png" alt="Draco编译文件列表" title="Draco编译文件列表"></p>
@@ -745,7 +749,11 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);</code>
           <a href="/tags/draco/">draco</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/pointcloud/show-pcd-data-via-bytes-in-threejs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">在three.js中加载字节形式的点云数据并利用Draco加快渲染速度</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/translate/ai/if-gpus-are-so-good-why-do-we-still/">
             <span class="next-text nav-default">[译]既然GPU如此强大，为啥我们还需要使用CPU?</span>
             <span class="next-text nav-mobile">下一篇</span>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在three.js中加载字节形式的点云数据并利用Draco加快渲染速度 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="介绍如何在three.js加载字节形式的点云数据,并基于Draco的压缩与解压减少网络传输中的数据体积,加快渲染速度" /><meta name="keywords" content="点云,three.js,draco,快速渲染" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/pointcloud/show-pcd-data-via-bytes-in-threejs/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f8a15eb0c012e3545d8b6ed47dcb94694059de6131ffb16c8bf6a65b3af1bf61.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/pointcloud/show-pcd-data-via-bytes-in-threejs/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="在three.js中加载字节形式的点云数据并利用Draco加快渲染速度">
+  <meta property="og:description" content="介绍如何在three.js加载字节形式的点云数据,并基于Draco的压缩与解压减少网络传输中的数据体积,加快渲染速度">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-11T10:13:14+08:00">
+    <meta property="article:modified_time" content="2025-03-11T10:13:14+08:00">
+    <meta property="article:tag" content="Pointcloud">
+    <meta property="article:tag" content="Draco">
+
+  <meta itemprop="name" content="在three.js中加载字节形式的点云数据并利用Draco加快渲染速度">
+  <meta itemprop="description" content="介绍如何在three.js加载字节形式的点云数据,并基于Draco的压缩与解压减少网络传输中的数据体积,加快渲染速度">
+  <meta itemprop="datePublished" content="2025-03-11T10:13:14+08:00">
+  <meta itemprop="dateModified" content="2025-03-11T10:13:14+08:00">
+  <meta itemprop="wordCount" content="2734">
+  <meta itemprop="keywords" content="点云,three.js,draco,快速渲染">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在three.js中加载字节形式的点云数据并利用Draco加快渲染速度">
+  <meta name="twitter:description" content="介绍如何在three.js加载字节形式的点云数据,并基于Draco的压缩与解压减少网络传输中的数据体积,加快渲染速度">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://tech.lucumt.info">
+        <li class="mobile-menu-item">外链</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header><main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在three.js中加载字节形式的点云数据并利用Draco加快渲染速度</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-03-11 </span>
+        <div class="post-category">
+            <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
+            </div>
+          <span class="more-meta"> 约 2734 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#threejs渲染">threejs渲染</a></li>
+        <li><a href="#服务端实现">服务端实现</a></li>
+        <li><a href="#客户端实现">客户端实现</a></li>
+        <li><a href="#相关错误修复">相关错误修复</a>
+          <ul>
+            <li><a href="#draco启动报错">Draco启动报错</a></li>
+            <li><a href="#draco播放报错">Draco播放报错</a></li>
+          </ul>
+        </li>
+        <li><a href="#效果展示对比">效果展示对比</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>基于<a href="/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data">利用Draco对点云数据进行编码解码以实现高效网络传输</a>一文介绍个人项目中关于<a href="https://threejs.org"><strong>three.js</strong></a>和<a href="https://github.com/google/draco"><strong>Draco</strong></a>的使用实践。</p>
+<h2 id="threejs渲染">threejs渲染</h2>
+<p>在 <code>three.js</code>的官方说明中对于对于点云数据的加载主要是通过<a href="https://threejs.org/docs/#examples/en/loaders/PCDLoader">PCDLoader</a>，其官方的使用说明如下，十分简洁。</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>// instantiate a loader
+const loader = new PCDLoader();
+
+// load a resource
+loader.load(
+    // resource URL
+    &#39;pointcloud.pcd&#39;,
+    // called when the resource is loaded
+    function(points) {
+        scene.add(points);
+    },
+    // called when loading is in progress
+    function(xhr) {
+        console.log((xhr.loaded / xhr.total * 100) &#43; &#39;% loaded&#39;);
+    },
+
+    // called when loading has errors
+    function(error) {
+        console.log(&#39;An error happened&#39;);
+    }
+);</code>
+</pre><p>上述API是通过直接加载<code>pcd</code>点云文件的方式实现的，而我们常规的使用场景是<code>pcd</code>文件在服务器端，需要在客户端读取并渲染，涉及到字节流的传输，此时客户端不存在现成的<code>pcd</code>文件，需要接收字节形式的点云数据。</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd-transmit-via-network.png" alt="基于网络传输点云文件" title="基于网络传输点云文件"></p>
+<p>上述基于<code>PCDLoader</code>实现的代码虽然很简洁，但其只能读取文件或URL数据流，使用范围受到一定程度的约束，个人希望在项目中能直接基于点云数据集合进行渲染。</p>
+<p>参考网络上的相关资料，修改后的代码如下，其通过<code>renderPcd()</code>函数接收点云数据集合并渲染，适用性更广。</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-javascript " title="渲染代码">
+<code>import * as THREE from &#39;three&#39;;
+import { OrbitControls } from &#39;three/addons/controls/OrbitControls.js&#39;;
+
+export const initComponments = (width, height, parent) =&gt; {
+    let renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+    parent.appendChild(renderer.domElement);
+
+    let scene = new THREE.Scene();
+
+    let camera = new THREE.PerspectiveCamera(12, width / height, 0.5, 50000);
+    camera.position.z = 310;
+    scene.add(camera);
+
+    let controls = new OrbitControls(camera, renderer.domElement);
+    controls.addEventListener(&#39;change&#39;, () =&gt; renderer.render(scene, camera)); // use if there is no animation loop
+    controls.target = new THREE.Vector3(0, 0, 1);
+    controls.autoRotate = false;
+    controls.dampingFactor = 0.25;
+
+    // 控制缩放范围
+    //controls.minDistance = 0.1;
+    //controls.maxDistance = 100;
+
+    //scene.add( new THREE.AxesHelper( 1 ) );
+
+    window.addEventListener(&#39;resize&#39;, () =&gt; {
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+        renderer.render(scene, camera);
+    });
+    return [renderer, camera, scene];
+}
+
+export const renderPcd = (name, data, renderer, camera, scene) =&gt; {
+    // 移除旧点云数据
+    for (let child of scene.children) {
+        if (child.type === &#39;Points&#39;) {
+            scene.remove(child);
+            break;
+        }
+    }
+
+    let geometry = new THREE.BufferGeometry();
+    let material = new THREE.PointsMaterial({ size: 0.05, vertexColors: 2 });  //vertexColors: THREE.VertexColors
+    let points = new THREE.Points(geometry, material);
+    let positions = Float32Array.from(data);
+
+    let color = []
+    for (let i = 0; i &lt; data.length; i &#43;= 3) {
+        color[i] = 0.12;
+        color[i &#43; 1] = 0.565;
+        color[i &#43; 2] = 1;
+    }
+    let colors = new Float32Array(color)
+
+    geometry.setAttribute(&#34;position&#34;, new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute(&#34;color&#34;, new THREE.BufferAttribute(colors, 3));
+    geometry.center();
+    geometry.rotateX(Math.PI);
+
+    // 沿y轴方向平移一定单位
+    //points.translateY(10);
+    //points.translateX(70);
+    points.name = name;
+
+    // 图像缩放
+    points.scale.set(1.2, 1.2, 1.2);
+    scene.add(points);
+    renderer.render(scene, camera);
+}</code>
+</pre><pre class="line-numbers language-javascript " title="调用代码">
+<code>import { PcdData } from &#39;../proto/pcd_pb&#39;;
+import { request } from &#39;../tools/axios_tools&#39;;
+import { initComponments, renderPcd } from &#39;../tools/play_tools&#39;;
+
+let renderer, camera, scene;
+export const clearPcdData = () =&gt; {
+    renderer = null;
+    camera = null;
+    scene = null;
+}
+
+export const playPcd = (pId, pHeight, data, playingRef, updateState) =&gt; {
+    // 进行一些必要的初始化操作
+    let parent = document.getElementById(`${pId}`);
+    let width = parent.offsetWidth;
+
+    let total = data.total;
+    if (total === 0) {
+        return;
+    }
+    if (!scene) {
+        let [sRenderer, sCamera, sScene] = initComponments(width, pHeight, parent);
+        renderer = sRenderer;
+        camera = sCamera;
+        scene = sScene;
+    }
+    loadPlayPcd(data, playingRef, updateState, renderer, camera, scene);
+};
+
+let count = 0;
+export const loadPlayPcd = (data, playingRef, updateState, renderer, camera, scene) =&gt; {
+    let file = data.file[count];
+    let total = data.total;
+    count&#43;&#43;;
+    let url = `main/loadPcdBinary?pcd=${file}`;
+    request.get(url, { responseType: &#34;arraybuffer&#34; }).then(function (response) {
+        if (!playingRef.current) {
+            return;
+        }
+        let result = PcdData.deserializeBinary(response.data);
+        renderPcd(result.getName(), result.getPointList(), renderer, camera, scene);
+        if (count &lt; total) {
+            let percent = (count / total * 100).toFixed(2);
+            updateState({ &#39;progress&#39;: percent, processCount: count });
+            loadPlayPcd(data, playingRef, updateState, renderer, camera, scene)
+        } else {
+            updateState({ &#39;progress&#39;: 0, processCount: 0 });
+            count = 0;
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+};</code>
+</pre></div>
+</div>  
+<h2 id="服务端实现">服务端实现</h2>
+<p>服务端采用<a href="https://expressjs.com">Express</a>实现，其主要功能如下：</p>
+<ol>
+<li>以<code>JSON</code>格式显示<code>pcd</code>、<code>ply</code>、<code>drc</code>等点云文件的整体信息</li>
+<li>将<code>pcd</code>文件转化为<code>ply</code>或<code>drc</code>格式的点云文件，相关操作均基于<code>JavaScript</code>实现</li>
+<li>以<code>Protocol Buffers</code>编码的形式提供<code>pcd</code>、<code>ply</code>、<code>drc</code>格式点云文件的下载，供客户端下载并渲染</li>
+</ol>
+<p>相关代码位于<a href="https://github.com/fox-world/draco-point-cloud-server">draco-point-cloud-server</a>，可将其下载到本地直接运行，也可基于下述相关指令构建<code>Docker</code>镜像并运行，或采用个人已经提前构建好的镜像<a href="https://hub.docker.com/repository/docker/lucumt/draco_server">draco_server</a></p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-bash " title="操作指令">
+<code># build image
+docker build -t lucumt/draco_server:1.0 .
+
+# run docker
+docker run -d -p 8000:8000 --name draco_server lucumt/draco_server:1.0
+
+# stop docker
+docker stop draco_server &amp;&amp; docker rm draco_server</code>
+</pre><pre class="line-numbers language-dockerfile " title="Dockerfile">
+<code>FROM node:22.14.0-alpine
+
+RUN mkdir /draco
+
+COPY draco-point-cloud-server.zip /draco/draco-point-cloud-server.zip
+WORKDIR /draco
+
+RUN unzip draco-point-cloud-server.zip &amp;&amp; rm draco-point-cloud-server.zip
+RUN mv draco-point-cloud-server server
+
+WORKDIR /draco/server
+RUN npm i
+
+ENV PORT=8000
+CMD [&#34;node&#34;, &#34;./bin/www&#34;]</code>
+</pre></div>
+</div>  
+<p>启动该服务后在浏览器中打开，其主页面显示如下</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-server-home-page.png" alt="Draco服务端运行界面" title="Draco服务端运行界面"></p>
+<p>点击相关链接即可进行相关操作，而基于<code>JavaScript</code>通过<code>Draco</code>将<code>pcd</code>转化为<code>drc</code>文件十分耗时，故推荐采用脚本进行批量转化以加快转化时间，具体请参见<a href="/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/#%E8%84%9A%E6%9C%AC%E8%BD%AC%E6%8D%A2">脚本转换</a>。</p>
+<p>为了方便使用，个人提前在该项目中已经准备好了若干<code>pcd</code>和<code>drc</code>格式的点云数据，通过源码或镜像启动服务端后可直接让客户端下载相关数据并进行渲染。</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-server-file-list.png" alt="Draco测试文件列表" title="Draco测试文件列表"></p>
+<h2 id="客户端实现">客户端实现</h2>
+<p>客户端基于<a href="https://react.dev/">React</a>实现，其主要功能如下：</p>
+<ol>
+<li>获取服务端<code>pcd</code>和<code>drc</code>文件的总数信息，并在页面展示</li>
+<li>下载<code>pcd</code>或<code>drc</code>文件，基于<code>Protocol Buffers</code>进行解码，并对<code>drc</code>文件通过<code>Draco</code>进行进一步的解码</li>
+<li>针对<code>pcd</code>和<code>drc</code>文件，分别基于<code>threejs</code>进行点云渲染，可进行开始播放、暂停播放、切换播放源等操作</li>
+</ol>
+<p>相关的代码位于<a href="https://github.com/fox-world/draco-point-cloud-client">draco-point-cloud-client</a>，可将其下载到本地自行编译部署，也可基于下述相关指令构建<code>Docker</code>镜像并运行，或采用个人已经提前构建好的镜像<a href="https://hub.docker.com/repository/docker/lucumt/draco_client">draco_client</a></p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-bash " title="操作指令">
+<code># build image
+docker build -t lucumt/draco_client:1.0 .
+
+# run docker
+docker run -d -p 3000:3000 --name draco_client lucumt/draco_client:1.0
+
+# stop docker
+docker stop draco_client &amp;&amp; docker rm draco_client</code>
+</pre><pre class="line-numbers language-dockerfile " title="Dockerfile">
+<code>FROM nginx
+
+COPY dist /usr/share/nginx/html
+COPY draco.conf /etc/nginx/conf.d/
+
+EXPOSE 3000</code>
+</pre><pre class="line-numbers language-nginx " title="Nginx配置文件">
+<code>server {
+    listen       3000;
+    server_name  draco-server;
+
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods &#39;GET, POST,PUT,DELETE, OPTIONS&#39;;
+    add_header Access-Control-Allow-Headers &#39;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization&#39;;
+
+
+    location / {
+      root   /usr/share/nginx/html;
+      index  index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}</code>
+</pre></div>
+</div>  
+<p>启动该服务后在浏览器中打开，其主页面显示如下</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-client-default-page.png" alt="Draco客户端界面" title="Draco客户端界面"></p>
+<p>点击图中的播放按钮，会加载点云文件并基于<code>threejs</code>进行渲染展示，或者通过顶部的tab菜单切换不同的数据格式播放</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-client-render-page.png" alt="Draco客户端点云渲染" title="Draco客户端点云渲染"></p>
+<h2 id="相关错误修复">相关错误修复</h2>
+<h3 id="draco启动报错">Draco启动报错</h3>
+<p>基于<code>Draco</code>官方的demo说明，在客户端项目中添加如下代码进行<code>Draco</code>初始化</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>import draco3d from &#39;draco3d&#39;;
+
+draco3d.createDecoderModule({}).then(function(module) {
+    // xxx
+});</code>
+</pre><p>通过<code>npm start</code>启动会发现其立即报错，报错信息类似如下</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-client-start-error.png" alt="Draco引入后启动报错" title="Draco引入后启动报错"></p>
+<p>此问题的根源是自己使用的<code>react-scripts</code>版本为<code>5.0.1</code>导致的，通过将其版本降低到<code>4.0.3</code>可修复，但自己并不想降低其版本，于是参考<a href="https://coding3.com/archives/react17-cosmjs-conflect.html">这篇文章</a>中说的第2种方法来解决：</p>
+<p>1.先确保项目中没有要提交的代码，<code>git status</code>显示无任何修改的内容，然后执行下述指令将<code>React</code>项目的webpack config从node_modules里暴露出来</p>
+<pre class="no-line-numbers language-bash " title="bash">
+<code>npm run eject</code>
+</pre><p>2.安装对应依赖包</p>
+<pre class="no-line-numbers language-bash " title="bash">
+<code>npm i stream-browserify buffer path-browserify crypto-browserify crypto-browserify</code>
+</pre><p>3.测试根据报错提示在<code>config/webpack.config.js</code>下搜索<code>resolve:</code>，并添加如下内容</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>fallback: {
+  &#34;stream&#34;: require.resolve(&#34;stream-browserify&#34;),
+  &#34;buffer&#34;: require.resolve(&#34;buffer/&#34;),
+  &#34;path&#34;: require.resolve(&#34;path-browserify&#34;),
+  &#34;crypto&#34;: require.resolve(&#34;crypto-browserify&#34;)
+}</code>
+</pre><p>4.之后重新执行<code>npm start</code>即可正常启动。</p>
+<h3 id="draco播放报错">Draco播放报错</h3>
+<p>修复完上述问题后，点击&quot;Draco播放&quot;以基于<code>drc</code>文件播放时，页面上会提示如下错误</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-play-page-error.png" alt="Draco播放时页面报错" title="Draco播放时页面报错"></p>
+<p>查看浏览器控制台有类似如下报错</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-play-console-error.png" alt="Draco播放时控制台报错" title="Draco播放时控制台报错"></p>
+<p>基于报错信息去网络查找，大部分都说要添加<code>draco_decoder.wasm</code>文件，继续在控制台查看网络请求，发现其确实在请求该文件，且加载报错</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-load-wasm-error.png" alt="Draco加载wasm文件报错" title="Draco加载wasm文件报错"></p>
+<p>进一步查看其请求路径如下，可知其是在<code>static/js</code>目录下查找该文件，其对应于项目中的<code>public/static/js</code>目录，检查后发现确实没有该文件，将<code>draco_decoder.wasm</code>放入该目录 即可解决此问题。</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-load-wasm-request.png" alt="Draco加载wasm文件请求" title="Draco加载wasm文件请求"></p>
+<h2 id="效果展示对比">效果展示对比</h2>
+<p>本章节主要利用前述预先准备好的120个<code>pcd</code>和<code>drc</code>文件，在客户端对它们分别进行连续播放测试，对比其耗时以及显示效果。</p>
+<p>在<a href="/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data">这篇文章</a>中已经说明了利用<code>Draco</code>压缩为<code>drc</code>文件后可大幅减少点云文件的大小</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd-drc-compare.png" alt="点云文件大小对比" title="点云文件大小对比"></p>
+<p>分别基于<code>pcd</code>和<code>drc</code>进行播放，其耗时对比如下</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd-load-time-cost.png" alt="pcd文件加载耗时" title="pcd文件加载耗时"> <br></p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc-load-time-cost.png" alt="drc文件加载耗时" title="drc文件加载耗时"></p>
+<p>从上述对比图可看出<code>drc</code>文件相对于原始的<code>pcd</code>文件，即使在经过<code>Protocol Buffers</code>序列化，其大小是原文件的1/20，且<strong>耗时在10ms级别</strong>，基本上实现了无感知延迟的点云连续播放。</p>
+<p>基于公司内部局域网，将前述的120帧点云文件全部播放完毕后对比效果如下：</p>
+<p><code>pcd</code>格式的点云文件全部播放完毕耗时<strong>58s</strong>，有肉眼可见的明显延迟</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd_play.gif" alt="pcd连续播放效果" title="pcd连续播放效果"></p>
+<p><code>drc</code>格式的点云文件全部播放完毕耗时<strong>7s</strong>，播放体验十分流畅，基本满足使用需求。</p>
+<p><img src="/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc_play.gif" alt="drc连续播放效果" title="drc连续播放效果"></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/pointcloud/">pointcloud</a>
+          <a href="/tags/draco/">draco</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/">
+            <span class="next-text nav-default">利用Draco对点云数据进行编码解码以实现高效网络传输</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+	<footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
+            crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+
+
+<script>
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" 
+  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
+      5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+</svg>`;
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
+    const div = document.createElement("div");
+    div.className = "copy-code";
+    div.innerHTML = copyIcon;
+    div.addEventListener("click", () =>
+      copyCodeToClipboard(div, codeDiv)
+    );
+    addCopyButtonToDom(div, codeDiv);
+  }
+
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
+      .innerText;
+    await navigator.clipboard.writeText(codeToCopy);
+    button.blur();
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
+  }
+
+  function addCopyButtonToDom(button, codeDiv) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "highlight-wrapper";
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
+  }
+
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
+  }
+</script>  
+
+
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
+</body>
+</html>

@@ -6,8 +6,15 @@
     <description>Recent content in Web编程 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Feb 2025 10:20:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 11 Mar 2025 10:13:14 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/web%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在three.js中加载字节形式的点云数据并利用Draco加快渲染速度</title>
+      <link>https://lucumt.info/post/pointcloud/show-pcd-data-via-bytes-in-threejs/</link>
+      <pubDate>Tue, 11 Mar 2025 10:13:14 +0800</pubDate>
+      <guid>https://lucumt.info/post/pointcloud/show-pcd-data-via-bytes-in-threejs/</guid>
+      <description>&lt;p&gt;基于&lt;a href=&#34;https://lucumt.info/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data&#34;&gt;利用Draco对点云数据进行编码解码以实现高效网络传输&lt;/a&gt;一文介绍个人项目中关于&lt;a href=&#34;https://threejs.org&#34;&gt;&lt;strong&gt;three.js&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://github.com/google/draco&#34;&gt;&lt;strong&gt;Draco&lt;/strong&gt;&lt;/a&gt;的使用实践。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用Draco对点云数据进行编码解码以实现高效网络传输</title>
       <link>https://lucumt.info/post/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/</link>
