@@ -2,7 +2,7 @@
 title: "在three.js中加载字节形式的点云数据并利用Draco加快渲染速度"
 date: 2025-03-11T10:13:14+08:00
 lastmod: 2025-03-11T10:13:14+08:00
-draft: true
+draft: false
 keywords: ["点云","three.js","draco","快速渲染"]
 description: "介绍如何在three.js加载字节形式的点云数据,并基于Draco的压缩与解压减少网络传输中的数据体积,加快渲染速度"
 tags: ["pointcloud","draco"]
@@ -13,7 +13,7 @@ author: "Rosen Lu"
 # P.S. comment can only be closed
 comment: true
 toc: true
-autoCollapseToc: true
+autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
@@ -347,6 +347,67 @@ server {
 
 ## 相关错误修复
 
+### Draco启动报错
+
+基于`Draco`官方的demo说明，在客户端项目中添加如下代码进行`Draco`初始化
+
+ ```javascript
+import draco3d from 'draco3d';
+
+draco3d.createDecoderModule({}).then(function(module) {
+     // xxx
+});
+ ```
+
+通过`npm start`启动会发现其立即报错，报错信息类似如下
+
+![Draco引入后启动报错](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-client-start-error.png "Draco引入后启动报错") 
+
+此问题的根源是自己使用的`react-scripts`版本为`5.0.1`导致的，通过将其版本降低到`4.0.3`可修复，但自己并不想降低其版本，于是参考[这篇文章](https://coding3.com/archives/react17-cosmjs-conflect.html)中说的第2种方法来解决：
+
+1.先确保项目中没有要提交的代码，`git status`显示无任何修改的内容，然后执行下述指令将`React`项目的webpack config从node_modules里暴露出来
+
+```bash
+npm run eject
+```
+
+2.安装对应依赖包
+
+```bash
+npm i stream-browserify buffer path-browserify crypto-browserify crypto-browserify
+```
+
+3.测试根据报错提示在`config/webpack.config.js`下搜索`resolve:`，并添加如下内容
+
+```javascript
+fallback: {
+  "stream": require.resolve("stream-browserify"),
+  "buffer": require.resolve("buffer/"),
+  "path": require.resolve("path-browserify"),
+  "crypto": require.resolve("crypto-browserify")
+}
+```
+
+4.之后重新执行`npm start`即可正常启动。
+
+### Draco播放报错
+
+修复完上述问题后，点击"Draco播放"以基于`drc`文件播放时，页面上会提示如下错误
+
+![Draco播放时页面报错](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-play-page-error.png "Draco播放时页面报错") 
+
+查看浏览器控制台有类似如下报错
+
+![Draco播放时控制台报错](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-play-console-error.png "Draco播放时控制台报错") 
+
+基于报错信息去网络查找，大部分都说要添加`draco_decoder.wasm`文件，继续在控制台查看网络请求，发现其确实在请求该文件，且加载报错
+
+![Draco加载wasm文件报错](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-load-wasm-error.png "Draco加载wasm文件报错") 
+
+进一步查看其请求路径如下，可知其是在`static/js`目录下查找该文件，其对应于项目中的`public/static/js`目录，检查后发现确实没有该文件，将`draco_decoder.wasm`放入该目录 即可解决此问题。
+
+![Draco加载wasm文件请求](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/draco-load-wasm-request.png "Draco加载wasm文件请求") 
+
 ## 效果展示对比
 
 本章节主要利用前述预先准备好的120个`pcd`和`drc`文件，在客户端对它们分别进行连续播放测试，对比其耗时以及显示效果。
@@ -369,6 +430,6 @@ server {
 
 ![pcd连续播放效果](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/pcd_play.gif "pcd连续播放效果") 
 
-`drc`格式的点云文件全部播放完毕耗时**7s**，播放体验十分流畅。
+`drc`格式的点云文件全部播放完毕耗时**7s**，播放体验十分流畅，基本满足使用需求。
 
 ![drc连续播放效果](/blog_img/pointcloud/show-pcd-data-via-bytes-in-threejs/drc_play.gif "drc连续播放效果") 
