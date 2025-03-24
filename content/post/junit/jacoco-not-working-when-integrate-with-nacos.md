@@ -5,9 +5,10 @@ lastmod: 2023-06-16T19:01:53+08:00
 draft: true
 keywords: []
 description: ""
-tags: ["junit","nacos"]
-categories: []
+tags: ["junit","junit5","nacos"]
+categories: ["单元测试"]
 author: "Rosen Lu"
+moreMeta: true
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
