@@ -10,9 +10,9 @@
     <atom:link href="https://lucumt.info/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针</title>
-      <link>https://lucumt.info/post/junit5/autowire-object-is-null-when-run-maven-test/</link>
+      <link>https://lucumt.info/post/junit/autowire-object-is-null-when-run-maven-test/</link>
       <pubDate>Mon, 24 Mar 2025 10:18:30 +0800</pubDate>
-      <guid>https://lucumt.info/post/junit5/autowire-object-is-null-when-run-maven-test/</guid>
+      <guid>https://lucumt.info/post/junit/autowire-object-is-null-when-run-maven-test/</guid>
       <description>&lt;p&gt;近期有个项目采用了&lt;a href=&#34;https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Release-Notes&#34;&gt;&lt;strong&gt;SpringBoot3&lt;/strong&gt; &lt;/a&gt;以及&lt;a href=&#34;https://junit.org/junit5&#34;&gt;&lt;strong&gt;JUnit5&lt;/strong&gt;&lt;/a&gt;进行单元测试，在此过程中一直提示&lt;code&gt;Spring&lt;/code&gt;中依赖注入报错的问题，该问题的解决方案比较特殊，主要是升级&lt;a href=&#34;https://maven.apache.org/surefire/maven-surefire-plugin&#34;&gt;&lt;strong&gt;maven-surefire-plugin&lt;/strong&gt;&lt;/a&gt;的版本，故简单记录下。&lt;/p&gt;</description>
     </item>
   </channel>
