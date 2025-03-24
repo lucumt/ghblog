@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针 - 飞狐的部落格</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rosen Lu" /><meta name="description" content="简单记录在利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针的问题，以及对应的解决方案" /><meta name="keywords" content="junit5,springboot,“空指针”" />
+<meta name="generator" content="Hugo0.126.1with theme even" />
+
+
+<link rel="canonical" href="https://lucumt.info/post/junit5/autowire-object-is-null-when-run-maven-test/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f8a15eb0c012e3545d8b6ed47dcb94694059de6131ffb16c8bf6a65b3af1bf61.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/junit5/autowire-object-is-null-when-run-maven-test/">
+  <meta property="og:site_name" content="飞狐的部落格">
+  <meta property="og:title" content="利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针">
+  <meta property="og:description" content="简单记录在利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针的问题，以及对应的解决方案">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-03-24T10:18:30+08:00">
+    <meta property="article:modified_time" content="2025-03-24T10:18:30+08:00">
+    <meta property="article:tag" content="Junit5">
+    <meta property="article:tag" content="Springboot">
+
+  <meta itemprop="name" content="利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针">
+  <meta itemprop="description" content="简单记录在利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针的问题，以及对应的解决方案">
+  <meta itemprop="datePublished" content="2025-03-24T10:18:30+08:00">
+  <meta itemprop="dateModified" content="2025-03-24T10:18:30+08:00">
+  <meta itemprop="wordCount" content="1144">
+  <meta itemprop="keywords" content="junit5,springboot,“空指针”">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针">
+  <meta name="twitter:description" content="简单记录在利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针的问题，以及对应的解决方案">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]--><link href="/lib/prism-1.29.0/themes/prism-solarizedlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet">
+<link href="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+</head>
+<body>
+	  
+	  <a href="https://github.com/lucumt/ghblog" title="https://github.com/lucumt/ghblog" target="_blank">  
+	  <img style="position: fixed; top: 0; right: 0; border: 0; z-index:9999;" 
+		 src="/blog_img/forkme_right_gray.png" 
+		 alt="Fork me on GitHub">
+	  </a><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rosen&#39;s World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://tech.lucumt.info">
+        <li class="mobile-menu-item">外链</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+<div class="container" id="mobile-panel"><header id="header" class="header"><div class="logo-wrapper">
+  <a href="/" class="logo">Rosen&#39;s World</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://tech.lucumt.info">外链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header><main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-03-24 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"> 单元测试 </a>
+            </div>
+          <span class="more-meta"> 约 1144 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>近期有个项目采用了<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Release-Notes"><strong>SpringBoot3</strong> </a>以及<a href="https://junit.org/junit5"><strong>JUnit5</strong></a>进行单元测试，在此过程中一直提示<code>Spring</code>中依赖注入报错的问题，该问题的解决方案比较特殊，主要是升级<a href="https://maven.apache.org/surefire/maven-surefire-plugin"><strong>maven-surefire-plugin</strong></a>的版本，故简单记录下。</p>
+<h2 id="问题描述">问题描述</h2>
+<p>相关代码如下，主要基于<code>UserMapperTest</code>进行测试</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-java " title="测试类代码">
+<code>import com.lucumt.app.AuthApplication;
+import com.lucumt.app.model.SysUser;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+@Slf4j
+@SpringBootTest(classes = AuthApplication.class)
+public class UserMapperTest {
+
+    @Resource
+    private SysUserMapper userMapper;
+
+    @BeforeAll
+    public static void init(){
+        System.setProperty(&#34;nacos.logging.default.config.enabled&#34;, &#34;false&#34;);
+    }
+
+    @Test
+    public void testSelectUser(){
+        List&lt;SysUser&gt; userList = userMapper.selectList(null);
+        userList.forEach(s-&gt;log.info(s.toString()));
+        assertFalse(userList.isEmpty());
+    }
+}</code>
+</pre><pre class="line-numbers language-java " title="接口类代码">
+<code>import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lucumt.app.model.SysUser;
+
+public interface SysUserMapper extends BaseMapper&lt;SysUser&gt; {
+}</code>
+</pre><pre class="line-numbers language-java " title="启动类代码">
+<code>import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@EnableDiscoveryClient
+@SpringBootApplication
+@MapperScan(&#34;com.lucumt.app.mapper&#34;)
+@SuppressWarnings(&#34;uncommentedmain&#34;)
+public class AuthApplication {
+
+    public static void main(String[] args) {
+        System.setProperty(&#34;nacos.logging.default.config.enabled&#34;, &#34;false&#34;);
+        SpringApplication.run(AuthApplication.class);
+    }
+}</code>
+</pre><pre class="line-numbers language-xml " title="父pom文件">
+<code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
+         xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+         xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.lucumt.app&lt;/groupId&gt;
+    &lt;artifactId&gt;auth&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+    &lt;description&gt;应用中心 - 权限与认证模块&lt;/description&gt;
+    &lt;modules&gt;
+        &lt;module&gt;app&lt;/module&gt;
+        &lt;module&gt;common&lt;/module&gt;
+    &lt;/modules&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;spring.boot.version&gt;3.2.12&lt;/spring.boot.version&gt;
+        &lt;spring.cloud.version&gt;2023.0.1&lt;/spring.cloud.version&gt;
+        &lt;nacos.version&gt;2023.0.1.0&lt;/nacos.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring.boot.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring.cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+            &lt;version&gt;2.15.4&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.json&lt;/groupId&gt;
+            &lt;artifactId&gt;json&lt;/artifactId&gt;
+            &lt;version&gt;20220320&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.18.36&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;${maven.compiler.source}&lt;/source&gt;
+                    &lt;target&gt;${maven.compiler.target}&lt;/target&gt;
+                    &lt;encoding&gt;${project.encoding}&lt;/encoding&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;!-- 持续集成时检查代码规范 --&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.sonarsource.scanner.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;sonar-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.6.0.1398&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;!-- 检查代码规范 --&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.1.2&lt;/version&gt;
+                &lt;dependencies&gt;
+                    &lt;dependency&gt;
+                        &lt;groupId&gt;com.puppycrawl.tools&lt;/groupId&gt;
+                        &lt;artifactId&gt;checkstyle&lt;/artifactId&gt;
+                        &lt;version&gt;8.41.1&lt;/version&gt;
+                    &lt;/dependency&gt;
+                &lt;/dependencies&gt;
+                &lt;configuration&gt;
+                    &lt;configLocation&gt;style/checkStyle.xml&lt;/configLocation&gt;
+                    &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+                    &lt;consoleOutput&gt;true&lt;/consoleOutput&gt;
+                    &lt;failsOnError&gt;true&lt;/failsOnError&gt;
+                    &lt;linkXRef&gt;false&lt;/linkXRef&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;validate&lt;/id&gt;
+                        &lt;phase&gt;validate&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;check&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+            &lt;!-- 上传jar包到仓库 --&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.8.2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.4.3&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;encoding&gt;utf-8&lt;/encoding&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;release&lt;/id&gt;
+            &lt;url&gt;https://mirrors.lucumt.com/repository/Maven-local&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;distributionManagement&gt;
+        &lt;repository&gt;
+            &lt;id&gt;release&lt;/id&gt;
+            &lt;url&gt;https://mirrors.lucumt.com/repository/Maven-local&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/distributionManagement&gt;
+
+&lt;/project&gt;</code>
+</pre><pre class="line-numbers language-xml " title="模块pom文件">
+<code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
+         xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+         xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.lucumt.app&lt;/groupId&gt;
+        &lt;artifactId&gt;auth&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;artifactId&gt;auth-app&lt;/artifactId&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
+        &lt;nacos.version&gt;2023.0.1.0&lt;/nacos.version&gt;
+        &lt;mysql.version&gt;8.0.15&lt;/mysql.version&gt;
+        &lt;mybatis-plus.version&gt;3.5.5&lt;/mybatis-plus.version&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.lucumt.app&lt;/groupId&gt;
+            &lt;artifactId&gt;auth-common&lt;/artifactId&gt;
+            &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+            &lt;scope&gt;compile&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-bootstrap&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;com.vaadin.external.google&lt;/groupId&gt;
+                    &lt;artifactId&gt;android-json&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;
+            &lt;version&gt;${nacos.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+            &lt;version&gt;${nacos.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;${mysql.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-plus-spring-boot3-starter&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis-plus.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${spring.boot.version}&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;repackage&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;</code>
+</pre></div>
+</div>  
+<p>在<code>Intellij Idea</code>中直接运行该测试类，可运行成功</p>
+<p><img src="/blog_img/junit/autowire-object-is-null-when-run-maven-test/run-junit-test-directly-in-idea.png" alt="IDEA中直接运行成功" title="IDEA中直接运行成功"></p>
+<p>在控制台执行<code>mvn clean compile test</code>时，报如下所示的空指针错误</p>
+<p><img src="/blog_img/junit/autowire-object-is-null-when-run-maven-test/run-junit-test-with-maven-error.png" alt="命令行中通过maven运行报错" title="命令行中通过maven运行报错"></p>
+<h2 id="解决方案">解决方案</h2>
+<p>一开始自己主要通过<code>Google</code>搜索，主要找到<a href="https://stackoverflow.com/questions/62871584/why-is-an-autowired-controller-always-null-in-junit5-tests">回复1</a>和<a href="https://stackoverflow.com/questions/54928869/migrating-from-junit4-to-junit5-throws-nullpointerexception-on-autowired-reposi">回复2</a>，但均未能解决报错问题。</p>
+<p>咨询<code>Deepseek</code>后，其给出的解决方案如下，挨个对照检查，自己的项目中并没有违反相关约束。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">错误原因</th>
+<th style="text-align:left">解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">缺少 <code>@SpringBootTest</code></td>
+<td style="text-align:left">添加 <code>@SpringBootTest</code> 注解</td>
+</tr>
+<tr>
+<td style="text-align:left">包路径不正确</td>
+<td style="text-align:left">调整测试类包位置或显式指定扫描路径</td>
+</tr>
+<tr>
+<td style="text-align:left">依赖未正确引入</td>
+<td style="text-align:left">检查 <code>spring-boot-starter-test</code> 依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">Bean未被<code>Spring</code>管理</td>
+<td style="text-align:left">添加 <code>@Component</code> 等注解或检查扫描配置</td>
+</tr>
+<tr>
+<td style="text-align:left">混淆<code>JUnit4</code>/<code>JUnit5</code> 注解</td>
+<td style="text-align:left">移除 <code>@RunWith</code>，使用<code>JUnit5</code>注解</td>
+</tr>
+</tbody>
+</table>
+<p>通过添加<code>MyBatis</code>相关的说明，对提示词进行细化后，回答如下，挨个对照检查，依旧不能解决问题。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>现象</strong></th>
+<th style="text-align:left"><strong>解决方案</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Mapper</code>接口未被扫描到</td>
+<td style="text-align:left">添加 <code>@MapperScan</code> 或检查包路径</td>
+</tr>
+<tr>
+<td style="text-align:left">数据源配置错误导致<code>MyBatis</code>初始化失败</td>
+<td style="text-align:left">检查测试环境的 <code>application.properties</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>XML</code>映射文件未找到</td>
+<td style="text-align:left">确认 <code>mybatis.mapper-locations</code> 配置正确</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>MyBatis</code>依赖版本不兼容</td>
+<td style="text-align:left">升级至与<code>Spring Boot 3.2</code>兼容的版本</td>
+</tr>
+<tr>
+<td style="text-align:left">测试未使用 <code>@Transactional</code> 导致数据库回滚问题</td>
+<td style="text-align:left">添加 <code>@Transactional</code> 注解在测试类或方法</td>
+</tr>
+</tbody>
+</table>
+<p>无奈之下只能继续搜索，找到了印度三哥写的<a href="https://mkyong.com/maven/maven-test-failed-on-spring-autowired-and-junit-5">这篇文章</a>，其中说明<code>maven-surefire-plugin</code>的版本太旧，需要进行升级。</p>
+<p>去对应报错信息处查看，确实如此</p>
+<p><img src="/blog_img/junit/autowire-object-is-null-when-run-maven-test/maven-surefire-plugin-version.png" alt="maven-surefire-plugin插件版本" title="maven-surefire-plugin插件版本"></p>
+<p>在模块pom文件中添加如下高亮部分的配置</p>
+<pre class="line-numbers language-xml " data-line="3-7" title="xml">
+<code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.22.0&lt;/version&gt;
+        &lt;/plugin&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;${spring.boot.version}&lt;/version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;repackage&lt;/goal&gt;
+                    &lt;/goals&gt;
+                &lt;/execution&gt;
+            &lt;/executions&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code>
+</pre><p>重新执行<code>mvn clean compile test</code>，可看出能正常执行成功。</p>
+<p><img src="/blog_img/junit/autowire-object-is-null-when-run-maven-test/run-junit-test-with-maven-success.png" alt="命令行中通过maven运行成功" title="命令行中通过maven运行成功"></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/junit5/">junit5</a>
+          <a href="/tags/springboot/">springboot</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/pointcloud/show-pcd-data-via-bytes-in-threejs/">
+            <span class="next-text nav-default">在three.js中加载字节形式的点云数据并利用Draco加快渲染速度</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
+
+      </div>
+    </main>
+	<footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:cumtlu@126.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer><div class="back-to-top" id="back-to-top" title="回到顶部">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div><script type="text/javascript" src="/lib/jquery/jquery-3.6.4.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script><script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7546563545653680"
+            crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75123653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75123653-1');
+</script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3S3FFW5PH3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3S3FFW5PH3');
+</script><script id="baidu_analytics">
+	  var _hmt = _hmt || [];
+	  (function() {
+		if (window.location.hostname === 'localhost') return;
+		var hm = document.createElement("script"); hm.async = true;
+		hm.src = "https://hm.baidu.com/hm.js?cabc0a71f63da092412d82d1aefe7d1c";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	  })();
+	</script>
+
+
+	<script id="baidu_push">
+	  (function(){
+		if (window.location.hostname === 'localhost') return;
+		var bp = document.createElement('script'); bp.async = true;
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+		  bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+		  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	  })();
+	</script>
+
+
+<script>
+  let copyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" 
+  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 
+      5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+</svg>`;
+  let copiedIcon=`<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>`;
+  function createCopyButton(codeDiv) {
+    const div = document.createElement("div");
+    div.className = "copy-code";
+    div.innerHTML = copyIcon;
+    div.addEventListener("click", () =>
+      copyCodeToClipboard(div, codeDiv)
+    );
+    addCopyButtonToDom(div, codeDiv);
+  }
+
+  async function copyCodeToClipboard(button, codeDiv) {
+    const codeToCopy = codeDiv.querySelector(":scope > code")
+      .innerText;
+    await navigator.clipboard.writeText(codeToCopy);
+    button.blur();
+	button.innerHTML = copiedIcon;
+    setTimeout(() => button.innerHTML = copyIcon, 2000);
+  }
+
+  function addCopyButtonToDom(button, codeDiv) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "highlight-wrapper";
+    codeDiv.parentNode.insertBefore(wrapper, codeDiv);
+    wrapper.appendChild(codeDiv);
+	wrapper.insertBefore(button, wrapper.firstChild);
+  }
+
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile){
+     document.querySelectorAll("pre[class*=language]").forEach((codeDiv) => createCopyButton(codeDiv));
+  }
+</script>  
+
+
+
+
+  <script type="text/javascript" src="/lib/prism-1.29.0/components/prism-core.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+  <script type="text/javascript" src="/lib/prism-1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  
+  <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', initCodeTabs);
+	 document.addEventListener('DOMContentLoaded', switchTabCodes);
+	 function initCodeTabs(){
+	     document.querySelectorAll('.codetabs').forEach(tab =>{
+		    let tabHeader = tab.querySelector('.codetabs-header');
+			let tabBody = tab.querySelector('.codetabs-body');
+		    let codeblocks = tab.querySelectorAll('.codetabs-body > .highlight-wrapper');
+			codeblocks.forEach((block,index) =>{
+			   let titleContent = block.querySelector('pre').getAttribute('title');
+			   let title = document.createElement('div');
+			   title.classList.add('tab');
+			   if(index == 0){
+			   	  title.classList.add('active');
+			   }
+			   title.setAttribute('data-codetab',index);
+			   title.appendChild(document.createTextNode(titleContent));
+			   tabHeader.appendChild(title);
+			   
+			   let div = document.createElement('div');
+			   div.classList.add('tab');
+			   if(index == 0){
+			   	  div.classList.add('active');
+			   }
+			   div.setAttribute('data-codetab',index);
+			   div.appendChild(block);
+			   tabBody.appendChild(div);
+			});
+		 });
+	 }
+	 function switchTabCodes(){
+		 document.querySelectorAll('.codetabs  .codetabs-header > .tab').forEach(tab => {
+			 tab.addEventListener('click', function() {
+			      if(tab.classList.contains('active')){
+					 return;
+				  }
+				  let tabId = tab.getAttribute('data-codetab');
+				  let codetabs = tab.parentNode.parentNode;
+				  
+				  codetabs.querySelectorAll('.codetabs .tab.active').forEach(e => e.classList.remove('active'));
+				  codetabs.querySelectorAll('.codetabs .tab[data-codetab="' + tabId + '"]').forEach(e => e.classList.add('active'));  
+			 });
+		 });
+	 }
+  </script>
+</body>
+</html>

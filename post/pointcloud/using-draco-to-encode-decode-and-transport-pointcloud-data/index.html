@@ -46,7 +46,7 @@
   <meta itemprop="description" content="基于自己项目中的经验，介绍如何利用Google Draco对点云数据编码与解码，以便缩小点云数据体积实现高效的网络传输">
   <meta itemprop="datePublished" content="2025-02-26T10:20:20+08:00">
   <meta itemprop="dateModified" content="2025-02-26T10:20:20+08:00">
-  <meta itemprop="wordCount" content="5725">
+  <meta itemprop="wordCount" content="5766">
   <meta itemprop="keywords" content="点云,three.js,draco,编码,解码,网络传输">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="利用Draco对点云数据进行编码解码以实现高效网络传输">
@@ -143,7 +143,7 @@
         <div class="post-category">
             <a href="/categories/web%E7%BC%96%E7%A8%8B/"> web编程 </a>
             </div>
-          <span class="more-meta"> 约 5725 字 </span>
+          <span class="more-meta"> 约 5766 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -752,6 +752,9 @@ encoder.SetAttributeQuantization(encoderModule.POSITION, 10);</code>
 </tr>
 </tbody>
 </table>
+<p>上述测试中<code>ply</code>和<code>drc</code>的请求耗时分别如下，其实际显示的耗时与肉眼看到的效果符合。</p>
+<p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/pcd-load-time-cost.png" alt="pcd文件加载耗时" title="pcd文件加载耗时"> <br></p>
+<p><img src="/blog_img/pointcloud/using-draco-to-encode-decode-and-transport-pointcloud-data/drc-load-time-cost.png" alt="drc文件加载耗时" title="drc文件加载耗时"></p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
