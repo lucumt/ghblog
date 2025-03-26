@@ -660,6 +660,13 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html&#34;&gt;&lt;strong&gt;BeanFactory&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&#34;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/FactoryBean.html&#34;&gt;&lt;strong&gt;FactoryBean&lt;/strong&gt;&lt;/a&gt;的区别与使用场景是&lt;a href=&#34;https://spring.io/&#34;&gt;&lt;strong&gt;Spring&lt;/strong&gt;&lt;/a&gt;面试中的高频题之一，本文基于网上资料和个人理解，简要说明他们之间的异同以及使用场景。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>在Java代码中集成LDAP</title>
+      <link>https://lucumt.info/post/ldap/using-ldap-in-java/</link>
+      <pubDate>Sun, 26 Dec 2021 09:15:58 +0800</pubDate>
+      <guid>https://lucumt.info/post/ldap/using-ldap-in-java/</guid>
+      <description>&lt;p&gt;简单记录个人项目中基于&lt;code&gt;Java&lt;/code&gt;使用&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;&lt;strong&gt;LDAP&lt;/strong&gt;&lt;/a&gt;的相关经验，供后续参考。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>[译]如何处理MySQL中的死锁</title>
       <link>https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/</link>
       <pubDate>Sat, 25 Sep 2021 17:03:21 +0800</pubDate>

@@ -65,6 +65,13 @@
       <description>&lt;p&gt;本文翻译自&lt;a href=&#34;https://jenkov.com/tutorials/java-concurrency/same-threading.html&#34;&gt;&lt;strong&gt;Same-threading&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统(Same-threading)&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 是由一个单线程横向扩展为N个线程系统并行执行的并发模型。&lt;/p&gt;&#xA;&lt;p&gt;同线程系统不是纯粹的单线程系统，因为它包含多个线程。 但其中每个线程都像单线程系统一样运，因此采用术语同线程而不是单线程。&lt;/p&gt;</description>
     </item>
     <item>
+      <title>在Java代码中集成LDAP</title>
+      <link>https://lucumt.info/post/ldap/using-ldap-in-java/</link>
+      <pubDate>Sun, 26 Dec 2021 09:15:58 +0800</pubDate>
+      <guid>https://lucumt.info/post/ldap/using-ldap-in-java/</guid>
+      <description>&lt;p&gt;简单记录个人项目中基于&lt;code&gt;Java&lt;/code&gt;使用&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;&lt;strong&gt;LDAP&lt;/strong&gt;&lt;/a&gt;的相关经验，供后续参考。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>利用JDK8时区常量进行时区相关操作</title>
       <link>https://lucumt.info/post/java-core/get-datetime-in-specific-timezone/</link>
       <pubDate>Tue, 08 Jun 2021 16:01:47 +0800</pubDate>

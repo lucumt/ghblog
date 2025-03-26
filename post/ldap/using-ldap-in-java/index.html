@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>[译]如何处理MySQL中的死锁 - 飞狐的部落格</title>
+  <title>在Java代码中集成LDAP - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,11 +16,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rosen Lu" /><meta name="description" content="翻译外网文章，简要介绍如何处理MySQL中的死锁问题，以便开发中遇到类似问题时可以参考" /><meta name="keywords" content="mysql,死锁" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="基于个人使用经验，简要记录如何在Java代码中集成LDAP/LDAPS,供后续参考使用" /><meta name="keywords" content="java,ldap,ldaps,认证" />
 <meta name="generator" content="Hugo0.126.1with theme even" />
 
 
-<link rel="canonical" href="https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/" />
+<link rel="canonical" href="https://lucumt.info/post/ldap/using-ldap-in-java/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -30,26 +30,26 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <link href="/sass/main.min.f8a15eb0c012e3545d8b6ed47dcb94694059de6131ffb16c8bf6a65b3af1bf61.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/mysql/how-to-deal-with-deadlocks-in-mysql/">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/ldap/using-ldap-in-java/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="[译]如何处理MySQL中的死锁">
-  <meta property="og:description" content="翻译外网文章，简要介绍如何处理MySQL中的死锁问题，以便开发中遇到类似问题时可以参考">
+  <meta property="og:title" content="在Java代码中集成LDAP">
+  <meta property="og:description" content="基于个人使用经验，简要记录如何在Java代码中集成LDAP/LDAPS,供后续参考使用">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2021-09-25T17:03:21+08:00">
-    <meta property="article:modified_time" content="2021-09-25T17:03:21+08:00">
-    <meta property="article:tag" content="Mysql">
+    <meta property="article:published_time" content="2021-12-26T09:15:58+08:00">
+    <meta property="article:modified_time" content="2021-12-26T09:15:58+08:00">
+    <meta property="article:tag" content="Ldap">
 
-  <meta itemprop="name" content="[译]如何处理MySQL中的死锁">
-  <meta itemprop="description" content="翻译外网文章，简要介绍如何处理MySQL中的死锁问题，以便开发中遇到类似问题时可以参考">
-  <meta itemprop="datePublished" content="2021-09-25T17:03:21+08:00">
-  <meta itemprop="dateModified" content="2021-09-25T17:03:21+08:00">
-  <meta itemprop="wordCount" content="1727">
-  <meta itemprop="keywords" content="mysql,死锁">
+  <meta itemprop="name" content="在Java代码中集成LDAP">
+  <meta itemprop="description" content="基于个人使用经验，简要记录如何在Java代码中集成LDAP/LDAPS,供后续参考使用">
+  <meta itemprop="datePublished" content="2021-12-26T09:15:58+08:00">
+  <meta itemprop="dateModified" content="2021-12-26T09:15:58+08:00">
+  <meta itemprop="wordCount" content="1194">
+  <meta itemprop="keywords" content="java,ldap,ldaps,认证">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="[译]如何处理MySQL中的死锁">
-  <meta name="twitter:description" content="翻译外网文章，简要介绍如何处理MySQL中的死锁问题，以便开发中遇到类似问题时可以参考">
+  <meta name="twitter:title" content="在Java代码中集成LDAP">
+  <meta name="twitter:description" content="基于个人使用经验，简要记录如何在Java代码中集成LDAP/LDAPS,供后续参考使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,13 +135,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">[译]如何处理MySQL中的死锁</h1>
+      <h1 class="post-title">在Java代码中集成LDAP</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-09-25 </span>
+        <span class="post-time"> 2021-12-26 </span>
         <div class="post-category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-            <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
+            <a href="/categories/java%E7%BC%96%E7%A8%8B/"> java编程 </a>
             </div>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -154,15 +153,10 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#定义">定义</a></li>
-        <li><a href="#处理策略">处理策略</a>
-          <ul>
-            <li><a href="#识别有问题的事务">识别有问题的事务</a></li>
-            <li><a href="#源码中定位到相关事务">源码中定位到相关事务</a></li>
-            <li><a href="#找到合适的解决方案">找到合适的解决方案</a></li>
-          </ul>
-        </li>
-        <li><a href="#总结">总结</a></li>
+        <li><a href="#java实现">Java实现</a></li>
+        <li><a href="#spring实现">Spring实现</a></li>
+        <li><a href="#动态实现">动态实现</a></li>
+        <li><a href="#ldaps支持">LDAPS支持</a></li>
       </ul>
     </li>
   </ul>
@@ -172,84 +166,261 @@
 	 
 	  	
 	
-    <div class="post-content image-center">
-	 <p>本文翻译自<a href="https://medium.com/geekculture/how-to-deal-with-deadlocks-in-mysql-58f4d830788b"><strong>How to deal with deadlocks in mysql</strong></a></p>
-<p>尽管对某些人来说很神秘，死锁却是一个很常见的问题。大多数时候由于事务将会回滚，死锁是没有副作用的，但若处理不当则可能会变得很糟糕。</p>
-<h2 id="定义">定义</h2>
-<p><img src="/blog_img/mysql/how-to-deal-with-deadlocks-in-mysql/dead-lock-definition.webp" alt="死锁定义" title="死锁定义"></p>
-<p>死锁是多个事务(通常为2个)在互相等待彼此的锁，通常<code>MySQL</code>可通过回滚事务来自行检测并解决此类问题，除非关闭死锁检测功能。</p>
-<p>死锁不仅仅存在于数据库中，只要有并发场景，就可能产生死锁！</p>
-<h2 id="处理策略">处理策略</h2>
-<p>处理死锁的策略包括3个步骤：</p>
-<ol>
-<li>识别有问题的事务</li>
-<li>源码中定位到相关事务</li>
-<li>找到合适的解决方案</li>
-</ol>
-<h3 id="识别有问题的事务">识别有问题的事务</h3>
-<p>首先需要获取死锁相关的信息，可通过<code>SHOW ENGINE INNODB STATUS</code>这条简单的的指令实现，不过其只显示最新的死锁信息，这对于了解一段时间内的死锁全过程信息没有太多帮助。</p>
-<p>幸好，从<code>MySQL5.5.30</code>开始其提供了一个名为<code>innodb_print_all_deadlocks</code>的配置项用于将所有的死锁都打印到错误日志中，同时启用此功能也不会导致停机。</p>
-<p>相关的日志内容看起来类似如下</p>
-<pre class="line-numbers language-sql " title="sql">
-<code>*** (1) TRANSACTION:
-TRANSACTION 450913541522, ACTIVE 0 sec starting index read
-mysql tables in use 1, locked 1
-LOCK WAIT 7 lock struct(s), heap size 1136, 3 row lock(s), undo log entries 2
-MySQL thread id 93608210, OS thread handle 47321957033728, query id 10802490531 10.0.64.165 db updating
-update `table1` set `scroll_to` = 3901, `updated_at` = ‘2021–08–17 11:30:53’ where `id` = 668126442
-*** (1) WAITING FOR THIS LOCK TO BE GRANTED:
-RECORD LOCKS space id 1455 page no 5719543 n bits 0 index PRIMARY of table `db`.`table1` trx id 450913541522 lock_mode X locks rec but not gap waiting
-Record lock, heap no 95 PHYSICAL RECORD: n_fields 24; compact format; info bits 0
-*** (2) TRANSACTION:
-TRANSACTION 450913541519, ACTIVE 0 sec inserting
-mysql tables in use 1, locked 1
-LOCK WAIT 9 lock struct(s), heap size 1136, 4 row lock(s), undo log entries 4
-MySQL thread id 93608214, OS thread handle 47339872995072, query id 10802490581 10.0.63.235 admin update
-insert into `table2` (`user_id`, `company_id`, `date`, `steps`, `updated_at`, `created_at`) values (491031, 1, ‘2021–08–17’, 359, ‘2021–08–17 11:30:53’, ‘2021–08–17 11:30:53’)
-*** (2) HOLDS THE LOCK(S):
-RECORD LOCKS space id 1455 page no 5719543 n bits 0 index PRIMARY of table `db`.`table1` trx id 450913541519 lock_mode X locks rec but not gap
-Record lock, heap no 95 PHYSICAL RECORD: n_fields 24; compact format; info bits 0
-*** (2) WAITING FOR THIS LOCK TO BE GRANTED:
-RECORD LOCKS space id 5817 page no 4486 n bits 0 index PRIMARY of table `db`.`user` trx id 450913541519 lock mode S locks rec but not gap waiting
-Record lock, heap no 99 PHYSICAL RECORD: n_fields 29; compact format; info bits 0</code>
-</pre><p>尽管其中包含许多信息，但由于我只关心哪个事务/线程在持有/等待哪些锁，将上述内容精简如下：</p>
-<pre class="line-numbers language-sql " title="sql">
-<code>Transaction 1: update `table1` set `scroll_to` = 3901, `updated_at` = ‘2021–08–17 11:30:53’ where `id` = 668126442
--&gt; Holding an X lock on `db`.`user`
--&gt; Wait for an X lock on `db`.`table1`
-Transaction 2: insert into `table2` (`user_id`, `company_id`, `date`, `steps`, `updated_at`, `created_at`) values (491031, 1, ‘2021–08–17’, 359, ‘2021–08–17 11:30:53’, ‘2021–08–17 11:30:53’)
--&gt; Hold an X lock on `db`.`table1`
--&gt; Wait for an S lock on `db`.`user`</code>
-</pre><p>可以看出尽管日志中没有明确的说明事务1持有了哪个锁，我们仍然可以推断出事务1在<code>db.user</code>中持有锁，而事务2正在等待该锁。</p>
-<p>同样可看出事务1虽然只是更新<code>table1</code>，但却在表<code>user</code>上持有锁，对事务2也类似，其向<code>table2</code>中插入数据但却在<code>table1</code>上持有锁，然后等待<code>user</code>表中的锁。咋一看很奇怪，这是由于此处显示的查询语句只是整个事务的<strong>一部分</strong>，这意味着在更新表<code>table1</code>之前，事务1已经在<code>user</code>表上执行了某些操作因而持有X锁，此分析同样适用于事务2，这些持有/获取锁的信息有助于在源码中具体定位事务的位置。</p>
-<h3 id="源码中定位到相关事务">源码中定位到相关事务</h3>
-<p>接下来就是在应用程序源码中找到事务，通常是通过编辑器的搜索功能实现，事务中应该包含我们在步骤1中发现的持有/等待锁相关的查询。</p>
-<p>对于大型代码工程来说可能是一项艰巨的任务，尤其是哪些使用了ORM框架实现数据库交互的项目。虽然数据库表名有助于缩小查询范围，但大多数情况下更需要耐心，或许同样需要检查由死锁导致的应用程序日志，其中包含了代码行等信息。</p>
-<h3 id="找到合适的解决方案">找到合适的解决方案</h3>
-<p>深入研究应用程序代码之后，假设你已经找到问题产生的根源，接下来需要寻找到一个合适的解决方案。</p>
-<p>并发是死锁产生的根源，为了减少死锁发生的概率，事务应该尽可能的快以避免受到其它事务的干扰，可通过下述方式重构来加快事务执行：</p>
-<ul>
-<li>将业务代码放到事务之外，我在遗留项目中看到过充斥着业务逻辑的臃肿事务。</li>
-<li>优化慢查询</li>
-</ul>
-<p>另一种方法是通过同步调用来避免并发。例如在打开一个应用程序时，用户位置和用户活动信息是以异步方式(同时的)发送到服务器，从而导致数据局死锁。将这些调用转化为同步实现应该能消除死锁，因为没有并发就没有死锁，当无法对遗留项目进行重构时该方案是一个不错的选择，然而若业务逻辑不允许这样修改则不生效。</p>
-<h2 id="总结">总结</h2>
-<p>就像人们所说的那样，死锁神秘且令人烦恼，但如果我们知道在哪寻找且具有一些耐心，其就不会难么神秘和令人讨厌且肯定能否避免。</p>
+    <div class="post-content image-border">
+	 <p>简单记录个人项目中基于<code>Java</code>使用<a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol"><strong>LDAP</strong></a>的相关经验，供后续参考。</p>
+<h2 id="java实现">Java实现</h2>
+<p><code>JDK</code>自带类库中的<a href="https://docs.oracle.com/javase/8/docs/api/javax/naming/package-summary.html"><strong>javax.naming</strong></a>包默认提供了<code>LDAP</code>的原生支持，其使用方式类似如下</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-java " title="用户认证">
+<code>public boolean ldapAuth(String username, String password) throws NamingException {
+    boolean loginResult = false;
+    
+    Hashtable&lt;String, String&gt; adminEnv = new Hashtable&lt;&gt;();
+    adminEnv.put(Context.INITIAL_CONTEXT_FACTORY, &#34;com.sun.jndi.ldap.LdapCtxFactory&#34;);
+    adminEnv.put(Context.PROVIDER_URL, &#34;ldap://ldap.lucumt.com&#34;);
+    adminEnv.put(Context.SECURITY_AUTHENTICATION, &#34;simple&#34;);
+    adminEnv.put(Context.SECURITY_PRINCIPAL, &#34;cn=admin,ou=adminUsers,ou=sso,dc=lucumt,dc=com&#34;);
+    adminEnv.put(Context.SECURITY_CREDENTIALS, &#34;qWertFx@&#34;);
+
+    DirContext adminCtx = new InitialDirContext(adminEnv);
+
+    String searchBase = &#34;ou=sso,dc=lucumt,dc=com&#34;;
+    String searchFilter = &#34;cn=&#34; &#43; username &#43; &#34;&#34;;
+    SearchControls controls = new SearchControls();
+    controls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+    NamingEnumeration&lt;SearchResult&gt; results =
+            adminCtx.search(searchBase, searchFilter, controls);
+
+    if (results.hasMore()) {
+        SearchResult result = results.next();
+        String foundUserDn = result.getNameInNamespace();
+
+        // 3. 使用搜索到的用户 DN 进行认证
+        Hashtable&lt;String, String&gt; userEnv = new Hashtable&lt;&gt;();
+        userEnv.putAll(adminEnv);
+        userEnv.put(Context.SECURITY_PRINCIPAL, foundUserDn);
+        userEnv.put(Context.SECURITY_CREDENTIALS, password);
+
+        DirContext userCtx = new InitialDirContext(userEnv);
+        System.out.println(&#34;认证成功！用户 DN：&#34; &#43; foundUserDn);
+        userCtx.close();
+        loginResult = true;
+    } else {
+        System.err.println(&#34;用户不存在！&#34;);
+    }
+
+    adminCtx.close();
+    return loginResult;
+}</code>
+</pre><pre class="line-numbers language-java " title="用户查询">
+<code>public static void testLDAP() {
+    // LDAP 服务器地址
+    String ldapUrl = &#34;ldap://ldap.lucumt.com&#34;;
+    // LDAP 管理员的用户名
+    String ldapUser = &#34;cn=admin,ou=adminUsers,ou=sso,dc=lucumt,dc=com&#34;;
+    // LDAP 管理员的密码
+    String ldapPassword = &#34;qWertFx@&#34;;
+    // 搜索的基础 DN
+    String baseDN = &#34;ou=sso,dc=lucumt,dc=com&#34;;
+    // 搜索的过滤器
+    String searchFilter = &#34;(objectClass=person)&#34;;
+
+    // 配置 LDAP 环境
+    Hashtable &lt; String, String &gt; env = new Hashtable &lt; &gt; ();
+    env.put(Context.INITIAL_CONTEXT_FACTORY, &#34;com.sun.jndi.ldap.LdapCtxFactory&#34;);
+    env.put(Context.PROVIDER_URL, ldapUrl);
+    env.put(Context.SECURITY_AUTHENTICATION, &#34;simple&#34;);
+    env.put(Context.SECURITY_PRINCIPAL, ldapUser);
+    env.put(Context.SECURITY_CREDENTIALS, ldapPassword);
+
+    try {
+        // 创建 LDAP 上下文
+        DirContext ctx = new InitialDirContext(env);
+        // 设置搜索控件
+        SearchControls searchControls = new SearchControls();
+        searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+        searchControls.setReturningAttributes(new String[] {
+            &#34;cn&#34;,
+            &#34;sn&#34;,
+            &#34;mail&#34;
+        }); // 要返回的属性
+
+        // 执行搜索
+        NamingEnumeration &lt; SearchResult &gt; results = ctx.search(baseDN, searchFilter, searchControls);
+
+        while (results.hasMore()) {
+            SearchResult result = results.next();
+            Attributes attributes = result.getAttributes();
+
+            Attribute cn = attributes.get(&#34;cn&#34;);
+            Attribute sn = attributes.get(&#34;sn&#34;);
+            Attribute mail = attributes.get(&#34;mail&#34;);
+
+            System.out.println(&#34;CN: &#34; &#43; (cn != null ? cn.get() : &#34;N/A&#34;));
+            System.out.println(&#34;SN: &#34; &#43; (sn != null ? sn.get() : &#34;N/A&#34;));
+            System.out.println(&#34;Mail: &#34; &#43; (mail != null ? mail.get() : &#34;N/A&#34;));
+            System.out.println(&#34;----------------------------&#34;);
+        }
+
+        // 关闭上下文
+        ctx.close();
+
+    } catch (NamingException e) {
+        e.printStackTrace();
+    }
+}</code>
+</pre></div>
+</div>  
+<h2 id="spring实现">Spring实现</h2>
+<p><code>JDK</code>自带的<code>LDAP</code> 操作起来较为复杂，可利用<code>Spring</code>提供的<a href="https://docs.spring.io/spring-ldap/docs/current/api/org/springframework/ldap/core/LdapTemplate.html"><strong>LdapTemplate</strong></a>简化上述操作。</p>
+<p>仿照下述代码引入相关依赖与配置</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-xml " title="LDAP依赖引入">
+<code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.ldap&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-ldap-core&lt;/artifactId&gt;
+&lt;/dependency&gt;</code>
+</pre><pre class="line-numbers language-yaml " title="LDAP服务配置">
+<code>spring:
+  ldap:
+    urls: ldap://ldap.lucumt.com
+    base: ou=sso,dc=lucumt,dc=com
+    username: cn=admin,ou=adminUsers,ou=sso,dc=lucumt,dc=com
+    password: qWertFx@</code>
+</pre><pre class="line-numbers language-yaml " title="LDAP属性配置">
+<code>ldap:
+   mail: email
+   userName: cn
+   realName: displayName
+   phone: mobile</code>
+</pre></div>
+</div>  
+<p>之后的代码如下所示，可看出同原始的<code>Java</code> 实现相比较，其篇幅已经缩减不少(高亮部分为核心代码)</p>
+<div class='codetabs'>
+  <div class="codetabs-header"></div>
+  <div class="codetabs-body">  
+<pre class="line-numbers language-java " data-line="13-14,22,32" title="业务类">
+<code>import com.lucumt.app.config.LdapConfig;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+public class AuthServiceImpl implements IAuthService {
+
+    @Resource
+    private LdapTemplate ldapTemplate;
+
+    @Resource
+    private LdapConfig ldapConfig;
+
+    @Override
+    public ResponseVM ldapLogin(UserVO loginUser) {
+        String filter = ldapConfig.getUid() &#43; &#34;=&#34; &#43; loginUser.getUserName();
+        boolean success = ldapTemplate.authenticate(&#34;&#34;, filter, loginUser.getPassword());
+        if (!success) {
+            return ResponseVM.fail(&#34;用户名或密码错误&#34;);
+        }
+        return ResponseVM.success(&#34;用户登录成功&#34;);
+    }
+    
+    @Override
+    public User fetchUserInfo(String username) {
+        String filter = ldapConfig.getUid() &#43; &#34;=&#34; &#43; username;
+        return ldapTemplate.searchForObject(&#34;&#34;, filter, context -&gt; {
+            DirContextAdapter ctx = (DirContextAdapter) context;
+            User u = new User();
+            u.setUserName(ctx.getStringAttribute(ldapConfig.getUsername()));
+            u.setRealName(this.convertAttributeValue(ctx.getStringAttribute(ldapConfig.getRealName())));
+            u.setEmail(this.convertAttributeValue(ctx.getStringAttribute(ldapConfig.getMail())));
+            u.setPhone(this.convertAttributeValue(ctx.getStringAttribute(ldapConfig.getPhone())));
+            return u;
+        });
+    }
+
+}</code>
+</pre><pre class="line-numbers language-java " title="配置类">
+<code>import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Getter
+@Setter
+@Component
+@ConfigurationProperties(prefix = &#34;ldap&#34;)
+public class LdapConfig {
+
+    private String uid;
+    private String userName;
+    private String realName;
+    private String mail;
+    private String phone;
+}</code>
+</pre></div>
+</div>  
+<h2 id="动态实现">动态实现</h2>
+<p>对于某些标准化产品而言，需要交付到客户使用环境后进行测试与配置，此时需要提供<code>LDAP</code>动态配置的功能</p>
+<p><img src="/blog_img/ldap/using-ldap-in-java/ldap-dynamic-config.png" alt="LDAP动态配置" title="LDAP动态配置"></p>
+<p>可利用类似如下代码基于不同的配置动态的创建<code>LdapTemplate</code>，核心为通过<code>new</code>关键字重新创建相关对象</p>
+<pre class="line-numbers language-java " data-line="2,15" title="java">
+<code>private LdapTemplate createLdapTemplate(LdapConfigVO config) {
+    LdapContextSource source = new LdapContextSource();
+    source.setUrl(config.getUrls());
+    source.setBase(config.getBase());
+
+    //非匿名验证时需要设置管理员账号信息
+    if (!config.isAnonymous()) {
+        source.setUserDn(config.getUsername());
+        source.setPassword(config.getPassword());
+    }
+
+    //确保上述配置生效
+    source.afterPropertiesSet();
+
+    LdapTemplate template = new LdapTemplate(source);
+    return template;
+}</code>
+</pre><h2 id="ldaps支持">LDAPS支持</h2>
+<p>部分场景需要使用基于<code>SSL/TSL</code>实现的<code>LDAPS</code>，要支持此功能只需做如下2处修改即可</p>
+<p>1.将<code>LDAP</code>的地址修改为加密形式，类似<code>ldaps://ldap.lucumt.com</code></p>
+<p>2.利用下述代码导入<code>LDAPS</code>的证书</p>
+<pre class="line-numbers language-bash " title="bash">
+<code># Windows导入与验证
+keytool -import -alias ldap-ca -file ldap-lucumt.crt -keystore &#34;%JAVA_HOME%\jre\lib\security\cacerts&#34; -storepass Pass@Word
+keytool -list -keystore &#34;%JAVA_HOME%\lib\security\cacerts&#34; -storepass Pass@Word -alias ldap-ca
+
+# Linux导入与验证
+keytool -import -alias ldap-ca -file ldap-lucumt.crt -keystore &#34;${JAVA_HOME}/jre/lib/security/cacerts&#34; -storepass Pass@Word
+keytool -list -keystore &#34;${JAVA_HOME}/lib/security/cacerts&#34; -storepass Pass@Word -alias ldap-ca</code>
+</pre><p>导入过程中的正常输出类似如下</p>
+<p><img src="/blog_img/ldap/using-ldap-in-java/ldap-certificate-import-result.png" alt="LDAP证书导入结果" title="LDAP证书导入结果"></p>
+<p>证书查看结果类似如下</p>
+<p><img src="/blog_img/ldap/using-ldap-in-java/ldap-certificate-list-result.png" alt="LDAP证书查看结果" title="LDAP证书查看结果"></p>
     </div>
 
     
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/mysql/">mysql</a>
+          <a href="/tags/ldap/">ldap</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/ldap/using-ldap-in-java/">
+        <a class="prev" href="/post/spring/spring-core/difference-between-factorybean-and-beanfactory/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">在Java代码中集成LDAP</span>
+            <span class="prev-text nav-default">Spring中BeanFactory和FactoryBean的区别以及使用场景</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/devops/upload-docker-image-to-harbor-via-shell/">
-            <span class="next-text nav-default">利用Linux脚本将Docker镜像手工上传到Harbor仓库</span>
+        <a class="next" href="/post/mysql/how-to-deal-with-deadlocks-in-mysql/">
+            <span class="next-text nav-default">[译]如何处理MySQL中的死锁</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

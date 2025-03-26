@@ -64,5 +64,12 @@
       <guid>https://lucumt.info/post/devops/setting-ldap-for-kubesphere/</guid>
       <description>&lt;p&gt;之前在公司内部推广&lt;a href=&#34;https://kubesphere.io/&#34;&gt;KubeSphere&lt;/a&gt;用于持续集成和部署，取得了不错的反馈，考虑到大规模使用的便利性以及之前已有&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;LDAP&lt;/a&gt;整合其它系统的成熟经验，很自然的想将&lt;code&gt;LDAP&lt;/code&gt;集成到&lt;code&gt;KubeSphere&lt;/code&gt;中。原以为会很容易，一番折腾下来费了不好功夫(&lt;strong&gt;&lt;code&gt;KubeSphere&lt;/code&gt;要求使用&lt;code&gt;LDAP&lt;/code&gt;时必须设置管理员账号和密码&lt;/strong&gt;)，简单记录下。&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>在Java代码中集成LDAP</title>
+      <link>https://lucumt.info/post/ldap/using-ldap-in-java/</link>
+      <pubDate>Sun, 26 Dec 2021 09:15:58 +0800</pubDate>
+      <guid>https://lucumt.info/post/ldap/using-ldap-in-java/</guid>
+      <description>&lt;p&gt;简单记录个人项目中基于&lt;code&gt;Java&lt;/code&gt;使用&lt;a href=&#34;https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol&#34;&gt;&lt;strong&gt;LDAP&lt;/strong&gt;&lt;/a&gt;的相关经验，供后续参考。&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
