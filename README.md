@@ -9,13 +9,6 @@
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/lucumt/ghblog)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lucumt/ghblog)
 ![GitHub repo size](https://img.shields.io/github/repo-size/lucumt/ghblog)
-<br/>
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Hugo)
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Even)
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Java)
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Spring)
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/MySQL)
-![GitHub search hit counter](https://img.shields.io/github/search/lucumt/ghblog/Golang)
 
 
 # 我的个人博客
