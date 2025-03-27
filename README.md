@@ -44,7 +44,7 @@
 
 请在Fork或Clone后将 **config.toml**中的 **gaid** 和 **baiduanalysis** 修改为你自己的相关账号，或者直接将这两个账户置为空。  
 
-```
+```toml
 title = "飞狐的部落格"
 
 logoTitle = "Rosen's World"
