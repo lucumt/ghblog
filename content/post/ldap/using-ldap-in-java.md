@@ -315,6 +315,10 @@ keytool -list -keystore "%JAVA_HOME%\lib\security\cacerts" -storepass Pass@Word 
 # Linux导入与验证
 keytool -import -alias ldap-ca -file ldap-lucumt.crt -keystore "${JAVA_HOME}/jre/lib/security/cacerts" -storepass Pass@Word
 keytool -list -keystore "${JAVA_HOME}/lib/security/cacerts" -storepass Pass@Word -alias ldap-ca
+
+# 通过下述方式在导入时免输入确认
+keytool -import -alias ldap-ca -file ldap-lucumt.crt \
+-keystore "${JAVA_HOME}/jre/lib/security/cacerts" -storepass Pass@Word -noprompt
 ```
 
 导入过程中的正常输出类似如下

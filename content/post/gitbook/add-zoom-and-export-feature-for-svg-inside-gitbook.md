@@ -311,3 +311,74 @@ function downloadSvg() {
   	document.body.removeChild(downloadLink);
   }
   ```
+
+## 动态开启
+
+2025/04/06更新，对上述代码中的`plugin.js`进行了改进处理，可实现动态的开启文件下载或缩放功能。
+
+在`book.js`中添加类似如下配置来进行自定义的开启或关闭
+
+```js
+"mermaid-fox":{
+    "zoom": true,
+    "download": true
+}
+```
+
+默认配置如下
+
+```js
+"mermaid-fox":{
+    "zoom": false,
+    "download": true
+}
+```
+
+修改后的`plugin.js`的核心代码如下
+
+```js{data-line="4-12,20,34"}
+require([
+    'gitbook'
+], function(gitbook) {
+    var mermaidConfig = {
+        "zoom": false,
+        "download": true
+    };
+    gitbook.events.bind('start', function(e, config) {
+        let customConfig = config['mermaid-fox']
+        for (let key of Object.keys(mermaidConfig)) {
+            mermaidConfig[key] = customConfig[key] ?? mermaidConfig[key];
+        }
+    });
+
+    gitbook.events.bind('page.change', function() {
+        mermaid.run({
+            querySelector: '.mermaid',
+            postRenderCallback: (id) => {
+                let ele = document.getElementById(id);
+                if (mermaidConfig.zoom) {
+                    let svg = ele.getBBox();
+                    let height = svg.height;
+                    let aHeight = height > 800 ? 800 : height;
+                    ele.setAttribute('style', 'height: ' + aHeight + 'px;overflow:scroll;');
+                    let panZoomTiger = svgPanZoom('#' + id, {
+                        zoomEnabled: true,
+                        controlIconsEnabled: true
+                    });
+                    panZoomTiger.resize();
+                    panZoomTiger.updateBBox();
+                }
+
+
+                if (mermaidConfig.download) {
+                    let download = ele.parentNode.previousSibling;
+                    download.addEventListener('click', e => {
+                        downloadData(id, ele);
+                    });
+                }
+            }
+        });
+    });
+});
+```
+
