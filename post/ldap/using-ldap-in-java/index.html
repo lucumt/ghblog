@@ -45,7 +45,7 @@
   <meta itemprop="description" content="基于个人使用经验，简要记录如何在Java代码中集成LDAP/LDAPS,供后续参考使用">
   <meta itemprop="datePublished" content="2021-12-26T09:15:58+08:00">
   <meta itemprop="dateModified" content="2021-12-26T09:15:58+08:00">
-  <meta itemprop="wordCount" content="1194">
+  <meta itemprop="wordCount" content="1222">
   <meta itemprop="keywords" content="java,ldap,ldaps,认证">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="在Java代码中集成LDAP">
@@ -401,7 +401,11 @@ keytool -list -keystore &#34;%JAVA_HOME%\lib\security\cacerts&#34; -storepass Pa
 
 # Linux导入与验证
 keytool -import -alias ldap-ca -file ldap-lucumt.crt -keystore &#34;${JAVA_HOME}/jre/lib/security/cacerts&#34; -storepass Pass@Word
-keytool -list -keystore &#34;${JAVA_HOME}/lib/security/cacerts&#34; -storepass Pass@Word -alias ldap-ca</code>
+keytool -list -keystore &#34;${JAVA_HOME}/lib/security/cacerts&#34; -storepass Pass@Word -alias ldap-ca
+
+# 通过下述方式在导入时免输入确认
+keytool -import -alias ldap-ca -file ldap-lucumt.crt \
+-keystore &#34;${JAVA_HOME}/jre/lib/security/cacerts&#34; -storepass Pass@Word -noprompt</code>
 </pre><p>导入过程中的正常输出类似如下</p>
 <p><img src="/blog_img/ldap/using-ldap-in-java/ldap-certificate-import-result.png" alt="LDAP证书导入结果" title="LDAP证书导入结果"></p>
 <p>证书查看结果类似如下</p>

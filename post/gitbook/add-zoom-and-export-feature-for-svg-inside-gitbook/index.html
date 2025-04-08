@@ -45,7 +45,7 @@
   <meta itemprop="description" content="简要介绍如何给GitBook中的SVG图像提供缩放和下载功能来解决复杂Mermaid图表无法查看的问题,缩放功能用于在线查看，下载功能用于将在线凸显下载为本地svg文件">
   <meta itemprop="datePublished" content="2024-06-27T20:35:45+08:00">
   <meta itemprop="dateModified" content="2024-06-27T20:35:45+08:00">
-  <meta itemprop="wordCount" content="1740">
+  <meta itemprop="wordCount" content="1977">
   <meta itemprop="keywords" content="gitbook,svg,缩放,下载">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="给GitBook中的SVG图像提供缩放和下载功能">
@@ -162,6 +162,7 @@
             <li><a href="#相关代码">相关代码</a></li>
           </ul>
         </li>
+        <li><a href="#动态开启">动态开启</a></li>
       </ul>
     </li>
   </ul>
@@ -389,6 +390,66 @@ function downloadData(id,ele) {
 }</code>
 </pre></li>
 </ul>
+<h2 id="动态开启">动态开启</h2>
+<p>2025/04/06更新，对上述代码中的<code>plugin.js</code>进行了改进处理，可实现动态的开启文件下载或缩放功能。</p>
+<p>在<code>book.js</code>中添加类似如下配置来进行自定义的开启或关闭</p>
+<pre class="line-numbers language-js " title="js">
+<code>&#34;mermaid-fox&#34;:{
+    &#34;zoom&#34;: true,
+    &#34;download&#34;: true
+}</code>
+</pre><p>默认配置如下</p>
+<pre class="line-numbers language-js " title="js">
+<code>&#34;mermaid-fox&#34;:{
+    &#34;zoom&#34;: false,
+    &#34;download&#34;: true
+}</code>
+</pre><p>修改后的<code>plugin.js</code>的核心代码如下</p>
+<pre class="line-numbers language-js " data-line="4-12,20,34" title="js">
+<code>require([
+    &#39;gitbook&#39;
+], function(gitbook) {
+    var mermaidConfig = {
+        &#34;zoom&#34;: false,
+        &#34;download&#34;: true
+    };
+    gitbook.events.bind(&#39;start&#39;, function(e, config) {
+        let customConfig = config[&#39;mermaid-fox&#39;]
+        for (let key of Object.keys(mermaidConfig)) {
+            mermaidConfig[key] = customConfig[key] ?? mermaidConfig[key];
+        }
+    });
+
+    gitbook.events.bind(&#39;page.change&#39;, function() {
+        mermaid.run({
+            querySelector: &#39;.mermaid&#39;,
+            postRenderCallback: (id) =&gt; {
+                let ele = document.getElementById(id);
+                if (mermaidConfig.zoom) {
+                    let svg = ele.getBBox();
+                    let height = svg.height;
+                    let aHeight = height &gt; 800 ? 800 : height;
+                    ele.setAttribute(&#39;style&#39;, &#39;height: &#39; &#43; aHeight &#43; &#39;px;overflow:scroll;&#39;);
+                    let panZoomTiger = svgPanZoom(&#39;#&#39; &#43; id, {
+                        zoomEnabled: true,
+                        controlIconsEnabled: true
+                    });
+                    panZoomTiger.resize();
+                    panZoomTiger.updateBBox();
+                }
+
+
+                if (mermaidConfig.download) {
+                    let download = ele.parentNode.previousSibling;
+                    download.addEventListener(&#39;click&#39;, e =&gt; {
+                        downloadData(id, ele);
+                    });
+                }
+            }
+        });
+    });
+});</code>
+</pre>
     </div>
 
     
