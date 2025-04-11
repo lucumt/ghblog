@@ -77,7 +77,6 @@ sequenceDiagrams:
 
 * **Email**: `lucumt@gmail.com`,`cumtlu@126.com`
 * **Skype**: `lu.rosen`
-* **领英**: [卢运强](https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/)
 * **QQ[微信]**: `317801876`
 
 ## 友情链接
