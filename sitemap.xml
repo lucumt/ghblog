@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lucumt.info/post/</loc>
+    <lastmod>2025-05-22T14:16:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/</loc>
+    <lastmod>2025-05-22T14:16:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lucumt.info/categories/</loc>
     <lastmod>2025-03-24T10:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,13 +24,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/junit5/</loc>
-    <lastmod>2025-03-24T10:18:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/post/</loc>
     <lastmod>2025-03-24T10:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,13 +45,6 @@
   
   <url>
     <loc>https://lucumt.info/categories/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2025-03-24T10:18:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/</loc>
     <lastmod>2025-03-24T10:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
