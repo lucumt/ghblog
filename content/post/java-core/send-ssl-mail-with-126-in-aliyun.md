@@ -108,7 +108,7 @@ public void testSendMail() {
 Java Mail中关于邮件设置的选项请参见[**com.sun.mail.smtp**](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html),实际使用时我发现只需要添加`props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");`即可，额外的添加其它一些配置反而可能会导致不能正常使用。
 
 如当参照Stackoverflow中的[**Using JavaMail with TLS**](https://stackoverflow.com/questions/411331/using-javamail-with-tls)这个问题的答案加上如下代码：
-```
+```java
 props.put("mail.smtp.starttls.enable","true");
 props.put("mail.smtp.auth", "true");
 props.put("mail.smtp.socketFactory.fallback", "false");
