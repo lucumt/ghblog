@@ -40,7 +40,7 @@
 
   <meta itemprop="name" content="飞狐的部落格">
   <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2025-05-22T14:16:21+08:00">
+  <meta itemprop="dateModified" content="2025-06-10T09:40:38+08:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="飞狐的部落格">
   <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
@@ -127,6 +127,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/">利用Nacos与KubeSphere创建多套开发与测试环境</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-09-15 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>基于<a href="/post/devops/share-experiences-for-using-kubesphere/">KubeSphere使用心得</a>给部门搭建了<code>dev</code>、<code>sit</code>、<code>test</code>、<code>prod</code>这4套环境之后，一开始使用较为顺利，但随着项目的推进以及开发人员的增多，同时有多个功能模块需要并行开发与测试，导致原有的4套环境不够用。经过一番摸索后，实现了结合<a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">Nacos</a>在<code>KubeSphere</code>中动态配置多套环境功能，通过修改<code>Nacos</code>中的<code>JSON</code>配置文件可很容易的从4套扩展为16套甚至更多。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/devops/using-nacos-and-kubesphere-to-create-multiple-environments/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/bit/merge-three-int-number-into-a-long-number/">将3个小int整数合并到1个long中从而缩小数据量</a></h1>
@@ -316,28 +337,6 @@
     </div>
     <div class="read-more">
       <a href="/post/docker/multiple-docker-compose-conflict-analysis/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/hugo/check-if-a-hugo-site-is-in-development-or-production/">[译]如何检测一个Hugo站点是开发环境还是生产环境</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-06-19 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> 个人博客 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://dev.to/tylerlwsmith/check-if-a-hugo-site-is-in-development-or-production-2beb"><strong>How to check if a Hugo site is in development or production</strong></a></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/hugo/check-if-a-hugo-site-is-in-development-or-production/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

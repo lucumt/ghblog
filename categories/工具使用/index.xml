@@ -6,8 +6,15 @@
     <description>Recent content in 工具使用 on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Jan 2025 13:38:21 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Jun 2025 18:32:17 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在GitBook中添加浏览器类型与版本检测</title>
+      <link>https://lucumt.info/post/gitbook/add-browser-check-function/</link>
+      <pubDate>Mon, 09 Jun 2025 18:32:17 +0800</pubDate>
+      <guid>https://lucumt.info/post/gitbook/add-browser-check-function/</guid>
+      <description>&lt;p&gt;在部门使用&lt;code&gt;GitBook&lt;/code&gt;的过程中，发现有些同事使用旧版的&lt;code&gt;Chrome&lt;/code&gt;浏览器会造成&lt;code&gt;GitBook&lt;/code&gt;页面显示不正常，故开发了一款插件对当前使用的浏览器类型和版本进行检测，强制使用不能低于特定版本的&lt;code&gt;Chrome&lt;/code&gt;浏览器，否则会弹出提示信息。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给GitBook生成的html页面中添加水印支持</title>
       <link>https://lucumt.info/post/gitbook/add-watermark-in-gitbook/</link>

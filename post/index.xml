@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 飞狐的部落格</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 Mar 2025 10:18:30 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Jun 2025 18:32:17 +0800</lastBuildDate>
     <atom:link href="https://lucumt.info/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在GitBook中添加浏览器类型与版本检测</title>
+      <link>https://lucumt.info/post/gitbook/add-browser-check-function/</link>
+      <pubDate>Mon, 09 Jun 2025 18:32:17 +0800</pubDate>
+      <guid>https://lucumt.info/post/gitbook/add-browser-check-function/</guid>
+      <description>&lt;p&gt;在部门使用&lt;code&gt;GitBook&lt;/code&gt;的过程中，发现有些同事使用旧版的&lt;code&gt;Chrome&lt;/code&gt;浏览器会造成&lt;code&gt;GitBook&lt;/code&gt;页面显示不正常，故开发了一款插件对当前使用的浏览器类型和版本进行检测，强制使用不能低于特定版本的&lt;code&gt;Chrome&lt;/code&gt;浏览器，否则会弹出提示信息。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针</title>
       <link>https://lucumt.info/post/junit/autowire-object-is-null-when-run-maven-test/</link>

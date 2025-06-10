@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>飞狐的部落格</title>
+  <title>在GitBook中添加浏览器类型与版本检测 - 飞狐的部落格</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,12 +16,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="" /><meta name="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!" /><meta name="keywords" content="Hugo,theme,even" />
+<meta name="author" content="Rosen Lu" /><meta name="description" content="对GitBook中开发插件，实现检测浏览器类型与版本，避免使用低版本时不支持部分高级特性的使用" /><meta name="keywords" content="GitBook,浏览器,Chrome" />
 <meta name="generator" content="Hugo0.126.1with theme even" />
 
 
-<link rel="canonical" href="https://lucumt.info/" /><link href="https://lucumt.info/index.xml" rel="alternate" type="application/rss+xml" title="飞狐的部落格" />
-  <link href="https://lucumt.info/index.xml" rel="feed" type="application/rss+xml" title="飞狐的部落格" />
+<link rel="canonical" href="https://lucumt.info/post/gitbook/add-browser-check-function/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -31,19 +30,26 @@
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <link href="/sass/main.min.f8a15eb0c012e3545d8b6ed47dcb94694059de6131ffb16c8bf6a65b3af1bf61.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet"><meta property="og:url" content="https://lucumt.info/post/gitbook/add-browser-check-function/">
   <meta property="og:site_name" content="飞狐的部落格">
-  <meta property="og:title" content="飞狐的部落格">
-  <meta property="og:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
+  <meta property="og:title" content="在GitBook中添加浏览器类型与版本检测">
+  <meta property="og:description" content="对GitBook中开发插件，实现检测浏览器类型与版本，避免使用低版本时不支持部分高级特性的使用">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-06-09T18:32:17+08:00">
+    <meta property="article:modified_time" content="2025-06-09T18:32:17+08:00">
+    <meta property="article:tag" content="Gitbook">
 
-  <meta itemprop="name" content="飞狐的部落格">
-  <meta itemprop="description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
-  <meta itemprop="dateModified" content="2025-06-10T09:40:38+08:00">
+  <meta itemprop="name" content="在GitBook中添加浏览器类型与版本检测">
+  <meta itemprop="description" content="对GitBook中开发插件，实现检测浏览器类型与版本，避免使用低版本时不支持部分高级特性的使用">
+  <meta itemprop="datePublished" content="2025-06-09T18:32:17+08:00">
+  <meta itemprop="dateModified" content="2025-06-09T18:32:17+08:00">
+  <meta itemprop="wordCount" content="1239">
+  <meta itemprop="keywords" content="GitBook,浏览器,Chrome">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="飞狐的部落格">
-  <meta name="twitter:description" content="飞狐的个人博客,博主是一个混迹于帝都的程序猿，主要从事Java、Python和Golang相关的开发工作，欢迎互相交流!">
+  <meta name="twitter:title" content="在GitBook中添加浏览器类型与版本检测">
+  <meta name="twitter:description" content="对GitBook中开发插件，实现检测浏览器类型与版本，避免使用低版本时不支持部分高级特性的使用">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -126,239 +132,182 @@
     </header><main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/using-mockito-in-junit5/">[译]在JUnit 5中使用Mockito</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-06-19 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-mockito/"><strong>Using Mockito With JUnit 5</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/using-mockito-in-junit5/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在GitBook中添加浏览器类型与版本检测</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/checkout-project-with-submodule-in-kubesphere/">在KubeSphere的流水线中下载构建具有子模块的项目</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-06-17 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在使用<a href="https://www.kubesphere.io/zh/"><strong>KubeSphere</strong></a>对公司项目进行持续集成时，有一个项目在<code>Gitlab</code>中采用了<a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"><strong>Submodules</strong></a>结构，导致原有的流水线不能直接使用，一番折腾后找到两种方案，其中一种比较优雅，简单记录下。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/checkout-project-with-submodule-in-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2025-06-09 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
+            </div>
+          <span class="more-meta"> 约 1239 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-parameterized-tests/">[译]JUnit 5 参数化测试实用指南</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-06-17 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-parameterized-tests/"><strong>A More Practical Guide to JUnit 5 Parameterized Tests</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-parameterized-tests/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题背景">问题背景</a></li>
+    <li><a href="#实现思路">实现思路</a></li>
+    <li><a href="#相关源码">相关源码</a></li>
+    <li><a href="#使用效果">使用效果</a></li>
+  </ul>
+</nav>
   </div>
-</article>
+</div>
+	 
+	  	
+	
+    <div class="post-content image-border">
+	 <p>在部门使用<code>GitBook</code>的过程中，发现有些同事使用旧版的<code>Chrome</code>浏览器会造成<code>GitBook</code>页面显示不正常，故开发了一款插件对当前使用的浏览器类型和版本进行检测，强制使用不能低于特定版本的<code>Chrome</code>浏览器，否则会弹出提示信息。</p>
+<h1 id="问题背景">问题背景</h1>
+<p>当使用<code>Chrome</code>浏览器版本较旧时(如版本为<code>88.0.4324.104</code>），打开<code>GitBook</code>后页面中的部分样式会显示不正常，类似下图所示，如左侧菜单以及提示插件等都不能正常渲染，影响使用体验。</p>
+<p><img src="/blog_img/gitbook/add-browser-check-function/gitbook-render-in-different-browsers.png" alt="GitBook在不同浏览器中的显示效果对比" title="GitBook在不同浏览器中的显示效果对比"></p>
+<p>出现此种问题的原因是<code>GitBook</code>中使用了一些高级的<code>CSS</code>和<code>HTML</code>特定，而低版本的<code>Chrome</code>浏览器不支持这些特定，从而导致此问题。</p>
+<p>对于非专业的<code>GitBook</code>开发维护人员而言，出现此问题后通常不知道问题原因以及如何处理，有必要给出醒目的提示，告知必须升级浏览器。</p>
+<p>而<code>GitBook</code>本身提供了灵活强大的插件开发功能，基于此，可通过开发对应的插件来实现强制检测与提醒。</p>
+<h1 id="实现思路">实现思路</h1>
+<p>要实现检测浏览器版本，关键是需要在页面每次加载时触发相关事件进行浏览器版本检测，类似<code>jQuery</code>中的<a href="https://api.jquery.com/ready/">ready()</a>函数，在<code>GitBook</code>中对应的事件回调函数为<code>page.change</code>：</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>gitbook.events.bind(&#39;page.change&#39;, function() {
+    // 此处编写相关的代码
+});</code>
+</pre><p>找到入口之后，接下来的事情就是检测浏览器类型与版本，这种事情可直接咨询DeepSeek，我们只需整合相关的代码即可实现目的。</p>
+<p><code>GitBook</code>支持在<code>book.js</code>中的<code>pluginsConfig</code>下添加相关配置实现自定义展现，基于此功能可实现让要检测的<code>Chrome</code>版本以及相关的提示信息能动态配置，其对应的事件回调函数为<code>start</code>。</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>gitbook.events.bind(&#39;start&#39;, function(e, config) {
+   // book.js中的pluginsConfig下的所有信息都在config中
+   // 可将其赋值给全局变量，然后在其它事件回调函数中使用
+   console.log(config);
+});</code>
+</pre><h1 id="相关源码">相关源码</h1>
+<p>完成代码参见<a href="https://github.com/gitbook-plugin-fox/gitbook-plugin-browser-check-fox"><strong>gitbook-plugin-browser-check-fox</strong></a>，核心代码如下：</p>
+<p><code>book.js</code>的配置代码：</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>pluginsConfig: {
+    &#39;browser-check-fox&#39;: {
+        &#39;enabled&#39;: true,
+        &#39;chrome-required-version&#39;: 126,
+        &#39;chrome-required-message&#39;: &#39;只支持使用Chrome浏览器&#39;,
+        &#39;chrome-required-version-message&#39;: &#39;当前浏览器版本为${currentVersion},需要升级到${requiredVersion}&#39;
+    }
+}</code>
+</pre><p><code>index.js</code>代码：</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>module.exports = {
+    book: {
+		assets:&#39;./&#39;,
+        js: [&#34;check.js&#34;]
+    }
+};</code>
+</pre><p><code>check.js</code>代码：</p>
+<pre class="line-numbers language-javascript " title="javascript">
+<code>require([&#39;gitbook&#39;, &#39;jQuery&#39;], function(gitbook, $) {
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-test-lifecycle/">[译]JUnit 5 生命周期 - 注释之前和之后</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-06-16 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
+    var browserCheckConfig = {};
+    gitbook.events.bind(&#39;start&#39;, function(e, config) {
+        let defaultConfig = {
+            enabled: true,
+            &#39;chrome-required-message&#39;: &#39;Only Chrome is supported to access this website&#39;,
+            &#39;chrome-required-version&#39;: &#39;126&#39;,
+            &#39;chrome-required-version-message&#39;: &#39;The version of your chrome brower is ${currentVersion},upgrade to ${requriedVersion},please&#39;
+        };
+        let customConfig = config[&#39;browser-check-fox&#39;];
+        for (let key of Object.keys(defaultConfig)) {
+            browserCheckConfig[key] = customConfig[key] ?? defaultConfig[key];
+        }
+    });
+    gitbook.events.bind(&#39;page.change&#39;, function() {
+        checkBrowserVersion(browserCheckConfig);
+    });
+
+});
+
+function checkBrowserVersion(config) {
+    if (!config[&#39;enabled&#39;]) {
+        return;
+    }
+    const userAgent = navigator.userAgent;
+    let isChrome = false;
+    let currentVersion = 0;
+	let requiredVersion = config[&#39;chrome-required-version&#39;];
+
+    // 使用正则表达式检测 Chrome 浏览器（排除 Edge、Opera 等基于 Chromium 的浏览器）
+    const chromeRegex = /(Chrome)\/(\d&#43;)/;
+    const edgeRegex = /(Edg|Edge)\//;
+    const operaRegex = /(OPR)\//;
+
+    // 排除 Edge 和 Opera
+    if (!edgeRegex.test(userAgent) &amp;&amp; !operaRegex.test(userAgent)) {
+        const chromeMatch = userAgent.match(chromeRegex);
+        if (chromeMatch) {
+            isChrome = true;
+            currentVersion = parseInt(chromeMatch[2]); // 提取主版本号
+        }
+    }
+
+    // 判断并提示
+    if (!isChrome) {
+        alert(config[&#39;chrome-required-message&#39;]);
+    } else if (currentVersion &lt; requiredVersion) {
+        let message = config[&#39;chrome-required-version-message&#39;];
+        message = message.replace(&#39;${currentVersion}&#39;, currentVersion);
+        message = message.replace(&#39;${requiredVersion}&#39;, requiredVersion);
+        alert(message);
+    }
+}</code>
+</pre><h1 id="使用效果">使用效果</h1>
+<p>插件包地址参见<a href="https://www.npmjs.com/package/gitbook-plugin-browser-check-fox"><strong>gitbook-plugin-browser-check-fox</strong></a>，其使用方式同其它的<code>GitBook</code>插件类似。</p>
+<p>使用非<code>Chrome</code>浏览器时的提示效果如下</p>
+<p><img src="/blog_img/gitbook/add-browser-check-function/browser-type-not-match-alert.png" alt="使用非Chrome浏览器时提示信息" title="使用非Chrome浏览器时提示信息"></p>
+<p>使用<code>Chrome</code>浏览器版本较低时的提示效果如下</p>
+<p><img src="/blog_img/gitbook/add-browser-check-function/browser-version-too-old-alert.png" alt="Chrome浏览器版本太旧提示" title="Chrome浏览器版本太旧提示"></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/gitbook/">GitBook</a>
           </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-test-lifecycle/"><strong>JUnit 5 Test Lifecycle: Before and After Annotations</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-test-lifecycle/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/prometheus-k8s-0-pending-in-kubesphere/">KubeSphere中名为prometheus-k8s-0的pod一直处理Pending状态解决</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-06-06 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>简要记录下在安装完成<a href="https://www.kubesphere.io/">KubeSphere</a>后由于缺少<a href="https://openebs.io/">OpenEBS</a>而导致名为<code>prometheus-k8s-0</code>的pod节点一直处于<code>Pending</code>状态，进而导致在<code>KubeSphere</code>集群管理中资源统计部分出现NaN的问题。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/prometheus-k8s-0-pending-in-kubesphere/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python/using-numpy-to-parse-npzp-into-csv/">利用Numpy将npz文件解析为csv文件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-05-16 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97/"> 数据计算 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>记录下如何基于<a href="https://numpy.org/"><strong>NumPy</strong></a>将<code>npz</code>文件解析成多个<code>csv</code>文件，以自己项目中使用的<code>npz</code>文件结构为例，其它地方使用时可能会有差异</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/python/using-numpy-to-parse-npzp-into-csv/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-nested-tests/">[译]JUnit 5 嵌套测试 - 将关联的测试分组在一起</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-05-02 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-nested-tests/"><strong>JUnit 5 Nested Tests: Grouping Related Tests Together</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-nested-tests/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-assertions/">[译]JUnit 5 断言 - 验证测试结果</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-05-01 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-assertions/"><strong>JUnit 5 Assertions: Verifying Test Results</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-assertions/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/translate/junit5/junit-5-getting-started/">[译]JUnit 5 入门 - 编写第一段测试代码</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-05-01 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BF%BB%E8%AF%91/"> 翻译 </a>
-          <a href="/categories/junit5%E7%BF%BB%E8%AF%91/"> JUnit5翻译 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文翻译自<a href="https://www.arhohuttunen.com/junit-5-getting-started"><strong>Getting Started with JUnit 5: Writing Your First Test</strong></a>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/translate/junit5/junit-5-getting-started/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/devops/share-kubepshere-using-experience-for-current-company/">KubeSphere在当前公司提升研发效率的使用实践分享</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-04-17 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"> 持续集成 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>我司从2022年6月开始使用<code>KubeSphere</code>到目前为止快一年时间，简要记录下此过程中的经验积累和问题反馈。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/devops/share-kubepshere-using-experience-for-current-company/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/5/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/7/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/junit/autowire-object-is-null-when-run-maven-test/">
+            <span class="next-text nav-default">利用SpringBoot3与JUnit5进行单元测试时依赖注入对象报空指针</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://giscus.app/client.js"
+            data-repo="lucumt/ghblog"
+            data-repo-id="MDEwOlJlcG9zaXRvcnk0MTQ3MDEzOA=="
+            data-category="General"
+            data-category-id="DIC_kwDOAnjIus4CRN6c"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/giscus/giscus">comments powered by giscus.</a></noscript>
 
       </div>
     </main>
@@ -368,7 +317,7 @@
       <a href="https://stackoverflow.com/users/3176419" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://www.linkedin.com/in/%E8%BF%90%E5%BC%BA-%E5%8D%A2-50a08bb5/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="https://github.com/lucumt" class="iconfont icon-github" title="github"></a>
-  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">

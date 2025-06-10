@@ -3,21 +3,49 @@
   
   <url>
     <loc>https://lucumt.info/post/</loc>
-    <lastmod>2025-05-22T14:16:21+08:00</lastmod>
+    <lastmod>2025-06-10T09:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/</loc>
-    <lastmod>2025-05-22T14:16:21+08:00</lastmod>
+    <lastmod>2025-06-10T09:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lucumt.info/categories/</loc>
-    <lastmod>2025-03-24T10:18:30+08:00</lastmod>
+    <lastmod>2025-06-09T18:32:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/gitbook/</loc>
+    <lastmod>2025-06-09T18:32:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/tags/</loc>
+    <lastmod>2025-06-09T18:32:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2025-06-09T18:32:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lucumt.info/post/gitbook/add-browser-check-function/</loc>
+    <lastmod>2025-06-09T18:32:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -31,13 +59,6 @@
   
   <url>
     <loc>https://lucumt.info/tags/springboot/</loc>
-    <lastmod>2025-03-24T10:18:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/tags/</loc>
     <lastmod>2025-03-24T10:18:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -135,21 +156,7 @@
   </url>
   
   <url>
-    <loc>https://lucumt.info/tags/gitbook/</loc>
-    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lucumt.info/post/gitbook/add-watermark-in-gitbook/</loc>
-    <lastmod>2025-01-16T13:38:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lucumt.info/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2025-01-16T13:38:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
