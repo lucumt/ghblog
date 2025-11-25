@@ -95,10 +95,10 @@ port = 389
 use_ssl = false
 start_tls = false
 ssl_skip_verify = false
-bind_dn = "cn=xxx,dc=chinahirain,dc=com"
+bind_dn = "cn=xxx,dc=chinalucumt,dc=com"
 bind_password = 'xxx'
 search_filter = "(uid=%s)"
-search_base_dns = ["dc=chinahirain,dc=com"]
+search_base_dns = ["dc=chinalucumt,dc=com"]
 
 [servers.attributes]
 name = "givenName"

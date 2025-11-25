@@ -1,12 +1,12 @@
 ---
-title: "利用Nginx来代理MinIO公共桶和私有桶的访问URL"
+title: "利用Nginx来代理MinIO私有桶的分享链接地址"
 date: 2025-06-10T09:40:38+08:00
 lastmod: 2025-06-10T09:40:38+08:00
 draft: true
 keywords: []
 description: ""
 tags: ["minio"]
-categories: []
+categories: ["网络编程"]
 author: "Rosen Lu"
 
 # You can also close(false) or open(true) something for this content.
@@ -51,14 +51,54 @@ highchartsDiagrams:
   options: ""
 ---
 
+简要介绍通过如何通过`Nginx`实现将`MinIO`中文件的请求地址进行代理转发，实现不同网络环境的隔离。
+
 <!--more-->
+
+# 问题背景
+
+部门项目需要部署在公网，该项目中使用到了`MinIO`作为文件存储，出于安全考虑it部门只开放了一个`443`端口。
+
+我们的项目是前后端分离的架构，且对于avatar头像，富文本编辑中的图片，用户上传的文件等各类型文件均通过`MinIO`进行存储，之前在内部网络中都是直接访问`MinIO`生成的URL访问链接。而现在的公网环境只有一个端口可用，前端页面访问、`MinIO`文件访问等都必须共用这一个宝贵的端口。
+
+前后端共用可用类似如下代码实现
+
+```nginx
+server {
+    listen       8080;
+    server_name  app-web;
+
+    # 前端页面访问入口
+    location / {
+      root   /usr/share/nginx/html/app-web;
+      index  index.html index.htm;
+          try_files $uri $uri/ /index.html;
+    }
+
+    # 后端API代理配置
+    location /api/ {
+          proxy_pass http://192.168.40.84:13001;
+          rewrite ^/api/(.*) /$1 break;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $realip_remote_addr;
+          proxy_set_header REMOTE-HOST $realip_remote_addr;
+    }
+}
+```
+
+自己想到了如下几种方案：
+
+1. 将`MinIO`设置为公开桶，然后通过`Nginx`进行代理，此种方式和前述的类似，且公开桶即使在局域网也有风险
+2. 在`Nginx`中收到请求后利用`Lua`脚本给`MinIO`发送请求然后返回
+3. 放弃直接使用超链接的方案，所有的文件预览与下载请求均通过给后端发送请求，后端`SpringBoot`接收到请求后通过代码的方式访问`MinIO`
+
+# 解决方案
 
 参考[这篇文章](https://www.cnblogs.com/zoujiaojiao/p/18534444)
 
-`Nginx`相关配置如下
 
+{{< details "点击查看Nginx完整配置代码" >}}
 ```nginx
-
 server {
     listen       8080;
     server_name  app-web;
@@ -76,7 +116,7 @@ server {
           try_files $uri $uri/ /index.html;
     }
 
-        # 后端API代理配置
+    # 后端API代理配置
     location /api/ {
           proxy_pass http://192.168.40.84:13001;
           rewrite ^/api/(.*) /$1 break;
@@ -117,4 +157,5 @@ server {
     }
 }
 ```
+{{< /details >}}
 

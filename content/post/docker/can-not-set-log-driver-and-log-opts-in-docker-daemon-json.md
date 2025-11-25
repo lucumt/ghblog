@@ -83,7 +83,7 @@ sequenceDiagrams:
 
    ```json
    {
-    "registry-mirrors":["https://docker.hirain.com"],
+    "registry-mirrors":["https://docker.lucumt.com"],
      "log-driver": "json-file",
      "log-opts": {
            "max-size": "50m",

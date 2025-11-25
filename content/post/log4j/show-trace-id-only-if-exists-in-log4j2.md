@@ -252,7 +252,7 @@ public class UserController {
 当使用`Feign`作为远程调用实现时，需在**被调用方**中添加如下配置代码才能确保`trace-id`被正常传递与获取。
 
 ```java
-import com.hirain.orienlink.mfs.filter.TraceIdFilter;
+import com.lucunmt.mfs.filter.TraceIdFilter;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.MDC;

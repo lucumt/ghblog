@@ -70,11 +70,11 @@ highchartsDiagrams:
 3. 在对应电脑的终端上执行下述指令，此处的账号为前一个步骤配置好的具有权限的账号
 
    ```bash
-   image=orienlink-frame-extraction:1.3.4.3 \
+   image=xxx-frame-extraction:1.3.4.3 \
    && docker login -u yunqaing.lu -p xxxx aeectss.xxxx.local:30005  \
-   && docker tag  orienlink-frame-extraction:1.3.4.4 aeectss.xxxx.local:30005/orienlink-product-library/$image  \
-   && docker push aeectss.xxxx.local:30005/orienlink-product-library/$image  \
-   && docker rmi aeectss.xxxx.local:30005/orienlink-product-library/$image  \
+   && docker tag  xxx-frame-extraction:1.3.4.4 aeectss.xxxx.local:30005/xxx-product-library/$image  \
+   && docker push aeectss.xxxx.local:30005/xxx-product-library/$image  \
+   && docker rmi aeectss.xxxx.local:30005/xxx-product-library/$image  \
    && docker logout aeectss.xxxx.local:30005
    ```
 
@@ -91,9 +91,9 @@ highchartsDiagrams:
    read tag
    
    docker login -u $username -p $password aeectss.xxxx.local:30005
-   docker tag $tag aeectss.xxxx.local:30005/orienlink-product-library/$tag
-   docker push aeectss.xxxx.local:30005/orienlink-product-library/$tag
-   docker rmi aeectss.xxxx.local:30005/orienlink-product-library/$tag
+   docker tag $tag aeectss.xxxx.local:30005/xxx-product-library/$tag
+   docker push aeectss.xxxx.local:30005/xxx-product-library/$tag
+   docker rmi aeectss.xxxx.local:30005/xxx-product-library/$tag
    docker logout aeectss.xxxx.local:30005
    ```
 

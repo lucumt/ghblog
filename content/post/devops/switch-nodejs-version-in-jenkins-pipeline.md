@@ -174,7 +174,7 @@ stage('镜像构建') {
             container('base') {
             sh '''echo $NODE_PORT
             cat cicd/Dockerfile
-            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t orienlink-evaluator-web:$BUILD_TAG .'''
+            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t xxx-evaluator-web:$BUILD_TAG .'''
             }
         }
     }

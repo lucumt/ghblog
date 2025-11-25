@@ -59,7 +59,7 @@ sequenceDiagrams:
 
 ```dockerfile
 FROM openjdk:8-jdk
-MAINTAINER 卢运强 "yunqiang.lu@hirain.com"
+MAINTAINER 卢运强 "yunqiang.lu@lucumt.com"
 
 # 在联网环境下可以通过wget直接下载压缩文件
 COPY nacos-server-2.2.1.tar.gz /home/nacos-server-2.2.1.tar.gz

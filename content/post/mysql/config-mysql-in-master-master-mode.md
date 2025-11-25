@@ -321,7 +321,7 @@ read -r -d '' sync_datbase_1 << EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST='aeectss.hirain.local',\
+MASTER_HOST='lucumt.local',\
 MASTER_PORT=3380,\
 MASTER_USER='root',\
 MASTER_PASSWORD='123456',\
@@ -340,7 +340,7 @@ read -r -d '' sync_datbase_2 << EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST='aeectss.hirain.local',\
+MASTER_HOST='lucumt.local',\
 MASTER_PORT=3370,\
 MASTER_USER='root',\
 MASTER_PASSWORD='123456',\
@@ -573,7 +573,7 @@ read -r -d '' sync_datbase_1 << EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST='aeectss.hirain.local',\
+MASTER_HOST='lucumt.local',\
 MASTER_PORT=3380,\
 MASTER_USER='root',\
 MASTER_PASSWORD='123456',\
@@ -590,7 +590,7 @@ read -r -d '' sync_datbase_2 << EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST='aeectss.hirain.local',\
+MASTER_HOST='lucumt.local',\
 MASTER_PORT=3370,\
 MASTER_USER='root',\
 MASTER_PASSWORD='123456',\
