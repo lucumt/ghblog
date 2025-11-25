@@ -333,7 +333,7 @@ public class UserController {
 <h3 id="feign调用">Feign调用</h3>
 <p>当使用<code>Feign</code>作为远程调用实现时，需在<strong>被调用方</strong>中添加如下配置代码才能确保<code>trace-id</code>被正常传递与获取。</p>
 <pre class="line-numbers language-java " title="java">
-<code>import com.hirain.orienlink.mfs.filter.TraceIdFilter;
+<code>import com.lucunmt.mfs.filter.TraceIdFilter;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.MDC;

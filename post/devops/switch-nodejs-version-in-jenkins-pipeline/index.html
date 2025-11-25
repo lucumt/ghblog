@@ -231,7 +231,7 @@ npm run build:qiankun</code>
             container(&#39;base&#39;) {
             sh &#39;&#39;&#39;echo $NODE_PORT
             cat cicd/Dockerfile
-            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t orienlink-evaluator-web:$BUILD_TAG .&#39;&#39;&#39;
+            docker build -f cicd/Dockerfile  --build-arg  PRODUCT_PHASE=$PRODUCT_PHASE -t xxx-evaluator-web:$BUILD_TAG .&#39;&#39;&#39;
             }
         }
     }

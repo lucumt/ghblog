@@ -435,7 +435,7 @@ docker exec -it mysql_vde_sync_test_2 bash -c &#34;mysql -uroot -p123456 -e\&#34
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST=&#39;aeectss.hirain.local&#39;,\
+MASTER_HOST=&#39;lucumt.local&#39;,\
 MASTER_PORT=3380,\
 MASTER_USER=&#39;root&#39;,\
 MASTER_PASSWORD=&#39;123456&#39;,\
@@ -452,7 +452,7 @@ docker exec -it mysql_vde_sync_test_1 bash -c &#34;mysql -uroot -p123456 -e\&#34
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST=&#39;aeectss.hirain.local&#39;,\
+MASTER_HOST=&#39;lucumt.local&#39;,\
 MASTER_PORT=3370,\
 MASTER_USER=&#39;root&#39;,\
 MASTER_PASSWORD=&#39;123456&#39;,\
@@ -653,7 +653,7 @@ read -r -d &#39;&#39; sync_datbase_1 &lt;&lt; EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST=&#39;aeectss.hirain.local&#39;,\
+MASTER_HOST=&#39;lucumt.local&#39;,\
 MASTER_PORT=3380,\
 MASTER_USER=&#39;root&#39;,\
 MASTER_PASSWORD=&#39;123456&#39;,\
@@ -670,7 +670,7 @@ read -r -d &#39;&#39; sync_datbase_2 &lt;&lt; EOF
 stop slave;
 
 CHANGE MASTER TO \
-MASTER_HOST=&#39;aeectss.hirain.local&#39;,\
+MASTER_HOST=&#39;lucumt.local&#39;,\
 MASTER_PORT=3370,\
 MASTER_USER=&#39;root&#39;,\
 MASTER_PASSWORD=&#39;123456&#39;,\
